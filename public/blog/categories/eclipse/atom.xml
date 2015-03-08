@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: eclipse | K]]></title>
+  <link href="http://mzkmzk.github.io/blog/categories/eclipse/atom.xml" rel="self"/>
+  <link href="http://mzkmzk.github.io/"/>
+  <updated>2015-03-08T12:22:33+08:00</updated>
+  <id>http://mzkmzk.github.io/</id>
+  <author>
+    <name><![CDATA[K]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Eclipse 搭建phpIDE和导入php项目]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/01/06/eclipse_phpide_import_php/"/>
+    <updated>2015-01-06T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/01/06/eclipse_phpide_import_php</id>
+    <content type="html"><![CDATA[<h3>0x01 搭建phpIDE</h3>
+
+<ol>
+<li><em>Help -> Install New Software</em></li>
+<li>Work with 选择 All Available Sites</li>
+<li>找到Web,XML,JAVA EE and OSGi Enterprise Developement 中的 PHP Development Tools(PDT)</li>
+<li>重启Eclipse</li>
+</ol>
+
+
+<h3>0x02 导入php项目</h3>
+
+<ol>
+<li><em>New ->PHP->PHP Project</em></li>
+<li>选择Create project at existing location 然后Browse中以前的php项目 即可</li>
+</ol>
+
+
+<h3>参考链接</h3>
+
+<p><a href="http://jingyan.baidu.com/article/6d704a13f8001928db51cad8.html">http://jingyan.baidu.com/article/6d704a13f8001928db51cad8.html</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Eclipse 多个工作空间共享快捷键]]></title>
+    <link href="http://mzkmzk.github.io/blog/2014/12/11/eclipse_mul_workspace_shortcut_key/"/>
+    <updated>2014-12-11T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2014/12/11/eclipse_mul_workspace_shortcut_key</id>
+    <content type="html"><![CDATA[<h3>0x01</h3>
+
+<pre><code>//被共享的工作空间
+
+%Workspace%/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.ui.workbench.prefs  
+
+//里面xml
+
+org.eclipse.ui.commands=&lt;?xml version/="1.0" encoding/="UTF-8"?&gt; 
+//复制 org.eclipse.ui.commands=后面的内容到新的工作空间的位置即可
+</code></pre>
+
+<p>参考链接<a href="http://forever8tf.iteye.com/blog/1255319">http://forever8tf.iteye.com/blog/1255319</a></p>
+]]></content>
+  </entry>
+  
+</feed>

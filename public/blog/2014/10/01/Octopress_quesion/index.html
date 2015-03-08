@@ -1,0 +1,221 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Octopress搭建和配置 - K</title>
+	<meta name="author" content="K">
+
+	
+	<meta name="description" content="1 Mac搭建Octopress 1.下载Octopress git clone git://github.com/imathis/octopress.git octopress 2.安装环境 cd octopress
+gem install bundler bundle install // &hellip;">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link href="false" rel="alternate" title="K" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script async="true" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	
+</head>
+
+
+<body>
+	<header id="header" class="inner"><h1><a href="/">K</a></h1>
+<nav id="main-nav"><ul class="main">
+	
+</ul>
+</nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Menu</a>
+		<div class="container"><ul class="main">
+	
+</ul>
+</div>
+	</div>
+	<div class="alignright search">
+		<a class="button"></a>
+		<div class="container">
+			<form action="https://www.google.com/search" method="get">
+				<input type="text" name="q" results="0">
+				<input type="hidden" name="q" value="site:mzkmzk.github.io">
+			</form>
+		</div>
+	</div>
+</nav>
+<nav id="sub-nav" class="alignright">
+	<div class="social">
+		
+		
+		
+		
+    
+		
+		
+		
+		
+		
+    
+	</div>
+	
+</nav>
+
+</header>
+	
+		
+	
+	<div id="content" class="inner"><article class="post">
+	<h2 class="title">Octopress搭建和配置</h2>
+	<div class="entry-content"><h3>1 Mac搭建Octopress</h3>
+
+<p>1.下载Octopress</p>
+
+<pre><code>git clone git://github.com/imathis/octopress.git  octopress 
+</code></pre>
+
+<p>2.安装环境</p>
+
+<pre><code>cd octopress
+gem install bundler 
+bundle install    // 若出现ERROR:  Could not find a valid gem 'bundler' (&gt;= 0), here is why:参考第三点
+</code></pre>
+
+<p>3.将Octopress部署上Github</p>
+
+<p>登录Github，假设你的用户名是username，首先要新建一个命名为 username.github.com 的Repo</p>
+
+<p>然后</p>
+
+<pre><code>rake setup_github_pages
+按照提示输入刚才新建的Repo地址，类似：git@github.com:username/username.github.com或git@github.com:username/username.github.com.git。
+
+rake install
+rake generate
+rake preview
+rake deploy
+</code></pre>
+
+<p>参考链接<a href="http://www.imeetyou.net/article.asp?id=478">http://www.imeetyou.net/article.asp?id=478</a></p>
+
+<h2>2 换Octopress主题</h2>
+
+<p>先自己google找喜欢的主题~..例如我比较喜欢</p>
+
+<p> <a href="http://zespia.tw/Octopress-Theme-Slash/index_tw.html">http://zespia.tw/Octopress-Theme-Slash/index_tw.html</a></p>
+
+<pre><code>cd octopres
+
+$ git clone git://github.com/tommy351/Octopress-Theme-Slash.git .themes/slash
+
+$ rake install['slash']
+
+$ rake generate
+
+//之后可以本地预览一下
+
+$ rake preview
+</code></pre>
+
+<p>参考链接<a href="http://www.cnblogs.com/sawyerzhu/p/3710374.html">http://www.cnblogs.com/sawyerzhu/p/3710374.html</a></p>
+
+<h3>3 如何解决国内安装gem的问题</h3>
+
+<pre><code>ERROR:  Could not find a valid gem 'bundler' (&gt;= 0), here is why:
+
+Unable to download data from https://rubygems.org/ - Errno::ETIMEDOUT:
+
+Operation timed out - connect(2) (https://rubygems.org/latest_specs.4.8.gz)
+
+ERROR:  Possible alternatives: bundler
+</code></pre>
+
+<p>解决办法</p>
+
+<pre><code>$ gem sources --remove https://rubygems.org/
+$ gem sources -a http://ruby.taobao.org/
+$ gem sources -l
+*** CURRENT SOURCES ***
+http://ruby.taobao.org
+# 请确保只有 ruby.taobao.org
+$ gem install rails
+</code></pre>
+
+<p>参考链接<a href="http://github.kimziv.com/2013/07/19/how-to-install-ruby-gems-in-china/">http://github.kimziv.com/2013/07/19/how-to-install-ruby-gems-in-china/</a></p>
+
+<h3>4用EditPlus写Octopress保存为UTF-8时为无BOM模式&amp;&amp;删除临时备份.bak&#8221;</h3>
+
+<p><em>Default encoding</em> 选择默认选择的保存编码</p>
+
+<p><em>UTF-8 signatrue</em>  选择Always remove signatrue 则保存为UTF-8时为无BOM模式</p>
+
+<p><em>Create backup file when sabing</em> 去掉对勾 修改时就不会产生.bak
+如下图</p>
+
+<p><img class="left" src="/images/blog/1.png" title="" ></p>
+
+<p>参考链接<a href="http://williamherry.com/blog/2012/07/20/octopress-setup/">http://williamherry.com/blog/2012/07/20/octopress-setup/</a></p>
+</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-10-01T11:36:40+08:00" pubdate data-updated="true"></time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/octopress/'>octopress</a>
+
+
+</div>
+	
+</div>
+</article>
+
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+		
+		
+		<a class="addthis_button_tweet"></a>
+		
+		
+		
+	</div>
+	
+</div>
+
+
+</div>
+	<footer id="footer" class="inner">Copyright &copy; 2015
+
+    K
+
+</footer>
+	<script src="/javascripts/slash.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+	$('.fancybox').fancybox();
+})(jQuery);
+</script> <!-- Delete or comment this line to disable Fancybox -->
+
+
+
+
+
+
+</body>
+</html>

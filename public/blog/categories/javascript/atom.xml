@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: javascript | K]]></title>
+  <link href="http://mzkmzk.github.io/blog/categories/javascript/atom.xml" rel="self"/>
+  <link href="http://mzkmzk.github.io/"/>
+  <updated>2015-03-08T12:22:33+08:00</updated>
+  <id>http://mzkmzk.github.io/</id>
+  <author>
+    <name><![CDATA[K]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[js动态添加 from表单元素]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/01/03/js_add_from/"/>
+    <updated>2015-01-03T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/01/03/js_add_from</id>
+    <content type="html"><![CDATA[<pre><code>//from_this参数作用为Onsubmit事件传递过来的from表单 或者通过id获取也可以
+function  inser_Submit(from_this){
+     var NFC_ID=document.createElement("input");
+     NFC_ID.type="hidden";
+     NFC_ID.name="NFC_ID";
+     NFC_ID.value=document.getElementById("NFCID").value;
+     from_this.appendChild(NFC_ID);
+}
+</code></pre>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[js 函数累积]]></title>
+    <link href="http://mzkmzk.github.io/blog/2014/12/16/js_function/"/>
+    <updated>2014-12-16T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2014/12/16/js_function</id>
+    <content type="html"><![CDATA[<p>jquery api<a href="http://jquery.bootcss.com/">http://jquery.bootcss.com/</a></p>
+
+<h3>select 选中项</h3>
+
+<pre><code>设置select中value="paraValue"的Item为选中    
+document.all.objSelect.value = objItemValue;  
+</code></pre>
+
+<p>参考链接<a href="http://www.cnblogs.com/Herist/archive/2007/09/24/903890.html">http://www.cnblogs.com/Herist/archive/2007/09/24/903890.html</a></p>
+
+<h3>Dom元素加载完毕后调用方法 ready()</h3>
+
+<pre><code>$(document).ready(function(){
+    $(".btn1").click(function(){
+        $("p").slideToggle();
+    });
+});
+</code></pre>
+
+<p>参考链接<a href="http://www.w3school.com.cn/jquery/event_ready.asp">http://www.w3school.com.cn/jquery/event_ready.asp</a></p>
+
+<h3>jquery 控制css</h3>
+
+<p>通过控制class为button_left的鼠标移入动作把id为up_page设置为可见</p>
+
+<pre><code>$(".button_left").mouseover(function(){
+$("#up_page").css("visibility","visible");
+});
+</code></pre>
+
+<h3>参考链接</h3>
+
+<p>jquery api <a href="http://api.jquery.com/">http://api.jquery.com/</a></p>
+]]></content>
+  </entry>
+  
+</feed>

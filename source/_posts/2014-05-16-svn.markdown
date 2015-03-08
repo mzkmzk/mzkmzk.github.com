@@ -1,0 +1,43 @@
+---
+layout: post
+title: "svn"
+date: 2014-05-16 19:13:15 +0800
+comments: true
+categories: svn
+---
+<!--more-->
+
+卧槽  我知道我绝对不止我被`svn`虐过
+
+其实来来去去都是那几个错 我就总结一下下就好了~_~
+
+一开始我是出现这个`svn is already under version control`问题(因为我这个文件夹是别的项目拷过来的 所以也有.svn文件夹)
+
+1.手动删除目录下的所有svn- -
+
+2.cd到你的目录 然后
+	
+	#find . -mindepth 2 -name '.svn' -exec rm -rf '{}' \;
+
+然后我就发现(因为我删除多了.svn文件夹.把上一级目录的.svn也删除了- -手贱.)
+
+
+	当提交的时候是这样的
+
+	Working copy not locked; this is probably a bug, please report
+	svn: Directory '...\.svn' 
+	containing working copy admin area is missing
+
+
+	更新的时候是这样的
+
+	Working copy not locked; this is probably a bug, please report
+	svn: Directory '...\.svn' 
+	containing working copy admin area is missing
+
+
+1. 先把目录复制粘贴去来
+2. 然后从子目录开始Team->Cleanup
+3. 然后再delete了目录
+4. 再导进去就好了
+

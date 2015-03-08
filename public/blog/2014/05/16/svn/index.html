@@ -1,0 +1,171 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>svn - K</title>
+	<meta name="author" content="K">
+
+	
+	<meta name="description" content="卧槽 我知道我绝对不止我被svn虐过 其实来来去去都是那几个错 我就总结一下下就好了~_~ 一开始我是出现这个svn is already under version control问题(因为我这个文件夹是别的项目拷过来的 所以也有.svn文件夹) 1.手动删除目录下的所有svn- - 2. &hellip;">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link href="false" rel="alternate" title="K" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script async="true" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	
+</head>
+
+
+<body>
+	<header id="header" class="inner"><h1><a href="/">K</a></h1>
+<nav id="main-nav"><ul class="main">
+	
+</ul>
+</nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Menu</a>
+		<div class="container"><ul class="main">
+	
+</ul>
+</div>
+	</div>
+	<div class="alignright search">
+		<a class="button"></a>
+		<div class="container">
+			<form action="https://www.google.com/search" method="get">
+				<input type="text" name="q" results="0">
+				<input type="hidden" name="q" value="site:mzkmzk.github.io">
+			</form>
+		</div>
+	</div>
+</nav>
+<nav id="sub-nav" class="alignright">
+	<div class="social">
+		
+		
+		
+		
+    
+		
+		
+		
+		
+		
+    
+	</div>
+	
+</nav>
+
+</header>
+	
+		
+	
+	<div id="content" class="inner"><article class="post">
+	<h2 class="title">Svn</h2>
+	<div class="entry-content"><!--more-->
+
+
+<p>卧槽  我知道我绝对不止我被<code>svn</code>虐过</p>
+
+<p>其实来来去去都是那几个错 我就总结一下下就好了~_~</p>
+
+<p>一开始我是出现这个<code>svn is already under version control</code>问题(因为我这个文件夹是别的项目拷过来的 所以也有.svn文件夹)</p>
+
+<p>1.手动删除目录下的所有svn- -</p>
+
+<p>2.cd到你的目录 然后</p>
+
+<pre><code>#find . -mindepth 2 -name '.svn' -exec rm -rf '{}' \;
+</code></pre>
+
+<p>然后我就发现(因为我删除多了.svn文件夹.把上一级目录的.svn也删除了- -手贱.)</p>
+
+<pre><code>当提交的时候是这样的
+
+Working copy not locked; this is probably a bug, please report
+svn: Directory '...\.svn' 
+containing working copy admin area is missing
+
+
+更新的时候是这样的
+
+Working copy not locked; this is probably a bug, please report
+svn: Directory '...\.svn' 
+containing working copy admin area is missing
+</code></pre>
+
+<ol>
+<li>先把目录复制粘贴去来</li>
+<li>然后从子目录开始Team->Cleanup</li>
+<li>然后再delete了目录</li>
+<li>再导进去就好了</li>
+</ol>
+
+</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-05-16T19:13:15+08:00" pubdate data-updated="true"></time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/svn/'>svn</a>
+
+
+</div>
+	
+</div>
+</article>
+
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+		
+		
+		<a class="addthis_button_tweet"></a>
+		
+		
+		
+	</div>
+	
+</div>
+
+
+</div>
+	<footer id="footer" class="inner">Copyright &copy; 2015
+
+    K
+
+</footer>
+	<script src="/javascripts/slash.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+	$('.fancybox').fancybox();
+})(jQuery);
+</script> <!-- Delete or comment this line to disable Fancybox -->
+
+
+
+
+
+
+</body>
+</html>

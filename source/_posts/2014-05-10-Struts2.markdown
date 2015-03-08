@@ -1,0 +1,67 @@
+---
+layout: post
+title: "Strtus2 问题集锦"
+date: 2014-10-01 11:39:40 +0800
+comments: true
+categories: Struts2 
+---
+<!--more-->
+###1.Strtus2 doubleselect标签 
+
+	<s:doubleselect  
+	list="#request.Student.ld"  //获取集合ld
+	listKey="DeptID"//集合中value的设定 DeptID是ld集合中元素的一个属性
+	listValue="DeptName"//集合中显示字段的设定 DeptID是ld集合中元素的一个属性
+	value="#request.Student.DeptID"   //默认值设定
+	name="DeptID"  		  
+	doubleList="top.ls"  	  //top代表着第一级表单现在选择的元素  我的ld集合中仍有一个名叫ls集合
+	doubleListKey="SpecialityID"       
+	doubleListValue="SpecialityName"  
+	doubleValue="#request.Student.SpecialityID" 
+	doubleName="SpecialityID"   
+	theme="simple">
+	</s:doubleselect>
+
+[参考链接](http://blog.sina.com.cn/s/blog_6145ed810100ebo6.html)
+
+###2. Struts2 全局result
+全局result
+例如错误返回页面
+当然也可以在web.xml</web-app>前直接设置404  
+	<error-page>
+		<error-code>404</error-code>
+		<location>/error.jsp</location>
+	</error-page>状态的返回页面
+
+
+当然有时候我们很多action都需要用到
+1同一个result就要设置全局result
+2action中无对应的result时 也会选用全局result
+
+
+	<global-results>
+            <result name="print">/result.jsp</result>
+	</global-results>
+
+###3. Strtus2 同一表单 可选择提交至多个action
+
+ 	<s:form  action="/Stu/updateStudent"> <!-- 必须为Strtus2的form表 && action属性必须在-->
+	<s:submit value="添加学生" name="redirect:www.google.com"></s:submit><!-- 跳转固定url-->
+	</s:form>
+	
+###4. Strtus2跨 package调用action
+
+	<package name="JobCentre" extends="struts-default,json-default" namespace="/Job">
+	<action name="addDept" class="com.job.action.jobCentre.Dept.addDept" >
+      		<result name="queryDept_One" type="chain">
+      		<param name="namespace">/Dept</param>
+      		<param name="actionName">queryDept_One</param> <!--name属性为actionName无需改 且后面不能用?传递参数 -->
+      		</result>  
+	</package>
+	<package name="Dept" extends="struts-default,json-default" namespace="/Dept">
+	<!-- 被调用的action -->
+      	<action name="queryDept_One" class="com.job.action.Dept.Dept.queryDept_One" >
+      		<result name="/Dept/DeptUpdate.jsp">/Dept/DeptUpdate.jsp</result>
+      	</action>
+	</package>
+

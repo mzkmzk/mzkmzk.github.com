@@ -1,0 +1,34 @@
+---
+layout: post
+title: "php搭建和MyEclipse集成"
+date: 2014-05-10 21:28:46 +0800
+comments: true
+categories: php 
+---
+<!--more-->
+###1.win下安装apache + mysql  + php
+
+参考资料 http://www.cnblogs.com/MonkeyF/archive/2013/06/06/3121658.html
+
+检查 httpd.conf 中有无语法错误
+Windows环境：
+httpd -t
+
+参考资料 
+http://hi.baidu.com/tianliao1988/item/50307310ddc771403b176e5c
+
+###2. MyEclipse6.5 搭建 php ide
+
+Eclipse集成php插件：
+
+help---->install new software------>add一个连接
+
+phpeclipse - http://update.phpeclipse.com/update/stable/1.2.x
+
+MyEclipse集成php插件：
+
+Help -> Soft Updates -> Find and Install -> Search for new features to install -> new remote lite
+
+ phpeclipse - http://update.phpeclipse.com/update/stable/1.2.x
+
+参考链接 http://blog.csdn.net/shanliangliuxing/article/details/8118033

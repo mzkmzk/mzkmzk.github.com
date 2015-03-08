@@ -1,0 +1,103 @@
+---
+layout: post
+title: "Mac 使用技巧"
+date: 2014-09-31 11:38:40 +0800
+comments: true
+categories: Mac 
+---
+
+##1. 配置环境变量
+	//终端输入 
+	pico .bash_profile
+	
+![Tomcat配置示例](/images/blog//0001.png)
+
+##2. 设置隐藏文件的可见性
+	//显示隐藏文件在终端输入:    
+	defaults write com.apple.finder AppleShowAllFiles -bool true  KillAll Finder
+
+	//相反要不显示输入   
+	defaults write com.apple.finder AppleShowAllFiles -bool false  KillAll Finder
+	
+##3. 根据路径打开文件夹
+打开应用程序`command+shift+A` - 使用工具 -终端
+
+	open . 需要打开的目录 
+	
+##4. 使用caffeinate阻止Mac运行屏幕保护和睡眠 
+
+caffeinate能阻止Mac进入睡眠状态，而且屏幕保护也不会激活。我们最好使用-t为命令加入具体的时间。比如下面的命令可以使Mac一小时内不进入睡眠状态。
+
+	caffeinate -t 3600
+	
+##5.使用purge命令释放内存
+
+purge命令可以清除内存和硬盘的缓存，与重启Mac的效果差不多。purge命令可以让不活跃的系统内存转变为可以使用的内存。你只需在终端中输入下面的命令即可。
+
+	purge
+	
+##6.创建有密码保护的压缩文件(不管用)
+
+你可以通过下面的命令将桌面上的macx.txt文件创建成有密码保护压缩文件protected.zip
+
+	zip -e /Users/maizhikun/Desktop/Tomcat_Start.zip /Users/maizhikun/Desktop/Tomcat_Start.pages 
+	
+##7 Mac连接Windows共享文件夹
+
+Finder -> 前往 ->前往服务器
+
+然后在弹出框里填写
+
+	smb://ip/文件夹名称
+	
+##8 Mac破解vmware --未证实
+
+<http://bbs.feng.com/read-htm-tid-6887336.html>
+
+##9 Mac配置github相关
+
+	cd ~/.ssh
+	ssh-keygen -t rsa -C 你注册github的email
+
+弹出`Enter file in which to save the key (/Users/twer/.ssh/id_rsa):`直接按空格
+
+弹出`Enter passphrase (empty for no passphrase):`输入你github账号的密码。
+
+弹出`Enter same passphrase again:`再次输入你的密码。
+
+打开~/.ssh下的id_rsa.pub文件复制里面的全部内容。
+登陆github，选择Account Settings-->SSH Public Keys 添加ssh，把剪切板的内容复制到key输入框内直接保存。
+
+测试shh:
+
+	ssh git@github.com
+	
+输出
+
+	PTY allocation request failed on channel 0
+	Hi username! You've successfully authenticated, but GitHub does not 	provide shell access.
+	Connection to github.com closed.
+	
+代表成功
+
+参考链接<http://segmentfault.com/blog/yaashion_xiang/1190000000364677>
+
+##10 mac 查看端口占用情况 
+
+Mac : lsof -i:8080
+
+linux : neststat -anltp | grep 8080
+
+参考链接<http://www.blogjava.net/willpower88/archive/2014/07/15/415838.html>
+
+##11 mac 查找文件
+
+Spotlight虽然快 而且有时也挺好用 - -但是经常还是会 找不到所匹配的文件...find命令会来得更准一点
+
+	//.表示从跟目录里开始查询所有文件.. 单引号里是所要求开头为08 CET4的所有文件
+	find . -name '08 CET4*'
+	
+参考链接<http://www.cnblogs.com/iphone520/archive/2012/03/26/2418468.html>
+
+	
+	

@@ -1,0 +1,80 @@
+---
+layout: post
+title: "Mac 搭建svn服务器"
+date: 2015-01-04 11:37:40 +0800
+comments: true
+categories: svn
+---
+###0x01 创建svn repository
+
+	svnadmin create /Users/maizhikun/Learning/svn/pro  //仓库位置，svn是svn的目录，pro是一个版本库的目录
+	
+###0x02 配置svn 用户权限
+
+`/Users/maizhikun/Learning/svn/pro/conf` 目录下存在三个文件 authz,passwd,svnserve.conf
+
+1.配置svnserve.conf
+
+	＃anon-access = read
+	＃auth-access = write
+	＃password-db = passwd
+	＃authz-db = authz
+	
+去掉#和#后的空格
+
+要防止匿名访问就
+
+	anon-access=none
+
+2.配置passwd
+
+	[users]
+	K=svn
+	MZK=svn
+	
+3.配置authz
+	
+	#设置了一个分组PAC 包括成员K和MZK
+	[groups]
+	PAC=K,MZK
+	
+	#[/]表示当前版本库的路径的访问权限
+	[/]
+	@PAC=rw
+	# 忘记了写上面两行 导致一直出现authorization failed 错误
+
+###0x03 启动svn服务
+
+	//没有任何输出则表示 启动成功
+	svnserve -d -r /Users/maizhikun/Learning/svn	
+	//测试
+	svn checkout svn://127.0.0.1/pro --username=K --password=svn ./pro
+
+###0x04(可选) svn客户端安装
+
+Version 下载链接<http://www.pc6.com/mac/116544.html>
+
+<!--###0x05(可选) 网页访问 svn apache整合svn
+	
+svn默认端口是3690
+	
+网页访问svn 127.0.0.1 会显示
+
+	( success ( 2 2 ( ) ( edit-pipeline svndiff1 absent-entries commit-revprops depth log-revprops atomic-revprops partial-replay ) ) ) 
+-->
+	
+	
+	
+	
+###参考链接
+
+参考链接<http://www.cnblogs.com/onlyfu/archive/2012/05/08/2489814.html>
+
+参考链接<http://www.cocoachina.com/bbs/read.php?tid=153734>
+
+
+	
+
+
+
+	

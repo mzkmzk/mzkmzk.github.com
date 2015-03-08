@@ -1,0 +1,329 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>android adapter - K</title>
+	<meta name="author" content="K">
+
+	
+	<meta name="description" content="android adapter主要分为SimpleAdapter、ArrayList、BaseAdapter 这里主要介绍BaseAdapter 0x01 .xml 布局文件的 单一行的样式设置 &lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt; &hellip;">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link href="false" rel="alternate" title="K" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script async="true" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	
+</head>
+
+
+<body>
+	<header id="header" class="inner"><h1><a href="/">K</a></h1>
+<nav id="main-nav"><ul class="main">
+	
+</ul>
+</nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Menu</a>
+		<div class="container"><ul class="main">
+	
+</ul>
+</div>
+	</div>
+	<div class="alignright search">
+		<a class="button"></a>
+		<div class="container">
+			<form action="https://www.google.com/search" method="get">
+				<input type="text" name="q" results="0">
+				<input type="hidden" name="q" value="site:mzkmzk.github.io">
+			</form>
+		</div>
+	</div>
+</nav>
+<nav id="sub-nav" class="alignright">
+	<div class="social">
+		
+		
+		
+		
+    
+		
+		
+		
+		
+		
+    
+	</div>
+	
+</nav>
+
+</header>
+	
+		
+	
+	<div id="content" class="inner"><article class="post">
+	<h2 class="title">Android Adapter</h2>
+	<div class="entry-content"><p>android adapter主要分为SimpleAdapter、ArrayList、BaseAdapter</p>
+
+<p>这里主要介绍BaseAdapter</p>
+
+<h3>0x01 .xml 布局文件的 单一行的样式设置</h3>
+
+<pre><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:orientation="horizontal" 
+android:id="@+id/book_access"
+&gt;
+ &lt;TextView
+         android:id="@+id/book_name"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_weight="1"
+         android:background="#ffffffff"
+         android:gravity="center"
+         android:text="@string/str_navi_home_navi_left" /&gt;
+      &lt;TextView
+          android:id="@+id/book_accessTime"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:background="#ffffffff"
+          android:gravity="center"
+          android:text="@string/str_navi_home_navi_right" /&gt;
+&lt;/LinearLayout&gt; 
+</code></pre>
+
+<h3>0x02 .java 继承BaseAdapter</h3>
+
+<pre><code>package gabriel.luoyer.promonkey.main;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
+
+import com.charon.pulltorefreshlistview.PullToRefreshListView;
+import com.charon.pulltorefreshlistview.PullToRefreshListView.OnRefreshListener;
+
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.os.SystemClock;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.BaseAdapter;
+import android.widget.TextView;
+import android.widget.Toast;
+import android.widget.AdapterView.OnItemClickListener;
+import gabriel.luoyer.promonkey.R;
+import gabriel.luoyer.promonkey.base.BaseFragment;
+import gabriel.luoyer.promonkey.bean.book;
+import gabriel.luoyer.promonkey.utils.ModelServer;
+
+public class HomeFragment extends BaseFragment {
+
+private PullToRefreshListView mPullToRefreshListView;
+private MyAdapter adapter;
+private ArrayList&lt;book&gt; data;
+public LayoutInflater mInflater;
+
+@Override
+public View onCreateView(LayoutInflater inflater, ViewGroup container,
+        Bundle savedInstanceState) {
+    mInflater=inflater;
+    View view = inflater.inflate(R.layout.main_frg_home, container, false);
+    findView(view);
+    initView(view);
+    return view;
+}
+
+private void findView(View view) {
+    mPullToRefreshListView = (PullToRefreshListView)view.findViewById(R.id.mfh_s);
+}
+
+private void initView(View view) {
+
+    data = new ArrayList&lt;book&gt;();
+
+    book b =new book();
+
+    b.setB_name("书籍名称");
+    b.setB_accessTime("借书时间");
+
+    data.add(b);
+
+    adapter = new MyAdapter();
+
+    mPullToRefreshListView.setAdapter(adapter);
+
+    mPullToRefreshListView.setOnRefreshListener(new OnRefreshListener() {
+
+        @Override
+        public void onRefresh() {
+            new AsyncTask&lt;Void, Void, Void&gt;() {
+
+                @Override
+                protected Void doInBackground(Void... params) {
+                    SystemClock.sleep(1000);
+                    book b =new book();
+                    b.setB_name("书籍名称");
+                    b.setB_accessTime("借书时间");
+                    data.add(b);
+                    return null;
+                }
+
+                @Override
+                protected void onPostExecute(Void result) {
+                    super.onPostExecute(result);
+                    adapter.notifyDataSetChanged();
+                    mPullToRefreshListView.onRefreshComplete();
+                }
+            }.execute();
+        }
+    });
+
+    mPullToRefreshListView
+            .setOnItemClickListener(new OnItemClickListener() {
+
+                @Override
+                public void onItemClick(AdapterView&lt;?&gt; parent, View view,
+                        int position, long id) {
+                    // If you call addHeaderView, the position will contains
+                    // the count of header view.
+                    // int realPosition = position
+                    // - mPullToRefreshListView.getHeaderViewsCount();
+                    // Toast.makeText(PullToRefreshActivity.this,
+                    // data.get(realPosition), Toast.LENGTH_SHORT).show();
+
+                    Toast.makeText(
+                            getActivity().getApplicationContext(),
+                            (String) mPullToRefreshListView.getAdapter()
+                                    .getItem(position), Toast.LENGTH_SHORT)
+                            .show();
+
+                }
+
+            });
+
+}
+
+
+private class MyAdapter extends BaseAdapter {
+
+    @Override
+    public int getCount() {
+        return data.size();
+    }
+
+    @Override
+    public Object getItem(int position) {
+        return data.get(position);
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+         ViewHolder holder = null;
+         if (convertView == null) {                    
+             holder=new ViewHolder();                   
+             convertView = mInflater.inflate(R.layout.main_frg_home_lv, null);
+             holder.book_name = (TextView)convertView.findViewById(R.id.book_name);
+             holder.book_accessTime = (TextView)convertView.findViewById(R.id.book_accessTime);
+             convertView.setTag(holder);                    
+         }else {                   
+             holder = (ViewHolder)convertView.getTag();
+         }                           
+         holder.book_name.setText(data.get(position).getB_name());
+         holder.book_accessTime.setText(data.get(position).getB_accessTime());                
+         return convertView;
+    }
+}
+
+public final class ViewHolder{
+    public TextView book_name;
+    public TextView book_accessTime;
+}
+}
+</code></pre>
+
+<p>参考链接<a href="http://www.xue5.com/Mobile/Mobile/735287.html">http://www.xue5.com/Mobile/Mobile/735287.html</a></p>
+</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-12-16T11:37:40+08:00" pubdate data-updated="true"></time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/android/'>android</a>
+
+
+</div>
+	
+</div>
+</article>
+
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+		
+		
+		<a class="addthis_button_tweet"></a>
+		
+		
+		
+	</div>
+	
+</div>
+
+
+</div>
+	<footer id="footer" class="inner">Copyright &copy; 2015
+
+    K
+
+</footer>
+	<script src="/javascripts/slash.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+	$('.fancybox').fancybox();
+})(jQuery);
+</script> <!-- Delete or comment this line to disable Fancybox -->
+
+
+
+
+
+
+</body>
+</html>

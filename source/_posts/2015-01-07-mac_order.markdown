@@ -1,0 +1,12 @@
+---
+layout: post
+title: "Mac 命令积累"
+date: 2015-01-07 11:37:40 +0800
+comments: true
+categories: Mac
+---
+
+###更改目录权限
+
+	//-R代表此目录下的所有目录和文件都更改为753权限
+	chmod -R 753 目录 

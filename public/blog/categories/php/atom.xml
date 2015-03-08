@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: php | K]]></title>
+  <link href="http://mzkmzk.github.io/blog/categories/php/atom.xml" rel="self"/>
+  <link href="http://mzkmzk.github.io/"/>
+  <updated>2015-03-08T12:22:33+08:00</updated>
+  <id>http://mzkmzk.github.io/</id>
+  <author>
+    <name><![CDATA[K]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[php 上传图片和预览]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/01/07/php_upload_picture/"/>
+    <updated>2015-01-07T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/01/07/php_upload_picture</id>
+    <content type="html"><![CDATA[<!--more-->
+
+
+<p>效果图</p>
+
+<pre><code>![image](images/blog/2015-01-07-02.png)
+</code></pre>
+
+<p>只需更改下</p>
+
+<pre><code>$upfile='./image/human'; //图片目录路径
+</code></pre>
+
+<p>此行的图片路径和权限即可</p>
+
+<pre><code>&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;
+&lt;html xmlns="http://www.w3.org/1999/xhtml"&gt;
+&lt;head&gt;
+&lt;meta http-equiv="Content-Type" content="text/html; charset=utf-8" /&gt;
+&lt;title&gt;上传图片&lt;/title&gt;
+&lt;/head&gt;
+
+&lt;body&gt;&lt;div align="center" style="width:50%; height:300px; font-size:13px"&gt;
+&lt;h3&gt;上传图片预览&lt;/h3&gt;
+&lt;form name="frm" method="post" enctype="multipart/form-data"&gt;
+&lt;font style="letter-spacing:1px" color="#FF0000"&gt;*只允许上传jpg|png|bmp|pjpeg|gif格式的图片&lt;/font&gt;&lt;br/&gt;&lt;br/&gt;
+请选择图片：
+ &lt;input name='upfile' type='file'/&gt;
+ &lt;input name="btn" type="submit" value="上传" /&gt;&lt;br /&gt;
+&lt;/form&gt;
+&lt;?php
+//全局变量
+$arrType=array('image/jpg','image/gif','image/png','image/bmp','image/pjpeg');
+$max_size='500000';      // 最大文件限制（单位：byte）
+$upfile='./image/human'; //图片目录路径
+$file=$_FILES['upfile'];    
+
+if($_SERVER['REQUEST_METHOD']=='POST'){ //判断提交方式是否为POST
+ if(!is_uploaded_file($file['tmp_name'])){ //判断上传文件是否存在
+echo "&lt;font color='#FF0000'&gt;文件不存在！&lt;/font&gt;";
+exit;
+}
+if($file['size']&gt;$max_size){  //判断文件大小是否大于500000字节
+echo "&lt;font color='#FF0000'&gt;上传文件太大！&lt;/font&gt;";
+exit;
+} 
+if(!in_array($file['type'],$arrType)){  //判断图片文件的格式
+ echo "&lt;font color='#FF0000'&gt;上传文件格式不对！&lt;/font&gt;";
+ exit;
+ }
+ if(!file_exists($upfile)){  // 判断存放文件目录是否存在
+ mkdir($upfile,0777,true);
+ } 
+  $imageSize=getimagesize($file['tmp_name']);   $img=$imageSize[0].'*'.$imageSize[1];
+  $fname=$file['name'];
+  $ftype=explode('.',$fname);
+  $picName=$upfile."/cloudy".$fname;
+  if(file_exists($picName)){
+echo "&lt;font color='#FF0000'&gt;同文件名已存在！&lt;/font&gt;";
+exit;
+ }
+ if(!move_uploaded_file($file['tmp_name'],$picName)){  
+echo "&lt;font color='#FF0000'&gt;移动文件出错！&lt;/font&gt;";
+exit;
+}
+else{
+echo "&lt;font color='#FF0000'&gt;图片文件上传成功！&lt;/font&gt;&lt;br/&gt;";
+echo "&lt;font color='#0000FF'&gt;图片大小：$img&lt;/font&gt;&lt;br/&gt;";
+echo "图片预览：&lt;br&gt;&lt;div style='border:#F00 1px solid; width:200px;height:200px'&gt;
+&lt;img src=\"".$picName."\" width=200px height=200px&gt;".$fname."&lt;/div&gt;";
+}
+  }
+  ?&gt;
+  &lt;/div&gt;
+  &lt;/body&gt;
+  &lt;/html&gt;
+</code></pre>
+
+<p>参考链接<a href="http://blog.163.com/ylx282006@126/blog/static/597727172010112385533429/">http://blog.163.com/ylx282006@126/blog/static/597727172010112385533429/</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[php 函数累积]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/01/07/php_function/"/>
+    <updated>2015-01-07T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/01/07/php_function</id>
+    <content type="html"><![CDATA[<h3>截取字符串函数</h3>
+
+<pre><code>$str1 = substr($str,5);
+echo "从第5个字符开始取至最后：".$str1."
+</code></pre>
+
+<p> 参考链接<a href="http://www.php100.com/html/php/hanshu/2013/0905/4650.html">http://www.php100.com/html/php/hanshu/2013/0905/4650.html</a></p>
+
+<h3>随机函数</h3>
+
+<pre><code>//mt_rand生成一个介于33和126之间的数字 
+//chr()将数字转为字符串
+char(mt_rand(33, 126));
+</code></pre>
+
+<h3>php 获取 form表单传递过来的file文件</h3>
+
+<pre><code>$_FILES($_REQUEST("fiel控件的name"));
+</code></pre>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[php 无法识别<? ?>]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/01/04/php_no_know_short_open_tag/"/>
+    <updated>2015-01-04T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/01/04/php_no_know_short_open_tag</id>
+    <content type="html"><![CDATA[<h3>0x01</h3>
+
+<p><em>vim /usr/local/etc/php/5.5</em></p>
+
+<pre><code>#默认是Off 改为On即可
+short_open_tag = On
+</code></pre>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[php 解决乱码]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/01/04/php_messy_code/"/>
+    <updated>2015-01-04T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/01/04/php_messy_code</id>
+    <content type="html"><![CDATA[<h3>0x01 php文件</h3>
+
+<pre><code>//php文件头中加入
+header("Content-Type: text/html; charset=utf-8");
+</code></pre>
+
+<h3>0x02 html 文件</h3>
+
+<pre><code>&lt;meta http-equiv="Content-Type" content="text/html; charset=utf-8"&gt;
+</code></pre>
+
+<h3>参考链接</h3>
+
+<p><a href="http://www.jb51.net/article/21118.htm">http://www.jb51.net/article/21118.htm</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[php搭建和MyEclipse集成]]></title>
+    <link href="http://mzkmzk.github.io/blog/2014/05/10/php/"/>
+    <updated>2014-05-10T21:28:46+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2014/05/10/php</id>
+    <content type="html"><![CDATA[<!--more-->
+
+
+<h3>1.win下安装apache + mysql  + php</h3>
+
+<p>参考资料 <a href="http://www.cnblogs.com/MonkeyF/archive/2013/06/06/3121658.html">http://www.cnblogs.com/MonkeyF/archive/2013/06/06/3121658.html</a></p>
+
+<p>检查 httpd.conf 中有无语法错误
+Windows环境：
+httpd -t</p>
+
+<p>参考资料
+<a href="http://hi.baidu.com/tianliao1988/item/50307310ddc771403b176e5c">http://hi.baidu.com/tianliao1988/item/50307310ddc771403b176e5c</a></p>
+
+<h3>2. MyEclipse6.5 搭建 php ide</h3>
+
+<p>Eclipse集成php插件：</p>
+
+<p>help&mdash;->install new software&mdash;&mdash;>add一个连接</p>
+
+<p>phpeclipse - <a href="http://update.phpeclipse.com/update/stable/1.2.x">http://update.phpeclipse.com/update/stable/1.2.x</a></p>
+
+<p>MyEclipse集成php插件：</p>
+
+<p>Help -> Soft Updates -> Find and Install -> Search for new features to install -> new remote lite</p>
+
+<p> phpeclipse - <a href="http://update.phpeclipse.com/update/stable/1.2.x">http://update.phpeclipse.com/update/stable/1.2.x</a></p>
+
+<p>参考链接 <a href="http://blog.csdn.net/shanliangliuxing/article/details/8118033">http://blog.csdn.net/shanliangliuxing/article/details/8118033</a></p>
+]]></content>
+  </entry>
+  
+</feed>

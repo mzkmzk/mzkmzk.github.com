@@ -1,0 +1,6 @@
+#Git常见错误
+
+###fatal: Not a git repository (or any of the parent directories): .git
+
+	git init
+	

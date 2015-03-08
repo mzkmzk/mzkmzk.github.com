@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: hack | K]]></title>
+  <link href="http://mzkmzk.github.io/blog/categories/hack/atom.xml" rel="self"/>
+  <link href="http://mzkmzk.github.io/"/>
+  <updated>2015-03-08T12:22:33+08:00</updated>
+  <id>http://mzkmzk.github.io/</id>
+  <author>
+    <name><![CDATA[K]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Wifi网络抓包]]></title>
+    <link href="http://mzkmzk.github.io/blog/2014/10/05/Internet-wifi/"/>
+    <updated>2014-10-05T15:16:46+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2014/10/05/Internet-wifi</id>
+    <content type="html"><![CDATA[<h1>Wifi网络抓包duanU</h1>
+
+<p>环境
+Mac OS X 10.9.4</p>
+
+<p>工具
+WireShark1.10.6</p>
+
+<p>1.创建airport软链接</p>
+
+<pre><code>$sudo ln -s /System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport   /usr/sbin/airport
+</code></pre>
+
+<p>2.确定无线网卡名</p>
+
+<pre><code>$ifconfig
+en0:        flags=8963&lt;UP,BROADCAST,SMART,RUNNING,PROMISC,SIMPLEX,MULTICAST&gt; mtu 1500
+ether ********
+inet6 ****
+    inet *****
+     netmask 0xffffff00 broadcast *****
+nd6 options=1&lt;PERFORMNUD&gt;
+media: autoselect
+status: active
+</code></pre>
+
+<p>这里的en0是我的无线.</p>
+
+<p>3.确认通道</p>
+
+<pre><code>$airport en0 scan
+ SSID BSSID             RSSI CHANNEL HT CC SECURITY (auth/unicast/group)
+ JENNY-PC_Network **** -66  1,+1    Y  -- WPA(PSK/AES/AES) WPA2(PSK/AES/AES) 
+ 我的通道是1
+$sudo airport -z//断开wifi
+$sudo airport -c1 //看CHANNEL的值
+
+确认一下~.
+$ airport -I
+ agrCtlRSSI: 0
+ agrExtRSSI: 0
+agrCtlNoise: 0
+agrExtNoise: 0
+      state: init
+    op mode: 
+ lastTxRate: 0
+    maxRate: 0
+lastAssocStatus: 65535
+802.11 auth: open
+  link auth: wpa2-psk
+      BSSID: 0:0:0:0:0:0
+       SSID: 
+        MCS: -1
+    channel: 1
+</code></pre>
+
+<p>4.配置WireShark</p>
+
+<p>双击wifi -en0 配置嗅探设置</p>
+
+<p><img src="/images/blog/004.png" alt="image" /></p>
+
+<p>设置wifi密码</p>
+
+<p>Edit-> Peferences</p>
+
+<p><img src="/images/blog//005.png" alt="image" /></p>
+
+<p><img src="/images/blog//006.png" alt="image" /></p>
+
+<p>启动监听 (只能监听到在监听后连接的设备)</p>
+
+<p><img src="/images/blog//007.png" alt="image" /></p>
+
+<p>参考链接<a href="http://www.douban.com/note/328099725/">http://www.douban.com/note/328099725/</a></p>
+]]></content>
+  </entry>
+  
+</feed>

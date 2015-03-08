@@ -1,0 +1,40 @@
+---
+layout: post
+title: "arduino"
+date: 2014-12-24 11:37:40 +0800
+comments: true
+categories: arduino 
+---
+##0x01 配置arduino开发环境
+
+1. 下载arduino开发软件<http://arduino.cc/en/Main/Software>
+
+2. 安装arduino uno开发板驱动 
+
+	2.1 usb 连接 arduino uno开发板
+	2.2 点击 控制面板 -> 端口 
+	    右击有黄色叹号的 USB Device 更新安装驱动
+	
+	![image](/images/blog/14-12-24-01.jpg)
+	
+3. 测试简单 demo 
+
+	![image](/images/blog/14-12-24-02-new.png)
+	
+		
+		void setup()
+		{ 
+		}
+		void loop()
+		{   
+		  digitalWrite(13, HIGH);   // turn the LED on (HIGH is the voltage level)
+ 		  delay(1000);               // wait for a second
+  		  digitalWrite(13, LOW);    // turn the LED off by making the voltage LOW
+ 		  delay(1000);               // wait for a second
+ 
+		}
+		
+##0x02 其他资料
+
+
+参考资料<http://www.geek-workshop.com/forum-49-1.html>
