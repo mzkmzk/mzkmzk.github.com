@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: mysql | K]]></title>
+  <link href="http://mzkmzk.github.io/blog/categories/mysql/atom.xml" rel="self"/>
+  <link href="http://mzkmzk.github.io/"/>
+  <updated>2015-03-08T12:16:44+08:00</updated>
+  <id>http://mzkmzk.github.io/</id>
+  <author>
+    <name><![CDATA[K]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Mysql 问题集锦]]></title>
+    <link href="http://mzkmzk.github.io/blog/2014/10/01/mysql_question/"/>
+    <updated>2014-10-01T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2014/10/01/mysql_question</id>
+    <content type="html"><![CDATA[<h2>1.mysql字符乱码</h2>
+
+<p>如要进行数据库定制，可到&#8217;/usr/local/mysql/support-files/&lsquo;文件夹底下，把里面的任一个.cnf配置文件复制到/etc/目录底下并修改文件名称为my.cnf。</p>
+
+<pre><code>sudo cp /usr/local/mysql/support-files/my-medium.cnf /etc/my.cnf
+
+sudo vi /etc/my.cnf
+</code></pre>
+
+<p>[mysqld]部分加入：</p>
+
+<pre><code>character-set-server=utf8
+</code></pre>
+]]></content>
+  </entry>
+  
+</feed>

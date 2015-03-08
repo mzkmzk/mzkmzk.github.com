@@ -1,0 +1,979 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[K]]></title>
+  <link href="http://mzkmzk.github.io/atom.xml" rel="self"/>
+  <link href="http://mzkmzk.github.io/"/>
+  <updated>2015-03-08T12:16:44+08:00</updated>
+  <id>http://mzkmzk.github.io/</id>
+  <author>
+    <name><![CDATA[K]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Mac 设置开机执行命令]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/01/13/Mac_login_sh/"/>
+    <updated>2015-01-13T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/01/13/Mac_login_sh</id>
+    <content type="html"><![CDATA[<h3>0x01 创建 .sh</h3>
+
+<p>.sh里设置要执行的命令</p>
+
+<p>然后 chmod 711 .sh</p>
+
+<h3>0x002设置开机启动</h3>
+
+<p>在系统偏好设置-用户与群组-登陆项 里添加上面你保存的可执行文件。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[php 上传图片和预览]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/01/07/php_upload_picture/"/>
+    <updated>2015-01-07T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/01/07/php_upload_picture</id>
+    <content type="html"><![CDATA[<!--more-->
+
+
+<p>效果图</p>
+
+<pre><code>![image](images/blog/2015-01-07-02.png)
+</code></pre>
+
+<p>只需更改下</p>
+
+<pre><code>$upfile='./image/human'; //图片目录路径
+</code></pre>
+
+<p>此行的图片路径和权限即可</p>
+
+<pre><code>&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;
+&lt;html xmlns="http://www.w3.org/1999/xhtml"&gt;
+&lt;head&gt;
+&lt;meta http-equiv="Content-Type" content="text/html; charset=utf-8" /&gt;
+&lt;title&gt;上传图片&lt;/title&gt;
+&lt;/head&gt;
+
+&lt;body&gt;&lt;div align="center" style="width:50%; height:300px; font-size:13px"&gt;
+&lt;h3&gt;上传图片预览&lt;/h3&gt;
+&lt;form name="frm" method="post" enctype="multipart/form-data"&gt;
+&lt;font style="letter-spacing:1px" color="#FF0000"&gt;*只允许上传jpg|png|bmp|pjpeg|gif格式的图片&lt;/font&gt;&lt;br/&gt;&lt;br/&gt;
+请选择图片：
+ &lt;input name='upfile' type='file'/&gt;
+ &lt;input name="btn" type="submit" value="上传" /&gt;&lt;br /&gt;
+&lt;/form&gt;
+&lt;?php
+//全局变量
+$arrType=array('image/jpg','image/gif','image/png','image/bmp','image/pjpeg');
+$max_size='500000';      // 最大文件限制（单位：byte）
+$upfile='./image/human'; //图片目录路径
+$file=$_FILES['upfile'];    
+
+if($_SERVER['REQUEST_METHOD']=='POST'){ //判断提交方式是否为POST
+ if(!is_uploaded_file($file['tmp_name'])){ //判断上传文件是否存在
+echo "&lt;font color='#FF0000'&gt;文件不存在！&lt;/font&gt;";
+exit;
+}
+if($file['size']&gt;$max_size){  //判断文件大小是否大于500000字节
+echo "&lt;font color='#FF0000'&gt;上传文件太大！&lt;/font&gt;";
+exit;
+} 
+if(!in_array($file['type'],$arrType)){  //判断图片文件的格式
+ echo "&lt;font color='#FF0000'&gt;上传文件格式不对！&lt;/font&gt;";
+ exit;
+ }
+ if(!file_exists($upfile)){  // 判断存放文件目录是否存在
+ mkdir($upfile,0777,true);
+ } 
+  $imageSize=getimagesize($file['tmp_name']);   $img=$imageSize[0].'*'.$imageSize[1];
+  $fname=$file['name'];
+  $ftype=explode('.',$fname);
+  $picName=$upfile."/cloudy".$fname;
+  if(file_exists($picName)){
+echo "&lt;font color='#FF0000'&gt;同文件名已存在！&lt;/font&gt;";
+exit;
+ }
+ if(!move_uploaded_file($file['tmp_name'],$picName)){  
+echo "&lt;font color='#FF0000'&gt;移动文件出错！&lt;/font&gt;";
+exit;
+}
+else{
+echo "&lt;font color='#FF0000'&gt;图片文件上传成功！&lt;/font&gt;&lt;br/&gt;";
+echo "&lt;font color='#0000FF'&gt;图片大小：$img&lt;/font&gt;&lt;br/&gt;";
+echo "图片预览：&lt;br&gt;&lt;div style='border:#F00 1px solid; width:200px;height:200px'&gt;
+&lt;img src=\"".$picName."\" width=200px height=200px&gt;".$fname."&lt;/div&gt;";
+}
+  }
+  ?&gt;
+  &lt;/div&gt;
+  &lt;/body&gt;
+  &lt;/html&gt;
+</code></pre>
+
+<p>参考链接<a href="http://blog.163.com/ylx282006@126/blog/static/597727172010112385533429/">http://blog.163.com/ylx282006@126/blog/static/597727172010112385533429/</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[php 函数累积]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/01/07/php_function/"/>
+    <updated>2015-01-07T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/01/07/php_function</id>
+    <content type="html"><![CDATA[<h3>截取字符串函数</h3>
+
+<pre><code>$str1 = substr($str,5);
+echo "从第5个字符开始取至最后：".$str1."
+</code></pre>
+
+<p> 参考链接<a href="http://www.php100.com/html/php/hanshu/2013/0905/4650.html">http://www.php100.com/html/php/hanshu/2013/0905/4650.html</a></p>
+
+<h3>随机函数</h3>
+
+<pre><code>//mt_rand生成一个介于33和126之间的数字 
+//chr()将数字转为字符串
+char(mt_rand(33, 126));
+</code></pre>
+
+<h3>php 获取 form表单传递过来的file文件</h3>
+
+<pre><code>$_FILES($_REQUEST("fiel控件的name"));
+</code></pre>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Mac 命令积累]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/01/07/mac_order/"/>
+    <updated>2015-01-07T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/01/07/mac_order</id>
+    <content type="html"><![CDATA[<h3>更改目录权限</h3>
+
+<pre><code>//-R代表此目录下的所有目录和文件都更改为753权限
+chmod -R 753 目录 
+</code></pre>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Mac 搭建 MAMP环境]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/01/06/mac_install_mamp/"/>
+    <updated>2015-01-06T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/01/06/mac_install_mamp</id>
+    <content type="html"><![CDATA[<h3>0x01 Apache 设置访问目录</h3>
+
+<p>默认的访问目录是</p>
+
+<pre><code>http://localhost/~user_name
+</code></pre>
+
+<p>修改默认访问目录<em>vim /etc/apache2/httpd.conf</em></p>
+
+<pre><code>#在这里设置默认的访问路径...
+DocumentRoot "/Users/username/Sites"
+&lt;Directory /&gt;
+Options Indexes MultiViews
+AllowOverride All
+Order allow,deny
+Allow from all
+&lt;/Directory&gt;
+</code></pre>
+
+<p>以后有项目往这里扔就可以访问了</p>
+
+<h3>0x02 更新php</h3>
+
+<pre><code>brew update
+brew tap homebrew/dupes
+brew tap josegonzalez/homebrew-php
+brew install php55 #Apache
+</code></pre>
+
+<p>修改php的cli路径 <em>vim /etc/bashrc</em></p>
+
+<pre><code>export PATH="/usr/local/bin:/usr/local/sbin:$PATH"
+</code></pre>
+
+<p>设置apache的使用的php版本 <em>vim /etc/apache2/httpd.conf</em></p>
+
+<pre><code>LoadModule php5_module /usr/local/Cellar/php55/5.5.20/libexec/apache2/libphp5.so
+</code></pre>
+
+<h3>0x03 安装mysql</h3>
+
+<p>由于我之前就安装了mysql&hellip;这里就直接引用参考链接..</p>
+
+<pre><code>brew install mysql
+unset TMPDIR
+mysql_install_db --verbose --user=`whoami` --basedir="$(brew --prefix mysql)" --datadir=/usr/local/var/mysql --tmpdir=/tmp
+sudo chown -R your_user /usr/local/var/mysql/
+</code></pre>
+
+<h3>参考链接</h3>
+
+<p>MAMP参考链接<a href="http://yansu.org/2013/12/11/lamp-in-mac.html">http://yansu.org/2013/12/11/lamp-in-mac.html</a></p>
+
+<p>更多有关bashrc设置参考链接<a href="http://www.tuicool.com/articles/7nu2E3R">http://www.tuicool.com/articles/7nu2E3R</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Eclipse 搭建phpIDE和导入php项目]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/01/06/eclipse_phpide_import_php/"/>
+    <updated>2015-01-06T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/01/06/eclipse_phpide_import_php</id>
+    <content type="html"><![CDATA[<h3>0x01 搭建phpIDE</h3>
+
+<ol>
+<li><em>Help -> Install New Software</em></li>
+<li>Work with 选择 All Available Sites</li>
+<li>找到Web,XML,JAVA EE and OSGi Enterprise Developement 中的 PHP Development Tools(PDT)</li>
+<li>重启Eclipse</li>
+</ol>
+
+
+<h3>0x02 导入php项目</h3>
+
+<ol>
+<li><em>New ->PHP->PHP Project</em></li>
+<li>选择Create project at existing location 然后Browse中以前的php项目 即可</li>
+</ol>
+
+
+<h3>参考链接</h3>
+
+<p><a href="http://jingyan.baidu.com/article/6d704a13f8001928db51cad8.html">http://jingyan.baidu.com/article/6d704a13f8001928db51cad8.html</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[php 无法识别<? ?>]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/01/04/php_no_know_short_open_tag/"/>
+    <updated>2015-01-04T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/01/04/php_no_know_short_open_tag</id>
+    <content type="html"><![CDATA[<h3>0x01</h3>
+
+<p><em>vim /usr/local/etc/php/5.5</em></p>
+
+<pre><code>#默认是Off 改为On即可
+short_open_tag = On
+</code></pre>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[php 解决乱码]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/01/04/php_messy_code/"/>
+    <updated>2015-01-04T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/01/04/php_messy_code</id>
+    <content type="html"><![CDATA[<h3>0x01 php文件</h3>
+
+<pre><code>//php文件头中加入
+header("Content-Type: text/html; charset=utf-8");
+</code></pre>
+
+<h3>0x02 html 文件</h3>
+
+<pre><code>&lt;meta http-equiv="Content-Type" content="text/html; charset=utf-8"&gt;
+</code></pre>
+
+<h3>参考链接</h3>
+
+<p><a href="http://www.jb51.net/article/21118.htm">http://www.jb51.net/article/21118.htm</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Mac 搭建svn服务器]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/01/04/mac_svn/"/>
+    <updated>2015-01-04T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/01/04/mac_svn</id>
+    <content type="html"><![CDATA[<h3>0x01 创建svn repository</h3>
+
+<pre><code>svnadmin create /Users/maizhikun/Learning/svn/pro  //仓库位置，svn是svn的目录，pro是一个版本库的目录
+</code></pre>
+
+<h3>0x02 配置svn 用户权限</h3>
+
+<p><code>/Users/maizhikun/Learning/svn/pro/conf</code> 目录下存在三个文件 authz,passwd,svnserve.conf</p>
+
+<p>1.配置svnserve.conf</p>
+
+<pre><code>＃anon-access = read
+＃auth-access = write
+＃password-db = passwd
+＃authz-db = authz
+</code></pre>
+
+<p>去掉#和#后的空格</p>
+
+<p>要防止匿名访问就</p>
+
+<pre><code>anon-access=none
+</code></pre>
+
+<p>2.配置passwd</p>
+
+<pre><code>[users]
+K=svn
+MZK=svn
+</code></pre>
+
+<p>3.配置authz</p>
+
+<pre><code>#设置了一个分组PAC 包括成员K和MZK
+[groups]
+PAC=K,MZK
+
+#[/]表示当前版本库的路径的访问权限
+[/]
+@PAC=rw
+# 忘记了写上面两行 导致一直出现authorization failed 错误
+</code></pre>
+
+<h3>0x03 启动svn服务</h3>
+
+<pre><code>//没有任何输出则表示 启动成功
+svnserve -d -r /Users/maizhikun/Learning/svn    
+//测试
+svn checkout svn://127.0.0.1/pro --username=K --password=svn ./pro
+</code></pre>
+
+<h3>0x04(可选) svn客户端安装</h3>
+
+<p>Version 下载链接<a href="http://www.pc6.com/mac/116544.html">http://www.pc6.com/mac/116544.html</a></p>
+
+<!--###0x05(可选) 网页访问 svn apache整合svn
+    
+svn默认端口是3690
+    
+网页访问svn 127.0.0.1 会显示
+
+    ( success ( 2 2 ( ) ( edit-pipeline svndiff1 absent-entries commit-revprops depth log-revprops atomic-revprops partial-replay ) ) ) 
+-->
+
+
+<h3>参考链接</h3>
+
+<p>参考链接<a href="http://www.cnblogs.com/onlyfu/archive/2012/05/08/2489814.html">http://www.cnblogs.com/onlyfu/archive/2012/05/08/2489814.html</a></p>
+
+<p>参考链接<a href="http://www.cocoachina.com/bbs/read.php?tid=153734">http://www.cocoachina.com/bbs/read.php?tid=153734</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[bootstrap 可视化布局]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/01/04/bootstrap_layout/"/>
+    <updated>2015-01-04T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/01/04/bootstrap_layout</id>
+    <content type="html"><![CDATA[<p><img src="images/blog/2015-01-07-01.png" alt="image" /></p>
+
+<p>bootstrap 提供的可视化布局</p>
+
+<h3>0x01 获取所需布局的代码</h3>
+
+<p><a href="http://www.bootcss.com/p/layoutit/#">http://www.bootcss.com/p/layoutit/#</a></p>
+
+<p>通过拖动设定自己想要的布局 然后 点击下载按钮 获取相对应的代码</p>
+
+<p>放入自己网页的想对应的位置</p>
+
+<h3>0x02 导入bootstrap相关的css和js</h3>
+
+<p>在项目导入<code>bootstrao v2.3</code>的css、js、和img</p>
+
+<p>下载地址<a href="http://v2.bootcss.com/">http://v2.bootcss.com/</a></p>
+
+<p>切记 在bootstrap.js前导入jquery.js</p>
+
+<p>jquery.js下载地址<a href="http://jquery.com/download/">http://jquery.com/download/</a></p>
+
+<p>在页面导入css和js</p>
+
+<pre><code>&lt;link rel="stylesheet" type="text/css" media="screen" href="./css/bootstrap.css"&gt;
+&lt;link rel="stylesheet" type="text/css" media="screen" href="./css/bootstrap-responsive.css"&gt;
+
+&lt;script type="text/javascript" src="./js/jquery-2_0_0.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="./js/bootstrap.js"&gt;&lt;/script&gt;
+</code></pre>
+
+<p>导入<code>bootstrap v3.0</code>是否可行尚未尝试</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[js动态添加 from表单元素]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/01/03/js_add_from/"/>
+    <updated>2015-01-03T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/01/03/js_add_from</id>
+    <content type="html"><![CDATA[<pre><code>//from_this参数作用为Onsubmit事件传递过来的from表单 或者通过id获取也可以
+function  inser_Submit(from_this){
+     var NFC_ID=document.createElement("input");
+     NFC_ID.type="hidden";
+     NFC_ID.name="NFC_ID";
+     NFC_ID.value=document.getElementById("NFCID").value;
+     from_this.appendChild(NFC_ID);
+}
+</code></pre>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[jquery 实现 ajax]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/01/03/jquery_ajax/"/>
+    <updated>2015-01-03T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/01/03/jquery_ajax</id>
+    <content type="html"><![CDATA[<h2>0x01 导入jquery.js</h2>
+
+<pre><code>&lt;script type="text/javascript" src="./js/jquery.min.js"&gt;&lt;/script&gt;
+</code></pre>
+
+<h2>0x02 调用 jquery 的ajax方法</h2>
+
+<pre><code>$(function(){
+    $('#login').on('submit',function(){
+        var $form = $(this),
+        //将所需要提交的form表单 序列化为字符串
+        postData = $form.serialize();
+        // loading...
+        //getJson第一个参数为要请求的url,第二个是传递过去的参数
+        $.getJSON('LoginAction',postData).done(function(data){
+            //data为返回来的json数据
+            if(data.msg){
+                location.href="Home.jsp";
+                alert("登陆成功");
+            }else{
+                alert("账号/密码错误 请重新输入");
+            }
+        }).fail(function(){
+            alert('登录出错：网络连接出现问题，请稍后再试。');
+        }).complete(function(){
+            // un loading...
+        })
+        return false;
+    });
+});
+</code></pre>
+
+<p>参考链接<a href="http://www.w3cschool.cn/ajax_getjson.html">http://www.w3cschool.cn/ajax_getjson.html</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[android dialog Fragment显示]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/01/02/android_dialog_fragment/"/>
+    <updated>2015-01-02T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/01/02/android_dialog_fragment</id>
+    <content type="html"><![CDATA[<p>先上效果图.</p>
+
+<h2>0x01 创建显示框视图 alert_dialog_nick.xml</h2>
+
+<pre><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:id="@+id/layout_r"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:background="#FFFFFF"
+android:orientation="vertical" &gt;
+
+&lt;RelativeLayout
+    android:layout_width="250dp"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="15.0dip"
+    android:gravity="center_horizontal" &gt;
+
+    &lt;EditText  
+        android:id="@+id/dialog_edit"  
+        android:layout_width="230dp"  
+        android:layout_height="40dp"  
+        android:background="@drawable/login_input" 
+        android:drawablePadding="25dip"
+        android:textColorHint="@color/color_hint"  
+        android:textSize="14.0dip"
+        android:inputType="number"  
+        android:paddingLeft="10dp" /&gt;  
+&lt;/RelativeLayout&gt;
+
+&lt;ImageView
+    android:layout_width="250dp"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_horizontal"
+    android:layout_marginTop="15dp"
+    android:background="@color/color_gray"
+    android:src="@drawable/prefresh_list_cutline" /&gt;
+
+&lt;RelativeLayout
+    android:layout_width="250dp"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="5dp"
+    android:layout_marginRight="5dp"
+    android:layout_marginTop="15dp" &gt;
+
+    &lt;LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:paddingBottom="10.0dip"
+        android:orientation="horizontal" &gt;
+
+        &lt;Button
+            android:id="@+id/yes"
+            android:layout_width="90.0dip"
+            android:layout_height="40.0dip"
+            android:background="@color/color_blue"
+            android:text="@string/dialog_yes"
+            android:textSize="16sp"
+            android:layout_marginRight="20.0dip"
+            android:textColor="@color/color_white" /&gt;
+
+        &lt;Button
+            android:id="@+id/no"
+            android:layout_width="90.0dip"
+            android:layout_height="40.0dip"
+            android:background="@color/color_red"
+            android:text="@string/dialog_no"
+            android:textSize="16sp"
+            android:textColor="@color/color_white" /&gt;
+    &lt;/LinearLayout&gt;
+&lt;/RelativeLayout&gt;
+
+&lt;/LinearLayout&gt;
+</code></pre>
+
+<h2>0x02 创建显示框TianKongDialog.java</h2>
+
+<pre><code>//TianKongDialog 这个注意点在 DialogFragment 要是import android.support.v4.app.DialogFragment的...不要直接app.DialogFragment的
+
+@SuppressLint("NewApi")
+public class TianKongDialog extends DialogFragment{
+private static String CURRENT_TIME = "CURRENT_TIME";
+
+private EditText dialog_edit;
+
+public static TianKongDialog newInstance(){
+    //创建一个新的带有参数的Fragment实例
+    TianKongDialog fragment = new TianKongDialog();
+    Bundle args = new Bundle();
+    fragment.setArguments(args);
+    return fragment;
+}
+
+@Override
+public Dialog onCreateDialog(Bundle savedInstanceState) {
+    LayoutInflater factory = (LayoutInflater)  getActivity().getSystemService( getActivity().LAYOUT_INFLATER_SERVICE);
+    final View customViewnick = factory.inflate(R.layout.alert_dialog_nick, null);
+    dialog_edit = (EditText)customViewnick.findViewById(R.id.dialog_edit);
+    final Dialog ad2 = new Dialog(getActivity(), R.style.Theme_CustomDialog2);
+    ad2.setContentView(customViewnick);
+    ad2.setCancelable(false);//有可能你调不出这个方法，可以通过ad.setOnKeyListener()方法来实现屏蔽back键
+    ad2.setCanceledOnTouchOutside(false);//当点击除对话框外屏幕其他区域时对话框不消失，默认是消失的
+
+    Button buttonnickyes = (Button)customViewnick.findViewById(R.id.yes);
+    buttonnickyes.setOnClickListener(new Button.OnClickListener() {
+
+        @Override
+        public void onClick(View arg0) {
+            String cushion_time = dialog_edit.getText().toString();
+            ad2.dismiss();
+        }
+    });
+    Button buttonnickno = (Button)customViewnick.findViewById(R.id.no);
+    buttonnickno.setOnClickListener(new Button.OnClickListener() {
+
+        @Override
+        public void onClick(View arg0) {
+            ad2.dismiss();
+        }
+    });
+    return ad2;         
+}
+
+
+
+}
+</code></pre>
+
+<h2>0x03 调用 显示框</h2>
+
+<pre><code>    String tag = "my_dialog";  
+    TianKongDialog myFragment = TianKongDialog.newInstance();  
+    myFragment.show(getFragmentManager(), tag); 
+</code></pre>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[android 设置两个控件各占屏幕的一半]]></title>
+    <link href="http://mzkmzk.github.io/blog/2014/12/27/android_two_layout/"/>
+    <updated>2014-12-27T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2014/12/27/android_two_layout</id>
+    <content type="html"><![CDATA[<p>我的需求是一行里 两个TextView 各占屏幕的 一半</p>
+
+<pre><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:orientation="horizontal" 
+android:id="@+id/book_access"
+&gt;
+ &lt;TextView
+         android:id="@+id/book_name"
+         android:layout_width="0dp" //设置0dp好像会提高效率
+         android:layout_height="wrap_content"
+         android:layout_weight="1"
+         android:background="#ffffffff"
+         android:gravity="center"
+         android:text="@string/str_navi_home_navi_left" /&gt;
+      &lt;TextView
+          android:id="@+id/book_accessTime"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:background="#ffffffff"
+          android:gravity="center"
+          android:text="@string/str_navi_home_navi_right" /&gt;
+&lt;/LinearLayout&gt;
+</code></pre>
+
+<p>如果要设置成其他的比例 只需要计算出 对应的layout_weight即可</p>
+
+<p>参考链接<a href="http://bbs.csdn.net/topics/390801550">http://bbs.csdn.net/topics/390801550</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[arduino]]></title>
+    <link href="http://mzkmzk.github.io/blog/2014/12/24/arduino/"/>
+    <updated>2014-12-24T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2014/12/24/arduino</id>
+    <content type="html"><![CDATA[<h2>0x01 配置arduino开发环境</h2>
+
+<ol>
+<li><p>下载arduino开发软件<a href="http://arduino.cc/en/Main/Software">http://arduino.cc/en/Main/Software</a></p></li>
+<li><p>安装arduino uno开发板驱动</p>
+
+<p> 2.1 usb 连接 arduino uno开发板
+ 2.2 点击 控制面板 -> 端口
+     右击有黄色叹号的 USB Device 更新安装驱动</p>
+
+<p> <img src="http://mzkmzk.github.io/images/blog/14-12-24-01.jpg" alt="image" /></p></li>
+<li><p>测试简单 demo</p>
+
+<p> <img src="http://mzkmzk.github.io/images/blog/14-12-24-02-new.png" alt="image" /></p>
+
+<pre><code> void setup()
+ { 
+ }
+ void loop()
+ {   
+   digitalWrite(13, HIGH);   // turn the LED on (HIGH is the voltage level)
+   delay(1000);               // wait for a second
+   digitalWrite(13, LOW);    // turn the LED off by making the voltage LOW
+   delay(1000);               // wait for a second
+
+ }
+</code></pre></li>
+</ol>
+
+
+<h2>0x02 其他资料</h2>
+
+<p>参考资料<a href="http://www.geek-workshop.com/forum-49-1.html">http://www.geek-workshop.com/forum-49-1.html</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[js 函数累积]]></title>
+    <link href="http://mzkmzk.github.io/blog/2014/12/16/js_function/"/>
+    <updated>2014-12-16T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2014/12/16/js_function</id>
+    <content type="html"><![CDATA[<p>jquery api<a href="http://jquery.bootcss.com/">http://jquery.bootcss.com/</a></p>
+
+<h3>select 选中项</h3>
+
+<pre><code>设置select中value="paraValue"的Item为选中    
+document.all.objSelect.value = objItemValue;  
+</code></pre>
+
+<p>参考链接<a href="http://www.cnblogs.com/Herist/archive/2007/09/24/903890.html">http://www.cnblogs.com/Herist/archive/2007/09/24/903890.html</a></p>
+
+<h3>Dom元素加载完毕后调用方法 ready()</h3>
+
+<pre><code>$(document).ready(function(){
+    $(".btn1").click(function(){
+        $("p").slideToggle();
+    });
+});
+</code></pre>
+
+<p>参考链接<a href="http://www.w3school.com.cn/jquery/event_ready.asp">http://www.w3school.com.cn/jquery/event_ready.asp</a></p>
+
+<h3>jquery 控制css</h3>
+
+<p>通过控制class为button_left的鼠标移入动作把id为up_page设置为可见</p>
+
+<pre><code>$(".button_left").mouseover(function(){
+$("#up_page").css("visibility","visible");
+});
+</code></pre>
+
+<h3>参考链接</h3>
+
+<p>jquery api <a href="http://api.jquery.com/">http://api.jquery.com/</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[android adapter]]></title>
+    <link href="http://mzkmzk.github.io/blog/2014/12/16/android_adapter/"/>
+    <updated>2014-12-16T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2014/12/16/android_adapter</id>
+    <content type="html"><![CDATA[<p>android adapter主要分为SimpleAdapter、ArrayList、BaseAdapter</p>
+
+<p>这里主要介绍BaseAdapter</p>
+
+<h3>0x01 .xml 布局文件的 单一行的样式设置</h3>
+
+<pre><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:orientation="horizontal" 
+android:id="@+id/book_access"
+&gt;
+ &lt;TextView
+         android:id="@+id/book_name"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_weight="1"
+         android:background="#ffffffff"
+         android:gravity="center"
+         android:text="@string/str_navi_home_navi_left" /&gt;
+      &lt;TextView
+          android:id="@+id/book_accessTime"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:background="#ffffffff"
+          android:gravity="center"
+          android:text="@string/str_navi_home_navi_right" /&gt;
+&lt;/LinearLayout&gt; 
+</code></pre>
+
+<h3>0x02 .java 继承BaseAdapter</h3>
+
+<pre><code>package gabriel.luoyer.promonkey.main;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
+
+import com.charon.pulltorefreshlistview.PullToRefreshListView;
+import com.charon.pulltorefreshlistview.PullToRefreshListView.OnRefreshListener;
+
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.os.SystemClock;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.BaseAdapter;
+import android.widget.TextView;
+import android.widget.Toast;
+import android.widget.AdapterView.OnItemClickListener;
+import gabriel.luoyer.promonkey.R;
+import gabriel.luoyer.promonkey.base.BaseFragment;
+import gabriel.luoyer.promonkey.bean.book;
+import gabriel.luoyer.promonkey.utils.ModelServer;
+
+public class HomeFragment extends BaseFragment {
+
+private PullToRefreshListView mPullToRefreshListView;
+private MyAdapter adapter;
+private ArrayList&lt;book&gt; data;
+public LayoutInflater mInflater;
+
+@Override
+public View onCreateView(LayoutInflater inflater, ViewGroup container,
+        Bundle savedInstanceState) {
+    mInflater=inflater;
+    View view = inflater.inflate(R.layout.main_frg_home, container, false);
+    findView(view);
+    initView(view);
+    return view;
+}
+
+private void findView(View view) {
+    mPullToRefreshListView = (PullToRefreshListView)view.findViewById(R.id.mfh_s);
+}
+
+private void initView(View view) {
+
+    data = new ArrayList&lt;book&gt;();
+
+    book b =new book();
+
+    b.setB_name("书籍名称");
+    b.setB_accessTime("借书时间");
+
+    data.add(b);
+
+    adapter = new MyAdapter();
+
+    mPullToRefreshListView.setAdapter(adapter);
+
+    mPullToRefreshListView.setOnRefreshListener(new OnRefreshListener() {
+
+        @Override
+        public void onRefresh() {
+            new AsyncTask&lt;Void, Void, Void&gt;() {
+
+                @Override
+                protected Void doInBackground(Void... params) {
+                    SystemClock.sleep(1000);
+                    book b =new book();
+                    b.setB_name("书籍名称");
+                    b.setB_accessTime("借书时间");
+                    data.add(b);
+                    return null;
+                }
+
+                @Override
+                protected void onPostExecute(Void result) {
+                    super.onPostExecute(result);
+                    adapter.notifyDataSetChanged();
+                    mPullToRefreshListView.onRefreshComplete();
+                }
+            }.execute();
+        }
+    });
+
+    mPullToRefreshListView
+            .setOnItemClickListener(new OnItemClickListener() {
+
+                @Override
+                public void onItemClick(AdapterView&lt;?&gt; parent, View view,
+                        int position, long id) {
+                    // If you call addHeaderView, the position will contains
+                    // the count of header view.
+                    // int realPosition = position
+                    // - mPullToRefreshListView.getHeaderViewsCount();
+                    // Toast.makeText(PullToRefreshActivity.this,
+                    // data.get(realPosition), Toast.LENGTH_SHORT).show();
+
+                    Toast.makeText(
+                            getActivity().getApplicationContext(),
+                            (String) mPullToRefreshListView.getAdapter()
+                                    .getItem(position), Toast.LENGTH_SHORT)
+                            .show();
+
+                }
+
+            });
+
+}
+
+
+private class MyAdapter extends BaseAdapter {
+
+    @Override
+    public int getCount() {
+        return data.size();
+    }
+
+    @Override
+    public Object getItem(int position) {
+        return data.get(position);
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+         ViewHolder holder = null;
+         if (convertView == null) {                    
+             holder=new ViewHolder();                   
+             convertView = mInflater.inflate(R.layout.main_frg_home_lv, null);
+             holder.book_name = (TextView)convertView.findViewById(R.id.book_name);
+             holder.book_accessTime = (TextView)convertView.findViewById(R.id.book_accessTime);
+             convertView.setTag(holder);                    
+         }else {                   
+             holder = (ViewHolder)convertView.getTag();
+         }                           
+         holder.book_name.setText(data.get(position).getB_name());
+         holder.book_accessTime.setText(data.get(position).getB_accessTime());                
+         return convertView;
+    }
+}
+
+public final class ViewHolder{
+    public TextView book_name;
+    public TextView book_accessTime;
+}
+}
+</code></pre>
+
+<p>参考链接<a href="http://www.xue5.com/Mobile/Mobile/735287.html">http://www.xue5.com/Mobile/Mobile/735287.html</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[android 布局]]></title>
+    <link href="http://mzkmzk.github.io/blog/2014/12/16/android_%20layout/"/>
+    <updated>2014-12-16T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2014/12/16/android_ layout</id>
+    <content type="html"><![CDATA[<p>LinearLayout、FrameLayout和AbsoulteLayout<a href="http://www.cnblogs.com/wisekingokok/archive/2011/08/23/2150452.html">http://www.cnblogs.com/wisekingokok/archive/2011/08/23/2150452.html</a></p>
+
+<p>RelativeLayout和TableLayout<a href="http://www.cnblogs.com/wisekingokok/archive/2011/08/24/2152004.html">http://www.cnblogs.com/wisekingokok/archive/2011/08/24/2152004.html</a></p>
+
+<p>android 屏幕自适应解决方案<a href="http://www.eoeandroid.com/thread-173973-1-1.html">http://www.eoeandroid.com/thread-173973-1-1.html</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[readme]]></title>
+    <link href="http://mzkmzk.github.io/blog/2014/12/16/Android_demo/"/>
+    <updated>2014-12-16T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2014/12/16/Android_demo</id>
+    <content type="html"><![CDATA[<h2>Robot</h2>
+
+<p>来源地址<a href="http://www.eoeandroid.com/thread-552985-1-1.html">http://www.eoeandroid.com/thread-552985-1-1.html</a></p>
+
+<p>简单的实现了一个机器人聊天功能（HerotCulb机器人）</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Mac 查看 android javadoc]]></title>
+    <link href="http://mzkmzk.github.io/blog/2014/12/11/mac_query_android_javadoc/"/>
+    <updated>2014-12-11T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2014/12/11/mac_query_android_javadoc</id>
+    <content type="html"><![CDATA[<p>网页的javadoc<a href="http://developer.android.com/reference/packages.html">http://developer.android.com/reference/packages.html</a></p>
+
+<p>但是 由于那个网站 经常上不去</p>
+
+<p>所以 down 一份 chm 不错</p>
+
+<p>chm 下载地址 <a href="https://code.google.com/p/android-chm-documentation/downloads/list">https://code.google.com/p/android-chm-documentation/downloads/list</a></p>
+
+<p>Mac阅读.chm软件&lt;thunder://QUFodHRwOi8vaWNobS5nb29nbGVjb2RlLmNvbS9maWxlcy9pQ2htLjEuNC4yLnppcFpa></p>
+
+<p>查看javadoc参考链接<a href="http://lkubaski.wordpress.com/2012/08/17/downloading-the-android-javadoc/">http://lkubaski.wordpress.com/2012/08/17/downloading-the-android-javadoc/</a></p>
+
+<p>.iChm软件参考链接<a href="http://www.appinn.com/ichm/">http://www.appinn.com/ichm/</a></p>
+]]></content>
+  </entry>
+  
+</feed>

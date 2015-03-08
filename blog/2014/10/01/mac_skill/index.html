@@ -1,0 +1,238 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Mac 使用技巧 - K</title>
+	<meta name="author" content="K">
+
+	
+	<meta name="description" content="1. 配置环境变量 //终端输入 pico .bash_profile 2. 设置隐藏文件的可见性 //显示隐藏文件在终端输入: defaults write com.apple.finder AppleShowAllFiles -bool true KillAll Finder // &hellip;">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link href="false" rel="alternate" title="K" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script async="true" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	
+</head>
+
+
+<body>
+	<header id="header" class="inner"><h1><a href="/">K</a></h1>
+<nav id="main-nav"><ul class="main">
+	
+</ul>
+</nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Menu</a>
+		<div class="container"><ul class="main">
+	
+</ul>
+</div>
+	</div>
+	<div class="alignright search">
+		<a class="button"></a>
+		<div class="container">
+			<form action="https://www.google.com/search" method="get">
+				<input type="text" name="q" results="0">
+				<input type="hidden" name="q" value="site:mzkmzk.github.io">
+			</form>
+		</div>
+	</div>
+</nav>
+<nav id="sub-nav" class="alignright">
+	<div class="social">
+		
+		
+		
+		
+    
+		
+		
+		
+		
+		
+    
+	</div>
+	
+</nav>
+
+</header>
+	
+		
+	
+	<div id="content" class="inner"><article class="post">
+	<h2 class="title">Mac 使用技巧</h2>
+	<div class="entry-content"><h2>1. 配置环境变量</h2>
+
+<pre><code>//终端输入 
+pico .bash_profile
+</code></pre>
+
+<p><img src="/images/blog//0001.png" alt="Tomcat配置示例" /></p>
+
+<h2>2. 设置隐藏文件的可见性</h2>
+
+<pre><code>//显示隐藏文件在终端输入:    
+defaults write com.apple.finder AppleShowAllFiles -bool true  KillAll Finder
+
+//相反要不显示输入   
+defaults write com.apple.finder AppleShowAllFiles -bool false  KillAll Finder
+</code></pre>
+
+<h2>3. 根据路径打开文件夹</h2>
+
+<p>打开应用程序<code>command+shift+A</code> - 使用工具 -终端</p>
+
+<pre><code>open . 需要打开的目录 
+</code></pre>
+
+<h2>4. 使用caffeinate阻止Mac运行屏幕保护和睡眠</h2>
+
+<p>caffeinate能阻止Mac进入睡眠状态，而且屏幕保护也不会激活。我们最好使用-t为命令加入具体的时间。比如下面的命令可以使Mac一小时内不进入睡眠状态。</p>
+
+<pre><code>caffeinate -t 3600
+</code></pre>
+
+<h2>5.使用purge命令释放内存</h2>
+
+<p>purge命令可以清除内存和硬盘的缓存，与重启Mac的效果差不多。purge命令可以让不活跃的系统内存转变为可以使用的内存。你只需在终端中输入下面的命令即可。</p>
+
+<pre><code>purge
+</code></pre>
+
+<h2>6.创建有密码保护的压缩文件(不管用)</h2>
+
+<p>你可以通过下面的命令将桌面上的macx.txt文件创建成有密码保护压缩文件protected.zip</p>
+
+<pre><code>zip -e /Users/maizhikun/Desktop/Tomcat_Start.zip /Users/maizhikun/Desktop/Tomcat_Start.pages 
+</code></pre>
+
+<h2>7 Mac连接Windows共享文件夹</h2>
+
+<p>Finder -> 前往 ->前往服务器</p>
+
+<p>然后在弹出框里填写</p>
+
+<pre><code>smb://ip/文件夹名称
+</code></pre>
+
+<h2>8 Mac破解vmware &ndash;未证实</h2>
+
+<p><a href="http://bbs.feng.com/read-htm-tid-6887336.html">http://bbs.feng.com/read-htm-tid-6887336.html</a></p>
+
+<h2>9 Mac配置github相关</h2>
+
+<pre><code>cd ~/.ssh
+ssh-keygen -t rsa -C 你注册github的email
+</code></pre>
+
+<p>弹出<code>Enter file in which to save the key (/Users/twer/.ssh/id_rsa):</code>直接按空格</p>
+
+<p>弹出<code>Enter passphrase (empty for no passphrase):</code>输入你github账号的密码。</p>
+
+<p>弹出<code>Enter same passphrase again:</code>再次输入你的密码。</p>
+
+<p>打开~/.ssh下的id_rsa.pub文件复制里面的全部内容。
+登陆github，选择Account Settings&ndash;>SSH Public Keys 添加ssh，把剪切板的内容复制到key输入框内直接保存。</p>
+
+<p>测试shh:</p>
+
+<pre><code>ssh git@github.com
+</code></pre>
+
+<p>输出</p>
+
+<pre><code>PTY allocation request failed on channel 0
+Hi username! You've successfully authenticated, but GitHub does not     provide shell access.
+Connection to github.com closed.
+</code></pre>
+
+<p>代表成功</p>
+
+<p>参考链接<a href="http://segmentfault.com/blog/yaashion_xiang/1190000000364677">http://segmentfault.com/blog/yaashion_xiang/1190000000364677</a></p>
+
+<h2>10 mac 查看端口占用情况</h2>
+
+<p>Mac : lsof -i:8080</p>
+
+<p>linux : neststat -anltp | grep 8080</p>
+
+<p>参考链接<a href="http://www.blogjava.net/willpower88/archive/2014/07/15/415838.html">http://www.blogjava.net/willpower88/archive/2014/07/15/415838.html</a></p>
+
+<h2>11 mac 查找文件</h2>
+
+<p>Spotlight虽然快 而且有时也挺好用 - -但是经常还是会 找不到所匹配的文件&hellip;find命令会来得更准一点</p>
+
+<pre><code>//.表示从跟目录里开始查询所有文件.. 单引号里是所要求开头为08 CET4的所有文件
+find . -name '08 CET4*'
+</code></pre>
+
+<p>参考链接<a href="http://www.cnblogs.com/iphone520/archive/2012/03/26/2418468.html">http://www.cnblogs.com/iphone520/archive/2012/03/26/2418468.html</a></p>
+</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-10-01T11:38:40+08:00" pubdate data-updated="true"></time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/mac/'>mac</a>
+
+
+</div>
+	
+</div>
+</article>
+
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+		
+		
+		<a class="addthis_button_tweet"></a>
+		
+		
+		
+	</div>
+	
+</div>
+
+
+</div>
+	<footer id="footer" class="inner">Copyright &copy; 2015
+
+    K
+
+</footer>
+	<script src="/javascripts/slash.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+	$('.fancybox').fancybox();
+})(jQuery);
+</script> <!-- Delete or comment this line to disable Fancybox -->
+
+
+
+
+
+
+</body>
+</html>

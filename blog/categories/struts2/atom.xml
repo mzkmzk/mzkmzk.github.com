@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: struts2 | K]]></title>
+  <link href="http://mzkmzk.github.io/blog/categories/struts2/atom.xml" rel="self"/>
+  <link href="http://mzkmzk.github.io/"/>
+  <updated>2015-03-08T12:16:44+08:00</updated>
+  <id>http://mzkmzk.github.io/</id>
+  <author>
+    <name><![CDATA[K]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Strtus2 问题集锦]]></title>
+    <link href="http://mzkmzk.github.io/blog/2014/10/01/Struts2/"/>
+    <updated>2014-10-01T11:39:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2014/10/01/Struts2</id>
+    <content type="html"><![CDATA[<!--more-->
+
+
+<h3>1.Strtus2 doubleselect标签</h3>
+
+<pre><code>&lt;s:doubleselect  
+list="#request.Student.ld"  //获取集合ld
+listKey="DeptID"//集合中value的设定 DeptID是ld集合中元素的一个属性
+listValue="DeptName"//集合中显示字段的设定 DeptID是ld集合中元素的一个属性
+value="#request.Student.DeptID"   //默认值设定
+name="DeptID"         
+doubleList="top.ls"       //top代表着第一级表单现在选择的元素  我的ld集合中仍有一个名叫ls集合
+doubleListKey="SpecialityID"       
+doubleListValue="SpecialityName"  
+doubleValue="#request.Student.SpecialityID" 
+doubleName="SpecialityID"   
+theme="simple"&gt;
+&lt;/s:doubleselect&gt;
+</code></pre>
+
+<p><a href="http://blog.sina.com.cn/s/blog_6145ed810100ebo6.html">参考链接</a></p>
+
+<h3>2. Struts2 全局result</h3>
+
+<p>全局result
+例如错误返回页面
+当然也可以在web.xml</web-app>前直接设置404<br/>
+    <error-page>
+        <error-code>404</error-code>
+        <location>/error.jsp</location>
+    </error-page>状态的返回页面</p>
+
+<p>当然有时候我们很多action都需要用到
+1同一个result就要设置全局result
+2action中无对应的result时 也会选用全局result</p>
+
+<pre><code>&lt;global-results&gt;
+        &lt;result name="print"&gt;/result.jsp&lt;/result&gt;
+&lt;/global-results&gt;
+</code></pre>
+
+<h3>3. Strtus2 同一表单 可选择提交至多个action</h3>
+
+<pre><code>&lt;s:form  action="/Stu/updateStudent"&gt; &lt;!-- 必须为Strtus2的form表 &amp;&amp; action属性必须在--&gt;
+&lt;s:submit value="添加学生" name="redirect:www.google.com"&gt;&lt;/s:submit&gt;&lt;!-- 跳转固定url--&gt;
+&lt;/s:form&gt;
+</code></pre>
+
+<h3>4. Strtus2跨 package调用action</h3>
+
+<pre><code>&lt;package name="JobCentre" extends="struts-default,json-default" namespace="/Job"&gt;
+&lt;action name="addDept" class="com.job.action.jobCentre.Dept.addDept" &gt;
+        &lt;result name="queryDept_One" type="chain"&gt;
+        &lt;param name="namespace"&gt;/Dept&lt;/param&gt;
+        &lt;param name="actionName"&gt;queryDept_One&lt;/param&gt; &lt;!--name属性为actionName无需改 且后面不能用?传递参数 --&gt;
+        &lt;/result&gt;  
+&lt;/package&gt;
+&lt;package name="Dept" extends="struts-default,json-default" namespace="/Dept"&gt;
+&lt;!-- 被调用的action --&gt;
+    &lt;action name="queryDept_One" class="com.job.action.Dept.Dept.queryDept_One" &gt;
+        &lt;result name="/Dept/DeptUpdate.jsp"&gt;/Dept/DeptUpdate.jsp&lt;/result&gt;
+    &lt;/action&gt;
+&lt;/package&gt;
+</code></pre>
+]]></content>
+  </entry>
+  
+</feed>

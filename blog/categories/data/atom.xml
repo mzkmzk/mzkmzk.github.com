@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: data | K]]></title>
+  <link href="http://mzkmzk.github.io/blog/categories/data/atom.xml" rel="self"/>
+  <link href="http://mzkmzk.github.io/"/>
+  <updated>2015-03-08T12:16:44+08:00</updated>
+  <id>http://mzkmzk.github.io/</id>
+  <author>
+    <name><![CDATA[K]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[organization of data]]></title>
+    <link href="http://mzkmzk.github.io/blog/2014/04/07/organization-of-data/"/>
+    <updated>2014-04-07T15:16:46+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2014/04/07/organization-of-data</id>
+    <content type="html"><![CDATA[<!--more-->
+
+
+<h3>发现有很多网上找到的资料都没时间整理 本来想用一个图表的形式整理的 但是暂时没发现有什么特别好用的工具 所以就在这里用序表的形式整理出来</h3>
+
+<hr />
+
+<h1>优秀程序猿博客</h1>
+
+<p><a href="http://blog.tankywoo.com/">Tankywoo的Blog</a></p>
+
+<p><a href="http://wiki.tankywoo.com/">Tankywoo的Wiki</a></p>
+
+<p><a href="http://coolshell.cn/">酷壳 - it</a></p>
+
+<hr />
+
+<h1>算法</h1>
+
+<p><a href="http://blog.csdn.net/zhengxu001/article/details/8018255"> 程序员面试、算法研究、编程艺术、红黑树、数据挖掘5大经典原创系列集锦与总结</a></p>
+
+<hr />
+
+<h1>知识汇总页面</h1>
+
+<p><a href="http://www.csdn.net/tag/">csdn的主题页面</a></p>
+
+<hr />
+
+<h1>网络安全</h1>
+
+<p>[知道创宇]</p>
+
+<hr />
+
+<h1>未吸收知识点的博客</h1>
+
+<p><a href="http://www.wutianqi.com/?p=3434">搭建个人Wiki-Tankwoo</a></p>
+
+<p><a href="http://blog.csdn.net/v_JULY_v/article/details/6111353">经典算法研究系列：四、教你通透彻底理解：BFS和DFS优先搜索算法</a></p>
+
+<p><a href="http://sharesdk.cn/">Share Sdk</a></p>
+
+<p><a href="http://hawstein.com/posts/dp-novice-to-advanced.html">动态规划：从新手到专家</a></p>
+
+<p><a href="http://www.hadoopor.com/thread-444-1-1.html">数据挖掘推荐书籍</a></p>
+
+<hr />
+
+<h1>已经吸收知识点</h1>
+
+<p><a href="http://www.cnblogs.com/zhangdongzi/archive/2011/04/18/2020179.html">android+strtus2连接后台</a></p>
+
+<hr />
+
+<h1>Tools</h1>
+
+<p><a href="http://overapi.com/">API查询 - 只有你想不到的api没有查不到的api- -</a></p>
+
+<p><a href="http://www.laoguo.org/android/sdk/api/">android 中文API 农民伯伯</a></p>
+
+<p><a href="http://www.cmd5.com/">md5在线解密加密</a></p>
+
+<p><a href="http://www.cppleyuan.com/books.html">推荐图书 - 算法 linux c方向</a></p>
+
+<p><a href="http://www.faviconer.com/">生成favicon.ico图标 </a></p>
+
+<p><a href="http://www.bitbug.net/">生成favicon.ico图标 比特虫</a></p>
+
+<hr />
+
+<h1>大学期间的比赛网站</h1>
+
+<p><a href="http://www.fwwb.org.cn/index.aspx">服务外包创业大赛</a></p>
+
+<hr />
+
+<h1>休闲网</h1>
+
+<p><a href="http://www.hualvtu.com/start.action">画旅途 - 打代码累了 看看风景也不错</a></p>
+
+<p><a href="http://vip.kankan.com/?actId=fzyh">迅雷看看影院 - 蛋疼得不知道看什么电影的时候- -</a></p>
+
+<hr />
+
+<h1>生活小tools</h1>
+
+<p><a href="http://jingyan.baidu.com/article/6b97984d7a9ccc1ca2b0bff0.html">笔记本电脑WIFI热点设置</a></p>
+
+<hr />
+
+<p><a href="http://blog.163.com/mz_kk/">本人旧博客 - 算法题 j2ee android</a></p>
+]]></content>
+  </entry>
+  
+</feed>

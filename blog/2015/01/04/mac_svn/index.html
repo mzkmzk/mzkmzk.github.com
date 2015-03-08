@@ -1,0 +1,202 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Mac 搭建svn服务器 - K</title>
+	<meta name="author" content="K">
+
+	
+	<meta name="description" content="0x01 创建svn repository svnadmin create /Users/maizhikun/Learning/svn/pro //仓库位置，svn是svn的目录，pro是一个版本库的目录 0x02 配置svn 用户权限 /Users/maizhikun/Learning/svn/ &hellip;">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link href="false" rel="alternate" title="K" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script async="true" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	
+</head>
+
+
+<body>
+	<header id="header" class="inner"><h1><a href="/">K</a></h1>
+<nav id="main-nav"><ul class="main">
+	
+</ul>
+</nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Menu</a>
+		<div class="container"><ul class="main">
+	
+</ul>
+</div>
+	</div>
+	<div class="alignright search">
+		<a class="button"></a>
+		<div class="container">
+			<form action="https://www.google.com/search" method="get">
+				<input type="text" name="q" results="0">
+				<input type="hidden" name="q" value="site:mzkmzk.github.io">
+			</form>
+		</div>
+	</div>
+</nav>
+<nav id="sub-nav" class="alignright">
+	<div class="social">
+		
+		
+		
+		
+    
+		
+		
+		
+		
+		
+    
+	</div>
+	
+</nav>
+
+</header>
+	
+		
+	
+	<div id="content" class="inner"><article class="post">
+	<h2 class="title">Mac 搭建svn服务器</h2>
+	<div class="entry-content"><h3>0x01 创建svn repository</h3>
+
+<pre><code>svnadmin create /Users/maizhikun/Learning/svn/pro  //仓库位置，svn是svn的目录，pro是一个版本库的目录
+</code></pre>
+
+<h3>0x02 配置svn 用户权限</h3>
+
+<p><code>/Users/maizhikun/Learning/svn/pro/conf</code> 目录下存在三个文件 authz,passwd,svnserve.conf</p>
+
+<p>1.配置svnserve.conf</p>
+
+<pre><code>＃anon-access = read
+＃auth-access = write
+＃password-db = passwd
+＃authz-db = authz
+</code></pre>
+
+<p>去掉#和#后的空格</p>
+
+<p>要防止匿名访问就</p>
+
+<pre><code>anon-access=none
+</code></pre>
+
+<p>2.配置passwd</p>
+
+<pre><code>[users]
+K=svn
+MZK=svn
+</code></pre>
+
+<p>3.配置authz</p>
+
+<pre><code>#设置了一个分组PAC 包括成员K和MZK
+[groups]
+PAC=K,MZK
+
+#[/]表示当前版本库的路径的访问权限
+[/]
+@PAC=rw
+# 忘记了写上面两行 导致一直出现authorization failed 错误
+</code></pre>
+
+<h3>0x03 启动svn服务</h3>
+
+<pre><code>//没有任何输出则表示 启动成功
+svnserve -d -r /Users/maizhikun/Learning/svn    
+//测试
+svn checkout svn://127.0.0.1/pro --username=K --password=svn ./pro
+</code></pre>
+
+<h3>0x04(可选) svn客户端安装</h3>
+
+<p>Version 下载链接<a href="http://www.pc6.com/mac/116544.html">http://www.pc6.com/mac/116544.html</a></p>
+
+<!--###0x05(可选) 网页访问 svn apache整合svn
+    
+svn默认端口是3690
+    
+网页访问svn 127.0.0.1 会显示
+
+    ( success ( 2 2 ( ) ( edit-pipeline svndiff1 absent-entries commit-revprops depth log-revprops atomic-revprops partial-replay ) ) ) 
+-->
+
+
+<h3>参考链接</h3>
+
+<p>参考链接<a href="http://www.cnblogs.com/onlyfu/archive/2012/05/08/2489814.html">http://www.cnblogs.com/onlyfu/archive/2012/05/08/2489814.html</a></p>
+
+<p>参考链接<a href="http://www.cocoachina.com/bbs/read.php?tid=153734">http://www.cocoachina.com/bbs/read.php?tid=153734</a></p>
+</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-01-04T11:37:40+08:00" pubdate data-updated="true"></time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/svn/'>svn</a>
+
+
+</div>
+	
+</div>
+</article>
+
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+		
+		
+		<a class="addthis_button_tweet"></a>
+		
+		
+		
+	</div>
+	
+</div>
+
+
+</div>
+	<footer id="footer" class="inner">Copyright &copy; 2015
+
+    K
+
+</footer>
+	<script src="/javascripts/slash.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+	$('.fancybox').fancybox();
+})(jQuery);
+</script> <!-- Delete or comment this line to disable Fancybox -->
+
+
+
+
+
+
+</body>
+</html>

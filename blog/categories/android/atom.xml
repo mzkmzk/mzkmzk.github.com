@@ -1,0 +1,465 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: android | K]]></title>
+  <link href="http://mzkmzk.github.io/blog/categories/android/atom.xml" rel="self"/>
+  <link href="http://mzkmzk.github.io/"/>
+  <updated>2015-03-08T12:16:44+08:00</updated>
+  <id>http://mzkmzk.github.io/</id>
+  <author>
+    <name><![CDATA[K]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[android dialog Fragment显示]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/01/02/android_dialog_fragment/"/>
+    <updated>2015-01-02T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/01/02/android_dialog_fragment</id>
+    <content type="html"><![CDATA[<p>先上效果图.</p>
+
+<h2>0x01 创建显示框视图 alert_dialog_nick.xml</h2>
+
+<pre><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:id="@+id/layout_r"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:background="#FFFFFF"
+android:orientation="vertical" &gt;
+
+&lt;RelativeLayout
+    android:layout_width="250dp"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="15.0dip"
+    android:gravity="center_horizontal" &gt;
+
+    &lt;EditText  
+        android:id="@+id/dialog_edit"  
+        android:layout_width="230dp"  
+        android:layout_height="40dp"  
+        android:background="@drawable/login_input" 
+        android:drawablePadding="25dip"
+        android:textColorHint="@color/color_hint"  
+        android:textSize="14.0dip"
+        android:inputType="number"  
+        android:paddingLeft="10dp" /&gt;  
+&lt;/RelativeLayout&gt;
+
+&lt;ImageView
+    android:layout_width="250dp"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_horizontal"
+    android:layout_marginTop="15dp"
+    android:background="@color/color_gray"
+    android:src="@drawable/prefresh_list_cutline" /&gt;
+
+&lt;RelativeLayout
+    android:layout_width="250dp"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="5dp"
+    android:layout_marginRight="5dp"
+    android:layout_marginTop="15dp" &gt;
+
+    &lt;LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:paddingBottom="10.0dip"
+        android:orientation="horizontal" &gt;
+
+        &lt;Button
+            android:id="@+id/yes"
+            android:layout_width="90.0dip"
+            android:layout_height="40.0dip"
+            android:background="@color/color_blue"
+            android:text="@string/dialog_yes"
+            android:textSize="16sp"
+            android:layout_marginRight="20.0dip"
+            android:textColor="@color/color_white" /&gt;
+
+        &lt;Button
+            android:id="@+id/no"
+            android:layout_width="90.0dip"
+            android:layout_height="40.0dip"
+            android:background="@color/color_red"
+            android:text="@string/dialog_no"
+            android:textSize="16sp"
+            android:textColor="@color/color_white" /&gt;
+    &lt;/LinearLayout&gt;
+&lt;/RelativeLayout&gt;
+
+&lt;/LinearLayout&gt;
+</code></pre>
+
+<h2>0x02 创建显示框TianKongDialog.java</h2>
+
+<pre><code>//TianKongDialog 这个注意点在 DialogFragment 要是import android.support.v4.app.DialogFragment的...不要直接app.DialogFragment的
+
+@SuppressLint("NewApi")
+public class TianKongDialog extends DialogFragment{
+private static String CURRENT_TIME = "CURRENT_TIME";
+
+private EditText dialog_edit;
+
+public static TianKongDialog newInstance(){
+    //创建一个新的带有参数的Fragment实例
+    TianKongDialog fragment = new TianKongDialog();
+    Bundle args = new Bundle();
+    fragment.setArguments(args);
+    return fragment;
+}
+
+@Override
+public Dialog onCreateDialog(Bundle savedInstanceState) {
+    LayoutInflater factory = (LayoutInflater)  getActivity().getSystemService( getActivity().LAYOUT_INFLATER_SERVICE);
+    final View customViewnick = factory.inflate(R.layout.alert_dialog_nick, null);
+    dialog_edit = (EditText)customViewnick.findViewById(R.id.dialog_edit);
+    final Dialog ad2 = new Dialog(getActivity(), R.style.Theme_CustomDialog2);
+    ad2.setContentView(customViewnick);
+    ad2.setCancelable(false);//有可能你调不出这个方法，可以通过ad.setOnKeyListener()方法来实现屏蔽back键
+    ad2.setCanceledOnTouchOutside(false);//当点击除对话框外屏幕其他区域时对话框不消失，默认是消失的
+
+    Button buttonnickyes = (Button)customViewnick.findViewById(R.id.yes);
+    buttonnickyes.setOnClickListener(new Button.OnClickListener() {
+
+        @Override
+        public void onClick(View arg0) {
+            String cushion_time = dialog_edit.getText().toString();
+            ad2.dismiss();
+        }
+    });
+    Button buttonnickno = (Button)customViewnick.findViewById(R.id.no);
+    buttonnickno.setOnClickListener(new Button.OnClickListener() {
+
+        @Override
+        public void onClick(View arg0) {
+            ad2.dismiss();
+        }
+    });
+    return ad2;         
+}
+
+
+
+}
+</code></pre>
+
+<h2>0x03 调用 显示框</h2>
+
+<pre><code>    String tag = "my_dialog";  
+    TianKongDialog myFragment = TianKongDialog.newInstance();  
+    myFragment.show(getFragmentManager(), tag); 
+</code></pre>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[android 设置两个控件各占屏幕的一半]]></title>
+    <link href="http://mzkmzk.github.io/blog/2014/12/27/android_two_layout/"/>
+    <updated>2014-12-27T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2014/12/27/android_two_layout</id>
+    <content type="html"><![CDATA[<p>我的需求是一行里 两个TextView 各占屏幕的 一半</p>
+
+<pre><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:orientation="horizontal" 
+android:id="@+id/book_access"
+&gt;
+ &lt;TextView
+         android:id="@+id/book_name"
+         android:layout_width="0dp" //设置0dp好像会提高效率
+         android:layout_height="wrap_content"
+         android:layout_weight="1"
+         android:background="#ffffffff"
+         android:gravity="center"
+         android:text="@string/str_navi_home_navi_left" /&gt;
+      &lt;TextView
+          android:id="@+id/book_accessTime"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:background="#ffffffff"
+          android:gravity="center"
+          android:text="@string/str_navi_home_navi_right" /&gt;
+&lt;/LinearLayout&gt;
+</code></pre>
+
+<p>如果要设置成其他的比例 只需要计算出 对应的layout_weight即可</p>
+
+<p>参考链接<a href="http://bbs.csdn.net/topics/390801550">http://bbs.csdn.net/topics/390801550</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[android adapter]]></title>
+    <link href="http://mzkmzk.github.io/blog/2014/12/16/android_adapter/"/>
+    <updated>2014-12-16T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2014/12/16/android_adapter</id>
+    <content type="html"><![CDATA[<p>android adapter主要分为SimpleAdapter、ArrayList、BaseAdapter</p>
+
+<p>这里主要介绍BaseAdapter</p>
+
+<h3>0x01 .xml 布局文件的 单一行的样式设置</h3>
+
+<pre><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:orientation="horizontal" 
+android:id="@+id/book_access"
+&gt;
+ &lt;TextView
+         android:id="@+id/book_name"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_weight="1"
+         android:background="#ffffffff"
+         android:gravity="center"
+         android:text="@string/str_navi_home_navi_left" /&gt;
+      &lt;TextView
+          android:id="@+id/book_accessTime"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:background="#ffffffff"
+          android:gravity="center"
+          android:text="@string/str_navi_home_navi_right" /&gt;
+&lt;/LinearLayout&gt; 
+</code></pre>
+
+<h3>0x02 .java 继承BaseAdapter</h3>
+
+<pre><code>package gabriel.luoyer.promonkey.main;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
+
+import com.charon.pulltorefreshlistview.PullToRefreshListView;
+import com.charon.pulltorefreshlistview.PullToRefreshListView.OnRefreshListener;
+
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.os.SystemClock;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.BaseAdapter;
+import android.widget.TextView;
+import android.widget.Toast;
+import android.widget.AdapterView.OnItemClickListener;
+import gabriel.luoyer.promonkey.R;
+import gabriel.luoyer.promonkey.base.BaseFragment;
+import gabriel.luoyer.promonkey.bean.book;
+import gabriel.luoyer.promonkey.utils.ModelServer;
+
+public class HomeFragment extends BaseFragment {
+
+private PullToRefreshListView mPullToRefreshListView;
+private MyAdapter adapter;
+private ArrayList&lt;book&gt; data;
+public LayoutInflater mInflater;
+
+@Override
+public View onCreateView(LayoutInflater inflater, ViewGroup container,
+        Bundle savedInstanceState) {
+    mInflater=inflater;
+    View view = inflater.inflate(R.layout.main_frg_home, container, false);
+    findView(view);
+    initView(view);
+    return view;
+}
+
+private void findView(View view) {
+    mPullToRefreshListView = (PullToRefreshListView)view.findViewById(R.id.mfh_s);
+}
+
+private void initView(View view) {
+
+    data = new ArrayList&lt;book&gt;();
+
+    book b =new book();
+
+    b.setB_name("书籍名称");
+    b.setB_accessTime("借书时间");
+
+    data.add(b);
+
+    adapter = new MyAdapter();
+
+    mPullToRefreshListView.setAdapter(adapter);
+
+    mPullToRefreshListView.setOnRefreshListener(new OnRefreshListener() {
+
+        @Override
+        public void onRefresh() {
+            new AsyncTask&lt;Void, Void, Void&gt;() {
+
+                @Override
+                protected Void doInBackground(Void... params) {
+                    SystemClock.sleep(1000);
+                    book b =new book();
+                    b.setB_name("书籍名称");
+                    b.setB_accessTime("借书时间");
+                    data.add(b);
+                    return null;
+                }
+
+                @Override
+                protected void onPostExecute(Void result) {
+                    super.onPostExecute(result);
+                    adapter.notifyDataSetChanged();
+                    mPullToRefreshListView.onRefreshComplete();
+                }
+            }.execute();
+        }
+    });
+
+    mPullToRefreshListView
+            .setOnItemClickListener(new OnItemClickListener() {
+
+                @Override
+                public void onItemClick(AdapterView&lt;?&gt; parent, View view,
+                        int position, long id) {
+                    // If you call addHeaderView, the position will contains
+                    // the count of header view.
+                    // int realPosition = position
+                    // - mPullToRefreshListView.getHeaderViewsCount();
+                    // Toast.makeText(PullToRefreshActivity.this,
+                    // data.get(realPosition), Toast.LENGTH_SHORT).show();
+
+                    Toast.makeText(
+                            getActivity().getApplicationContext(),
+                            (String) mPullToRefreshListView.getAdapter()
+                                    .getItem(position), Toast.LENGTH_SHORT)
+                            .show();
+
+                }
+
+            });
+
+}
+
+
+private class MyAdapter extends BaseAdapter {
+
+    @Override
+    public int getCount() {
+        return data.size();
+    }
+
+    @Override
+    public Object getItem(int position) {
+        return data.get(position);
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+         ViewHolder holder = null;
+         if (convertView == null) {                    
+             holder=new ViewHolder();                   
+             convertView = mInflater.inflate(R.layout.main_frg_home_lv, null);
+             holder.book_name = (TextView)convertView.findViewById(R.id.book_name);
+             holder.book_accessTime = (TextView)convertView.findViewById(R.id.book_accessTime);
+             convertView.setTag(holder);                    
+         }else {                   
+             holder = (ViewHolder)convertView.getTag();
+         }                           
+         holder.book_name.setText(data.get(position).getB_name());
+         holder.book_accessTime.setText(data.get(position).getB_accessTime());                
+         return convertView;
+    }
+}
+
+public final class ViewHolder{
+    public TextView book_name;
+    public TextView book_accessTime;
+}
+}
+</code></pre>
+
+<p>参考链接<a href="http://www.xue5.com/Mobile/Mobile/735287.html">http://www.xue5.com/Mobile/Mobile/735287.html</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[android 布局]]></title>
+    <link href="http://mzkmzk.github.io/blog/2014/12/16/android_%20layout/"/>
+    <updated>2014-12-16T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2014/12/16/android_ layout</id>
+    <content type="html"><![CDATA[<p>LinearLayout、FrameLayout和AbsoulteLayout<a href="http://www.cnblogs.com/wisekingokok/archive/2011/08/23/2150452.html">http://www.cnblogs.com/wisekingokok/archive/2011/08/23/2150452.html</a></p>
+
+<p>RelativeLayout和TableLayout<a href="http://www.cnblogs.com/wisekingokok/archive/2011/08/24/2152004.html">http://www.cnblogs.com/wisekingokok/archive/2011/08/24/2152004.html</a></p>
+
+<p>android 屏幕自适应解决方案<a href="http://www.eoeandroid.com/thread-173973-1-1.html">http://www.eoeandroid.com/thread-173973-1-1.html</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Android 问题集锦]]></title>
+    <link href="http://mzkmzk.github.io/blog/2014/10/01/android_question/"/>
+    <updated>2014-10-01T11:40:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2014/10/01/android_question</id>
+    <content type="html"><![CDATA[<h2>1. MAC ADT下载提示 没安装 java se6</h2>
+
+<pre><code>//每个人的jdk版本不一样 路径文字不完全一样 建议tab补全输路径
+sudo vim  /Library/Java/JavaVirtualMachines/jdk1.7.0_67.jdk/Contents/Info.plist  
+</code></pre>
+
+<p>把原本的</p>
+
+<pre><code>&lt;key&gt;JVMCapabilities&lt;/key&gt;
+            &lt;array&gt;
+                    &lt;string&gt;CommandLine&lt;/string&gt;
+            &lt;/array&gt;
+</code></pre>
+
+<p>修改成</p>
+
+<pre><code>&lt;key&gt;JVMCapabilities&lt;/key&gt;
+            &lt;array&gt;
+                    &lt;string&gt;JNI&lt;/string&gt;
+                    &lt;string&gt;BundledApp&lt;/string&gt;
+                    &lt;string&gt;WebStart&lt;/string&gt;
+                    &lt;string&gt;Applets&lt;/string&gt;
+                    &lt;string&gt;CommandLine&lt;/string&gt;
+            &lt;/array&gt;
+</code></pre>
+
+<p>参考链接<a href="http://smilejay.com/2013/11/mac-os-x-to-open-eclipse-you-need-a-java-se-6-runtime/">http://smilejay.com/2013/11/mac-os-x-to-open-eclipse-you-need-a-java-se-6-runtime/</a></p>
+
+<h2>2. Android 导入工程出现Unable to resolve target &lsquo;android-xx&#8217;错误</h2>
+
+<p>出现这样的错误可能会导致 .R文件无法生成..</p>
+
+<p>首先打开其他你能运行的Android项目</p>
+
+<p>到工作空间查看其project.properties文件</p>
+
+<pre><code>target=android-?
+</code></pre>
+
+<p>然后再到你刚导入的项目改成和?即可</p>
+
+<p>懒的话 直接把文件复制粘贴过去- -&hellip;应该也ok</p>
+]]></content>
+  </entry>
+  
+</feed>
