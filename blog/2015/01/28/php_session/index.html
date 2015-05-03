@@ -1,0 +1,167 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>php Warning: session_start() - K</title>
+	<meta name="author" content="K">
+
+	
+	<meta name="description" content="php Warning: session_start(): The session id is too long or contains illegal characters, valid characters are a-z, A-Z, 0-9 and '-,' 突然发现在页面会显示这个错误 &hellip;">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link href="false" rel="alternate" title="K" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script async="true" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	
+</head>
+
+
+<body>
+	<header id="header" class="inner"><h1><a href="/">K</a></h1>
+<nav id="main-nav"><ul class="main">
+	
+</ul>
+</nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Menu</a>
+		<div class="container"><ul class="main">
+	
+</ul>
+</div>
+	</div>
+	<div class="alignright search">
+		<a class="button"></a>
+		<div class="container">
+			<form action="https://www.google.com/search" method="get">
+				<input type="text" name="q" results="0">
+				<input type="hidden" name="q" value="site:mzkmzk.github.io">
+			</form>
+		</div>
+	</div>
+</nav>
+<nav id="sub-nav" class="alignright">
+	<div class="social">
+		
+		
+		
+		
+    
+		
+		
+		
+		
+		
+    
+	</div>
+	
+</nav>
+
+</header>
+	
+		
+	
+	<div id="content" class="inner"><article class="post">
+	<h2 class="title">Php Warning: Session_start()</h2>
+	<div class="entry-content"><!--more-->
+
+
+<pre><code>php Warning: session_start(): The session id is too long or contains illegal characters, valid characters are a-z, A-Z, 0-9 and '-,'
+</code></pre>
+
+<p>突然发现在页面会显示这个错误 找到了暂时的解决办法</p>
+
+<p>把session_start(); 改为</p>
+
+<pre><code>function my_session_start()
+{
+if (ini_get('session.use_cookies') &amp;&amp; isset($_COOKIE['PHPSESSID'])) {
+    $sessid = $_COOKIE['PHPSESSID'];
+} elseif (!ini_get('session.use_only_cookies') &amp;&amp; isset($_GET['PHPSESSID'])) {
+    $sessid = $_GET['PHPSESSID'];
+} else {
+    session_start();
+    return false;
+}
+
+if (!preg_match('/^[a-z0-9]{32}$/', $sessid)) {
+    return false;
+}
+session_start();
+
+return true;
+}
+</code></pre>
+
+<p>然后调用my_session_start()即可</p>
+
+<h3>后续..</h3>
+
+<p>发现之后等候PHPSESSION一直为空 怎么设置都没有- -&hellip;然后换Safari试试&hellip;结果SESSION完全没问题..然后返回Chrome删除下COOKIE&hellip;就OK&hellip;..</p>
+</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-01-28T11:37:40+08:00" pubdate data-updated="true"></time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/php/'>php</a>
+
+
+</div>
+	
+</div>
+</article>
+
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+		
+		
+		<a class="addthis_button_tweet"></a>
+		
+		
+		
+	</div>
+	
+</div>
+
+
+</div>
+	<footer id="footer" class="inner">Copyright &copy; 2015
+
+    K
+
+</footer>
+	<script src="/javascripts/slash.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+	$('.fancybox').fancybox();
+})(jQuery);
+</script> <!-- Delete or comment this line to disable Fancybox -->
+
+
+
+
+
+
+</body>
+</html>

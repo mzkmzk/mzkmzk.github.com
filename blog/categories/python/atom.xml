@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: python | K]]></title>
+  <link href="http://mzkmzk.github.io/blog/categories/python/atom.xml" rel="self"/>
+  <link href="http://mzkmzk.github.io/"/>
+  <updated>2015-05-03T20:17:45+08:00</updated>
+  <id>http://mzkmzk.github.io/</id>
+  <author>
+    <name><![CDATA[K]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[python2与3具体差别]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/02/14/python2_3_different/"/>
+    <updated>2015-02-14T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/02/14/python2_3_different</id>
+    <content type="html"><![CDATA[<!--more-->
+
+
+<p><a href="http://www.diveintopython3.net/porting-code-to-python-3-with-2to3.html">http://www.diveintopython3.net/porting-code-to-python-3-with-2to3.html</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Mac 安装pip]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/02/14/mac_pip/"/>
+    <updated>2015-02-14T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/02/14/mac_pip</id>
+    <content type="html"><![CDATA[<!--more-->
+
+
+<h3>0x00 下载安装文件</h3>
+
+<p><a href="https://raw.githubusercontent.com/pypa/pip/master/contrib/get-pip.py">https://raw.githubusercontent.com/pypa/pip/master/contrib/get-pip.py</a></p>
+
+<h3>0x01 终端安装pip</h3>
+
+<pre><code>sudo python Desktop/pip_setup.py 
+</code></pre>
+
+<h3>0x02 建立软链接文件</h3>
+
+<pre><code>//Version/后的3.3根据自己的真实版本决定
+#ln -s /System/Library/Frameworks/Python.framework/Versions/3.4/bin/pip /usr/bin/pip
+</code></pre>
+
+<h3>pip用途</h3>
+
+<p>主要用用作安装python第三方库</p>
+
+<p>例如request<a href="https://github.com/kennethreitz/requests">https://github.com/kennethreitz/requests</a></p>
+
+<pre><code>//安装
+pip install requests
+</code></pre>
+
+<h3>参考链接</h3>
+
+<p><a href="http://blog.sina.com.cn/s/blog_62d4d5900101cv1l.html">http://blog.sina.com.cn/s/blog_62d4d5900101cv1l.html</a></p>
+
+<p>python环境简介<a href="https://github.com/dccrazyboy/pyeco/blob/master/pyeco.rst">https://github.com/dccrazyboy/pyeco/blob/master/pyeco.rst</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Mac 升级python3.4.2]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/02/07/mac_python3.4.2/"/>
+    <updated>2015-02-07T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/02/07/mac_python3.4.2</id>
+    <content type="html"><![CDATA[<!--more-->
+
+
+<h3>0x01下载安装包</h3>
+
+<p>下载安装文件<a href="https://www.python.org/downloads/">https://www.python.org/downloads/</a></p>
+
+<h3>0x02 移动python的安装目录</h3>
+
+<p><code>sudo mv /Library/Frameworks/Python.framework/Versions/3.4 /System/Library/Frameworks/Python.framework/Versions</code></p>
+
+<h3>0x03 更改权限</h3>
+
+<p>&lsquo;sudo chown -R root:wheel /System/Library/Frameworks/Python.framework/Versions/3.4&rsquo;</p>
+
+<h3>0x04 更改链接</h3>
+
+<pre><code>sudo rm /System/Library/Frameworks/Python.framework/Versions/Current
+sudo ln -s /System/Library/Frameworks/Python.framework/Versions/3.4 /System/Library/Frameworks/Python.framework/Versions/Current
+</code></pre>
+
+<h3>0x05 删除旧的命令符号链接</h3>
+
+<pre><code>sudo rm /usr/bin/pydoc
+sudo rm /usr/bin/python
+sudo rm /usr/bin/pythonw
+sudo rm /usr/bin/python-config
+</code></pre>
+
+<h3>0x06 重新建立新的命令符号链接</h3>
+
+<pre><code>sudo ln -s /System/Library/Frameworks/Python.framework/Versions/3.4/bin/pydoc3.4 /usr/bin/pydoc
+sudo ln -s /System/Library/Frameworks/Python.framework/Versions/3.4/bin/python3.4 /usr/bin/python
+sudo ln -s /System/Library/Frameworks/Python.framework/Versions/3.4/bin/pythonw3.4 /usr/bin/pythonw
+sudo ln -s /System/Library/Frameworks/Python.framework/Versions/3.4/bin/python3.4m-config /usr/bin/python-config
+</code></pre>
+
+<p>重启Consonle ok</p>
+
+<h3>参考链接</h3>
+
+<p><a href="http://www.cnblogs.com/nokiaguy/p/3456590.html">http://www.cnblogs.com/nokiaguy/p/3456590.html</a></p>
+]]></content>
+  </entry>
+  
+</feed>

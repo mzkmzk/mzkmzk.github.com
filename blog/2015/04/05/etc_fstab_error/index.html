@@ -1,0 +1,169 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>修改/etc/fstab错误修复方案 - K</title>
+	<meta name="author" content="K">
+
+	
+	<meta name="description" content="0x00报错 系统在开机的时候会显示 Cheking fileSystems [FAILED] 0x01 导入iso启动盘 虚拟机中cd光盘选中.iso 重启 0x02 恢复步骤 选中 Rescue installed system 选择语言English 键盘 us 选择驱动器 Local &hellip;">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link href="false" rel="alternate" title="K" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script async="true" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	
+</head>
+
+
+<body>
+	<header id="header" class="inner"><h1><a href="/">K</a></h1>
+<nav id="main-nav"><ul class="main">
+	
+</ul>
+</nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Menu</a>
+		<div class="container"><ul class="main">
+	
+</ul>
+</div>
+	</div>
+	<div class="alignright search">
+		<a class="button"></a>
+		<div class="container">
+			<form action="https://www.google.com/search" method="get">
+				<input type="text" name="q" results="0">
+				<input type="hidden" name="q" value="site:mzkmzk.github.io">
+			</form>
+		</div>
+	</div>
+</nav>
+<nav id="sub-nav" class="alignright">
+	<div class="social">
+		
+		
+		
+		
+    
+		
+		
+		
+		
+		
+    
+	</div>
+	
+</nav>
+
+</header>
+	
+		
+	
+	<div id="content" class="inner"><article class="post">
+	<h2 class="title">修改/etc/fstab错误修复方案</h2>
+	<div class="entry-content"><!--more-->
+
+
+<h3>0x00报错</h3>
+
+<p>系统在开机的时候会显示</p>
+
+<pre><code>Cheking fileSystems                 [FAILED]
+</code></pre>
+
+<h3>0x01 导入iso启动盘</h3>
+
+<p>虚拟机中cd光盘选中.iso</p>
+
+<p>重启</p>
+
+<h3>0x02 恢复步骤</h3>
+
+<p>选中 Rescue installed system</p>
+
+<p>选择语言English</p>
+
+<p>键盘 us</p>
+
+<p>选择驱动器 Local CD/DVE</p>
+
+<p>然后到选择不配置networking</p>
+
+<p>Continue 然后下一步到 选择shell Start shell 即可</p>
+
+<p>然后进入  <code>vi /mnt/sysimage/etc/fstab</code></p>
+
+<p>修改为正常 再reboot重启即可</p>
+
+<h3>0x03 参考链接</h3>
+
+<p><a href="http://wenku.baidu.com/link?url=yG8YaFpib4-7wIFKjwLPqGCxUalRCNBxnTqQ1vnHRqDXIWHBTWwoPweEiM_bfmsCUPLbveoNCyrbD2YL7ArqqsKXUGQWCheR1ftBchkdNiq">http://wenku.baidu.com/link?url=yG8YaFpib4-7wIFKjwLPqGCxUalRCNBxnTqQ1vnHRqDXIWHBTWwoPweEiM_bfmsCUPLbveoNCyrbD2YL7ArqqsKXUGQWCheR1ftBchkdNiq</a></p>
+</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-04-05T11:37:40+08:00" pubdate data-updated="true"></time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/linux/'>linux</a>
+
+
+</div>
+	
+</div>
+</article>
+
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+		
+		
+		<a class="addthis_button_tweet"></a>
+		
+		
+		
+	</div>
+	
+</div>
+
+
+</div>
+	<footer id="footer" class="inner">Copyright &copy; 2015
+
+    K
+
+</footer>
+	<script src="/javascripts/slash.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+	$('.fancybox').fancybox();
+})(jQuery);
+</script> <!-- Delete or comment this line to disable Fancybox -->
+
+
+
+
+
+
+</body>
+</html>

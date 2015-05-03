@@ -1,0 +1,183 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Git常见错误 - K</title>
+	<meta name="author" content="K">
+
+	
+	<meta name="description" content="fatal: Not a git repository (or any of the parent directories): .git git init 向github提交分支代码 一开始git remote -v一直都没有显示内容 后来 git remote add origin git@ &hellip;">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link href="false" rel="alternate" title="K" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script async="true" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	
+</head>
+
+
+<body>
+	<header id="header" class="inner"><h1><a href="/">K</a></h1>
+<nav id="main-nav"><ul class="main">
+	
+</ul>
+</nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Menu</a>
+		<div class="container"><ul class="main">
+	
+</ul>
+</div>
+	</div>
+	<div class="alignright search">
+		<a class="button"></a>
+		<div class="container">
+			<form action="https://www.google.com/search" method="get">
+				<input type="text" name="q" results="0">
+				<input type="hidden" name="q" value="site:mzkmzk.github.io">
+			</form>
+		</div>
+	</div>
+</nav>
+<nav id="sub-nav" class="alignright">
+	<div class="social">
+		
+		
+		
+		
+    
+		
+		
+		
+		
+		
+    
+	</div>
+	
+</nav>
+
+</header>
+	
+		
+	
+	<div id="content" class="inner"><article class="post">
+	<h2 class="title">Git常见错误</h2>
+	<div class="entry-content"><!--more-->
+
+
+<h3>fatal: Not a git repository (or any of the parent directories): .git</h3>
+
+<pre><code>git init
+</code></pre>
+
+<h3>向github提交分支代码</h3>
+
+<p>一开始<code>git remote -v</code>一直都没有显示内容</p>
+
+<p>后来</p>
+
+<pre><code> git remote add origin git@github.com:mzkmzk/mzkmzk.github.com.git
+</code></pre>
+
+<p>然后就开始有显示了</p>
+
+<pre><code>K-2:octopress maizhikun$ git remote add origin git@github.com:mzkmzk/mzkmzk.github.com.git
+K-2:octopress maizhikun$ git remote -v
+origin  git@github.com:mzkmzk/mzkmzk.github.com.git (fetch)
+origin  git@github.com:mzkmzk/mzkmzk.github.com.git (push)
+</code></pre>
+
+<p>尝试提交分支 代码</p>
+
+<pre><code> K-2:octopress maizhikun$ git push origin source 
+error: src refspec source does not match any.
+error: failed to push some refs to 'git@github.com:mzkmzk/mzkmzk.github.com.git'
+</code></pre>
+
+<p>后来先checkout一下 source分支 就ok了</p>
+
+<pre><code>K-2:octopress maizhikun$ git checkout source
+Switched to branch 'source'
+K-2:octopress maizhikun$ git push origin source
+</code></pre>
+
+<p>参考链接<a href="http://zyueqi.iteye.com/blog/1461466">http://zyueqi.iteye.com/blog/1461466</a></p>
+
+<p>总结</p>
+
+<pre><code>git init
+git remote add origin ssh地址
+git add .
+git commit -m "first commit"
+git branch 分支名称
+git checkout 分支名称
+git push origin 分支名称
+</code></pre>
+</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-03-08T11:37:40+08:00" pubdate data-updated="true"></time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/git/'>git</a>
+
+
+</div>
+	
+</div>
+</article>
+
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+		
+		
+		<a class="addthis_button_tweet"></a>
+		
+		
+		
+	</div>
+	
+</div>
+
+
+</div>
+	<footer id="footer" class="inner">Copyright &copy; 2015
+
+    K
+
+</footer>
+	<script src="/javascripts/slash.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+	$('.fancybox').fancybox();
+})(jQuery);
+</script> <!-- Delete or comment this line to disable Fancybox -->
+
+
+
+
+
+
+</body>
+</html>

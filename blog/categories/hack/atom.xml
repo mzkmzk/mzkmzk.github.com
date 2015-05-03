@@ -4,7 +4,7 @@
   <title><![CDATA[Category: hack | K]]></title>
   <link href="http://mzkmzk.github.io/blog/categories/hack/atom.xml" rel="self"/>
   <link href="http://mzkmzk.github.io/"/>
-  <updated>2015-03-08T12:16:44+08:00</updated>
+  <updated>2015-05-03T20:17:45+08:00</updated>
   <id>http://mzkmzk.github.io/</id>
   <author>
     <name><![CDATA[K]]></name>
@@ -12,6 +12,91 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[hack思路]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/05/01/hack_thiking/"/>
+    <updated>2015-05-01T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/05/01/hack_thiking</id>
+    <content type="html"><![CDATA[<!--more-->
+
+
+<h3>天津大学仁爱学院教务网</h3>
+
+<p>在论文搜索里输入&#8217; 会在本页显示报错 信息</p>
+
+<h3>2013的windows System权限漏洞</h3>
+
+<p><a href="http://bbs.blackbap.org/thread-4431-1-1.html">http://bbs.blackbap.org/thread-4431-1-1.html</a></p>
+
+<p><a href="http://www.leavesongs.com/PENETRATION/privilege-escalation-MS13-046.html">http://www.leavesongs.com/PENETRATION/privilege-escalation-MS13-046.html</a></p>
+
+<h3>Strtus2漏洞利用</h3>
+
+<pre><code>python  Desktop/UseOfStruts.py  http://loveniwed.com
+</code></pre>
+
+<p>失败原因 估计由于我自己的Strtus2版本较高</p>
+
+<pre><code>参考链接&lt;http://www.leavesongs.com/PENETRATION/UseOfStruts.html&gt;
+</code></pre>
+
+<h3>Strtus2 远程控制利用</h3>
+
+<pre><code>http://drops.wooyun.org/papers/1377
+</code></pre>
+
+<h3>oa仁爱网bug</h3>
+
+<p><a href="http://oa.tjrac.edu.cn/rweb/Main/logon.do">http://oa.tjrac.edu.cn/rweb/Main/logon.do</a>
+zm
+123
+报错</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[社工库]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/02/14/social_work_db/"/>
+    <updated>2015-02-14T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/02/14/social_work_db</id>
+    <content type="html"><![CDATA[<!--more-->
+
+
+<h3>qq群社工库</h3>
+
+<p><a href="https://qqgroup.insight-labs.org/">https://qqgroup.insight-labs.org/</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[limit 注入]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/02/14/hack_false/"/>
+    <updated>2015-02-14T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/02/14/hack_false</id>
+    <content type="html"><![CDATA[<!--more-->
+
+
+<p><a href="http://www.leavesongs.com/PENETRATION/sql-injections-in-mysql-limit-clause.html">http://www.leavesongs.com/PENETRATION/sql-injections-in-mysql-limit-clause.html</a></p>
+
+<p>不成功源于 : 本机测试 语句错误</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[mysql 常用命令积累]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/02/11/mysql_usual_order/"/>
+    <updated>2015-02-11T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/02/11/mysql_usual_order</id>
+    <content type="html"><![CDATA[<!--more-->
+
+
+<h3>查询mysql版本</h3>
+
+<pre><code>select version();
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Wifi网络抓包]]></title>

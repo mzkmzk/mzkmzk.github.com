@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: windows | K]]></title>
+  <link href="http://mzkmzk.github.io/blog/categories/windows/atom.xml" rel="self"/>
+  <link href="http://mzkmzk.github.io/"/>
+  <updated>2015-05-03T20:17:45+08:00</updated>
+  <id>http://mzkmzk.github.io/</id>
+  <author>
+    <name><![CDATA[K]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Windows 常用命令累积]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/04/03/windows_usual_order/"/>
+    <updated>2015-04-03T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/04/03/windows_usual_order</id>
+    <content type="html"><![CDATA[<!--more-->
+
+
+<h3>查看端口占用</h3>
+
+<pre><code>#查看占用8080端口的程序
+netstat -ano|findstr "8080"
+</code></pre>
+
+<h3>根据pid 查询具体程序</h3>
+
+<pre><code>#查询pid 为5224的程序名
+tasklist |findstr "5224"    
+</code></pre>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[修改windows 后缀名为显示]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/03/26/windows_suffix/"/>
+    <updated>2015-03-26T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/03/26/windows_suffix</id>
+    <content type="html"><![CDATA[<!--more-->
+
+
+<p>有时候后缀名 并不会显示在 名字里</p>
+
+<p>所以就要设置 我的电脑->工具(如果没有工具的话 就点击组织->布局->菜单栏)->文件夹选项->查看->取消掉 隐藏已知文件类型的拓展名。</p>
+
+<p>然后就OK了</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Windows无法修改默认打开方式]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/03/26/windows_no_change_open/"/>
+    <updated>2015-03-26T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/03/26/windows_no_change_open</id>
+    <content type="html"><![CDATA[<!--more-->
+
+
+<p>昨天 在属性修改了.txt打开方式为cmd 然后右击.txt无法选择默认打开方式</p>
+
+<p>解决方法是</p>
+
+<p>运行 regedit</p>
+
+<p>&ndash;HKEY_CURRENT_USER
+&mdash;-Software
+&mdash;&mdash;Microsoft
+&mdash;&mdash;&ndash;Windows
+&mdash;&mdash;&mdash;-CurrentVersion
+&mdash;&mdash;&mdash;&mdash;Explorer
+&mdash;&mdash;&mdash;&mdash;&ndash;FileExts</p>
+
+<p>找到里面的.txt 删除UserChoice文件夹 就可以了</p>
+
+<p>参考链接<a href="http://blog.sina.com.cn/s/blog_5feacbdf01019qzb.html">http://blog.sina.com.cn/s/blog_5feacbdf01019qzb.html</a></p>
+]]></content>
+  </entry>
+  
+</feed>

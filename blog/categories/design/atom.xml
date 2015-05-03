@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: design | K]]></title>
+  <link href="http://mzkmzk.github.io/blog/categories/design/atom.xml" rel="self"/>
+  <link href="http://mzkmzk.github.io/"/>
+  <updated>2015-05-03T20:17:45+08:00</updated>
+  <id>http://mzkmzk.github.io/</id>
+  <author>
+    <name><![CDATA[K]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Mac adobe cc 2014安装过程]]></title>
+    <link href="http://mzkmzk.github.io/blog/2014/12/07/mac_adobe_cc_2014_install/"/>
+    <updated>2014-12-07T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2014/12/07/mac_adobe_cc_2014_install</id>
+    <content type="html"><![CDATA[<!--more-->
+
+
+<h2>PS CC</h2>
+
+<h3>0x01 下载文件</h3>
+
+<p>.dmg下载百度云盘<a href="http://pan.baidu.com/share/link?shareid=497291185&amp;uk=4094912105">http://pan.baidu.com/share/link?shareid=497291185&amp;uk=4094912105</a> 密码&#8217;1cbn&#8217;</p>
+
+<p>破解文件下载<a href="http://pan.baidu.com/share/link?shareid=2040778295&amp;uk=1627788804">http://pan.baidu.com/share/link?shareid=2040778295&amp;uk=1627788804</a></p>
+
+<h3>0x02 安装ps cc</h3>
+
+<pre><code>1.点击使用正常安装
+2.把破解文件替换在...../Adobe Photoshop CC/(右击ps cc 选择显示包内容)Adobe Photoshop CC.app/Contents/Frameworks/
+</code></pre>
+
+<p>参考链接<a href="http://www.midbai.com/adobe-cc-crack.html">http://www.midbai.com/adobe-cc-crack.html</a>正解</p>
+
+<p>参考链接<a href="http://aikongke.com/4201.html">http://aikongke.com/4201.html</a>此方法无用 但是内含个adoube cc 2014系列下载链接</p>
+
+<h2>AE CC</h2>
+
+<h3>0x01  下载文件</h3>
+
+<p>.dmg下载百度云盘<a href="http://pan.baidu.com/share/link?shareid=497291185&amp;uk=4094912105">http://pan.baidu.com/share/link?shareid=497291185&amp;uk=4094912105</a> 密码&#8217;1cbn&#8217;</p>
+
+<p>破解文件<a href="http://pan.baidu.com/s/1qW9ExmW">http://pan.baidu.com/s/1qW9ExmW</a></p>
+
+<h3>0x02</h3>
+
+<p>断网并且使用算号器文件夹中的 Reset hosts file to the default.app 应用把之前的系统host还原。</p>
+
+<h3>0x03</h3>
+
+<p>用算号器（xf-accm2014.dmg）并选择相应的软件，算出序列号，输入序列号安装（记得保存这个序列号，用于激活）。</p>
+]]></content>
+  </entry>
+  
+</feed>

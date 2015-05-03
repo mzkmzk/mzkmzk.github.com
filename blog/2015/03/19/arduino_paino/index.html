@@ -1,0 +1,216 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Arduino通过光敏电阻实现电子琴 - K</title>
+	<meta name="author" content="K">
+
+	
+	<meta name="description" content="0x00原材料 一个Arduino Uno
+6跟470R的电阻//不是470R也可以 电阻的数值只影响代码中if判断的数值而已
+一个面包板
+20+条
+6个光敏电阻
+蜂鸣器 0x01源代码 void setup(){
+Serial.begin(9600);
+pinMode(3,OUTPUT); &hellip;">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link href="false" rel="alternate" title="K" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script async="true" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	
+</head>
+
+
+<body>
+	<header id="header" class="inner"><h1><a href="/">K</a></h1>
+<nav id="main-nav"><ul class="main">
+	
+</ul>
+</nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Menu</a>
+		<div class="container"><ul class="main">
+	
+</ul>
+</div>
+	</div>
+	<div class="alignright search">
+		<a class="button"></a>
+		<div class="container">
+			<form action="https://www.google.com/search" method="get">
+				<input type="text" name="q" results="0">
+				<input type="hidden" name="q" value="site:mzkmzk.github.io">
+			</form>
+		</div>
+	</div>
+</nav>
+<nav id="sub-nav" class="alignright">
+	<div class="social">
+		
+		
+		
+		
+    
+		
+		
+		
+		
+		
+    
+	</div>
+	
+</nav>
+
+</header>
+	
+		
+	
+	<div id="content" class="inner"><article class="post">
+	<h2 class="title">Arduino通过光敏电阻实现电子琴</h2>
+	<div class="entry-content"><!--more-->
+
+
+<h3>0x00原材料</h3>
+
+<ol>
+<li>一个Arduino Uno</li>
+<li>6跟470R的电阻//不是470R也可以 电阻的数值只影响代码中if判断的数值而已</li>
+<li>一个面包板</li>
+<li>20+条</li>
+<li>6个光敏电阻</li>
+<li>蜂鸣器</li>
+</ol>
+
+
+<h3>0x01源代码</h3>
+
+<pre><code>void setup(){
+Serial.begin(9600);
+pinMode(3,OUTPUT);
+pinMode(2,INPUT);
+}
+void loop(){
+int val1=analogRead(0);
+int val2=analogRead(1);
+int val3=analogRead(2);
+int val4=analogRead(3);
+int val5=analogRead(4);
+int val6=analogRead(5);
+int val7=digitalRead(2);
+
+   if(val1&lt;2)
+   {
+     Serial.print("val1  : ");
+     Serial.println(val1);
+     tone(3,525,100);
+   }
+   if(val2&lt;2)
+   { 
+     Serial.print("val2  : ");
+     Serial.println(val2);
+     tone(3,589,100);
+   } 
+   if(val3&lt;2)
+   {
+     Serial.print("val3  : ");
+     Serial.println(val3);
+     tone(3,661,100);
+   }
+   if(val4&lt;2)
+   {
+     Serial.print("val4  : ");
+     Serial.println(val4);
+     tone(3,700,100);
+   }
+   if(val5&lt;2)
+   {
+     Serial.print("val5  : ");
+     Serial.println(val5);
+     tone(3,786,100);
+   }
+   if(val6&lt;3)
+   {
+  Serial.print("val6  : ");
+  Serial.println(val6);
+  tone(3,882,100);
+  }
+}
+</code></pre>
+
+<h3>0x02线路图</h3>
+
+<p><img src="/blog/2015-03-26-01.jpg" alt="image" /></p>
+
+<h3>0x03参考链接</h3>
+
+<p><a href="http://www.geek-workshop.com/thread-4939-1-1.html">http://www.geek-workshop.com/thread-4939-1-1.html</a></p>
+</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-03-19T11:37:40+08:00" pubdate data-updated="true"></time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/arduino/'>arduino</a>
+
+
+</div>
+	
+</div>
+</article>
+
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+		
+		
+		<a class="addthis_button_tweet"></a>
+		
+		
+		
+	</div>
+	
+</div>
+
+
+</div>
+	<footer id="footer" class="inner">Copyright &copy; 2015
+
+    K
+
+</footer>
+	<script src="/javascripts/slash.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+	$('.fancybox').fancybox();
+})(jQuery);
+</script> <!-- Delete or comment this line to disable Fancybox -->
+
+
+
+
+
+
+</body>
+</html>

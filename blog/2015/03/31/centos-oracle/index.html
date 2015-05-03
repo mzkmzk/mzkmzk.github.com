@@ -1,0 +1,286 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>CentOS 5.1安装Oracle10 64 - K</title>
+	<meta name="author" content="K">
+
+	
+	<meta name="description" content="0x00 下载安装包 下载安装包 http://pan.baidu.com/wap/link?uk=3727692514&amp;shareid=2487050160&amp;third=0 这个含有其他Oracle数据库资源http://uni-smr.ac.ru/archive/db/ &hellip;">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link href="false" rel="alternate" title="K" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script async="true" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	
+</head>
+
+
+<body>
+	<header id="header" class="inner"><h1><a href="/">K</a></h1>
+<nav id="main-nav"><ul class="main">
+	
+</ul>
+</nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Menu</a>
+		<div class="container"><ul class="main">
+	
+</ul>
+</div>
+	</div>
+	<div class="alignright search">
+		<a class="button"></a>
+		<div class="container">
+			<form action="https://www.google.com/search" method="get">
+				<input type="text" name="q" results="0">
+				<input type="hidden" name="q" value="site:mzkmzk.github.io">
+			</form>
+		</div>
+	</div>
+</nav>
+<nav id="sub-nav" class="alignright">
+	<div class="social">
+		
+		
+		
+		
+    
+		
+		
+		
+		
+		
+    
+	</div>
+	
+</nav>
+
+</header>
+	
+		
+	
+	<div id="content" class="inner"><article class="post">
+	<h2 class="title">CentOS 5.1安装Oracle10 64</h2>
+	<div class="entry-content"><!--more-->
+
+
+<h3>0x00 下载安装包</h3>
+
+<p>下载安装包 <a href="http://pan.baidu.com/wap/link?uk=3727692514&amp;shareid=2487050160&amp;third=0">http://pan.baidu.com/wap/link?uk=3727692514&amp;shareid=2487050160&amp;third=0</a></p>
+
+<p>这个含有其他Oracle数据库资源<a href="http://uni-smr.ac.ru/archive/db/Oracle/">http://uni-smr.ac.ru/archive/db/Oracle/</a></p>
+
+<p>解压压缩包</p>
+
+<pre><code>gunzip 10201_database_linux_x86_64.cpio.gz
+cpio -idmv &lt; 10201_database_linux_x86_64.cpio
+</code></pre>
+
+<h3>0x01 查看硬件坏境</h3>
+
+<pre><code>#查看内存  至少1G内存
+[root@localhost oracle]# grep MemTotal /proc/meminfo
+MemTotal:      1021724 kB
+
+#查看swap
+#如果内存为大于512M则swap大小为内存2倍
+#如果内存在1到2G之间则swap大小为内存1.5倍
+#如果内存在2到8G之间则swap大小为内存1倍
+#如果内存大于8G则swap大小为内存0.75倍
+[root@localhost oracle]# grep SwapTotal /proc/meminfo
+SwapTotal:     2064344 kB
+
+
+#查看硬盘
+#/tmp目录至少400MB
+#oracle安装目录大约在1.5到3.5G之间
+#数据文件至少1.2G
+[root@localhost oracle]# df -h
+Filesystem            Size  Used Avail Use% Mounted on
+/dev/sda2              18G  2.8G   14G  17% /
+/dev/sda1             289M   17M  258M   7% /boot
+tmpfs                 499M     0  499M   0% /dev/shm
+.host:/               373G  238G  136G  64% /mnt/hgfs
+</code></pre>
+
+<h3>0x02安装所需安装包</h3>
+
+<pre><code>yum install -y compat-db pdksh sysstat screen libXp compat-libstdc++*
+</code></pre>
+
+<h3>0x03 配置Oracle环境</h3>
+
+<p>添加必要的用户组：</p>
+
+<pre><code>/usr/sbin/groupadd oinstall
+/usr/sbin/groupadd dba
+/usr/sbin/groupadd oper
+</code></pre>
+
+<p>更改oracle用户权限</p>
+
+<pre><code>/usr/sbin/usermod -g oinstall -G dba,oper oracle
+</code></pre>
+
+<p>配置内核参数、修改用户环境变量</p>
+
+<p>编辑 <code>/etc/sysctl.conf</code>在最后加入</p>
+
+<pre><code>#oracle
+kernel.shmmni = 4096
+kernel.sem = 250 32000 100 128
+fs.file-max = 65536
+net.ipv4.ip_local_port_range = 1024 65000
+net.core.rmem_default = 262144
+net.core.rmem_max = 262144
+net.core.wmem_default = 262144
+net.core.wmem_max = 262144
+</code></pre>
+
+<p>运行</p>
+
+<pre><code>/sbin/sysctl -p
+</code></pre>
+
+<p>使配置文件生效</p>
+
+<p>编辑<code>/etc/security/limits.conf</code> 在最后加入</p>
+
+<pre><code>oracle soft nproc 2047
+oracle hard nproc 16384
+oracle soft nofile 1024
+oracle hard nofile 65536
+</code></pre>
+
+<p>编辑<code>/etc/pam.d/login</code>在最后加入</p>
+
+<pre><code>session required pam_limits.so
+</code></pre>
+
+<p>编辑<code>/etc/profile</code>在最后加入</p>
+
+<pre><code>if [ $USER = "oracle" ]; then
+if [ $SHELL = "/bin/ksh" ]; then
+ulimit -p 16384
+ulimit -n 65536
+else
+ulimit -u 16384 -n 65536
+fi
+fi
+
+ORACLE_BASE="/opt/app/oracle"
+export ORACLE_BASE
+ORACLE_HOME=$ORACLE_BASE"/product/10.2.0/db_1"
+ORACLE_SID=MZKOracle
+#此SID在后面安装时需要填入和这里配置一样的
+export ORACLE_HOME ORACLE_SID
+</code></pre>
+
+<p>编辑<code>/etc/redhat-release</code>在最后加入</p>
+
+<pre><code>#10G默认不支持5.6版本，修改掉此信息可略过错误）
+#而且要把之前的删除掉不能#掉
+redhat-4
+</code></pre>
+
+<p>配置oracle用户环境变量</p>
+
+<pre><code>su oracle
+vi ~/.bash_profile
+#在最后加入
+PATH=$PATH:$HOME/bin:$ORACLE_HOME/bin
+export PATH
+export NLS_LANG=AMERICAN_AMERICA.ZHS16GBK   
+</code></pre>
+
+<p>创建ORACLE_BASE目录:</p>
+
+<pre><code>mkdir -p /opt/app/oracle
+#权限设置: 
+chown -R oracle:oinstall /opt/app/
+</code></pre>
+
+<h3>0x04安装</h3>
+
+<pre><code>#将0x00中解压的database包放到/opt中
+sudo cp -R /mnt/hgfs/maizhikun/Learning/Oracle/ /opt/
+</code></pre>
+
+<p>图形化界面 我就不截图了</p>
+
+<p>参考<a href="http://www.xmydlinux.org/201104/439.html">http://www.xmydlinux.org/201104/439.html</a></p>
+
+<h3>0x05参考链接</h3>
+
+<p><a href="http://www.xmydlinux.org/201104/439.html">http://www.xmydlinux.org/201104/439.html</a></p>
+
+<p><a href="http://www.cnblogs.com/mchina/archive/2013/03/08/2934473.html">http://www.cnblogs.com/mchina/archive/2013/03/08/2934473.html</a></p>
+</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-03-31T11:37:40+08:00" pubdate data-updated="true"></time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/oracle/'>oracle</a>
+
+
+</div>
+	
+</div>
+</article>
+
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+		
+		
+		<a class="addthis_button_tweet"></a>
+		
+		
+		
+	</div>
+	
+</div>
+
+
+</div>
+	<footer id="footer" class="inner">Copyright &copy; 2015
+
+    K
+
+</footer>
+	<script src="/javascripts/slash.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+	$('.fancybox').fancybox();
+})(jQuery);
+</script> <!-- Delete or comment this line to disable Fancybox -->
+
+
+
+
+
+
+</body>
+</html>

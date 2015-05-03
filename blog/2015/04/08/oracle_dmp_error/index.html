@@ -1,0 +1,183 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Oracle 导入.dmp乱码 - K</title>
+	<meta name="author" content="K">
+
+	
+	<meta name="description" content="0x00查询Oracle数据库字符编码 SQL&gt; select userenv('language') from dual; USERENV('LANGUAGE')
+---------------------------------------------------- &hellip;">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link href="false" rel="alternate" title="K" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script async="true" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	
+</head>
+
+
+<body>
+	<header id="header" class="inner"><h1><a href="/">K</a></h1>
+<nav id="main-nav"><ul class="main">
+	
+</ul>
+</nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Menu</a>
+		<div class="container"><ul class="main">
+	
+</ul>
+</div>
+	</div>
+	<div class="alignright search">
+		<a class="button"></a>
+		<div class="container">
+			<form action="https://www.google.com/search" method="get">
+				<input type="text" name="q" results="0">
+				<input type="hidden" name="q" value="site:mzkmzk.github.io">
+			</form>
+		</div>
+	</div>
+</nav>
+<nav id="sub-nav" class="alignright">
+	<div class="social">
+		
+		
+		
+		
+    
+		
+		
+		
+		
+		
+    
+	</div>
+	
+</nav>
+
+</header>
+	
+		
+	
+	<div id="content" class="inner"><article class="post">
+	<h2 class="title">Oracle 导入.dmp乱码</h2>
+	<div class="entry-content"><!--more-->
+
+
+<h3>0x00查询Oracle数据库字符编码</h3>
+
+<pre><code>SQL&gt; select userenv('language') from dual;
+
+
+USERENV('LANGUAGE')
+----------------------------------------------------
+AMERICAN_AMERICA.AL32UTF8
+</code></pre>
+
+<h3>0x02查看dmp文件字符编码</h3>
+
+<pre><code>[root@linux5 ~]# cat /mnt/hgfs/2015-03-16-Library/one.dmp  |od -x|head -1|awk '{print $2 $3}'|cut -c 3-6
+0345
+
+查询0345是什么编码
+SQL&gt; select nls_charset_name(to_number('0345','xxxx')) from dual;
+
+NLS_CHARSET_NAME(TO_NUMBER('03454','XXXX'
+----------------------------------------
+ZHS16GBK
+</code></pre>
+
+<h3>0x03查看Linux字符集</h3>
+
+<pre><code>#查看系统登录用户当前的字符集状态
+[root@linux5 ~]# echo $LANG
+zh_CN.UTF-8
+命令:locale -a   查看本地的字符集
+    locale -m   查看所有支持的字符集
+</code></pre>
+
+<h3>0x04解决方案</h3>
+
+<p>把Oracle的客户端和Linux字符集调整成一致就可以了 应该是UTF-8包含了JA16EUCTILDE这个编码</p>
+
+<h3>0x05参考链接</h3>
+
+<p> 如何解决乱码问题<a href="http://blog.chinaunix.net/uid-186064-id-2823338.html">http://blog.chinaunix.net/uid-186064-id-2823338.html</a></p>
+
+<p> oracle字符对照表<a href="http://docs.oracle.com/cd/B19306_01/server.102/b14225/applocaledata.htm#i634428">http://docs.oracle.com/cd/B19306_01/server.102/b14225/applocaledata.htm#i634428</a></p>
+
+<p> 如何查看oracle数据库字符集<a href="http://blog.csdn.net/heianemo/article/details/7702749">http://blog.csdn.net/heianemo/article/details/7702749</a></p>
+
+<p> 遗留问题</p>
+
+<p> IMP-00008: unrecognized statement in the export file:</p>
+</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-04-08T11:37:40+08:00" pubdate data-updated="true"></time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/oracle/'>oracle</a>
+
+
+</div>
+	
+</div>
+</article>
+
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+		
+		
+		<a class="addthis_button_tweet"></a>
+		
+		
+		
+	</div>
+	
+</div>
+
+
+</div>
+	<footer id="footer" class="inner">Copyright &copy; 2015
+
+    K
+
+</footer>
+	<script src="/javascripts/slash.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+	$('.fancybox').fancybox();
+})(jQuery);
+</script> <!-- Delete or comment this line to disable Fancybox -->
+
+
+
+
+
+
+</body>
+</html>

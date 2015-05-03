@@ -4,7 +4,7 @@
   <title><![CDATA[K]]></title>
   <link href="http://mzkmzk.github.io/atom.xml" rel="self"/>
   <link href="http://mzkmzk.github.io/"/>
-  <updated>2015-03-08T12:16:44+08:00</updated>
+  <updated>2015-05-03T20:17:45+08:00</updated>
   <id>http://mzkmzk.github.io/</id>
   <author>
     <name><![CDATA[K]]></name>
@@ -14,965 +14,1119 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Mac 设置开机执行命令]]></title>
-    <link href="http://mzkmzk.github.io/blog/2015/01/13/Mac_login_sh/"/>
-    <updated>2015-01-13T11:37:40+08:00</updated>
-    <id>http://mzkmzk.github.io/blog/2015/01/13/Mac_login_sh</id>
-    <content type="html"><![CDATA[<h3>0x01 创建 .sh</h3>
-
-<p>.sh里设置要执行的命令</p>
-
-<p>然后 chmod 711 .sh</p>
-
-<h3>0x002设置开机启动</h3>
-
-<p>在系统偏好设置-用户与群组-登陆项 里添加上面你保存的可执行文件。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[php 上传图片和预览]]></title>
-    <link href="http://mzkmzk.github.io/blog/2015/01/07/php_upload_picture/"/>
-    <updated>2015-01-07T11:37:40+08:00</updated>
-    <id>http://mzkmzk.github.io/blog/2015/01/07/php_upload_picture</id>
+    <title type="html"><![CDATA[hack思路]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/05/01/hack_thiking/"/>
+    <updated>2015-05-01T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/05/01/hack_thiking</id>
     <content type="html"><![CDATA[<!--more-->
 
 
-<p>效果图</p>
+<h3>天津大学仁爱学院教务网</h3>
 
-<pre><code>![image](images/blog/2015-01-07-02.png)
+<p>在论文搜索里输入&#8217; 会在本页显示报错 信息</p>
+
+<h3>2013的windows System权限漏洞</h3>
+
+<p><a href="http://bbs.blackbap.org/thread-4431-1-1.html">http://bbs.blackbap.org/thread-4431-1-1.html</a></p>
+
+<p><a href="http://www.leavesongs.com/PENETRATION/privilege-escalation-MS13-046.html">http://www.leavesongs.com/PENETRATION/privilege-escalation-MS13-046.html</a></p>
+
+<h3>Strtus2漏洞利用</h3>
+
+<pre><code>python  Desktop/UseOfStruts.py  http://loveniwed.com
 </code></pre>
 
-<p>只需更改下</p>
+<p>失败原因 估计由于我自己的Strtus2版本较高</p>
 
-<pre><code>$upfile='./image/human'; //图片目录路径
+<pre><code>参考链接&lt;http://www.leavesongs.com/PENETRATION/UseOfStruts.html&gt;
 </code></pre>
 
-<p>此行的图片路径和权限即可</p>
+<h3>Strtus2 远程控制利用</h3>
 
-<pre><code>&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;
-&lt;html xmlns="http://www.w3.org/1999/xhtml"&gt;
-&lt;head&gt;
-&lt;meta http-equiv="Content-Type" content="text/html; charset=utf-8" /&gt;
-&lt;title&gt;上传图片&lt;/title&gt;
-&lt;/head&gt;
-
-&lt;body&gt;&lt;div align="center" style="width:50%; height:300px; font-size:13px"&gt;
-&lt;h3&gt;上传图片预览&lt;/h3&gt;
-&lt;form name="frm" method="post" enctype="multipart/form-data"&gt;
-&lt;font style="letter-spacing:1px" color="#FF0000"&gt;*只允许上传jpg|png|bmp|pjpeg|gif格式的图片&lt;/font&gt;&lt;br/&gt;&lt;br/&gt;
-请选择图片：
- &lt;input name='upfile' type='file'/&gt;
- &lt;input name="btn" type="submit" value="上传" /&gt;&lt;br /&gt;
-&lt;/form&gt;
-&lt;?php
-//全局变量
-$arrType=array('image/jpg','image/gif','image/png','image/bmp','image/pjpeg');
-$max_size='500000';      // 最大文件限制（单位：byte）
-$upfile='./image/human'; //图片目录路径
-$file=$_FILES['upfile'];    
-
-if($_SERVER['REQUEST_METHOD']=='POST'){ //判断提交方式是否为POST
- if(!is_uploaded_file($file['tmp_name'])){ //判断上传文件是否存在
-echo "&lt;font color='#FF0000'&gt;文件不存在！&lt;/font&gt;";
-exit;
-}
-if($file['size']&gt;$max_size){  //判断文件大小是否大于500000字节
-echo "&lt;font color='#FF0000'&gt;上传文件太大！&lt;/font&gt;";
-exit;
-} 
-if(!in_array($file['type'],$arrType)){  //判断图片文件的格式
- echo "&lt;font color='#FF0000'&gt;上传文件格式不对！&lt;/font&gt;";
- exit;
- }
- if(!file_exists($upfile)){  // 判断存放文件目录是否存在
- mkdir($upfile,0777,true);
- } 
-  $imageSize=getimagesize($file['tmp_name']);   $img=$imageSize[0].'*'.$imageSize[1];
-  $fname=$file['name'];
-  $ftype=explode('.',$fname);
-  $picName=$upfile."/cloudy".$fname;
-  if(file_exists($picName)){
-echo "&lt;font color='#FF0000'&gt;同文件名已存在！&lt;/font&gt;";
-exit;
- }
- if(!move_uploaded_file($file['tmp_name'],$picName)){  
-echo "&lt;font color='#FF0000'&gt;移动文件出错！&lt;/font&gt;";
-exit;
-}
-else{
-echo "&lt;font color='#FF0000'&gt;图片文件上传成功！&lt;/font&gt;&lt;br/&gt;";
-echo "&lt;font color='#0000FF'&gt;图片大小：$img&lt;/font&gt;&lt;br/&gt;";
-echo "图片预览：&lt;br&gt;&lt;div style='border:#F00 1px solid; width:200px;height:200px'&gt;
-&lt;img src=\"".$picName."\" width=200px height=200px&gt;".$fname."&lt;/div&gt;";
-}
-  }
-  ?&gt;
-  &lt;/div&gt;
-  &lt;/body&gt;
-  &lt;/html&gt;
+<pre><code>http://drops.wooyun.org/papers/1377
 </code></pre>
 
-<p>参考链接<a href="http://blog.163.com/ylx282006@126/blog/static/597727172010112385533429/">http://blog.163.com/ylx282006@126/blog/static/597727172010112385533429/</a></p>
+<h3>oa仁爱网bug</h3>
+
+<p><a href="http://oa.tjrac.edu.cn/rweb/Main/logon.do">http://oa.tjrac.edu.cn/rweb/Main/logon.do</a>
+zm
+123
+报错</p>
 ]]></content>
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[php 函数累积]]></title>
-    <link href="http://mzkmzk.github.io/blog/2015/01/07/php_function/"/>
-    <updated>2015-01-07T11:37:40+08:00</updated>
-    <id>http://mzkmzk.github.io/blog/2015/01/07/php_function</id>
-    <content type="html"><![CDATA[<h3>截取字符串函数</h3>
+    <title type="html"><![CDATA[sqlmap渗透某系统过程]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/04/30/rac_permeate.markdwon/"/>
+    <updated>2015-04-30T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/04/30/rac_permeate.markdwon</id>
+    <content type="html"><![CDATA[<!--more-->
 
-<pre><code>$str1 = substr($str,5);
-echo "从第5个字符开始取至最后：".$str1."
+
+<p>主要通过<code>sqlmap</code>进行渗透</p>
+
+<h3>0x00 找到注入点</h3>
+
+<p>如图<a href="15-02-15-01">link</a></p>
+
+<p>通过<code>burpsuite</code>获取此系统中某处的搜索功能 中的信息 然后保存到txt中</p>
+
+<pre><code>python sqlmap.py -r /Users/~/Desktop/injection6.txt
 </code></pre>
 
-<p> 参考链接<a href="http://www.php100.com/html/php/hanshu/2013/0905/4650.html">http://www.php100.com/html/php/hanshu/2013/0905/4650.html</a></p>
+<p>然后获取到注入点</p>
 
-<h3>随机函数</h3>
+<p><a href="15-02-15-02">link</a></p>
 
-<pre><code>//mt_rand生成一个介于33和126之间的数字 
-//chr()将数字转为字符串
-char(mt_rand(33, 126));
+<h3>0x02 查询数据库表</h3>
+
+<pre><code>python sqlmap.py -r /Users/~/Desktop/injection6.txt  -p searchKeyword  --tables --exclude-sysdbs 
 </code></pre>
 
-<h3>php 获取 form表单传递过来的file文件</h3>
+<p><a href="15-02-15-03">link</a></p>
 
-<pre><code>$_FILES($_REQUEST("fiel控件的name"));
-</code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Mac 命令积累]]></title>
-    <link href="http://mzkmzk.github.io/blog/2015/01/07/mac_order/"/>
-    <updated>2015-01-07T11:37:40+08:00</updated>
-    <id>http://mzkmzk.github.io/blog/2015/01/07/mac_order</id>
-    <content type="html"><![CDATA[<h3>更改目录权限</h3>
+<h3>0x03 渗透步骤</h3>
 
-<pre><code>//-R代表此目录下的所有目录和文件都更改为753权限
-chmod -R 753 目录 
-</code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Mac 搭建 MAMP环境]]></title>
-    <link href="http://mzkmzk.github.io/blog/2015/01/06/mac_install_mamp/"/>
-    <updated>2015-01-06T11:37:40+08:00</updated>
-    <id>http://mzkmzk.github.io/blog/2015/01/06/mac_install_mamp</id>
-    <content type="html"><![CDATA[<h3>0x01 Apache 设置访问目录</h3>
-
-<p>默认的访问目录是</p>
-
-<pre><code>http://localhost/~user_name
-</code></pre>
-
-<p>修改默认访问目录<em>vim /etc/apache2/httpd.conf</em></p>
-
-<pre><code>#在这里设置默认的访问路径...
-DocumentRoot "/Users/username/Sites"
-&lt;Directory /&gt;
-Options Indexes MultiViews
-AllowOverride All
-Order allow,deny
-Allow from all
-&lt;/Directory&gt;
-</code></pre>
-
-<p>以后有项目往这里扔就可以访问了</p>
-
-<h3>0x02 更新php</h3>
-
-<pre><code>brew update
-brew tap homebrew/dupes
-brew tap josegonzalez/homebrew-php
-brew install php55 #Apache
-</code></pre>
-
-<p>修改php的cli路径 <em>vim /etc/bashrc</em></p>
-
-<pre><code>export PATH="/usr/local/bin:/usr/local/sbin:$PATH"
-</code></pre>
-
-<p>设置apache的使用的php版本 <em>vim /etc/apache2/httpd.conf</em></p>
-
-<pre><code>LoadModule php5_module /usr/local/Cellar/php55/5.5.20/libexec/apache2/libphp5.so
-</code></pre>
-
-<h3>0x03 安装mysql</h3>
-
-<p>由于我之前就安装了mysql&hellip;这里就直接引用参考链接..</p>
-
-<pre><code>brew install mysql
-unset TMPDIR
-mysql_install_db --verbose --user=`whoami` --basedir="$(brew --prefix mysql)" --datadir=/usr/local/var/mysql --tmpdir=/tmp
-sudo chown -R your_user /usr/local/var/mysql/
-</code></pre>
+<p>这可以获取数据库和数据库表
+    python ~/Learning/Hack/sqlmap/sqlmap_new/sqlmap/sqlmap.py -r  ~/Desktop/hackTJRAC_BM.txt  -p tb_QueryText &ndash;tables &ndash;exclude-sysdbs &ndash;columns ,-C,-T,-D &ndash;dump -T vUsers</p>
 
 <h3>参考链接</h3>
 
-<p>MAMP参考链接<a href="http://yansu.org/2013/12/11/lamp-in-mac.html">http://yansu.org/2013/12/11/lamp-in-mac.html</a></p>
-
-<p>更多有关bashrc设置参考链接<a href="http://www.tuicool.com/articles/7nu2E3R">http://www.tuicool.com/articles/7nu2E3R</a></p>
+<p>sqlmap使用参考手册<a href="http://drops.wooyun.org/tips/143">http://drops.wooyun.org/tips/143</a></p>
 ]]></content>
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Eclipse 搭建phpIDE和导入php项目]]></title>
-    <link href="http://mzkmzk.github.io/blog/2015/01/06/eclipse_phpide_import_php/"/>
-    <updated>2015-01-06T11:37:40+08:00</updated>
-    <id>http://mzkmzk.github.io/blog/2015/01/06/eclipse_phpide_import_php</id>
-    <content type="html"><![CDATA[<h3>0x01 搭建phpIDE</h3>
-
-<ol>
-<li><em>Help -> Install New Software</em></li>
-<li>Work with 选择 All Available Sites</li>
-<li>找到Web,XML,JAVA EE and OSGi Enterprise Developement 中的 PHP Development Tools(PDT)</li>
-<li>重启Eclipse</li>
-</ol>
+    <title type="html"><![CDATA[抓站下载工具 Mac Httracl]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/04/30/download_website/"/>
+    <updated>2015-04-30T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/04/30/download_website</id>
+    <content type="html"><![CDATA[<!--more-->
 
 
-<h3>0x02 导入php项目</h3>
+<h3>0x00下载地址<a href="https://www.httrack.com/page/2/en/index.html">https://www.httrack.com/page/2/en/index.html</a></h3>
 
-<ol>
-<li><em>New ->PHP->PHP Project</em></li>
-<li>选择Create project at existing location 然后Browse中以前的php项目 即可</li>
-</ol>
+<h3>0x01运行</h3>
+
+<p>终端输入<code>/Users/maizhikun/Learning/Hack/httrack/Mac/httrack-3.48.21/src/httrack</code></p>
+
+<pre><code>Welcome to HTTrack Website Copier (Offline Browser) 3.48-21
+Copyright (C) 1998-2015 Xavier Roche and other contributors
+To see the option list, enter a blank line or try httrack --help
+
+#输入项目名
+Enter project name :Text
+#输入文件存放路径
+Base path (return=/Users/maizhikun/websites/) :/Users/maizhikun/Learning/Hack/httrack/workspace/
+#输入要抓取的网址
+Enter URLs (separated by commas or blank spaces) :loveniwed.com
+
+Action:
+#默认的下载方式
+(enter) 1   Mirror Web Site(s)
+#默认的下载方式和所提question中所有的有可能下载的所有链接
+2   Mirror Web Site(s) with Wizard
+#会只下载制定的文件,但不会包括爬虫文件
+3   Just Get Files Indicated
+#下载网站中所有的链接
+4   Mirror ALL links in URLs (Multiple Mirror)
+#所有的链接都会变成书签
+5   Test Links In URLs (Bookmark Test)
+0   Quit
+: 1
+
+Proxy (return=none) :
+
+You can define wildcards, like: -*.gif +www.*.com/*.zip -*img_*.zip
+Wildcards (return=none) :
+
+You can define additional options, such as recurse level (-r&lt;number&gt;), separed by blank spaces
+To see the option list, type help
+Additional options (return=none) :
+
+---&gt; Wizard command line: httrack loveniwed.com  -O "/Users/maizhikun/Learning/Hack/httrack/workspace/Text"  -%v  
+
+Ready to launch the mirror? (Y/n) :y
+
+Mirror launched on Wed, 01 Apr 2015 18:21:25 by HTTrack Website Copier/3.48-21 [XR&amp;CO'2014]
+mirroring loveniwed.com with the wizard help..
+
+
+
+* loveniwed.com/up/Report3341北京城里最大的户外公园婚礼堂,您的专属婚礼殿堂！19.j* loveniwed.com/up/Report2701北京国贸大酒店“爱在云端Love In * loveniwed.co696/707: loveniwed.com/up/Report2111电影《完美嫁衣》发布会24.jpg (35952 bytesDone.08: loveniwed.com/sanya0.html (2050 bytes) - 500
+Thanks for using HTTrack!
+* 
+logout
+
+[进程已完成]
+</code></pre>
+
+<h3>网站方式</h3>
+
+<p>执行<code>~/httrack/src/webhttrack</code>可以在网页版中抓站</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[tjrac_lib响应式设计初稿]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/04/28/tjraclibwebresponsive/"/>
+    <updated>2015-04-28T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/04/28/tjraclibwebresponsive</id>
+    <content type="html"><![CDATA[<!--more-->
 
 
 <h3>参考链接</h3>
 
-<p><a href="http://jingyan.baidu.com/article/6d704a13f8001928db51cad8.html">http://jingyan.baidu.com/article/6d704a13f8001928db51cad8.html</a></p>
+<p><a href="http://www.ruanyifeng.com/blog/2012/05/responsive_web_design.html">http://www.ruanyifeng.com/blog/2012/05/responsive_web_design.html</a></p>
 ]]></content>
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[php 无法识别<? ?>]]></title>
-    <link href="http://mzkmzk.github.io/blog/2015/01/04/php_no_know_short_open_tag/"/>
-    <updated>2015-01-04T11:37:40+08:00</updated>
-    <id>http://mzkmzk.github.io/blog/2015/01/04/php_no_know_short_open_tag</id>
-    <content type="html"><![CDATA[<h3>0x01</h3>
+    <title type="html"><![CDATA[旅游路线]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/04/17/travel/"/>
+    <updated>2015-04-17T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/04/17/travel</id>
+    <content type="html"><![CDATA[<!--more-->
 
-<p><em>vim /usr/local/etc/php/5.5</em></p>
 
-<pre><code>#默认是Off 改为On即可
-short_open_tag = On
-</code></pre>
+<p>21 黄金海岸</p>
+
+<p>22 北大桥</p>
+
+<p>23 星海公园</p>
+
+<p>24 长城</p>
+
+<p>25 顾河园</p>
+
+<p>26 天安门</p>
+
+<p>27 回民街</p>
+
+<p>28 兵马俑</p>
+
+<p>29 大小雁塔</p>
 ]]></content>
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[php 解决乱码]]></title>
-    <link href="http://mzkmzk.github.io/blog/2015/01/04/php_messy_code/"/>
-    <updated>2015-01-04T11:37:40+08:00</updated>
-    <id>http://mzkmzk.github.io/blog/2015/01/04/php_messy_code</id>
-    <content type="html"><![CDATA[<h3>0x01 php文件</h3>
+    <title type="html"><![CDATA[旅游路线]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/04/17/tjraclibapp/"/>
+    <updated>2015-04-17T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/04/17/tjraclibapp</id>
+    <content type="html"><![CDATA[<!--more-->
 
-<pre><code>//php文件头中加入
-header("Content-Type: text/html; charset=utf-8");
+
+<p>登陆</p>
+
+<p>续借</p>
+
+<p>学生信息</p>
+
+<p>推购.</p>
+
+<p>挂失</p>
+
+<p>检索历史</p>
+
+<p>AR</p>
+
+<p>我靠&hellip;.</p>
+
+<p>&hellip;..</p>
+
+<p>每次都要Clean项目才可以?..我日了狗了.</p>
+
+<p>Tomcat问题实在蛋疼</p>
+
+<p>还有借书历史会显示null</p>
+
+<p>还有需要点击刷新几下页面才出来</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Oracle 导入.dmp乱码]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/04/08/oracle_dmp_error/"/>
+    <updated>2015-04-08T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/04/08/oracle_dmp_error</id>
+    <content type="html"><![CDATA[<!--more-->
+
+
+<h3>0x00查询Oracle数据库字符编码</h3>
+
+<pre><code>SQL&gt; select userenv('language') from dual;
+
+
+USERENV('LANGUAGE')
+----------------------------------------------------
+AMERICAN_AMERICA.AL32UTF8
 </code></pre>
 
-<h3>0x02 html 文件</h3>
+<h3>0x02查看dmp文件字符编码</h3>
 
-<pre><code>&lt;meta http-equiv="Content-Type" content="text/html; charset=utf-8"&gt;
+<pre><code>[root@linux5 ~]# cat /mnt/hgfs/2015-03-16-Library/one.dmp  |od -x|head -1|awk '{print $2 $3}'|cut -c 3-6
+0345
+
+查询0345是什么编码
+SQL&gt; select nls_charset_name(to_number('0345','xxxx')) from dual;
+
+NLS_CHARSET_NAME(TO_NUMBER('03454','XXXX'
+----------------------------------------
+ZHS16GBK
+</code></pre>
+
+<h3>0x03查看Linux字符集</h3>
+
+<pre><code>#查看系统登录用户当前的字符集状态
+[root@linux5 ~]# echo $LANG
+zh_CN.UTF-8
+命令:locale -a   查看本地的字符集
+    locale -m   查看所有支持的字符集
+</code></pre>
+
+<h3>0x04解决方案</h3>
+
+<p>把Oracle的客户端和Linux字符集调整成一致就可以了 应该是UTF-8包含了JA16EUCTILDE这个编码</p>
+
+<h3>0x05参考链接</h3>
+
+<p> 如何解决乱码问题<a href="http://blog.chinaunix.net/uid-186064-id-2823338.html">http://blog.chinaunix.net/uid-186064-id-2823338.html</a></p>
+
+<p> oracle字符对照表<a href="http://docs.oracle.com/cd/B19306_01/server.102/b14225/applocaledata.htm#i634428">http://docs.oracle.com/cd/B19306_01/server.102/b14225/applocaledata.htm#i634428</a></p>
+
+<p> 如何查看oracle数据库字符集<a href="http://blog.csdn.net/heianemo/article/details/7702749">http://blog.csdn.net/heianemo/article/details/7702749</a></p>
+
+<p> 遗留问题</p>
+
+<p> IMP-00008: unrecognized statement in the export file:</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[使用Oracle数据库笔记]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/04/08/Oracle/"/>
+    <updated>2015-04-08T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/04/08/Oracle</id>
+    <content type="html"><![CDATA[<!--more-->
+
+
+<h3>命令行连接数据库</h3>
+
+<pre><code>//通过ssh 执行此命令 说没有sqlplus命令?
+sqlplus /nolog
+</code></pre>
+
+<h3>Oracle 提供外部监听接口</h3>
+
+<pre><code>lsnrctl start
+</code></pre>
+
+<h3>Oracle 登陆数据库</h3>
+
+<pre><code>sqlplus "scott/管理员账户 as sysdba"
+</code></pre>
+
+<h3>Oracle 关闭数据库</h3>
+
+<pre><code>SQL&gt;shutdown normal;
+</code></pre>
+
+<h3>启动数据库实例</h3>
+
+<pre><code>SQL&gt;startup;
+</code></pre>
+
+<h3>查看Oracle用户</h3>
+
+<pre><code>select * from all_users;
+</code></pre>
+
+<h3>创建用户</h3>
+
+<pre><code>#1创建表空间
+create tablespace text(表名) datafile '/home/oracle/workspace/text.dbf'(表空间存在路径) size 10M(表大小);
+
+#2创建用户
+create user text(用户名) identified by oracle(密码) default tablespace text(表名) temporary tablespace temp ;
+
+#3.创建角色
+create  role  textuser(角色名);
+
+#4赋予权限
+grant create any table to textuser(角色名)
+
+#5把角色给用户
+grant connect ,resource ,textuser(角色) to text(用户);
+
+#6新用户登陆
+conn text/oracle;
+</code></pre>
+
+<h3>启动 127.0.0.1:5560 isqlplus</h3>
+
+<pre><code>isqlplusctl start;
+</code></pre>
+
+<h3>查看所有数据库</h3>
+
+<pre><code>select name from v$database;
+</code></pre>
+
+<h3>查看哪些用户拥有sysdba、sysoper权限</h3>
+
+<pre><code>select * from V_$PWFILE_USERS；
+
+show user；查看当前数据库连接用户
+</code></pre>
+
+<h3>进入某个数据库：</h3>
+
+<pre><code>database 数据库名；
+
+#查看数据库结构：
+desc v$database；      
+</code></pre>
+
+<h3>查看所有用户实例</h3>
+
+<pre><code>INSTANCE_NAME
+----------------
+orcl
+</code></pre>
+
+<h3>查看当前库的所有数据表</h3>
+
+<pre><code>select * from all_tables;
+
+select table_name from all_tables;        
+
+select table_name from user_tables;
+
+select table_name from all_tables where owner='用户名';
+</code></pre>
+
+<h3>查看表结构</h3>
+
+<pre><code>desc 表名；
+</code></pre>
+
+<h3>关闭数据库</h3>
+
+<pre><code>SQL&gt;shutdown immediate
+</code></pre>
+
+<h3>查看表空间</h3>
+
+<pre><code>SQL&gt;select * from v$tablespace;
+
+   TS# NAME               INC BIG FLA ENC
+---------- ------------------------------ --- --- --- ---
+ 0 SYSTEM             YES NO  YES
+ 1 UNDOTBS1           YES NO  YES
+ 2 SYSAUX             YES NO  YES
+ 4 USERS              YES NO  YES
+ 3 TEMP               NO  NO  YES
+ 6 TEXT               YES NO  YES
+</code></pre>
+
+<h3>查询字符集</h3>
+
+<pre><code>SQL&gt;select * from v$nls_parameters;
+
+or
+
+SQL&gt; select userenv('language') from dual;
+
+
+USERENV('LANGUAGE')
+----------------------------------------------------
+AMERICAN_AMERICA.AL32UTF8
+</code></pre>
+
+<h3>让外网访问数据库</h3>
+
+<pre><code>[root@linux5 ~]# setenforce 0;
+[root@linux5 ~]# service iptables stop;
 </code></pre>
 
 <h3>参考链接</h3>
 
-<p><a href="http://www.jb51.net/article/21118.htm">http://www.jb51.net/article/21118.htm</a></p>
+<p>基本查询数据库命令<a href="http://www.cnblogs.com/jiaxiaoai/archive/2011/05/09/2041008.html">http://www.cnblogs.com/jiaxiaoai/archive/2011/05/09/2041008.html</a></p>
 ]]></content>
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Mac 搭建svn服务器]]></title>
-    <link href="http://mzkmzk.github.io/blog/2015/01/04/mac_svn/"/>
-    <updated>2015-01-04T11:37:40+08:00</updated>
-    <id>http://mzkmzk.github.io/blog/2015/01/04/mac_svn</id>
-    <content type="html"><![CDATA[<h3>0x01 创建svn repository</h3>
+    <title type="html"><![CDATA[imp导入数据到ORACLE遇到ORA-12899错误]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/04/07/imp_12899/"/>
+    <updated>2015-04-07T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/04/07/imp_12899</id>
+    <content type="html"><![CDATA[<!--more-->
 
-<pre><code>svnadmin create /Users/maizhikun/Learning/svn/pro  //仓库位置，svn是svn的目录，pro是一个版本库的目录
+
+<h3>0x00原因</h3>
+
+<pre><code>因为exp时字符集占用的位数比导入时字符集的占用的位数要少
 </code></pre>
 
-<h3>0x02 配置svn 用户权限</h3>
+<h3>0x01解决方案</h3>
 
-<p><code>/Users/maizhikun/Learning/svn/pro/conf</code> 目录下存在三个文件 authz,passwd,svnserve.conf</p>
+<pre><code>这里演示的是ZHS16GBK为导出库字符集 而UTF-8为导入库 而作出的更改
 
-<p>1.配置svnserve.conf</p>
-
-<pre><code>＃anon-access = read
-＃auth-access = write
-＃password-db = passwd
-＃authz-db = authz
+：$sqlplus /nolog
+SQL&gt;conn / as sysdba
+SQL&gt;SHUTDOWN IMMEDIATE
+SQL&gt;STARTUP MOUNT
+SQL&gt;ALTER SYSTEM ENABLE RESTRICTED SESSION;
+SQL&gt;ALTER SYSTEM SET JOB_QUEUE_PROCESSES=0;
+SQL&gt;ALTER SYSTEM SET AQ_TM_PROCESSES=0;
+SQL&gt;ALTER DATABASE OPEN;
+SQL&gt; ALTER DATABASE CHARACTER SET ZHS16GBK ;
+ALTER DATABASE CHARACTER SET ZHS16GBK
+*ERROR at line 1:
+ORA-12712: new character set must be a superset of old character set
+报字符集不兼容，此时下INTERNAL_USE指令不对字符集超集进行检查：
+SQL&gt;ALTER DATABASE CHARACTER SET INTERNAL_USE ZHS16GBK;
+SQL&gt;SHUTDOWN IMMEDIATE
+SQL&gt;STARTUP
 </code></pre>
 
-<p>去掉#和#后的空格</p>
+<p>再次用imp导入，就没有问题了。</p>
 
-<p>要防止匿名访问就</p>
+<p>导入了以后 NLS_LANG也要跟着改 不然乱码</p>
 
-<pre><code>anon-access=none
+<pre><code>export NLS_LANG="SIMPLIFIED CHINESE_CHINA.ZHS32GB18030"
 </code></pre>
 
-<p>2.配置passwd</p>
+<h3>0x02参考链接</h3>
 
-<pre><code>[users]
-K=svn
-MZK=svn
+<p><a href="http://blog.sina.com.cn/s/blog_713043600100ohva.html">http://blog.sina.com.cn/s/blog_713043600100ohva.html</a></p>
+
+<p><a href="http://blog.csdn.net/namesliu/article/details/8030316">http://blog.csdn.net/namesliu/article/details/8030316</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[修改/etc/fstab错误修复方案]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/04/05/etc_fstab_error/"/>
+    <updated>2015-04-05T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/04/05/etc_fstab_error</id>
+    <content type="html"><![CDATA[<!--more-->
+
+
+<h3>0x00报错</h3>
+
+<p>系统在开机的时候会显示</p>
+
+<pre><code>Cheking fileSystems                 [FAILED]
 </code></pre>
 
-<p>3.配置authz</p>
+<h3>0x01 导入iso启动盘</h3>
 
-<pre><code>#设置了一个分组PAC 包括成员K和MZK
-[groups]
-PAC=K,MZK
+<p>虚拟机中cd光盘选中.iso</p>
 
-#[/]表示当前版本库的路径的访问权限
-[/]
-@PAC=rw
-# 忘记了写上面两行 导致一直出现authorization failed 错误
+<p>重启</p>
+
+<h3>0x02 恢复步骤</h3>
+
+<p>选中 Rescue installed system</p>
+
+<p>选择语言English</p>
+
+<p>键盘 us</p>
+
+<p>选择驱动器 Local CD/DVE</p>
+
+<p>然后到选择不配置networking</p>
+
+<p>Continue 然后下一步到 选择shell Start shell 即可</p>
+
+<p>然后进入  <code>vi /mnt/sysimage/etc/fstab</code></p>
+
+<p>修改为正常 再reboot重启即可</p>
+
+<h3>0x03 参考链接</h3>
+
+<p><a href="http://wenku.baidu.com/link?url=yG8YaFpib4-7wIFKjwLPqGCxUalRCNBxnTqQ1vnHRqDXIWHBTWwoPweEiM_bfmsCUPLbveoNCyrbD2YL7ArqqsKXUGQWCheR1ftBchkdNiq">http://wenku.baidu.com/link?url=yG8YaFpib4-7wIFKjwLPqGCxUalRCNBxnTqQ1vnHRqDXIWHBTWwoPweEiM_bfmsCUPLbveoNCyrbD2YL7ArqqsKXUGQWCheR1ftBchkdNiq</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Linux拓展硬盘]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/04/05/enpand_disk/"/>
+    <updated>2015-04-05T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/04/05/enpand_disk</id>
+    <content type="html"><![CDATA[<!--more-->
+
+
+<h3>0x00原因</h3>
+
+<p>犹豫昨天import了一个1.7G的数据库 导致硬盘不够用 开机时输入完密码后无法进入图形界面</p>
+
+<p>显示错误</p>
+
+<pre><code>Ubuntu-The configuration defaults for GNOME Power Manager have not been installed correctly
 </code></pre>
 
-<h3>0x03 启动svn服务</h3>
+<h3>0x01Vmware 给虚拟机加硬盘</h3>
 
-<pre><code>//没有任何输出则表示 启动成功
-svnserve -d -r /Users/maizhikun/Learning/svn    
-//测试
-svn checkout svn://127.0.0.1/pro --username=K --password=svn ./pro
+<p>这个在设备比较好加</p>
+
+<p>加完后 启动机器</p>
+
+<pre><code>[root@linux5 oracle]#su root
+[root@linux5 oracle]# fdisk -l
+
+Disk /dev/sda: 53.7 GB, 53687091200 bytes
+255 heads, 63 sectors/track, 6527 cylinders
+Units = cylinders of 16065 * 512 = 8225280 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disk identifier: 0x00038d6a
+Device Boot      Start         End      Blocks   Id  System
+/dev/sda1   *           1          39      307200   83  Linux
+Partition 1 does not end on cylinder boundary.
+/dev/sda2              39        2093    16501760   83  Linux
+/dev/sda3            2093        2611     4161536   82  Linux swap / Solaris
 </code></pre>
 
-<h3>0x04(可选) svn客户端安装</h3>
+<h3>0x02 新建分区</h3>
 
-<p>Version 下载链接<a href="http://www.pc6.com/mac/116544.html">http://www.pc6.com/mac/116544.html</a></p>
+<pre><code>[root@linux5 oracle]# fdisk -cu /dev/sda
 
-<!--###0x05(可选) 网页访问 svn apache整合svn
-    
-svn默认端口是3690
-    
-网页访问svn 127.0.0.1 会显示
+Command (m for help): n
+Command action
+e   extended
+p   primary partition (1-4)
+p
+Selected partition 4
+First sector (41943040-104857599, default 41943040): 
+Using default value 41943040
+Last sector, +sectors or +size{K,M,G} (41943040-104857599, default 104857599): 
+Using default value 104857599
 
-    ( success ( 2 2 ( ) ( edit-pipeline svndiff1 absent-entries commit-revprops depth log-revprops atomic-revprops partial-replay ) ) ) 
--->
+Command (m for help): w
+The partition table has been altered!
 
+Calling ioctl() to re-read partition table.
+
+WARNING: Re-reading the partition table failed with error 16: 设备或资源忙.
+The kernel still uses the old table. The new table will be used at
+the next reboot or after you run partprobe(8) or kpartx(8)
+Syncing disks.
+</code></pre>
+
+<p>这里报了个警告 说资源在忙</p>
+
+<p>查看新建结果</p>
+
+<pre><code>[root@linux5 oracle]# fdisk -l
+
+Disk /dev/sda: 53.7 GB, 53687091200 bytes
+255 heads, 63 sectors/track, 6527 cylinders
+Units = cylinders of 16065 * 512 = 8225280 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disk identifier: 0x00038d6a
+
+Device Boot      Start         End      Blocks   Id  System
+/dev/sda1   *           1          39      307200   83  Linux
+Partition 1 does not end on cylinder boundary.
+/dev/sda2              39        2093    16501760   83  Linux
+/dev/sda3            2093        2611     4161536   82  Linux swap / Solaris
+/dev/sda4            2611        6528    31457280   83  Linux
+Partition 4 does not end on cylinder boundary.
+</code></pre>
+
+<p>这里最后报了个 分区4没有结束范围&hellip;刚的新建分区应该是有问题</p>
+
+<h3>0x03 格式化新建分区</h3>
+
+<p>查了一下以前的文件类型</p>
+
+<pre><code>[root@linux5 oracle]# more /etc/fstab 
+
+#
+# /etc/fstab
+# Created by anaconda on Mon Mar 30 09:13:27 2015
+#
+# Accessible filesystems, by reference, are maintained under '/dev/disk'
+# See man pages fstab(5), findfs(8), mount(8) and/or blkid(8) for more info
+#
+UUID=18d82504-c890-43d2-9b7c-771f22e8f762 /                       ext4    defaults 
+   1 1
+UUID=8b4ddae2-a584-4a7f-a9aa-9633b32b4816 /boot                   ext4    defaults 
+   1 2
+UUID=2de40b84-00b1-4507-9d59-a4041ec0a903 swap                    swap    defaults 
+   0 0
+tmpfs                   /dev/shm                tmpfs   defaults        0 0
+devpts                  /dev/pts                devpts  gid=5,mode=620  0 0
+sysfs                   /sys                    sysfs   defaults        0 0
+proc                    /proc                   proc    defaults        0 0
+</code></pre>
+
+<p>恩 以前的是ext4的 开始格式化新建磁盘分区</p>
+
+<pre><code>[root@linux5 oracle]# mkfs -t ext4 /dev/sda4 
+mke2fs 1.41.12 (17-May-2010)
+文件系统标签=
+操作系统:Linux
+块大小=4096 (log=2)
+分块大小=4096 (log=2)
+Stride=0 blocks, Stripe width=0 blocks
+1966080 inodes, 7864320 blocks
+393216 blocks (5.00%) reserved for the super user
+第一个数据块=0
+Maximum filesystem blocks=0
+240 block groups
+32768 blocks per group, 32768 fragments per group
+8192 inodes per group
+Superblock backups stored on blocks: 
+32768, 98304, 163840, 229376, 294912, 819200, 884736, 1605632, 2654208, 
+4096000
+
+正在写入inode表: 完成                            
+Creating journal (32768 blocks): 完成
+Writing superblocks and filesystem accounting information: 完成
+</code></pre>
+
+<p>好了格式化完毕</p>
+
+<h3>挂载硬盘</h3>
+
+<p>查询UUID</p>
+
+<pre><code>[root@linux5 oracle]# blkid /dev/sda4
+/dev/sda4: UUID="b6705f46-548a-4eeb-bc85-92e3550599f3" TYPE="ext4" 
+</code></pre>
+
+<p>然后就编辑<code>/etc/fstab</code>在里面加入</p>
+
+<pre><code>UUID=b6705f46-548a-4eeb-bc85-92e3550599f3 /oracle                       ext4    defaults        1 2
+</code></pre>
+
+<p>第五列：指明是否要备份，（0为不备份，1为要备份，一般根分区要备份）</p>
+
+<p>第六列：指明自检顺序。 （0为不自检，1或者2为要自检，如果是根分区要设为1，其他分区只能是2）</p>
+
+<p><code>/etc/fstab</code>参数说明<a href="http://hndtraveller.blog.51cto.com/231121/186777">http://hndtraveller.blog.51cto.com/231121/186777</a></p>
+
+<p>ok 我现在主要问题是Oracle太大 但是直接把/oracle挂载在 /dev/sdb4上</p>
+
+<pre><code>#实时把/dev/sda4 挂载 /oracle里
+mount /dev/sda4 /oracle
+#/帮oracle先改名
+mv /oracle /oracle.bk
+#创建空的/oracle
+mkdir /oracle
+#更改为原来权限
+chown oracle:oinstall /oracle
+#移动数据
+mv /oracle.bk/* /oracle
+#去除备份数据库目录
+rmdir /oracle.bk
+</code></pre>
+
+<p>再df -h</p>
+
+<pre><code>[root@linux5 oracle]# df -h
+文件系统          容量  已用  可用 已用%% 挂载点
+/dev/sda2              16G   15G     0 100% /
+tmpfs                 1.9G     0  1.9G   0% /dev/shm
+/dev/sda1             291M   34M  243M  12% /boot
+.host:/               373G  283G   91G  76% /mnt/hgfs   /dev/sda4              30G  172M   28G   1% /oracle
+</code></pre>
+
+<p>ok 勉强成功</p>
+
+<h3>参考资料</h3>
+
+<p>其实这个方法要更简便 差不多 用tar来代码我的mv</p>
+
+<p><a href="http://blog.csdn.net/cymm_liu/article/details/11932297">http://blog.csdn.net/cymm_liu/article/details/11932297</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[oracle 导入.dmp和.log文件]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/04/04/oracle_dmp_log/"/>
+    <updated>2015-04-04T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/04/04/oracle_dmp_log</id>
+    <content type="html"><![CDATA[<!--more-->
+
+
+<h3>0x00 创建导入文件夹并授予权限</h3>
+
+<pre><code>SQL&gt;show user
+USER IS "SYS"
+
+crate directory data_hehe as '导入文件夹路径'
+grant read,write on directory data_hehe to scott;
+</code></pre>
+
+<h3>0x01 导入数据库</h3>
+
+<pre><code>SQL&gt;show user
+USER IS "SYS"
+
+#注意 用户名一定要与导出的.dmp里写的用户名一直
+SQL&gt;create user LIBSYS(用户名) identity by LIBSYS(密码)
+2 DEFAULT TABLESPACE users;
+3 quota 20g on users
+
+grant connect to LIBSYS;
+
+cd   导入文件夹路径
+
+imp system/oracle FULL=y file=one.dmp log=one.log 
+</code></pre>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Windows 常用命令累积]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/04/03/windows_usual_order/"/>
+    <updated>2015-04-03T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/04/03/windows_usual_order</id>
+    <content type="html"><![CDATA[<!--more-->
+
+
+<h3>查看端口占用</h3>
+
+<pre><code>#查看占用8080端口的程序
+netstat -ano|findstr "8080"
+</code></pre>
+
+<h3>根据pid 查询具体程序</h3>
+
+<pre><code>#查询pid 为5224的程序名
+tasklist |findstr "5224"    
+</code></pre>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[CentOS 5.1安装Oracle10 64]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/03/31/centos-oracle/"/>
+    <updated>2015-03-31T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/03/31/centos-oracle</id>
+    <content type="html"><![CDATA[<!--more-->
+
+
+<h3>0x00 下载安装包</h3>
+
+<p>下载安装包 <a href="http://pan.baidu.com/wap/link?uk=3727692514&amp;shareid=2487050160&amp;third=0">http://pan.baidu.com/wap/link?uk=3727692514&amp;shareid=2487050160&amp;third=0</a></p>
+
+<p>这个含有其他Oracle数据库资源<a href="http://uni-smr.ac.ru/archive/db/Oracle/">http://uni-smr.ac.ru/archive/db/Oracle/</a></p>
+
+<p>解压压缩包</p>
+
+<pre><code>gunzip 10201_database_linux_x86_64.cpio.gz
+cpio -idmv &lt; 10201_database_linux_x86_64.cpio
+</code></pre>
+
+<h3>0x01 查看硬件坏境</h3>
+
+<pre><code>#查看内存  至少1G内存
+[root@localhost oracle]# grep MemTotal /proc/meminfo
+MemTotal:      1021724 kB
+
+#查看swap
+#如果内存为大于512M则swap大小为内存2倍
+#如果内存在1到2G之间则swap大小为内存1.5倍
+#如果内存在2到8G之间则swap大小为内存1倍
+#如果内存大于8G则swap大小为内存0.75倍
+[root@localhost oracle]# grep SwapTotal /proc/meminfo
+SwapTotal:     2064344 kB
+
+
+#查看硬盘
+#/tmp目录至少400MB
+#oracle安装目录大约在1.5到3.5G之间
+#数据文件至少1.2G
+[root@localhost oracle]# df -h
+Filesystem            Size  Used Avail Use% Mounted on
+/dev/sda2              18G  2.8G   14G  17% /
+/dev/sda1             289M   17M  258M   7% /boot
+tmpfs                 499M     0  499M   0% /dev/shm
+.host:/               373G  238G  136G  64% /mnt/hgfs
+</code></pre>
+
+<h3>0x02安装所需安装包</h3>
+
+<pre><code>yum install -y compat-db pdksh sysstat screen libXp compat-libstdc++*
+</code></pre>
+
+<h3>0x03 配置Oracle环境</h3>
+
+<p>添加必要的用户组：</p>
+
+<pre><code>/usr/sbin/groupadd oinstall
+/usr/sbin/groupadd dba
+/usr/sbin/groupadd oper
+</code></pre>
+
+<p>更改oracle用户权限</p>
+
+<pre><code>/usr/sbin/usermod -g oinstall -G dba,oper oracle
+</code></pre>
+
+<p>配置内核参数、修改用户环境变量</p>
+
+<p>编辑 <code>/etc/sysctl.conf</code>在最后加入</p>
+
+<pre><code>#oracle
+kernel.shmmni = 4096
+kernel.sem = 250 32000 100 128
+fs.file-max = 65536
+net.ipv4.ip_local_port_range = 1024 65000
+net.core.rmem_default = 262144
+net.core.rmem_max = 262144
+net.core.wmem_default = 262144
+net.core.wmem_max = 262144
+</code></pre>
+
+<p>运行</p>
+
+<pre><code>/sbin/sysctl -p
+</code></pre>
+
+<p>使配置文件生效</p>
+
+<p>编辑<code>/etc/security/limits.conf</code> 在最后加入</p>
+
+<pre><code>oracle soft nproc 2047
+oracle hard nproc 16384
+oracle soft nofile 1024
+oracle hard nofile 65536
+</code></pre>
+
+<p>编辑<code>/etc/pam.d/login</code>在最后加入</p>
+
+<pre><code>session required pam_limits.so
+</code></pre>
+
+<p>编辑<code>/etc/profile</code>在最后加入</p>
+
+<pre><code>if [ $USER = "oracle" ]; then
+if [ $SHELL = "/bin/ksh" ]; then
+ulimit -p 16384
+ulimit -n 65536
+else
+ulimit -u 16384 -n 65536
+fi
+fi
+
+ORACLE_BASE="/opt/app/oracle"
+export ORACLE_BASE
+ORACLE_HOME=$ORACLE_BASE"/product/10.2.0/db_1"
+ORACLE_SID=MZKOracle
+#此SID在后面安装时需要填入和这里配置一样的
+export ORACLE_HOME ORACLE_SID
+</code></pre>
+
+<p>编辑<code>/etc/redhat-release</code>在最后加入</p>
+
+<pre><code>#10G默认不支持5.6版本，修改掉此信息可略过错误）
+#而且要把之前的删除掉不能#掉
+redhat-4
+</code></pre>
+
+<p>配置oracle用户环境变量</p>
+
+<pre><code>su oracle
+vi ~/.bash_profile
+#在最后加入
+PATH=$PATH:$HOME/bin:$ORACLE_HOME/bin
+export PATH
+export NLS_LANG=AMERICAN_AMERICA.ZHS16GBK   
+</code></pre>
+
+<p>创建ORACLE_BASE目录:</p>
+
+<pre><code>mkdir -p /opt/app/oracle
+#权限设置: 
+chown -R oracle:oinstall /opt/app/
+</code></pre>
+
+<h3>0x04安装</h3>
+
+<pre><code>#将0x00中解压的database包放到/opt中
+sudo cp -R /mnt/hgfs/maizhikun/Learning/Oracle/ /opt/
+</code></pre>
+
+<p>图形化界面 我就不截图了</p>
+
+<p>参考<a href="http://www.xmydlinux.org/201104/439.html">http://www.xmydlinux.org/201104/439.html</a></p>
+
+<h3>0x05参考链接</h3>
+
+<p><a href="http://www.xmydlinux.org/201104/439.html">http://www.xmydlinux.org/201104/439.html</a></p>
+
+<p><a href="http://www.cnblogs.com/mchina/archive/2013/03/08/2934473.html">http://www.cnblogs.com/mchina/archive/2013/03/08/2934473.html</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Mac 下安装Vmware fusion7]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/03/29/mac_vmware_fusion7/"/>
+    <updated>2015-03-29T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/03/29/mac_vmware_fusion7</id>
+    <content type="html"><![CDATA[<h3>下载地址</h3>
+
+<p><a href="http://pan.baidu.com/s/1o6BOGFw">http://pan.baidu.com/s/1o6BOGFw</a></p>
+
+<h3>Ubantu和Win</h3>
+
+<p>Win我直接导的是 双系统中的Boot camp</p>
+
+<p>Ubantu是在<a href="http://www.ubuntu.com/download/desktop">http://www.ubuntu.com/download/desktop</a>下的..</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[制作纪念魔兽视频过程]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/03/28/war_mv/"/>
+    <updated>2015-03-28T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/03/28/war_mv</id>
+    <content type="html"><![CDATA[<h3>0x00安装 pr  ae  Fraps</h3>
+
+<p>pr和ae见&lt;>次篇幅</p>
+
+<p>Fraps<a href="http://tieba.baidu.com/p/3477295300">http://tieba.baidu.com/p/3477295300</a></p>
+
+<h3>0x01 视频整体思路整理</h3>
+
+<p>开头和结尾的8</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[使用jQuery MiniUI搭建后台demo]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/03/28/jquery_miniui/"/>
+    <updated>2015-03-28T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/03/28/jquery_miniui</id>
+    <content type="html"><![CDATA[<p>jQuery MiniUI 提供了一套.net/php/java 的后台模板 这里介绍一下使用方法</p>
+
+<h3>0x00下载demo</h3>
+
+<p><a href="http://www.miniui.com/download/">http://www.miniui.com/download/</a></p>
+
+<p>在这里选择使用的语言</p>
+
+<h3>0x01导入demo</h3>
+
+<h4>java</h4>
+
+<p>在Eclipse导入<code>import-&gt;Existing Project</code>以后</p>
+
+<p>项目会出现小红叉</p>
+
+<p>解决办法:</p>
+
+<p>删除不存在的jre
+<code>右击项目-&gt;Bulid path-&gt;选中Libraries标签页-&gt;选中有小红叉的JRE -&gt;remove</code></p>
+
+<p>导入本地的jre
+<code>Add Library-&gt;Jre System Library-&gt;OK</code></p>
+
+<p>如果此时项目中WebContent文件中有jsp报错 则Close项目 然后再Open</p>
+
+<p>修改src中的TestDB.java中的相关数据库信息</p>
+
+<h4>php</h4>
+
+<p>把项目扔进apache的目录即可</p>
+
+<p>然后在demo/data/invoke.php，修改相关数据库配置字符串。</p>
+
+<h4>导入mysql数据库</h4>
+
+<p>下载的项目中的WebContet中有个dbsql</p>
+
+<p>如果导入.sql文件不存在..说数据库已存在 则</p>
+
+<p>打开.sql文件 注释创建数据库的代码行</p>
+
+<pre><code>#CREATE DATABASE `plusoft_test`
+#CHARACTER SET 'utf8'
+#COLLATE 'utf8_general_ci';
+
+#USE `plusoft_test`;    
+</code></pre>
+
+<p>ok 运行项目即可</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Linux 用户无法使用sudo]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/03/27/linux_sudo/"/>
+    <updated>2015-03-27T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/03/27/linux_sudo</id>
+    <content type="html"><![CDATA[<!--more-->
+
+
+<h3>0x00问题</h3>
+
+<pre><code>[oracle@localhost bin]$ sudo mkdir -p /opt/app/oracle
+[sudo] password for oracle: 
+oracle is not in the sudoers file.  This incident will be reported.
+</code></pre>
+
+<h3>0x01解决办法</h3>
+
+<pre><code>su root
+echo '用户名  ALL=(ALL) ALL' &gt;&gt; /etc/sudoers
+</code></pre>
 
 <h3>参考链接</h3>
 
-<p>参考链接<a href="http://www.cnblogs.com/onlyfu/archive/2012/05/08/2489814.html">http://www.cnblogs.com/onlyfu/archive/2012/05/08/2489814.html</a></p>
-
-<p>参考链接<a href="http://www.cocoachina.com/bbs/read.php?tid=153734">http://www.cocoachina.com/bbs/read.php?tid=153734</a></p>
+<p><a href="http://superuser.com/questions/120340/user-not-in-the-sudoers-file-this-incident-will-be-reported">http://superuser.com/questions/120340/user-not-in-the-sudoers-file-this-incident-will-be-reported</a>中user21655的回复</p>
 ]]></content>
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[bootstrap 可视化布局]]></title>
-    <link href="http://mzkmzk.github.io/blog/2015/01/04/bootstrap_layout/"/>
-    <updated>2015-01-04T11:37:40+08:00</updated>
-    <id>http://mzkmzk.github.io/blog/2015/01/04/bootstrap_layout</id>
-    <content type="html"><![CDATA[<p><img src="images/blog/2015-01-07-01.png" alt="image" /></p>
+    <title type="html"><![CDATA[修改windows 后缀名为显示]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/03/26/windows_suffix/"/>
+    <updated>2015-03-26T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/03/26/windows_suffix</id>
+    <content type="html"><![CDATA[<!--more-->
 
-<p>bootstrap 提供的可视化布局</p>
 
-<h3>0x01 获取所需布局的代码</h3>
+<p>有时候后缀名 并不会显示在 名字里</p>
 
-<p><a href="http://www.bootcss.com/p/layoutit/#">http://www.bootcss.com/p/layoutit/#</a></p>
+<p>所以就要设置 我的电脑->工具(如果没有工具的话 就点击组织->布局->菜单栏)->文件夹选项->查看->取消掉 隐藏已知文件类型的拓展名。</p>
 
-<p>通过拖动设定自己想要的布局 然后 点击下载按钮 获取相对应的代码</p>
-
-<p>放入自己网页的想对应的位置</p>
-
-<h3>0x02 导入bootstrap相关的css和js</h3>
-
-<p>在项目导入<code>bootstrao v2.3</code>的css、js、和img</p>
-
-<p>下载地址<a href="http://v2.bootcss.com/">http://v2.bootcss.com/</a></p>
-
-<p>切记 在bootstrap.js前导入jquery.js</p>
-
-<p>jquery.js下载地址<a href="http://jquery.com/download/">http://jquery.com/download/</a></p>
-
-<p>在页面导入css和js</p>
-
-<pre><code>&lt;link rel="stylesheet" type="text/css" media="screen" href="./css/bootstrap.css"&gt;
-&lt;link rel="stylesheet" type="text/css" media="screen" href="./css/bootstrap-responsive.css"&gt;
-
-&lt;script type="text/javascript" src="./js/jquery-2_0_0.js"&gt;&lt;/script&gt;
-&lt;script type="text/javascript" src="./js/bootstrap.js"&gt;&lt;/script&gt;
-</code></pre>
-
-<p>导入<code>bootstrap v3.0</code>是否可行尚未尝试</p>
+<p>然后就OK了</p>
 ]]></content>
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[js动态添加 from表单元素]]></title>
-    <link href="http://mzkmzk.github.io/blog/2015/01/03/js_add_from/"/>
-    <updated>2015-01-03T11:37:40+08:00</updated>
-    <id>http://mzkmzk.github.io/blog/2015/01/03/js_add_from</id>
-    <content type="html"><![CDATA[<pre><code>//from_this参数作用为Onsubmit事件传递过来的from表单 或者通过id获取也可以
-function  inser_Submit(from_this){
-     var NFC_ID=document.createElement("input");
-     NFC_ID.type="hidden";
-     NFC_ID.name="NFC_ID";
-     NFC_ID.value=document.getElementById("NFCID").value;
-     from_this.appendChild(NFC_ID);
-}
-</code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[jquery 实现 ajax]]></title>
-    <link href="http://mzkmzk.github.io/blog/2015/01/03/jquery_ajax/"/>
-    <updated>2015-01-03T11:37:40+08:00</updated>
-    <id>http://mzkmzk.github.io/blog/2015/01/03/jquery_ajax</id>
-    <content type="html"><![CDATA[<h2>0x01 导入jquery.js</h2>
+    <title type="html"><![CDATA[Windows无法修改默认打开方式]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/03/26/windows_no_change_open/"/>
+    <updated>2015-03-26T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/03/26/windows_no_change_open</id>
+    <content type="html"><![CDATA[<!--more-->
 
-<pre><code>&lt;script type="text/javascript" src="./js/jquery.min.js"&gt;&lt;/script&gt;
-</code></pre>
 
-<h2>0x02 调用 jquery 的ajax方法</h2>
+<p>昨天 在属性修改了.txt打开方式为cmd 然后右击.txt无法选择默认打开方式</p>
 
-<pre><code>$(function(){
-    $('#login').on('submit',function(){
-        var $form = $(this),
-        //将所需要提交的form表单 序列化为字符串
-        postData = $form.serialize();
-        // loading...
-        //getJson第一个参数为要请求的url,第二个是传递过去的参数
-        $.getJSON('LoginAction',postData).done(function(data){
-            //data为返回来的json数据
-            if(data.msg){
-                location.href="Home.jsp";
-                alert("登陆成功");
-            }else{
-                alert("账号/密码错误 请重新输入");
-            }
-        }).fail(function(){
-            alert('登录出错：网络连接出现问题，请稍后再试。');
-        }).complete(function(){
-            // un loading...
-        })
-        return false;
-    });
-});
-</code></pre>
+<p>解决方法是</p>
 
-<p>参考链接<a href="http://www.w3cschool.cn/ajax_getjson.html">http://www.w3cschool.cn/ajax_getjson.html</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[android dialog Fragment显示]]></title>
-    <link href="http://mzkmzk.github.io/blog/2015/01/02/android_dialog_fragment/"/>
-    <updated>2015-01-02T11:37:40+08:00</updated>
-    <id>http://mzkmzk.github.io/blog/2015/01/02/android_dialog_fragment</id>
-    <content type="html"><![CDATA[<p>先上效果图.</p>
+<p>运行 regedit</p>
 
-<h2>0x01 创建显示框视图 alert_dialog_nick.xml</h2>
+<p>&ndash;HKEY_CURRENT_USER
+&mdash;-Software
+&mdash;&mdash;Microsoft
+&mdash;&mdash;&ndash;Windows
+&mdash;&mdash;&mdash;-CurrentVersion
+&mdash;&mdash;&mdash;&mdash;Explorer
+&mdash;&mdash;&mdash;&mdash;&ndash;FileExts</p>
 
-<pre><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
-&lt;LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-android:id="@+id/layout_r"
-android:layout_width="wrap_content"
-android:layout_height="wrap_content"
-android:background="#FFFFFF"
-android:orientation="vertical" &gt;
+<p>找到里面的.txt 删除UserChoice文件夹 就可以了</p>
 
-&lt;RelativeLayout
-    android:layout_width="250dp"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="15.0dip"
-    android:gravity="center_horizontal" &gt;
-
-    &lt;EditText  
-        android:id="@+id/dialog_edit"  
-        android:layout_width="230dp"  
-        android:layout_height="40dp"  
-        android:background="@drawable/login_input" 
-        android:drawablePadding="25dip"
-        android:textColorHint="@color/color_hint"  
-        android:textSize="14.0dip"
-        android:inputType="number"  
-        android:paddingLeft="10dp" /&gt;  
-&lt;/RelativeLayout&gt;
-
-&lt;ImageView
-    android:layout_width="250dp"
-    android:layout_height="wrap_content"
-    android:layout_gravity="center_horizontal"
-    android:layout_marginTop="15dp"
-    android:background="@color/color_gray"
-    android:src="@drawable/prefresh_list_cutline" /&gt;
-
-&lt;RelativeLayout
-    android:layout_width="250dp"
-    android:layout_height="wrap_content"
-    android:layout_marginLeft="5dp"
-    android:layout_marginRight="5dp"
-    android:layout_marginTop="15dp" &gt;
-
-    &lt;LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:paddingBottom="10.0dip"
-        android:orientation="horizontal" &gt;
-
-        &lt;Button
-            android:id="@+id/yes"
-            android:layout_width="90.0dip"
-            android:layout_height="40.0dip"
-            android:background="@color/color_blue"
-            android:text="@string/dialog_yes"
-            android:textSize="16sp"
-            android:layout_marginRight="20.0dip"
-            android:textColor="@color/color_white" /&gt;
-
-        &lt;Button
-            android:id="@+id/no"
-            android:layout_width="90.0dip"
-            android:layout_height="40.0dip"
-            android:background="@color/color_red"
-            android:text="@string/dialog_no"
-            android:textSize="16sp"
-            android:textColor="@color/color_white" /&gt;
-    &lt;/LinearLayout&gt;
-&lt;/RelativeLayout&gt;
-
-&lt;/LinearLayout&gt;
-</code></pre>
-
-<h2>0x02 创建显示框TianKongDialog.java</h2>
-
-<pre><code>//TianKongDialog 这个注意点在 DialogFragment 要是import android.support.v4.app.DialogFragment的...不要直接app.DialogFragment的
-
-@SuppressLint("NewApi")
-public class TianKongDialog extends DialogFragment{
-private static String CURRENT_TIME = "CURRENT_TIME";
-
-private EditText dialog_edit;
-
-public static TianKongDialog newInstance(){
-    //创建一个新的带有参数的Fragment实例
-    TianKongDialog fragment = new TianKongDialog();
-    Bundle args = new Bundle();
-    fragment.setArguments(args);
-    return fragment;
-}
-
-@Override
-public Dialog onCreateDialog(Bundle savedInstanceState) {
-    LayoutInflater factory = (LayoutInflater)  getActivity().getSystemService( getActivity().LAYOUT_INFLATER_SERVICE);
-    final View customViewnick = factory.inflate(R.layout.alert_dialog_nick, null);
-    dialog_edit = (EditText)customViewnick.findViewById(R.id.dialog_edit);
-    final Dialog ad2 = new Dialog(getActivity(), R.style.Theme_CustomDialog2);
-    ad2.setContentView(customViewnick);
-    ad2.setCancelable(false);//有可能你调不出这个方法，可以通过ad.setOnKeyListener()方法来实现屏蔽back键
-    ad2.setCanceledOnTouchOutside(false);//当点击除对话框外屏幕其他区域时对话框不消失，默认是消失的
-
-    Button buttonnickyes = (Button)customViewnick.findViewById(R.id.yes);
-    buttonnickyes.setOnClickListener(new Button.OnClickListener() {
-
-        @Override
-        public void onClick(View arg0) {
-            String cushion_time = dialog_edit.getText().toString();
-            ad2.dismiss();
-        }
-    });
-    Button buttonnickno = (Button)customViewnick.findViewById(R.id.no);
-    buttonnickno.setOnClickListener(new Button.OnClickListener() {
-
-        @Override
-        public void onClick(View arg0) {
-            ad2.dismiss();
-        }
-    });
-    return ad2;         
-}
-
-
-
-}
-</code></pre>
-
-<h2>0x03 调用 显示框</h2>
-
-<pre><code>    String tag = "my_dialog";  
-    TianKongDialog myFragment = TianKongDialog.newInstance();  
-    myFragment.show(getFragmentManager(), tag); 
-</code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[android 设置两个控件各占屏幕的一半]]></title>
-    <link href="http://mzkmzk.github.io/blog/2014/12/27/android_two_layout/"/>
-    <updated>2014-12-27T11:37:40+08:00</updated>
-    <id>http://mzkmzk.github.io/blog/2014/12/27/android_two_layout</id>
-    <content type="html"><![CDATA[<p>我的需求是一行里 两个TextView 各占屏幕的 一半</p>
-
-<pre><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
-&lt;LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-android:orientation="horizontal" 
-android:id="@+id/book_access"
-&gt;
- &lt;TextView
-         android:id="@+id/book_name"
-         android:layout_width="0dp" //设置0dp好像会提高效率
-         android:layout_height="wrap_content"
-         android:layout_weight="1"
-         android:background="#ffffffff"
-         android:gravity="center"
-         android:text="@string/str_navi_home_navi_left" /&gt;
-      &lt;TextView
-          android:id="@+id/book_accessTime"
-          android:layout_width="0dp"
-          android:layout_height="wrap_content"
-          android:layout_weight="1"
-          android:background="#ffffffff"
-          android:gravity="center"
-          android:text="@string/str_navi_home_navi_right" /&gt;
-&lt;/LinearLayout&gt;
-</code></pre>
-
-<p>如果要设置成其他的比例 只需要计算出 对应的layout_weight即可</p>
-
-<p>参考链接<a href="http://bbs.csdn.net/topics/390801550">http://bbs.csdn.net/topics/390801550</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[arduino]]></title>
-    <link href="http://mzkmzk.github.io/blog/2014/12/24/arduino/"/>
-    <updated>2014-12-24T11:37:40+08:00</updated>
-    <id>http://mzkmzk.github.io/blog/2014/12/24/arduino</id>
-    <content type="html"><![CDATA[<h2>0x01 配置arduino开发环境</h2>
-
-<ol>
-<li><p>下载arduino开发软件<a href="http://arduino.cc/en/Main/Software">http://arduino.cc/en/Main/Software</a></p></li>
-<li><p>安装arduino uno开发板驱动</p>
-
-<p> 2.1 usb 连接 arduino uno开发板
- 2.2 点击 控制面板 -> 端口
-     右击有黄色叹号的 USB Device 更新安装驱动</p>
-
-<p> <img src="http://mzkmzk.github.io/images/blog/14-12-24-01.jpg" alt="image" /></p></li>
-<li><p>测试简单 demo</p>
-
-<p> <img src="http://mzkmzk.github.io/images/blog/14-12-24-02-new.png" alt="image" /></p>
-
-<pre><code> void setup()
- { 
- }
- void loop()
- {   
-   digitalWrite(13, HIGH);   // turn the LED on (HIGH is the voltage level)
-   delay(1000);               // wait for a second
-   digitalWrite(13, LOW);    // turn the LED off by making the voltage LOW
-   delay(1000);               // wait for a second
-
- }
-</code></pre></li>
-</ol>
-
-
-<h2>0x02 其他资料</h2>
-
-<p>参考资料<a href="http://www.geek-workshop.com/forum-49-1.html">http://www.geek-workshop.com/forum-49-1.html</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[js 函数累积]]></title>
-    <link href="http://mzkmzk.github.io/blog/2014/12/16/js_function/"/>
-    <updated>2014-12-16T11:37:40+08:00</updated>
-    <id>http://mzkmzk.github.io/blog/2014/12/16/js_function</id>
-    <content type="html"><![CDATA[<p>jquery api<a href="http://jquery.bootcss.com/">http://jquery.bootcss.com/</a></p>
-
-<h3>select 选中项</h3>
-
-<pre><code>设置select中value="paraValue"的Item为选中    
-document.all.objSelect.value = objItemValue;  
-</code></pre>
-
-<p>参考链接<a href="http://www.cnblogs.com/Herist/archive/2007/09/24/903890.html">http://www.cnblogs.com/Herist/archive/2007/09/24/903890.html</a></p>
-
-<h3>Dom元素加载完毕后调用方法 ready()</h3>
-
-<pre><code>$(document).ready(function(){
-    $(".btn1").click(function(){
-        $("p").slideToggle();
-    });
-});
-</code></pre>
-
-<p>参考链接<a href="http://www.w3school.com.cn/jquery/event_ready.asp">http://www.w3school.com.cn/jquery/event_ready.asp</a></p>
-
-<h3>jquery 控制css</h3>
-
-<p>通过控制class为button_left的鼠标移入动作把id为up_page设置为可见</p>
-
-<pre><code>$(".button_left").mouseover(function(){
-$("#up_page").css("visibility","visible");
-});
-</code></pre>
-
-<h3>参考链接</h3>
-
-<p>jquery api <a href="http://api.jquery.com/">http://api.jquery.com/</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[android adapter]]></title>
-    <link href="http://mzkmzk.github.io/blog/2014/12/16/android_adapter/"/>
-    <updated>2014-12-16T11:37:40+08:00</updated>
-    <id>http://mzkmzk.github.io/blog/2014/12/16/android_adapter</id>
-    <content type="html"><![CDATA[<p>android adapter主要分为SimpleAdapter、ArrayList、BaseAdapter</p>
-
-<p>这里主要介绍BaseAdapter</p>
-
-<h3>0x01 .xml 布局文件的 单一行的样式设置</h3>
-
-<pre><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
-&lt;LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-android:orientation="horizontal" 
-android:id="@+id/book_access"
-&gt;
- &lt;TextView
-         android:id="@+id/book_name"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:layout_weight="1"
-         android:background="#ffffffff"
-         android:gravity="center"
-         android:text="@string/str_navi_home_navi_left" /&gt;
-      &lt;TextView
-          android:id="@+id/book_accessTime"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_weight="1"
-          android:background="#ffffffff"
-          android:gravity="center"
-          android:text="@string/str_navi_home_navi_right" /&gt;
-&lt;/LinearLayout&gt; 
-</code></pre>
-
-<h3>0x02 .java 继承BaseAdapter</h3>
-
-<pre><code>package gabriel.luoyer.promonkey.main;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.http.NameValuePair;
-import org.apache.http.message.BasicNameValuePair;
-
-import com.charon.pulltorefreshlistview.PullToRefreshListView;
-import com.charon.pulltorefreshlistview.PullToRefreshListView.OnRefreshListener;
-
-import android.os.AsyncTask;
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-import android.os.SystemClock;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.BaseAdapter;
-import android.widget.TextView;
-import android.widget.Toast;
-import android.widget.AdapterView.OnItemClickListener;
-import gabriel.luoyer.promonkey.R;
-import gabriel.luoyer.promonkey.base.BaseFragment;
-import gabriel.luoyer.promonkey.bean.book;
-import gabriel.luoyer.promonkey.utils.ModelServer;
-
-public class HomeFragment extends BaseFragment {
-
-private PullToRefreshListView mPullToRefreshListView;
-private MyAdapter adapter;
-private ArrayList&lt;book&gt; data;
-public LayoutInflater mInflater;
-
-@Override
-public View onCreateView(LayoutInflater inflater, ViewGroup container,
-        Bundle savedInstanceState) {
-    mInflater=inflater;
-    View view = inflater.inflate(R.layout.main_frg_home, container, false);
-    findView(view);
-    initView(view);
-    return view;
-}
-
-private void findView(View view) {
-    mPullToRefreshListView = (PullToRefreshListView)view.findViewById(R.id.mfh_s);
-}
-
-private void initView(View view) {
-
-    data = new ArrayList&lt;book&gt;();
-
-    book b =new book();
-
-    b.setB_name("书籍名称");
-    b.setB_accessTime("借书时间");
-
-    data.add(b);
-
-    adapter = new MyAdapter();
-
-    mPullToRefreshListView.setAdapter(adapter);
-
-    mPullToRefreshListView.setOnRefreshListener(new OnRefreshListener() {
-
-        @Override
-        public void onRefresh() {
-            new AsyncTask&lt;Void, Void, Void&gt;() {
-
-                @Override
-                protected Void doInBackground(Void... params) {
-                    SystemClock.sleep(1000);
-                    book b =new book();
-                    b.setB_name("书籍名称");
-                    b.setB_accessTime("借书时间");
-                    data.add(b);
-                    return null;
-                }
-
-                @Override
-                protected void onPostExecute(Void result) {
-                    super.onPostExecute(result);
-                    adapter.notifyDataSetChanged();
-                    mPullToRefreshListView.onRefreshComplete();
-                }
-            }.execute();
-        }
-    });
-
-    mPullToRefreshListView
-            .setOnItemClickListener(new OnItemClickListener() {
-
-                @Override
-                public void onItemClick(AdapterView&lt;?&gt; parent, View view,
-                        int position, long id) {
-                    // If you call addHeaderView, the position will contains
-                    // the count of header view.
-                    // int realPosition = position
-                    // - mPullToRefreshListView.getHeaderViewsCount();
-                    // Toast.makeText(PullToRefreshActivity.this,
-                    // data.get(realPosition), Toast.LENGTH_SHORT).show();
-
-                    Toast.makeText(
-                            getActivity().getApplicationContext(),
-                            (String) mPullToRefreshListView.getAdapter()
-                                    .getItem(position), Toast.LENGTH_SHORT)
-                            .show();
-
-                }
-
-            });
-
-}
-
-
-private class MyAdapter extends BaseAdapter {
-
-    @Override
-    public int getCount() {
-        return data.size();
-    }
-
-    @Override
-    public Object getItem(int position) {
-        return data.get(position);
-    }
-
-    @Override
-    public long getItemId(int position) {
-        return position;
-    }
-
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-         ViewHolder holder = null;
-         if (convertView == null) {                    
-             holder=new ViewHolder();                   
-             convertView = mInflater.inflate(R.layout.main_frg_home_lv, null);
-             holder.book_name = (TextView)convertView.findViewById(R.id.book_name);
-             holder.book_accessTime = (TextView)convertView.findViewById(R.id.book_accessTime);
-             convertView.setTag(holder);                    
-         }else {                   
-             holder = (ViewHolder)convertView.getTag();
-         }                           
-         holder.book_name.setText(data.get(position).getB_name());
-         holder.book_accessTime.setText(data.get(position).getB_accessTime());                
-         return convertView;
-    }
-}
-
-public final class ViewHolder{
-    public TextView book_name;
-    public TextView book_accessTime;
-}
-}
-</code></pre>
-
-<p>参考链接<a href="http://www.xue5.com/Mobile/Mobile/735287.html">http://www.xue5.com/Mobile/Mobile/735287.html</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[android 布局]]></title>
-    <link href="http://mzkmzk.github.io/blog/2014/12/16/android_%20layout/"/>
-    <updated>2014-12-16T11:37:40+08:00</updated>
-    <id>http://mzkmzk.github.io/blog/2014/12/16/android_ layout</id>
-    <content type="html"><![CDATA[<p>LinearLayout、FrameLayout和AbsoulteLayout<a href="http://www.cnblogs.com/wisekingokok/archive/2011/08/23/2150452.html">http://www.cnblogs.com/wisekingokok/archive/2011/08/23/2150452.html</a></p>
-
-<p>RelativeLayout和TableLayout<a href="http://www.cnblogs.com/wisekingokok/archive/2011/08/24/2152004.html">http://www.cnblogs.com/wisekingokok/archive/2011/08/24/2152004.html</a></p>
-
-<p>android 屏幕自适应解决方案<a href="http://www.eoeandroid.com/thread-173973-1-1.html">http://www.eoeandroid.com/thread-173973-1-1.html</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[readme]]></title>
-    <link href="http://mzkmzk.github.io/blog/2014/12/16/Android_demo/"/>
-    <updated>2014-12-16T11:37:40+08:00</updated>
-    <id>http://mzkmzk.github.io/blog/2014/12/16/Android_demo</id>
-    <content type="html"><![CDATA[<h2>Robot</h2>
-
-<p>来源地址<a href="http://www.eoeandroid.com/thread-552985-1-1.html">http://www.eoeandroid.com/thread-552985-1-1.html</a></p>
-
-<p>简单的实现了一个机器人聊天功能（HerotCulb机器人）</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Mac 查看 android javadoc]]></title>
-    <link href="http://mzkmzk.github.io/blog/2014/12/11/mac_query_android_javadoc/"/>
-    <updated>2014-12-11T11:37:40+08:00</updated>
-    <id>http://mzkmzk.github.io/blog/2014/12/11/mac_query_android_javadoc</id>
-    <content type="html"><![CDATA[<p>网页的javadoc<a href="http://developer.android.com/reference/packages.html">http://developer.android.com/reference/packages.html</a></p>
-
-<p>但是 由于那个网站 经常上不去</p>
-
-<p>所以 down 一份 chm 不错</p>
-
-<p>chm 下载地址 <a href="https://code.google.com/p/android-chm-documentation/downloads/list">https://code.google.com/p/android-chm-documentation/downloads/list</a></p>
-
-<p>Mac阅读.chm软件&lt;thunder://QUFodHRwOi8vaWNobS5nb29nbGVjb2RlLmNvbS9maWxlcy9pQ2htLjEuNC4yLnppcFpa></p>
-
-<p>查看javadoc参考链接<a href="http://lkubaski.wordpress.com/2012/08/17/downloading-the-android-javadoc/">http://lkubaski.wordpress.com/2012/08/17/downloading-the-android-javadoc/</a></p>
-
-<p>.iChm软件参考链接<a href="http://www.appinn.com/ichm/">http://www.appinn.com/ichm/</a></p>
+<p>参考链接<a href="http://blog.sina.com.cn/s/blog_5feacbdf01019qzb.html">http://blog.sina.com.cn/s/blog_5feacbdf01019qzb.html</a></p>
 ]]></content>
   </entry>
   

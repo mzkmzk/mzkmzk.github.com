@@ -1,0 +1,278 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>使用Oracle数据库笔记 - K</title>
+	<meta name="author" content="K">
+
+	
+	<meta name="description" content="命令行连接数据库 //通过ssh 执行此命令 说没有sqlplus命令?
+sqlplus /nolog Oracle 提供外部监听接口 lsnrctl start Oracle 登陆数据库 sqlplus "scott/管理员账户 as sysdba" Oracle 关闭数据库 SQL&gt; &hellip;">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link href="false" rel="alternate" title="K" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script async="true" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	
+</head>
+
+
+<body>
+	<header id="header" class="inner"><h1><a href="/">K</a></h1>
+<nav id="main-nav"><ul class="main">
+	
+</ul>
+</nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Menu</a>
+		<div class="container"><ul class="main">
+	
+</ul>
+</div>
+	</div>
+	<div class="alignright search">
+		<a class="button"></a>
+		<div class="container">
+			<form action="https://www.google.com/search" method="get">
+				<input type="text" name="q" results="0">
+				<input type="hidden" name="q" value="site:mzkmzk.github.io">
+			</form>
+		</div>
+	</div>
+</nav>
+<nav id="sub-nav" class="alignright">
+	<div class="social">
+		
+		
+		
+		
+    
+		
+		
+		
+		
+		
+    
+	</div>
+	
+</nav>
+
+</header>
+	
+		
+	
+	<div id="content" class="inner"><article class="post">
+	<h2 class="title">使用Oracle数据库笔记</h2>
+	<div class="entry-content"><!--more-->
+
+
+<h3>命令行连接数据库</h3>
+
+<pre><code>//通过ssh 执行此命令 说没有sqlplus命令?
+sqlplus /nolog
+</code></pre>
+
+<h3>Oracle 提供外部监听接口</h3>
+
+<pre><code>lsnrctl start
+</code></pre>
+
+<h3>Oracle 登陆数据库</h3>
+
+<pre><code>sqlplus "scott/管理员账户 as sysdba"
+</code></pre>
+
+<h3>Oracle 关闭数据库</h3>
+
+<pre><code>SQL&gt;shutdown normal;
+</code></pre>
+
+<h3>启动数据库实例</h3>
+
+<pre><code>SQL&gt;startup;
+</code></pre>
+
+<h3>查看Oracle用户</h3>
+
+<pre><code>select * from all_users;
+</code></pre>
+
+<h3>创建用户</h3>
+
+<pre><code>#1创建表空间
+create tablespace text(表名) datafile '/home/oracle/workspace/text.dbf'(表空间存在路径) size 10M(表大小);
+
+#2创建用户
+create user text(用户名) identified by oracle(密码) default tablespace text(表名) temporary tablespace temp ;
+
+#3.创建角色
+create  role  textuser(角色名);
+
+#4赋予权限
+grant create any table to textuser(角色名)
+
+#5把角色给用户
+grant connect ,resource ,textuser(角色) to text(用户);
+
+#6新用户登陆
+conn text/oracle;
+</code></pre>
+
+<h3>启动 127.0.0.1:5560 isqlplus</h3>
+
+<pre><code>isqlplusctl start;
+</code></pre>
+
+<h3>查看所有数据库</h3>
+
+<pre><code>select name from v$database;
+</code></pre>
+
+<h3>查看哪些用户拥有sysdba、sysoper权限</h3>
+
+<pre><code>select * from V_$PWFILE_USERS；
+
+show user；查看当前数据库连接用户
+</code></pre>
+
+<h3>进入某个数据库：</h3>
+
+<pre><code>database 数据库名；
+
+#查看数据库结构：
+desc v$database；      
+</code></pre>
+
+<h3>查看所有用户实例</h3>
+
+<pre><code>INSTANCE_NAME
+----------------
+orcl
+</code></pre>
+
+<h3>查看当前库的所有数据表</h3>
+
+<pre><code>select * from all_tables;
+
+select table_name from all_tables;        
+
+select table_name from user_tables;
+
+select table_name from all_tables where owner='用户名';
+</code></pre>
+
+<h3>查看表结构</h3>
+
+<pre><code>desc 表名；
+</code></pre>
+
+<h3>关闭数据库</h3>
+
+<pre><code>SQL&gt;shutdown immediate
+</code></pre>
+
+<h3>查看表空间</h3>
+
+<pre><code>SQL&gt;select * from v$tablespace;
+
+   TS# NAME               INC BIG FLA ENC
+---------- ------------------------------ --- --- --- ---
+ 0 SYSTEM             YES NO  YES
+ 1 UNDOTBS1           YES NO  YES
+ 2 SYSAUX             YES NO  YES
+ 4 USERS              YES NO  YES
+ 3 TEMP               NO  NO  YES
+ 6 TEXT               YES NO  YES
+</code></pre>
+
+<h3>查询字符集</h3>
+
+<pre><code>SQL&gt;select * from v$nls_parameters;
+
+or
+
+SQL&gt; select userenv('language') from dual;
+
+
+USERENV('LANGUAGE')
+----------------------------------------------------
+AMERICAN_AMERICA.AL32UTF8
+</code></pre>
+
+<h3>让外网访问数据库</h3>
+
+<pre><code>[root@linux5 ~]# setenforce 0;
+[root@linux5 ~]# service iptables stop;
+</code></pre>
+
+<h3>参考链接</h3>
+
+<p>基本查询数据库命令<a href="http://www.cnblogs.com/jiaxiaoai/archive/2011/05/09/2041008.html">http://www.cnblogs.com/jiaxiaoai/archive/2011/05/09/2041008.html</a></p>
+</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-04-08T11:37:40+08:00" pubdate data-updated="true"></time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/travel/'>travel</a>
+
+
+</div>
+	
+</div>
+</article>
+
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+		
+		
+		<a class="addthis_button_tweet"></a>
+		
+		
+		
+	</div>
+	
+</div>
+
+
+</div>
+	<footer id="footer" class="inner">Copyright &copy; 2015
+
+    K
+
+</footer>
+	<script src="/javascripts/slash.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+	$('.fancybox').fancybox();
+})(jQuery);
+</script> <!-- Delete or comment this line to disable Fancybox -->
+
+
+
+
+
+
+</body>
+</html>

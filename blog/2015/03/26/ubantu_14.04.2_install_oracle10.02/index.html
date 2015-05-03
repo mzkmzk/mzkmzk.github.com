@@ -1,0 +1,324 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Ubuntu 14.04.2安装Oracle10.02 - K</title>
+	<meta name="author" content="K">
+
+	
+	<meta name="description" content="0x00 下载 下载安装包 http://pan.baidu.com/wap/link?uk=3727692514&amp;shareid=2487050160&amp;third=0 这个含有其他Oracle数据库资源http://uni-smr.ac.ru/archive/db/Oracle &hellip;">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link href="false" rel="alternate" title="K" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script async="true" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	
+</head>
+
+
+<body>
+	<header id="header" class="inner"><h1><a href="/">K</a></h1>
+<nav id="main-nav"><ul class="main">
+	
+</ul>
+</nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Menu</a>
+		<div class="container"><ul class="main">
+	
+</ul>
+</div>
+	</div>
+	<div class="alignright search">
+		<a class="button"></a>
+		<div class="container">
+			<form action="https://www.google.com/search" method="get">
+				<input type="text" name="q" results="0">
+				<input type="hidden" name="q" value="site:mzkmzk.github.io">
+			</form>
+		</div>
+	</div>
+</nav>
+<nav id="sub-nav" class="alignright">
+	<div class="social">
+		
+		
+		
+		
+    
+		
+		
+		
+		
+		
+    
+	</div>
+	
+</nav>
+
+</header>
+	
+		
+	
+	<div id="content" class="inner"><article class="post">
+	<h2 class="title">Ubuntu 14.04.2安装Oracle10.02</h2>
+	<div class="entry-content"><!--more-->
+
+
+<h3>0x00 下载</h3>
+
+<p>下载安装包 <a href="http://pan.baidu.com/wap/link?uk=3727692514&amp;shareid=2487050160&amp;third=0">http://pan.baidu.com/wap/link?uk=3727692514&amp;shareid=2487050160&amp;third=0</a></p>
+
+<p>这个含有其他Oracle数据库资源<a href="http://uni-smr.ac.ru/archive/db/Oracle/">http://uni-smr.ac.ru/archive/db/Oracle/</a></p>
+
+<h3>0x01 解压</h3>
+
+<p>解压压缩包</p>
+
+<pre><code>gunzip 10201_database_linux_x86_64.cpio.gz
+cpio -idmv &lt; 10201_database_linux_x86_64.cpio
+</code></pre>
+
+<h3>0x02 安装</h3>
+
+<pre><code>cd database/
+./runInstaller
+</code></pre>
+
+<p>然后发生了报错</p>
+
+<pre><code>./runInstaller: 63 /home/oracle/database/install/.oui: not found
+</code></pre>
+
+<p>应该是缺少图形文件之类的 安装即可</p>
+
+<pre><code>sudo apt-get install lib32z1
+</code></pre>
+
+<p>报错解决参考链接<a href="http://stackoverflow.com/questions/23182765/how-to-install-ia32-libs-in-ubuntu-14-04-lts-trusty-tahr">http://stackoverflow.com/questions/23182765/how-to-install-ia32-libs-in-ubuntu-14-04-lts-trusty-tahr</a></p>
+
+<p>再次执行</p>
+
+<pre><code>./runInstaller
+</code></pre>
+
+<p>然后继续报错</p>
+
+<pre><code>Starting Oracle Universal Installer...
+
+Checking installer requirements...
+
+Checking operating system version: must be redhat-3, SuSE-9, redhat-4, UnitedLinux-1.0, asianux-1 or asianux-2
+                                  Failed &lt;&lt;&lt;&lt;
+
+Exiting Oracle Universal Installer, log for this session can be found at /tmp/OraInstall2015-03-20_10-07-57PM/installActions2015-03-20_10-07-57PM.log
+</code></pre>
+
+<p>解决办法:</p>
+
+<pre><code>sudo ln -s /etc /etc/rc.d
+sudo ln -s /lib/i386-linux-gnu/libgcc_s.so.1 /lib/
+sudo ln -s /usr/bin/awk /bin/awk
+sudo ln -s /usr/bin/basename /bin/basename
+sudo ln -s /usr/bin/rpm /bin/rpm
+sudo ln -s /usr/lib/i386-linux-gnu/libpthread_nonshared.a /usr/lib/libpthread_nonshared.a
+sudo ln -s /usr/lib/i386-linux-gnu/libc_nonshared.a /usr/lib/libc_nonshared.a
+sudo ln -s /usr/lib/i386-linux-gnu/libstdc++.so.6 /lib/
+sudo ln -s /usr/lib/i386-linux-gnu/libstdc++.so.6 /usr/lib/
+sudo ln -s /usr/lib/i386-linux-gnu/libstdc++.so.5 /lib/
+sudo ln -s /usr/lib/i386-linux-gnu/libstdc++.so.5 /usr/lib/
+sudo touch /etc/redhat-release
+sudo vi /etc/redhat-release
+//在里面输入Red Hat Linux release 4
+</code></pre>
+
+<p>参考链接<a href="http://abadem.blog.51cto.com/1601838/1270558">http://abadem.blog.51cto.com/1601838/1270558</a>中的第11步</p>
+
+<p>ok  然后上面的错误消失了 但是java会报错</p>
+
+<pre><code>maizhikun@ubuntu:~/Oracle$ ./runInstaller 
+Starting Oracle Universal Installer...
+
+Checking installer requirements...
+
+Checking operating system version: must be redhat-3, SuSE-9, redhat-4, UnitedLinux-1.0, asianux-1 or asianux-2
+                                  Passed
+
+
+All installer requirements met.
+
+Preparing to launch Oracle Universal Installer from /tmp/OraInstall2015-03-20_11-52-52PM. Please wait ...maizhikun@ubuntu:~/Oracle$ Exception in thread "main" java.lang.UnsatisfiedLinkError: /tmp/OraInstall2015-03-20_11-52-52PM/jre/1.4.2/lib/i386/libawt.so: libXp.so.6: cannot open shared object file: No such file or directory
+at java.lang.ClassLoader$NativeLibrary.load(Native Method)
+at java.lang.ClassLoader.loadLibrary0(Unknown Source)
+at java.lang.ClassLoader.loadLibrary(Unknown Source)
+at java.lang.Runtime.loadLibrary0(Unknown Source)
+at java.lang.System.loadLibrary(Unknown Source)
+at sun.security.action.LoadLibraryAction.run(Unknown Source)
+at java.security.AccessController.doPrivileged(Native Method)
+at sun.awt.NativeLibLoader.loadLibraries(Unknown Source)
+at sun.awt.DebugHelper.&lt;clinit&gt;(Unknown Source)
+at java.awt.Component.&lt;clinit&gt;(Unknown Source)
+</code></pre>
+
+<p>ok 应该就是java的问题 安装jdk</p>
+
+<p>下载地址<a href="http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html">http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html</a></p>
+
+<pre><code>//解压 
+gunzip 压缩包
+tar xvf 解压后的压缩包 
+</code></pre>
+
+<p>参考链接<a href="http://www.cnblogs.com/eoiioe/archive/2008/09/20/1294681.html">http://www.cnblogs.com/eoiioe/archive/2008/09/20/1294681.html</a></p>
+
+<pre><code>//配置java环境变量 
+cp .bashrc /tmp/.bash_original //备份.bashrc
+vi ~/.bashrc
+export JAVA_HOME=/opt/Java/jdk/jdk1.7
+export CLASSPATH=${JAVA_HOME}/lib:.
+export PATH=${JAVA_HOME}/bin:$PATH
+source ~/.bashrc //为了让配置立即生效
+//检验
+maizhikun@ubuntu:~$ java -version
+java version "1.7.0_75"
+Java(TM) SE Runtime Environment (build 1.7.0_75-b13)
+Java HotSpot(TM) Client VM (build 24.75-b04, mixed mode)
+</code></pre>
+
+<p>参考链接<a href="http://www.cnblogs.com/memory4young/p/ubuntu-install-jdk.html">http://www.cnblogs.com/memory4young/p/ubuntu-install-jdk.html</a></p>
+
+<p>配置好java以后 发现还是报这个错</p>
+
+<p>然后觉得不是java的问题 而是缺少libxp.so.6</p>
+
+<pre><code>sudo  apt-get install libxp-dev
+</code></pre>
+
+<p>发现好像还不是这个问题 应该是我的Ubuntu64位系统</p>
+
+<p>而我的libXp.so.6在</p>
+
+<pre><code>/usr/lib/x86_64-linux-gnu/libXp.so.6
+</code></pre>
+
+<p>所以我尝试了下</p>
+
+<pre><code>ln -s /usr/lib/x86_64-linux-gnu/libXp.so.6 /usr/lib/
+</code></pre>
+
+<p>ok 产生了新的错误</p>
+
+<pre><code>Exception java.lang.UnsatisfiedLinkError: /tmp/OraInstall2015-03-24_07-16-12PM/jre/1.4.2/lib/i386/libawt.so: libXp.so.6: wrong ELF class: ELFCLASS64 occurred..
+java.lang.UnsatisfiedLinkError: /tmp/OraInstall2015-03-24_07-16-12PM/jre/1.4.2/lib/i386/libawt.so: libXp.so.6: wrong ELF class: ELFCLASS64
+at java.lang.ClassLoader$NativeLibrary.load(Native Method)
+</code></pre>
+
+<p>这应该是Oracle自带的jre我现在我无法使用 所以使用我自己下载的jre试试</p>
+
+<pre><code> /home/maizhikun/Oracle/runInstaller -jreLoc /usr/lib/jdk1.7/jdk1.7.0_75/jre/
+</code></pre>
+
+<p>然后又有新的错误</p>
+
+<pre><code>Preparing to launch Oracle Universal Installer from /tmp/OraInstall2015-03-25_11-15-16AM. Please wait ...The Java RunTime Environment was not found at /usr/li/jdk1.7//jdk1.7.0_75/jre/bin/java. Hence, the Oracle Universal Installer cannot be run.
+Please visit http://www.javasoft.com and install JRE version 1.3.1 or higher and try again.
+: No such file or directory
+</code></pre>
+
+<p>这应该是我的jre版本过高? 以前的Oracle带不起来? 然后我又下载了个jdk5</p>
+
+<p>下载地址<a href="http://www.oracle.com/technetwork/java/javasebusiness/downloads/java-archive-downloads-javase5-419410.html">http://www.oracle.com/technetwork/java/javasebusiness/downloads/java-archive-downloads-javase5-419410.html</a></p>
+
+<p>给予.bin文件的执行权限</p>
+
+<pre><code>chmod u+x .bin文件
+sudo .bin文件//注意一定要su回宿主用户不然不行的
+</code></pre>
+
+<p>ok  解压之后 执行</p>
+
+<pre><code>#这个会调用设定的jre而不用Oracle自带的jre
+/home/oracle/Oracle/runInstaller  --jreLoc /usr/lib/jdk1.5/jre1.5.0_22/
+</code></pre>
+
+<p>然后就报这个错</p>
+
+<pre><code>Preparing to launch Oracle Universal Installer from /tmp/OraInstall2015-03-25_08-42-27PM. Please wait ...The Java RunTime Environment was not found at /usr/li/jdk1.5//jre1.5.0_22/bin/java. Hence, the Oracle Universal Installer cannot be run.
+Please visit http://www.javasoft.com and install JRE version 1.3.1 or higher and try again.
+: No such file or directory
+</code></pre>
+
+<p>who am i
+whoami</p>
+
+<p>sudo -i</p>
+
+<p>切换到root</p>
+</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-03-26T11:37:40+08:00" pubdate data-updated="true"></time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/oracle/'>oracle</a>
+
+
+</div>
+	
+</div>
+</article>
+
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+		
+		
+		<a class="addthis_button_tweet"></a>
+		
+		
+		
+	</div>
+	
+</div>
+
+
+</div>
+	<footer id="footer" class="inner">Copyright &copy; 2015
+
+    K
+
+</footer>
+	<script src="/javascripts/slash.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+	$('.fancybox').fancybox();
+})(jQuery);
+</script> <!-- Delete or comment this line to disable Fancybox -->
+
+
+
+
+
+
+</body>
+</html>

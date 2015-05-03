@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: travel | K]]></title>
+  <link href="http://mzkmzk.github.io/blog/categories/travel/atom.xml" rel="self"/>
+  <link href="http://mzkmzk.github.io/"/>
+  <updated>2015-05-03T20:17:45+08:00</updated>
+  <id>http://mzkmzk.github.io/</id>
+  <author>
+    <name><![CDATA[K]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[旅游路线]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/04/17/travel/"/>
+    <updated>2015-04-17T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/04/17/travel</id>
+    <content type="html"><![CDATA[<!--more-->
+
+
+<p>21 黄金海岸</p>
+
+<p>22 北大桥</p>
+
+<p>23 星海公园</p>
+
+<p>24 长城</p>
+
+<p>25 顾河园</p>
+
+<p>26 天安门</p>
+
+<p>27 回民街</p>
+
+<p>28 兵马俑</p>
+
+<p>29 大小雁塔</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[旅游路线]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/04/17/tjraclibapp/"/>
+    <updated>2015-04-17T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/04/17/tjraclibapp</id>
+    <content type="html"><![CDATA[<!--more-->
+
+
+<p>登陆</p>
+
+<p>续借</p>
+
+<p>学生信息</p>
+
+<p>推购.</p>
+
+<p>挂失</p>
+
+<p>检索历史</p>
+
+<p>AR</p>
+
+<p>我靠&hellip;.</p>
+
+<p>&hellip;..</p>
+
+<p>每次都要Clean项目才可以?..我日了狗了.</p>
+
+<p>Tomcat问题实在蛋疼</p>
+
+<p>还有借书历史会显示null</p>
+
+<p>还有需要点击刷新几下页面才出来</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[使用Oracle数据库笔记]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/04/08/Oracle/"/>
+    <updated>2015-04-08T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/04/08/Oracle</id>
+    <content type="html"><![CDATA[<!--more-->
+
+
+<h3>命令行连接数据库</h3>
+
+<pre><code>//通过ssh 执行此命令 说没有sqlplus命令?
+sqlplus /nolog
+</code></pre>
+
+<h3>Oracle 提供外部监听接口</h3>
+
+<pre><code>lsnrctl start
+</code></pre>
+
+<h3>Oracle 登陆数据库</h3>
+
+<pre><code>sqlplus "scott/管理员账户 as sysdba"
+</code></pre>
+
+<h3>Oracle 关闭数据库</h3>
+
+<pre><code>SQL&gt;shutdown normal;
+</code></pre>
+
+<h3>启动数据库实例</h3>
+
+<pre><code>SQL&gt;startup;
+</code></pre>
+
+<h3>查看Oracle用户</h3>
+
+<pre><code>select * from all_users;
+</code></pre>
+
+<h3>创建用户</h3>
+
+<pre><code>#1创建表空间
+create tablespace text(表名) datafile '/home/oracle/workspace/text.dbf'(表空间存在路径) size 10M(表大小);
+
+#2创建用户
+create user text(用户名) identified by oracle(密码) default tablespace text(表名) temporary tablespace temp ;
+
+#3.创建角色
+create  role  textuser(角色名);
+
+#4赋予权限
+grant create any table to textuser(角色名)
+
+#5把角色给用户
+grant connect ,resource ,textuser(角色) to text(用户);
+
+#6新用户登陆
+conn text/oracle;
+</code></pre>
+
+<h3>启动 127.0.0.1:5560 isqlplus</h3>
+
+<pre><code>isqlplusctl start;
+</code></pre>
+
+<h3>查看所有数据库</h3>
+
+<pre><code>select name from v$database;
+</code></pre>
+
+<h3>查看哪些用户拥有sysdba、sysoper权限</h3>
+
+<pre><code>select * from V_$PWFILE_USERS；
+
+show user；查看当前数据库连接用户
+</code></pre>
+
+<h3>进入某个数据库：</h3>
+
+<pre><code>database 数据库名；
+
+#查看数据库结构：
+desc v$database；      
+</code></pre>
+
+<h3>查看所有用户实例</h3>
+
+<pre><code>INSTANCE_NAME
+----------------
+orcl
+</code></pre>
+
+<h3>查看当前库的所有数据表</h3>
+
+<pre><code>select * from all_tables;
+
+select table_name from all_tables;        
+
+select table_name from user_tables;
+
+select table_name from all_tables where owner='用户名';
+</code></pre>
+
+<h3>查看表结构</h3>
+
+<pre><code>desc 表名；
+</code></pre>
+
+<h3>关闭数据库</h3>
+
+<pre><code>SQL&gt;shutdown immediate
+</code></pre>
+
+<h3>查看表空间</h3>
+
+<pre><code>SQL&gt;select * from v$tablespace;
+
+   TS# NAME               INC BIG FLA ENC
+---------- ------------------------------ --- --- --- ---
+ 0 SYSTEM             YES NO  YES
+ 1 UNDOTBS1           YES NO  YES
+ 2 SYSAUX             YES NO  YES
+ 4 USERS              YES NO  YES
+ 3 TEMP               NO  NO  YES
+ 6 TEXT               YES NO  YES
+</code></pre>
+
+<h3>查询字符集</h3>
+
+<pre><code>SQL&gt;select * from v$nls_parameters;
+
+or
+
+SQL&gt; select userenv('language') from dual;
+
+
+USERENV('LANGUAGE')
+----------------------------------------------------
+AMERICAN_AMERICA.AL32UTF8
+</code></pre>
+
+<h3>让外网访问数据库</h3>
+
+<pre><code>[root@linux5 ~]# setenforce 0;
+[root@linux5 ~]# service iptables stop;
+</code></pre>
+
+<h3>参考链接</h3>
+
+<p>基本查询数据库命令<a href="http://www.cnblogs.com/jiaxiaoai/archive/2011/05/09/2041008.html">http://www.cnblogs.com/jiaxiaoai/archive/2011/05/09/2041008.html</a></p>
+]]></content>
+  </entry>
+  
+</feed>

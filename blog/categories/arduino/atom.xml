@@ -4,7 +4,7 @@
   <title><![CDATA[Category: arduino | K]]></title>
   <link href="http://mzkmzk.github.io/blog/categories/arduino/atom.xml" rel="self"/>
   <link href="http://mzkmzk.github.io/"/>
-  <updated>2015-03-08T12:16:44+08:00</updated>
+  <updated>2015-05-03T20:17:45+08:00</updated>
   <id>http://mzkmzk.github.io/</id>
   <author>
     <name><![CDATA[K]]></name>
@@ -12,6 +12,91 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Arduino通过光敏电阻实现电子琴]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/03/19/arduino_paino/"/>
+    <updated>2015-03-19T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/03/19/arduino_paino</id>
+    <content type="html"><![CDATA[<!--more-->
+
+
+<h3>0x00原材料</h3>
+
+<ol>
+<li>一个Arduino Uno</li>
+<li>6跟470R的电阻//不是470R也可以 电阻的数值只影响代码中if判断的数值而已</li>
+<li>一个面包板</li>
+<li>20+条</li>
+<li>6个光敏电阻</li>
+<li>蜂鸣器</li>
+</ol>
+
+
+<h3>0x01源代码</h3>
+
+<pre><code>void setup(){
+Serial.begin(9600);
+pinMode(3,OUTPUT);
+pinMode(2,INPUT);
+}
+void loop(){
+int val1=analogRead(0);
+int val2=analogRead(1);
+int val3=analogRead(2);
+int val4=analogRead(3);
+int val5=analogRead(4);
+int val6=analogRead(5);
+int val7=digitalRead(2);
+
+   if(val1&lt;2)
+   {
+     Serial.print("val1  : ");
+     Serial.println(val1);
+     tone(3,525,100);
+   }
+   if(val2&lt;2)
+   { 
+     Serial.print("val2  : ");
+     Serial.println(val2);
+     tone(3,589,100);
+   } 
+   if(val3&lt;2)
+   {
+     Serial.print("val3  : ");
+     Serial.println(val3);
+     tone(3,661,100);
+   }
+   if(val4&lt;2)
+   {
+     Serial.print("val4  : ");
+     Serial.println(val4);
+     tone(3,700,100);
+   }
+   if(val5&lt;2)
+   {
+     Serial.print("val5  : ");
+     Serial.println(val5);
+     tone(3,786,100);
+   }
+   if(val6&lt;3)
+   {
+  Serial.print("val6  : ");
+  Serial.println(val6);
+  tone(3,882,100);
+  }
+}
+</code></pre>
+
+<h3>0x02线路图</h3>
+
+<p><img src="/blog/2015-03-26-01.jpg" alt="image" /></p>
+
+<h3>0x03参考链接</h3>
+
+<p><a href="http://www.geek-workshop.com/thread-4939-1-1.html">http://www.geek-workshop.com/thread-4939-1-1.html</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[arduino]]></title>

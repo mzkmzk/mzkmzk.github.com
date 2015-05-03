@@ -1,0 +1,574 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: oracle | K]]></title>
+  <link href="http://mzkmzk.github.io/blog/categories/oracle/atom.xml" rel="self"/>
+  <link href="http://mzkmzk.github.io/"/>
+  <updated>2015-05-03T20:17:45+08:00</updated>
+  <id>http://mzkmzk.github.io/</id>
+  <author>
+    <name><![CDATA[K]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Oracle 导入.dmp乱码]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/04/08/oracle_dmp_error/"/>
+    <updated>2015-04-08T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/04/08/oracle_dmp_error</id>
+    <content type="html"><![CDATA[<!--more-->
+
+
+<h3>0x00查询Oracle数据库字符编码</h3>
+
+<pre><code>SQL&gt; select userenv('language') from dual;
+
+
+USERENV('LANGUAGE')
+----------------------------------------------------
+AMERICAN_AMERICA.AL32UTF8
+</code></pre>
+
+<h3>0x02查看dmp文件字符编码</h3>
+
+<pre><code>[root@linux5 ~]# cat /mnt/hgfs/2015-03-16-Library/one.dmp  |od -x|head -1|awk '{print $2 $3}'|cut -c 3-6
+0345
+
+查询0345是什么编码
+SQL&gt; select nls_charset_name(to_number('0345','xxxx')) from dual;
+
+NLS_CHARSET_NAME(TO_NUMBER('03454','XXXX'
+----------------------------------------
+ZHS16GBK
+</code></pre>
+
+<h3>0x03查看Linux字符集</h3>
+
+<pre><code>#查看系统登录用户当前的字符集状态
+[root@linux5 ~]# echo $LANG
+zh_CN.UTF-8
+命令:locale -a   查看本地的字符集
+    locale -m   查看所有支持的字符集
+</code></pre>
+
+<h3>0x04解决方案</h3>
+
+<p>把Oracle的客户端和Linux字符集调整成一致就可以了 应该是UTF-8包含了JA16EUCTILDE这个编码</p>
+
+<h3>0x05参考链接</h3>
+
+<p> 如何解决乱码问题<a href="http://blog.chinaunix.net/uid-186064-id-2823338.html">http://blog.chinaunix.net/uid-186064-id-2823338.html</a></p>
+
+<p> oracle字符对照表<a href="http://docs.oracle.com/cd/B19306_01/server.102/b14225/applocaledata.htm#i634428">http://docs.oracle.com/cd/B19306_01/server.102/b14225/applocaledata.htm#i634428</a></p>
+
+<p> 如何查看oracle数据库字符集<a href="http://blog.csdn.net/heianemo/article/details/7702749">http://blog.csdn.net/heianemo/article/details/7702749</a></p>
+
+<p> 遗留问题</p>
+
+<p> IMP-00008: unrecognized statement in the export file:</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[imp导入数据到ORACLE遇到ORA-12899错误]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/04/07/imp_12899/"/>
+    <updated>2015-04-07T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/04/07/imp_12899</id>
+    <content type="html"><![CDATA[<!--more-->
+
+
+<h3>0x00原因</h3>
+
+<pre><code>因为exp时字符集占用的位数比导入时字符集的占用的位数要少
+</code></pre>
+
+<h3>0x01解决方案</h3>
+
+<pre><code>这里演示的是ZHS16GBK为导出库字符集 而UTF-8为导入库 而作出的更改
+
+：$sqlplus /nolog
+SQL&gt;conn / as sysdba
+SQL&gt;SHUTDOWN IMMEDIATE
+SQL&gt;STARTUP MOUNT
+SQL&gt;ALTER SYSTEM ENABLE RESTRICTED SESSION;
+SQL&gt;ALTER SYSTEM SET JOB_QUEUE_PROCESSES=0;
+SQL&gt;ALTER SYSTEM SET AQ_TM_PROCESSES=0;
+SQL&gt;ALTER DATABASE OPEN;
+SQL&gt; ALTER DATABASE CHARACTER SET ZHS16GBK ;
+ALTER DATABASE CHARACTER SET ZHS16GBK
+*ERROR at line 1:
+ORA-12712: new character set must be a superset of old character set
+报字符集不兼容，此时下INTERNAL_USE指令不对字符集超集进行检查：
+SQL&gt;ALTER DATABASE CHARACTER SET INTERNAL_USE ZHS16GBK;
+SQL&gt;SHUTDOWN IMMEDIATE
+SQL&gt;STARTUP
+</code></pre>
+
+<p>再次用imp导入，就没有问题了。</p>
+
+<p>导入了以后 NLS_LANG也要跟着改 不然乱码</p>
+
+<pre><code>export NLS_LANG="SIMPLIFIED CHINESE_CHINA.ZHS32GB18030"
+</code></pre>
+
+<h3>0x02参考链接</h3>
+
+<p><a href="http://blog.sina.com.cn/s/blog_713043600100ohva.html">http://blog.sina.com.cn/s/blog_713043600100ohva.html</a></p>
+
+<p><a href="http://blog.csdn.net/namesliu/article/details/8030316">http://blog.csdn.net/namesliu/article/details/8030316</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[CentOS 5.1安装Oracle10 64]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/03/31/centos-oracle/"/>
+    <updated>2015-03-31T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/03/31/centos-oracle</id>
+    <content type="html"><![CDATA[<!--more-->
+
+
+<h3>0x00 下载安装包</h3>
+
+<p>下载安装包 <a href="http://pan.baidu.com/wap/link?uk=3727692514&amp;shareid=2487050160&amp;third=0">http://pan.baidu.com/wap/link?uk=3727692514&amp;shareid=2487050160&amp;third=0</a></p>
+
+<p>这个含有其他Oracle数据库资源<a href="http://uni-smr.ac.ru/archive/db/Oracle/">http://uni-smr.ac.ru/archive/db/Oracle/</a></p>
+
+<p>解压压缩包</p>
+
+<pre><code>gunzip 10201_database_linux_x86_64.cpio.gz
+cpio -idmv &lt; 10201_database_linux_x86_64.cpio
+</code></pre>
+
+<h3>0x01 查看硬件坏境</h3>
+
+<pre><code>#查看内存  至少1G内存
+[root@localhost oracle]# grep MemTotal /proc/meminfo
+MemTotal:      1021724 kB
+
+#查看swap
+#如果内存为大于512M则swap大小为内存2倍
+#如果内存在1到2G之间则swap大小为内存1.5倍
+#如果内存在2到8G之间则swap大小为内存1倍
+#如果内存大于8G则swap大小为内存0.75倍
+[root@localhost oracle]# grep SwapTotal /proc/meminfo
+SwapTotal:     2064344 kB
+
+
+#查看硬盘
+#/tmp目录至少400MB
+#oracle安装目录大约在1.5到3.5G之间
+#数据文件至少1.2G
+[root@localhost oracle]# df -h
+Filesystem            Size  Used Avail Use% Mounted on
+/dev/sda2              18G  2.8G   14G  17% /
+/dev/sda1             289M   17M  258M   7% /boot
+tmpfs                 499M     0  499M   0% /dev/shm
+.host:/               373G  238G  136G  64% /mnt/hgfs
+</code></pre>
+
+<h3>0x02安装所需安装包</h3>
+
+<pre><code>yum install -y compat-db pdksh sysstat screen libXp compat-libstdc++*
+</code></pre>
+
+<h3>0x03 配置Oracle环境</h3>
+
+<p>添加必要的用户组：</p>
+
+<pre><code>/usr/sbin/groupadd oinstall
+/usr/sbin/groupadd dba
+/usr/sbin/groupadd oper
+</code></pre>
+
+<p>更改oracle用户权限</p>
+
+<pre><code>/usr/sbin/usermod -g oinstall -G dba,oper oracle
+</code></pre>
+
+<p>配置内核参数、修改用户环境变量</p>
+
+<p>编辑 <code>/etc/sysctl.conf</code>在最后加入</p>
+
+<pre><code>#oracle
+kernel.shmmni = 4096
+kernel.sem = 250 32000 100 128
+fs.file-max = 65536
+net.ipv4.ip_local_port_range = 1024 65000
+net.core.rmem_default = 262144
+net.core.rmem_max = 262144
+net.core.wmem_default = 262144
+net.core.wmem_max = 262144
+</code></pre>
+
+<p>运行</p>
+
+<pre><code>/sbin/sysctl -p
+</code></pre>
+
+<p>使配置文件生效</p>
+
+<p>编辑<code>/etc/security/limits.conf</code> 在最后加入</p>
+
+<pre><code>oracle soft nproc 2047
+oracle hard nproc 16384
+oracle soft nofile 1024
+oracle hard nofile 65536
+</code></pre>
+
+<p>编辑<code>/etc/pam.d/login</code>在最后加入</p>
+
+<pre><code>session required pam_limits.so
+</code></pre>
+
+<p>编辑<code>/etc/profile</code>在最后加入</p>
+
+<pre><code>if [ $USER = "oracle" ]; then
+if [ $SHELL = "/bin/ksh" ]; then
+ulimit -p 16384
+ulimit -n 65536
+else
+ulimit -u 16384 -n 65536
+fi
+fi
+
+ORACLE_BASE="/opt/app/oracle"
+export ORACLE_BASE
+ORACLE_HOME=$ORACLE_BASE"/product/10.2.0/db_1"
+ORACLE_SID=MZKOracle
+#此SID在后面安装时需要填入和这里配置一样的
+export ORACLE_HOME ORACLE_SID
+</code></pre>
+
+<p>编辑<code>/etc/redhat-release</code>在最后加入</p>
+
+<pre><code>#10G默认不支持5.6版本，修改掉此信息可略过错误）
+#而且要把之前的删除掉不能#掉
+redhat-4
+</code></pre>
+
+<p>配置oracle用户环境变量</p>
+
+<pre><code>su oracle
+vi ~/.bash_profile
+#在最后加入
+PATH=$PATH:$HOME/bin:$ORACLE_HOME/bin
+export PATH
+export NLS_LANG=AMERICAN_AMERICA.ZHS16GBK   
+</code></pre>
+
+<p>创建ORACLE_BASE目录:</p>
+
+<pre><code>mkdir -p /opt/app/oracle
+#权限设置: 
+chown -R oracle:oinstall /opt/app/
+</code></pre>
+
+<h3>0x04安装</h3>
+
+<pre><code>#将0x00中解压的database包放到/opt中
+sudo cp -R /mnt/hgfs/maizhikun/Learning/Oracle/ /opt/
+</code></pre>
+
+<p>图形化界面 我就不截图了</p>
+
+<p>参考<a href="http://www.xmydlinux.org/201104/439.html">http://www.xmydlinux.org/201104/439.html</a></p>
+
+<h3>0x05参考链接</h3>
+
+<p><a href="http://www.xmydlinux.org/201104/439.html">http://www.xmydlinux.org/201104/439.html</a></p>
+
+<p><a href="http://www.cnblogs.com/mchina/archive/2013/03/08/2934473.html">http://www.cnblogs.com/mchina/archive/2013/03/08/2934473.html</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Ubuntu 14.04.2安装Oracle10.02]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/03/26/ubantu_14.04.2_install_oracle10.02/"/>
+    <updated>2015-03-26T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/03/26/ubantu_14.04.2_install_oracle10.02</id>
+    <content type="html"><![CDATA[<!--more-->
+
+
+<h3>0x00 下载</h3>
+
+<p>下载安装包 <a href="http://pan.baidu.com/wap/link?uk=3727692514&amp;shareid=2487050160&amp;third=0">http://pan.baidu.com/wap/link?uk=3727692514&amp;shareid=2487050160&amp;third=0</a></p>
+
+<p>这个含有其他Oracle数据库资源<a href="http://uni-smr.ac.ru/archive/db/Oracle/">http://uni-smr.ac.ru/archive/db/Oracle/</a></p>
+
+<h3>0x01 解压</h3>
+
+<p>解压压缩包</p>
+
+<pre><code>gunzip 10201_database_linux_x86_64.cpio.gz
+cpio -idmv &lt; 10201_database_linux_x86_64.cpio
+</code></pre>
+
+<h3>0x02 安装</h3>
+
+<pre><code>cd database/
+./runInstaller
+</code></pre>
+
+<p>然后发生了报错</p>
+
+<pre><code>./runInstaller: 63 /home/oracle/database/install/.oui: not found
+</code></pre>
+
+<p>应该是缺少图形文件之类的 安装即可</p>
+
+<pre><code>sudo apt-get install lib32z1
+</code></pre>
+
+<p>报错解决参考链接<a href="http://stackoverflow.com/questions/23182765/how-to-install-ia32-libs-in-ubuntu-14-04-lts-trusty-tahr">http://stackoverflow.com/questions/23182765/how-to-install-ia32-libs-in-ubuntu-14-04-lts-trusty-tahr</a></p>
+
+<p>再次执行</p>
+
+<pre><code>./runInstaller
+</code></pre>
+
+<p>然后继续报错</p>
+
+<pre><code>Starting Oracle Universal Installer...
+
+Checking installer requirements...
+
+Checking operating system version: must be redhat-3, SuSE-9, redhat-4, UnitedLinux-1.0, asianux-1 or asianux-2
+                                  Failed &lt;&lt;&lt;&lt;
+
+Exiting Oracle Universal Installer, log for this session can be found at /tmp/OraInstall2015-03-20_10-07-57PM/installActions2015-03-20_10-07-57PM.log
+</code></pre>
+
+<p>解决办法:</p>
+
+<pre><code>sudo ln -s /etc /etc/rc.d
+sudo ln -s /lib/i386-linux-gnu/libgcc_s.so.1 /lib/
+sudo ln -s /usr/bin/awk /bin/awk
+sudo ln -s /usr/bin/basename /bin/basename
+sudo ln -s /usr/bin/rpm /bin/rpm
+sudo ln -s /usr/lib/i386-linux-gnu/libpthread_nonshared.a /usr/lib/libpthread_nonshared.a
+sudo ln -s /usr/lib/i386-linux-gnu/libc_nonshared.a /usr/lib/libc_nonshared.a
+sudo ln -s /usr/lib/i386-linux-gnu/libstdc++.so.6 /lib/
+sudo ln -s /usr/lib/i386-linux-gnu/libstdc++.so.6 /usr/lib/
+sudo ln -s /usr/lib/i386-linux-gnu/libstdc++.so.5 /lib/
+sudo ln -s /usr/lib/i386-linux-gnu/libstdc++.so.5 /usr/lib/
+sudo touch /etc/redhat-release
+sudo vi /etc/redhat-release
+//在里面输入Red Hat Linux release 4
+</code></pre>
+
+<p>参考链接<a href="http://abadem.blog.51cto.com/1601838/1270558">http://abadem.blog.51cto.com/1601838/1270558</a>中的第11步</p>
+
+<p>ok  然后上面的错误消失了 但是java会报错</p>
+
+<pre><code>maizhikun@ubuntu:~/Oracle$ ./runInstaller 
+Starting Oracle Universal Installer...
+
+Checking installer requirements...
+
+Checking operating system version: must be redhat-3, SuSE-9, redhat-4, UnitedLinux-1.0, asianux-1 or asianux-2
+                                  Passed
+
+
+All installer requirements met.
+
+Preparing to launch Oracle Universal Installer from /tmp/OraInstall2015-03-20_11-52-52PM. Please wait ...maizhikun@ubuntu:~/Oracle$ Exception in thread "main" java.lang.UnsatisfiedLinkError: /tmp/OraInstall2015-03-20_11-52-52PM/jre/1.4.2/lib/i386/libawt.so: libXp.so.6: cannot open shared object file: No such file or directory
+at java.lang.ClassLoader$NativeLibrary.load(Native Method)
+at java.lang.ClassLoader.loadLibrary0(Unknown Source)
+at java.lang.ClassLoader.loadLibrary(Unknown Source)
+at java.lang.Runtime.loadLibrary0(Unknown Source)
+at java.lang.System.loadLibrary(Unknown Source)
+at sun.security.action.LoadLibraryAction.run(Unknown Source)
+at java.security.AccessController.doPrivileged(Native Method)
+at sun.awt.NativeLibLoader.loadLibraries(Unknown Source)
+at sun.awt.DebugHelper.&lt;clinit&gt;(Unknown Source)
+at java.awt.Component.&lt;clinit&gt;(Unknown Source)
+</code></pre>
+
+<p>ok 应该就是java的问题 安装jdk</p>
+
+<p>下载地址<a href="http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html">http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html</a></p>
+
+<pre><code>//解压 
+gunzip 压缩包
+tar xvf 解压后的压缩包 
+</code></pre>
+
+<p>参考链接<a href="http://www.cnblogs.com/eoiioe/archive/2008/09/20/1294681.html">http://www.cnblogs.com/eoiioe/archive/2008/09/20/1294681.html</a></p>
+
+<pre><code>//配置java环境变量 
+cp .bashrc /tmp/.bash_original //备份.bashrc
+vi ~/.bashrc
+export JAVA_HOME=/opt/Java/jdk/jdk1.7
+export CLASSPATH=${JAVA_HOME}/lib:.
+export PATH=${JAVA_HOME}/bin:$PATH
+source ~/.bashrc //为了让配置立即生效
+//检验
+maizhikun@ubuntu:~$ java -version
+java version "1.7.0_75"
+Java(TM) SE Runtime Environment (build 1.7.0_75-b13)
+Java HotSpot(TM) Client VM (build 24.75-b04, mixed mode)
+</code></pre>
+
+<p>参考链接<a href="http://www.cnblogs.com/memory4young/p/ubuntu-install-jdk.html">http://www.cnblogs.com/memory4young/p/ubuntu-install-jdk.html</a></p>
+
+<p>配置好java以后 发现还是报这个错</p>
+
+<p>然后觉得不是java的问题 而是缺少libxp.so.6</p>
+
+<pre><code>sudo  apt-get install libxp-dev
+</code></pre>
+
+<p>发现好像还不是这个问题 应该是我的Ubuntu64位系统</p>
+
+<p>而我的libXp.so.6在</p>
+
+<pre><code>/usr/lib/x86_64-linux-gnu/libXp.so.6
+</code></pre>
+
+<p>所以我尝试了下</p>
+
+<pre><code>ln -s /usr/lib/x86_64-linux-gnu/libXp.so.6 /usr/lib/
+</code></pre>
+
+<p>ok 产生了新的错误</p>
+
+<pre><code>Exception java.lang.UnsatisfiedLinkError: /tmp/OraInstall2015-03-24_07-16-12PM/jre/1.4.2/lib/i386/libawt.so: libXp.so.6: wrong ELF class: ELFCLASS64 occurred..
+java.lang.UnsatisfiedLinkError: /tmp/OraInstall2015-03-24_07-16-12PM/jre/1.4.2/lib/i386/libawt.so: libXp.so.6: wrong ELF class: ELFCLASS64
+at java.lang.ClassLoader$NativeLibrary.load(Native Method)
+</code></pre>
+
+<p>这应该是Oracle自带的jre我现在我无法使用 所以使用我自己下载的jre试试</p>
+
+<pre><code> /home/maizhikun/Oracle/runInstaller -jreLoc /usr/lib/jdk1.7/jdk1.7.0_75/jre/
+</code></pre>
+
+<p>然后又有新的错误</p>
+
+<pre><code>Preparing to launch Oracle Universal Installer from /tmp/OraInstall2015-03-25_11-15-16AM. Please wait ...The Java RunTime Environment was not found at /usr/li/jdk1.7//jdk1.7.0_75/jre/bin/java. Hence, the Oracle Universal Installer cannot be run.
+Please visit http://www.javasoft.com and install JRE version 1.3.1 or higher and try again.
+: No such file or directory
+</code></pre>
+
+<p>这应该是我的jre版本过高? 以前的Oracle带不起来? 然后我又下载了个jdk5</p>
+
+<p>下载地址<a href="http://www.oracle.com/technetwork/java/javasebusiness/downloads/java-archive-downloads-javase5-419410.html">http://www.oracle.com/technetwork/java/javasebusiness/downloads/java-archive-downloads-javase5-419410.html</a></p>
+
+<p>给予.bin文件的执行权限</p>
+
+<pre><code>chmod u+x .bin文件
+sudo .bin文件//注意一定要su回宿主用户不然不行的
+</code></pre>
+
+<p>ok  解压之后 执行</p>
+
+<pre><code>#这个会调用设定的jre而不用Oracle自带的jre
+/home/oracle/Oracle/runInstaller  --jreLoc /usr/lib/jdk1.5/jre1.5.0_22/
+</code></pre>
+
+<p>然后就报这个错</p>
+
+<pre><code>Preparing to launch Oracle Universal Installer from /tmp/OraInstall2015-03-25_08-42-27PM. Please wait ...The Java RunTime Environment was not found at /usr/li/jdk1.5//jre1.5.0_22/bin/java. Hence, the Oracle Universal Installer cannot be run.
+Please visit http://www.javasoft.com and install JRE version 1.3.1 or higher and try again.
+: No such file or directory
+</code></pre>
+
+<p>who am i
+whoami</p>
+
+<p>sudo -i</p>
+
+<p>切换到root</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Oracle10g 监听器未启动错误]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/03/23/Oracle_listenres_error/"/>
+    <updated>2015-03-23T11:40:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/03/23/Oracle_listenres_error</id>
+    <content type="html"><![CDATA[<!--more-->
+
+
+<h3>0x00报错代码</h3>
+
+<pre><code>IMP-00058: ORACLE error 12541 encountered ORA-12541: TNS:no listener
+</code></pre>
+
+<h3>0x01解决方案</h3>
+
+<pre><code>su -oracle
+
+netmgr
+
+先把分支的Listeners分支下的监听器删掉
+
+然后新建类型为 Listening locations 的监听器
+再创建Database Services的监听器
+
+监听器名字随便起 例如 Library
+创建新的监听器 orcl
+端口改为1570
+</code></pre>
+
+<h3>0x02监听器启动</h3>
+
+<pre><code>lsnrctl start Library
+</code></pre>
+
+<h3>0x03检查结果</h3>
+
+<pre><code>[oracle@linux5 Library]$ more /oracle/product/10.2/db_1/network/admin/listener.ora 
+# listener.ora Network Configuration File: /oracle/product/10.2/db_1/network/admin/listener.ora
+# Generated by Oracle configuration tools.
+
+LISTENER1 =
+(DESCRIPTION =
+(ADDRESS = (PROTOCOL = TCP)(HOST = 192.168.188.139)(PORT = 1570))
+)
+SID_LIST_LISTENER1 =
+(SID_LIST =
+(SID_DESC =
+  (GLOBAL_DBNAME = orcl)
+  (ORACLE_HOME = /oracle/product/10.2/db_1)
+  (SID_NAME = ORCL)
+)
+)
+
+[oracle@linux5 Library]$ lsnrctl status  LISTENER1
+
+LSNRCTL for Linux: Version 10.2.0.4.0 - Production on 04-APR-2015 07:52:11
+
+Copyright (c) 1991, 2007, Oracle.  All rights reserved.
+
+Connecting to (DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=192.168.188.139)(PORT=1570)))
+STATUS of the LISTENER
+------------------------
+Alias                     LISTENER1
+Version                   TNSLSNR for Linux: Version 10.2.0.4.0 - Production
+Start Date                04-APR-2015 05:51:30
+Uptime                    0 days 2 hr. 0 min. 40 sec
+Trace Level               off
+Security                  ON: Local OS Authentication
+SNMP                      OFF
+Listener Parameter File   /oracle/product/10.2/db_1/network/admin/listener.ora
+Listener Log File         /oracle/product/10.2/db_1/network/log/listener1.log
+Listening Endpoints Summary...
+(DESCRIPTION=(ADDRESS=(PROTOCOL=tcp)(HOST=192.168.188.139)(PORT=1570)))
+Services Summary...
+Service "orcl" has 1 instance(`s).
+Instance "ORCL", status UNKNOWN, has 1 handler(s) for this service...
+The command completed successfully
+</code></pre>
+
+<h3>0x04其他方法</h3>
+
+<p>想不用图形界面新建监听器的同学可以直接敲代码新建 案例目录为</p>
+
+<pre><code>more /oracle/product/10.2/db_1/network/admin/samples/
+</code></pre>
+]]></content>
+  </entry>
+  
+</feed>

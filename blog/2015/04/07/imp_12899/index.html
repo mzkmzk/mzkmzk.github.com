@@ -1,0 +1,176 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>imp导入数据到ORACLE遇到ORA-12899错误 - K</title>
+	<meta name="author" content="K">
+
+	
+	<meta name="description" content="0x00原因 因为exp时字符集占用的位数比导入时字符集的占用的位数要少 0x01解决方案 这里演示的是ZHS16GBK为导出库字符集 而UTF-8为导入库 而作出的更改 ：$sqlplus /nolog
+SQL&gt;conn / as sysdba
+SQL&gt;SHUTDOWN &hellip;">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link href="false" rel="alternate" title="K" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script async="true" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	
+</head>
+
+
+<body>
+	<header id="header" class="inner"><h1><a href="/">K</a></h1>
+<nav id="main-nav"><ul class="main">
+	
+</ul>
+</nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Menu</a>
+		<div class="container"><ul class="main">
+	
+</ul>
+</div>
+	</div>
+	<div class="alignright search">
+		<a class="button"></a>
+		<div class="container">
+			<form action="https://www.google.com/search" method="get">
+				<input type="text" name="q" results="0">
+				<input type="hidden" name="q" value="site:mzkmzk.github.io">
+			</form>
+		</div>
+	</div>
+</nav>
+<nav id="sub-nav" class="alignright">
+	<div class="social">
+		
+		
+		
+		
+    
+		
+		
+		
+		
+		
+    
+	</div>
+	
+</nav>
+
+</header>
+	
+		
+	
+	<div id="content" class="inner"><article class="post">
+	<h2 class="title">imp导入数据到ORACLE遇到ORA-12899错误</h2>
+	<div class="entry-content"><!--more-->
+
+
+<h3>0x00原因</h3>
+
+<pre><code>因为exp时字符集占用的位数比导入时字符集的占用的位数要少
+</code></pre>
+
+<h3>0x01解决方案</h3>
+
+<pre><code>这里演示的是ZHS16GBK为导出库字符集 而UTF-8为导入库 而作出的更改
+
+：$sqlplus /nolog
+SQL&gt;conn / as sysdba
+SQL&gt;SHUTDOWN IMMEDIATE
+SQL&gt;STARTUP MOUNT
+SQL&gt;ALTER SYSTEM ENABLE RESTRICTED SESSION;
+SQL&gt;ALTER SYSTEM SET JOB_QUEUE_PROCESSES=0;
+SQL&gt;ALTER SYSTEM SET AQ_TM_PROCESSES=0;
+SQL&gt;ALTER DATABASE OPEN;
+SQL&gt; ALTER DATABASE CHARACTER SET ZHS16GBK ;
+ALTER DATABASE CHARACTER SET ZHS16GBK
+*ERROR at line 1:
+ORA-12712: new character set must be a superset of old character set
+报字符集不兼容，此时下INTERNAL_USE指令不对字符集超集进行检查：
+SQL&gt;ALTER DATABASE CHARACTER SET INTERNAL_USE ZHS16GBK;
+SQL&gt;SHUTDOWN IMMEDIATE
+SQL&gt;STARTUP
+</code></pre>
+
+<p>再次用imp导入，就没有问题了。</p>
+
+<p>导入了以后 NLS_LANG也要跟着改 不然乱码</p>
+
+<pre><code>export NLS_LANG="SIMPLIFIED CHINESE_CHINA.ZHS32GB18030"
+</code></pre>
+
+<h3>0x02参考链接</h3>
+
+<p><a href="http://blog.sina.com.cn/s/blog_713043600100ohva.html">http://blog.sina.com.cn/s/blog_713043600100ohva.html</a></p>
+
+<p><a href="http://blog.csdn.net/namesliu/article/details/8030316">http://blog.csdn.net/namesliu/article/details/8030316</a></p>
+</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-04-07T11:37:40+08:00" pubdate data-updated="true"></time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/oracle/'>oracle</a>
+
+
+</div>
+	
+</div>
+</article>
+
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+		
+		
+		<a class="addthis_button_tweet"></a>
+		
+		
+		
+	</div>
+	
+</div>
+
+
+</div>
+	<footer id="footer" class="inner">Copyright &copy; 2015
+
+    K
+
+</footer>
+	<script src="/javascripts/slash.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+	$('.fancybox').fancybox();
+})(jQuery);
+</script> <!-- Delete or comment this line to disable Fancybox -->
+
+
+
+
+
+
+</body>
+</html>

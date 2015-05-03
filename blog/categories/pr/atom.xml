@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: pr | K]]></title>
+  <link href="http://mzkmzk.github.io/blog/categories/pr/atom.xml" rel="self"/>
+  <link href="http://mzkmzk.github.io/"/>
+  <updated>2015-05-03T20:17:45+08:00</updated>
+  <id>http://mzkmzk.github.io/</id>
+  <author>
+    <name><![CDATA[K]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Pr无法导入mov格式素材]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/03/19/pr_no_mov/"/>
+    <updated>2015-03-19T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/03/19/pr_no_mov</id>
+    <content type="html"><![CDATA[<!--more-->
+
+
+<p>其实缺少了QuickTime</p>
+
+<p>去<a href="https://www.apple.com/quicktime/download/">https://www.apple.com/quicktime/download/</a>下载安装</p>
+
+<p>重启pr即可</p>
+]]></content>
+  </entry>
+  
+</feed>

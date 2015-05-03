@@ -4,7 +4,7 @@
   <title><![CDATA[Category: mysql | K]]></title>
   <link href="http://mzkmzk.github.io/blog/categories/mysql/atom.xml" rel="self"/>
   <link href="http://mzkmzk.github.io/"/>
-  <updated>2015-03-08T12:16:44+08:00</updated>
+  <updated>2015-05-03T20:17:45+08:00</updated>
   <id>http://mzkmzk.github.io/</id>
   <author>
     <name><![CDATA[K]]></name>
@@ -31,6 +31,25 @@ sudo vi /etc/my.cnf
 
 <pre><code>character-set-server=utf8
 </code></pre>
+
+<h2>2.mysql无法删除数据库</h2>
+
+<p>错误代码</p>
+
+<pre><code>DROP DATABASE db_name;
+ERROR 1010 (HY000): Error dropping database (can't rmdir './db_name', errno: 66)
+</code></pre>
+
+<p>解决办法</p>
+
+<pre><code>1) Find the database directory: mysql -e "select @@datadir" -&gt; /usr/local/mysql/data/
+
+2) Go to DB folder: cd /usr/local/mysql/data/
+
+3) Delete DB folder of DB with issue (in this case: sudo rm -rf DB_NAME)
+</code></pre>
+
+<p>参考链接<a href="http://stackoverflow.com/questions/16527054/drop-database-return-error-dropping-database-errno-66-in-mysql">http://stackoverflow.com/questions/16527054/drop-database-return-error-dropping-database-errno-66-in-mysql</a></p>
 ]]></content>
   </entry>
   

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: web | K]]></title>
+  <link href="http://mzkmzk.github.io/blog/categories/web/atom.xml" rel="self"/>
+  <link href="http://mzkmzk.github.io/"/>
+  <updated>2015-05-03T20:17:45+08:00</updated>
+  <id>http://mzkmzk.github.io/</id>
+  <author>
+    <name><![CDATA[K]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[tjrac_lib响应式设计初稿]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/04/28/tjraclibwebresponsive/"/>
+    <updated>2015-04-28T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/04/28/tjraclibwebresponsive</id>
+    <content type="html"><![CDATA[<!--more-->
+
+
+<h3>参考链接</h3>
+
+<p><a href="http://www.ruanyifeng.com/blog/2012/05/responsive_web_design.html">http://www.ruanyifeng.com/blog/2012/05/responsive_web_design.html</a></p>
+]]></content>
+  </entry>
+  
+</feed>

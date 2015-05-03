@@ -4,7 +4,7 @@
   <title><![CDATA[Category: php | K]]></title>
   <link href="http://mzkmzk.github.io/blog/categories/php/atom.xml" rel="self"/>
   <link href="http://mzkmzk.github.io/"/>
-  <updated>2015-03-08T12:16:44+08:00</updated>
+  <updated>2015-05-03T20:17:45+08:00</updated>
   <id>http://mzkmzk.github.io/</id>
   <author>
     <name><![CDATA[K]]></name>
@@ -12,6 +12,49 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[php Warning: session_start()]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/01/28/php_session/"/>
+    <updated>2015-01-28T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/01/28/php_session</id>
+    <content type="html"><![CDATA[<!--more-->
+
+
+<pre><code>php Warning: session_start(): The session id is too long or contains illegal characters, valid characters are a-z, A-Z, 0-9 and '-,'
+</code></pre>
+
+<p>突然发现在页面会显示这个错误 找到了暂时的解决办法</p>
+
+<p>把session_start(); 改为</p>
+
+<pre><code>function my_session_start()
+{
+if (ini_get('session.use_cookies') &amp;&amp; isset($_COOKIE['PHPSESSID'])) {
+    $sessid = $_COOKIE['PHPSESSID'];
+} elseif (!ini_get('session.use_only_cookies') &amp;&amp; isset($_GET['PHPSESSID'])) {
+    $sessid = $_GET['PHPSESSID'];
+} else {
+    session_start();
+    return false;
+}
+
+if (!preg_match('/^[a-z0-9]{32}$/', $sessid)) {
+    return false;
+}
+session_start();
+
+return true;
+}
+</code></pre>
+
+<p>然后调用my_session_start()即可</p>
+
+<h3>后续..</h3>
+
+<p>发现之后等候PHPSESSION一直为空 怎么设置都没有- -&hellip;然后换Safari试试&hellip;结果SESSION完全没问题..然后返回Chrome删除下COOKIE&hellip;就OK&hellip;..</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[php 上传图片和预览]]></title>
@@ -161,43 +204,6 @@ header("Content-Type: text/html; charset=utf-8");
 <h3>参考链接</h3>
 
 <p><a href="http://www.jb51.net/article/21118.htm">http://www.jb51.net/article/21118.htm</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[php搭建和MyEclipse集成]]></title>
-    <link href="http://mzkmzk.github.io/blog/2014/05/10/php/"/>
-    <updated>2014-05-10T21:28:46+08:00</updated>
-    <id>http://mzkmzk.github.io/blog/2014/05/10/php</id>
-    <content type="html"><![CDATA[<!--more-->
-
-
-<h3>1.win下安装apache + mysql  + php</h3>
-
-<p>参考资料 <a href="http://www.cnblogs.com/MonkeyF/archive/2013/06/06/3121658.html">http://www.cnblogs.com/MonkeyF/archive/2013/06/06/3121658.html</a></p>
-
-<p>检查 httpd.conf 中有无语法错误
-Windows环境：
-httpd -t</p>
-
-<p>参考资料
-<a href="http://hi.baidu.com/tianliao1988/item/50307310ddc771403b176e5c">http://hi.baidu.com/tianliao1988/item/50307310ddc771403b176e5c</a></p>
-
-<h3>2. MyEclipse6.5 搭建 php ide</h3>
-
-<p>Eclipse集成php插件：</p>
-
-<p>help&mdash;->install new software&mdash;&mdash;>add一个连接</p>
-
-<p>phpeclipse - <a href="http://update.phpeclipse.com/update/stable/1.2.x">http://update.phpeclipse.com/update/stable/1.2.x</a></p>
-
-<p>MyEclipse集成php插件：</p>
-
-<p>Help -> Soft Updates -> Find and Install -> Search for new features to install -> new remote lite</p>
-
-<p> phpeclipse - <a href="http://update.phpeclipse.com/update/stable/1.2.x">http://update.phpeclipse.com/update/stable/1.2.x</a></p>
-
-<p>参考链接 <a href="http://blog.csdn.net/shanliangliuxing/article/details/8118033">http://blog.csdn.net/shanliangliuxing/article/details/8118033</a></p>
 ]]></content>
   </entry>
   

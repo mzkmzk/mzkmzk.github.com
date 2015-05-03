@@ -4,7 +4,7 @@
   <title><![CDATA[Category: javascript | K]]></title>
   <link href="http://mzkmzk.github.io/blog/categories/javascript/atom.xml" rel="self"/>
   <link href="http://mzkmzk.github.io/"/>
-  <updated>2015-03-08T12:16:44+08:00</updated>
+  <updated>2015-05-03T20:17:45+08:00</updated>
   <id>http://mzkmzk.github.io/</id>
   <author>
     <name><![CDATA[K]]></name>
@@ -14,19 +14,69 @@
 
   
   <entry>
+    <title type="html"><![CDATA[使用jQuery MiniUI搭建后台demo]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/03/28/jquery_miniui/"/>
+    <updated>2015-03-28T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/03/28/jquery_miniui</id>
+    <content type="html"><![CDATA[<p>jQuery MiniUI 提供了一套.net/php/java 的后台模板 这里介绍一下使用方法</p>
+
+<h3>0x00下载demo</h3>
+
+<p><a href="http://www.miniui.com/download/">http://www.miniui.com/download/</a></p>
+
+<p>在这里选择使用的语言</p>
+
+<h3>0x01导入demo</h3>
+
+<h4>java</h4>
+
+<p>在Eclipse导入<code>import-&gt;Existing Project</code>以后</p>
+
+<p>项目会出现小红叉</p>
+
+<p>解决办法:</p>
+
+<p>删除不存在的jre
+<code>右击项目-&gt;Bulid path-&gt;选中Libraries标签页-&gt;选中有小红叉的JRE -&gt;remove</code></p>
+
+<p>导入本地的jre
+<code>Add Library-&gt;Jre System Library-&gt;OK</code></p>
+
+<p>如果此时项目中WebContent文件中有jsp报错 则Close项目 然后再Open</p>
+
+<p>修改src中的TestDB.java中的相关数据库信息</p>
+
+<h4>php</h4>
+
+<p>把项目扔进apache的目录即可</p>
+
+<p>然后在demo/data/invoke.php，修改相关数据库配置字符串。</p>
+
+<h4>导入mysql数据库</h4>
+
+<p>下载的项目中的WebContet中有个dbsql</p>
+
+<p>如果导入.sql文件不存在..说数据库已存在 则</p>
+
+<p>打开.sql文件 注释创建数据库的代码行</p>
+
+<pre><code>#CREATE DATABASE `plusoft_test`
+#CHARACTER SET 'utf8'
+#COLLATE 'utf8_general_ci';
+
+#USE `plusoft_test`;    
+</code></pre>
+
+<p>ok 运行项目即可</p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[js动态添加 from表单元素]]></title>
     <link href="http://mzkmzk.github.io/blog/2015/01/03/js_add_from/"/>
     <updated>2015-01-03T11:37:40+08:00</updated>
     <id>http://mzkmzk.github.io/blog/2015/01/03/js_add_from</id>
-    <content type="html"><![CDATA[<pre><code>//from_this参数作用为Onsubmit事件传递过来的from表单 或者通过id获取也可以
-function  inser_Submit(from_this){
-     var NFC_ID=document.createElement("input");
-     NFC_ID.type="hidden";
-     NFC_ID.name="NFC_ID";
-     NFC_ID.value=document.getElementById("NFCID").value;
-     from_this.appendChild(NFC_ID);
-}
-</code></pre>
+    <content type="html"><![CDATA[
 ]]></content>
   </entry>
   
@@ -63,6 +113,23 @@ document.all.objSelect.value = objItemValue;
 <pre><code>$(".button_left").mouseover(function(){
 $("#up_page").css("visibility","visible");
 });
+</code></pre>
+
+<h3>js动态添加 from表单元素</h3>
+
+<pre><code>//from_this参数作用为Onsubmit事件传递过来的from表单 或者通过id获取也可以
+function  inser_Submit(from_this){
+     var NFC_ID=document.createElement("input");
+     NFC_ID.type="hidden";
+     NFC_ID.name="NFC_ID";
+     NFC_ID.value=document.getElementById("NFCID").value;
+     from_this.appendChild(NFC_ID);
+}   
+</code></pre>
+
+<h3>js设置cookie</h3>
+
+<pre><code>document.cookie="key=value; path=/"
 </code></pre>
 
 <h3>参考链接</h3>

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: mac | K]]></title>
   <link href="http://mzkmzk.github.io/blog/categories/mac/atom.xml" rel="self"/>
   <link href="http://mzkmzk.github.io/"/>
-  <updated>2015-03-08T12:16:44+08:00</updated>
+  <updated>2015-05-03T20:17:45+08:00</updated>
   <id>http://mzkmzk.github.io/</id>
   <author>
     <name><![CDATA[K]]></name>
@@ -14,11 +14,50 @@
 
   
   <entry>
+    <title type="html"><![CDATA[Mac 下安装Vmware fusion7]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/03/29/mac_vmware_fusion7/"/>
+    <updated>2015-03-29T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/03/29/mac_vmware_fusion7</id>
+    <content type="html"><![CDATA[<h3>下载地址</h3>
+
+<p><a href="http://pan.baidu.com/s/1o6BOGFw">http://pan.baidu.com/s/1o6BOGFw</a></p>
+
+<h3>Ubantu和Win</h3>
+
+<p>Win我直接导的是 双系统中的Boot camp</p>
+
+<p>Ubantu是在<a href="http://www.ubuntu.com/download/desktop">http://www.ubuntu.com/download/desktop</a>下的..</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Mac 和 Vmware的 Ubuntu 实现文件共享]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/03/22/mac_vmware_ubuntu_share/"/>
+    <updated>2015-03-22T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/03/22/mac_vmware_ubuntu_share</id>
+    <content type="html"><![CDATA[<!--more-->
+
+
+<h3>0x00 Vmware设置共享文件夹</h3>
+
+<p>右击Ubuntu虚拟机设置->共享->选择共享文件夹</p>
+
+<h3>0x01 Ubuntu共享文件夹的路径</h3>
+
+<pre><code>cd /mnt/hgfs
+</code></pre>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[Mac 设置开机执行命令]]></title>
     <link href="http://mzkmzk.github.io/blog/2015/01/13/Mac_login_sh/"/>
     <updated>2015-01-13T11:37:40+08:00</updated>
     <id>http://mzkmzk.github.io/blog/2015/01/13/Mac_login_sh</id>
-    <content type="html"><![CDATA[<h3>0x01 创建 .sh</h3>
+    <content type="html"><![CDATA[<!--more-->
+
+
+<h3>0x01 创建 .sh</h3>
 
 <p>.sh里设置要执行的命令</p>
 
@@ -102,68 +141,6 @@ sudo chown -R your_user /usr/local/var/mysql/
 <p>MAMP参考链接<a href="http://yansu.org/2013/12/11/lamp-in-mac.html">http://yansu.org/2013/12/11/lamp-in-mac.html</a></p>
 
 <p>更多有关bashrc设置参考链接<a href="http://www.tuicool.com/articles/7nu2E3R">http://www.tuicool.com/articles/7nu2E3R</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Mac 查看 android javadoc]]></title>
-    <link href="http://mzkmzk.github.io/blog/2014/12/11/mac_query_android_javadoc/"/>
-    <updated>2014-12-11T11:37:40+08:00</updated>
-    <id>http://mzkmzk.github.io/blog/2014/12/11/mac_query_android_javadoc</id>
-    <content type="html"><![CDATA[<p>网页的javadoc<a href="http://developer.android.com/reference/packages.html">http://developer.android.com/reference/packages.html</a></p>
-
-<p>但是 由于那个网站 经常上不去</p>
-
-<p>所以 down 一份 chm 不错</p>
-
-<p>chm 下载地址 <a href="https://code.google.com/p/android-chm-documentation/downloads/list">https://code.google.com/p/android-chm-documentation/downloads/list</a></p>
-
-<p>Mac阅读.chm软件&lt;thunder://QUFodHRwOi8vaWNobS5nb29nbGVjb2RlLmNvbS9maWxlcy9pQ2htLjEuNC4yLnppcFpa></p>
-
-<p>查看javadoc参考链接<a href="http://lkubaski.wordpress.com/2012/08/17/downloading-the-android-javadoc/">http://lkubaski.wordpress.com/2012/08/17/downloading-the-android-javadoc/</a></p>
-
-<p>.iChm软件参考链接<a href="http://www.appinn.com/ichm/">http://www.appinn.com/ichm/</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Mac adobe cc 2014安装过程]]></title>
-    <link href="http://mzkmzk.github.io/blog/2014/12/07/mac_adobe_cc_2014_install/"/>
-    <updated>2014-12-07T11:37:40+08:00</updated>
-    <id>http://mzkmzk.github.io/blog/2014/12/07/mac_adobe_cc_2014_install</id>
-    <content type="html"><![CDATA[<h2>PS CC</h2>
-
-<h3>0x01 下载文件</h3>
-
-<p>.dmg下载百度云盘<a href="http://pan.baidu.com/share/link?shareid=497291185&amp;uk=4094912105">http://pan.baidu.com/share/link?shareid=497291185&amp;uk=4094912105</a> 密码&#8217;1cbn&#8217;</p>
-
-<p>破解文件下载<a href="http://pan.baidu.com/share/link?shareid=2040778295&amp;uk=1627788804">http://pan.baidu.com/share/link?shareid=2040778295&amp;uk=1627788804</a></p>
-
-<h3>0x02 安装ps cc</h3>
-
-<pre><code>1.点击使用正常安装
-2.把破解文件替换在...../Adobe Photoshop CC/(右击ps cc 选择显示包内容)Adobe Photoshop CC.app/Contents/Frameworks/
-</code></pre>
-
-<p>参考链接<a href="http://www.midbai.com/adobe-cc-crack.html">http://www.midbai.com/adobe-cc-crack.html</a>正解</p>
-
-<p>参考链接<a href="http://aikongke.com/4201.html">http://aikongke.com/4201.html</a>此方法无用 但是内含个adoube cc 2014系列下载链接</p>
-
-<h2>AE CC</h2>
-
-<h3>0x01  下载文件</h3>
-
-<p>.dmg下载百度云盘<a href="http://pan.baidu.com/share/link?shareid=497291185&amp;uk=4094912105">http://pan.baidu.com/share/link?shareid=497291185&amp;uk=4094912105</a> 密码&#8217;1cbn&#8217;</p>
-
-<p>破解文件<a href="http://pan.baidu.com/s/1qW9ExmW">http://pan.baidu.com/s/1qW9ExmW</a></p>
-
-<h3>0x02</h3>
-
-<p>断网并且使用算号器文件夹中的 Reset hosts file to the default.app 应用把之前的系统host还原。</p>
-
-<h3>0x03</h3>
-
-<p>用算号器（xf-accm2014.dmg）并选择相应的软件，算出序列号，输入序列号安装（记得保存这个序列号，用于激活）。</p>
 ]]></content>
   </entry>
   

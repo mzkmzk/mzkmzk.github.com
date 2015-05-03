@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: git | K]]></title>
+  <link href="http://mzkmzk.github.io/blog/categories/git/atom.xml" rel="self"/>
+  <link href="http://mzkmzk.github.io/"/>
+  <updated>2015-05-03T20:17:45+08:00</updated>
+  <id>http://mzkmzk.github.io/</id>
+  <author>
+    <name><![CDATA[K]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Git常见错误]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/03/08/git_error/"/>
+    <updated>2015-03-08T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/03/08/git_error</id>
+    <content type="html"><![CDATA[<!--more-->
+
+
+<h3>fatal: Not a git repository (or any of the parent directories): .git</h3>
+
+<pre><code>git init
+</code></pre>
+
+<h3>向github提交分支代码</h3>
+
+<p>一开始<code>git remote -v</code>一直都没有显示内容</p>
+
+<p>后来</p>
+
+<pre><code> git remote add origin git@github.com:mzkmzk/mzkmzk.github.com.git
+</code></pre>
+
+<p>然后就开始有显示了</p>
+
+<pre><code>K-2:octopress maizhikun$ git remote add origin git@github.com:mzkmzk/mzkmzk.github.com.git
+K-2:octopress maizhikun$ git remote -v
+origin  git@github.com:mzkmzk/mzkmzk.github.com.git (fetch)
+origin  git@github.com:mzkmzk/mzkmzk.github.com.git (push)
+</code></pre>
+
+<p>尝试提交分支 代码</p>
+
+<pre><code> K-2:octopress maizhikun$ git push origin source 
+error: src refspec source does not match any.
+error: failed to push some refs to 'git@github.com:mzkmzk/mzkmzk.github.com.git'
+</code></pre>
+
+<p>后来先checkout一下 source分支 就ok了</p>
+
+<pre><code>K-2:octopress maizhikun$ git checkout source
+Switched to branch 'source'
+K-2:octopress maizhikun$ git push origin source
+</code></pre>
+
+<p>参考链接<a href="http://zyueqi.iteye.com/blog/1461466">http://zyueqi.iteye.com/blog/1461466</a></p>
+
+<p>总结</p>
+
+<pre><code>git init
+git remote add origin ssh地址
+git add .
+git commit -m "first commit"
+git branch 分支名称
+git checkout 分支名称
+git push origin 分支名称
+</code></pre>
+]]></content>
+  </entry>
+  
+</feed>

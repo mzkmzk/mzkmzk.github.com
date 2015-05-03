@@ -1,0 +1,182 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>使用jQuery MiniUI搭建后台demo - K</title>
+	<meta name="author" content="K">
+
+	
+	<meta name="description" content="jQuery MiniUI 提供了一套.net/php/java 的后台模板 这里介绍一下使用方法 0x00下载demo http://www.miniui.com/download/ 在这里选择使用的语言 0x01导入demo java 在Eclipse导入import-&gt;Existing &hellip;">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link href="false" rel="alternate" title="K" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script async="true" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	
+</head>
+
+
+<body>
+	<header id="header" class="inner"><h1><a href="/">K</a></h1>
+<nav id="main-nav"><ul class="main">
+	
+</ul>
+</nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Menu</a>
+		<div class="container"><ul class="main">
+	
+</ul>
+</div>
+	</div>
+	<div class="alignright search">
+		<a class="button"></a>
+		<div class="container">
+			<form action="https://www.google.com/search" method="get">
+				<input type="text" name="q" results="0">
+				<input type="hidden" name="q" value="site:mzkmzk.github.io">
+			</form>
+		</div>
+	</div>
+</nav>
+<nav id="sub-nav" class="alignright">
+	<div class="social">
+		
+		
+		
+		
+    
+		
+		
+		
+		
+		
+    
+	</div>
+	
+</nav>
+
+</header>
+	
+		
+	
+	<div id="content" class="inner"><article class="post">
+	<h2 class="title">使用jQuery MiniUI搭建后台demo</h2>
+	<div class="entry-content"><p>jQuery MiniUI 提供了一套.net/php/java 的后台模板 这里介绍一下使用方法</p>
+
+<h3>0x00下载demo</h3>
+
+<p><a href="http://www.miniui.com/download/">http://www.miniui.com/download/</a></p>
+
+<p>在这里选择使用的语言</p>
+
+<h3>0x01导入demo</h3>
+
+<h4>java</h4>
+
+<p>在Eclipse导入<code>import-&gt;Existing Project</code>以后</p>
+
+<p>项目会出现小红叉</p>
+
+<p>解决办法:</p>
+
+<p>删除不存在的jre
+<code>右击项目-&gt;Bulid path-&gt;选中Libraries标签页-&gt;选中有小红叉的JRE -&gt;remove</code></p>
+
+<p>导入本地的jre
+<code>Add Library-&gt;Jre System Library-&gt;OK</code></p>
+
+<p>如果此时项目中WebContent文件中有jsp报错 则Close项目 然后再Open</p>
+
+<p>修改src中的TestDB.java中的相关数据库信息</p>
+
+<h4>php</h4>
+
+<p>把项目扔进apache的目录即可</p>
+
+<p>然后在demo/data/invoke.php，修改相关数据库配置字符串。</p>
+
+<h4>导入mysql数据库</h4>
+
+<p>下载的项目中的WebContet中有个dbsql</p>
+
+<p>如果导入.sql文件不存在..说数据库已存在 则</p>
+
+<p>打开.sql文件 注释创建数据库的代码行</p>
+
+<pre><code>#CREATE DATABASE `plusoft_test`
+#CHARACTER SET 'utf8'
+#COLLATE 'utf8_general_ci';
+
+#USE `plusoft_test`;    
+</code></pre>
+
+<p>ok 运行项目即可</p>
+</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-03-28T11:37:40+08:00" pubdate data-updated="true"></time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/javascript/'>javascript</a>
+
+
+</div>
+	
+</div>
+</article>
+
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+		
+		
+		<a class="addthis_button_tweet"></a>
+		
+		
+		
+	</div>
+	
+</div>
+
+
+</div>
+	<footer id="footer" class="inner">Copyright &copy; 2015
+
+    K
+
+</footer>
+	<script src="/javascripts/slash.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+	$('.fancybox').fancybox();
+})(jQuery);
+</script> <!-- Delete or comment this line to disable Fancybox -->
+
+
+
+
+
+
+</body>
+</html>
