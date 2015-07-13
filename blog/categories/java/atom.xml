@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: java | K]]></title>
+  <link href="http://mzkmzk.github.io/blog/categories/java/atom.xml" rel="self"/>
+  <link href="http://mzkmzk.github.io/"/>
+  <updated>2015-07-13T22:44:38+08:00</updated>
+  <id>http://mzkmzk.github.io/</id>
+  <author>
+    <name><![CDATA[K]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[HttpClient 发出请求的get详解]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/01/24/HttpClient/"/>
+    <updated>2015-01-24T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/01/24/HttpClient</id>
+    <content type="html"><![CDATA[<!--more-->
+
+
+<h3>get</h3>
+
+<h3>post</h3>
+
+<p>默认自带的状态</p>
+
+<p>加上参数的状态</p>
+
+<p>加上方法默认自带 看参数的不同</p>
+
+<h3>发送json</h3>
+
+<p><a href="http://stackoverflow.com/questions/12059278/how-to-post-json-request-using-apache-httpclient-3-1">http://stackoverflow.com/questions/12059278/how-to-post-json-request-using-apache-httpclient-3-1</a></p>
+]]></content>
+  </entry>
+  
+</feed>

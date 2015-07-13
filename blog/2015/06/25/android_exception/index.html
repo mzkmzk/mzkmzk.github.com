@@ -1,0 +1,706 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Android 捕抓异常发送给服务器 - K</title>
+	<meta name="author" content="K">
+
+	
+	<meta name="description" content="在任何服务性行业中,用户遇到的问题,我们就要解决
+所以app也要捕抓到用户在使用过程中的bug 他们就是我们的测试人员 本文中讲两部分,一部分是被我们捕抓到的异常,另一部分是我们没有捕抓到的,从而导致app奔溃的异常。 异常最终都写入log.我把log放在可访问的地方,在浏览器输入地址即可查看 &hellip;">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link href="false" rel="alternate" title="K" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script async="true" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	
+</head>
+
+
+<body>
+	<header id="header" class="inner"><h1><a href="/">K</a></h1>
+<nav id="K_select">
+	<div class="alignleft menu">
+		<a class="button">Category</a>
+		<div class="container"><ul class="main">
+		
+	
+<li><a href="/blog/categories/markdown">markdown</a></li>
+
+<li><a href="/blog/categories/data">data</a></li>
+
+<li><a href="/blog/categories/php">php</a></li>
+
+<li><a href="/blog/categories/svn">svn</a></li>
+
+<li><a href="/blog/categories/octopress">octopress</a></li>
+
+<li><a href="/blog/categories/mysql">mysql</a></li>
+
+<li><a href="/blog/categories/j2ee">j2ee</a></li>
+
+<li><a href="/blog/categories/mac">mac</a></li>
+
+<li><a href="/blog/categories/struts2">struts2</a></li>
+
+<li><a href="/blog/categories/android">android</a></li>
+
+<li><a href="/blog/categories/hack">hack</a></li>
+
+<li><a href="/blog/categories/design">design</a></li>
+
+<li><a href="/blog/categories/eclipse">eclipse</a></li>
+
+<li><a href="/blog/categories/readme">readme</a></li>
+
+<li><a href="/blog/categories/javascript">javascript</a></li>
+
+<li><a href="/blog/categories/arduino">arduino</a></li>
+
+<li><a href="/blog/categories/jquery">jquery</a></li>
+
+<li><a href="/blog/categories/bootstrap">bootstrap</a></li>
+
+<li><a href="/blog/categories/squild">squild</a></li>
+
+<li><a href="/blog/categories/question">question</a></li>
+
+<li><a href="/blog/categories/java">java</a></li>
+
+<li><a href="/blog/categories/sqlmap">sqlmap</a></li>
+
+<li><a href="/blog/categories/python">python</a></li>
+
+<li><a href="/blog/categories/git">git</a></li>
+
+<li><a href="/blog/categories/pr">pr</a></li>
+
+<li><a href="/blog/categories/linux">linux</a></li>
+
+<li><a href="/blog/categories/oracle">oracle</a></li>
+
+<li><a href="/blog/categories/windows">windows</a></li>
+
+<li><a href="/blog/categories/video">video</a></li>
+
+<li><a href="/blog/categories/travel">travel</a></li>
+
+<li><a href="/blog/categories/web">web</a></li>
+
+<li><a href="/blog/categories/httracl">httracl</a></li>
+
+<li><a href="/blog/categories/httpclient">httpclient</a></li>
+
+<li><a href="/blog/categories/sql">sql</a></li>
+
+<li><a href="/blog/categories/photoshop">photoshop</a></li>
+
+</ul>
+</div>
+	</div>
+	<div class="alignright search">
+		<a class="button"></a>
+		<div class="container">
+			<form action="https://www.google.com/search" method="get">
+				<input type="text" name="q" results="0">
+				<input type="hidden" name="q" value="site:mzkmzk.github.io">
+			</form>
+		</div>
+	</div>
+</nav>
+<nav id="main-nav">
+	<ul class="main">
+		
+	
+
+
+</ul>
+
+	</nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Category</a>
+		<div class="container"><ul class="main">
+		
+	
+<li><a href="/blog/categories/markdown">markdown</a></li>
+
+<li><a href="/blog/categories/data">data</a></li>
+
+<li><a href="/blog/categories/php">php</a></li>
+
+<li><a href="/blog/categories/svn">svn</a></li>
+
+<li><a href="/blog/categories/octopress">octopress</a></li>
+
+<li><a href="/blog/categories/mysql">mysql</a></li>
+
+<li><a href="/blog/categories/j2ee">j2ee</a></li>
+
+<li><a href="/blog/categories/mac">mac</a></li>
+
+<li><a href="/blog/categories/struts2">struts2</a></li>
+
+<li><a href="/blog/categories/android">android</a></li>
+
+<li><a href="/blog/categories/hack">hack</a></li>
+
+<li><a href="/blog/categories/design">design</a></li>
+
+<li><a href="/blog/categories/eclipse">eclipse</a></li>
+
+<li><a href="/blog/categories/readme">readme</a></li>
+
+<li><a href="/blog/categories/javascript">javascript</a></li>
+
+<li><a href="/blog/categories/arduino">arduino</a></li>
+
+<li><a href="/blog/categories/jquery">jquery</a></li>
+
+<li><a href="/blog/categories/bootstrap">bootstrap</a></li>
+
+<li><a href="/blog/categories/squild">squild</a></li>
+
+<li><a href="/blog/categories/question">question</a></li>
+
+<li><a href="/blog/categories/java">java</a></li>
+
+<li><a href="/blog/categories/sqlmap">sqlmap</a></li>
+
+<li><a href="/blog/categories/python">python</a></li>
+
+<li><a href="/blog/categories/git">git</a></li>
+
+<li><a href="/blog/categories/pr">pr</a></li>
+
+<li><a href="/blog/categories/linux">linux</a></li>
+
+<li><a href="/blog/categories/oracle">oracle</a></li>
+
+<li><a href="/blog/categories/windows">windows</a></li>
+
+<li><a href="/blog/categories/video">video</a></li>
+
+<li><a href="/blog/categories/travel">travel</a></li>
+
+<li><a href="/blog/categories/web">web</a></li>
+
+<li><a href="/blog/categories/httracl">httracl</a></li>
+
+<li><a href="/blog/categories/httpclient">httpclient</a></li>
+
+<li><a href="/blog/categories/sql">sql</a></li>
+
+<li><a href="/blog/categories/photoshop">photoshop</a></li>
+
+</ul>
+</div>
+	</div>
+	<div class="alignright search">
+		<a class="button"></a>
+		<div class="container">
+			<form action="https://www.google.com/search" method="get">
+				<input type="text" name="q" results="0">
+				<input type="hidden" name="q" value="site:mzkmzk.github.io">
+			</form>
+		</div>
+	</div>
+</nav>
+<nav id="sub-nav" class="alignright">
+	<div class="social">
+		
+		
+		
+		
+    
+		
+		
+		
+		
+		
+    
+	</div>
+	
+</nav>
+
+</header>
+	
+		
+	
+	<div id="content" class="inner"><article class="post">
+	<h2 class="title">Android 捕抓异常发送给服务器</h2>
+	<div class="entry-content"><!--more-->
+
+
+<p>在任何服务性行业中,用户遇到的问题,我们就要解决
+所以app也要捕抓到用户在使用过程中的bug</p>
+
+<p>他们就是我们的测试人员</p>
+
+<p>本文中讲两部分,一部分是被我们捕抓到的异常,另一部分是我们没有捕抓到的,从而导致app奔溃的异常。</p>
+
+<p>异常最终都写入log.我把log放在可访问的地方,在浏览器输入地址即可查看</p>
+
+<p>效果如:</p>
+
+<pre><code>用户 ID: null it is UncaughtExceptionHandler
+2015-06-25-22:21class: com.tjrac.activity._0.LoginActivity$AndroidUser_Login; method: run; line: 141;  Exception: java.lang.NullPointerException
+2015-06-25-22:21class: java.lang.Thread; method: run; line: 1019;  Exception: java.lang.NullPointerException
+
+
+用户 ID: null it is UncaughtExceptionHandler
+2015-06-25-22:22class: com.tjrac.activity._0.LoginActivity$AndroidUser_Login; method: run; line: 141;  Exception: java.lang.NullPointerException
+2015-06-25-22:22class: java.lang.Thread; method: run; line: 1019;  Exception: java.lang.NullPointerException
+</code></pre>
+
+<h3>0x00 服务器接受异常数据</h3>
+
+<p>无论是我们捕抓或是没捕抓到的异常,服务器接受的方法都一样,写入一个.log文件中.我用的是Struts2框架</p>
+
+<pre><code>public class PrintException implements Action {
+
+@Override
+public String execute() throws Exception {
+    HttpServletRequest request =ServletActionContext.getRequest();
+    request.getContextPath();
+    File file =new File(ServletActionContext.getServletContext().getRealPath("/log")+"/Exception.log");
+    System.out.println(file.getPath());
+    PrintWriter pw =new PrintWriter(new OutputStreamWriter(new FileOutputStream(file,true),"UTF-8"),true);
+    pw.println("用户 ID: "+request.getParameter("cert_id"));
+    pw.println(request.getParameter("exception"));
+    pw.println();
+    pw.close();
+    return null;
+}
+</code></pre>
+
+<h3>0x01 发送被我们捕抓到的异常</h3>
+
+<p>这个就相对简单直接在捕抓异常后面加一个处理语句.题外话,可不可以重写捕抓异常的方法,然后捕抓异常后会自动发送异常给服务器.</p>
+
+<p>在捕抓到异常后调用sendException方法,我这里多给了一个Context,因为要获取到用户的id 然后方便处理异常.</p>
+
+<pre><code>public static void sendException(Context context,Exception exception){
+    List&lt;NameValuePair&gt; params = new ArrayList&lt;NameValuePair&gt;();
+    params.add(new BasicNameValuePair("cert_id", context
+            .getSharedPreferences("user", 0).getString("cert_id", null)));
+    params.add(new BasicNameValuePair("exception",ExceptionToString(exception)));
+    ModelServer modelHttp = new ModelServer();
+    modelHttp.Model_server(params, "PrintException");
+}
+
+/**
+ * 将Exception 转为String
+ * @param exception
+ * @return
+ */
+public static String ExceptionToString(Exception exception ){
+    StringWriter sw = new StringWriter();
+    PrintWriter pw =new PrintWriter(sw);
+    pw.println("异常发生时间 : "+getSystemTime_Minute());
+    exception.printStackTrace(pw);
+    pw.close();
+    return sw.toString();
+}
+</code></pre>
+
+<h3>0x02 设置捕抓全局异常</h3>
+
+<p>这里写了一个捕抓的Handler 通常不用大改,一般只改getTraceInfo()方法。</p>
+
+<pre><code>import java.io.File;
+import java.io.FileOutputStream;
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.io.Writer;
+import java.lang.Thread.UncaughtExceptionHandler;
+import java.lang.reflect.Field;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
+
+import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.PackageManager.NameNotFoundException;
+import android.os.Build;
+import android.os.Environment;
+import android.os.Looper;
+import android.util.Log;
+import android.widget.Toast;
+
+/**
+ * UncaughtException处理类,当程序发生Uncaught异常的时候,有该类来接管程序,并记录发送错误报告.
+ * 
+ * @author user 
+ */
+@SuppressLint("SdCardPath")
+public class CrashHandler implements UncaughtExceptionHandler {
+
+public static final String TAG = "TEST";
+
+// CrashHandler 实例
+private static CrashHandler INSTANCE = new CrashHandler();
+
+// 程序的 Context 对象
+private Context mContext;
+
+// 系统默认的 UncaughtException 处理类
+private Thread.UncaughtExceptionHandler mDefaultHandler;
+
+// 用来存储设备信息和异常信息
+private Map&lt;String, String&gt; infos = new HashMap&lt;String, String&gt;();
+
+// 用来显示Toast中的信息
+private static String error = "程序错误，额，不对，我应该说，服务器正在维护中，请稍后再试";
+
+private static final Map&lt;String, String&gt; regexMap = new HashMap&lt;String, String&gt;();
+
+// 用于格式化日期,作为日志文件名的一部分
+private DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss",
+        Locale.CHINA);
+
+/** 保证只有一个 CrashHandler 实例 */
+private CrashHandler() {
+    //
+}
+
+/** 获取 CrashHandler 实例 ,单例模式 */
+public static CrashHandler getInstance() {
+    initMap();
+    return INSTANCE;
+}
+
+/**
+ * 初始化
+ * 
+ * @param context
+ */
+public void init(Context context) {
+    mContext = context;
+
+    // 获取系统默认的 UncaughtException 处理器
+    mDefaultHandler = Thread.getDefaultUncaughtExceptionHandler();
+
+    // 设置该 CrashHandler 为程序的默认处理器
+    Thread.setDefaultUncaughtExceptionHandler(this);
+    Log.d("TEST", "Crash:init");
+}
+
+/**
+ * 当 UncaughtException 发生时会转入该函数来处理
+ */
+@Override
+public void uncaughtException(Thread thread, Throwable ex) {
+    if (!handleException(ex) &amp;&amp; mDefaultHandler != null) {
+        // 如果用户没有处理则让系统默认的异常处理器来处理
+        mDefaultHandler.uncaughtException(thread, ex);
+        Log.d("TEST", "defalut");
+    } else {
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            Log.e(TAG, "error : ", e);
+        }
+        // 退出程序
+        android.os.Process.killProcess(android.os.Process.myPid());
+        // mDefaultHandler.uncaughtException(thread, ex);
+        System.exit(1);
+    }
+}
+
+/**
+ * 自定义错误处理，收集错误信息，发送错误报告等操作均在此完成
+ * 
+ * @param ex
+ * @return true：如果处理了该异常信息；否则返回 false
+ */
+private boolean handleException(Throwable ex) {
+    if (ex == null) {
+        return false;
+    }
+
+    // 收集设备参数信息
+    // collectDeviceInfo(mContext);
+    // 保存日志文件
+    saveCrashInfo2File(ex);
+    // 使用 Toast 来显示异常信息
+    new Thread() {
+        @Override
+        public void run() {
+            Looper.prepare();
+            Toast.makeText(mContext, error, Toast.LENGTH_LONG).show();
+            Looper.loop();
+        }
+    }.start();
+    return true;
+}
+
+/**
+ * 收集设备参数信息
+ * 
+ * @param ctx
+ */
+public void collectDeviceInfo(Context ctx) {
+    try {
+        PackageManager pm = ctx.getPackageManager();
+        PackageInfo pi = pm.getPackageInfo(ctx.getPackageName(),
+                PackageManager.GET_ACTIVITIES);
+
+        if (pi != null) {
+            String versionName = pi.versionName == null ? "null"
+                    : pi.versionName;
+            String versionCode = pi.versionCode + "";
+            infos.put("versionName", versionName);
+            infos.put("versionCode", versionCode);
+        }
+    } catch (NameNotFoundException e) {
+        Log.e(TAG, "an error occured when collect package info", e);
+    }
+
+    Field[] fields = Build.class.getDeclaredFields();
+    for (Field field : fields) {
+        try {
+            field.setAccessible(true);
+            infos.put(field.getName(), field.get(null).toString());
+            Log.d(TAG, field.getName() + " : " + field.get(null));
+        } catch (Exception e) {
+            Log.e(TAG, "an error occured when collect crash info", e);
+        }
+    }
+}
+
+/**
+ * 保存错误信息到文件中 *
+ * 
+ * @param ex
+ * @return 返回文件名称,便于将文件传送到服务器
+ */
+private String saveCrashInfo2File(Throwable ex) {
+    StringBuffer sb = getTraceInfo(ex);
+    Writer writer = new StringWriter();
+    PrintWriter printWriter = new PrintWriter(writer);
+    ex.printStackTrace(printWriter);
+    Throwable cause = ex.getCause();
+    while (cause != null) {
+        cause.printStackTrace(printWriter);
+        cause = cause.getCause();
+    }
+    printWriter.close();
+
+    String result = writer.toString();
+    sb.append(result);
+    try {
+        long timestamp = System.currentTimeMillis();
+        String time = formatter.format(new Date());
+        String fileName = "crash-" + time + "-" + timestamp + ".log";
+
+        if (Environment.getExternalStorageState().equals(
+                Environment.MEDIA_MOUNTED)) {
+            String path = Environment.getExternalStorageDirectory()
+                    + "/crash/";
+            File dir = new File(path);
+            if (!dir.exists()) {
+                dir.mkdirs();
+            }
+            FileOutputStream fos = new FileOutputStream(path + fileName);
+            fos.write(sb.toString().getBytes());
+            fos.close();
+        }
+
+        return fileName;
+    } catch (Exception e) {
+        Log.e(TAG, "an error occured while writing file...", e);
+    }
+
+    return null;
+}
+
+/**
+ * 整理异常信息
+ * @param e
+ * @return
+ */
+public static StringBuffer getTraceInfo(Throwable exception) {
+     /*
+    StringBuffer sb = new StringBuffer();
+
+    Throwable ex = e.getCause() == null ? e : e.getCause();
+    StackTraceElement[] stacks = ex.getStackTrace();
+    for (int i = 0; i &lt; stacks.length; i++) {
+        if (i == 0) {
+            setError(ex.toString());
+        }
+        sb.append(Utils.getSystemTime_Minute()).append("class: ").append(stacks[i].getClassName())
+                .append("; method: ").append(stacks[i].getMethodName())
+                .append("; line: ").append(stacks[i].getLineNumber())
+                .append(";  Exception: ").append(ex.toString() + "\n");
+    }
+
+    Log.d(TAG, sb.toString());
+    */
+    List&lt;NameValuePair&gt; params = new ArrayList&lt;NameValuePair&gt;();
+    params.add(new BasicNameValuePair("cert_id", "null it is UncaughtExceptionHandler"));
+    params.add(new BasicNameValuePair("exception",Utils.ThrowableToString(exception)));
+    ModelServer modelHttp = new ModelServer();
+    modelHttp.Model_server(params, "PrintException");
+    return new StringBuffer(Utils.ThrowableToString(exception));
+}
+
+/**
+ * 设置错误的提示语
+ * @param e
+ */
+public static void setError(String e) {
+    Pattern pattern;
+    Matcher matcher;
+    for (Entry&lt;String, String&gt; m : regexMap.entrySet()) {
+        Log.d(TAG, e+"key:" + m.getKey() + "; value:" + m.getValue());
+        pattern = Pattern.compile(m.getKey());
+        matcher = pattern.matcher(e);
+        if(matcher.matches()){
+            error = m.getValue();
+            break;
+        }
+    }
+}
+
+/**
+ * 初始化错误的提示语
+ */
+private static void initMap() {
+    // Java.lang.NullPointerException
+    // java.lang.ClassNotFoundException
+    // java.lang.ArithmeticException
+    // java.lang.ArrayIndexOutOfBoundsException
+    // java.lang.IllegalArgumentException
+    // java.lang.IllegalAccessException
+    // SecturityException
+    // NumberFormatException
+    // OutOfMemoryError 
+    // StackOverflowError 
+    // RuntimeException 
+    regexMap.put(".*NullPointerException.*", "嘿，无中生有~Boom!");
+    regexMap.put(".*ClassNotFoundException.*", "你确定你能找得到它？");
+    regexMap.put(".*ArithmeticException.*", "我猜你的数学是体育老师教的，对吧？");
+    regexMap.put(".*ArrayIndexOutOfBoundsException.*", "恩，无下限=无节操，请不要跟我搭话");
+    regexMap.put(".*IllegalArgumentException.*", "你的出生就是一场错误。");
+    regexMap.put(".*IllegalAccessException.*", "很遗憾，你的信用卡账号被冻结了，无权支付");
+    regexMap.put(".*SecturityException.*", "死神马上降临");
+    regexMap.put(".*NumberFormatException.*", "想要改变一下自己形象？去泰国吧，包你满意");
+    regexMap.put(".*OutOfMemoryError.*", "或许你该减减肥了");
+    regexMap.put(".*StackOverflowError.*", "啊，啊，憋不住了！");
+    regexMap.put(".*RuntimeException.*", "你的人生走错了方向，重来吧");
+
+}
+
+}
+</code></pre>
+
+<p>再写一个启动这个Handler的全局类</p>
+
+<pre><code>import android.app.Application;
+
+public class CrashApplication extends Application {
+
+@Override
+public void onCreate() {
+    super.onCreate();
+    CrashHandler crashHandler = CrashHandler.getInstance();
+    crashHandler.init(getApplicationContext());
+}
+
+}
+</code></pre>
+
+<p>然后在AndroidManifest.xml注册下这个全局类</p>
+
+<pre><code> &lt;application
+ android:name="com.tjrac.utils.CrashApplication"...&gt;
+</code></pre>
+
+<h3>参考资料</h3>
+
+<p>捕抓全局异常<a href="http://www.cnblogs.com/cpacm/p/3948991.html">http://www.cnblogs.com/cpacm/p/3948991.html</a></p>
+</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-06-25T21:28:46+08:00" pubdate data-updated="true"></time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/android/'>android</a>
+
+
+</div>
+	
+</div>
+</article>
+
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+		
+		
+		<a class="addthis_button_tweet"></a>
+		
+		
+		
+	</div>
+	
+</div>
+
+
+</div>
+	<footer id="footer" class="inner">
+
+Copyright &copy; 2015
+
+    K
+
+
+</footer>
+	<script src="/javascripts/slash.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+	$('.fancybox').fancybox();
+})(jQuery);
+</script> <!-- Delete or comment this line to disable Fancybox -->
+
+
+
+
+
+
+</body>
+</html>

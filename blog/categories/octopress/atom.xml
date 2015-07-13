@@ -4,7 +4,7 @@
   <title><![CDATA[Category: octopress | K]]></title>
   <link href="http://mzkmzk.github.io/blog/categories/octopress/atom.xml" rel="self"/>
   <link href="http://mzkmzk.github.io/"/>
-  <updated>2015-05-03T20:17:45+08:00</updated>
+  <updated>2015-07-13T22:44:38+08:00</updated>
   <id>http://mzkmzk.github.io/</id>
   <author>
     <name><![CDATA[K]]></name>
@@ -12,6 +12,296 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[修改octopress导航栏]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/07/13/update_slash/"/>
+    <updated>2015-07-13T21:28:46+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/07/13/update_slash</id>
+    <content type="html"><![CDATA[<!--more-->
+
+
+<p>本人想做一个类似本博客中 导航栏的这个下拉选项效果</p>
+
+<h3>0x00 添加下拉框</h3>
+
+<p>导航栏页面 <code>/source/_include/header.html</code></p>
+
+<p> 在h1标签下添加下拉框</p>
+
+<pre><code>    &lt;nav id="K_select"&gt;
+    &lt;div class="alignleft menu"&gt;
+        &lt;a class="button"&gt;Category&lt;/a&gt;
+        &lt;div class="container"&gt;\{\% include navigation.html %\}\&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class="alignright search"&gt;
+        &lt;a class="button"&gt;&lt;/a&gt;
+        &lt;div class="container"&gt;
+            &lt;form action="\{\{\ site.simple_search \}\}\" method="get"&gt;
+                &lt;input type="text" name="q" results="0"&gt;
+                &lt;input type="hidden" name="q" value="site:\{\{\ site.url | shorthand_url \}\}\"&gt;
+            &lt;/form&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;/nav&gt;
+</code></pre>
+
+<h3>0x01 设置相关css</h3>
+
+<p>css<code>/source/styleshets/screen.css</code></p>
+
+<pre><code>#K_select
+ {
+display: block
+}
+
+#K_select a
+{
+display: block
+}
+
+#K_select .button
+{
+cursor: pointer
+}
+
+#K_select .container
+{
+display: none
+}
+
+#K_select .menu
+{
+position: relative;
+width: 150px;
+margin-left:175px;
+}
+
+#K_select .menu .button
+{
+background: #f2f2f2;
+border: 1px solid #ddd;
+color: #999;
+padding: 0 60px 0 10px;
+position: relative;
+-webkit-border-radius: 5px;
+-moz-border-radius: 5px;
+-ms-border-radius: 5px;
+-o-border-radius: 5px;
+border-radius: 5px
+}
+
+#K_select .menu .button:hover
+{
+color: #999
+}
+
+#K_select .menu .button.on
+{
+color: #666;
+-webkit-border-radius: 5px 5px 5px 0;
+-moz-border-radius: 5px 5px 5px 0;
+-ms-border-radius: 5px 5px 5px 0;
+-o-border-radius: 5px 5px 5px 0;
+border-radius: 5px 5px 5px 0
+}
+
+#K_select .menu .button.on:before
+{
+content: "\f077"
+}
+
+#K_select .menu .button:before
+{
+content: "\f078";
+color: #ddd;
+font: 16px FontAwesome;
+line-height: 30px;
+position: absolute;
+top: 0;
+right: 40px
+}
+
+#K_select .menu .container
+{
+background: #f2f2f2;
+border: 1px solid #ddd;
+border-top: none;
+position: absolute;
+top: 31px;
+z-index: 1;
+-webkit-border-radius: 0 0 5px 5px;
+-moz-border-radius: 0 0 5px 5px;
+-ms-border-radius: 0 0 5px 5px;
+-o-border-radius: 0 0 5px 5px;
+border-radius: 0 0 5px 5px
+}
+
+#K_select .menu .container ul
+{
+list-style: none
+}
+
+#K_select .menu .container ul ul
+{
+margin-left: 20px
+}
+
+#K_select .menu .container a
+{
+padding: 0 10px
+}
+
+#K_select .search
+{
+position: absolute;
+/*top: 0;
+right: 0*/
+}
+
+#K_select .search .button
+{
+background: #ddd;
+width: 30px;
+height: 30px;
+position: absolute;
+/*top: 1px;
+right: -1px;*/
+margin-top: 1px;
+margin-left: 315px;
+-webkit-border-radius: 0 5px 5px 0;
+-moz-border-radius: 0 5px 5px 0;
+-ms-border-radius: 0 5px 5px 0;
+-o-border-radius: 0 5px 5px 0;
+border-radius: 0 5px 5px 0
+}
+
+#K_select .search .button:before
+{
+content: "\f002";
+color: #f2f2f2;
+font: 20px FontAwesome;
+line-height: 30px;
+position: absolute;
+top: 0;
+left: 7px
+}
+
+#K_select .search .button.on
+{
+background: #ccc
+}
+
+#K_select .search .button.on:before
+{
+content: "\f00d"
+}
+
+#K_select .search .container
+{
+padding-left: 190px;
+/*position: absolute;
+right: 51px;*/
+z-index: 1
+}
+
+#K_select .search input[type="text"]
+{
+background: #fff;
+border: 1px solid #ddd;
+border-right: none;
+color: #999;
+font: 13px "HelveticaNeue-Light","Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,sans-serif;
+height: 30px;
+width: 100%;
+padding: 0 10px;
+-webkit-border-radius: 5px 0 0 5px;
+-moz-border-radius: 5px 0 0 5px;
+-ms-border-radius: 5px 0 0 5px;
+-o-border-radius: 5px 0 0 5px;
+border-radius: 5px 0 0 5px
+}
+
+#K_select .search input[type="text"]:focus,#K_select .search input[type="text"]:active
+{
+background: #fff;
+
+color: #666;
+outline: none
+}
+
+@media screen and (max-width: 600px)
+{
+#K_select
+{
+   display: none !important;
+}
+}
+
+@media screen and (min-width: 600px)
+{
+#header {
+    height: 30px !important;
+}
+#header h1
+{
+    float: left !important;
+}
+
+#main-nav {
+    float: left !important;
+    margin-left: 30px;
+    margin-top: 0px;
+}
+} 
+</code></pre>
+
+<h3>0x02 设置JS</h3>
+
+<p>文件 <code>/sourece/javascripts/slash.js</code>在function内添加以下代码</p>
+
+<pre><code>var k_select = $('#K_select');
+
+$('html').click(function(){
+    k_select.find('.on').each(function(){
+        $(this).removeClass('on').next().hide();
+    });
+});
+
+k_select.on('click', '.menu .button', function(){
+    if (!$(this).hasClass('on')){
+        var width = $(this).width() + 42;
+        $(this).addClass('on').next().show().css({width: width});
+    } else {
+        $(this).removeClass('on').next().hide();
+    }
+}).on('click', '.search .button', function(){
+    if (!$(this).hasClass('on')){
+        var width = 120;
+        k_select.children('.menu').children().eq(0).removeClass('on').next().hide();
+        $(this).addClass('on').next().show().css({width: width}).children().children().eq(0).focus();
+    } else {
+        $(this).removeClass('on').next().hide().children().children().eq(0).val('');
+    }
+}).click(function(e){
+    e.stopPropagation();
+});
+</code></pre>
+
+<h3>0x03 遍历分类目录</h3>
+
+<p><code>/source/_include/custom/navigation.html</code>ul标签内</p>
+
+<pre><code>    \{\% for category in site.categories \%\}
+&lt;li&gt;&lt;a href="\{\{ root_url \}\}/blog/categories/\{\{ category | first \}\}"&gt;\{\{ category | first \}\}&lt;/a&gt;&lt;/li&gt;
+\{\% endfor \%\}
+</code></pre>
+
+<h3>参考资料</h3>
+
+<p>遍历分类<a href="http://segmentfault.com/a/1190000000406017">http://segmentfault.com/a/1190000000406017</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Octopress搭建和配置]]></title>

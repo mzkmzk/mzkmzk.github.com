@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: sql | K]]></title>
+  <link href="http://mzkmzk.github.io/blog/categories/sql/atom.xml" rel="self"/>
+  <link href="http://mzkmzk.github.io/"/>
+  <updated>2015-07-13T22:44:38+08:00</updated>
+  <id>http://mzkmzk.github.io/</id>
+  <author>
+    <name><![CDATA[K]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[sql server 简单问题集合]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/05/21/sqlserver_question/"/>
+    <updated>2015-05-21T08:22:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/05/21/sqlserver_question</id>
+    <content type="html"><![CDATA[<!--more-->
+
+
+<h3>忘记sa账号密码</h3>
+
+<p>用windows验证登陆进去执行</p>
+
+<pre><code>EXEC sp_password NULL,'Newpassword','sa'
+</code></pre>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[ sql server 2008 安装]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/05/18/sqlserver_install/"/>
+    <updated>2015-05-18T08:22:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/05/18/sqlserver_install</id>
+    <content type="html"><![CDATA[<!--more-->
+
+
+<h3>0x00下载地址</h3>
+
+<p><a href="http://blog.sina.com.cn/s/blog_4aedf6370101j9tz.html">http://blog.sina.com.cn/s/blog_4aedf6370101j9tz.html</a></p>
+
+<h3>0x01安装</h3>
+
+<p>解压完成后 点击 setup.exe</p>
+
+<p>然后</p>
+
+<p><img src="/images/blog/2015-05-19-01.png" alt="image" /></p>
+
+<p><img src="/images/blog/2015-05-19-02.png" alt="image" /></p>
+
+<p>如果在这次自己填写账号密码的话 就会报错 要改为NO AUTHORITY SYSTEM的 另外一个选项未尝试
+<img src="/images/blog/2015-05-19-03.png" alt="image" /></p>
+
+<p><img src="/images/blog/2015-05-19-04.png" alt="image" /></p>
+
+<p><img src="/images/blog/2015-05-19-05.png" alt="image" /></p>
+
+<p><img src="/images/blog/2015-05-19-06.png" alt="image" /></p>
+
+<h3>0X02 安装完后开始导入数据库</h3>
+
+<p><img src="/images/blog/2015-05-19-07.png" alt="image" /></p>
+
+<p>先选择sqlserver management  studio</p>
+
+<p>然后右击数据库附加 选中mdf即可</p>
+
+<h3>0x03 java程序连接数据库</h3>
+
+<p>先查看一下数据库的占用端口</p>
+
+<p>记得启用Tcp/IP连接和 在里面属性查看端口</p>
+
+<p><img src="/images/blog/2015-05-19-08.png" alt="image" /></p>
+
+<p>java连接代码 注意之前要添加驱动包</p>
+
+<pre><code>import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
+public class Test_connect_sqlserver {
+public static void main(String args[]){
+ String driverName = "com.microsoft.jdbc.sqlserver.SQLServerDriver"; // 加载JDBC驱动
+ String dbURL = "jdbc:microsoft:sqlserver://192.168.188.128:1433;databasename=jspesf"; 
+ String userName = "sa"; // 用户名
+ String userPwd = "1234"; // 密码
+
+ try {
+     // 加载SQLSERVER JDBC驱动程序
+     System.out.println("1");
+     Class.forName(driverName);
+     System.out.println("2");
+     //建立数据库连接
+     Connection connect = DriverManager.getConnection(dbURL, userName,userPwd);
+     System.out.println("3");
+     Statement stmt = connect.createStatement();
+     System.out.println("开始查询之前");
+     ResultSet rs = stmt.executeQuery("select * from dbo.admin;");
+     System.out.println("查询结束");
+     while (rs.next()) {
+         System.out.println(rs.getString("username"));
+     }
+ } catch (ClassNotFoundException e) {
+     System.out.print("Error loading SQLServer Driver!");
+     e.printStackTrace();
+ } catch (Exception e) {
+     System.out.print("get data error!");
+     e.printStackTrace();
+ }
+}
+}
+</code></pre>
+
+<h3>参考链接</h3>
+
+<p>安装sqlserver<a href="http://www.downcc.com/tech/4135.html">http://www.downcc.com/tech/4135.html</a>
+查看端口<a href="http://www.cnblogs.com/xwdreamer/archive/2012/06/23/2559344.html">http://www.cnblogs.com/xwdreamer/archive/2012/06/23/2559344.html</a></p>
+]]></content>
+  </entry>
+  
+</feed>

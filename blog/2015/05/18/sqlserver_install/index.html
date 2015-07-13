@@ -1,0 +1,386 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title> sql server 2008 安装 - K</title>
+	<meta name="author" content="K">
+
+	
+	<meta name="description" content="0x00下载地址 http://blog.sina.com.cn/s/blog_4aedf6370101j9tz.html 0x01安装 解压完成后 点击 setup.exe 然后 如果在这次自己填写账号密码的话 就会报错 要改为NO AUTHORITY SYSTEM的 另外一个选项未尝试 &hellip;">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link href="false" rel="alternate" title="K" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script async="true" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	
+</head>
+
+
+<body>
+	<header id="header" class="inner"><h1><a href="/">K</a></h1>
+<nav id="K_select">
+	<div class="alignleft menu">
+		<a class="button">Category</a>
+		<div class="container"><ul class="main">
+		
+	
+<li><a href="/blog/categories/markdown">markdown</a></li>
+
+<li><a href="/blog/categories/data">data</a></li>
+
+<li><a href="/blog/categories/php">php</a></li>
+
+<li><a href="/blog/categories/svn">svn</a></li>
+
+<li><a href="/blog/categories/octopress">octopress</a></li>
+
+<li><a href="/blog/categories/mysql">mysql</a></li>
+
+<li><a href="/blog/categories/j2ee">j2ee</a></li>
+
+<li><a href="/blog/categories/mac">mac</a></li>
+
+<li><a href="/blog/categories/struts2">struts2</a></li>
+
+<li><a href="/blog/categories/android">android</a></li>
+
+<li><a href="/blog/categories/hack">hack</a></li>
+
+<li><a href="/blog/categories/design">design</a></li>
+
+<li><a href="/blog/categories/eclipse">eclipse</a></li>
+
+<li><a href="/blog/categories/readme">readme</a></li>
+
+<li><a href="/blog/categories/javascript">javascript</a></li>
+
+<li><a href="/blog/categories/arduino">arduino</a></li>
+
+<li><a href="/blog/categories/jquery">jquery</a></li>
+
+<li><a href="/blog/categories/bootstrap">bootstrap</a></li>
+
+<li><a href="/blog/categories/squild">squild</a></li>
+
+<li><a href="/blog/categories/question">question</a></li>
+
+<li><a href="/blog/categories/java">java</a></li>
+
+<li><a href="/blog/categories/sqlmap">sqlmap</a></li>
+
+<li><a href="/blog/categories/python">python</a></li>
+
+<li><a href="/blog/categories/git">git</a></li>
+
+<li><a href="/blog/categories/pr">pr</a></li>
+
+<li><a href="/blog/categories/linux">linux</a></li>
+
+<li><a href="/blog/categories/oracle">oracle</a></li>
+
+<li><a href="/blog/categories/windows">windows</a></li>
+
+<li><a href="/blog/categories/video">video</a></li>
+
+<li><a href="/blog/categories/travel">travel</a></li>
+
+<li><a href="/blog/categories/web">web</a></li>
+
+<li><a href="/blog/categories/httracl">httracl</a></li>
+
+<li><a href="/blog/categories/httpclient">httpclient</a></li>
+
+<li><a href="/blog/categories/sql">sql</a></li>
+
+<li><a href="/blog/categories/photoshop">photoshop</a></li>
+
+</ul>
+</div>
+	</div>
+	<div class="alignright search">
+		<a class="button"></a>
+		<div class="container">
+			<form action="https://www.google.com/search" method="get">
+				<input type="text" name="q" results="0">
+				<input type="hidden" name="q" value="site:mzkmzk.github.io">
+			</form>
+		</div>
+	</div>
+</nav>
+<nav id="main-nav">
+	<ul class="main">
+		
+	
+
+
+</ul>
+
+	</nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Category</a>
+		<div class="container"><ul class="main">
+		
+	
+<li><a href="/blog/categories/markdown">markdown</a></li>
+
+<li><a href="/blog/categories/data">data</a></li>
+
+<li><a href="/blog/categories/php">php</a></li>
+
+<li><a href="/blog/categories/svn">svn</a></li>
+
+<li><a href="/blog/categories/octopress">octopress</a></li>
+
+<li><a href="/blog/categories/mysql">mysql</a></li>
+
+<li><a href="/blog/categories/j2ee">j2ee</a></li>
+
+<li><a href="/blog/categories/mac">mac</a></li>
+
+<li><a href="/blog/categories/struts2">struts2</a></li>
+
+<li><a href="/blog/categories/android">android</a></li>
+
+<li><a href="/blog/categories/hack">hack</a></li>
+
+<li><a href="/blog/categories/design">design</a></li>
+
+<li><a href="/blog/categories/eclipse">eclipse</a></li>
+
+<li><a href="/blog/categories/readme">readme</a></li>
+
+<li><a href="/blog/categories/javascript">javascript</a></li>
+
+<li><a href="/blog/categories/arduino">arduino</a></li>
+
+<li><a href="/blog/categories/jquery">jquery</a></li>
+
+<li><a href="/blog/categories/bootstrap">bootstrap</a></li>
+
+<li><a href="/blog/categories/squild">squild</a></li>
+
+<li><a href="/blog/categories/question">question</a></li>
+
+<li><a href="/blog/categories/java">java</a></li>
+
+<li><a href="/blog/categories/sqlmap">sqlmap</a></li>
+
+<li><a href="/blog/categories/python">python</a></li>
+
+<li><a href="/blog/categories/git">git</a></li>
+
+<li><a href="/blog/categories/pr">pr</a></li>
+
+<li><a href="/blog/categories/linux">linux</a></li>
+
+<li><a href="/blog/categories/oracle">oracle</a></li>
+
+<li><a href="/blog/categories/windows">windows</a></li>
+
+<li><a href="/blog/categories/video">video</a></li>
+
+<li><a href="/blog/categories/travel">travel</a></li>
+
+<li><a href="/blog/categories/web">web</a></li>
+
+<li><a href="/blog/categories/httracl">httracl</a></li>
+
+<li><a href="/blog/categories/httpclient">httpclient</a></li>
+
+<li><a href="/blog/categories/sql">sql</a></li>
+
+<li><a href="/blog/categories/photoshop">photoshop</a></li>
+
+</ul>
+</div>
+	</div>
+	<div class="alignright search">
+		<a class="button"></a>
+		<div class="container">
+			<form action="https://www.google.com/search" method="get">
+				<input type="text" name="q" results="0">
+				<input type="hidden" name="q" value="site:mzkmzk.github.io">
+			</form>
+		</div>
+	</div>
+</nav>
+<nav id="sub-nav" class="alignright">
+	<div class="social">
+		
+		
+		
+		
+    
+		
+		
+		
+		
+		
+    
+	</div>
+	
+</nav>
+
+</header>
+	
+		
+	
+	<div id="content" class="inner"><article class="post">
+	<h2 class="title">Sql Server 2008 安装</h2>
+	<div class="entry-content"><!--more-->
+
+
+<h3>0x00下载地址</h3>
+
+<p><a href="http://blog.sina.com.cn/s/blog_4aedf6370101j9tz.html">http://blog.sina.com.cn/s/blog_4aedf6370101j9tz.html</a></p>
+
+<h3>0x01安装</h3>
+
+<p>解压完成后 点击 setup.exe</p>
+
+<p>然后</p>
+
+<p><img src="/images/blog/2015-05-19-01.png" alt="image" /></p>
+
+<p><img src="/images/blog/2015-05-19-02.png" alt="image" /></p>
+
+<p>如果在这次自己填写账号密码的话 就会报错 要改为NO AUTHORITY SYSTEM的 另外一个选项未尝试
+<img src="/images/blog/2015-05-19-03.png" alt="image" /></p>
+
+<p><img src="/images/blog/2015-05-19-04.png" alt="image" /></p>
+
+<p><img src="/images/blog/2015-05-19-05.png" alt="image" /></p>
+
+<p><img src="/images/blog/2015-05-19-06.png" alt="image" /></p>
+
+<h3>0X02 安装完后开始导入数据库</h3>
+
+<p><img src="/images/blog/2015-05-19-07.png" alt="image" /></p>
+
+<p>先选择sqlserver management  studio</p>
+
+<p>然后右击数据库附加 选中mdf即可</p>
+
+<h3>0x03 java程序连接数据库</h3>
+
+<p>先查看一下数据库的占用端口</p>
+
+<p>记得启用Tcp/IP连接和 在里面属性查看端口</p>
+
+<p><img src="/images/blog/2015-05-19-08.png" alt="image" /></p>
+
+<p>java连接代码 注意之前要添加驱动包</p>
+
+<pre><code>import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
+public class Test_connect_sqlserver {
+public static void main(String args[]){
+ String driverName = "com.microsoft.jdbc.sqlserver.SQLServerDriver"; // 加载JDBC驱动
+ String dbURL = "jdbc:microsoft:sqlserver://192.168.188.128:1433;databasename=jspesf"; 
+ String userName = "sa"; // 用户名
+ String userPwd = "1234"; // 密码
+
+ try {
+     // 加载SQLSERVER JDBC驱动程序
+     System.out.println("1");
+     Class.forName(driverName);
+     System.out.println("2");
+     //建立数据库连接
+     Connection connect = DriverManager.getConnection(dbURL, userName,userPwd);
+     System.out.println("3");
+     Statement stmt = connect.createStatement();
+     System.out.println("开始查询之前");
+     ResultSet rs = stmt.executeQuery("select * from dbo.admin;");
+     System.out.println("查询结束");
+     while (rs.next()) {
+         System.out.println(rs.getString("username"));
+     }
+ } catch (ClassNotFoundException e) {
+     System.out.print("Error loading SQLServer Driver!");
+     e.printStackTrace();
+ } catch (Exception e) {
+     System.out.print("get data error!");
+     e.printStackTrace();
+ }
+}
+}
+</code></pre>
+
+<h3>参考链接</h3>
+
+<p>安装sqlserver<a href="http://www.downcc.com/tech/4135.html">http://www.downcc.com/tech/4135.html</a>
+查看端口<a href="http://www.cnblogs.com/xwdreamer/archive/2012/06/23/2559344.html">http://www.cnblogs.com/xwdreamer/archive/2012/06/23/2559344.html</a></p>
+</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-05-18T08:22:40+08:00" pubdate data-updated="true"></time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/sql/'>sql</a>
+
+
+</div>
+	
+</div>
+</article>
+
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+		
+		
+		<a class="addthis_button_tweet"></a>
+		
+		
+		
+	</div>
+	
+</div>
+
+
+</div>
+	<footer id="footer" class="inner">
+
+Copyright &copy; 2015
+
+    K
+
+
+</footer>
+	<script src="/javascripts/slash.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+	$('.fancybox').fancybox();
+})(jQuery);
+</script> <!-- Delete or comment this line to disable Fancybox -->
+
+
+
+
+
+
+</body>
+</html>

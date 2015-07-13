@@ -1,0 +1,651 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Android 版本升级实现 - K</title>
+	<meta name="author" content="K">
+
+	
+	<meta name="description" content="项目中版本更新是不可或缺的功能 0x00配置Config 这里主要配置的是4个final属性 还有的就是获取新版信息的路径,返回的是一个json 如 {"version":{"apkname":"Tjrac_lib.apk","appname":"Tjrac_lib","verCode":"2 &hellip;">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link href="false" rel="alternate" title="K" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script async="true" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	
+</head>
+
+
+<body>
+	<header id="header" class="inner"><h1><a href="/">K</a></h1>
+<nav id="K_select">
+	<div class="alignleft menu">
+		<a class="button">Category</a>
+		<div class="container"><ul class="main">
+		
+	
+<li><a href="/blog/categories/markdown">markdown</a></li>
+
+<li><a href="/blog/categories/data">data</a></li>
+
+<li><a href="/blog/categories/php">php</a></li>
+
+<li><a href="/blog/categories/svn">svn</a></li>
+
+<li><a href="/blog/categories/octopress">octopress</a></li>
+
+<li><a href="/blog/categories/mysql">mysql</a></li>
+
+<li><a href="/blog/categories/j2ee">j2ee</a></li>
+
+<li><a href="/blog/categories/mac">mac</a></li>
+
+<li><a href="/blog/categories/struts2">struts2</a></li>
+
+<li><a href="/blog/categories/android">android</a></li>
+
+<li><a href="/blog/categories/hack">hack</a></li>
+
+<li><a href="/blog/categories/design">design</a></li>
+
+<li><a href="/blog/categories/eclipse">eclipse</a></li>
+
+<li><a href="/blog/categories/readme">readme</a></li>
+
+<li><a href="/blog/categories/javascript">javascript</a></li>
+
+<li><a href="/blog/categories/arduino">arduino</a></li>
+
+<li><a href="/blog/categories/jquery">jquery</a></li>
+
+<li><a href="/blog/categories/bootstrap">bootstrap</a></li>
+
+<li><a href="/blog/categories/squild">squild</a></li>
+
+<li><a href="/blog/categories/question">question</a></li>
+
+<li><a href="/blog/categories/java">java</a></li>
+
+<li><a href="/blog/categories/sqlmap">sqlmap</a></li>
+
+<li><a href="/blog/categories/python">python</a></li>
+
+<li><a href="/blog/categories/git">git</a></li>
+
+<li><a href="/blog/categories/pr">pr</a></li>
+
+<li><a href="/blog/categories/linux">linux</a></li>
+
+<li><a href="/blog/categories/oracle">oracle</a></li>
+
+<li><a href="/blog/categories/windows">windows</a></li>
+
+<li><a href="/blog/categories/video">video</a></li>
+
+<li><a href="/blog/categories/travel">travel</a></li>
+
+<li><a href="/blog/categories/web">web</a></li>
+
+<li><a href="/blog/categories/httracl">httracl</a></li>
+
+<li><a href="/blog/categories/httpclient">httpclient</a></li>
+
+<li><a href="/blog/categories/sql">sql</a></li>
+
+<li><a href="/blog/categories/photoshop">photoshop</a></li>
+
+</ul>
+</div>
+	</div>
+	<div class="alignright search">
+		<a class="button"></a>
+		<div class="container">
+			<form action="https://www.google.com/search" method="get">
+				<input type="text" name="q" results="0">
+				<input type="hidden" name="q" value="site:mzkmzk.github.io">
+			</form>
+		</div>
+	</div>
+</nav>
+<nav id="main-nav">
+	<ul class="main">
+		
+	
+
+
+</ul>
+
+	</nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Category</a>
+		<div class="container"><ul class="main">
+		
+	
+<li><a href="/blog/categories/markdown">markdown</a></li>
+
+<li><a href="/blog/categories/data">data</a></li>
+
+<li><a href="/blog/categories/php">php</a></li>
+
+<li><a href="/blog/categories/svn">svn</a></li>
+
+<li><a href="/blog/categories/octopress">octopress</a></li>
+
+<li><a href="/blog/categories/mysql">mysql</a></li>
+
+<li><a href="/blog/categories/j2ee">j2ee</a></li>
+
+<li><a href="/blog/categories/mac">mac</a></li>
+
+<li><a href="/blog/categories/struts2">struts2</a></li>
+
+<li><a href="/blog/categories/android">android</a></li>
+
+<li><a href="/blog/categories/hack">hack</a></li>
+
+<li><a href="/blog/categories/design">design</a></li>
+
+<li><a href="/blog/categories/eclipse">eclipse</a></li>
+
+<li><a href="/blog/categories/readme">readme</a></li>
+
+<li><a href="/blog/categories/javascript">javascript</a></li>
+
+<li><a href="/blog/categories/arduino">arduino</a></li>
+
+<li><a href="/blog/categories/jquery">jquery</a></li>
+
+<li><a href="/blog/categories/bootstrap">bootstrap</a></li>
+
+<li><a href="/blog/categories/squild">squild</a></li>
+
+<li><a href="/blog/categories/question">question</a></li>
+
+<li><a href="/blog/categories/java">java</a></li>
+
+<li><a href="/blog/categories/sqlmap">sqlmap</a></li>
+
+<li><a href="/blog/categories/python">python</a></li>
+
+<li><a href="/blog/categories/git">git</a></li>
+
+<li><a href="/blog/categories/pr">pr</a></li>
+
+<li><a href="/blog/categories/linux">linux</a></li>
+
+<li><a href="/blog/categories/oracle">oracle</a></li>
+
+<li><a href="/blog/categories/windows">windows</a></li>
+
+<li><a href="/blog/categories/video">video</a></li>
+
+<li><a href="/blog/categories/travel">travel</a></li>
+
+<li><a href="/blog/categories/web">web</a></li>
+
+<li><a href="/blog/categories/httracl">httracl</a></li>
+
+<li><a href="/blog/categories/httpclient">httpclient</a></li>
+
+<li><a href="/blog/categories/sql">sql</a></li>
+
+<li><a href="/blog/categories/photoshop">photoshop</a></li>
+
+</ul>
+</div>
+	</div>
+	<div class="alignright search">
+		<a class="button"></a>
+		<div class="container">
+			<form action="https://www.google.com/search" method="get">
+				<input type="text" name="q" results="0">
+				<input type="hidden" name="q" value="site:mzkmzk.github.io">
+			</form>
+		</div>
+	</div>
+</nav>
+<nav id="sub-nav" class="alignright">
+	<div class="social">
+		
+		
+		
+		
+    
+		
+		
+		
+		
+		
+    
+	</div>
+	
+</nav>
+
+</header>
+	
+		
+	
+	<div id="content" class="inner"><article class="post">
+	<h2 class="title">Android 版本升级实现</h2>
+	<div class="entry-content"><!--more-->
+
+
+<p>项目中版本更新是不可或缺的功能</p>
+
+<p><img src="images/blog/2015-06-24-01.png" alt="展示图" /></p>
+
+<h3>0x00配置Config</h3>
+
+<p>这里主要配置的是4个final属性 还有的就是获取新版信息的路径,返回的是一个json 如</p>
+
+<p><code>{"version":{"apkname":"Tjrac_lib.apk","appname":"Tjrac_lib","verCode":"2","verName":"1.0.1"}}</code></p>
+
+<p>然后存放新版apk在UPDATE_APKNAME路径上~</p>
+
+<pre><code>import com.tjrac.R;
+
+import android.content.Context;
+import android.content.pm.PackageManager.NameNotFoundException;
+import android.util.Log;
+
+public class Config {
+private static final String TAG = "Config";
+/**
+ * 服务器存放的apk路径
+ */
+public static final String UPDATE_SERVER = "http://192.168.0.101:8080/NFC_Library/";
+
+/**
+ * 新版apk存在服务器的路径和名称
+ */
+public static final String UPDATE_APKNAME = "Tjrac_lib.apk";
+
+/**
+ * 获取版本信息的访问路径
+ */
+public static final String UPDATE_VERJSON = "LIB/LIB_AndroidUser_Version_Update";
+
+/**
+ * 保存在sdk内的新版apk名称
+ */
+public static final String UPDATE_SAVENAME = "Tjrac_lib.apk";
+
+public static int getVerCode(Context context) {
+    int verCode = -1;
+    try {
+        verCode = context.getPackageManager().getPackageInfo(
+                "com.tjrac", 0).versionCode;
+        System.out.println("版本号为 : "+verCode);
+    } catch (NameNotFoundException e) {
+        Log.e(TAG, e.getMessage());
+    }
+    return verCode;
+}
+
+public static String getVerName(Context context) {
+    String verName = "";
+    try {
+        verName = context.getPackageManager().getPackageInfo(
+                "com.tjrac", 0).versionName;
+        System.out.println("版本名称为 : "+verName);
+    } catch (NameNotFoundException e) {
+        Log.e(TAG, e.getMessage());
+    }
+    return verName;
+}
+
+public static String getAppName(Context context) {
+    String verName = context.getResources().getText(R.string.app_name)
+            .toString();
+    return verName;
+}
+}
+</code></pre>
+
+<h3>0x01 更新操作类 Update</h3>
+
+<p>getServerVerCode():获取新版本信息
+Select_Version():比较新旧版本号
+notNewVersionShow():版本号一致无需更新
+doNewVersionUpdate():更新版本
+downFile(final String url):下载新版本
+down():下载完成,取消提示框
+update():安装新版本</p>
+
+<pre><code>import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.json.JSONObject;
+
+import com.tjrac.R;
+import com.tjrac.activity.base.BaseActivity;
+
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Bundle;
+import android.os.Environment;
+import android.os.Handler;
+
+public class Update  extends Activity{
+private static final String TAG = "Update";
+public ProgressDialog pBar;
+private Handler handler = new Handler();
+private Handler handler_Select_Version =new Handler();
+private int newVerCode = 0;
+private String newVerName = "";
+private Context context;
+
+public Update(Context context){
+    this.context=context;
+}
+
+public boolean getServerVerCode() {
+    new Thread() {
+        public void run() {
+            try {
+                String verjson = NetworkTool.getContent(Config.UPDATE_SERVER
+                        + Config.UPDATE_VERJSON);
+                System.out.println("getServerVerCode : " +Config.UPDATE_SERVER + Config.UPDATE_VERJSON);
+                System.out.println("获取新的版本号 json : " +verjson );
+                JSONObject json_msg = new JSONObject(verjson);
+                JSONObject obj = json_msg.getJSONObject("version");
+                    try {
+                        newVerCode = Integer.parseInt(obj.getString("verCode"));
+                        System.out.println("json 解析的新 版本 号 newVerCode为 : "+ newVerCode);
+                        newVerName = obj.getString("verName");
+                        System.out.println("json 解析的新 版本 名称 newVerName为 : "+ newVerName);
+                        Select_Version();
+                    } catch (Exception e) {
+                        newVerCode = -1;
+                        newVerName = "";
+                        e.printStackTrace();
+                    }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }.start();
+
+    return true;
+}
+
+void Select_Version(){
+    handler_Select_Version.post(new Runnable() {
+        public void run() {
+            int vercode = Config.getVerCode(context);
+            System.out.println("获取新版本号后 为 新版本为 : "+ newVerCode +"  旧版本号为 : "+vercode);
+            if (newVerCode &gt; vercode) {
+                doNewVersionUpdate();
+            } else {
+                notNewVersionShow();
+            }
+        }
+    });
+}
+
+private void notNewVersionShow() {
+    int verCode = Config.getVerCode(context);
+    String verName = Config.getVerName(context);
+    StringBuffer sb = new StringBuffer();
+    sb.append("当前版本:");
+    sb.append(verName);
+    sb.append(" Code:");
+    sb.append(verCode);
+    sb.append(",\n已是最新版,⽆无需更新!");
+    Dialog dialog = new AlertDialog.Builder(context)
+            .setTitle("软件更新").setMessage(sb.toString())// 设置内容
+            .setPositiveButton("确定",// 设置确定按钮
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog,
+                                int which) {
+                            finish();
+                        }
+                    }).create();// 创建 // 显⽰示对话框
+    dialog.show();
+}
+
+private void doNewVersionUpdate() {
+    int verCode = Config.getVerCode(context);
+    String verName = Config.getVerName(context);
+    StringBuffer sb = new StringBuffer();
+    sb.append("当前版本:");
+    sb.append(verName);
+    sb.append(" Code:");
+    sb.append(verCode);
+    sb.append(", 发现新版本:");
+    sb.append(newVerName);
+    sb.append(" Code:");
+    sb.append(newVerCode);
+    sb.append(", 是否更新?");
+    Dialog dialog = new AlertDialog.Builder(context)
+            .setTitle("软件更新")
+            .setMessage(sb.toString())
+            // 设置内容
+            .setPositiveButton("更新",// 设置确定按钮
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog,
+                                int which) {
+                            pBar = new ProgressDialog(context);
+                            pBar.setTitle("正在下载");
+                            pBar.setMessage("请稍候...");
+                            pBar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                            downFile(Config.UPDATE_SERVER
+                                    + Config.UPDATE_APKNAME);
+                            System.out.println("更新版本下载地址 : "+Config.UPDATE_SERVER+ Config.UPDATE_APKNAME );
+                        }
+                    })
+            .setNegativeButton("暂不更新",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog,
+                                int whichButton) {
+                            // 点击"取消"按钮之后退出程序 finish();
+                        }
+                    }).create();// 创建
+    // 显⽰示对话框
+    dialog.show();
+}
+
+void downFile(final String url) {
+    pBar.show();
+    new Thread() {
+        public void run() {
+            HttpClient client = new DefaultHttpClient();
+            HttpGet get = new HttpGet(url);
+            HttpResponse response;
+            try {
+                response = client.execute(get);
+                HttpEntity entity = response.getEntity();
+                long length = entity.getContentLength();
+                InputStream is = entity.getContent();
+                FileOutputStream fileOutputStream = null;
+                if (is != null) {
+                    File file = new File(
+                            Environment.getExternalStorageDirectory(),
+                            Config.UPDATE_SAVENAME);
+                    fileOutputStream = new FileOutputStream(file);
+                    byte[] buf = new byte[1024];
+                    int ch = -1;
+                    int count = 0;
+                    while ((ch = is.read(buf)) != -1) {
+                        fileOutputStream.write(buf, 0, ch);
+                        count += ch;
+                        if (length &gt; 0) {
+                        }
+                    }
+                }
+                fileOutputStream.flush();
+                if (fileOutputStream != null) {
+                    fileOutputStream.close();
+                }
+                down();
+            } catch (ClientProtocolException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }.start();
+}
+
+void down() {
+    handler.post(new Runnable() {
+        public void run() {
+            pBar.cancel();
+            update();
+        }
+    });
+}
+
+void update() {
+    Intent intent = new Intent(Intent.ACTION_VIEW);
+    intent.setDataAndType(Uri.fromFile(new File(Environment
+            .getExternalStorageDirectory(), Config.UPDATE_SAVENAME)),
+            "application/vnd.android.package-archive");
+    context.startActivity(intent);
+}
+}
+</code></pre>
+
+<h3>网络辅助类 NetworkTool</h3>
+
+<pre><code>import java.io.BufferedReader;
+import java.io.InputStreamReader;
+
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.params.HttpConnectionParams;
+import org.apache.http.params.HttpParams;
+
+public class NetworkTool {
+/**
+ * 获取⺴⽹网址内容
+ * 
+ * @param url
+ * @return
+ * @throws Exception
+ */
+public static String getContent(String url) throws Exception {
+    StringBuilder sb = new StringBuilder();
+    HttpClient client = new DefaultHttpClient();
+    HttpParams httpParams = client.getParams();
+    // 设置⺴⽹网络超时参数 HttpConnectionParams.setConnectionTimeout(httpParams,
+    // 3000);
+    HttpConnectionParams.setSoTimeout(httpParams, 5000);
+    HttpResponse response = client.execute(new HttpGet(url));
+    HttpEntity entity = response.getEntity();
+    if (entity != null) {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(
+                entity.getContent(), "UTF-8"), 8192);
+        String line = null;
+        while ((line = reader.readLine()) != null) {
+            sb.append(line + "\n");
+        }
+        reader.close();
+    }
+    return sb.toString();
+}
+}
+</code></pre>
+
+<h3>调用更新方法</h3>
+
+<p>在当前的activity中</p>
+
+<pre><code>Update update =new Update(Sy_Activity.this);
+update.getServerVerCode();
+</code></pre>
+
+<h1>参考链接</h1>
+
+<p><a href="http://blog.csdn.net/xjanker2/article/details/6303937">http://blog.csdn.net/xjanker2/article/details/6303937</a></p>
+
+<p><a href="https://code.google.com/p/androidex/source/browse/trunk/jtapp-12-updateapksamples/">https://code.google.com/p/androidex/source/browse/trunk/jtapp-12-updateapksamples/</a></p>
+</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-06-23T21:28:46+08:00" pubdate data-updated="true"></time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/android/'>android</a>
+
+
+</div>
+	
+</div>
+</article>
+
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+		
+		
+		<a class="addthis_button_tweet"></a>
+		
+		
+		
+	</div>
+	
+</div>
+
+
+</div>
+	<footer id="footer" class="inner">
+
+Copyright &copy; 2015
+
+    K
+
+
+</footer>
+	<script src="/javascripts/slash.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+	$('.fancybox').fancybox();
+})(jQuery);
+</script> <!-- Delete or comment this line to disable Fancybox -->
+
+
+
+
+
+
+</body>
+</html>

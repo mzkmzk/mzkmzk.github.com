@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: photoshop | K]]></title>
+  <link href="http://mzkmzk.github.io/blog/categories/photoshop/atom.xml" rel="self"/>
+  <link href="http://mzkmzk.github.io/"/>
+  <updated>2015-07-13T22:44:38+08:00</updated>
+  <id>http://mzkmzk.github.io/</id>
+  <author>
+    <name><![CDATA[K]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[ps网上知识积累]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/07/02/ps.markdwon/"/>
+    <updated>2015-07-02T21:28:46+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/07/02/ps.markdwon</id>
+    <content type="html"><![CDATA[<!--more-->
+
+
+<h3>ps知识积累</h3>
+
+<p>消除背景<a href="http://jingyan.baidu.com/article/17bd8e52f64bc485ab2bb8c1.html">http://jingyan.baidu.com/article/17bd8e52f64bc485ab2bb8c1.html</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[把图片P成圆形]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/06/06/ps_circle_markdown/"/>
+    <updated>2015-06-06T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/06/06/ps_circle_markdown</id>
+    <content type="html"><![CDATA[<!--more-->
+
+
+<p>图书馆老师叫我把图书馆app的logo设置一下- -&hellip;&hellip;额&hellip;..额&hellip;..我只有在网上找图,,然后P成圆形 效果还OK - -..</p>
+
+<p><img src="/images/blog/2015-06-06-01.png" alt="效果图" /></p>
+
+<h3>0x00 用圆形框住所需部分</h3>
+
+<p><img src="/images/blog/2015-06-06-02.png" alt="圆形取内容" /></p>
+
+<h3>0x01 调节背景色为黑色</h3>
+
+<p><img src="/images/blog/2015-06-06-03.png" alt="调节背景色" /></p>
+
+<h3>0x02 添加矢量蒙版</h3>
+
+<p><img src="/images/blog/2015-06-06-04.png" alt="添加矢量蒙版" /></p>
+
+<h3>参考链接</h3>
+
+<p><a href="http://jingyan.baidu.com/article/c275f6bac3da2de33d75672c.html">http://jingyan.baidu.com/article/c275f6bac3da2de33d75672c.html</a></p>
+]]></content>
+  </entry>
+  
+</feed>

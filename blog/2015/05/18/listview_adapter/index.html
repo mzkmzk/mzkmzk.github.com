@@ -1,0 +1,686 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>ListView与Adapter简单试用 - K</title>
+	<meta name="author" content="K">
+
+	
+	<meta name="description" content="0x00 概述 在android项目中,有很多时候要用到列表,这时listview和adapter
+就能满足你的需求,基本的 创建总布局文件
+创建listview_item即每一行要显示的布局文件
+创建adapter类
+创建activity类将数据放进adapter中 这里是完成后的效果图 &hellip;">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link href="false" rel="alternate" title="K" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script async="true" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	
+</head>
+
+
+<body>
+	<header id="header" class="inner"><h1><a href="/">K</a></h1>
+<nav id="K_select">
+	<div class="alignleft menu">
+		<a class="button">Category</a>
+		<div class="container"><ul class="main">
+		
+	
+<li><a href="/blog/categories/markdown">markdown</a></li>
+
+<li><a href="/blog/categories/data">data</a></li>
+
+<li><a href="/blog/categories/php">php</a></li>
+
+<li><a href="/blog/categories/svn">svn</a></li>
+
+<li><a href="/blog/categories/octopress">octopress</a></li>
+
+<li><a href="/blog/categories/mysql">mysql</a></li>
+
+<li><a href="/blog/categories/j2ee">j2ee</a></li>
+
+<li><a href="/blog/categories/mac">mac</a></li>
+
+<li><a href="/blog/categories/struts2">struts2</a></li>
+
+<li><a href="/blog/categories/android">android</a></li>
+
+<li><a href="/blog/categories/hack">hack</a></li>
+
+<li><a href="/blog/categories/design">design</a></li>
+
+<li><a href="/blog/categories/eclipse">eclipse</a></li>
+
+<li><a href="/blog/categories/readme">readme</a></li>
+
+<li><a href="/blog/categories/javascript">javascript</a></li>
+
+<li><a href="/blog/categories/arduino">arduino</a></li>
+
+<li><a href="/blog/categories/jquery">jquery</a></li>
+
+<li><a href="/blog/categories/bootstrap">bootstrap</a></li>
+
+<li><a href="/blog/categories/squild">squild</a></li>
+
+<li><a href="/blog/categories/question">question</a></li>
+
+<li><a href="/blog/categories/java">java</a></li>
+
+<li><a href="/blog/categories/sqlmap">sqlmap</a></li>
+
+<li><a href="/blog/categories/python">python</a></li>
+
+<li><a href="/blog/categories/git">git</a></li>
+
+<li><a href="/blog/categories/pr">pr</a></li>
+
+<li><a href="/blog/categories/linux">linux</a></li>
+
+<li><a href="/blog/categories/oracle">oracle</a></li>
+
+<li><a href="/blog/categories/windows">windows</a></li>
+
+<li><a href="/blog/categories/video">video</a></li>
+
+<li><a href="/blog/categories/travel">travel</a></li>
+
+<li><a href="/blog/categories/web">web</a></li>
+
+<li><a href="/blog/categories/httracl">httracl</a></li>
+
+<li><a href="/blog/categories/httpclient">httpclient</a></li>
+
+<li><a href="/blog/categories/sql">sql</a></li>
+
+<li><a href="/blog/categories/photoshop">photoshop</a></li>
+
+</ul>
+</div>
+	</div>
+	<div class="alignright search">
+		<a class="button"></a>
+		<div class="container">
+			<form action="https://www.google.com/search" method="get">
+				<input type="text" name="q" results="0">
+				<input type="hidden" name="q" value="site:mzkmzk.github.io">
+			</form>
+		</div>
+	</div>
+</nav>
+<nav id="main-nav">
+	<ul class="main">
+		
+	
+
+
+</ul>
+
+	</nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Category</a>
+		<div class="container"><ul class="main">
+		
+	
+<li><a href="/blog/categories/markdown">markdown</a></li>
+
+<li><a href="/blog/categories/data">data</a></li>
+
+<li><a href="/blog/categories/php">php</a></li>
+
+<li><a href="/blog/categories/svn">svn</a></li>
+
+<li><a href="/blog/categories/octopress">octopress</a></li>
+
+<li><a href="/blog/categories/mysql">mysql</a></li>
+
+<li><a href="/blog/categories/j2ee">j2ee</a></li>
+
+<li><a href="/blog/categories/mac">mac</a></li>
+
+<li><a href="/blog/categories/struts2">struts2</a></li>
+
+<li><a href="/blog/categories/android">android</a></li>
+
+<li><a href="/blog/categories/hack">hack</a></li>
+
+<li><a href="/blog/categories/design">design</a></li>
+
+<li><a href="/blog/categories/eclipse">eclipse</a></li>
+
+<li><a href="/blog/categories/readme">readme</a></li>
+
+<li><a href="/blog/categories/javascript">javascript</a></li>
+
+<li><a href="/blog/categories/arduino">arduino</a></li>
+
+<li><a href="/blog/categories/jquery">jquery</a></li>
+
+<li><a href="/blog/categories/bootstrap">bootstrap</a></li>
+
+<li><a href="/blog/categories/squild">squild</a></li>
+
+<li><a href="/blog/categories/question">question</a></li>
+
+<li><a href="/blog/categories/java">java</a></li>
+
+<li><a href="/blog/categories/sqlmap">sqlmap</a></li>
+
+<li><a href="/blog/categories/python">python</a></li>
+
+<li><a href="/blog/categories/git">git</a></li>
+
+<li><a href="/blog/categories/pr">pr</a></li>
+
+<li><a href="/blog/categories/linux">linux</a></li>
+
+<li><a href="/blog/categories/oracle">oracle</a></li>
+
+<li><a href="/blog/categories/windows">windows</a></li>
+
+<li><a href="/blog/categories/video">video</a></li>
+
+<li><a href="/blog/categories/travel">travel</a></li>
+
+<li><a href="/blog/categories/web">web</a></li>
+
+<li><a href="/blog/categories/httracl">httracl</a></li>
+
+<li><a href="/blog/categories/httpclient">httpclient</a></li>
+
+<li><a href="/blog/categories/sql">sql</a></li>
+
+<li><a href="/blog/categories/photoshop">photoshop</a></li>
+
+</ul>
+</div>
+	</div>
+	<div class="alignright search">
+		<a class="button"></a>
+		<div class="container">
+			<form action="https://www.google.com/search" method="get">
+				<input type="text" name="q" results="0">
+				<input type="hidden" name="q" value="site:mzkmzk.github.io">
+			</form>
+		</div>
+	</div>
+</nav>
+<nav id="sub-nav" class="alignright">
+	<div class="social">
+		
+		
+		
+		
+    
+		
+		
+		
+		
+		
+    
+	</div>
+	
+</nav>
+
+</header>
+	
+		
+	
+	<div id="content" class="inner"><article class="post">
+	<h2 class="title">ListView与Adapter简单试用</h2>
+	<div class="entry-content"><!--more-->
+
+
+<h3>0x00 概述</h3>
+
+<p>在android项目中,有很多时候要用到列表,这时listview和adapter
+就能满足你的需求,基本的</p>
+
+<ol>
+<li>创建总布局文件</li>
+<li>创建listview_item即每一行要显示的布局文件</li>
+<li>创建adapter类</li>
+<li>创建activity类将数据放进adapter中</li>
+</ol>
+
+
+<p>这里是完成后的效果图</p>
+
+<p><img src="/images/blog/2015-05-18-01.png" alt="image" /></p>
+
+<h3>0x01 创建总布局文件 activity_jiansuo.xml</h3>
+
+<pre><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:orientation="vertical" &gt;
+
+&lt;EditText
+    android:id="@+id/et_jiansuo"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:text="搜索内容" /&gt;
+
+&lt;Button
+    android:id="@+id/bt_jiansuo"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:text="搜索" /&gt;
+
+&lt;ListView
+    android:id="@+id/lv_jiansuo"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content" /&gt;
+
+&lt;/LinearLayout&gt;
+</code></pre>
+
+<h3>0x02 创建listview_item即每一行要显示的布局文件 activity_jiansuo_item.xml</h3>
+
+<pre><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:orientation="vertical" &gt;
+
+&lt;TextView
+    android:id="@+id/tv_m_title"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" /&gt;
+
+&lt;TextView
+    android:id="@+id/tv_call_no"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" /&gt;
+
+&lt;TextView
+    android:id="@+id/tv_guanchang"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" /&gt;
+
+&lt;TextView
+    android:id="@+id/tv_kejie"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" /&gt;
+
+&lt;TextView
+    android:id="@+id/tv_m_author"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" /&gt;
+
+&lt;TextView
+    android:id="@+id/tv_m_publisher"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" /&gt;
+
+&lt;TextView
+    android:id="@+id/tv_m_year"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" /&gt;
+
+&lt;/LinearLayout&gt;
+</code></pre>
+
+<h3>0x03 创建adapter类</h3>
+
+<pre><code>import gabriel.luoyer.promonkey.R;
+import gabriel.luoyer.promonkey.bean.LIB.LIB_book;
+
+import java.util.List;
+
+import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.TextView;
+
+public class JianSuo_Adapter extends BaseAdapter {
+
+private Context context; // 运行上下文
+private List&lt;LIB_book&gt; listItems; // 商品信息集合
+private LayoutInflater listContainer; // 视图容器
+
+public final class ListItemView {
+    public TextView tv_m_title;
+    public TextView tv_call_no;
+    public TextView tv_guanchang;
+    public TextView tv_kejie;
+    public TextView tv_m_author;
+    public TextView tv_m_publisher;
+    public TextView tv_m_year;
+}
+
+public JianSuo_Adapter(Context context, List&lt;LIB_book&gt; listItems) {
+    this.context = context;
+    this.listItems = listItems;
+    listContainer = LayoutInflater.from(context); // 创建视图容器并设置上下文
+}
+
+@Override
+public int getCount() {
+    return listItems.size();
+}
+
+@Override
+public LIB_book getItem(int position) {
+    return listItems.get(position);
+}
+
+@Override
+public long getItemId(int position) {
+    return position;
+}
+
+@Override
+public View getView(int position, View convertView, ViewGroup parent) {
+    ListItemView listItemView = null;
+    if (convertView == null) {
+        listItemView = new ListItemView();
+        convertView = listContainer.inflate(R.layout.activity_jiansuo_item, null);
+        listItemView.tv_m_title=(TextView)convertView.findViewById(R.id.tv_m_title);
+        listItemView.tv_call_no=(TextView)convertView.findViewById(R.id.tv_call_no);
+        listItemView.tv_guanchang=(TextView)convertView.findViewById(R.id.tv_guanchang);
+        listItemView.tv_kejie=(TextView)convertView.findViewById(R.id.tv_kejie);
+        listItemView.tv_m_author=(TextView)convertView.findViewById(R.id.tv_m_author);
+        listItemView.tv_m_publisher=(TextView)convertView.findViewById(R.id.tv_m_publisher);
+        listItemView.tv_m_year=(TextView)convertView.findViewById(R.id.tv_m_year);
+        //设置控件集到convertView  
+        convertView.setTag(listItemView);
+    }else{
+          listItemView = (ListItemView)convertView.getTag();  
+    }
+    listItemView.tv_m_title.setText(listItems.get(position).getM_TITLE());
+    listItemView.tv_call_no.setText(listItems.get(position).getCALL_NO());
+    listItemView.tv_guanchang.setText(listItems.get(position).getGuanChang());
+    listItemView.tv_kejie.setText(listItems.get(position).getKeJie());
+    listItemView.tv_m_author.setText(listItems.get(position).getM_AUTHOR());
+    listItemView.tv_m_publisher.setText(listItems.get(position)
+            .getM_PUBLISHER());
+    listItemView.tv_m_year.setText(listItems.get(position).getM_PUB_YEAR());
+
+    return convertView;
+}
+</code></pre>
+
+<p>}</p>
+
+<h3>0x04 创建activity类将数据放进adapter中</h3>
+
+<pre><code>import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.json.JSONObject;
+
+
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ListView;
+import gabriel.luoyer.promonkey.R;
+import gabriel.luoyer.promonkey.adapter.JianSuo_Adapter;
+import gabriel.luoyer.promonkey.base.BaseActivity;
+import gabriel.luoyer.promonkey.bean.LIB.LIB_book;
+import gabriel.luoyer.promonkey.bean.LIB.util.HttpClient_Bean_K;
+import gabriel.luoyer.promonkey.utils.HttpClient_Util_K;
+import gabriel.luoyer.promonkey.utils.NumericCharacterReference;
+
+public class JianSuo_activity extends BaseActivity {
+
+private ListView listView;
+private EditText et_jiansuo;
+private Button bt_jiansuo;
+private JianSuo_Adapter jiansuo_adapter;
+public LayoutInflater mInflater;
+public JSONObject json;
+private HttpClient_Bean_K hcbk_lend_lst;
+private List&lt;String&gt; ls_lst_two_params = new ArrayList&lt;String&gt;();
+private JianSuo_Adapter jianSuo_Adapter;
+private List&lt;LIB_book&gt; llb;
+private HttpClient_Bean_K hcbk_bl_jiansuo;
+
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_jiansuo);
+
+    initViews();
+    initEvents();
+}
+
+@Override
+protected void initViews() {
+    listView = (ListView) this.findViewById(R.id.lv_jiansuo);
+    et_jiansuo = (EditText) this.findViewById(R.id.et_jiansuo);
+    bt_jiansuo = (Button) this.findViewById(R.id.bt_jiansuo);
+}
+
+@Override
+protected void initEvents() {
+    bt_jiansuo.setOnClickListener(new OnClickListener() {
+
+        @Override
+        public void onClick(View arg0) {
+            if(!et_jiansuo.getText().toString().isEmpty()){
+                Thread jianSuo_Book_thread = new Thread(new JianSuo_Book_thread());
+                jianSuo_Book_thread.start();
+            }
+
+        }
+
+    });
+
+}
+
+class JianSuo_Book_thread implements Runnable {
+
+    @Override
+    public void run() {
+
+        /*
+         * 先写成 每次访问都要登陆 因为第一次访问为未登陆 不知道为何返回码不为302 而是200 //访问lst //Header []
+         * header_android ={new
+         * Header("Set-Cookie",sharedata.getString("Set-Cookie", null))};
+         * hcbk_lend_lst = HttpClient_Util_K .http_Client_Get_Web(
+         * "http://121.193.129.2:8080/reader/book_lst.php", null, null,
+         * null);
+         * System.out.println("hcbk_lend_lst 第一次发送未还书籍记录 返回码为 :  "+hcbk_lend_lst
+         * .getStatusCode() );
+         */
+
+        String jiansuo = "";
+        try {
+            jiansuo = URLEncoder.encode(et_jiansuo.getText()+"", "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        // 获取检索书籍
+        org.apache.commons.httpclient.NameValuePair[] data_jiansuo = {
+                new org.apache.commons.httpclient.NameValuePair(
+                        "strSearchType", "title"),
+                new org.apache.commons.httpclient.NameValuePair(
+                        "match_flag", "any"),
+                new org.apache.commons.httpclient.NameValuePair(
+                        "historyCount", "1"),
+                new org.apache.commons.httpclient.NameValuePair("strText",
+                        jiansuo),
+                new org.apache.commons.httpclient.NameValuePair("doctype",
+                        "ALL"),
+                new org.apache.commons.httpclient.NameValuePair(
+                        "with_ebook", "on"),
+                new org.apache.commons.httpclient.NameValuePair(
+                        "displaypg", "20"),
+                new org.apache.commons.httpclient.NameValuePair("showmode",
+                        "list"),
+                new org.apache.commons.httpclient.NameValuePair("sort",
+                        "CATA_DATE"),
+                new org.apache.commons.httpclient.NameValuePair("orderby",
+                        "desc"),
+                new org.apache.commons.httpclient.NameValuePair("location",
+                        "ALL") };
+         hcbk_bl_jiansuo = HttpClient_Util_K
+                .http_Client_Get_Web(
+                        "http://121.193.129.2:8080/opac/openlink.php",
+                        data_jiansuo, null, null);
+
+        Message msg = queryMaxhandler.obtainMessage();
+        msg.what = 0;
+        queryMaxhandler.sendMessage(msg);
+    }
+
+}
+
+// Handler
+Handler queryMaxhandler = new Handler() {
+    public void handleMessage(Message msg) {
+        switch (msg.what) {
+        case 0:
+            llb =new ArrayList&lt;LIB_book&gt;();
+            int fromIndex = hcbk_bl_jiansuo.getWebContent().indexOf("&lt;h3&gt;");
+            int num = 0;
+            while (fromIndex != -1) {
+                LIB_book lb_item = new LIB_book();
+                num++;
+                // 获取m_title 开始以&amp;#X 结束以&lt;/a&gt;
+                int m_title_start = hcbk_bl_jiansuo.getWebContent().indexOf("&amp;#x",
+                        fromIndex);
+                int m_title_end = hcbk_bl_jiansuo.getWebContent().indexOf("&lt;/a&gt;",
+                        m_title_start);
+                String m_title = hcbk_bl_jiansuo.getWebContent().substring(
+                        m_title_start, m_title_end);
+                System.out.print(num + ":"
+                        + NumericCharacterReference.decode(m_title, '!'));
+
+                lb_item.setM_TITLE(NumericCharacterReference.decode(m_title, '!'));
+                // 获取索引号 
+                int m_call_no_end =hcbk_bl_jiansuo.getWebContent().indexOf("&lt;/h3&gt;", m_title_end);
+                //+5为了去掉&lt;/a&gt;
+                System.out.print("  索引号 :"+NumericCharacterReference.decode(hcbk_bl_jiansuo.getWebContent().substring(m_title_end+5, m_call_no_end).trim(),'!'));
+                lb_item.setCALL_NO(NumericCharacterReference.decode(hcbk_bl_jiansuo.getWebContent().substring(m_title_end+5, m_call_no_end).trim(),'!'));
+                //获取馆藏副本 +5为了去掉馆藏副本 :
+                int guanchang_start =hcbk_bl_jiansuo.getWebContent().indexOf("馆藏复本：",m_call_no_end);
+                int guanchang_end =hcbk_bl_jiansuo.getWebContent().indexOf("&lt;br&gt;",guanchang_start);
+                System.out.print("   馆藏副本 :"+NumericCharacterReference.decode(hcbk_bl_jiansuo.getWebContent().substring(guanchang_start+5,guanchang_end).trim(), '!'));
+                lb_item.setGuanChang(Integer.parseInt(NumericCharacterReference.decode(hcbk_bl_jiansuo.getWebContent().substring(guanchang_start+5,guanchang_end).trim(), '!')));
+                //获取可借副本
+                int kejie_start =hcbk_bl_jiansuo.getWebContent().indexOf("可借复本：",guanchang_end);
+                int kejie_end =hcbk_bl_jiansuo.getWebContent().indexOf("&lt;/span&gt;",kejie_start);
+                System.out.print("   可借副本 :"+NumericCharacterReference.decode(hcbk_bl_jiansuo.getWebContent().substring(kejie_start+5,kejie_end).trim(), '!'));
+                lb_item.setKeJie(Integer.parseInt(NumericCharacterReference.decode(hcbk_bl_jiansuo.getWebContent().substring(kejie_start+5,kejie_end).trim(), '!')));
+                //获取责任者
+                int m_author_start =hcbk_bl_jiansuo.getWebContent().indexOf("&lt;/span&gt;",kejie_end);
+                int m_author_end =hcbk_bl_jiansuo.getWebContent().indexOf("&lt;br /&gt;",m_author_start);
+                System.out.print("   责任者 :"+NumericCharacterReference.decode(hcbk_bl_jiansuo.getWebContent().substring(m_author_start+7,m_author_end).trim(), '!'));
+                lb_item.setM_AUTHOR(NumericCharacterReference.decode(hcbk_bl_jiansuo.getWebContent().substring(m_author_start+7,m_author_end).trim(), '!'));
+                //出版社和年份
+                int m_publisher_year_start =hcbk_bl_jiansuo.getWebContent().indexOf("&lt;br /&gt;",m_author_end);
+                //+6为了躲开开始时的&lt;br /&gt;
+                int m_publisher_year_end =hcbk_bl_jiansuo.getWebContent().indexOf("&lt;br /&gt;",m_publisher_year_start+6);
+                //System.out.println("start " +m_publisher_year_start +"end "+m_publisher_year_end);
+                //System.out.println(NumericCharacterReference.decode(hcbk_bl_jiansuo.getWebContent().substring(m_publisher_year_start+6,m_publisher_year_end).trim(),'!'));
+                String[] m_publisher_year = NumericCharacterReference.decode(hcbk_bl_jiansuo.getWebContent().substring(m_publisher_year_start+6,m_publisher_year_end).trim(),'!').split("&amp;nbsp;");
+
+                System.out.println("   出版社 :"+m_publisher_year[0]+"  年份 :  "+m_publisher_year[1]);
+                lb_item.setM_PUBLISHER(m_publisher_year[0]);
+                lb_item.setM_PUB_YEAR(m_publisher_year[1]);
+                fromIndex = hcbk_bl_jiansuo.getWebContent().indexOf("&lt;h3&gt;",
+                        m_publisher_year_end);
+                llb.add(lb_item);
+            }
+            jiansuo_adapter = new JianSuo_Adapter(JianSuo_activity.this, llb); //创建适配器  
+                listView.setAdapter(jiansuo_adapter);  
+            break;
+
+        }
+
+    }
+};
+
+}
+</code></pre>
+
+<h3>0x05 参考链接</h3>
+
+<p><a href="http://www.jb51.net/article/37236.htm">http://www.jb51.net/article/37236.htm</a></p>
+</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-05-18T11:37:40+08:00" pubdate data-updated="true"></time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/android/'>android</a>
+
+
+</div>
+	
+</div>
+</article>
+
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+		
+		
+		<a class="addthis_button_tweet"></a>
+		
+		
+		
+	</div>
+	
+</div>
+
+
+</div>
+	<footer id="footer" class="inner">
+
+Copyright &copy; 2015
+
+    K
+
+
+</footer>
+	<script src="/javascripts/slash.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+	$('.fancybox').fancybox();
+})(jQuery);
+</script> <!-- Delete or comment this line to disable Fancybox -->
+
+
+
+
+
+
+</body>
+</html>

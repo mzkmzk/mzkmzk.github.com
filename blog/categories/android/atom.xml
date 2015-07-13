@@ -4,7 +4,7 @@
   <title><![CDATA[Category: android | K]]></title>
   <link href="http://mzkmzk.github.io/blog/categories/android/atom.xml" rel="self"/>
   <link href="http://mzkmzk.github.io/"/>
-  <updated>2015-05-03T20:17:45+08:00</updated>
+  <updated>2015-07-13T22:44:38+08:00</updated>
   <id>http://mzkmzk.github.io/</id>
   <author>
     <name><![CDATA[K]]></name>
@@ -14,451 +14,1423 @@
 
   
   <entry>
-    <title type="html"><![CDATA[android dialog Fragment显示]]></title>
-    <link href="http://mzkmzk.github.io/blog/2015/01/02/android_dialog_fragment/"/>
-    <updated>2015-01-02T11:37:40+08:00</updated>
-    <id>http://mzkmzk.github.io/blog/2015/01/02/android_dialog_fragment</id>
-    <content type="html"><![CDATA[<p>先上效果图.</p>
+    <title type="html"><![CDATA[Android 捕抓异常发送给服务器]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/06/25/android_exception/"/>
+    <updated>2015-06-25T21:28:46+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/06/25/android_exception</id>
+    <content type="html"><![CDATA[<!--more-->
 
-<h2>0x01 创建显示框视图 alert_dialog_nick.xml</h2>
 
-<pre><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
-&lt;LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-android:id="@+id/layout_r"
-android:layout_width="wrap_content"
-android:layout_height="wrap_content"
-android:background="#FFFFFF"
-android:orientation="vertical" &gt;
+<p>在任何服务性行业中,用户遇到的问题,我们就要解决
+所以app也要捕抓到用户在使用过程中的bug</p>
 
-&lt;RelativeLayout
-    android:layout_width="250dp"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="15.0dip"
-    android:gravity="center_horizontal" &gt;
+<p>他们就是我们的测试人员</p>
 
-    &lt;EditText  
-        android:id="@+id/dialog_edit"  
-        android:layout_width="230dp"  
-        android:layout_height="40dp"  
-        android:background="@drawable/login_input" 
-        android:drawablePadding="25dip"
-        android:textColorHint="@color/color_hint"  
-        android:textSize="14.0dip"
-        android:inputType="number"  
-        android:paddingLeft="10dp" /&gt;  
-&lt;/RelativeLayout&gt;
+<p>本文中讲两部分,一部分是被我们捕抓到的异常,另一部分是我们没有捕抓到的,从而导致app奔溃的异常。</p>
 
-&lt;ImageView
-    android:layout_width="250dp"
-    android:layout_height="wrap_content"
-    android:layout_gravity="center_horizontal"
-    android:layout_marginTop="15dp"
-    android:background="@color/color_gray"
-    android:src="@drawable/prefresh_list_cutline" /&gt;
+<p>异常最终都写入log.我把log放在可访问的地方,在浏览器输入地址即可查看</p>
 
-&lt;RelativeLayout
-    android:layout_width="250dp"
-    android:layout_height="wrap_content"
-    android:layout_marginLeft="5dp"
-    android:layout_marginRight="5dp"
-    android:layout_marginTop="15dp" &gt;
+<p>效果如:</p>
 
-    &lt;LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:paddingBottom="10.0dip"
-        android:orientation="horizontal" &gt;
+<pre><code>用户 ID: null it is UncaughtExceptionHandler
+2015-06-25-22:21class: com.tjrac.activity._0.LoginActivity$AndroidUser_Login; method: run; line: 141;  Exception: java.lang.NullPointerException
+2015-06-25-22:21class: java.lang.Thread; method: run; line: 1019;  Exception: java.lang.NullPointerException
 
-        &lt;Button
-            android:id="@+id/yes"
-            android:layout_width="90.0dip"
-            android:layout_height="40.0dip"
-            android:background="@color/color_blue"
-            android:text="@string/dialog_yes"
-            android:textSize="16sp"
-            android:layout_marginRight="20.0dip"
-            android:textColor="@color/color_white" /&gt;
 
-        &lt;Button
-            android:id="@+id/no"
-            android:layout_width="90.0dip"
-            android:layout_height="40.0dip"
-            android:background="@color/color_red"
-            android:text="@string/dialog_no"
-            android:textSize="16sp"
-            android:textColor="@color/color_white" /&gt;
-    &lt;/LinearLayout&gt;
-&lt;/RelativeLayout&gt;
-
-&lt;/LinearLayout&gt;
+用户 ID: null it is UncaughtExceptionHandler
+2015-06-25-22:22class: com.tjrac.activity._0.LoginActivity$AndroidUser_Login; method: run; line: 141;  Exception: java.lang.NullPointerException
+2015-06-25-22:22class: java.lang.Thread; method: run; line: 1019;  Exception: java.lang.NullPointerException
 </code></pre>
 
-<h2>0x02 创建显示框TianKongDialog.java</h2>
+<h3>0x00 服务器接受异常数据</h3>
 
-<pre><code>//TianKongDialog 这个注意点在 DialogFragment 要是import android.support.v4.app.DialogFragment的...不要直接app.DialogFragment的
+<p>无论是我们捕抓或是没捕抓到的异常,服务器接受的方法都一样,写入一个.log文件中.我用的是Struts2框架</p>
 
-@SuppressLint("NewApi")
-public class TianKongDialog extends DialogFragment{
-private static String CURRENT_TIME = "CURRENT_TIME";
-
-private EditText dialog_edit;
-
-public static TianKongDialog newInstance(){
-    //创建一个新的带有参数的Fragment实例
-    TianKongDialog fragment = new TianKongDialog();
-    Bundle args = new Bundle();
-    fragment.setArguments(args);
-    return fragment;
-}
+<pre><code>public class PrintException implements Action {
 
 @Override
-public Dialog onCreateDialog(Bundle savedInstanceState) {
-    LayoutInflater factory = (LayoutInflater)  getActivity().getSystemService( getActivity().LAYOUT_INFLATER_SERVICE);
-    final View customViewnick = factory.inflate(R.layout.alert_dialog_nick, null);
-    dialog_edit = (EditText)customViewnick.findViewById(R.id.dialog_edit);
-    final Dialog ad2 = new Dialog(getActivity(), R.style.Theme_CustomDialog2);
-    ad2.setContentView(customViewnick);
-    ad2.setCancelable(false);//有可能你调不出这个方法，可以通过ad.setOnKeyListener()方法来实现屏蔽back键
-    ad2.setCanceledOnTouchOutside(false);//当点击除对话框外屏幕其他区域时对话框不消失，默认是消失的
-
-    Button buttonnickyes = (Button)customViewnick.findViewById(R.id.yes);
-    buttonnickyes.setOnClickListener(new Button.OnClickListener() {
-
-        @Override
-        public void onClick(View arg0) {
-            String cushion_time = dialog_edit.getText().toString();
-            ad2.dismiss();
-        }
-    });
-    Button buttonnickno = (Button)customViewnick.findViewById(R.id.no);
-    buttonnickno.setOnClickListener(new Button.OnClickListener() {
-
-        @Override
-        public void onClick(View arg0) {
-            ad2.dismiss();
-        }
-    });
-    return ad2;         
-}
-
-
-
+public String execute() throws Exception {
+    HttpServletRequest request =ServletActionContext.getRequest();
+    request.getContextPath();
+    File file =new File(ServletActionContext.getServletContext().getRealPath("/log")+"/Exception.log");
+    System.out.println(file.getPath());
+    PrintWriter pw =new PrintWriter(new OutputStreamWriter(new FileOutputStream(file,true),"UTF-8"),true);
+    pw.println("用户 ID: "+request.getParameter("cert_id"));
+    pw.println(request.getParameter("exception"));
+    pw.println();
+    pw.close();
+    return null;
 }
 </code></pre>
 
-<h2>0x03 调用 显示框</h2>
+<h3>0x01 发送被我们捕抓到的异常</h3>
 
-<pre><code>    String tag = "my_dialog";  
-    TianKongDialog myFragment = TianKongDialog.newInstance();  
-    myFragment.show(getFragmentManager(), tag); 
-</code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[android 设置两个控件各占屏幕的一半]]></title>
-    <link href="http://mzkmzk.github.io/blog/2014/12/27/android_two_layout/"/>
-    <updated>2014-12-27T11:37:40+08:00</updated>
-    <id>http://mzkmzk.github.io/blog/2014/12/27/android_two_layout</id>
-    <content type="html"><![CDATA[<p>我的需求是一行里 两个TextView 各占屏幕的 一半</p>
+<p>这个就相对简单直接在捕抓异常后面加一个处理语句.题外话,可不可以重写捕抓异常的方法,然后捕抓异常后会自动发送异常给服务器.</p>
 
-<pre><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
-&lt;LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-android:orientation="horizontal" 
-android:id="@+id/book_access"
-&gt;
- &lt;TextView
-         android:id="@+id/book_name"
-         android:layout_width="0dp" //设置0dp好像会提高效率
-         android:layout_height="wrap_content"
-         android:layout_weight="1"
-         android:background="#ffffffff"
-         android:gravity="center"
-         android:text="@string/str_navi_home_navi_left" /&gt;
-      &lt;TextView
-          android:id="@+id/book_accessTime"
-          android:layout_width="0dp"
-          android:layout_height="wrap_content"
-          android:layout_weight="1"
-          android:background="#ffffffff"
-          android:gravity="center"
-          android:text="@string/str_navi_home_navi_right" /&gt;
-&lt;/LinearLayout&gt;
+<p>在捕抓到异常后调用sendException方法,我这里多给了一个Context,因为要获取到用户的id 然后方便处理异常.</p>
+
+<pre><code>public static void sendException(Context context,Exception exception){
+    List&lt;NameValuePair&gt; params = new ArrayList&lt;NameValuePair&gt;();
+    params.add(new BasicNameValuePair("cert_id", context
+            .getSharedPreferences("user", 0).getString("cert_id", null)));
+    params.add(new BasicNameValuePair("exception",ExceptionToString(exception)));
+    ModelServer modelHttp = new ModelServer();
+    modelHttp.Model_server(params, "PrintException");
+}
+
+/**
+ * 将Exception 转为String
+ * @param exception
+ * @return
+ */
+public static String ExceptionToString(Exception exception ){
+    StringWriter sw = new StringWriter();
+    PrintWriter pw =new PrintWriter(sw);
+    pw.println("异常发生时间 : "+getSystemTime_Minute());
+    exception.printStackTrace(pw);
+    pw.close();
+    return sw.toString();
+}
 </code></pre>
 
-<p>如果要设置成其他的比例 只需要计算出 对应的layout_weight即可</p>
+<h3>0x02 设置捕抓全局异常</h3>
 
-<p>参考链接<a href="http://bbs.csdn.net/topics/390801550">http://bbs.csdn.net/topics/390801550</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[android adapter]]></title>
-    <link href="http://mzkmzk.github.io/blog/2014/12/16/android_adapter/"/>
-    <updated>2014-12-16T11:37:40+08:00</updated>
-    <id>http://mzkmzk.github.io/blog/2014/12/16/android_adapter</id>
-    <content type="html"><![CDATA[<p>android adapter主要分为SimpleAdapter、ArrayList、BaseAdapter</p>
+<p>这里写了一个捕抓的Handler 通常不用大改,一般只改getTraceInfo()方法。</p>
 
-<p>这里主要介绍BaseAdapter</p>
-
-<h3>0x01 .xml 布局文件的 单一行的样式设置</h3>
-
-<pre><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
-&lt;LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-android:orientation="horizontal" 
-android:id="@+id/book_access"
-&gt;
- &lt;TextView
-         android:id="@+id/book_name"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:layout_weight="1"
-         android:background="#ffffffff"
-         android:gravity="center"
-         android:text="@string/str_navi_home_navi_left" /&gt;
-      &lt;TextView
-          android:id="@+id/book_accessTime"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_weight="1"
-          android:background="#ffffffff"
-          android:gravity="center"
-          android:text="@string/str_navi_home_navi_right" /&gt;
-&lt;/LinearLayout&gt; 
-</code></pre>
-
-<h3>0x02 .java 继承BaseAdapter</h3>
-
-<pre><code>package gabriel.luoyer.promonkey.main;
-
+<pre><code>import java.io.File;
+import java.io.FileOutputStream;
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.io.Writer;
+import java.lang.Thread.UncaughtExceptionHandler;
+import java.lang.reflect.Field;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 
-import com.charon.pulltorefreshlistview.PullToRefreshListView;
-import com.charon.pulltorefreshlistview.PullToRefreshListView.OnRefreshListener;
+import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.PackageManager.NameNotFoundException;
+import android.os.Build;
+import android.os.Environment;
+import android.os.Looper;
+import android.util.Log;
+import android.widget.Toast;
 
-import android.os.AsyncTask;
+/**
+ * UncaughtException处理类,当程序发生Uncaught异常的时候,有该类来接管程序,并记录发送错误报告.
+ * 
+ * @author user 
+ */
+@SuppressLint("SdCardPath")
+public class CrashHandler implements UncaughtExceptionHandler {
+
+public static final String TAG = "TEST";
+
+// CrashHandler 实例
+private static CrashHandler INSTANCE = new CrashHandler();
+
+// 程序的 Context 对象
+private Context mContext;
+
+// 系统默认的 UncaughtException 处理类
+private Thread.UncaughtExceptionHandler mDefaultHandler;
+
+// 用来存储设备信息和异常信息
+private Map&lt;String, String&gt; infos = new HashMap&lt;String, String&gt;();
+
+// 用来显示Toast中的信息
+private static String error = "程序错误，额，不对，我应该说，服务器正在维护中，请稍后再试";
+
+private static final Map&lt;String, String&gt; regexMap = new HashMap&lt;String, String&gt;();
+
+// 用于格式化日期,作为日志文件名的一部分
+private DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss",
+        Locale.CHINA);
+
+/** 保证只有一个 CrashHandler 实例 */
+private CrashHandler() {
+    //
+}
+
+/** 获取 CrashHandler 实例 ,单例模式 */
+public static CrashHandler getInstance() {
+    initMap();
+    return INSTANCE;
+}
+
+/**
+ * 初始化
+ * 
+ * @param context
+ */
+public void init(Context context) {
+    mContext = context;
+
+    // 获取系统默认的 UncaughtException 处理器
+    mDefaultHandler = Thread.getDefaultUncaughtExceptionHandler();
+
+    // 设置该 CrashHandler 为程序的默认处理器
+    Thread.setDefaultUncaughtExceptionHandler(this);
+    Log.d("TEST", "Crash:init");
+}
+
+/**
+ * 当 UncaughtException 发生时会转入该函数来处理
+ */
+@Override
+public void uncaughtException(Thread thread, Throwable ex) {
+    if (!handleException(ex) &amp;&amp; mDefaultHandler != null) {
+        // 如果用户没有处理则让系统默认的异常处理器来处理
+        mDefaultHandler.uncaughtException(thread, ex);
+        Log.d("TEST", "defalut");
+    } else {
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            Log.e(TAG, "error : ", e);
+        }
+        // 退出程序
+        android.os.Process.killProcess(android.os.Process.myPid());
+        // mDefaultHandler.uncaughtException(thread, ex);
+        System.exit(1);
+    }
+}
+
+/**
+ * 自定义错误处理，收集错误信息，发送错误报告等操作均在此完成
+ * 
+ * @param ex
+ * @return true：如果处理了该异常信息；否则返回 false
+ */
+private boolean handleException(Throwable ex) {
+    if (ex == null) {
+        return false;
+    }
+
+    // 收集设备参数信息
+    // collectDeviceInfo(mContext);
+    // 保存日志文件
+    saveCrashInfo2File(ex);
+    // 使用 Toast 来显示异常信息
+    new Thread() {
+        @Override
+        public void run() {
+            Looper.prepare();
+            Toast.makeText(mContext, error, Toast.LENGTH_LONG).show();
+            Looper.loop();
+        }
+    }.start();
+    return true;
+}
+
+/**
+ * 收集设备参数信息
+ * 
+ * @param ctx
+ */
+public void collectDeviceInfo(Context ctx) {
+    try {
+        PackageManager pm = ctx.getPackageManager();
+        PackageInfo pi = pm.getPackageInfo(ctx.getPackageName(),
+                PackageManager.GET_ACTIVITIES);
+
+        if (pi != null) {
+            String versionName = pi.versionName == null ? "null"
+                    : pi.versionName;
+            String versionCode = pi.versionCode + "";
+            infos.put("versionName", versionName);
+            infos.put("versionCode", versionCode);
+        }
+    } catch (NameNotFoundException e) {
+        Log.e(TAG, "an error occured when collect package info", e);
+    }
+
+    Field[] fields = Build.class.getDeclaredFields();
+    for (Field field : fields) {
+        try {
+            field.setAccessible(true);
+            infos.put(field.getName(), field.get(null).toString());
+            Log.d(TAG, field.getName() + " : " + field.get(null));
+        } catch (Exception e) {
+            Log.e(TAG, "an error occured when collect crash info", e);
+        }
+    }
+}
+
+/**
+ * 保存错误信息到文件中 *
+ * 
+ * @param ex
+ * @return 返回文件名称,便于将文件传送到服务器
+ */
+private String saveCrashInfo2File(Throwable ex) {
+    StringBuffer sb = getTraceInfo(ex);
+    Writer writer = new StringWriter();
+    PrintWriter printWriter = new PrintWriter(writer);
+    ex.printStackTrace(printWriter);
+    Throwable cause = ex.getCause();
+    while (cause != null) {
+        cause.printStackTrace(printWriter);
+        cause = cause.getCause();
+    }
+    printWriter.close();
+
+    String result = writer.toString();
+    sb.append(result);
+    try {
+        long timestamp = System.currentTimeMillis();
+        String time = formatter.format(new Date());
+        String fileName = "crash-" + time + "-" + timestamp + ".log";
+
+        if (Environment.getExternalStorageState().equals(
+                Environment.MEDIA_MOUNTED)) {
+            String path = Environment.getExternalStorageDirectory()
+                    + "/crash/";
+            File dir = new File(path);
+            if (!dir.exists()) {
+                dir.mkdirs();
+            }
+            FileOutputStream fos = new FileOutputStream(path + fileName);
+            fos.write(sb.toString().getBytes());
+            fos.close();
+        }
+
+        return fileName;
+    } catch (Exception e) {
+        Log.e(TAG, "an error occured while writing file...", e);
+    }
+
+    return null;
+}
+
+/**
+ * 整理异常信息
+ * @param e
+ * @return
+ */
+public static StringBuffer getTraceInfo(Throwable exception) {
+     /*
+    StringBuffer sb = new StringBuffer();
+
+    Throwable ex = e.getCause() == null ? e : e.getCause();
+    StackTraceElement[] stacks = ex.getStackTrace();
+    for (int i = 0; i &lt; stacks.length; i++) {
+        if (i == 0) {
+            setError(ex.toString());
+        }
+        sb.append(Utils.getSystemTime_Minute()).append("class: ").append(stacks[i].getClassName())
+                .append("; method: ").append(stacks[i].getMethodName())
+                .append("; line: ").append(stacks[i].getLineNumber())
+                .append(";  Exception: ").append(ex.toString() + "\n");
+    }
+
+    Log.d(TAG, sb.toString());
+    */
+    List&lt;NameValuePair&gt; params = new ArrayList&lt;NameValuePair&gt;();
+    params.add(new BasicNameValuePair("cert_id", "null it is UncaughtExceptionHandler"));
+    params.add(new BasicNameValuePair("exception",Utils.ThrowableToString(exception)));
+    ModelServer modelHttp = new ModelServer();
+    modelHttp.Model_server(params, "PrintException");
+    return new StringBuffer(Utils.ThrowableToString(exception));
+}
+
+/**
+ * 设置错误的提示语
+ * @param e
+ */
+public static void setError(String e) {
+    Pattern pattern;
+    Matcher matcher;
+    for (Entry&lt;String, String&gt; m : regexMap.entrySet()) {
+        Log.d(TAG, e+"key:" + m.getKey() + "; value:" + m.getValue());
+        pattern = Pattern.compile(m.getKey());
+        matcher = pattern.matcher(e);
+        if(matcher.matches()){
+            error = m.getValue();
+            break;
+        }
+    }
+}
+
+/**
+ * 初始化错误的提示语
+ */
+private static void initMap() {
+    // Java.lang.NullPointerException
+    // java.lang.ClassNotFoundException
+    // java.lang.ArithmeticException
+    // java.lang.ArrayIndexOutOfBoundsException
+    // java.lang.IllegalArgumentException
+    // java.lang.IllegalAccessException
+    // SecturityException
+    // NumberFormatException
+    // OutOfMemoryError 
+    // StackOverflowError 
+    // RuntimeException 
+    regexMap.put(".*NullPointerException.*", "嘿，无中生有~Boom!");
+    regexMap.put(".*ClassNotFoundException.*", "你确定你能找得到它？");
+    regexMap.put(".*ArithmeticException.*", "我猜你的数学是体育老师教的，对吧？");
+    regexMap.put(".*ArrayIndexOutOfBoundsException.*", "恩，无下限=无节操，请不要跟我搭话");
+    regexMap.put(".*IllegalArgumentException.*", "你的出生就是一场错误。");
+    regexMap.put(".*IllegalAccessException.*", "很遗憾，你的信用卡账号被冻结了，无权支付");
+    regexMap.put(".*SecturityException.*", "死神马上降临");
+    regexMap.put(".*NumberFormatException.*", "想要改变一下自己形象？去泰国吧，包你满意");
+    regexMap.put(".*OutOfMemoryError.*", "或许你该减减肥了");
+    regexMap.put(".*StackOverflowError.*", "啊，啊，憋不住了！");
+    regexMap.put(".*RuntimeException.*", "你的人生走错了方向，重来吧");
+
+}
+
+}
+</code></pre>
+
+<p>再写一个启动这个Handler的全局类</p>
+
+<pre><code>import android.app.Application;
+
+public class CrashApplication extends Application {
+
+@Override
+public void onCreate() {
+    super.onCreate();
+    CrashHandler crashHandler = CrashHandler.getInstance();
+    crashHandler.init(getApplicationContext());
+}
+
+}
+</code></pre>
+
+<p>然后在AndroidManifest.xml注册下这个全局类</p>
+
+<pre><code> &lt;application
+ android:name="com.tjrac.utils.CrashApplication"...&gt;
+</code></pre>
+
+<h3>参考资料</h3>
+
+<p>捕抓全局异常<a href="http://www.cnblogs.com/cpacm/p/3948991.html">http://www.cnblogs.com/cpacm/p/3948991.html</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Android 版本升级实现]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/06/23/android_version/"/>
+    <updated>2015-06-23T21:28:46+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/06/23/android_version</id>
+    <content type="html"><![CDATA[<!--more-->
+
+
+<p>项目中版本更新是不可或缺的功能</p>
+
+<p><img src="images/blog/2015-06-24-01.png" alt="展示图" /></p>
+
+<h3>0x00配置Config</h3>
+
+<p>这里主要配置的是4个final属性 还有的就是获取新版信息的路径,返回的是一个json 如</p>
+
+<p><code>{"version":{"apkname":"Tjrac_lib.apk","appname":"Tjrac_lib","verCode":"2","verName":"1.0.1"}}</code></p>
+
+<p>然后存放新版apk在UPDATE_APKNAME路径上~</p>
+
+<pre><code>import com.tjrac.R;
+
+import android.content.Context;
+import android.content.pm.PackageManager.NameNotFoundException;
+import android.util.Log;
+
+public class Config {
+private static final String TAG = "Config";
+/**
+ * 服务器存放的apk路径
+ */
+public static final String UPDATE_SERVER = "http://192.168.0.101:8080/NFC_Library/";
+
+/**
+ * 新版apk存在服务器的路径和名称
+ */
+public static final String UPDATE_APKNAME = "Tjrac_lib.apk";
+
+/**
+ * 获取版本信息的访问路径
+ */
+public static final String UPDATE_VERJSON = "LIB/LIB_AndroidUser_Version_Update";
+
+/**
+ * 保存在sdk内的新版apk名称
+ */
+public static final String UPDATE_SAVENAME = "Tjrac_lib.apk";
+
+public static int getVerCode(Context context) {
+    int verCode = -1;
+    try {
+        verCode = context.getPackageManager().getPackageInfo(
+                "com.tjrac", 0).versionCode;
+        System.out.println("版本号为 : "+verCode);
+    } catch (NameNotFoundException e) {
+        Log.e(TAG, e.getMessage());
+    }
+    return verCode;
+}
+
+public static String getVerName(Context context) {
+    String verName = "";
+    try {
+        verName = context.getPackageManager().getPackageInfo(
+                "com.tjrac", 0).versionName;
+        System.out.println("版本名称为 : "+verName);
+    } catch (NameNotFoundException e) {
+        Log.e(TAG, e.getMessage());
+    }
+    return verName;
+}
+
+public static String getAppName(Context context) {
+    String verName = context.getResources().getText(R.string.app_name)
+            .toString();
+    return verName;
+}
+}
+</code></pre>
+
+<h3>0x01 更新操作类 Update</h3>
+
+<p>getServerVerCode():获取新版本信息
+Select_Version():比较新旧版本号
+notNewVersionShow():版本号一致无需更新
+doNewVersionUpdate():更新版本
+downFile(final String url):下载新版本
+down():下载完成,取消提示框
+update():安装新版本</p>
+
+<pre><code>import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.json.JSONObject;
+
+import com.tjrac.R;
+import com.tjrac.activity.base.BaseActivity;
+
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Bundle;
+import android.os.Environment;
+import android.os.Handler;
+
+public class Update  extends Activity{
+private static final String TAG = "Update";
+public ProgressDialog pBar;
+private Handler handler = new Handler();
+private Handler handler_Select_Version =new Handler();
+private int newVerCode = 0;
+private String newVerName = "";
+private Context context;
+
+public Update(Context context){
+    this.context=context;
+}
+
+public boolean getServerVerCode() {
+    new Thread() {
+        public void run() {
+            try {
+                String verjson = NetworkTool.getContent(Config.UPDATE_SERVER
+                        + Config.UPDATE_VERJSON);
+                System.out.println("getServerVerCode : " +Config.UPDATE_SERVER + Config.UPDATE_VERJSON);
+                System.out.println("获取新的版本号 json : " +verjson );
+                JSONObject json_msg = new JSONObject(verjson);
+                JSONObject obj = json_msg.getJSONObject("version");
+                    try {
+                        newVerCode = Integer.parseInt(obj.getString("verCode"));
+                        System.out.println("json 解析的新 版本 号 newVerCode为 : "+ newVerCode);
+                        newVerName = obj.getString("verName");
+                        System.out.println("json 解析的新 版本 名称 newVerName为 : "+ newVerName);
+                        Select_Version();
+                    } catch (Exception e) {
+                        newVerCode = -1;
+                        newVerName = "";
+                        e.printStackTrace();
+                    }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }.start();
+
+    return true;
+}
+
+void Select_Version(){
+    handler_Select_Version.post(new Runnable() {
+        public void run() {
+            int vercode = Config.getVerCode(context);
+            System.out.println("获取新版本号后 为 新版本为 : "+ newVerCode +"  旧版本号为 : "+vercode);
+            if (newVerCode &gt; vercode) {
+                doNewVersionUpdate();
+            } else {
+                notNewVersionShow();
+            }
+        }
+    });
+}
+
+private void notNewVersionShow() {
+    int verCode = Config.getVerCode(context);
+    String verName = Config.getVerName(context);
+    StringBuffer sb = new StringBuffer();
+    sb.append("当前版本:");
+    sb.append(verName);
+    sb.append(" Code:");
+    sb.append(verCode);
+    sb.append(",\n已是最新版,⽆无需更新!");
+    Dialog dialog = new AlertDialog.Builder(context)
+            .setTitle("软件更新").setMessage(sb.toString())// 设置内容
+            .setPositiveButton("确定",// 设置确定按钮
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog,
+                                int which) {
+                            finish();
+                        }
+                    }).create();// 创建 // 显⽰示对话框
+    dialog.show();
+}
+
+private void doNewVersionUpdate() {
+    int verCode = Config.getVerCode(context);
+    String verName = Config.getVerName(context);
+    StringBuffer sb = new StringBuffer();
+    sb.append("当前版本:");
+    sb.append(verName);
+    sb.append(" Code:");
+    sb.append(verCode);
+    sb.append(", 发现新版本:");
+    sb.append(newVerName);
+    sb.append(" Code:");
+    sb.append(newVerCode);
+    sb.append(", 是否更新?");
+    Dialog dialog = new AlertDialog.Builder(context)
+            .setTitle("软件更新")
+            .setMessage(sb.toString())
+            // 设置内容
+            .setPositiveButton("更新",// 设置确定按钮
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog,
+                                int which) {
+                            pBar = new ProgressDialog(context);
+                            pBar.setTitle("正在下载");
+                            pBar.setMessage("请稍候...");
+                            pBar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                            downFile(Config.UPDATE_SERVER
+                                    + Config.UPDATE_APKNAME);
+                            System.out.println("更新版本下载地址 : "+Config.UPDATE_SERVER+ Config.UPDATE_APKNAME );
+                        }
+                    })
+            .setNegativeButton("暂不更新",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog,
+                                int whichButton) {
+                            // 点击"取消"按钮之后退出程序 finish();
+                        }
+                    }).create();// 创建
+    // 显⽰示对话框
+    dialog.show();
+}
+
+void downFile(final String url) {
+    pBar.show();
+    new Thread() {
+        public void run() {
+            HttpClient client = new DefaultHttpClient();
+            HttpGet get = new HttpGet(url);
+            HttpResponse response;
+            try {
+                response = client.execute(get);
+                HttpEntity entity = response.getEntity();
+                long length = entity.getContentLength();
+                InputStream is = entity.getContent();
+                FileOutputStream fileOutputStream = null;
+                if (is != null) {
+                    File file = new File(
+                            Environment.getExternalStorageDirectory(),
+                            Config.UPDATE_SAVENAME);
+                    fileOutputStream = new FileOutputStream(file);
+                    byte[] buf = new byte[1024];
+                    int ch = -1;
+                    int count = 0;
+                    while ((ch = is.read(buf)) != -1) {
+                        fileOutputStream.write(buf, 0, ch);
+                        count += ch;
+                        if (length &gt; 0) {
+                        }
+                    }
+                }
+                fileOutputStream.flush();
+                if (fileOutputStream != null) {
+                    fileOutputStream.close();
+                }
+                down();
+            } catch (ClientProtocolException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }.start();
+}
+
+void down() {
+    handler.post(new Runnable() {
+        public void run() {
+            pBar.cancel();
+            update();
+        }
+    });
+}
+
+void update() {
+    Intent intent = new Intent(Intent.ACTION_VIEW);
+    intent.setDataAndType(Uri.fromFile(new File(Environment
+            .getExternalStorageDirectory(), Config.UPDATE_SAVENAME)),
+            "application/vnd.android.package-archive");
+    context.startActivity(intent);
+}
+}
+</code></pre>
+
+<h3>网络辅助类 NetworkTool</h3>
+
+<pre><code>import java.io.BufferedReader;
+import java.io.InputStreamReader;
+
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.params.HttpConnectionParams;
+import org.apache.http.params.HttpParams;
+
+public class NetworkTool {
+/**
+ * 获取⺴⽹网址内容
+ * 
+ * @param url
+ * @return
+ * @throws Exception
+ */
+public static String getContent(String url) throws Exception {
+    StringBuilder sb = new StringBuilder();
+    HttpClient client = new DefaultHttpClient();
+    HttpParams httpParams = client.getParams();
+    // 设置⺴⽹网络超时参数 HttpConnectionParams.setConnectionTimeout(httpParams,
+    // 3000);
+    HttpConnectionParams.setSoTimeout(httpParams, 5000);
+    HttpResponse response = client.execute(new HttpGet(url));
+    HttpEntity entity = response.getEntity();
+    if (entity != null) {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(
+                entity.getContent(), "UTF-8"), 8192);
+        String line = null;
+        while ((line = reader.readLine()) != null) {
+            sb.append(line + "\n");
+        }
+        reader.close();
+    }
+    return sb.toString();
+}
+}
+</code></pre>
+
+<h3>调用更新方法</h3>
+
+<p>在当前的activity中</p>
+
+<pre><code>Update update =new Update(Sy_Activity.this);
+update.getServerVerCode();
+</code></pre>
+
+<h1>参考链接</h1>
+
+<p><a href="http://blog.csdn.net/xjanker2/article/details/6303937">http://blog.csdn.net/xjanker2/article/details/6303937</a></p>
+
+<p><a href="https://code.google.com/p/androidex/source/browse/trunk/jtapp-12-updateapksamples/">https://code.google.com/p/androidex/source/browse/trunk/jtapp-12-updateapksamples/</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Android 欢迎界面的制作]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/06/22/android_welcome/"/>
+    <updated>2015-06-22T08:22:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/06/22/android_welcome</id>
+    <content type="html"><![CDATA[<!--more-->
+
+
+<h3>0x00Activity</h3>
+
+<pre><code>import java.util.TimerTask;
+
+import com.tjrac.R;
+import com.tjrac.activity._0.LoginActivity;
+
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Message;
-import android.os.SystemClock;
-import android.util.Log;
+import android.app.Activity;
+import android.content.Intent;
+import android.graphics.drawable.Drawable;
+import android.view.View;
+import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.animation.Animation.AnimationListener;
+import android.widget.ImageView;
+
+public class WelcomeActivity extends Activity {
+
+private ImageView mShowPicture = null;// 显示图片
+private Animation mFadeIn = null;// 开始动画
+private Animation mFadeOut = null;// 开始动画
+private Drawable mPicture_1 = null;// 第一张图片
+private Drawable mPicture_2 = null;
+private ImageView mShowtext = null;;
+
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+    this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,  
+    WindowManager.LayoutParams.FLAG_FULLSCREEN);//去掉信息栏  
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.welcome_activity);
+    // 绑定界面
+    mShowPicture = (ImageView) findViewById(R.id.guide_picture);
+    mShowtext = (ImageView) findViewById(R.id.guide_text);
+
+
+
+    // 初始化图片资源
+    mPicture_1 = getResources().getDrawable(R.drawable.ic_launcher);
+
+    // 设置开始界面效果
+    mShowPicture.setImageDrawable(mPicture_1);
+    Animation anim = AnimationUtils.loadAnimation(this, R.anim.mshowpicture);
+    anim.setFillAfter(true);
+    mShowPicture.startAnimation(anim);
+
+    mPicture_2 = getResources().getDrawable(R.drawable.pac_bg_text3);
+    mShowtext.setImageDrawable(mPicture_2);
+    mShowtext.setVisibility(View.GONE);       
+
+    mFadeIn = AnimationUtils.loadAnimation(this,R.anim.guide_welcome_fade_in);
+    mFadeIn.setDuration(1500L);
+
+
+
+    // 初始化动画
+    Handler handler = new Handler();
+    TimerTask task = new TimerTask() {
+        @Override
+        public void run() {
+            // 隐藏掉全屏图片
+            mShowtext.setVisibility(View.VISIBLE);
+            mShowtext.startAnimation(mFadeIn);
+        }
+    };
+    // 5秒后执行TimerTask任务
+    handler.postDelayed(task, 1500);
+
+    // 设置动画的监听
+    mFadeIn.setAnimationListener(new AnimationListener() {
+
+        @Override
+        public void onAnimationStart(Animation animation) {
+
+        }
+
+        @Override
+        public void onAnimationRepeat(Animation animation) {
+
+        }
+
+        @Override
+        public void onAnimationEnd(Animation animation) {
+            // 第一个动画结束时开始第二个动画
+            startActivity(new Intent(WelcomeActivity.this,LoginActivity.class));
+            finish();
+        }
+    });
+}
+}
+</code></pre>
+
+<h3>0x01 布局文件</h3>
+
+<pre><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:orientation="vertical"
+android:background="@color/color_white" &gt;
+
+&lt;RelativeLayout
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" &gt;
+
+    &lt;ImageView
+        android:id="@+id/guide_picture"
+        android:layout_width="120.0dip"
+        android:layout_height="120.0dip"
+        android:layout_centerHorizontal="true" 
+        android:layout_marginTop="200.0dip"
+        android:scaleType="fitXY" /&gt;
+
+    &lt;ImageView
+        android:id="@+id/guide_text"
+        android:layout_width="250.0dip"
+        android:layout_height="30.0dip"
+        android:layout_centerHorizontal="true" 
+        android:layout_below="@id/guide_picture"
+        android:layout_marginTop="30.0dip"
+        android:scaleType="fitXY" /&gt;
+
+&lt;/RelativeLayout&gt;
+
+&lt;/FrameLayout&gt;
+</code></pre>
+
+<h3>0x02动画anim</h3>
+
+<p>guide_welcome_fade_in.xml</p>
+
+<pre><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;set xmlns:android="http://schemas.android.com/apk/res/android" &gt;
+
+&lt;alpha
+    android:fromAlpha="0.0"
+    android:toAlpha="1.0" /&gt;
+&lt;/set&gt;
+</code></pre>
+
+<p>mshowpicture.xml</p>
+
+<pre><code>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;set xmlns:android="http://schemas.android.com/apk/res/android"
+    android:interpolator="@android:anim/decelerate_interpolator"&gt;
+
+   &lt;translate android:fromYDelta="0" android:toYDelta="-100" android:duration="1500" /&gt;
+   &lt;alpha android:fromAlpha="0.0" android:toAlpha="1.0" android:duration="1500"/&gt;
+
+&lt;/set&gt;
+</code></pre>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Android中ImageView的scaleType属性]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/05/24/imageview_scaleType/"/>
+    <updated>2015-05-24T08:22:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/05/24/imageview_scaleType</id>
+    <content type="html"><![CDATA[<!--more-->
+
+
+<h3>0x00思路</h3>
+
+<p>我的目标是在任何尺寸的屏幕下 都按3分之一显示图片,然后3分之二显示其他内容.然而imagesview的scaleType属性有9种:matrix、fitXY、fitStart、fitCenter、fitEnd、center、centerCrop、centerInside.第九种就是没写这个属性.</p>
+
+<p><img src="/images/blog/2015-05-24-01.png" alt="原图片" /></p>
+
+<h3>0x01基本代码</h3>
+
+<pre><code>&lt;LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:orientation="vertical"
+tools:context="com.tjrac.MainActivity" &gt;
+
+&lt;LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_weight="2"
+    android:orientation="vertical" &gt;
+
+    &lt;ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:contentDescription="@string/text"
+        android:scaleType="centerInside"
+        android:src="@drawable/sy_scroll_1" /&gt;
+&lt;/LinearLayout&gt;
+
+&lt;LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_weight="1" &gt;
+
+    &lt;TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="@string/text" /&gt;
+&lt;/LinearLayout&gt;
+
+&lt;/LinearLayout&gt;
+</code></pre>
+
+<p>然而matrix的的显示效果为</p>
+
+<p><img src="/images/blog/2015-05-24-02.png" alt="matrix" /></p>
+
+<p>fitXY的的显示效果为</p>
+
+<p><img src="/images/blog/2015-05-24-03.png" alt="fitXY" /></p>
+
+<p>fitStart的的显示效果为</p>
+
+<p><img src="/images/blog/2015-05-24-04.png" alt="fitStart" /></p>
+
+<p>fitCenter的的显示效果为</p>
+
+<p><img src="/images/blog/2015-05-24-05.png" alt="fitCenter" /></p>
+
+<p>fitEnd的的显示效果为</p>
+
+<p><img src="/images/blog/2015-05-24-06.png" alt="fitEnd" /></p>
+
+<p>center的的显示效果为</p>
+
+<p><img src="/images/blog/2015-05-24-07.png" alt="center" /></p>
+
+<p>centerCrop的的显示效果为</p>
+
+<p><img src="/images/blog/2015-05-24-08.png" alt="centerCrop" /></p>
+
+<p>centerInside的的显示效果为</p>
+
+<p><img src="/images/blog/2015-05-24-09.png" alt="centerInside" /></p>
+
+<p>不设置的的显示效果为</p>
+
+<p><img src="/images/blog/2015-05-24-10.png" alt="不设置" /></p>
+
+<h3>参考链接</h3>
+
+<p><a href="http://www.chenyunchao.com/?p=189">http://www.chenyunchao.com/?p=189</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[ListView与Adapter简单试用]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/05/18/listview_adapter/"/>
+    <updated>2015-05-18T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/05/18/listview_adapter</id>
+    <content type="html"><![CDATA[<!--more-->
+
+
+<h3>0x00 概述</h3>
+
+<p>在android项目中,有很多时候要用到列表,这时listview和adapter
+就能满足你的需求,基本的</p>
+
+<ol>
+<li>创建总布局文件</li>
+<li>创建listview_item即每一行要显示的布局文件</li>
+<li>创建adapter类</li>
+<li>创建activity类将数据放进adapter中</li>
+</ol>
+
+
+<p>这里是完成后的效果图</p>
+
+<p><img src="/images/blog/2015-05-18-01.png" alt="image" /></p>
+
+<h3>0x01 创建总布局文件 activity_jiansuo.xml</h3>
+
+<pre><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:orientation="vertical" &gt;
+
+&lt;EditText
+    android:id="@+id/et_jiansuo"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:text="搜索内容" /&gt;
+
+&lt;Button
+    android:id="@+id/bt_jiansuo"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:text="搜索" /&gt;
+
+&lt;ListView
+    android:id="@+id/lv_jiansuo"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content" /&gt;
+
+&lt;/LinearLayout&gt;
+</code></pre>
+
+<h3>0x02 创建listview_item即每一行要显示的布局文件 activity_jiansuo_item.xml</h3>
+
+<pre><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:orientation="vertical" &gt;
+
+&lt;TextView
+    android:id="@+id/tv_m_title"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" /&gt;
+
+&lt;TextView
+    android:id="@+id/tv_call_no"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" /&gt;
+
+&lt;TextView
+    android:id="@+id/tv_guanchang"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" /&gt;
+
+&lt;TextView
+    android:id="@+id/tv_kejie"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" /&gt;
+
+&lt;TextView
+    android:id="@+id/tv_m_author"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" /&gt;
+
+&lt;TextView
+    android:id="@+id/tv_m_publisher"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" /&gt;
+
+&lt;TextView
+    android:id="@+id/tv_m_year"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" /&gt;
+
+&lt;/LinearLayout&gt;
+</code></pre>
+
+<h3>0x03 创建adapter类</h3>
+
+<pre><code>import gabriel.luoyer.promonkey.R;
+import gabriel.luoyer.promonkey.bean.LIB.LIB_book;
+
+import java.util.List;
+
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
-import android.widget.Toast;
-import android.widget.AdapterView.OnItemClickListener;
-import gabriel.luoyer.promonkey.R;
-import gabriel.luoyer.promonkey.base.BaseFragment;
-import gabriel.luoyer.promonkey.bean.book;
-import gabriel.luoyer.promonkey.utils.ModelServer;
 
-public class HomeFragment extends BaseFragment {
+public class JianSuo_Adapter extends BaseAdapter {
 
-private PullToRefreshListView mPullToRefreshListView;
-private MyAdapter adapter;
-private ArrayList&lt;book&gt; data;
-public LayoutInflater mInflater;
+private Context context; // 运行上下文
+private List&lt;LIB_book&gt; listItems; // 商品信息集合
+private LayoutInflater listContainer; // 视图容器
+
+public final class ListItemView {
+    public TextView tv_m_title;
+    public TextView tv_call_no;
+    public TextView tv_guanchang;
+    public TextView tv_kejie;
+    public TextView tv_m_author;
+    public TextView tv_m_publisher;
+    public TextView tv_m_year;
+}
+
+public JianSuo_Adapter(Context context, List&lt;LIB_book&gt; listItems) {
+    this.context = context;
+    this.listItems = listItems;
+    listContainer = LayoutInflater.from(context); // 创建视图容器并设置上下文
+}
 
 @Override
-public View onCreateView(LayoutInflater inflater, ViewGroup container,
-        Bundle savedInstanceState) {
-    mInflater=inflater;
-    View view = inflater.inflate(R.layout.main_frg_home, container, false);
-    findView(view);
-    initView(view);
-    return view;
+public int getCount() {
+    return listItems.size();
 }
 
-private void findView(View view) {
-    mPullToRefreshListView = (PullToRefreshListView)view.findViewById(R.id.mfh_s);
+@Override
+public LIB_book getItem(int position) {
+    return listItems.get(position);
 }
 
-private void initView(View view) {
+@Override
+public long getItemId(int position) {
+    return position;
+}
 
-    data = new ArrayList&lt;book&gt;();
+@Override
+public View getView(int position, View convertView, ViewGroup parent) {
+    ListItemView listItemView = null;
+    if (convertView == null) {
+        listItemView = new ListItemView();
+        convertView = listContainer.inflate(R.layout.activity_jiansuo_item, null);
+        listItemView.tv_m_title=(TextView)convertView.findViewById(R.id.tv_m_title);
+        listItemView.tv_call_no=(TextView)convertView.findViewById(R.id.tv_call_no);
+        listItemView.tv_guanchang=(TextView)convertView.findViewById(R.id.tv_guanchang);
+        listItemView.tv_kejie=(TextView)convertView.findViewById(R.id.tv_kejie);
+        listItemView.tv_m_author=(TextView)convertView.findViewById(R.id.tv_m_author);
+        listItemView.tv_m_publisher=(TextView)convertView.findViewById(R.id.tv_m_publisher);
+        listItemView.tv_m_year=(TextView)convertView.findViewById(R.id.tv_m_year);
+        //设置控件集到convertView  
+        convertView.setTag(listItemView);
+    }else{
+          listItemView = (ListItemView)convertView.getTag();  
+    }
+    listItemView.tv_m_title.setText(listItems.get(position).getM_TITLE());
+    listItemView.tv_call_no.setText(listItems.get(position).getCALL_NO());
+    listItemView.tv_guanchang.setText(listItems.get(position).getGuanChang());
+    listItemView.tv_kejie.setText(listItems.get(position).getKeJie());
+    listItemView.tv_m_author.setText(listItems.get(position).getM_AUTHOR());
+    listItemView.tv_m_publisher.setText(listItems.get(position)
+            .getM_PUBLISHER());
+    listItemView.tv_m_year.setText(listItems.get(position).getM_PUB_YEAR());
 
-    book b =new book();
+    return convertView;
+}
+</code></pre>
 
-    b.setB_name("书籍名称");
-    b.setB_accessTime("借书时间");
+<p>}</p>
 
-    data.add(b);
+<h3>0x04 创建activity类将数据放进adapter中</h3>
 
-    adapter = new MyAdapter();
+<pre><code>import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.List;
 
-    mPullToRefreshListView.setAdapter(adapter);
+import org.json.JSONObject;
 
-    mPullToRefreshListView.setOnRefreshListener(new OnRefreshListener() {
+
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ListView;
+import gabriel.luoyer.promonkey.R;
+import gabriel.luoyer.promonkey.adapter.JianSuo_Adapter;
+import gabriel.luoyer.promonkey.base.BaseActivity;
+import gabriel.luoyer.promonkey.bean.LIB.LIB_book;
+import gabriel.luoyer.promonkey.bean.LIB.util.HttpClient_Bean_K;
+import gabriel.luoyer.promonkey.utils.HttpClient_Util_K;
+import gabriel.luoyer.promonkey.utils.NumericCharacterReference;
+
+public class JianSuo_activity extends BaseActivity {
+
+private ListView listView;
+private EditText et_jiansuo;
+private Button bt_jiansuo;
+private JianSuo_Adapter jiansuo_adapter;
+public LayoutInflater mInflater;
+public JSONObject json;
+private HttpClient_Bean_K hcbk_lend_lst;
+private List&lt;String&gt; ls_lst_two_params = new ArrayList&lt;String&gt;();
+private JianSuo_Adapter jianSuo_Adapter;
+private List&lt;LIB_book&gt; llb;
+private HttpClient_Bean_K hcbk_bl_jiansuo;
+
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_jiansuo);
+
+    initViews();
+    initEvents();
+}
+
+@Override
+protected void initViews() {
+    listView = (ListView) this.findViewById(R.id.lv_jiansuo);
+    et_jiansuo = (EditText) this.findViewById(R.id.et_jiansuo);
+    bt_jiansuo = (Button) this.findViewById(R.id.bt_jiansuo);
+}
+
+@Override
+protected void initEvents() {
+    bt_jiansuo.setOnClickListener(new OnClickListener() {
 
         @Override
-        public void onRefresh() {
-            new AsyncTask&lt;Void, Void, Void&gt;() {
+        public void onClick(View arg0) {
+            if(!et_jiansuo.getText().toString().isEmpty()){
+                Thread jianSuo_Book_thread = new Thread(new JianSuo_Book_thread());
+                jianSuo_Book_thread.start();
+            }
 
-                @Override
-                protected Void doInBackground(Void... params) {
-                    SystemClock.sleep(1000);
-                    book b =new book();
-                    b.setB_name("书籍名称");
-                    b.setB_accessTime("借书时间");
-                    data.add(b);
-                    return null;
-                }
-
-                @Override
-                protected void onPostExecute(Void result) {
-                    super.onPostExecute(result);
-                    adapter.notifyDataSetChanged();
-                    mPullToRefreshListView.onRefreshComplete();
-                }
-            }.execute();
         }
+
     });
 
-    mPullToRefreshListView
-            .setOnItemClickListener(new OnItemClickListener() {
+}
 
-                @Override
-                public void onItemClick(AdapterView&lt;?&gt; parent, View view,
-                        int position, long id) {
-                    // If you call addHeaderView, the position will contains
-                    // the count of header view.
-                    // int realPosition = position
-                    // - mPullToRefreshListView.getHeaderViewsCount();
-                    // Toast.makeText(PullToRefreshActivity.this,
-                    // data.get(realPosition), Toast.LENGTH_SHORT).show();
+class JianSuo_Book_thread implements Runnable {
 
-                    Toast.makeText(
-                            getActivity().getApplicationContext(),
-                            (String) mPullToRefreshListView.getAdapter()
-                                    .getItem(position), Toast.LENGTH_SHORT)
-                            .show();
+    @Override
+    public void run() {
 
-                }
+        /*
+         * 先写成 每次访问都要登陆 因为第一次访问为未登陆 不知道为何返回码不为302 而是200 //访问lst //Header []
+         * header_android ={new
+         * Header("Set-Cookie",sharedata.getString("Set-Cookie", null))};
+         * hcbk_lend_lst = HttpClient_Util_K .http_Client_Get_Web(
+         * "http://121.193.129.2:8080/reader/book_lst.php", null, null,
+         * null);
+         * System.out.println("hcbk_lend_lst 第一次发送未还书籍记录 返回码为 :  "+hcbk_lend_lst
+         * .getStatusCode() );
+         */
 
-            });
+        String jiansuo = "";
+        try {
+            jiansuo = URLEncoder.encode(et_jiansuo.getText()+"", "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        // 获取检索书籍
+        org.apache.commons.httpclient.NameValuePair[] data_jiansuo = {
+                new org.apache.commons.httpclient.NameValuePair(
+                        "strSearchType", "title"),
+                new org.apache.commons.httpclient.NameValuePair(
+                        "match_flag", "any"),
+                new org.apache.commons.httpclient.NameValuePair(
+                        "historyCount", "1"),
+                new org.apache.commons.httpclient.NameValuePair("strText",
+                        jiansuo),
+                new org.apache.commons.httpclient.NameValuePair("doctype",
+                        "ALL"),
+                new org.apache.commons.httpclient.NameValuePair(
+                        "with_ebook", "on"),
+                new org.apache.commons.httpclient.NameValuePair(
+                        "displaypg", "20"),
+                new org.apache.commons.httpclient.NameValuePair("showmode",
+                        "list"),
+                new org.apache.commons.httpclient.NameValuePair("sort",
+                        "CATA_DATE"),
+                new org.apache.commons.httpclient.NameValuePair("orderby",
+                        "desc"),
+                new org.apache.commons.httpclient.NameValuePair("location",
+                        "ALL") };
+         hcbk_bl_jiansuo = HttpClient_Util_K
+                .http_Client_Get_Web(
+                        "http://121.193.129.2:8080/opac/openlink.php",
+                        data_jiansuo, null, null);
+
+        Message msg = queryMaxhandler.obtainMessage();
+        msg.what = 0;
+        queryMaxhandler.sendMessage(msg);
+    }
 
 }
 
+// Handler
+Handler queryMaxhandler = new Handler() {
+    public void handleMessage(Message msg) {
+        switch (msg.what) {
+        case 0:
+            llb =new ArrayList&lt;LIB_book&gt;();
+            int fromIndex = hcbk_bl_jiansuo.getWebContent().indexOf("&lt;h3&gt;");
+            int num = 0;
+            while (fromIndex != -1) {
+                LIB_book lb_item = new LIB_book();
+                num++;
+                // 获取m_title 开始以&amp;#X 结束以&lt;/a&gt;
+                int m_title_start = hcbk_bl_jiansuo.getWebContent().indexOf("&amp;#x",
+                        fromIndex);
+                int m_title_end = hcbk_bl_jiansuo.getWebContent().indexOf("&lt;/a&gt;",
+                        m_title_start);
+                String m_title = hcbk_bl_jiansuo.getWebContent().substring(
+                        m_title_start, m_title_end);
+                System.out.print(num + ":"
+                        + NumericCharacterReference.decode(m_title, '!'));
 
-private class MyAdapter extends BaseAdapter {
+                lb_item.setM_TITLE(NumericCharacterReference.decode(m_title, '!'));
+                // 获取索引号 
+                int m_call_no_end =hcbk_bl_jiansuo.getWebContent().indexOf("&lt;/h3&gt;", m_title_end);
+                //+5为了去掉&lt;/a&gt;
+                System.out.print("  索引号 :"+NumericCharacterReference.decode(hcbk_bl_jiansuo.getWebContent().substring(m_title_end+5, m_call_no_end).trim(),'!'));
+                lb_item.setCALL_NO(NumericCharacterReference.decode(hcbk_bl_jiansuo.getWebContent().substring(m_title_end+5, m_call_no_end).trim(),'!'));
+                //获取馆藏副本 +5为了去掉馆藏副本 :
+                int guanchang_start =hcbk_bl_jiansuo.getWebContent().indexOf("馆藏复本：",m_call_no_end);
+                int guanchang_end =hcbk_bl_jiansuo.getWebContent().indexOf("&lt;br&gt;",guanchang_start);
+                System.out.print("   馆藏副本 :"+NumericCharacterReference.decode(hcbk_bl_jiansuo.getWebContent().substring(guanchang_start+5,guanchang_end).trim(), '!'));
+                lb_item.setGuanChang(Integer.parseInt(NumericCharacterReference.decode(hcbk_bl_jiansuo.getWebContent().substring(guanchang_start+5,guanchang_end).trim(), '!')));
+                //获取可借副本
+                int kejie_start =hcbk_bl_jiansuo.getWebContent().indexOf("可借复本：",guanchang_end);
+                int kejie_end =hcbk_bl_jiansuo.getWebContent().indexOf("&lt;/span&gt;",kejie_start);
+                System.out.print("   可借副本 :"+NumericCharacterReference.decode(hcbk_bl_jiansuo.getWebContent().substring(kejie_start+5,kejie_end).trim(), '!'));
+                lb_item.setKeJie(Integer.parseInt(NumericCharacterReference.decode(hcbk_bl_jiansuo.getWebContent().substring(kejie_start+5,kejie_end).trim(), '!')));
+                //获取责任者
+                int m_author_start =hcbk_bl_jiansuo.getWebContent().indexOf("&lt;/span&gt;",kejie_end);
+                int m_author_end =hcbk_bl_jiansuo.getWebContent().indexOf("&lt;br /&gt;",m_author_start);
+                System.out.print("   责任者 :"+NumericCharacterReference.decode(hcbk_bl_jiansuo.getWebContent().substring(m_author_start+7,m_author_end).trim(), '!'));
+                lb_item.setM_AUTHOR(NumericCharacterReference.decode(hcbk_bl_jiansuo.getWebContent().substring(m_author_start+7,m_author_end).trim(), '!'));
+                //出版社和年份
+                int m_publisher_year_start =hcbk_bl_jiansuo.getWebContent().indexOf("&lt;br /&gt;",m_author_end);
+                //+6为了躲开开始时的&lt;br /&gt;
+                int m_publisher_year_end =hcbk_bl_jiansuo.getWebContent().indexOf("&lt;br /&gt;",m_publisher_year_start+6);
+                //System.out.println("start " +m_publisher_year_start +"end "+m_publisher_year_end);
+                //System.out.println(NumericCharacterReference.decode(hcbk_bl_jiansuo.getWebContent().substring(m_publisher_year_start+6,m_publisher_year_end).trim(),'!'));
+                String[] m_publisher_year = NumericCharacterReference.decode(hcbk_bl_jiansuo.getWebContent().substring(m_publisher_year_start+6,m_publisher_year_end).trim(),'!').split("&amp;nbsp;");
 
-    @Override
-    public int getCount() {
-        return data.size();
+                System.out.println("   出版社 :"+m_publisher_year[0]+"  年份 :  "+m_publisher_year[1]);
+                lb_item.setM_PUBLISHER(m_publisher_year[0]);
+                lb_item.setM_PUB_YEAR(m_publisher_year[1]);
+                fromIndex = hcbk_bl_jiansuo.getWebContent().indexOf("&lt;h3&gt;",
+                        m_publisher_year_end);
+                llb.add(lb_item);
+            }
+            jiansuo_adapter = new JianSuo_Adapter(JianSuo_activity.this, llb); //创建适配器  
+                listView.setAdapter(jiansuo_adapter);  
+            break;
+
+        }
+
     }
+};
 
-    @Override
-    public Object getItem(int position) {
-        return data.get(position);
-    }
-
-    @Override
-    public long getItemId(int position) {
-        return position;
-    }
-
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-         ViewHolder holder = null;
-         if (convertView == null) {                    
-             holder=new ViewHolder();                   
-             convertView = mInflater.inflate(R.layout.main_frg_home_lv, null);
-             holder.book_name = (TextView)convertView.findViewById(R.id.book_name);
-             holder.book_accessTime = (TextView)convertView.findViewById(R.id.book_accessTime);
-             convertView.setTag(holder);                    
-         }else {                   
-             holder = (ViewHolder)convertView.getTag();
-         }                           
-         holder.book_name.setText(data.get(position).getB_name());
-         holder.book_accessTime.setText(data.get(position).getB_accessTime());                
-         return convertView;
-    }
 }
-
-public final class ViewHolder{
-    public TextView book_name;
-    public TextView book_accessTime;
-}
-}
 </code></pre>
 
-<p>参考链接<a href="http://www.xue5.com/Mobile/Mobile/735287.html">http://www.xue5.com/Mobile/Mobile/735287.html</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[android 布局]]></title>
-    <link href="http://mzkmzk.github.io/blog/2014/12/16/android_%20layout/"/>
-    <updated>2014-12-16T11:37:40+08:00</updated>
-    <id>http://mzkmzk.github.io/blog/2014/12/16/android_ layout</id>
-    <content type="html"><![CDATA[<p>LinearLayout、FrameLayout和AbsoulteLayout<a href="http://www.cnblogs.com/wisekingokok/archive/2011/08/23/2150452.html">http://www.cnblogs.com/wisekingokok/archive/2011/08/23/2150452.html</a></p>
+<h3>0x05 参考链接</h3>
 
-<p>RelativeLayout和TableLayout<a href="http://www.cnblogs.com/wisekingokok/archive/2011/08/24/2152004.html">http://www.cnblogs.com/wisekingokok/archive/2011/08/24/2152004.html</a></p>
-
-<p>android 屏幕自适应解决方案<a href="http://www.eoeandroid.com/thread-173973-1-1.html">http://www.eoeandroid.com/thread-173973-1-1.html</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Android 问题集锦]]></title>
-    <link href="http://mzkmzk.github.io/blog/2014/10/01/android_question/"/>
-    <updated>2014-10-01T11:40:40+08:00</updated>
-    <id>http://mzkmzk.github.io/blog/2014/10/01/android_question</id>
-    <content type="html"><![CDATA[<h2>1. MAC ADT下载提示 没安装 java se6</h2>
-
-<pre><code>//每个人的jdk版本不一样 路径文字不完全一样 建议tab补全输路径
-sudo vim  /Library/Java/JavaVirtualMachines/jdk1.7.0_67.jdk/Contents/Info.plist  
-</code></pre>
-
-<p>把原本的</p>
-
-<pre><code>&lt;key&gt;JVMCapabilities&lt;/key&gt;
-            &lt;array&gt;
-                    &lt;string&gt;CommandLine&lt;/string&gt;
-            &lt;/array&gt;
-</code></pre>
-
-<p>修改成</p>
-
-<pre><code>&lt;key&gt;JVMCapabilities&lt;/key&gt;
-            &lt;array&gt;
-                    &lt;string&gt;JNI&lt;/string&gt;
-                    &lt;string&gt;BundledApp&lt;/string&gt;
-                    &lt;string&gt;WebStart&lt;/string&gt;
-                    &lt;string&gt;Applets&lt;/string&gt;
-                    &lt;string&gt;CommandLine&lt;/string&gt;
-            &lt;/array&gt;
-</code></pre>
-
-<p>参考链接<a href="http://smilejay.com/2013/11/mac-os-x-to-open-eclipse-you-need-a-java-se-6-runtime/">http://smilejay.com/2013/11/mac-os-x-to-open-eclipse-you-need-a-java-se-6-runtime/</a></p>
-
-<h2>2. Android 导入工程出现Unable to resolve target &lsquo;android-xx&#8217;错误</h2>
-
-<p>出现这样的错误可能会导致 .R文件无法生成..</p>
-
-<p>首先打开其他你能运行的Android项目</p>
-
-<p>到工作空间查看其project.properties文件</p>
-
-<pre><code>target=android-?
-</code></pre>
-
-<p>然后再到你刚导入的项目改成和?即可</p>
-
-<p>懒的话 直接把文件复制粘贴过去- -&hellip;应该也ok</p>
+<p><a href="http://www.jb51.net/article/37236.htm">http://www.jb51.net/article/37236.htm</a></p>
 ]]></content>
   </entry>
   

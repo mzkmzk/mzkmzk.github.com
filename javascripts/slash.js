@@ -32,7 +32,7 @@
 
 	externalLinks(); // Delete or comment this line to disable opening external links in new window
 	appendCaption(); // Delete or comment this line to disable caption
-
+	
 	var mobilenav = $('#mobile-nav');
 
 	$('html').click(function(){
@@ -59,4 +59,33 @@
 	}).click(function(e){
 		e.stopPropagation();
 	});
+
+
+var k_select = $('#K_select');
+
+	$('html').click(function(){
+		k_select.find('.on').each(function(){
+			$(this).removeClass('on').next().hide();
+		});
+	});
+
+	k_select.on('click', '.menu .button', function(){
+		if (!$(this).hasClass('on')){
+			var width = $(this).width() + 42;
+			$(this).addClass('on').next().show().css({width: width});
+		} else {
+			$(this).removeClass('on').next().hide();
+		}
+	}).on('click', '.search .button', function(){
+		if (!$(this).hasClass('on')){
+			var width = 120;
+			k_select.children('.menu').children().eq(0).removeClass('on').next().hide();
+			$(this).addClass('on').next().show().css({width: width}).children().children().eq(0).focus();
+		} else {
+			$(this).removeClass('on').next().hide().children().children().eq(0).val('');
+		}
+	}).click(function(e){
+		e.stopPropagation();
+	});
+
 })(jQuery);
