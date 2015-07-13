@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: iphone | K]]></title>
+  <link href="http://mzkmzk.github.io/blog/categories/iphone/atom.xml" rel="self"/>
+  <link href="http://mzkmzk.github.io/"/>
+  <updated>2015-07-13T23:49:33+08:00</updated>
+  <id>http://mzkmzk.github.io/</id>
+  <author>
+    <name><![CDATA[K]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[I6 plus 入手]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/01/21/i6_plus_welcome/"/>
+    <updated>2015-01-21T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/01/21/i6_plus_welcome</id>
+    <content type="html"><![CDATA[<!--more-->
+
+
+<p></p>
+
+<h2>1.数字显示信息</h2>
+
+<h3>0x01</h3>
+
+<p>手机拨打<em>*3001#12345#*</em></p>
+
+<h3>0x02</h3>
+
+<p>长按锁屏键 直到出来滑动关机 然后长按 home键 ok.</p>
+
+<h3>ps 如何设置回格数显示</h3>
+
+<p>继续拨打<em>*3001#12345#*</em> 然后home键即可</p>
+
+<h2>2.分身照片..</h2>
+
+<ol>
+<li><p>拍摄时切换到全景模式(panoramic)。</p></li>
+<li><p>让对象摆好pose。</p></li>
+<li><p>慢慢移动相机，直到对象出画。</p></li>
+<li><p>让对象赶紧跑出画面，从你背后绕着跑到镜头前面，但是 不要入画。</p></li>
+<li><p>等他再次摆好pose，你再继续移动相机，完成拍摄。</p></li>
+</ol>
+
+
+<p>参考链接<a href="http://www.huxiu.com/article/106487/1.html">http://www.huxiu.com/article/106487/1.html</a></p>
+]]></content>
+  </entry>
+  
+</feed>

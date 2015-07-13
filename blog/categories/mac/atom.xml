@@ -4,7 +4,7 @@
   <title><![CDATA[Category: mac | K]]></title>
   <link href="http://mzkmzk.github.io/blog/categories/mac/atom.xml" rel="self"/>
   <link href="http://mzkmzk.github.io/"/>
-  <updated>2015-07-13T22:44:38+08:00</updated>
+  <updated>2015-07-13T23:49:33+08:00</updated>
   <id>http://mzkmzk.github.io/</id>
   <author>
     <name><![CDATA[K]]></name>
@@ -50,6 +50,28 @@
   </entry>
   
   <entry>
+    <title type="html"><![CDATA[Mac 挂vpn]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/01/24/mac_vpn/"/>
+    <updated>2015-01-24T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/01/24/mac_vpn</id>
+    <content type="html"><![CDATA[<!--more-->
+
+
+<h3>0x01 下载shadowsocks</h3>
+
+<p><a href="https://github.com/shadowsocks/shadowsocks">https://github.com/shadowsocks/shadowsocks</a></p>
+
+<p>安装步骤看里面的readme.md 或者直接上网下一个也行</p>
+
+<h3>0x02 配置服务器</h3>
+
+<p>这里采用的是pennyjob提供的一个免费vpn</p>
+
+<p>点击shadowsocks->服务器->打开服务器设定->点击+号->地址pennyjob.net 端口8080 加密aes-256-cfb->密码pennyjob->点击确定->再次选择服务器选定刚才新建的服务器 ok google吧.</p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[Mac 设置开机执行命令]]></title>
     <link href="http://mzkmzk.github.io/blog/2015/01/13/Mac_login_sh/"/>
     <updated>2015-01-13T11:37:40+08:00</updated>
@@ -79,68 +101,6 @@
 <pre><code>//-R代表此目录下的所有目录和文件都更改为753权限
 chmod -R 753 目录 
 </code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Mac 搭建 MAMP环境]]></title>
-    <link href="http://mzkmzk.github.io/blog/2015/01/06/mac_install_mamp/"/>
-    <updated>2015-01-06T11:37:40+08:00</updated>
-    <id>http://mzkmzk.github.io/blog/2015/01/06/mac_install_mamp</id>
-    <content type="html"><![CDATA[<h3>0x01 Apache 设置访问目录</h3>
-
-<p>默认的访问目录是</p>
-
-<pre><code>http://localhost/~user_name
-</code></pre>
-
-<p>修改默认访问目录<em>vim /etc/apache2/httpd.conf</em></p>
-
-<pre><code>#在这里设置默认的访问路径...
-DocumentRoot "/Users/username/Sites"
-&lt;Directory /&gt;
-Options Indexes MultiViews
-AllowOverride All
-Order allow,deny
-Allow from all
-&lt;/Directory&gt;
-</code></pre>
-
-<p>以后有项目往这里扔就可以访问了</p>
-
-<h3>0x02 更新php</h3>
-
-<pre><code>brew update
-brew tap homebrew/dupes
-brew tap josegonzalez/homebrew-php
-brew install php55 #Apache
-</code></pre>
-
-<p>修改php的cli路径 <em>vim /etc/bashrc</em></p>
-
-<pre><code>export PATH="/usr/local/bin:/usr/local/sbin:$PATH"
-</code></pre>
-
-<p>设置apache的使用的php版本 <em>vim /etc/apache2/httpd.conf</em></p>
-
-<pre><code>LoadModule php5_module /usr/local/Cellar/php55/5.5.20/libexec/apache2/libphp5.so
-</code></pre>
-
-<h3>0x03 安装mysql</h3>
-
-<p>由于我之前就安装了mysql&hellip;这里就直接引用参考链接..</p>
-
-<pre><code>brew install mysql
-unset TMPDIR
-mysql_install_db --verbose --user=`whoami` --basedir="$(brew --prefix mysql)" --datadir=/usr/local/var/mysql --tmpdir=/tmp
-sudo chown -R your_user /usr/local/var/mysql/
-</code></pre>
-
-<h3>参考链接</h3>
-
-<p>MAMP参考链接<a href="http://yansu.org/2013/12/11/lamp-in-mac.html">http://yansu.org/2013/12/11/lamp-in-mac.html</a></p>
-
-<p>更多有关bashrc设置参考链接<a href="http://www.tuicool.com/articles/7nu2E3R">http://www.tuicool.com/articles/7nu2E3R</a></p>
 ]]></content>
   </entry>
   
