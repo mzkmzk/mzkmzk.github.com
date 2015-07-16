@@ -4,7 +4,7 @@
   <title><![CDATA[K]]></title>
   <link href="http://mzkmzk.github.io/atom.xml" rel="self"/>
   <link href="http://mzkmzk.github.io/"/>
-  <updated>2015-07-13T23:49:10+08:00</updated>
+  <updated>2015-07-16T19:35:18+08:00</updated>
   <id>http://mzkmzk.github.io/</id>
   <author>
     <name><![CDATA[K]]></name>
@@ -12,6 +12,102 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[octorpess添加评论功能]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/07/16/comments_octopress/"/>
+    <updated>2015-07-16T21:28:46+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/07/16/comments_octopress</id>
+    <content type="html"><![CDATA[<p>使用的是<code>多说评论系统</code></p>
+
+<p>注册多说<a href="http://duoshuo.com/">http://duoshuo.com/</a></p>
+
+<h3>0x00 系统设置修改</h3>
+
+<p>在<code>_config.xml</code>文件最下方添加 yurename为注册多说时的个性域名二级域名,例如mzkmzk.duoshuo.com yourname则为mzkmzk</p>
+
+<pre><code># duoshuo comments
+duoshuo_comments: true
+duoshuo_short_name: yourname
+</code></pre>
+
+<h3>0x01 修改页面</h3>
+
+<p>在 <code>source/_layouts/post.html</code> 最下方添加的 <code>disqus</code>代码</p>
+
+<pre><code>\{\% if site.duoshuo_short_name and site.duoshuo_comments == true and page.comments == true \%\}
+&lt;section&gt;
+&lt;h1&gt;Comments&lt;/h1&gt;
+&lt;div id="comments" aria-live="polite"&gt;\{\% include post/duoshuo.html \%\}&lt;/div&gt;
+ &lt;/section&gt;
+ \{\% endif \%\}
+</code></pre>
+
+<p>如果你希望一些单独的页面下方也放置评论功能，譬如 <code>rake new_page["xxx"]</code> 产生的页面也能评论，那么请在 <code>source/_layouts/page.html</code> 中也做如上的修改。</p>
+
+<h3>0x02 创建模块代码</h3>
+
+<p>创建文件<code>source/_includes/post/duoshuo.html</code></p>
+
+<p>代码如下</p>
+
+<pre><code>&lt;!-- 多说评论框 start --&gt;
+&lt;div class="ds-thread" data-thread-key="\{\% if site.titlecase \%\}\{\{ page.title | titlecase \}\}\{\% else \%\}\{\{ page.title \}\}\{\% endif \%\}" data-title="\{\% if site.titlecase \%\}\{\{ page.title | titlecase \}\}\{\% else \%\}\{\{ page.title \}\}\{\% endif \%\}" data-url="\{\% if site.url \%\}\{\{ page.url | url \}\}\{\% else \%\}\{\{ page.url \}\}\{\% endif \%\}"&gt;&lt;/div&gt;
+&lt;!-- 多说评论框 end --&gt;
+&lt;!-- 多说公共JS代码 start (一个网页只需插入一次) --&gt;
+&lt;script type="text/javascript"&gt;
+var duoshuoQuery = {short_name:"mzkmzk"};
+(function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+})();
+&lt;/script&gt;
+&lt;!-- 多说公共JS代码 end --&gt;
+</code></pre>
+
+<h3>0x03 在文章标签处添加评论快捷键</h3>
+
+<p>就是在文章左侧添加一个按钮 点一下即可到评论模块</p>
+
+<p>文件<code>_includes/article.html</code></p>
+
+<pre><code>        \{\% if site.disqus_short_name and page.comments != false and post.comments != false and site.disqus_show_comment_count == true \%\}
+     | &lt;a href="\{\% if index \%\}\{\{ root_url \}\}\{\{ post.url \}\}\{\% endif \%\}#disqus_thread"&gt;Comments&lt;/a&gt;
+    \{\% endif \%\}
+</code></pre>
+
+<p>下方添加</p>
+
+<pre><code>   \{\% if site.duoshuo_short_name and page.comments != false and post.comments != false and site.duoshuo_comments == true \%\}
+      | &lt;a href="\{\% if index \%\}\{\{ root_url \}\}\{\{ post.url \}\}\{\% endif \%\}#comments"&gt;Comments&lt;/a&gt;
+     \{\% endif \%\}
+</code></pre>
+
+<h3>参考链接</h3>
+
+<p><a href="http://havee.me/internet/2013-02/add-duoshuo-commemt-system-into-octopress.html">http://havee.me/internet/2013-02/add-duoshuo-commemt-system-into-octopress.html</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[个人简历]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/07/16/adoube_me.markdwon/"/>
+    <updated>2015-07-16T21:28:46+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/07/16/adoube_me.markdwon</id>
+    <content type="html"><![CDATA[<p>毕业于天津大学仁爱学院,深圳和东莞地区求职,java、android、web方向。大学主要参加比赛与接外包项目,曾荣获华北五省计算机大赛一等奖、蓝桥杯软件大赛全国三等奖和服务外包大赛二等奖。外包项目方向主要为Web响应式设计与就业系统设计。个人博客mzkmzk.github.com。项目视频展示i
+.youku.com/404MZK</p>
+
+<p>个人简历</p>
+
+<p><img src="http://mzkmzk.github.io/images/blog/2015-07-16-01.jpg" alt="简历-1" />
+<img src="http://mzkmzk.github.io/images/blog/2015-07-16-02.jpg" alt="简历-2" />
+<img src="http://mzkmzk.github.io/images/blog/2015-07-16-03.jpg" alt="简历-3" /></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[修改octopress导航栏]]></title>
@@ -3284,65 +3380,6 @@ connect: 网络不可达
 <p><a href="http://loveniwed.com/queryReportAction?ntype=professor%22%3E%3Cscript%3Ealert%2842873%29%3C%2Fscript%3E">http://loveniwed.com/queryReportAction?ntype=professor%22%3E%3Cscript%3Ealert%2842873%29%3C%2Fscript%3E</a></p>
 
 <p>In this paper, the author gives a personal view on the current development direction of smart home, </p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Linux 常用命令]]></title>
-    <link href="http://mzkmzk.github.io/blog/2015/05/04/Linux_Order/"/>
-    <updated>2015-05-04T21:28:46+08:00</updated>
-    <id>http://mzkmzk.github.io/blog/2015/05/04/Linux_Order</id>
-    <content type="html"><![CDATA[<!--more-->
-
-
-<h3>sheel相关</h3>
-
-<pre><code>#set        查看所有变量
-#export     查看所有环境变量
-#printenv   查看所有环境变量
-</code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[hack思路]]></title>
-    <link href="http://mzkmzk.github.io/blog/2015/05/01/hack_thiking/"/>
-    <updated>2015-05-01T11:37:40+08:00</updated>
-    <id>http://mzkmzk.github.io/blog/2015/05/01/hack_thiking</id>
-    <content type="html"><![CDATA[<!--more-->
-
-
-<h3>天津大学仁爱学院教务网</h3>
-
-<p>在论文搜索里输入&#8217; 会在本页显示报错 信息</p>
-
-<h3>2013的windows System权限漏洞</h3>
-
-<p><a href="http://bbs.blackbap.org/thread-4431-1-1.html">http://bbs.blackbap.org/thread-4431-1-1.html</a></p>
-
-<p><a href="http://www.leavesongs.com/PENETRATION/privilege-escalation-MS13-046.html">http://www.leavesongs.com/PENETRATION/privilege-escalation-MS13-046.html</a></p>
-
-<h3>Strtus2漏洞利用</h3>
-
-<pre><code>python  Desktop/UseOfStruts.py  http://loveniwed.com
-</code></pre>
-
-<p>失败原因 估计由于我自己的Strtus2版本较高</p>
-
-<pre><code>参考链接&lt;http://www.leavesongs.com/PENETRATION/UseOfStruts.html&gt;
-</code></pre>
-
-<h3>Strtus2 远程控制利用</h3>
-
-<pre><code>http://drops.wooyun.org/papers/1377
-</code></pre>
-
-<h3>oa仁爱网bug</h3>
-
-<p><a href="http://oa.tjrac.edu.cn/rweb/Main/logon.do">http://oa.tjrac.edu.cn/rweb/Main/logon.do</a>
-zm
-123
-报错</p>
 ]]></content>
   </entry>
   
