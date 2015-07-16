@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: seo | K]]></title>
+  <link href="http://mzkmzk.github.io/blog/categories/seo/atom.xml" rel="self"/>
+  <link href="http://mzkmzk.github.io/"/>
+  <updated>2015-07-16T23:56:32+08:00</updated>
+  <id>http://mzkmzk.github.io/</id>
+  <author>
+    <name><![CDATA[K]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[网站 seo的开始]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/07/16/seo_start/"/>
+    <updated>2015-07-16T21:28:46+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/07/16/seo_start</id>
+    <content type="html"><![CDATA[<p>网站的seo 一开始主要给百度和谷歌提交网站地图和优化代码</p>
+
+<h3>0x00 验证网址</h3>
+
+<p>首先要先验证网址是你的- -.</p>
+
+<p>百度站长地址:<a href="http://zhanzhang.baidu.com/">http://zhanzhang.baidu.com/</a></p>
+
+<p>谷歌站长地址<a href="https://www.google.com/webmasters/tools/">https://www.google.com/webmasters/tools/</a></p>
+
+<h3>0x01 提交网址</h3>
+
+<p>跟目录下编写<code>robots.txt</code>文件</p>
+
+<p>eg:</p>
+
+<pre><code>User-agent: *
+Disallow: 
+
+Sitemap: http://mzkmzk.github.io/sitemap.xml 
+</code></pre>
+
+<p><code>http://mzkmzk.github.io/sitemap.xml</code>则为我的网站地图</p>
+
+<p>生成网址<a href="https://www.xml-sitemaps.com/">https://www.xml-sitemaps.com/</a></p>
+
+<p>然后再百度和站长工具提交robots.txt和sitemap.xml即可</p>
+
+<h3>后续建议</h3>
+
+<p>SEO 网站的质量最为关键 其次,可以CSS和JS合成减少网络请求也有用,最好建一个百度统计,时刻留意网站访问趋势。</p>
+]]></content>
+  </entry>
+  
+</feed>
