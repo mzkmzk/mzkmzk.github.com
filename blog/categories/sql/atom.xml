@@ -4,7 +4,7 @@
   <title><![CDATA[Category: sql | K]]></title>
   <link href="http://mzkmzk.github.io/blog/categories/sql/atom.xml" rel="self"/>
   <link href="http://mzkmzk.github.io/"/>
-  <updated>2015-07-17T00:00:28+08:00</updated>
+  <updated>2015-07-20T02:51:47+08:00</updated>
   <id>http://mzkmzk.github.io/</id>
   <author>
     <name><![CDATA[K]]></name>
@@ -121,6 +121,30 @@ public static void main(String args[]){
 
 <p>安装sqlserver<a href="http://www.downcc.com/tech/4135.html">http://www.downcc.com/tech/4135.html</a>
 查看端口<a href="http://www.cnblogs.com/xwdreamer/archive/2012/06/23/2559344.html">http://www.cnblogs.com/xwdreamer/archive/2012/06/23/2559344.html</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[mysql 常用命令积累]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/02/11/mysql_usual_order/"/>
+    <updated>2015-02-11T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/02/11/mysql_usual_order</id>
+    <content type="html"><![CDATA[<!--more-->
+
+
+<h3>查询mysql版本</h3>
+
+<pre><code>select version();
+</code></pre>
+
+<h3>查询数据库占用端口</h3>
+
+<pre><code>show variables like 'port';
+
+or
+
+select * from global_variables where VARIABLE_NAME ='PORT';
+</code></pre>
 ]]></content>
   </entry>
   

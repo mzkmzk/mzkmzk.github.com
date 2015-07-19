@@ -4,7 +4,7 @@
   <title><![CDATA[Category: linux | K]]></title>
   <link href="http://mzkmzk.github.io/blog/categories/linux/atom.xml" rel="self"/>
   <link href="http://mzkmzk.github.io/"/>
-  <updated>2015-07-17T00:00:28+08:00</updated>
+  <updated>2015-07-20T02:51:47+08:00</updated>
   <id>http://mzkmzk.github.io/</id>
   <author>
     <name><![CDATA[K]]></name>
@@ -14,25 +14,10 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Linux常用命令]]></title>
-    <link href="http://mzkmzk.github.io/blog/2015/05/08/Linux_Order/"/>
-    <updated>2015-05-08T11:40:40+08:00</updated>
-    <id>http://mzkmzk.github.io/blog/2015/05/08/Linux_Order</id>
-    <content type="html"><![CDATA[<!--more-->
-
-
-<h3>Linux装逼命令</h3>
-
-<pre><code>cat /dev/urandom | hexdump -C | grep "ca fe" 
-</code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
     <title type="html"><![CDATA[Linux 常用命令]]></title>
-    <link href="http://mzkmzk.github.io/blog/2015/05/04/Linux_Order/"/>
-    <updated>2015-05-04T21:28:46+08:00</updated>
-    <id>http://mzkmzk.github.io/blog/2015/05/04/Linux_Order</id>
+    <link href="http://mzkmzk.github.io/blog/2015/05/18/Linux_Order/"/>
+    <updated>2015-05-18T21:28:46+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/05/18/Linux_Order</id>
     <content type="html"><![CDATA[<!--more-->
 
 
@@ -42,6 +27,29 @@
 #export     查看所有环境变量
 #printenv   查看所有环境变量
 </code></pre>
+
+<h3>Linux装逼命令</h3>
+
+<pre><code>cat /dev/urandom | hexdump -C | grep "ca fe" 
+</code></pre>
+
+<hr />
+
+<h1>工具安装</h1>
+
+<h3>ssh</h3>
+
+<ol>
+<li>安装客户端<code>sudo apt-get install openssh-client</code></li>
+<li>安装服务端<code>sudo apt-get install openssh-server</code></li>
+<li>开启服务<code>/etc/init.d/ssh start</code></li>
+<li>检测服务端口和开启情况<code>ps -e |grep ssh</code></li>
+<li>登陆ssh<code>ssh username@ip</code></li>
+<li>修改配置信息<code>vim /etc/ssh/sshd_config</code></li>
+</ol>
+
+
+<p>参考连接<a href="http://www.cnblogs.com/nodot/archive/2011/06/10/2077595.html">http://www.cnblogs.com/nodot/archive/2011/06/10/2077595.html</a></p>
 ]]></content>
   </entry>
   
@@ -319,6 +327,33 @@ cd   导入文件夹路径
 
 imp system/oracle FULL=y file=one.dmp log=one.log 
 </code></pre>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Linux 用户无法使用sudo]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/03/27/linux_sudo/"/>
+    <updated>2015-03-27T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/03/27/linux_sudo</id>
+    <content type="html"><![CDATA[<!--more-->
+
+
+<h3>0x00问题</h3>
+
+<pre><code>[oracle@localhost bin]$ sudo mkdir -p /opt/app/oracle
+[sudo] password for oracle: 
+oracle is not in the sudoers file.  This incident will be reported.
+</code></pre>
+
+<h3>0x01解决办法</h3>
+
+<pre><code>su root
+echo '用户名  ALL=(ALL) ALL' &gt;&gt; /etc/sudoers
+</code></pre>
+
+<h3>参考链接</h3>
+
+<p><a href="http://superuser.com/questions/120340/user-not-in-the-sudoers-file-this-incident-will-be-reported">http://superuser.com/questions/120340/user-not-in-the-sudoers-file-this-incident-will-be-reported</a>中user21655的回复</p>
 ]]></content>
   </entry>
   

