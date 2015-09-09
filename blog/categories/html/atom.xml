@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: html | K]]></title>
+  <link href="http://mzkmzk.github.io/blog/categories/html/atom.xml" rel="self"/>
+  <link href="http://mzkmzk.github.io/"/>
+  <updated>2015-09-09T16:41:24+08:00</updated>
+  <id>http://mzkmzk.github.io/</id>
+  <author>
+    <name><![CDATA[K]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[html 使用积累]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/08/07/html_%20accumulated/"/>
+    <updated>2015-08-07T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/08/07/html_ accumulated</id>
+    <content type="html"><![CDATA[<p>隐藏html</p>
+
+<ol>
+<li>display:none|block; 隐藏不占据空间.</li>
+<li>visibility：hidden|visible; 隐藏仍占据空间;</li>
+</ol>
+
+
+<h3>css3 html支持浏览器程度查询</h3>
+
+<p><a href="http://caniuse.com/">http://caniuse.com/</a></p>
+
+<h3>css@import和link的区别</h3>
+
+<p><a href="http://www.dreamdu.com/blog/2007/05/11/css_link_import/">http://www.dreamdu.com/blog/2007/05/11/css_link_import/</a></p>
+
+<h3>好用的框架</h3>
+
+<p>类似于alert的作用,但是用户无需点击它,它会自动显示在右下角,用户体验棒很多<a href="http://github.hubspot.com/messenger/docs/welcome/">http://github.hubspot.com/messenger/docs/welcome/</a></p>
+
+<p>bootcdn<a href="http://www.bootcdn.cn/">http://www.bootcdn.cn/</a>各大框架的各版本链接</p>
+
+<h3>待消化框架</h3>
+
+<p>做动画效果的<a href="http://tumult.com/hype/">http://tumult.com/hype/</a></p>
+
+<h3>零散知识点</h3>
+
+<ol>
+<li><code>&lt;code&gt;</code>标签通常只是把文本变成等宽字体,但它暗示着这段文本是源程序代码.</li>
+<li><code>&lt;th scope="col|row|colgroup|rowgroup"&gt;</code>对普通浏览器无作用,但是被作为阅读器理解为头部.</li>
+<li><p><code>vertical-align</code>可能的值:</p>
+
+<p> 3.1 <code>baseline</code>元素放置在父元素基线上</p>
+
+<p> 3.2 <code>sub</code>垂直对齐文本下标</p>
+
+<p> 3.3 <code>super</code>垂直对齐文本上标</p>
+
+<p> 3.4 <code>%</code>使用line-height属性的百分比值来排列元素,允许使用负值</p>
+
+<p> 3.5 <code>inherit</code>从父类继承</p>
+
+<p> 3.5 其余:top,text-top,middle,buttom,text-bottom,length</p></li>
+</ol>
+
+
+<p>4.<code>float</code>使用后magin 0 auto会失去作用,因为float的布局会移出文档流.</p>
+
+<h3>Bootstrap 理解</h3>
+
+<ol>
+<li><code>.col-xs-12 .col-sm-6 .col-md-8</code>表示 当屏幕小于768时,按xs走,屏幕分辨率在768-996时按sm走,大于996后按md走</li>
+<li>使用表格样式<code>.table</code>,<code>.table-striped</code>斑马线样式,<code>.table-bordered</code>带边框,<code>.table-hover</code>悬停样式,<code>table-condensed</code>紧凑,<code>table-responsive</code>滚动条响应式</li>
+</ol>
+
+
+<h3>控件状态</h3>
+
+<p>以a标签为例</p>
+
+<pre><code>a:link {color: #FF0000} /* 未访问的链接 */
+a:visited {color: #00FF00} /* 已访问的链接 */
+a:hover {color: #FF00FF} /* 鼠标移动到链接上 */
+a:active {color: #0000FF} /* 选定的链接 */
+</code></pre>
+
+<h3>规范性</h3>
+
+<p>1.标签中的的顺序</p>
+
+<pre><code>class
+id, name
+data-*
+src, for, type, href
+title, alt
+aria-*, role    
+</code></pre>
+]]></content>
+  </entry>
+  
+</feed>

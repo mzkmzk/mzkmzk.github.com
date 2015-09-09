@@ -4,7 +4,7 @@
   <title><![CDATA[Category: javascript | K]]></title>
   <link href="http://mzkmzk.github.io/blog/categories/javascript/atom.xml" rel="self"/>
   <link href="http://mzkmzk.github.io/"/>
-  <updated>2015-07-20T02:51:47+08:00</updated>
+  <updated>2015-09-09T16:41:24+08:00</updated>
   <id>http://mzkmzk.github.io/</id>
   <author>
     <name><![CDATA[K]]></name>
@@ -72,19 +72,10 @@
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[js动态添加 from表单元素]]></title>
-    <link href="http://mzkmzk.github.io/blog/2015/01/03/js_add_from/"/>
-    <updated>2015-01-03T11:37:40+08:00</updated>
-    <id>http://mzkmzk.github.io/blog/2015/01/03/js_add_from</id>
-    <content type="html"><![CDATA[
-]]></content>
-  </entry>
-  
-  <entry>
     <title type="html"><![CDATA[js 函数累积]]></title>
-    <link href="http://mzkmzk.github.io/blog/2014/12/16/js_function/"/>
-    <updated>2014-12-16T11:37:40+08:00</updated>
-    <id>http://mzkmzk.github.io/blog/2014/12/16/js_function</id>
+    <link href="http://mzkmzk.github.io/blog/2015/01/07/js_function/"/>
+    <updated>2015-01-07T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/01/07/js_function</id>
     <content type="html"><![CDATA[<p>jquery api<a href="http://jquery.bootcss.com/">http://jquery.bootcss.com/</a></p>
 
 <h3>select 选中项</h3>
@@ -132,9 +123,150 @@ function  inser_Submit(from_this){
 <pre><code>document.cookie="key=value; path=/"
 </code></pre>
 
+<h3>form表单动态添加子成员</h3>
+
+<pre><code>var page_form =document.createElement("form");
+page_form.appendChild(document.getElementById("search_type"));
+page_form.appendChild(document.getElementById("search_cancer_type"));
+page_form.appendChild(document.getElementById("search_info"));
+</code></pre>
+
+<h3>函数积累</h3>
+
+<ol>
+<li>.trim();</li>
+<li>window.location.href获取当前url</li>
+<li>parseInt(String) Stirng转int</li>
+</ol>
+
+
+<h3>jqeury函数积累</h3>
+
+<ol>
+<li>addClass(&ldquo;class&rdquo;); removeClass(&ldquo;class&rdquo;); 切换class:toggleClass(&ldquo;class&rdquo;);</li>
+<li>获取内容.html(); 设置内容.html(&ldquo;内容&rdquo;);</li>
+<li>$(document).ready(function(){});document加载完后执行的函数</li>
+</ol>
+
+
+<h3>注意点</h3>
+
+<ol>
+<li>用js提交form表单时,最好用get方法,因为用post方法的话,返回上一页需要重新提交表单.</li>
+<li>jQuery的show()和hide()函数时,注意如果该空间不需要提交到form内,要<code>$("#id").attr("disabled",true);</code></li>
+</ol>
+
+
+<h3>js验证身份证</h3>
+
+<pre><code>function IdentityCodeValid(code) {
+    var city = {
+        11: "北京",
+        12: "天津",
+        13: "河北",
+        14: "山西",
+        15: "内蒙古",
+        21: "辽宁",
+        22: "吉林",
+        23: "黑龙江 ",
+        31: "上海",
+        32: "江苏",
+        33: "浙江",
+        34: "安徽",
+        35: "福建",
+        36: "江西",
+        37: "山东",
+        41: "河南",
+        42: "湖北 ",
+        43: "湖南",
+        44: "广东",
+        45: "广西",
+        46: "海南",
+        50: "重庆",
+        51: "四川",
+        52: "贵州",
+        53: "云南",
+        54: "西藏 ",
+        61: "陕西",
+        62: "甘肃",
+        63: "青海",
+        64: "宁夏",
+        65: "新疆",
+        71: "台湾",
+        81: "香港",
+        82: "澳门",
+        91: "国外 "
+    };
+    var tip = "";
+    var pass = true;
+
+    if (!city[code.substr(0, 2)]) {
+        tip = "身份证地址编码错误";
+        pass = false;
+    } else {
+        //18位身份证需要验证最后一位校验位
+        if (code.length == 18) {
+            code = code.split('');
+            //∑(ai×Wi)(mod 11)
+            //加权因子
+            var factor = [7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2];
+            //校验位
+            var parity = [1, 0, 'X', 9, 8, 7, 6, 5, 4, 3, 2];
+            var sum = 0;
+            var ai = 0;
+            var wi = 0;
+            for (var i = 0; i &lt; 17; i++) {
+                ai = code[i];
+                wi = factor[i];
+                sum += ai * wi;
+            }
+            var last = parity[sum % 11];
+            if (parity[sum % 11] != code[17]) {
+                tip = "身份证校验位错误";
+                pass = false;
+            }
+        }
+    }
+    if (!pass) alert(tip);
+    return pass;
+}
+</code></pre>
+
+<h3>操作json</h3>
+
+<ol>
+<li>向一个元素添加属性<code>json[i].key=value</code>;</li>
+<li>json转为String<code>JSON.stringify()</code>参考链接<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify">https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify</a></li>
+<li><p>json新增元素</p>
+
+<pre><code> var title_x = [];
+ var key = { "key" : value };
+ title_x.push(key);
+</code></pre></li>
+<li><p>json排序<a href="http://www.cnblogs.com/breakdown/archive/2012/08/03/2619480.html">http://www.cnblogs.com/breakdown/archive/2012/08/03/2619480.html</a></p></li>
+</ol>
+
+
+<p>参考链接<a href="http://blog.csdn.net/jcx5083761/article/details/9091701">http://blog.csdn.net/jcx5083761/article/details/9091701</a></p>
+
 <h3>参考链接</h3>
 
 <p>jquery api <a href="http://api.jquery.com/">http://api.jquery.com/</a></p>
+
+<p>Web端我们有实时的JS报错监控平台<a href="https://github.com/tmallfe/tmallfe.github.io/issues/6">https://github.com/tmallfe/tmallfe.github.io/issues/6</a></p>
+
+<p>js类继承<a href="http://javascript.crockford.com/zh/inheritance.html">http://javascript.crockford.com/zh/inheritance.html</a></p>
+
+<h3>未消化</h3>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[js动态添加 from表单元素]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/01/03/js_add_from/"/>
+    <updated>2015-01-03T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/01/03/js_add_from</id>
+    <content type="html"><![CDATA[
 ]]></content>
   </entry>
   

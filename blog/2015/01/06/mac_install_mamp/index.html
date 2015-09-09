@@ -70,11 +70,11 @@ var _hmt = _hmt || [];
 
 <li><a href="/blog/categories/readme">readme</a></li>
 
-<li><a href="/blog/categories/javascript">javascript</a></li>
-
 <li><a href="/blog/categories/arduino">arduino</a></li>
 
 <li><a href="/blog/categories/jquery">jquery</a></li>
+
+<li><a href="/blog/categories/javascript">javascript</a></li>
 
 <li><a href="/blog/categories/bootstrap">bootstrap</a></li>
 
@@ -92,9 +92,9 @@ var _hmt = _hmt || [];
 
 <li><a href="/blog/categories/python">python</a></li>
 
-<li><a href="/blog/categories/sql">sql</a></li>
-
 <li><a href="/blog/categories/git">git</a></li>
+
+<li><a href="/blog/categories/sql">sql</a></li>
 
 <li><a href="/blog/categories/pr">pr</a></li>
 
@@ -119,6 +119,18 @@ var _hmt = _hmt || [];
 <li><a href="/blog/categories/about_me">about_me</a></li>
 
 <li><a href="/blog/categories/seo">seo</a></li>
+
+<li><a href="/blog/categories/前端">前端</a></li>
+
+<li><a href="/blog/categories/ios">ios</a></li>
+
+<li><a href="/blog/categories/app">app</a></li>
+
+<li><a href="/blog/categories/axure">axure</a></li>
+
+<li><a href="/blog/categories/html">html</a></li>
+
+<li><a href="/blog/categories/node">node</a></li>
 
 <li><a href="/blog/categories/">About me</a></li>
 </ul>
@@ -177,11 +189,11 @@ var _hmt = _hmt || [];
 
 <li><a href="/blog/categories/readme">readme</a></li>
 
-<li><a href="/blog/categories/javascript">javascript</a></li>
-
 <li><a href="/blog/categories/arduino">arduino</a></li>
 
 <li><a href="/blog/categories/jquery">jquery</a></li>
+
+<li><a href="/blog/categories/javascript">javascript</a></li>
 
 <li><a href="/blog/categories/bootstrap">bootstrap</a></li>
 
@@ -199,9 +211,9 @@ var _hmt = _hmt || [];
 
 <li><a href="/blog/categories/python">python</a></li>
 
-<li><a href="/blog/categories/sql">sql</a></li>
-
 <li><a href="/blog/categories/git">git</a></li>
+
+<li><a href="/blog/categories/sql">sql</a></li>
 
 <li><a href="/blog/categories/pr">pr</a></li>
 
@@ -226,6 +238,18 @@ var _hmt = _hmt || [];
 <li><a href="/blog/categories/about_me">about_me</a></li>
 
 <li><a href="/blog/categories/seo">seo</a></li>
+
+<li><a href="/blog/categories/前端">前端</a></li>
+
+<li><a href="/blog/categories/ios">ios</a></li>
+
+<li><a href="/blog/categories/app">app</a></li>
+
+<li><a href="/blog/categories/axure">axure</a></li>
+
+<li><a href="/blog/categories/html">html</a></li>
+
+<li><a href="/blog/categories/node">node</a></li>
 
 <li><a href="/blog/categories/">About me</a></li>
 </ul>
@@ -318,6 +342,22 @@ sudo chown -R your_user /usr/local/var/mysql/
 <p>MAMP参考链接<a href="http://yansu.org/2013/12/11/lamp-in-mac.html">http://yansu.org/2013/12/11/lamp-in-mac.html</a></p>
 
 <p>更多有关bashrc设置参考链接<a href="http://www.tuicool.com/articles/7nu2E3R">http://www.tuicool.com/articles/7nu2E3R</a></p>
+
+<h3>后续问题</h3>
+
+<p>Mac升级版本后发现apache+php不好用了 应该是升级导致httpd.conf也修改回去了</p>
+
+<ol>
+<li><p>首先 修改访问路径</p>
+
+<pre><code> DocumentRoot "/Users/maizhikun/Learning/apache_sites"
+ &lt;Directory "/Users/maizhikun/Learning/apache_sites"&gt;
+</code></pre>
+
+<p>2
+. 开启php支持LoadModule php5_module libexec/apache2/libphp5.so去掉#(这样我直接LoadModule php5_module /usr/local/Cellar/php55/5.5.20/libexec/apache2/libphp5.so  不行 )</p></li>
+</ol>
+
 </div>
 
 

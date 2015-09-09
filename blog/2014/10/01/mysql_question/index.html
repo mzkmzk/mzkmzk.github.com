@@ -7,7 +7,7 @@
 	<meta name="author" content="K">
 
 	
-	<meta name="description" content="1.mysql字符乱码 如要进行数据库定制，可到'/usr/local/mysql/support-files/&lsquo;文件夹底下，把里面的任一个.cnf配置文件复制到/etc/目录底下并修改文件名称为my.cnf。 sudo cp /usr/local/mysql/support- &hellip;">
+	<meta name="description" content="1. mysql字符乱码 如要进行数据库定制，可到'/usr/local/mysql/support-files/&lsquo;文件夹底下，把里面的任一个.cnf配置文件复制到/etc/目录底下并修改文件名称为my.cnf。 sudo cp /usr/local/mysql/support- &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	<meta name="baidu-site-verification" content="HWyzFajtAX" />
@@ -68,11 +68,11 @@ var _hmt = _hmt || [];
 
 <li><a href="/blog/categories/readme">readme</a></li>
 
-<li><a href="/blog/categories/javascript">javascript</a></li>
-
 <li><a href="/blog/categories/arduino">arduino</a></li>
 
 <li><a href="/blog/categories/jquery">jquery</a></li>
+
+<li><a href="/blog/categories/javascript">javascript</a></li>
 
 <li><a href="/blog/categories/bootstrap">bootstrap</a></li>
 
@@ -90,9 +90,9 @@ var _hmt = _hmt || [];
 
 <li><a href="/blog/categories/python">python</a></li>
 
-<li><a href="/blog/categories/sql">sql</a></li>
-
 <li><a href="/blog/categories/git">git</a></li>
+
+<li><a href="/blog/categories/sql">sql</a></li>
 
 <li><a href="/blog/categories/pr">pr</a></li>
 
@@ -117,6 +117,18 @@ var _hmt = _hmt || [];
 <li><a href="/blog/categories/about_me">about_me</a></li>
 
 <li><a href="/blog/categories/seo">seo</a></li>
+
+<li><a href="/blog/categories/前端">前端</a></li>
+
+<li><a href="/blog/categories/ios">ios</a></li>
+
+<li><a href="/blog/categories/app">app</a></li>
+
+<li><a href="/blog/categories/axure">axure</a></li>
+
+<li><a href="/blog/categories/html">html</a></li>
+
+<li><a href="/blog/categories/node">node</a></li>
 
 <li><a href="/blog/categories/">About me</a></li>
 </ul>
@@ -175,11 +187,11 @@ var _hmt = _hmt || [];
 
 <li><a href="/blog/categories/readme">readme</a></li>
 
-<li><a href="/blog/categories/javascript">javascript</a></li>
-
 <li><a href="/blog/categories/arduino">arduino</a></li>
 
 <li><a href="/blog/categories/jquery">jquery</a></li>
+
+<li><a href="/blog/categories/javascript">javascript</a></li>
 
 <li><a href="/blog/categories/bootstrap">bootstrap</a></li>
 
@@ -197,9 +209,9 @@ var _hmt = _hmt || [];
 
 <li><a href="/blog/categories/python">python</a></li>
 
-<li><a href="/blog/categories/sql">sql</a></li>
-
 <li><a href="/blog/categories/git">git</a></li>
+
+<li><a href="/blog/categories/sql">sql</a></li>
 
 <li><a href="/blog/categories/pr">pr</a></li>
 
@@ -224,6 +236,18 @@ var _hmt = _hmt || [];
 <li><a href="/blog/categories/about_me">about_me</a></li>
 
 <li><a href="/blog/categories/seo">seo</a></li>
+
+<li><a href="/blog/categories/前端">前端</a></li>
+
+<li><a href="/blog/categories/ios">ios</a></li>
+
+<li><a href="/blog/categories/app">app</a></li>
+
+<li><a href="/blog/categories/axure">axure</a></li>
+
+<li><a href="/blog/categories/html">html</a></li>
+
+<li><a href="/blog/categories/node">node</a></li>
 
 <li><a href="/blog/categories/">About me</a></li>
 </ul>
@@ -262,7 +286,7 @@ var _hmt = _hmt || [];
 	
 	<div id="content" class="inner"><article class="post">
 	<h2 class="title">Mysql 问题集锦</h2>
-	<div class="entry-content"><h2>1.mysql字符乱码</h2>
+	<div class="entry-content"><h3>1. mysql字符乱码</h3>
 
 <p>如要进行数据库定制，可到&#8217;/usr/local/mysql/support-files/&lsquo;文件夹底下，把里面的任一个.cnf配置文件复制到/etc/目录底下并修改文件名称为my.cnf。</p>
 
@@ -276,7 +300,7 @@ sudo vi /etc/my.cnf
 <pre><code>character-set-server=utf8
 </code></pre>
 
-<h2>2.mysql无法删除数据库</h2>
+<h3>2. mysql无法删除数据库</h3>
 
 <p>错误代码</p>
 
@@ -294,6 +318,78 @@ ERROR 1010 (HY000): Error dropping database (can't rmdir './db_name', errno: 66)
 </code></pre>
 
 <p>参考链接<a href="http://stackoverflow.com/questions/16527054/drop-database-return-error-dropping-database-errno-66-in-mysql">http://stackoverflow.com/questions/16527054/drop-database-return-error-dropping-database-errno-66-in-mysql</a></p>
+
+<h3>3. Can&rsquo;t connect to MySQL server on &lsquo;127.0.0.1&rsquo; (61)</h3>
+
+<p>原因 数据库未启动</p>
+
+<h2>4. java.sql.SQLException: Access denied for user &lsquo;root&rsquo;@&lsquo;localhost&rsquo; (using password: YES)</h2>
+
+<p>解决办法 把数据库连接的localhost改为127.0.0.1</p>
+
+<h3>4. 开启远程访问数据库</h3>
+
+<p>首先访问下3306的状态</p>
+
+<pre><code>maizk@x02:~$ netstat -an | grep 3306
+tcp        0      0 127.0.0.1:3306          0.0.0.0:*               LISTEN 
+</code></pre>
+
+<p>3306只对本机开放</p>
+
+<p>修改/etc/mysql/my.cnf</p>
+
+<pre><code>//注销下面这句话
+bind-address = 127.0.0.1
+</code></pre>
+
+<p>重启mysql</p>
+
+<pre><code>//linux
+sudo /etc/init.d/mysql restart
+</code></pre>
+
+<p>再查看下3306的状态</p>
+
+<pre><code>maizk@x02:/etc/mysql$ netstat -an | grep 3306
+tcp        0      0 0.0.0.0:3306            0.0.0.0:*               LISTEN     
+tcp        0      0 127.0.0.1:53766         127.0.0.1:3306          TIME_WAIT  
+tcp        0      0 127.0.0.1:53765         127.0.0.1:3306          TIME_WAIT  
+tcp        0      0 127.0.0.1:53767         127.0.0.1:3306          TIME_WAIT  
+</code></pre>
+
+<p>ok 3306对外开放了</p>
+
+<p>远程访问下试试</p>
+
+<pre><code>K:~ maizhikun$ /usr/local/mysql/bin/mysql -u root -h 192.168.0.11 -p 
+Enter password: 
+ERROR 1130 (HY000): Host '192.168.0.129' is not allowed to connect to this MySQL server
+</code></pre>
+
+<p>给予IP用户权限</p>
+
+<pre><code>mysql&gt; grant all on *.* to user_name@"%" identified by "user_password"; 　
+</code></pre>
+
+<p>*.*代表任意数据库的任意表,%代表任何IP,</p>
+
+<p>但是发现phpmyadmin无法登陆了提示2002错误,phpmyadmin应该默认用localhost登陆的,但是我们要改成127.0.0.1</p>
+
+<pre><code>vim /usr/share/phpmyadmin/libraries/config.default.php
+
+$cfg['Servers'][$i]['host'] = 'localhost';
+
+//修改为
+
+$cfg['Servers'][$i]['host'] = '127.0.0.1';
+</code></pre>
+
+<p>参考链接<a href="http://www.cnblogs.com/sunzhenchao/archive/2013/01/16/2863160.html">http://www.cnblogs.com/sunzhenchao/archive/2013/01/16/2863160.html</a></p>
+
+<p>ok,完事</p>
+
+<p>主要参考这个,还有数据库拒绝外界访问设置参考链接<a href="http://amon.org/how-to-manage-port-3306-for-mysql-connection.html">http://amon.org/how-to-manage-port-3306-for-mysql-connection.html</a></p>
 </div>
 
 

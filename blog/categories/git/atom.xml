@@ -4,7 +4,7 @@
   <title><![CDATA[Category: git | K]]></title>
   <link href="http://mzkmzk.github.io/blog/categories/git/atom.xml" rel="self"/>
   <link href="http://mzkmzk.github.io/"/>
-  <updated>2015-07-20T02:51:47+08:00</updated>
+  <updated>2015-09-09T16:41:24+08:00</updated>
   <id>http://mzkmzk.github.io/</id>
   <author>
     <name><![CDATA[K]]></name>
@@ -69,6 +69,61 @@ git branch 分支名称
 git checkout 分支名称
 git push origin 分支名称
 </code></pre>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[git 入门]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/02/11/git_study/"/>
+    <updated>2015-02-11T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/02/11/git_study</id>
+    <content type="html"><![CDATA[<h3>设置不要版本控制的文件</h3>
+
+<p>根目录下创建<code>.gitignore</code></p>
+
+<p>eg:</p>
+
+<pre><code>.gradle
+/local.properties
+/.idea/workspace.xml
+/.idea/libraries
+.DS_Store
+/build
+</code></pre>
+
+<h3>设置提交人喝邮箱</h3>
+
+<p>仅作内容提醒所用</p>
+
+<pre><code>git config --global user.email "maizk@haplox.com"
+git config --global user.name "Service" 
+</code></pre>
+
+<h3>设置密钥</h3>
+
+<h3>常用命令</h3>
+
+<pre><code>git init
+git remote add origin ssh地址
+git add .
+git commit -m "first commit"
+git branch 分支名称
+git checkout 分支名称
+git push origin 分支名称
+</code></pre>
+
+<h3>参考链接</h3>
+
+<p>待消化</p>
+
+<ol>
+<li>git详细解释<a href="http://blog.jobbole.com/25775/">http://blog.jobbole.com/25775/</a></li>
+</ol>
+
+
+<p>git原理介绍<a href="http://blog.cnbluebox.com/blog/2014/04/15/gitlabde-shi-yong/">http://blog.cnbluebox.com/blog/2014/04/15/gitlabde-shi-yong/</a></p>
+
+<p>管理命令<a href="http://www.360doc.com/content/14/1029/10/13147830_420815353.shtml">http://www.360doc.com/content/14/1029/10/13147830_420815353.shtml</a></p>
 ]]></content>
   </entry>
   

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: node | K]]></title>
+  <link href="http://mzkmzk.github.io/blog/categories/node/atom.xml" rel="self"/>
+  <link href="http://mzkmzk.github.io/"/>
+  <updated>2015-09-09T16:41:24+08:00</updated>
+  <id>http://mzkmzk.github.io/</id>
+  <author>
+    <name><![CDATA[K]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[node入门]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/08/15/node_js_start/"/>
+    <updated>2015-08-15T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/08/15/node_js_start</id>
+    <content type="html"><![CDATA[<h3>下载安装包</h3>
+
+<p><a href="https://nodejs.org/download/">https://nodejs.org/download/</a></p>
+
+<p>安装完成后的信息</p>
+
+<pre><code>Node was installed at
+
+/usr/local/bin/node
+
+npm was installed at
+
+/usr/local/bin/npm
+
+Make sure that /usr/local/bin is in your $PATH.
+</code></pre>
+]]></content>
+  </entry>
+  
+</feed>

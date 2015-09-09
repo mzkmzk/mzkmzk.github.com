@@ -1,0 +1,475 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>HaploX Web Bug制作过程 - K</title>
+	<meta name="author" content="K">
+
+	
+	<meta name="description" content="0x00 Web Bug 用户登录时间不对
+管理用户和用户列表是一样的- -?.
+数据库级联删除 - 目测是执行多个sql而非设置数据库表关系
+权限限制为空
+http://192.168.0.20:8080/lab/backend-zh/patient/addPatient.php必填UI错位 &hellip;">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="baidu-site-verification" content="HWyzFajtAX" />
+	<meta name="google-site-verification" content="xf8laC_mNTP9RdWTD-O8D4yYFsMXXnGjvcWVNqfNntk" />
+	<link href="false" rel="alternate" title="K" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script async="true" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	
+	<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?1e6c60ae572d5e740a34233f4accedbd";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+</head>
+
+
+<body>
+	<header id="header" class="inner"><h1><a href="/">K</a></h1>
+<nav id="K_select">
+	<div class="alignleft menu">
+		<a class="button">Category</a>
+		<div class="container"><ul class="main">
+		
+	
+<li><a href="/blog/categories/markdown">markdown</a></li>
+
+<li><a href="/blog/categories/data">data</a></li>
+
+<li><a href="/blog/categories/php">php</a></li>
+
+<li><a href="/blog/categories/svn">svn</a></li>
+
+<li><a href="/blog/categories/octopress">octopress</a></li>
+
+<li><a href="/blog/categories/mysql">mysql</a></li>
+
+<li><a href="/blog/categories/j2ee">j2ee</a></li>
+
+<li><a href="/blog/categories/mac">mac</a></li>
+
+<li><a href="/blog/categories/struts2">struts2</a></li>
+
+<li><a href="/blog/categories/android">android</a></li>
+
+<li><a href="/blog/categories/hack">hack</a></li>
+
+<li><a href="/blog/categories/design">design</a></li>
+
+<li><a href="/blog/categories/eclipse">eclipse</a></li>
+
+<li><a href="/blog/categories/readme">readme</a></li>
+
+<li><a href="/blog/categories/arduino">arduino</a></li>
+
+<li><a href="/blog/categories/jquery">jquery</a></li>
+
+<li><a href="/blog/categories/javascript">javascript</a></li>
+
+<li><a href="/blog/categories/bootstrap">bootstrap</a></li>
+
+<li><a href="/blog/categories/squild">squild</a></li>
+
+<li><a href="/blog/categories/iphone">iphone</a></li>
+
+<li><a href="/blog/categories/question">question</a></li>
+
+<li><a href="/blog/categories/java">java</a></li>
+
+<li><a href="/blog/categories/photoshop">photoshop</a></li>
+
+<li><a href="/blog/categories/sqlmap">sqlmap</a></li>
+
+<li><a href="/blog/categories/python">python</a></li>
+
+<li><a href="/blog/categories/git">git</a></li>
+
+<li><a href="/blog/categories/sql">sql</a></li>
+
+<li><a href="/blog/categories/pr">pr</a></li>
+
+<li><a href="/blog/categories/linux">linux</a></li>
+
+<li><a href="/blog/categories/oracle">oracle</a></li>
+
+<li><a href="/blog/categories/windows">windows</a></li>
+
+<li><a href="/blog/categories/video">video</a></li>
+
+<li><a href="/blog/categories/travel">travel</a></li>
+
+<li><a href="/blog/categories/web">web</a></li>
+
+<li><a href="/blog/categories/httracl">httracl</a></li>
+
+<li><a href="/blog/categories/httpclient">httpclient</a></li>
+
+<li><a href="/blog/categories/tjrac">tjrac</a></li>
+
+<li><a href="/blog/categories/about_me">about_me</a></li>
+
+<li><a href="/blog/categories/seo">seo</a></li>
+
+<li><a href="/blog/categories/前端">前端</a></li>
+
+<li><a href="/blog/categories/ios">ios</a></li>
+
+<li><a href="/blog/categories/app">app</a></li>
+
+<li><a href="/blog/categories/axure">axure</a></li>
+
+<li><a href="/blog/categories/html">html</a></li>
+
+<li><a href="/blog/categories/node">node</a></li>
+
+<li><a href="/blog/categories/">About me</a></li>
+</ul>
+</div>
+	</div>
+	<div class="alignright search">
+		<a class="button"></a>
+		<div class="container">
+			<form action="https://www.google.com/search" method="get">
+				<input type="text" name="q" results="0">
+				<input type="hidden" name="q" value="site:mzkmzk.github.io">
+			</form>
+		</div>
+	</div>
+</nav>
+<nav id="main-nav">
+	<ul class="main">
+		<li><a href="/blog/2015/07/16/adoube_me.markdwon/">About me</a></li>
+	
+
+
+</ul>
+
+	</nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Category</a>
+		<div class="container"><ul class="main">
+		
+	
+<li><a href="/blog/categories/markdown">markdown</a></li>
+
+<li><a href="/blog/categories/data">data</a></li>
+
+<li><a href="/blog/categories/php">php</a></li>
+
+<li><a href="/blog/categories/svn">svn</a></li>
+
+<li><a href="/blog/categories/octopress">octopress</a></li>
+
+<li><a href="/blog/categories/mysql">mysql</a></li>
+
+<li><a href="/blog/categories/j2ee">j2ee</a></li>
+
+<li><a href="/blog/categories/mac">mac</a></li>
+
+<li><a href="/blog/categories/struts2">struts2</a></li>
+
+<li><a href="/blog/categories/android">android</a></li>
+
+<li><a href="/blog/categories/hack">hack</a></li>
+
+<li><a href="/blog/categories/design">design</a></li>
+
+<li><a href="/blog/categories/eclipse">eclipse</a></li>
+
+<li><a href="/blog/categories/readme">readme</a></li>
+
+<li><a href="/blog/categories/arduino">arduino</a></li>
+
+<li><a href="/blog/categories/jquery">jquery</a></li>
+
+<li><a href="/blog/categories/javascript">javascript</a></li>
+
+<li><a href="/blog/categories/bootstrap">bootstrap</a></li>
+
+<li><a href="/blog/categories/squild">squild</a></li>
+
+<li><a href="/blog/categories/iphone">iphone</a></li>
+
+<li><a href="/blog/categories/question">question</a></li>
+
+<li><a href="/blog/categories/java">java</a></li>
+
+<li><a href="/blog/categories/photoshop">photoshop</a></li>
+
+<li><a href="/blog/categories/sqlmap">sqlmap</a></li>
+
+<li><a href="/blog/categories/python">python</a></li>
+
+<li><a href="/blog/categories/git">git</a></li>
+
+<li><a href="/blog/categories/sql">sql</a></li>
+
+<li><a href="/blog/categories/pr">pr</a></li>
+
+<li><a href="/blog/categories/linux">linux</a></li>
+
+<li><a href="/blog/categories/oracle">oracle</a></li>
+
+<li><a href="/blog/categories/windows">windows</a></li>
+
+<li><a href="/blog/categories/video">video</a></li>
+
+<li><a href="/blog/categories/travel">travel</a></li>
+
+<li><a href="/blog/categories/web">web</a></li>
+
+<li><a href="/blog/categories/httracl">httracl</a></li>
+
+<li><a href="/blog/categories/httpclient">httpclient</a></li>
+
+<li><a href="/blog/categories/tjrac">tjrac</a></li>
+
+<li><a href="/blog/categories/about_me">about_me</a></li>
+
+<li><a href="/blog/categories/seo">seo</a></li>
+
+<li><a href="/blog/categories/前端">前端</a></li>
+
+<li><a href="/blog/categories/ios">ios</a></li>
+
+<li><a href="/blog/categories/app">app</a></li>
+
+<li><a href="/blog/categories/axure">axure</a></li>
+
+<li><a href="/blog/categories/html">html</a></li>
+
+<li><a href="/blog/categories/node">node</a></li>
+
+<li><a href="/blog/categories/">About me</a></li>
+</ul>
+</div>
+	</div>
+	<div class="alignright search">
+		<a class="button"></a>
+		<div class="container">
+			<form action="https://www.google.com/search" method="get">
+				<input type="text" name="q" results="0">
+				<input type="hidden" name="q" value="site:mzkmzk.github.io">
+			</form>
+		</div>
+	</div>
+</nav>
+<nav id="sub-nav" class="alignright">
+	<div class="social">
+		
+		
+		
+		
+    
+		
+		
+		
+		
+		
+    
+	</div>
+	
+</nav>
+
+</header>
+	
+		
+	
+	<div id="content" class="inner"><article class="post">
+	<h2 class="title">HaploX Web Bug制作过程</h2>
+	<div class="entry-content"><h3>0x00 Web Bug</h3>
+
+<ol>
+<li>用户登录时间不对</li>
+<li>管理用户和用户列表是一样的- -?.</li>
+<li>数据库级联删除 - 目测是执行多个sql而非设置数据库表关系</li>
+<li>权限限制为空</li>
+<li><a href="http://192.168.0.20:8080/lab/backend-zh/patient/addPatient.php">http://192.168.0.20:8080/lab/backend-zh/patient/addPatient.php</a>必填UI错位</li>
+<li>添加病人时,性别为何要Unknow</li>
+<li>添加病人时显示错误:机构名称错误，无法找到有效编码！！！主诉疾病名称错误，无法找到有效编码！！！,不友好 又要全部重新填过,建议Ajax及时校验</li>
+<li>病人列表 选择排序时,下拉贴表超出去了</li>
+<li>建议新增病人时,机构名称为下拉列表,</li>
+<li>新增病人的时候啊.什么是机构分配
+编码,是新增机构时我填写的编码吗.</li>
+<li>第三次添加病人.显示错误:主诉疾病名称错误，无法找到有效编码！！！</li>
+<li>终于成功添加病人了&hellip;添加病人中的主诉疾病还是下拉列表比较好</li>
+<li>病人添加病历还得重新填姓名?????????????????????????id级联不行?</li>
+<li>疑问:新增病历时:能否重复提交同一种主诉疾病</li>
+<li>新增病历的病历图片居然是一个文本框?</li>
+<li>添加病历显示:病人/样本不存在！！！&hellip;.</li>
+<li>修改病人资料:必填项不可为空！！！但是星星只标了头三项不能为空</li>
+<li>新增病历要求病人名称不能为空,但是新增病人时病人名字可以为空</li>
+<li>修改病人资料时,全部资料写完了 但是还是显示必填项不能为空</li>
+<li>感觉web导航栏和左部重复</li>
+<li>新增DNA信息生成编码时为乱码:����-150727001和处理时间错位</li>
+<li>页面统一字符,能用中文都用中文,别中英参杂</li>
+<li><p>数据库多余字段</p>
+
+<pre><code>patient_medical_record表
+1. title
+2. detail
+3. major_disease
+</code></pre></li>
+</ol>
+
+
+<h3>0x00 APP构架思路</h3>
+
+<p>疑问:报告生成的根据属性</p>
+
+<h3>0X01 编写list_View页面思路</h3>
+
+<ol>
+<li>编写布局文件</li>
+<li>编写Bean 了解清楚显示属性</li>
+<li>编写Adapter</li>
+<li>编写Handler</li>
+<li>编写Thread</li>
+<li>编写Activity</li>
+</ol>
+
+
+<h3>0x02 APP图片地址</h3>
+
+<p>index</p>
+
+<p>病人管理<a href="https://www.iconfinder.com/icons/313530/aid_cure_medical_patient_surgery_surgical_icon#size=128">https://www.iconfinder.com/icons/313530/aid_cure_medical_patient_surgery_surgical_icon#size=128</a></p>
+
+<p>样本管理<a href="https://www.iconfinder.com/icons/227904/color_drip_dropper_sample_icon#size=128">https://www.iconfinder.com/icons/227904/color_drip_dropper_sample_icon#size=128</a></p>
+
+<p>DNA管理<a href="https://www.iconfinder.com/icons/368106/biology_dna_icon#size=128">https://www.iconfinder.com/icons/368106/biology_dna_icon#size=128</a></p>
+
+<p>DNA文库<a href="https://www.iconfinder.com/icons/278716/dna_genious_icon#size=128">https://www.iconfinder.com/icons/278716/dna_genious_icon#size=128</a></p>
+
+<p>上机管理<a href="https://www.iconfinder.com/icons/363302/computer_glasses_woman_icon#size=128">https://www.iconfinder.com/icons/363302/computer_glasses_woman_icon#size=128</a></p>
+
+<p>测序管理<a href="https://www.iconfinder.com/icons/391688/filter_list_order_outline_sequence_sort_sorting_icon#size=128">https://www.iconfinder.com/icons/391688/filter_list_order_outline_sequence_sort_sorting_icon#size=128</a></p>
+
+<h3>0x03 APP疑问</h3>
+
+<ol>
+<li>样本列表中病人和取样者的区别</li>
+<li>样本和DNA的关系</li>
+</ol>
+
+
+<h3>0x04 遗留问题</h3>
+
+<ol>
+<li><p>index中6个图片要制作成.9.png不然每个屏幕显示不一样.</p></li>
+<li><p>首页中轮播图有两个onclick时间不知道是干哈的- -. 发现2个是一样的 就删了一个</p></li>
+</ol>
+
+
+<h3>0x05 总结</h3>
+
+<ol>
+<li>命名 文件夹首字母大写</li>
+<li>命令 文件夹 功能跳转 以跳转为头,若镶嵌 则功能为头</li>
+</ol>
+
+</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-07-27T11:37:40+08:00" pubdate data-updated="true"></time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/app/'>app</a>
+
+
+</div>
+	
+</div>
+</article>
+
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+		
+		<a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+		
+		
+		<a class="addthis_button_tweet"></a>
+		
+		
+		
+	</div>
+	
+</div>
+
+
+
+
+
+
+  <section>
+    <h1>Comments</h1>
+    <div id="comments" aria-live="polite">
+
+<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="HaploX Web Bug制作过程" data-title="HaploX Web Bug制作过程" data-url="/blog/2015/07/27/Haplox_APP_start/"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"mzkmzk"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- 多说公共JS代码 end --></div>
+  </section>
+</div>
+	<footer id="footer" class="inner">
+
+Copyright &copy; 2015
+
+    K
+
+
+</footer>
+	<script src="/javascripts/slash.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+	$('.fancybox').fancybox();
+})(jQuery);
+</script> <!-- Delete or comment this line to disable Fancybox -->
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: app | K]]></title>
+  <link href="http://mzkmzk.github.io/blog/categories/app/atom.xml" rel="self"/>
+  <link href="http://mzkmzk.github.io/"/>
+  <updated>2015-09-09T16:41:24+08:00</updated>
+  <id>http://mzkmzk.github.io/</id>
+  <author>
+    <name><![CDATA[K]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[HaploX Web Bug制作过程]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/07/27/Haplox_APP_start/"/>
+    <updated>2015-07-27T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/07/27/Haplox_APP_start</id>
+    <content type="html"><![CDATA[<h3>0x00 Web Bug</h3>
+
+<ol>
+<li>用户登录时间不对</li>
+<li>管理用户和用户列表是一样的- -?.</li>
+<li>数据库级联删除 - 目测是执行多个sql而非设置数据库表关系</li>
+<li>权限限制为空</li>
+<li><a href="http://192.168.0.20:8080/lab/backend-zh/patient/addPatient.php">http://192.168.0.20:8080/lab/backend-zh/patient/addPatient.php</a>必填UI错位</li>
+<li>添加病人时,性别为何要Unknow</li>
+<li>添加病人时显示错误:机构名称错误，无法找到有效编码！！！主诉疾病名称错误，无法找到有效编码！！！,不友好 又要全部重新填过,建议Ajax及时校验</li>
+<li>病人列表 选择排序时,下拉贴表超出去了</li>
+<li>建议新增病人时,机构名称为下拉列表,</li>
+<li>新增病人的时候啊.什么是机构分配
+编码,是新增机构时我填写的编码吗.</li>
+<li>第三次添加病人.显示错误:主诉疾病名称错误，无法找到有效编码！！！</li>
+<li>终于成功添加病人了&hellip;添加病人中的主诉疾病还是下拉列表比较好</li>
+<li>病人添加病历还得重新填姓名?????????????????????????id级联不行?</li>
+<li>疑问:新增病历时:能否重复提交同一种主诉疾病</li>
+<li>新增病历的病历图片居然是一个文本框?</li>
+<li>添加病历显示:病人/样本不存在！！！&hellip;.</li>
+<li>修改病人资料:必填项不可为空！！！但是星星只标了头三项不能为空</li>
+<li>新增病历要求病人名称不能为空,但是新增病人时病人名字可以为空</li>
+<li>修改病人资料时,全部资料写完了 但是还是显示必填项不能为空</li>
+<li>感觉web导航栏和左部重复</li>
+<li>新增DNA信息生成编码时为乱码:����-150727001和处理时间错位</li>
+<li>页面统一字符,能用中文都用中文,别中英参杂</li>
+<li><p>数据库多余字段</p>
+
+<pre><code>patient_medical_record表
+1. title
+2. detail
+3. major_disease
+</code></pre></li>
+</ol>
+
+
+<h3>0x00 APP构架思路</h3>
+
+<p>疑问:报告生成的根据属性</p>
+
+<h3>0X01 编写list_View页面思路</h3>
+
+<ol>
+<li>编写布局文件</li>
+<li>编写Bean 了解清楚显示属性</li>
+<li>编写Adapter</li>
+<li>编写Handler</li>
+<li>编写Thread</li>
+<li>编写Activity</li>
+</ol>
+
+
+<h3>0x02 APP图片地址</h3>
+
+<p>index</p>
+
+<p>病人管理<a href="https://www.iconfinder.com/icons/313530/aid_cure_medical_patient_surgery_surgical_icon#size=128">https://www.iconfinder.com/icons/313530/aid_cure_medical_patient_surgery_surgical_icon#size=128</a></p>
+
+<p>样本管理<a href="https://www.iconfinder.com/icons/227904/color_drip_dropper_sample_icon#size=128">https://www.iconfinder.com/icons/227904/color_drip_dropper_sample_icon#size=128</a></p>
+
+<p>DNA管理<a href="https://www.iconfinder.com/icons/368106/biology_dna_icon#size=128">https://www.iconfinder.com/icons/368106/biology_dna_icon#size=128</a></p>
+
+<p>DNA文库<a href="https://www.iconfinder.com/icons/278716/dna_genious_icon#size=128">https://www.iconfinder.com/icons/278716/dna_genious_icon#size=128</a></p>
+
+<p>上机管理<a href="https://www.iconfinder.com/icons/363302/computer_glasses_woman_icon#size=128">https://www.iconfinder.com/icons/363302/computer_glasses_woman_icon#size=128</a></p>
+
+<p>测序管理<a href="https://www.iconfinder.com/icons/391688/filter_list_order_outline_sequence_sort_sorting_icon#size=128">https://www.iconfinder.com/icons/391688/filter_list_order_outline_sequence_sort_sorting_icon#size=128</a></p>
+
+<h3>0x03 APP疑问</h3>
+
+<ol>
+<li>样本列表中病人和取样者的区别</li>
+<li>样本和DNA的关系</li>
+</ol>
+
+
+<h3>0x04 遗留问题</h3>
+
+<ol>
+<li><p>index中6个图片要制作成.9.png不然每个屏幕显示不一样.</p></li>
+<li><p>首页中轮播图有两个onclick时间不知道是干哈的- -. 发现2个是一样的 就删了一个</p></li>
+</ol>
+
+
+<h3>0x05 总结</h3>
+
+<ol>
+<li>命名 文件夹首字母大写</li>
+<li>命令 文件夹 功能跳转 以跳转为头,若镶嵌 则功能为头</li>
+</ol>
+
+]]></content>
+  </entry>
+  
+</feed>

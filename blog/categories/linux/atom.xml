@@ -4,7 +4,7 @@
   <title><![CDATA[Category: linux | K]]></title>
   <link href="http://mzkmzk.github.io/blog/categories/linux/atom.xml" rel="self"/>
   <link href="http://mzkmzk.github.io/"/>
-  <updated>2015-07-20T02:51:47+08:00</updated>
+  <updated>2015-09-09T16:41:24+08:00</updated>
   <id>http://mzkmzk.github.io/</id>
   <author>
     <name><![CDATA[K]]></name>
@@ -35,6 +35,38 @@
 
 <hr />
 
+<h3>修改用户密码</h3>
+
+<pre><code>passwd
+输入旧面貌
+输入两次新密码
+</code></pre>
+
+<h3>连接mysql命令</h3>
+
+<pre><code>mysql -u 用户名 -h ip -D 数据库 -p
+</code></pre>
+
+<h3>mysql生成.sql</h3>
+
+<pre><code>mysqldump -h localhost -u root -p  数据库名  &gt; ~/K`
+</code></pre>
+
+<h3>下载服务器资源</h3>
+
+<p>scp maizk@120.<em>.67.</em>:/home/maizk/K /Users/maizhikun/</p>
+
+<h3>待了解命令</h3>
+
+<p>du</p>
+
+<h3>其他</h3>
+
+<ol>
+<li>更改目录属主和属组,用来方便上传文件,不用sudo<code>sudo chown -R maizk.maizk admin/</code></li>
+</ol>
+
+
 <h1>工具安装</h1>
 
 <h3>ssh</h3>
@@ -50,6 +82,25 @@
 
 
 <p>参考连接<a href="http://www.cnblogs.com/nodot/archive/2011/06/10/2077595.html">http://www.cnblogs.com/nodot/archive/2011/06/10/2077595.html</a></p>
+
+<h3>其他</h3>
+
+<ol>
+<li>更改目录属主和属组,用来方便上传文件,不用sudo<code>sudo chown -R maizk.maizk admin/</code></li>
+</ol>
+
+
+<h3>grep</h3>
+
+<pre><code>grep '过滤内容' 
+
+-c 打印每个输入文件的匹配行数
+-l 打印每个输入文件的名字
+-n提供输入行的行号
+-i忽略表达式中字母大小写
+</code></pre>
+
+<p>参考链接<a href="http://chenhua-1984.iteye.com/blog/736650">http://chenhua-1984.iteye.com/blog/736650</a></p>
 ]]></content>
   </entry>
   

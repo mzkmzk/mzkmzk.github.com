@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: 前端 | K]]></title>
+  <link href="http://mzkmzk.github.io/blog/categories/qian-duan/atom.xml" rel="self"/>
+  <link href="http://mzkmzk.github.io/"/>
+  <updated>2015-09-09T16:41:24+08:00</updated>
+  <id>http://mzkmzk.github.io/</id>
+  <author>
+    <name><![CDATA[K]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[react入门]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/07/20/react_start/"/>
+    <updated>2015-07-20T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/07/20/react_start</id>
+    <content type="html"><![CDATA[<!--more-->
+
+
+<h3>开始安装使用react</h3>
+
+<p>下载地址<a href="http://facebook.github.io/react/docs/getting-started.html">http://facebook.github.io/react/docs/getting-started.html</a></p>
+
+<p>尝试下载安装包种examaple</p>
+
+<p>先安装node.js</p>
+
+<ol>
+<li><p>examples/basic-jsx-precompile/</p>
+
+<pre><code> npm install -g react-tools
+ cd examples/basic-jsx-precompile/
+ jsx . build/
+</code></pre></li>
+</ol>
+
+
+<h3>参考资料</h3>
+
+<p>react-native 之布局篇<a href="https://github.com/tmallfe/tmallfe.github.io/issues/19">https://github.com/tmallfe/tmallfe.github.io/issues/19</a></p>
+
+<p>react开发者演讲<a href="https://code.facebook.com/posts/1014532261909640/react-native-bringing-modern-web-techniques-to-mobile/">https://code.facebook.com/posts/1014532261909640/react-native-bringing-modern-web-techniques-to-mobile/</a></p>
+
+<p>react示例阅读<a href="http://www.infoq.com/cn/articles/subversion-front-end-ui-development-framework-react">http://www.infoq.com/cn/articles/subversion-front-end-ui-development-framework-react</a></p>
+
+<p>API<a href="http://facebook.github.io/react-native/docs/troubleshooting.html#content">http://facebook.github.io/react-native/docs/troubleshooting.html#content</a></p>
+
+<p>在线开发环境<a href="https://jsfiddle.net/reactjs/69z2wepo/">https://jsfiddle.net/reactjs/69z2wepo/</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[grunt入门]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/07/20/grunt_start/"/>
+    <updated>2015-07-20T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/07/20/grunt_start</id>
+    <content type="html"><![CDATA[<h3>安装步骤</h3>
+
+<ol>
+<li>先安装node.js</li>
+<li>输入命令行<code>sudo npm install -g grunt-cli</code></li>
+</ol>
+
+]]></content>
+  </entry>
+  
+</feed>

@@ -69,11 +69,11 @@ var _hmt = _hmt || [];
 
 <li><a href="/blog/categories/readme">readme</a></li>
 
-<li><a href="/blog/categories/javascript">javascript</a></li>
-
 <li><a href="/blog/categories/arduino">arduino</a></li>
 
 <li><a href="/blog/categories/jquery">jquery</a></li>
+
+<li><a href="/blog/categories/javascript">javascript</a></li>
 
 <li><a href="/blog/categories/bootstrap">bootstrap</a></li>
 
@@ -91,9 +91,9 @@ var _hmt = _hmt || [];
 
 <li><a href="/blog/categories/python">python</a></li>
 
-<li><a href="/blog/categories/sql">sql</a></li>
-
 <li><a href="/blog/categories/git">git</a></li>
+
+<li><a href="/blog/categories/sql">sql</a></li>
 
 <li><a href="/blog/categories/pr">pr</a></li>
 
@@ -118,6 +118,18 @@ var _hmt = _hmt || [];
 <li><a href="/blog/categories/about_me">about_me</a></li>
 
 <li><a href="/blog/categories/seo">seo</a></li>
+
+<li><a href="/blog/categories/前端">前端</a></li>
+
+<li><a href="/blog/categories/ios">ios</a></li>
+
+<li><a href="/blog/categories/app">app</a></li>
+
+<li><a href="/blog/categories/axure">axure</a></li>
+
+<li><a href="/blog/categories/html">html</a></li>
+
+<li><a href="/blog/categories/node">node</a></li>
 
 <li><a href="/blog/categories/">About me</a></li>
 </ul>
@@ -176,11 +188,11 @@ var _hmt = _hmt || [];
 
 <li><a href="/blog/categories/readme">readme</a></li>
 
-<li><a href="/blog/categories/javascript">javascript</a></li>
-
 <li><a href="/blog/categories/arduino">arduino</a></li>
 
 <li><a href="/blog/categories/jquery">jquery</a></li>
+
+<li><a href="/blog/categories/javascript">javascript</a></li>
 
 <li><a href="/blog/categories/bootstrap">bootstrap</a></li>
 
@@ -198,9 +210,9 @@ var _hmt = _hmt || [];
 
 <li><a href="/blog/categories/python">python</a></li>
 
-<li><a href="/blog/categories/sql">sql</a></li>
-
 <li><a href="/blog/categories/git">git</a></li>
+
+<li><a href="/blog/categories/sql">sql</a></li>
 
 <li><a href="/blog/categories/pr">pr</a></li>
 
@@ -225,6 +237,18 @@ var _hmt = _hmt || [];
 <li><a href="/blog/categories/about_me">about_me</a></li>
 
 <li><a href="/blog/categories/seo">seo</a></li>
+
+<li><a href="/blog/categories/前端">前端</a></li>
+
+<li><a href="/blog/categories/ios">ios</a></li>
+
+<li><a href="/blog/categories/app">app</a></li>
+
+<li><a href="/blog/categories/axure">axure</a></li>
+
+<li><a href="/blog/categories/html">html</a></li>
+
+<li><a href="/blog/categories/node">node</a></li>
 
 <li><a href="/blog/categories/">About me</a></li>
 </ul>
@@ -263,7 +287,7 @@ var _hmt = _hmt || [];
 	
 	<div id="content" class="inner"><article class="post">
 	<h2 class="title">Android 问题集锦</h2>
-	<div class="entry-content"><h2>1. MAC ADT下载提示 没安装 java se6</h2>
+	<div class="entry-content"><h3>1. MAC ADT下载提示 没安装 java se6</h3>
 
 <pre><code>//每个人的jdk版本不一样 路径文字不完全一样 建议tab补全输路径
 sudo vim  /Library/Java/JavaVirtualMachines/jdk1.7.0_67.jdk/Contents/Info.plist  
@@ -291,7 +315,7 @@ sudo vim  /Library/Java/JavaVirtualMachines/jdk1.7.0_67.jdk/Contents/Info.plist
 
 <p>参考链接<a href="http://smilejay.com/2013/11/mac-os-x-to-open-eclipse-you-need-a-java-se-6-runtime/">http://smilejay.com/2013/11/mac-os-x-to-open-eclipse-you-need-a-java-se-6-runtime/</a></p>
 
-<h2>2. Android 导入工程出现Unable to resolve target &lsquo;android-xx&#8217;错误</h2>
+<h3>2. Android 导入工程出现Unable to resolve target &lsquo;android-xx&#8217;错误</h3>
 
 <p>出现这样的错误可能会导致 .R文件无法生成..</p>
 
@@ -305,6 +329,73 @@ sudo vim  /Library/Java/JavaVirtualMachines/jdk1.7.0_67.jdk/Contents/Info.plist
 <p>然后再到你刚导入的项目改成和?即可</p>
 
 <p>懒的话 直接把文件复制粘贴过去- -&hellip;应该也ok</p>
+
+<h3>AS新建assets目录</h3>
+
+<pre><code>XXX\src\main\assets  
+</code></pre>
+
+<p>这个位置可以通过XXX.iml  XXX代表自己的项目名，其中有设置assets的目录，设置如下</p>
+
+<pre><code>&lt;option name="ASSETS_FOLDER_RELATIVE_PATH" value="/src/main/assets" /&gt;  
+</code></pre>
+
+<p>参考链接<a href="http://blog.csdn.net/caesardadi/article/details/14231293">http://blog.csdn.net/caesardadi/article/details/14231293</a></p>
+
+<h3>自定义控件</h3>
+
+<p>在values/attr.xml中配置</p>
+
+<pre><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+</code></pre>
+
+<p><resources></p>
+
+<pre><code>    &lt;!--Utils.Accordin_Widget --&gt;
+        &lt;declare-styleable name="image_labeled_button"&gt;
+            &lt;attr name="icon_resource" format="reference" /&gt;
+            &lt;attr name="icon_label" format="reference" /&gt;
+        &lt;/declare-styleable&gt;
+        &lt;declare-styleable name="toggle_image_labeled_button"&gt;
+            &lt;attr name="icon_resource_off" format="reference" /&gt;
+        &lt;/declare-styleable&gt;
+        &lt;declare-styleable name="accordion"&gt;
+            &lt;attr name="header_layout_id" format="reference" /&gt;
+            &lt;attr name="header_layout_fold_button_id" format="reference" /&gt;
+            &lt;attr name="header_layout_label_id" format="reference" /&gt;
+            &lt;attr name="custom_font" format="string" /&gt;
+            &lt;attr name="section_headers" format="reference" /&gt;
+            &lt;attr name="section_container" format="reference" /&gt;
+            &lt;attr name="section_container_parent" format="reference" /&gt;
+            &lt;attr name="section_bottom" format="reference" /&gt;
+            &lt;attr name="section_visibility" format="reference"/&gt;
+        &lt;/declare-styleable&gt;
+
+&lt;/resources&gt;
+</code></pre>
+
+<p>然后再xml中引用</p>
+
+<pre><code> xmlns:accordion="http://schemas.android.com/apk/res-auto"
+</code></pre>
+
+<h3>Androidstudio 导入库</h3>
+
+<p><a href="http://www.cnblogs.com/neozhu/p/3458759.html">http://www.cnblogs.com/neozhu/p/3458759.html</a></p>
+
+<h3>优秀开源项目</h3>
+
+<p>听过效果实现开源的<a href="https://github.com/RoyWallace/Simiquan">https://github.com/RoyWallace/Simiquan</a></p>
+
+<h3>AS使用git</h3>
+
+<h3>DeviceMonitor: Adb rejected connection to client &lsquo;4902&rsquo;: closed</h3>
+
+<p>adb拒绝连接..重启之</p>
+
+<pre><code>adb kill-server
+adb start-server
+</code></pre>
 </div>
 
 

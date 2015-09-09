@@ -1,0 +1,443 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: ios | K]]></title>
+  <link href="http://mzkmzk.github.io/blog/categories/ios/atom.xml" rel="self"/>
+  <link href="http://mzkmzk.github.io/"/>
+  <updated>2015-09-09T16:41:24+08:00</updated>
+  <id>http://mzkmzk.github.io/</id>
+  <author>
+    <name><![CDATA[K]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[iOS 入门常见问题]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/07/20/iOS_Start/"/>
+    <updated>2015-07-20T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/07/20/iOS_Start</id>
+    <content type="html"><![CDATA[<h3>1. Device os version lower than deployment target</h3>
+
+<p>我把手机连接电脑后,准备跑项目,但是Xcode提醒<code>Device os version lower than deployment target</code></p>
+
+<p>原因是项目要求最低版本高于手机版本,单击项目修改D<code>eployment Target即可</code></p>
+
+<p>API<a href="https://developer.apple.com/library/ios/navigation/">https://developer.apple.com/library/ios/navigation/</a></p>
+
+<p>学习视频<a href="http://open.163.com/special/opencourse/ios8.html">http://open.163.com/special/opencourse/ios8.html</a></p>
+
+<h4>/Users/maizhikun/Learning/iOS/workspace/Calculatoer/Calculatoer/CalculatorBrain.swift:12:22: &lsquo;Printable&rsquo; has been renamed to &lsquo;CustomStringConvertible&rsquo;</h4>
+
+<p> enum Op: Printable改成</p>
+
+<p> enum Op: CustomStringConvertible</p>
+
+<h3>书籍</h3>
+
+<p> <a href="http://www.zhihu.com/question/24004342">http://www.zhihu.com/question/24004342</a></p>
+
+<h3>学习博客</h3>
+
+<p> <a href="http://blog.csdn.net/Yt7589#rd?sukey=fc78a68049a14bb282a9238cb43355c93c53ed2c5959342e3c9a2d814b2888b1f46e19db83593016565093d093f7aff4">http://blog.csdn.net/Yt7589#rd?sukey=fc78a68049a14bb282a9238cb43355c93c53ed2c5959342e3c9a2d814b2888b1f46e19db83593016565093d093f7aff4</a></p>
+
+<h2>白胡子教程笔记</h2>
+
+<h4>第四课Swift和Foundation框架</h4>
+
+<ol>
+<li><p>数组</p>
+
+<pre><code> var a = Arry&lt;String&gt;()
+
+ var a = [String]()
+
+ var animals = ["Giraffe","Cow"]
+
+ animals.append("Dog");
+
+ let animal = animals[1]
+
+ for animals in animals {
+     println("\(animal)")
+ }
+</code></pre></li>
+<li><p>Dictonary</p>
+
+<pre><code> var pac10teamRankings = Dictionary&lt;String, Int&gt;()
+
+ var pac10teamRankings = [String:Int]()
+
+ pac10teamRankings = ["Stanford":1,"Cal":10]
+
+ let ranking = pac10teamRankings["Ohin State"] //return nil
+
+ for (key , value ) in pack10teamRankings {
+     println("\(key) = \(value)")
+ }
+</code></pre></li>
+<li><p>Rabge</p>
+
+<pre><code> struct Range&lt;T&gt;{
+     var startIndex :T
+     var endIndex: T
+ }       
+</code></pre>
+
+<p> An Array&rsquo;s range would be a Range<Int></p>
+
+<p> Warning: A String subrange is not Range<Int>(it is Range&lt;String.Index> &hellip; we&rsquo;ll talk later!)</p>
+
+<p> There is special syntax for specifying a Range: either &hellip;(ubclusive) or ..&lt;(open-ended)</p>
+
+<pre><code> let array =["a","b","c","d"]
+
+ let subArray1 = array[2...3] //return ["c","d"]
+
+ let subArray2 = array[2..&lt;3] // return ["c"]
+
+ for i in [27...104]{
+ }
+</code></pre></li>
+<li><p>其他数据类型</p>
+
+<pre><code> NSObject
+ NSNumber
+ NSDate
+ NSData
+</code></pre></li>
+<li><p>数据类型</p>
+
+<pre><code> //声明
+ class CalculatorBrain { }
+
+ struct Vertex  {}
+
+ enum Op {}
+
+ //函数
+
+ func doit(argument: Type) -&gt; ReturnValue{}
+
+ var storedProperty =&lt;initial value&gt;(not enum)
+
+ var computerProperty: Type{
+     get {}
+     set {}
+ }
+
+ //构造函数
+ init(argument1: Type, argument2: Typ2, ...){} 
+</code></pre>
+
+ 三者不同点:
+
+<ol>
+<li>Inheritance(class only)</li>
+<li>Introspection and castring(class only)</li>
+<li>Value type(struct,enum) vs. Referenct type(class)</li>
+</ol>
+</li>
+<li><p>Value vs. Referenct</p>
+
+<p> Value:</p>
+
+<p> You must note any func that can mutate a struct/enum with the keyword <code>mutaint</code></p>
+
+<p> Referenct :</p></li>
+<li><p>Methods</p>
+
+<p> 重写父类方法/属性时,要使用<code>override</code></p>
+
+<p> <code>final</code> 标记不能被重写的方法和属性</p>
+
+<pre><code> var d: Double =...
+
+ if d.isSignMinus {
+     d =Double.abs(d)
+ }
+
+ static func abs(d: Double) -&gt; Double{}
+
+
+ //Parameter Names 
+ 1.
+ func foo(external internal: Int){
+     let local = internal
+ }
+
+ func bar() {
+     let result = foo(external: 123)
+ }
+
+ 2.我部想拥有一个外部名
+ func foo(_ internal: Int){
+     let local = internal
+ }
+
+ func bar(){
+     let result = foo(123)
+ }
+
+ 3. 必须要外部名
+ func foo(#internal: Int){
+     let local = internal
+ }
+
+ func bar(){
+     let result = foo(internal: 123)
+ }
+
+ 4.
+ func foo(first: Int, second: Double){
+     let local =internal
+ }
+
+ func bar(){
+     let result = foo(123, second 5.5)
+ }
+
+ 5. 
+ fimc fpp(first: Int, externalSecond second: Double){
+     let local =internal //?这是不是错了?
+ }
+
+ func bar(){
+     let result = foo(123, externalSecond: 5.5)
+ }
+
+ 6. 
+ func foo(first: Int, _ second: Double){
+     let local = internal 
+ }
+
+ func bar(){
+     let result =foo(123,5.5)
+ }
+</code></pre></li>
+<li><p>Properties</p>
+
+<pre><code> var someStoredProperty: Int =42{
+     willset { newValue is the new value }
+     didSet {oldValue is the old value }
+ }
+
+  var inheritedProperty {
+     willSet { newValue is the new value}
+     didSet { oldValue is the old value}
+ }
+</code></pre>
+
+<p> Lazy Initialization (惰性实例化)</p>
+
+<p> 只有var 可以用lazy ,let不可以</p>
+
+<pre><code> lazy var brain = Calculator Brain()
+
+ lazy var someProperty: Type =  {
+     return &lt;the constructed value &gt;
+ }
+
+ lazy var myProperty =self.initializeMyProperty()
+</code></pre></li>
+<li><p>Initialization</p>
+
+<p> lazy 或者其他很多方法可以避免initiative</p>
+
+<pre><code> selfinit(&lt;args&gt;)
+
+ super.init(&lt;args&gt;)
+</code></pre>
+
+ 两种构造方法
+
+<pre><code> 1. Convenience Init
+     1. 只能调用本类的designated initializer
+     2. 只能通过本类的designated intializer才能访问其他的值
+ 2. Designated Initalizers(default)
+     1. 之前不能有Convenience Init
+     2. 只能调用其父类的Designated initializer
+     3. 调用父类的Init前,先初始化所有的property
+     4. 必须先让父类初始化property才能给子类调用
+</code></pre>
+
+<p> 子类没写designated init则继承父类所有的designated init和Converienct init,否则不继承父类的所有designated init</p>
+
+<p> required init 子类必须实现这个方法</p>
+
+<pre><code> init?(arg1: Type1, ...){}
+
+ let image = UIImage(named: "foo")
+
+ if let image = UIImage(named: "foo"){
+     successfully 
+ }else {
+     faled
+ }
+
+ let commaSeparatedArrayElements: String = ",".join(myArray)
+</code></pre></li>
+<li><p>AnyObject</p>
+
+<p>主要用来兼用现有的Object-C和iOS代码</p>
+
+<pre><code>var destinationViewController: AnyObject
+var toolbarItems: [AndObject]
+
+func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject)
+func appConstraints(constraints: [AnyObject])
+func appendDigit(sender: AnyObject)
+
+class func buttonWithType(buttonType: UIButtonType) -&gt; AnyObject
+
+let calcVC = destinationViewController as CalculatorViewController 
+
+if let calcVC = destinationViewController as? CalculatorViewController {...}
+
+---
+
+var toolbarItems: [AnyObject]
+
+for item in toolbarItems {
+    if let toolbarItem = item as? UIBarButtonItem{
+
+    }
+}
+
+for toolbarItem in toolbarItems as [UIBarButtonItem] {
+    //不能使用as? 因为for toolbarItem in nil是无意义的
+}
+
+---
+
+let button: AnyObject =UIButton.buttonWithType(UIButtonType.System)
+
+let tutle = (button as UIButton).currentTitle
+</code></pre></li>
+</ol>
+
+
+<p>11 Function</p>
+
+<pre><code>//Some Array&lt;T&gt; Methods
++=[T] //not +=T 
+
+var a = [a,b,c]
+
+append(T)
+
+insert(T, atIndex : Int)
+
+splice(Array&lt;T&gt;,atIndex: Int)   a.splice([d,e], atIndex:1),a = [a,d,e,b,c]
+
+removeAtIndex(Int)
+
+removeRange(Range) a.removeRange(0..&lt;2) a = [c]
+
+replaceRange(Range, [T]) //a.replaceRange(0...1 with: [x,y,z]),a= [x,y,z,b]
+
+sort(isOrderedBefore : (T,T)) -&gt; Bool) //e.g a.sort($$0 &lt;$1)
+
+filter(includeElement: (T) -&gt; Bool) -&gt; [T]
+
+let stringified: [String] = [1,2,3].map{ "\($0)"}
+
+let sum: Int = [1,2,3].reduce(0) {$0 + $1}
+
+//String
+
+var s = "hello"
+
+let index = advance(s.startIndex,2) //return  l
+
+s.splice("abc",index) // return heabcllo
+
+let startIndex =advance(s.startIndex,1)
+
+let endIndex = advance(s.startIndex,6)
+
+let substring = s[index..&lt;endIndex] // return eabcl
+
+//String.Index
+
+let num = "56.25"
+
+if let decimalRange = num.rangeOfString("."){
+    let wholeNumberPart = num[num.startIndex..&lt;decimalRange.startIndex]
+}
+
+s.removeRange([s.startIndex..&lt;decimalRange.startIndex])
+
+//Other String Methods
+
+description -&gt;String //Printable
+
+endIndex -&gt; String.Index
+
+hasPrefix(String)) -&gt; Bool
+
+hasSuffix(String) -&gt; Bool
+
+toInt -&gt; Int?  //not toDouble
+
+capitalizedString -&gt; String 
+
+lowercaseString -&gt; String
+
+uppercaseString -&gt; String 
+
+join(Array) -&gt; String // ",".join(]"1","2",3""]) = "1,2,3"
+
+componentsSeparatedByString(Strign ) -&gt; [String] // "1,2,3".csbs(",") = ["1","2","3"]
+
+//Type Conversion
+
+let d: Double =37.5
+
+let f: Falot = 37.5
+
+let x = Int(d)
+
+let xd = Double(x)
+
+let cgf =CgFloat(d)
+
+let a = Array("abc")  // a = ["a","b","c"]
+
+let s = String(["a","b","c"]) // return s = "abc"
+
+let s = String(52)
+
+let s= "\(37.5)"
+
+//Assertions 
+
+assert(() -&gt; Bpp; ,"message")
+
+e.g: assert(validation() !=nil,"the validation function returned nil")
+
+//Other Functions 
+
+let count = countElements(aCollection) //how many elements in the collection
+
+let sub = dropFirst(aSliceable) //drops the first thing in the sliceable
+
+let sub dropLast(aSliceable) // drops the last thing in the sliceable
+
+let first = first(aCollection) 
+
+let last = last(aCollection)
+
+let prefix = prefix(aSliceable, X:Int)
+
+let suffix = suffix(aSliceable, X: Int)
+
+let reversed: Array = reverse(aCollection)
+
+let backwardsSTRING = String(reverse(s))
+</code></pre>
+]]></content>
+  </entry>
+  
+</feed>

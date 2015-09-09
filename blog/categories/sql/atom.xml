@@ -4,7 +4,7 @@
   <title><![CDATA[Category: sql | K]]></title>
   <link href="http://mzkmzk.github.io/blog/categories/sql/atom.xml" rel="self"/>
   <link href="http://mzkmzk.github.io/"/>
-  <updated>2015-07-20T02:51:47+08:00</updated>
+  <updated>2015-09-09T16:41:24+08:00</updated>
   <id>http://mzkmzk.github.io/</id>
   <author>
     <name><![CDATA[K]]></name>
@@ -12,6 +12,56 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Mac 配置mysql配置文件]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/09/06/mac_mysql_cnf/"/>
+    <updated>2015-09-06T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/09/06/mac_mysql_cnf</id>
+    <content type="html"><![CDATA[<h3>0x00 copy my.cnf</h3>
+
+<p>Mac默认没有这个文件.用系统默认的配置</p>
+
+<p>要想更改的话</p>
+
+<pre><code>cd /usr/local/mysql/support-files/
+</code></pre>
+
+<p>在此文件夹里面任意复制一个.cnf到/etc下也就行</p>
+
+<h3>各种小配置</h3>
+
+<ol>
+<li><p>设置记录sql文件</p>
+
+<pre><code> [mysqld]段内增加
+ //记录使用过的预计
+ general_log = 1
+ general_log_file = 文件路径
+
+ //另外命令也可开关.不过应该是临时的
+ SET GLOBAL general_log = 'ON';
+ SET GLOBAL general_log = 'OFF';
+
+ //并不知道有神马用
+ slow_query_log = 1 
+
+ //系统报错文件
+  /usr/local/mysql/data/K.local.err  
+
+  log_bin= /var/log/mysql/mysql-bin.log
+</code></pre>
+
+<p> 参考链接<a href="http://hessian.cn/p/1018.html">http://hessian.cn/p/1018.html</a></p></li>
+<li><p>限定访问ip</p>
+
+<pre><code> //若想其他机器能登录,注释掉此句
+ #bind-address           = 127.0.0.1
+</code></pre></li>
+</ol>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[sql server 简单问题集合]]></title>
@@ -132,6 +182,26 @@ public static void main(String args[]){
     <content type="html"><![CDATA[<!--more-->
 
 
+<h3>查看数据库个数</h3>
+
+<pre><code>show databases
+</code></pre>
+
+<h3>选择数据库</h3>
+
+<pre><code>use databasename
+</code></pre>
+
+<h3>显示所有表</h3>
+
+<pre><code>show tables;
+</code></pre>
+
+<h3>显示表结构</h3>
+
+<pre><code>show colums from 表名
+</code></pre>
+
 <h3>查询mysql版本</h3>
 
 <pre><code>select version();
@@ -144,6 +214,97 @@ public static void main(String args[]){
 or
 
 select * from global_variables where VARIABLE_NAME ='PORT';
+</code></pre>
+
+<h3>复杂语句总结</h3>
+
+<ol>
+<li><p>patient表中存病人信息,attachment表中存病人的附件,现要查全部病人中的附件个数.</p>
+
+<pre><code> select *,count(attachment.id) as attachment_sum from attachment right outer JOIN patient on ( patient.id = attachment.patient_id) group by patient.id 
+</code></pre>
+
+<p> 参考链接<a href="http://www.dreamincode.net/forums/topic/63460-count-and-show-values-0-or-null-mysql/">http://www.dreamincode.net/forums/topic/63460-count-and-show-values-0-or-null-mysql/</a></p></li>
+<li><p>按年日月统计数据</p>
+
+<pre><code> select DATE_FORMAT(created_at,'%X-%V')n,count(*) from sample group by n ;
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th>n  </th>
+<th>count(*)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2015-33</td>
+<td>11</td>
+</tr>
+<tr>
+<td>2015-34</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+
+
+<p> 2015-33是2015年第33个星期的意思.</p>
+
+<pre><code> select year(created_at) ,month(created_at), day(created_at) ,count(*)  from sample group by year(created_at) ,month(created_at), day(created_at);
+</code></pre>
+
+<p> 参考链接<a href="http://blog.csdn.net/youngqj/article/details/6453647">http://blog.csdn.net/youngqj/article/details/6453647</a>
+<a href="http://www.cnblogs.com/Fooo/p/3435687.html">http://www.cnblogs.com/Fooo/p/3435687.html</a></p></li>
+</ol>
+
+
+<h3>gound by 要在where 之前?</h3>
+
+<h3>sql连接详解</h3>
+
+<p><a href="http://www.cnblogs.com/eflylab/archive/2007/06/25/794278.html">http://www.cnblogs.com/eflylab/archive/2007/06/25/794278.html</a></p>
+
+<p>一句话右边为主.</p>
+
+<h3>选择范围</h3>
+
+<p><code>where 属性 between var1 and var2</code>  每个数据库处理var2方式不一样 mysql则返回var1和var2的(包含等于)</p>
+
+<p>排除在外的 not between</p>
+
+<h3>选择数据多少</h3>
+
+<p><code>limit var1 , var2</code> 返回var+1开始的var2条数据</p>
+
+<h3>判断是否为null</h3>
+
+<pre><code>where var is null; 
+where var IS NOT NULL;
+</code></pre>
+
+<h3>数据库系统文件</h3>
+
+<p>查询日志路径</p>
+
+<pre><code>SHOW  GLOBAL VARIABLES LIKE '%log%';
+</code></pre>
+
+<p>系统错误文件</p>
+
+<pre><code>/usr/local/mysql/data/K.local.err
+</code></pre>
+
+<h3>重启mysql</h3>
+
+<pre><code>//linux
+sudo /etc/init.d/mysql restart
+</code></pre>
+
+<h3>并没什么用的命令</h3>
+
+<pre><code>SELECT * INTO OUTFILE '/Users/maizhikun/test2/K.csv' FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '"' LINES  TERMINATED BY '\n' FROM   INFORMATION_SCHEMA.COLUMNS WHERE  TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'table'
 </code></pre>
 ]]></content>
   </entry>
