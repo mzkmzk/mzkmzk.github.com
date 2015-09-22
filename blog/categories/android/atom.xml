@@ -4,7 +4,7 @@
   <title><![CDATA[Category: android | K]]></title>
   <link href="http://mzkmzk.github.io/blog/categories/android/atom.xml" rel="self"/>
   <link href="http://mzkmzk.github.io/"/>
-  <updated>2015-09-09T16:41:24+08:00</updated>
+  <updated>2015-09-22T16:50:09+08:00</updated>
   <id>http://mzkmzk.github.io/</id>
   <author>
     <name><![CDATA[K]]></name>
@@ -12,6 +12,32 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Android开发总结]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/09/10/android_summarization/"/>
+    <updated>2015-09-10T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/09/10/android_summarization</id>
+    <content type="html"><![CDATA[<ol>
+<li>命名规范时,要保增加/删除其他功能时命名不用改变</li>
+<li>模块化,一般大量调用后就不要轻易改变.作为一个基础.不然其他调用此模块的代码都需要改变</li>
+<li>不错的参考模块<a href="http://www.codeceo.com/article/android-code-style-guide.html">http://www.codeceo.com/article/android-code-style-guide.html</a></li>
+</ol>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Android adb]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/09/10/android_adb_order/"/>
+    <updated>2015-09-10T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/09/10/android_adb_order</id>
+    <content type="html"><![CDATA[<ol>
+<li>adb device 显示连接的设备</li>
+</ol>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[AndroidStudio技巧]]></title>
@@ -814,265 +840,6 @@ update.getServerVerCode();
 <p><a href="http://blog.csdn.net/xjanker2/article/details/6303937">http://blog.csdn.net/xjanker2/article/details/6303937</a></p>
 
 <p><a href="https://code.google.com/p/androidex/source/browse/trunk/jtapp-12-updateapksamples/">https://code.google.com/p/androidex/source/browse/trunk/jtapp-12-updateapksamples/</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Android 欢迎界面的制作]]></title>
-    <link href="http://mzkmzk.github.io/blog/2015/06/22/android_welcome/"/>
-    <updated>2015-06-22T08:22:40+08:00</updated>
-    <id>http://mzkmzk.github.io/blog/2015/06/22/android_welcome</id>
-    <content type="html"><![CDATA[<!--more-->
-
-
-<h3>0x00Activity</h3>
-
-<pre><code>import java.util.TimerTask;
-
-import com.tjrac.R;
-import com.tjrac.activity._0.LoginActivity;
-
-import android.os.Bundle;
-import android.os.Handler;
-import android.app.Activity;
-import android.content.Intent;
-import android.graphics.drawable.Drawable;
-import android.view.View;
-import android.view.WindowManager;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.view.animation.Animation.AnimationListener;
-import android.widget.ImageView;
-
-public class WelcomeActivity extends Activity {
-
-private ImageView mShowPicture = null;// 显示图片
-private Animation mFadeIn = null;// 开始动画
-private Animation mFadeOut = null;// 开始动画
-private Drawable mPicture_1 = null;// 第一张图片
-private Drawable mPicture_2 = null;
-private ImageView mShowtext = null;;
-
-@Override
-protected void onCreate(Bundle savedInstanceState) {
-    this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,  
-    WindowManager.LayoutParams.FLAG_FULLSCREEN);//去掉信息栏  
-    super.onCreate(savedInstanceState);
-    setContentView(R.layout.welcome_activity);
-    // 绑定界面
-    mShowPicture = (ImageView) findViewById(R.id.guide_picture);
-    mShowtext = (ImageView) findViewById(R.id.guide_text);
-
-
-
-    // 初始化图片资源
-    mPicture_1 = getResources().getDrawable(R.drawable.ic_launcher);
-
-    // 设置开始界面效果
-    mShowPicture.setImageDrawable(mPicture_1);
-    Animation anim = AnimationUtils.loadAnimation(this, R.anim.mshowpicture);
-    anim.setFillAfter(true);
-    mShowPicture.startAnimation(anim);
-
-    mPicture_2 = getResources().getDrawable(R.drawable.pac_bg_text3);
-    mShowtext.setImageDrawable(mPicture_2);
-    mShowtext.setVisibility(View.GONE);       
-
-    mFadeIn = AnimationUtils.loadAnimation(this,R.anim.guide_welcome_fade_in);
-    mFadeIn.setDuration(1500L);
-
-
-
-    // 初始化动画
-    Handler handler = new Handler();
-    TimerTask task = new TimerTask() {
-        @Override
-        public void run() {
-            // 隐藏掉全屏图片
-            mShowtext.setVisibility(View.VISIBLE);
-            mShowtext.startAnimation(mFadeIn);
-        }
-    };
-    // 5秒后执行TimerTask任务
-    handler.postDelayed(task, 1500);
-
-    // 设置动画的监听
-    mFadeIn.setAnimationListener(new AnimationListener() {
-
-        @Override
-        public void onAnimationStart(Animation animation) {
-
-        }
-
-        @Override
-        public void onAnimationRepeat(Animation animation) {
-
-        }
-
-        @Override
-        public void onAnimationEnd(Animation animation) {
-            // 第一个动画结束时开始第二个动画
-            startActivity(new Intent(WelcomeActivity.this,LoginActivity.class));
-            finish();
-        }
-    });
-}
-}
-</code></pre>
-
-<h3>0x01 布局文件</h3>
-
-<pre><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
-&lt;FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-android:orientation="vertical"
-android:background="@color/color_white" &gt;
-
-&lt;RelativeLayout
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:orientation="vertical" &gt;
-
-    &lt;ImageView
-        android:id="@+id/guide_picture"
-        android:layout_width="120.0dip"
-        android:layout_height="120.0dip"
-        android:layout_centerHorizontal="true" 
-        android:layout_marginTop="200.0dip"
-        android:scaleType="fitXY" /&gt;
-
-    &lt;ImageView
-        android:id="@+id/guide_text"
-        android:layout_width="250.0dip"
-        android:layout_height="30.0dip"
-        android:layout_centerHorizontal="true" 
-        android:layout_below="@id/guide_picture"
-        android:layout_marginTop="30.0dip"
-        android:scaleType="fitXY" /&gt;
-
-&lt;/RelativeLayout&gt;
-
-&lt;/FrameLayout&gt;
-</code></pre>
-
-<h3>0x02动画anim</h3>
-
-<p>guide_welcome_fade_in.xml</p>
-
-<pre><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
-&lt;set xmlns:android="http://schemas.android.com/apk/res/android" &gt;
-
-&lt;alpha
-    android:fromAlpha="0.0"
-    android:toAlpha="1.0" /&gt;
-&lt;/set&gt;
-</code></pre>
-
-<p>mshowpicture.xml</p>
-
-<pre><code>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
-&lt;set xmlns:android="http://schemas.android.com/apk/res/android"
-    android:interpolator="@android:anim/decelerate_interpolator"&gt;
-
-   &lt;translate android:fromYDelta="0" android:toYDelta="-100" android:duration="1500" /&gt;
-   &lt;alpha android:fromAlpha="0.0" android:toAlpha="1.0" android:duration="1500"/&gt;
-
-&lt;/set&gt;
-</code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Android中ImageView的scaleType属性]]></title>
-    <link href="http://mzkmzk.github.io/blog/2015/05/24/imageview_scaleType/"/>
-    <updated>2015-05-24T08:22:40+08:00</updated>
-    <id>http://mzkmzk.github.io/blog/2015/05/24/imageview_scaleType</id>
-    <content type="html"><![CDATA[<!--more-->
-
-
-<h3>0x00思路</h3>
-
-<p>我的目标是在任何尺寸的屏幕下 都按3分之一显示图片,然后3分之二显示其他内容.然而imagesview的scaleType属性有9种:matrix、fitXY、fitStart、fitCenter、fitEnd、center、centerCrop、centerInside.第九种就是没写这个属性.</p>
-
-<p><img src="/images/blog/2015-05-24-01.png" alt="原图片" /></p>
-
-<h3>0x01基本代码</h3>
-
-<pre><code>&lt;LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:tools="http://schemas.android.com/tools"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-android:orientation="vertical"
-tools:context="com.tjrac.MainActivity" &gt;
-
-&lt;LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_weight="2"
-    android:orientation="vertical" &gt;
-
-    &lt;ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:contentDescription="@string/text"
-        android:scaleType="centerInside"
-        android:src="@drawable/sy_scroll_1" /&gt;
-&lt;/LinearLayout&gt;
-
-&lt;LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_weight="1" &gt;
-
-    &lt;TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/text" /&gt;
-&lt;/LinearLayout&gt;
-
-&lt;/LinearLayout&gt;
-</code></pre>
-
-<p>然而matrix的的显示效果为</p>
-
-<p><img src="/images/blog/2015-05-24-02.png" alt="matrix" /></p>
-
-<p>fitXY的的显示效果为</p>
-
-<p><img src="/images/blog/2015-05-24-03.png" alt="fitXY" /></p>
-
-<p>fitStart的的显示效果为</p>
-
-<p><img src="/images/blog/2015-05-24-04.png" alt="fitStart" /></p>
-
-<p>fitCenter的的显示效果为</p>
-
-<p><img src="/images/blog/2015-05-24-05.png" alt="fitCenter" /></p>
-
-<p>fitEnd的的显示效果为</p>
-
-<p><img src="/images/blog/2015-05-24-06.png" alt="fitEnd" /></p>
-
-<p>center的的显示效果为</p>
-
-<p><img src="/images/blog/2015-05-24-07.png" alt="center" /></p>
-
-<p>centerCrop的的显示效果为</p>
-
-<p><img src="/images/blog/2015-05-24-08.png" alt="centerCrop" /></p>
-
-<p>centerInside的的显示效果为</p>
-
-<p><img src="/images/blog/2015-05-24-09.png" alt="centerInside" /></p>
-
-<p>不设置的的显示效果为</p>
-
-<p><img src="/images/blog/2015-05-24-10.png" alt="不设置" /></p>
-
-<h3>参考链接</h3>
-
-<p><a href="http://www.chenyunchao.com/?p=189">http://www.chenyunchao.com/?p=189</a></p>
 ]]></content>
   </entry>
   

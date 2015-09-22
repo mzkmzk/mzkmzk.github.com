@@ -4,7 +4,7 @@
   <title><![CDATA[Category: html | K]]></title>
   <link href="http://mzkmzk.github.io/blog/categories/html/atom.xml" rel="self"/>
   <link href="http://mzkmzk.github.io/"/>
-  <updated>2015-09-09T16:41:24+08:00</updated>
+  <updated>2015-09-22T16:50:09+08:00</updated>
   <id>http://mzkmzk.github.io/</id>
   <author>
     <name><![CDATA[K]]></name>
@@ -94,8 +94,25 @@ id, name
 data-*
 src, for, type, href
 title, alt
-aria-*, role    
+aria-*, role
 </code></pre>
+
+<h3>零散属性收集</h3>
+
+<ol>
+<li><p>background:</p>
+
+<pre><code> background-color
+ background-position
+ background-size
+ background-repeat 
+ background-origin
+ background-clip
+ background-attachment
+ background-image :url()
+</code></pre></li>
+</ol>
+
 ]]></content>
   </entry>
   

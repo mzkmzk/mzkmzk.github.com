@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: develop | K]]></title>
+  <link href="http://mzkmzk.github.io/blog/categories/develop/atom.xml" rel="self"/>
+  <link href="http://mzkmzk.github.io/"/>
+  <updated>2015-09-22T16:50:09+08:00</updated>
+  <id>http://mzkmzk.github.io/</id>
+  <author>
+    <name><![CDATA[K]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[开发规范]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/09/21/develop_norm/"/>
+    <updated>2015-09-21T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/09/21/develop_norm</id>
+    <content type="html"><![CDATA[<h3>ALL</h3>
+
+<p>在函数名和变量名种一个_分割功能,描述一个功能的两个单词用驼峰</p>
+
+<p>包名 首字母大写</p>
+
+<h3>JS</h3>
+
+<h3>CSS</h3>
+
+<h3>HTML</h3>
+
+<ol>
+<li>在控件中,id绝对不能重复,要重复.宁可不设</li>
+</ol>
+
+
+<h3>Adnroid</h3>
+
+<h3>php</h3>
+
+<h3>iOS</h3>
+
+<h3>ERROR</h3>
+
+<ol>
+<li>类 方法 错误 参数;</li>
+</ol>
+
+]]></content>
+  </entry>
+  
+</feed>

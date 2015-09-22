@@ -4,7 +4,7 @@
   <title><![CDATA[Category: javascript | K]]></title>
   <link href="http://mzkmzk.github.io/blog/categories/javascript/atom.xml" rel="self"/>
   <link href="http://mzkmzk.github.io/"/>
-  <updated>2015-09-09T16:41:24+08:00</updated>
+  <updated>2015-09-22T16:50:09+08:00</updated>
   <id>http://mzkmzk.github.io/</id>
   <author>
     <name><![CDATA[K]]></name>
@@ -12,6 +12,22 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[js 坑点]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/09/21/js_error/"/>
+    <updated>2015-09-21T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/09/21/js_error</id>
+    <content type="html"><![CDATA[<h1>未解决</h1>
+
+<p>莫名其妙.在div中设置onclick方法就能找该方法,在包含下的input下就找不到.</p>
+
+<pre><code>'&lt;div class="col-sm-1" onclick="delete_library()"&gt;'+
+        '&lt;input  onclick="delete_library()" class="btn btn-info" id="delete_library_'+new_library_num+'" name="delete_library" value="删除"   style="width:100%"  /&gt;'+    
+    '&lt;/div&gt;';
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[使用jQuery MiniUI搭建后台demo]]></title>
@@ -137,6 +153,7 @@ page_form.appendChild(document.getElementById("search_info"));
 <li>.trim();</li>
 <li>window.location.href获取当前url</li>
 <li>parseInt(String) Stirng转int</li>
+<li>string.split(&lsquo;string_split&rsquo;) 方法用于把一个字符串分割成字符串数组。</li>
 </ol>
 
 

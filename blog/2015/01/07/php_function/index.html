@@ -51,7 +51,7 @@ var _hmt = _hmt || [];
 
 <li><a href="/blog/categories/octopress">octopress</a></li>
 
-<li><a href="/blog/categories/mysql">mysql</a></li>
+<li><a href="/blog/categories/sql">sql</a></li>
 
 <li><a href="/blog/categories/j2ee">j2ee</a></li>
 
@@ -93,8 +93,6 @@ var _hmt = _hmt || [];
 
 <li><a href="/blog/categories/git">git</a></li>
 
-<li><a href="/blog/categories/sql">sql</a></li>
-
 <li><a href="/blog/categories/pr">pr</a></li>
 
 <li><a href="/blog/categories/linux">linux</a></li>
@@ -123,13 +121,15 @@ var _hmt = _hmt || [];
 
 <li><a href="/blog/categories/ios">ios</a></li>
 
-<li><a href="/blog/categories/app">app</a></li>
-
 <li><a href="/blog/categories/axure">axure</a></li>
 
 <li><a href="/blog/categories/html">html</a></li>
 
 <li><a href="/blog/categories/node">node</a></li>
+
+<li><a href="/blog/categories/my">my</a></li>
+
+<li><a href="/blog/categories/develop">develop</a></li>
 
 <li><a href="/blog/categories/">About me</a></li>
 </ul>
@@ -170,7 +170,7 @@ var _hmt = _hmt || [];
 
 <li><a href="/blog/categories/octopress">octopress</a></li>
 
-<li><a href="/blog/categories/mysql">mysql</a></li>
+<li><a href="/blog/categories/sql">sql</a></li>
 
 <li><a href="/blog/categories/j2ee">j2ee</a></li>
 
@@ -212,8 +212,6 @@ var _hmt = _hmt || [];
 
 <li><a href="/blog/categories/git">git</a></li>
 
-<li><a href="/blog/categories/sql">sql</a></li>
-
 <li><a href="/blog/categories/pr">pr</a></li>
 
 <li><a href="/blog/categories/linux">linux</a></li>
@@ -242,13 +240,15 @@ var _hmt = _hmt || [];
 
 <li><a href="/blog/categories/ios">ios</a></li>
 
-<li><a href="/blog/categories/app">app</a></li>
-
 <li><a href="/blog/categories/axure">axure</a></li>
 
 <li><a href="/blog/categories/html">html</a></li>
 
 <li><a href="/blog/categories/node">node</a></li>
+
+<li><a href="/blog/categories/my">my</a></li>
+
+<li><a href="/blog/categories/develop">develop</a></li>
 
 <li><a href="/blog/categories/">About me</a></li>
 </ul>
@@ -332,13 +332,17 @@ char(mt_rand(33, 126));
 <li><code>strlen($var)</code>返回字符串长度</li>
 <li>&lsquo;&#8217;和&#8221;&ldquo; 前者不会解析$ 后者会;</li>
 <li><code>var_dump(对象)</code>会输出类的详情</li>
-</ol>
+<li><code>explode(",",$buffer);</code>分割字符串</li>
+<li><code>strpos("str","baohan")</code> 判断是否包含字符串 返回boolean</li>
+<li><code>in_array("Glenn",$people,[bool $strict = FALSE ])</code>判断元素是否在数组内,strict决定是否判断类型</li>
+<li><code>array_push($array,$val1,$val2)</code>推送到栈末,返回长度</li>
+<li><code>error_log</code>错误输出到指定文件.更多:PHP Error 和 Logging 函数</li>
+<li><code>trim(string,[charlist])</code>清除字符串</li>
+<li><code>array_filter(array)</code>:清楚数组中的空元素</li>
+<li><p><code>array_merge(array1,array2)</code>;合并数组</p>
 
-
-<h3>note</h3>
-
-<ol>
-<li>在表格中echo东西,如果没有td 会默认在表格前.</li>
+<h3>note</h3></li>
+<li><p>在表格中echo东西,如果没有td 会默认在表格前.</p></li>
 </ol>
 
 
@@ -432,6 +436,13 @@ return str.slice(0, i + 1);
 <h3>Fatal error: Cannot redeclare class</h3>
 
 <p>重复定义类/类路径错误</p>
+
+<h3>php应该注意的地方</h3>
+
+<ol>
+<li>php数组中例如 params[&lsquo;id&rsquo;] id是会认为是变量,要用&#8221;&ldquo; 错误</li>
+</ol>
+
 </div>
 
 

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: my | K]]></title>
+  <link href="http://mzkmzk.github.io/blog/categories/my/atom.xml" rel="self"/>
+  <link href="http://mzkmzk.github.io/"/>
+  <updated>2015-09-22T16:50:09+08:00</updated>
+  <id>http://mzkmzk.github.io/</id>
+  <author>
+    <name><![CDATA[K]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[决策性错误]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/09/16/my_error/"/>
+    <updated>2015-09-16T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/09/16/my_error</id>
+    <content type="html"><![CDATA[<ol>
+<li>给别的部门表需要填写Excel时,一定要填写好规则.不然会把自己累死&hellip;</li>
+</ol>
+
+]]></content>
+  </entry>
+  
+</feed>

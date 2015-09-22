@@ -4,7 +4,7 @@
   <title><![CDATA[Category: linux | K]]></title>
   <link href="http://mzkmzk.github.io/blog/categories/linux/atom.xml" rel="self"/>
   <link href="http://mzkmzk.github.io/"/>
-  <updated>2015-09-09T16:41:24+08:00</updated>
+  <updated>2015-09-22T16:50:09+08:00</updated>
   <id>http://mzkmzk.github.io/</id>
   <author>
     <name><![CDATA[K]]></name>
@@ -101,6 +101,10 @@
 </code></pre>
 
 <p>参考链接<a href="http://chenhua-1984.iteye.com/blog/736650">http://chenhua-1984.iteye.com/blog/736650</a></p>
+
+<h3>ls</h3>
+
+<p>时间排序<code>ls -lt</code></p>
 ]]></content>
   </entry>
   
