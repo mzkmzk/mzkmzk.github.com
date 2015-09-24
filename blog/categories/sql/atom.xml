@@ -4,7 +4,7 @@
   <title><![CDATA[Category: sql | K]]></title>
   <link href="http://mzkmzk.github.io/blog/categories/sql/atom.xml" rel="self"/>
   <link href="http://mzkmzk.github.io/"/>
-  <updated>2015-09-22T16:50:09+08:00</updated>
+  <updated>2015-09-24T15:21:29+08:00</updated>
   <id>http://mzkmzk.github.io/</id>
   <author>
     <name><![CDATA[K]]></name>
@@ -316,6 +316,29 @@ sudo /etc/init.d/mysql restart
 
 <pre><code>SELECT * INTO OUTFILE '/Users/maizhikun/test2/K.csv' FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '"' LINES  TERMINATED BY '\n' FROM   INFORMATION_SCHEMA.COLUMNS WHERE  TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'table'
 </code></pre>
+
+<h3>like in</h3>
+
+<p>like通配 一般后面只跟一个字符串,如何 用一个属性匹配多个like通配符呢 ? 我们想要的sql是这样的</p>
+
+<pre><code>SELECT * FROM fiberbox f WHERE f.fiberBox LIKE '%1740 %' OR f.fiberBox LIKE '%1938 %' OR f.fiberBox LIKE '%1940 %'
+</code></pre>
+
+<p>这语句是OK 但是很繁琐 我们想要的是这样的</p>
+
+<pre><code>SELECT * FROM fiberbox f WHERE f.fiberbox LIKE IN('%140 %', '%1938 %', '%1940 %')
+</code></pre>
+
+<p>但是这样语法是错误的 应该这么玩</p>
+
+<pre><code>SELECT * from fiberbox where field REGEXP '1740|1938|1940';
+</code></pre>
+
+<p>问题 那如果我只想 <code>liek %xxx</code> 呢 ??? 估计只能用第一种繁琐的用法了.</p>
+
+<p>后续 原来REGEXP后面跟正则..那么应该就能无敌了.. 我上面的问题就可以解决了</p>
+
+<p>参考链接<a href="https://stackoverflow.com/questions/1127088/mysql-like-in/1127106#1127106">https://stackoverflow.com/questions/1127088/mysql-like-in/1127106#1127106</a></p>
 ]]></content>
   </entry>
   

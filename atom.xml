@@ -4,7 +4,7 @@
   <title><![CDATA[K]]></title>
   <link href="http://mzkmzk.github.io/atom.xml" rel="self"/>
   <link href="http://mzkmzk.github.io/"/>
-  <updated>2015-09-22T16:50:09+08:00</updated>
+  <updated>2015-09-24T15:21:29+08:00</updated>
   <id>http://mzkmzk.github.io/</id>
   <author>
     <name><![CDATA[K]]></name>
@@ -190,6 +190,21 @@ return str.slice(0, i + 1);
 </code></pre>
 
 <p>但是想把该代码转为JAVA的,但对正则不太了解.日后再说.</p>
+
+<h3>0x01 foreach改变数组无效</h3>
+
+<p>用foreach改变数组无用,用普通for即可..</p>
+
+<pre><code>//for ($index = 0 ;$index&lt; count($rs);$index++){
+        //  $rs[$index] = array_merge($rs[$index], $patient_Model-&gt;query_name($rs[$index]['patient_id']));
+            //array_push($rs[$index], array('patient_name'=&gt;$patient_Model-&gt;query_name($rs[$index]['patient_id'])));
+        //}
+        foreach ($rs as $rs_one){
+            $rs_one = array_merge($rs_one, $patient_Model-&gt;query_name($rs_one['patient_id']));
+            //array_push($rs_one, array('patient_name'=&gt;$patient_Model-&gt;query_name($rs_one['patient_id'])));
+            //print_r($rs_one);
+        }
+</code></pre>
 ]]></content>
   </entry>
   
