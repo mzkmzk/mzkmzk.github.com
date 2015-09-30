@@ -3,13 +3,11 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>php_常见小问题 - K</title>
+	<title>Laraval 入门 - K</title>
 	<meta name="author" content="K">
 
 	
-	<meta name="description" content="0x00 php echo 返回JSON但莫名多了&amp;#65279 原因:调用的文件中存储UTF-8 BOM 把格式改为UTF-8即可 js正则也可以去除此字符 //去除返回数据前后空白符
-function trim(str){
-str = str.replace(/^\s\s &hellip;">
+	<meta name="description" content="配置与安装 需要条件: - PHP &gt;= 5.5.9 - OpenSSL PHP 扩展 - PDO PHP 扩展 - Mbstring PHP 扩展 - Tokenizer PHP 扩展 查看方式:phpinfo(); 配置composer. 配置~/.composer/vendor/ &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	<meta name="baidu-site-verification" content="HWyzFajtAX" />
@@ -287,43 +285,157 @@ var _hmt = _hmt || [];
 		
 	
 	<div id="content" class="inner"><article class="post">
-	<h2 class="title">Php_常见小问题</h2>
-	<div class="entry-content"><h3>0x00 php echo 返回JSON但莫名多了&amp;#65279</h3>
+	<h2 class="title">Laraval 入门</h2>
+	<div class="entry-content"><!--more-->
 
-<p>原因:调用的文件中存储UTF-8 BOM 把格式改为UTF-8即可</p>
 
-<p>js正则也可以去除此字符</p>
+<h2>配置与安装</h2>
 
-<pre><code>//去除返回数据前后空白符
-function trim(str){
-str = str.replace(/^\s\s*/, ''),
-ws = /\s/,
-i = str.length;
-while (ws.test(str.charAt(--i)));
-return str.slice(0, i + 1);
-}
+<p>需要条件:</p>
+
+<pre><code>- PHP &gt;= 5.5.9 - OpenSSL PHP 扩展 - PDO PHP 扩展 - Mbstring PHP 扩展 - Tokenizer PHP 扩展
 </code></pre>
 
-<p>但是想把该代码转为JAVA的,但对正则不太了解.日后再说.</p>
+<p>查看方式:<code>phpinfo();</code></p>
 
-<h3>0x01 foreach改变数组无效</h3>
+<p>配置composer.</p>
 
-<p>用foreach改变数组无用,用普通for即可..</p>
+<p>配置<code>~/.composer/vendor/bin</code>到PATH</p>
 
-<pre><code>//for ($index = 0 ;$index&lt; count($rs);$index++){
-        //  $rs[$index] = array_merge($rs[$index], $patient_Model-&gt;query_name($rs[$index]['patient_id']));
-            //array_push($rs[$index], array('patient_name'=&gt;$patient_Model-&gt;query_name($rs[$index]['patient_id'])));
-        //}
-        foreach ($rs as $rs_one){
-            $rs_one = array_merge($rs_one, $patient_Model-&gt;query_name($rs_one['patient_id']));
-            //array_push($rs_one, array('patient_name'=&gt;$patient_Model-&gt;query_name($rs_one['patient_id'])));
-            //print_r($rs_one);
-        }
+<p>安装Laravel</p>
+
+<pre><code>sudo composer global require "laravel/installer=~1.1"
 </code></pre>
 
-<h3>php 升级到5.6</h3>
+<p>之后就<code>laravel new blog</code> 爽一爽</p>
 
-<p><a href="http://php-osx.liip.ch/">http://php-osx.liip.ch/</a></p>
+<p>/config里都是配置文件 需要仔细看看.</p>
+
+<p>配置/storage和bootstrap/cache服务器写权限</p>
+
+<pre><code> chmod -R  777   storage/
+ chmod -R  777   bootstrap/cache
+</code></pre>
+
+<p>ok,把项目放进apache路径 然后</p>
+
+<pre><code>http://localhost/laravel/public/
+</code></pre>
+
+<p>就会看到Laravel 5字样了</p>
+
+<p>我们自己试一试弄一个页面吧</p>
+
+<p>打开<code>/app/Http/routes.php</code>,设置Url跳转和传递title参数</p>
+
+<pre><code>Route::get('/hi',function(){
+return View::make('hi')-&gt;with("title","Hello Word");
+});
+</code></pre>
+
+<p>打开<code>/resources/views</code>创建hi.blade.php</p>
+
+<pre><code>@include('header')
+&lt;h1&gt;&lt;/h1&gt;
+&lt;p&gt;one Laravel&lt;/p&gt;
+</code></pre>
+
+<p>再在其目录下创建header.blade.php</p>
+
+<pre><code>&lt;p&gt;header&lt;/p&gt;
+</code></pre>
+
+<p>ok 访问url<code>http://localhost/laravel/public/index.php/hi</code></p>
+
+<p>如何去掉可恶的index.php</p>
+
+<ol>
+<li>设置apache支持.htaccess,打开apache http.conf,搜索<code>AllowOverride</code> 把None都改为All</li>
+<li>设置加载mod_rewrite模块,打开apache http.conf,搜索<code>mod_rewrite</code>,把前面的#去掉(校验方法-php_info()),重启下apache哦~.</li>
+<li><p>设置Laravel的.htaccess,把下面的内容代替之前的内容.</p>
+
+<pre><code> Options +FollowSymLinks
+ RewriteEngine On
+
+ RewriteCond %{REQUEST_FILENAME} !-d
+ RewriteCond %{REQUEST_FILENAME} !-f
+ RewriteRule ^ index.php [L]
+</code></pre></li>
+</ol>
+
+
+<p>ok<code>http://localhost/laravel/public/hi</code>爽一发吧.</p>
+
+<p>参考链接<a href="http://oublog.cn/u_58/">http://oublog.cn/u_58/</a></p>
+
+<p>环境配置</p>
+
+<pre><code>//获取系统配置
+config('app.timezone')
+//设置系统配置
+config(['app.timezone' =&gt; 'Asia/Shanghai'])
+</code></pre>
+
+<h3>路由</h3>
+
+<p>访问Controllers</p>
+
+<pre><code>Route::get('/Text_Laravel/Text_DB','Text_Laravel.Text_DB@index');
+</code></pre>
+
+<p>访问View</p>
+
+<pre><code>Route::get('/User/Login',function () {
+return view('User.Login');
+});
+</code></pre>
+
+<h3>数据库配制</h3>
+
+<p>配置文件<code>config/database.php</code></p>
+
+<p>Laravel还可以配置读写两个不同的ip地址.</p>
+
+<pre><code>'mysql' =&gt; [
+'read' =&gt; [
+    'host' =&gt; '192.168.1.1',
+],
+'write' =&gt; [
+    'host' =&gt; '196.168.1.2'
+],
+'driver'    =&gt; 'mysql',
+'database'  =&gt; 'database',
+'username'  =&gt; 'root',
+'password'  =&gt; '',
+'charset'   =&gt; 'utf8',
+'collation' =&gt; 'utf8_unicode_ci',
+'prefix'    =&gt; '',
+],
+</code></pre>
+
+<p>光配置这个还不行 还要去配置.env ? 难道.env是通过config实时生成的?</p>
+
+<h2>阅读API文档</h2>
+
+<p><a href="http://www.golaravel.com/laravel/docs/5.1/">http://www.golaravel.com/laravel/docs/5.1/</a></p>
+
+<h3>routing</h3>
+
+<p><a href="http://laravel.com/docs/5.1/routing">http://laravel.com/docs/5.1/routing</a></p>
+
+<p>路由配置在<code>app/Http/routes.php</code></p>
+
+<p>先来看下简单的配置,get,post请求,还有match,any匹配多种请求,还有通过url传递参数(参数不能包含<code>-</code>),</p>
+
+<h2>应用中碰到的应用</h2>
+
+<h3>获取路径</h3>
+
+<p>获取相对于目录的绝对路径</p>
+
+<p>详见<a href="http://www.golaravel.com/laravel/docs/5.1/helpers/#paths">http://www.golaravel.com/laravel/docs/5.1/helpers/#paths</a></p>
+
+<p>获取网络路径</p>
 </div>
 
 
@@ -340,7 +452,7 @@ return str.slice(0, i + 1);
   
 
 
-<time datetime="2015-09-09T11:37:40+08:00" pubdate data-updated="true"></time></div>
+<time datetime="2015-09-24T11:37:40+08:00" pubdate data-updated="true"></time></div>
 	<div class="tags">
 
 
@@ -376,7 +488,7 @@ return str.slice(0, i + 1);
     <div id="comments" aria-live="polite">
 
 <!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="Php_常见小问题" data-title="Php_常见小问题" data-url="/blog/2015/09/09/php_question/"></div>
+	<div class="ds-thread" data-thread-key="Laraval 入门" data-title="Laraval 入门" data-url="/blog/2015/09/24/Lavaral-start/"></div>
 <!-- 多说评论框 end -->
 <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 <script type="text/javascript">

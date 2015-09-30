@@ -4,7 +4,7 @@
   <title><![CDATA[K]]></title>
   <link href="http://mzkmzk.github.io/atom.xml" rel="self"/>
   <link href="http://mzkmzk.github.io/"/>
-  <updated>2015-09-24T15:21:29+08:00</updated>
+  <updated>2015-09-30T11:20:24+08:00</updated>
   <id>http://mzkmzk.github.io/</id>
   <author>
     <name><![CDATA[K]]></name>
@@ -12,6 +12,164 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Laraval 入门]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/09/24/Lavaral-start/"/>
+    <updated>2015-09-24T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/09/24/Lavaral-start</id>
+    <content type="html"><![CDATA[<!--more-->
+
+
+<h2>配置与安装</h2>
+
+<p>需要条件:</p>
+
+<pre><code>- PHP &gt;= 5.5.9 - OpenSSL PHP 扩展 - PDO PHP 扩展 - Mbstring PHP 扩展 - Tokenizer PHP 扩展
+</code></pre>
+
+<p>查看方式:<code>phpinfo();</code></p>
+
+<p>配置composer.</p>
+
+<p>配置<code>~/.composer/vendor/bin</code>到PATH</p>
+
+<p>安装Laravel</p>
+
+<pre><code>sudo composer global require "laravel/installer=~1.1"
+</code></pre>
+
+<p>之后就<code>laravel new blog</code> 爽一爽</p>
+
+<p>/config里都是配置文件 需要仔细看看.</p>
+
+<p>配置/storage和bootstrap/cache服务器写权限</p>
+
+<pre><code> chmod -R  777   storage/
+ chmod -R  777   bootstrap/cache
+</code></pre>
+
+<p>ok,把项目放进apache路径 然后</p>
+
+<pre><code>http://localhost/laravel/public/
+</code></pre>
+
+<p>就会看到Laravel 5字样了</p>
+
+<p>我们自己试一试弄一个页面吧</p>
+
+<p>打开<code>/app/Http/routes.php</code>,设置Url跳转和传递title参数</p>
+
+<pre><code>Route::get('/hi',function(){
+return View::make('hi')-&gt;with("title","Hello Word");
+});
+</code></pre>
+
+<p>打开<code>/resources/views</code>创建hi.blade.php</p>
+
+<pre><code>@include('header')
+&lt;h1&gt;&lt;/h1&gt;
+&lt;p&gt;one Laravel&lt;/p&gt;
+</code></pre>
+
+<p>再在其目录下创建header.blade.php</p>
+
+<pre><code>&lt;p&gt;header&lt;/p&gt;
+</code></pre>
+
+<p>ok 访问url<code>http://localhost/laravel/public/index.php/hi</code></p>
+
+<p>如何去掉可恶的index.php</p>
+
+<ol>
+<li>设置apache支持.htaccess,打开apache http.conf,搜索<code>AllowOverride</code> 把None都改为All</li>
+<li>设置加载mod_rewrite模块,打开apache http.conf,搜索<code>mod_rewrite</code>,把前面的#去掉(校验方法-php_info()),重启下apache哦~.</li>
+<li><p>设置Laravel的.htaccess,把下面的内容代替之前的内容.</p>
+
+<pre><code> Options +FollowSymLinks
+ RewriteEngine On
+
+ RewriteCond %{REQUEST_FILENAME} !-d
+ RewriteCond %{REQUEST_FILENAME} !-f
+ RewriteRule ^ index.php [L]
+</code></pre></li>
+</ol>
+
+
+<p>ok<code>http://localhost/laravel/public/hi</code>爽一发吧.</p>
+
+<p>参考链接<a href="http://oublog.cn/u_58/">http://oublog.cn/u_58/</a></p>
+
+<p>环境配置</p>
+
+<pre><code>//获取系统配置
+config('app.timezone')
+//设置系统配置
+config(['app.timezone' =&gt; 'Asia/Shanghai'])
+</code></pre>
+
+<h3>路由</h3>
+
+<p>访问Controllers</p>
+
+<pre><code>Route::get('/Text_Laravel/Text_DB','Text_Laravel.Text_DB@index');
+</code></pre>
+
+<p>访问View</p>
+
+<pre><code>Route::get('/User/Login',function () {
+return view('User.Login');
+});
+</code></pre>
+
+<h3>数据库配制</h3>
+
+<p>配置文件<code>config/database.php</code></p>
+
+<p>Laravel还可以配置读写两个不同的ip地址.</p>
+
+<pre><code>'mysql' =&gt; [
+'read' =&gt; [
+    'host' =&gt; '192.168.1.1',
+],
+'write' =&gt; [
+    'host' =&gt; '196.168.1.2'
+],
+'driver'    =&gt; 'mysql',
+'database'  =&gt; 'database',
+'username'  =&gt; 'root',
+'password'  =&gt; '',
+'charset'   =&gt; 'utf8',
+'collation' =&gt; 'utf8_unicode_ci',
+'prefix'    =&gt; '',
+],
+</code></pre>
+
+<p>光配置这个还不行 还要去配置.env ? 难道.env是通过config实时生成的?</p>
+
+<h2>阅读API文档</h2>
+
+<p><a href="http://www.golaravel.com/laravel/docs/5.1/">http://www.golaravel.com/laravel/docs/5.1/</a></p>
+
+<h3>routing</h3>
+
+<p><a href="http://laravel.com/docs/5.1/routing">http://laravel.com/docs/5.1/routing</a></p>
+
+<p>路由配置在<code>app/Http/routes.php</code></p>
+
+<p>先来看下简单的配置,get,post请求,还有match,any匹配多种请求,还有通过url传递参数(参数不能包含<code>-</code>),</p>
+
+<h2>应用中碰到的应用</h2>
+
+<h3>获取路径</h3>
+
+<p>获取相对于目录的绝对路径</p>
+
+<p>详见<a href="http://www.golaravel.com/laravel/docs/5.1/helpers/#paths">http://www.golaravel.com/laravel/docs/5.1/helpers/#paths</a></p>
+
+<p>获取网络路径</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[js 坑点]]></title>
@@ -205,6 +363,10 @@ return str.slice(0, i + 1);
             //print_r($rs_one);
         }
 </code></pre>
+
+<h3>php 升级到5.6</h3>
+
+<p><a href="http://php-osx.liip.ch/">http://php-osx.liip.ch/</a></p>
 ]]></content>
   </entry>
   
@@ -485,7 +647,7 @@ aria-*, role
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[react入门]]></title>
+    <title type="html"><![CDATA[Axure入门]]></title>
     <link href="http://mzkmzk.github.io/blog/2015/07/29/Axure_start/"/>
     <updated>2015-07-29T11:37:40+08:00</updated>
     <id>http://mzkmzk.github.io/blog/2015/07/29/Axure_start</id>
@@ -502,6 +664,10 @@ aria-*, role
 <a href="http://blog.sina.com.cn/s/blog_7256fe8f0101b29t.html">http://blog.sina.com.cn/s/blog_7256fe8f0101b29t.html</a></p>
 
 <p>侧滑和弹窗效果实现记录</p>
+
+<h3>教程</h3>
+
+<p><a href="http://www.woshipm.com/rp/39208.html">http://www.woshipm.com/rp/39208.html</a></p>
 ]]></content>
   </entry>
   
@@ -984,32 +1150,6 @@ let backwardsSTRING = String(reverse(s))
 <li>输入命令行<code>sudo npm install -g grunt-cli</code></li>
 </ol>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[metasploit 安装]]></title>
-    <link href="http://mzkmzk.github.io/blog/2015/07/19/metasploit_install/"/>
-    <updated>2015-07-19T11:37:40+08:00</updated>
-    <id>http://mzkmzk.github.io/blog/2015/07/19/metasploit_install</id>
-    <content type="html"><![CDATA[<!--more-->
-
-
-<p>注意点</p>
-
-<ol>
-<li>一定要注意教程的最低配置设定</li>
-<li>安装到最后会有个获取验证码..我试过qq、新浪和gmail都无法获取验证码,听说一定要企业邮箱 例如139(我还没尝试),别人给的我一个使用吗QWYW-M386-29JQ-PHMW</li>
-</ol>
-
-
-<h3>0x00下载地址</h3>
-
-<p><a href="http://www.rapid7.com/products/metasploit/download.jsp">http://www.rapid7.com/products/metasploit/download.jsp</a></p>
-
-<h3>0x01 教程下载地址</h3>
-
-<p><a href="https://community.rapid7.com/docs/DOC-2100">https://community.rapid7.com/docs/DOC-2100</a></p>
 ]]></content>
   </entry>
   

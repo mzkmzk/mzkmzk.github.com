@@ -4,7 +4,7 @@
   <title><![CDATA[Category: linux | K]]></title>
   <link href="http://mzkmzk.github.io/blog/categories/linux/atom.xml" rel="self"/>
   <link href="http://mzkmzk.github.io/"/>
-  <updated>2015-09-24T15:21:29+08:00</updated>
+  <updated>2015-09-30T11:20:24+08:00</updated>
   <id>http://mzkmzk.github.io/</id>
   <author>
     <name><![CDATA[K]]></name>
@@ -105,6 +105,23 @@
 <h3>ls</h3>
 
 <p>时间排序<code>ls -lt</code></p>
+
+<h3>查看文件相关</h3>
+
+<ol>
+<li><code>stat 文件</code>看访问时间,修改时间,状态改动时间</li>
+</ol>
+
+
+<h3>跟踪相关</h3>
+
+<ol>
+<li><code>who</code>查看谁在登陆</li>
+<li><code>last</code>查看最近登陆情况</li>
+<li><code>lastlog</code>查看各用户的登陆情况</li>
+<li><code>more /var/log.auth.log</code>记录登陆情况</li>
+</ol>
+
 ]]></content>
   </entry>
   
