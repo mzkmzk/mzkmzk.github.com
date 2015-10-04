@@ -4,7 +4,7 @@
   <title><![CDATA[Category: develop | K]]></title>
   <link href="http://mzkmzk.github.io/blog/categories/develop/atom.xml" rel="self"/>
   <link href="http://mzkmzk.github.io/"/>
-  <updated>2015-09-30T11:20:24+08:00</updated>
+  <updated>2015-10-04T23:45:18+08:00</updated>
   <id>http://mzkmzk.github.io/</id>
   <author>
     <name><![CDATA[K]]></name>
@@ -20,7 +20,8 @@
     <id>http://mzkmzk.github.io/blog/2015/09/21/develop_norm</id>
     <content type="html"><![CDATA[<h3>ALL</h3>
 
-<p>在函数名和变量名种一个_分割功能,描述一个功能的两个单词用驼峰</p>
+<p>文件和文件夹用<em>,方法和变量用驼峰
+在函数名和变量名种一个</em>分割功能,描述一个功能的两个单词用驼峰</p>
 
 <p>包名 首字母大写</p>
 

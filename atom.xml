@@ -4,7 +4,7 @@
   <title><![CDATA[K]]></title>
   <link href="http://mzkmzk.github.io/atom.xml" rel="self"/>
   <link href="http://mzkmzk.github.io/"/>
-  <updated>2015-09-30T11:20:24+08:00</updated>
+  <updated>2015-10-04T23:45:18+08:00</updated>
   <id>http://mzkmzk.github.io/</id>
   <author>
     <name><![CDATA[K]]></name>
@@ -14,10 +14,387 @@
 
   
   <entry>
+    <title type="html"><![CDATA[系统分析师UML项目实战书籍阅读总结]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/10/01/uml_project_book/"/>
+    <updated>2015-10-01T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/10/01/uml_project_book</id>
+    <content type="html"><![CDATA[<!--more-->
+
+
+<h3>1. UML项目现场</h3>
+
+<p><code>只有平庸的人,才会提出复杂的解决方案</code></p>
+
+<p>UML建模顺序: 流程建模 -> 用例建模 ->领域建模</p>
+
+<p>活动图,用例图,类图的图标名称介绍.</p>
+
+<h3>2. 业务流程建模</h3>
+
+<p>业务流程定义:</p>
+
+<ol>
+<li>特定的客户</li>
+<li>特定的目标</li>
+<li>特定的服务</li>
+</ol>
+
+
+<p>对于不重要的工作,不做活动图</p>
+
+<p>表2-1 活动图用于表示业务流程或系统流程</p>
+
+<table>
+<thead>
+<tr>
+<th> 项目\活动图  </th>
+<th> 业务流程                                  </th>
+<th> 系统流程                                  </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td> 主要作用      </td>
+<td>                   表示企业组织的未来流程   </td>
+<td> 表示系统内部的系统流程                     </td>
+</tr>
+<tr>
+<td> 人工操作      </td>
+<td> 可能出现人工操作                          </td>
+<td> 不会出现人工操作                          </td>
+</tr>
+<tr>
+<td> 生成机时      </td>
+<td> 需求分析阶段                                </td>
+<td> 系统设计时间                                </td>
+</tr>
+<tr>
+<td> 相关文件      </td>
+<td> 收录在系统需求的规格书(SRS)                </td>
+<td> 收录在系统设计规格书(SDS)                   </td>
+</tr>
+<tr>
+<td> 绘制者         </td>
+<td> 系统分析师                                   </td>
+<td> 系统设计师                                   </td>
+</tr>
+<tr>
+<td> 观看者         </td>
+<td> 客户/用户(系统设计师也会参考使用)          </td>
+<td> 程序设计师                                   </td>
+</tr>
+<tr>
+<td> 粒度            </td>
+<td> 一张活动图对应多个用例(即将用例视为黑箱)   </td>
+<td> 一张活动图对应一个用例(即将用例视为白盒)   </td>
+</tr>
+</tbody>
+</table>
+
+
+<p>表2-2 于系统设计时间的活动图和顺序图</p>
+
+<table>
+<thead>
+<tr>
+<th> 项目/图类型  </th>
+<th> 活动图(系统流程)                           </th>
+<th> 顺序图(对象互动)                               </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td> 主要作用      </td>
+<td> 表示系统内部的系统流程                     </td>
+<td> 表示系统内部的对象互动                         </td>
+</tr>
+<tr>
+<td> 主要特色      </td>
+<td> 凸显流程与控制节点                           </td>
+<td> 凸显对象依序调用方法或函数                       </td>
+</tr>
+<tr>
+<td> 生成时机      </td>
+<td> 高级的系统设计时间                           </td>
+<td> 细部的系统设计时间                               </td>
+</tr>
+<tr>
+<td> 相关文件      </td>
+<td> 收录在系统设计规格书(SDS)                   </td>
+<td> 同左                                            </td>
+</tr>
+<tr>
+<td> 实作情况      </td>
+<td> 无法直接对应程序代码                        </td>
+<td> 可以直接对应程序代码(有些UML工具可以自动产码)     </td>
+</tr>
+<tr>
+<td> 绘制者         </td>
+<td> 系统设计师                                   </td>
+<td> 同左                                            </td>
+</tr>
+<tr>
+<td> 观看者         </td>
+<td> 程序设计师                                   </td>
+<td> 同左                                            </td>
+</tr>
+<tr>
+<td> 粒度            </td>
+<td> 一张活动图对应一个用例(即将用例视为白箱)   </td>
+<td> 同左                                            </td>
+</tr>
+</tbody>
+</table>
+
+
+<p>活动图图标:</p>
+
+<ol>
+<li>起始节点: 实心小圆 (建议一个活动图 一个起始节点)</li>
+<li>活动终点: 双圆,内实外空</li>
+<li>判断节点: 空心菱形</li>
+<li><p>动作: 圆角矩形 动作粒度要与用例粒度相近</p>
+
+<p> 4.1 第一行: (一个动作负责人)</p>
+
+<p> 4.2 第二行: 动作名称,动词开头</p></li>
+<li>合并节点: 空心菱形</li>
+<li>活动: 圆角矩形,右下角三叉图标 (活动可拆分外令一个活动图 )</li>
+<li>分叉与会合: 粗线段 (等所有条件具备进行下一阶段 建议分叉与会合成对出现)</li>
+<li>对象节点: 矩形 (代表流入/流出的数据项)</li>
+</ol>
+
+
+<h3>3. 用例建模</h3>
+
+<p>用例来源:</p>
+
+<ol>
+<li>业务流程</li>
+<li>功能流程</li>
+<li>其他用例</li>
+</ol>
+
+
+<p>建议同时生成用例图和功能架构图.</p>
+
+<p>用例图作用:</p>
+
+<ol>
+<li>规范一套动作</li>
+<li>明确结果</li>
+<li>表明参与者 (参与者包括主要参与者(启动者)和次要参与者)</li>
+</ol>
+
+
+<p>业务流程导出初版用例</p>
+
+<ol>
+<li>查看动作,动作负责人即为参与者,动作即为用例</li>
+<li>查看判断节点,判断判断节点是否需要其他用例支持</li>
+</ol>
+
+
+<p>功能划分->业务流程->初版用例->功能架构->用例图->用例描述</p>
+
+<p>用例描述:</p>
+
+<ol>
+<li>前置条件: 执行流程前必须要满足的条件</li>
+<li>主要流程: 一般正常的流程 (主要详细分为参与者输入,系统处理过程,及输出,要求非常详细!)</li>
+<li>替换流程: 特殊情况 (替换流程的编号,紧跟发生特殊情况的主要流程编号)</li>
+<li>后置条件: 必须要完成的结果</li>
+</ol>
+
+
+<p>包含关系与扩展关系</p>
+
+<ol>
+<li><p>包含关系: &lt;\<include>> 虚线箭头指向被包含 被包含可视为<code>前置条件</code></p>
+
+<p> 1.1 被包含的小用例无法脱离基础用例而单独存在</p>
+
+<p> 1.2 基础用例一定执行被包含的小用例</p>
+
+<p> 1.3 两者加起来是一条流程</p></li>
+<li><p>扩展关系: &lt;\<extends>> 虚线箭头直线被扩展 扩展可不执行 ,可视为<code>替换流程</code></p>
+
+<p> 2.1 拓展的小用例无法脱离基础用例而单独存在</p>
+
+<p> 2.2 基础用例不一定执行拓展的小用例</p>
+
+<p> 2.3 两者加起来是两条流程,其一是单独的基础用例,其二是基础用例外加拓展用例</p></li>
+</ol>
+
+
+<h3>4. 领域建模</h3>
+
+<p>领域模型:</p>
+
+<ol>
+<li>一种概念模型,呈现问题领域中的重要概念</li>
+<li>描述问题领域中的实体,实体属性,操作,角色,关系和限制.</li>
+<li>对于用例所描述的互动过程,领域模型可以为用例起支持结构作用.</li>
+<li>通常用类图描述领域模型.</li>
+<li>领域模式可用于出代码</li>
+</ol>
+
+
+<p>类图:</p>
+
+<ol>
+<li>类用矩形表示,第一行为名称,第二行为属性,第三行为操作</li>
+<li>属性 属性名称:数据类型=初始值</li>
+<li>操作 操作名称(参数,数据类型):返回值数据类型</li>
+<li><p>结合关系: 实线 表示两个领域存在重要且需要永久保存的静态关系</p>
+
+<p> 4.1 单向结合 无法从目标端找回来源端</p>
+
+<p> 4.2 双向结合</p>
+
+<p> 4.3 聚合关系 空心菱形 指向聚合类 整体-部分</p>
+
+<p> 4.4 组合关系 实心菱形 组合关系具有聚合关系的所有特性另加部分对象只会链接到一个整体对象,不允许数个整体对象共用一个部分对象,部分对象跟随整体对象的存活.</p>
+
+<p> 4.3 个体数目 下限..上限 表明关系:一对一,一对多,多对多.多对一.</p></li>
+</ol>
+
+
+<p>用例描述推导领域模型</p>
+
+<ol>
+<li>查看用例描述,把其中的数据项归到领域中.</li>
+<li>类代表领域,数据项代表属性</li>
+<li>查看概念之间的关系</li>
+<li>根据关系在两端添加数量</li>
+</ol>
+
+
+<p>领域模型呈现业务规则</p>
+
+<ol>
+<li>通过结合关系和个体数目来表达关系静态结构的业务规则</li>
+<li>通过操作来表达计算公司以及一些需要查验或检核的业务规则</li>
+</ol>
+
+
+<h3>5. 模型走读</h3>
+
+<p>作用:检测模型质量</p>
+
+<p>走读功能架构图与用例图</p>
+
+<ol>
+<li>是否可以从功能架构图追溯到用例图 (最好情况: 直接采用用例作为功能架构图中的功能)</li>
+<li>检测功能架构图中的系统,功能模块,用例名称是否和用例图一致</li>
+<li>若功能模块和底下的功能模块与客户的征求建议书(RFP)不一致,则需请求客户同意,看功能模块的切割、名称、地下的功能归属是否恰当.</li>
+</ol>
+
+
+<p>走读中遇到的问题及其解决方案:</p>
+
+<ol>
+<li>出现多个用例参与一个用例入口 解决:用例图中参与者第二行标明{or }</li>
+</ol>
+
+
+<p>走读用例图和用例描述</p>
+
+<ol>
+<li>检测参与者是否摆在系统方框之外,在系统方框和功能模块方框最上方要用标注&lt;\&lt;系统>>或&lt;\&lt;功能模块>></li>
+<li>用例描述每一个步骤都以参与者或系统开头</li>
+</ol>
+
+
+<p>界面雏形工具: Pencil</p>
+
+<p>走读用例描述与领域模型</p>
+
+<ol>
+<li>主要查看是否遗漏数据项(属性)、业务规则和重要操作</li>
+</ol>
+
+
+<h5>善用对象图</h5>
+
+<p>对象图是系统的快照,可表示某一时刻或某一场景系统内有哪些重要对象,属性的数值以及他们之间的关系.</p>
+
+<p>在绘制对象图,想好场景,一边套场景,一边通过对象图走读领域模型</p>
+
+<p>用对象图发现用例描述某一动作不能执行, 解决方案 增加用例辅助完成.</p>
+
+<h4>领域模式描述:</h4>
+
+<p>领域模式主要通过文字记录类别、属性、结合、限制的定义或解释、操作</p>
+
+<h3>6. 继续走读</h3>
+
+<p>走读中做了几个调整.</p>
+
+<p>1.整合应整合用例(自动汇整集锦交易与自动申购基金)</p>
+
+<p>非功能性需求可以添加到用例描述中或建立单独一个表格供整个系统参考.</p>
+
+<p>走读领域,可搭配情景对象图.这个很重要,其实在做系统测试时候,完全可以按照这个来.</p>
+
+<h3>7. 基金系统范例</h3>
+
+<p>以功能模块拆分用例图.</p>
+
+<p>主要把前面章节的图 汇总在一起.</p>
+
+<h3>总结</h3>
+
+<p>第四章的结合实例来说领域模型很精彩</p>
+
+<p>重复地方很多,有利有弊.</p>
+
+<p>对于整个系统流程来说,算是不错的体验.能够让读者大概明白UML的大概过程,每一步应该做什么.然后循环迭代.这和敏捷开发的思想很像.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[PHP工具]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/09/30/php_utils/"/>
+    <updated>2015-09-30T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/09/30/php_utils</id>
+    <content type="html"><![CDATA[<!--more-->
+
+
+<h3>IDE</h3>
+
+<p>PHPStore</p>
+
+<p>官网下载</p>
+
+<p>破解码<code>EMBRACE</code></p>
+
+<p>参考<a href="http://orgcent.com/phpstorm-register-key-license/">http://orgcent.com/phpstorm-register-key-license/</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Laravel 错误积累]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/09/30/Laravel_error/"/>
+    <updated>2015-09-30T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/09/30/Laravel_error</id>
+    <content type="html"><![CDATA[<!--more-->
+
+
+<h4>[Laravel5] TokenMismatchException in VerifyCsrfToken</h4>
+
+<p>form表单内添加</p>
+
+<pre><code>&lt;input type="hidden" name="_token" value=""&gt;
+</code></pre>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[Laraval 入门]]></title>
-    <link href="http://mzkmzk.github.io/blog/2015/09/24/Lavaral-start/"/>
+    <link href="http://mzkmzk.github.io/blog/2015/09/24/Lavarel-start/"/>
     <updated>2015-09-24T11:37:40+08:00</updated>
-    <id>http://mzkmzk.github.io/blog/2015/09/24/Lavaral-start</id>
+    <id>http://mzkmzk.github.io/blog/2015/09/24/Lavarel-start</id>
     <content type="html"><![CDATA[<!--more-->
 
 
@@ -167,7 +544,14 @@ return view('User.Login');
 
 <p>详见<a href="http://www.golaravel.com/laravel/docs/5.1/helpers/#paths">http://www.golaravel.com/laravel/docs/5.1/helpers/#paths</a></p>
 
-<p>获取网络路径</p>
+<ol>
+<li><p>获取网络路径</p></li>
+<li><p>关闭CSRF,<code>App\Http;\Kernel</code>,注释</p>
+
+<pre><code>  // \App\Http\Middleware\VerifyCsrfToken::class,
+</code></pre></li>
+</ol>
+
 ]]></content>
   </entry>
   
@@ -184,6 +568,13 @@ return view('User.Login');
         '&lt;input  onclick="delete_library()" class="btn btn-info" id="delete_library_'+new_library_num+'" name="delete_library" value="删除"   style="width:100%"  /&gt;'+    
     '&lt;/div&gt;';
 </code></pre>
+
+<h1>已解决</h1>
+
+<ol>
+<li>jquery的ajax中不能再方法内return,返回的都是undefinte;</li>
+</ol>
+
 ]]></content>
   </entry>
   
@@ -194,7 +585,8 @@ return view('User.Login');
     <id>http://mzkmzk.github.io/blog/2015/09/21/develop_norm</id>
     <content type="html"><![CDATA[<h3>ALL</h3>
 
-<p>在函数名和变量名种一个_分割功能,描述一个功能的两个单词用驼峰</p>
+<p>文件和文件夹用<em>,方法和变量用驼峰
+在函数名和变量名种一个</em>分割功能,描述一个功能的两个单词用驼峰</p>
 
 <p>包名 首字母大写</p>
 
@@ -668,488 +1060,6 @@ aria-*, role
 <h3>教程</h3>
 
 <p><a href="http://www.woshipm.com/rp/39208.html">http://www.woshipm.com/rp/39208.html</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[react入门]]></title>
-    <link href="http://mzkmzk.github.io/blog/2015/07/20/react_start/"/>
-    <updated>2015-07-20T11:37:40+08:00</updated>
-    <id>http://mzkmzk.github.io/blog/2015/07/20/react_start</id>
-    <content type="html"><![CDATA[<!--more-->
-
-
-<h3>开始安装使用react</h3>
-
-<p>下载地址<a href="http://facebook.github.io/react/docs/getting-started.html">http://facebook.github.io/react/docs/getting-started.html</a></p>
-
-<p>尝试下载安装包种examaple</p>
-
-<p>先安装node.js</p>
-
-<ol>
-<li><p>examples/basic-jsx-precompile/</p>
-
-<pre><code> npm install -g react-tools
- cd examples/basic-jsx-precompile/
- jsx . build/
-</code></pre></li>
-</ol>
-
-
-<h3>参考资料</h3>
-
-<p>react-native 之布局篇<a href="https://github.com/tmallfe/tmallfe.github.io/issues/19">https://github.com/tmallfe/tmallfe.github.io/issues/19</a></p>
-
-<p>react开发者演讲<a href="https://code.facebook.com/posts/1014532261909640/react-native-bringing-modern-web-techniques-to-mobile/">https://code.facebook.com/posts/1014532261909640/react-native-bringing-modern-web-techniques-to-mobile/</a></p>
-
-<p>react示例阅读<a href="http://www.infoq.com/cn/articles/subversion-front-end-ui-development-framework-react">http://www.infoq.com/cn/articles/subversion-front-end-ui-development-framework-react</a></p>
-
-<p>API<a href="http://facebook.github.io/react-native/docs/troubleshooting.html#content">http://facebook.github.io/react-native/docs/troubleshooting.html#content</a></p>
-
-<p>在线开发环境<a href="https://jsfiddle.net/reactjs/69z2wepo/">https://jsfiddle.net/reactjs/69z2wepo/</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[iOS 入门常见问题]]></title>
-    <link href="http://mzkmzk.github.io/blog/2015/07/20/iOS_Start/"/>
-    <updated>2015-07-20T11:37:40+08:00</updated>
-    <id>http://mzkmzk.github.io/blog/2015/07/20/iOS_Start</id>
-    <content type="html"><![CDATA[<h3>1. Device os version lower than deployment target</h3>
-
-<p>我把手机连接电脑后,准备跑项目,但是Xcode提醒<code>Device os version lower than deployment target</code></p>
-
-<p>原因是项目要求最低版本高于手机版本,单击项目修改D<code>eployment Target即可</code></p>
-
-<p>API<a href="https://developer.apple.com/library/ios/navigation/">https://developer.apple.com/library/ios/navigation/</a></p>
-
-<p>学习视频<a href="http://open.163.com/special/opencourse/ios8.html">http://open.163.com/special/opencourse/ios8.html</a></p>
-
-<h4>/Users/maizhikun/Learning/iOS/workspace/Calculatoer/Calculatoer/CalculatorBrain.swift:12:22: &lsquo;Printable&rsquo; has been renamed to &lsquo;CustomStringConvertible&rsquo;</h4>
-
-<p> enum Op: Printable改成</p>
-
-<p> enum Op: CustomStringConvertible</p>
-
-<h3>书籍</h3>
-
-<p> <a href="http://www.zhihu.com/question/24004342">http://www.zhihu.com/question/24004342</a></p>
-
-<h3>学习博客</h3>
-
-<p> <a href="http://blog.csdn.net/Yt7589#rd?sukey=fc78a68049a14bb282a9238cb43355c93c53ed2c5959342e3c9a2d814b2888b1f46e19db83593016565093d093f7aff4">http://blog.csdn.net/Yt7589#rd?sukey=fc78a68049a14bb282a9238cb43355c93c53ed2c5959342e3c9a2d814b2888b1f46e19db83593016565093d093f7aff4</a></p>
-
-<h2>白胡子教程笔记</h2>
-
-<h4>第四课Swift和Foundation框架</h4>
-
-<ol>
-<li><p>数组</p>
-
-<pre><code> var a = Arry&lt;String&gt;()
-
- var a = [String]()
-
- var animals = ["Giraffe","Cow"]
-
- animals.append("Dog");
-
- let animal = animals[1]
-
- for animals in animals {
-     println("\(animal)")
- }
-</code></pre></li>
-<li><p>Dictonary</p>
-
-<pre><code> var pac10teamRankings = Dictionary&lt;String, Int&gt;()
-
- var pac10teamRankings = [String:Int]()
-
- pac10teamRankings = ["Stanford":1,"Cal":10]
-
- let ranking = pac10teamRankings["Ohin State"] //return nil
-
- for (key , value ) in pack10teamRankings {
-     println("\(key) = \(value)")
- }
-</code></pre></li>
-<li><p>Rabge</p>
-
-<pre><code> struct Range&lt;T&gt;{
-     var startIndex :T
-     var endIndex: T
- }       
-</code></pre>
-
-<p> An Array&rsquo;s range would be a Range<Int></p>
-
-<p> Warning: A String subrange is not Range<Int>(it is Range&lt;String.Index> &hellip; we&rsquo;ll talk later!)</p>
-
-<p> There is special syntax for specifying a Range: either &hellip;(ubclusive) or ..&lt;(open-ended)</p>
-
-<pre><code> let array =["a","b","c","d"]
-
- let subArray1 = array[2...3] //return ["c","d"]
-
- let subArray2 = array[2..&lt;3] // return ["c"]
-
- for i in [27...104]{
- }
-</code></pre></li>
-<li><p>其他数据类型</p>
-
-<pre><code> NSObject
- NSNumber
- NSDate
- NSData
-</code></pre></li>
-<li><p>数据类型</p>
-
-<pre><code> //声明
- class CalculatorBrain { }
-
- struct Vertex  {}
-
- enum Op {}
-
- //函数
-
- func doit(argument: Type) -&gt; ReturnValue{}
-
- var storedProperty =&lt;initial value&gt;(not enum)
-
- var computerProperty: Type{
-     get {}
-     set {}
- }
-
- //构造函数
- init(argument1: Type, argument2: Typ2, ...){} 
-</code></pre>
-
- 三者不同点:
-
-<ol>
-<li>Inheritance(class only)</li>
-<li>Introspection and castring(class only)</li>
-<li>Value type(struct,enum) vs. Referenct type(class)</li>
-</ol>
-</li>
-<li><p>Value vs. Referenct</p>
-
-<p> Value:</p>
-
-<p> You must note any func that can mutate a struct/enum with the keyword <code>mutaint</code></p>
-
-<p> Referenct :</p></li>
-<li><p>Methods</p>
-
-<p> 重写父类方法/属性时,要使用<code>override</code></p>
-
-<p> <code>final</code> 标记不能被重写的方法和属性</p>
-
-<pre><code> var d: Double =...
-
- if d.isSignMinus {
-     d =Double.abs(d)
- }
-
- static func abs(d: Double) -&gt; Double{}
-
-
- //Parameter Names 
- 1.
- func foo(external internal: Int){
-     let local = internal
- }
-
- func bar() {
-     let result = foo(external: 123)
- }
-
- 2.我部想拥有一个外部名
- func foo(_ internal: Int){
-     let local = internal
- }
-
- func bar(){
-     let result = foo(123)
- }
-
- 3. 必须要外部名
- func foo(#internal: Int){
-     let local = internal
- }
-
- func bar(){
-     let result = foo(internal: 123)
- }
-
- 4.
- func foo(first: Int, second: Double){
-     let local =internal
- }
-
- func bar(){
-     let result = foo(123, second 5.5)
- }
-
- 5. 
- fimc fpp(first: Int, externalSecond second: Double){
-     let local =internal //?这是不是错了?
- }
-
- func bar(){
-     let result = foo(123, externalSecond: 5.5)
- }
-
- 6. 
- func foo(first: Int, _ second: Double){
-     let local = internal 
- }
-
- func bar(){
-     let result =foo(123,5.5)
- }
-</code></pre></li>
-<li><p>Properties</p>
-
-<pre><code> var someStoredProperty: Int =42{
-     willset { newValue is the new value }
-     didSet {oldValue is the old value }
- }
-
-  var inheritedProperty {
-     willSet { newValue is the new value}
-     didSet { oldValue is the old value}
- }
-</code></pre>
-
-<p> Lazy Initialization (惰性实例化)</p>
-
-<p> 只有var 可以用lazy ,let不可以</p>
-
-<pre><code> lazy var brain = Calculator Brain()
-
- lazy var someProperty: Type =  {
-     return &lt;the constructed value &gt;
- }
-
- lazy var myProperty =self.initializeMyProperty()
-</code></pre></li>
-<li><p>Initialization</p>
-
-<p> lazy 或者其他很多方法可以避免initiative</p>
-
-<pre><code> selfinit(&lt;args&gt;)
-
- super.init(&lt;args&gt;)
-</code></pre>
-
- 两种构造方法
-
-<pre><code> 1. Convenience Init
-     1. 只能调用本类的designated initializer
-     2. 只能通过本类的designated intializer才能访问其他的值
- 2. Designated Initalizers(default)
-     1. 之前不能有Convenience Init
-     2. 只能调用其父类的Designated initializer
-     3. 调用父类的Init前,先初始化所有的property
-     4. 必须先让父类初始化property才能给子类调用
-</code></pre>
-
-<p> 子类没写designated init则继承父类所有的designated init和Converienct init,否则不继承父类的所有designated init</p>
-
-<p> required init 子类必须实现这个方法</p>
-
-<pre><code> init?(arg1: Type1, ...){}
-
- let image = UIImage(named: "foo")
-
- if let image = UIImage(named: "foo"){
-     successfully 
- }else {
-     faled
- }
-
- let commaSeparatedArrayElements: String = ",".join(myArray)
-</code></pre></li>
-<li><p>AnyObject</p>
-
-<p>主要用来兼用现有的Object-C和iOS代码</p>
-
-<pre><code>var destinationViewController: AnyObject
-var toolbarItems: [AndObject]
-
-func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject)
-func appConstraints(constraints: [AnyObject])
-func appendDigit(sender: AnyObject)
-
-class func buttonWithType(buttonType: UIButtonType) -&gt; AnyObject
-
-let calcVC = destinationViewController as CalculatorViewController 
-
-if let calcVC = destinationViewController as? CalculatorViewController {...}
-
----
-
-var toolbarItems: [AnyObject]
-
-for item in toolbarItems {
-    if let toolbarItem = item as? UIBarButtonItem{
-
-    }
-}
-
-for toolbarItem in toolbarItems as [UIBarButtonItem] {
-    //不能使用as? 因为for toolbarItem in nil是无意义的
-}
-
----
-
-let button: AnyObject =UIButton.buttonWithType(UIButtonType.System)
-
-let tutle = (button as UIButton).currentTitle
-</code></pre></li>
-</ol>
-
-
-<p>11 Function</p>
-
-<pre><code>//Some Array&lt;T&gt; Methods
-+=[T] //not +=T 
-
-var a = [a,b,c]
-
-append(T)
-
-insert(T, atIndex : Int)
-
-splice(Array&lt;T&gt;,atIndex: Int)   a.splice([d,e], atIndex:1),a = [a,d,e,b,c]
-
-removeAtIndex(Int)
-
-removeRange(Range) a.removeRange(0..&lt;2) a = [c]
-
-replaceRange(Range, [T]) //a.replaceRange(0...1 with: [x,y,z]),a= [x,y,z,b]
-
-sort(isOrderedBefore : (T,T)) -&gt; Bool) //e.g a.sort($$0 &lt;$1)
-
-filter(includeElement: (T) -&gt; Bool) -&gt; [T]
-
-let stringified: [String] = [1,2,3].map{ "\($0)"}
-
-let sum: Int = [1,2,3].reduce(0) {$0 + $1}
-
-//String
-
-var s = "hello"
-
-let index = advance(s.startIndex,2) //return  l
-
-s.splice("abc",index) // return heabcllo
-
-let startIndex =advance(s.startIndex,1)
-
-let endIndex = advance(s.startIndex,6)
-
-let substring = s[index..&lt;endIndex] // return eabcl
-
-//String.Index
-
-let num = "56.25"
-
-if let decimalRange = num.rangeOfString("."){
-    let wholeNumberPart = num[num.startIndex..&lt;decimalRange.startIndex]
-}
-
-s.removeRange([s.startIndex..&lt;decimalRange.startIndex])
-
-//Other String Methods
-
-description -&gt;String //Printable
-
-endIndex -&gt; String.Index
-
-hasPrefix(String)) -&gt; Bool
-
-hasSuffix(String) -&gt; Bool
-
-toInt -&gt; Int?  //not toDouble
-
-capitalizedString -&gt; String 
-
-lowercaseString -&gt; String
-
-uppercaseString -&gt; String 
-
-join(Array) -&gt; String // ",".join(]"1","2",3""]) = "1,2,3"
-
-componentsSeparatedByString(Strign ) -&gt; [String] // "1,2,3".csbs(",") = ["1","2","3"]
-
-//Type Conversion
-
-let d: Double =37.5
-
-let f: Falot = 37.5
-
-let x = Int(d)
-
-let xd = Double(x)
-
-let cgf =CgFloat(d)
-
-let a = Array("abc")  // a = ["a","b","c"]
-
-let s = String(["a","b","c"]) // return s = "abc"
-
-let s = String(52)
-
-let s= "\(37.5)"
-
-//Assertions 
-
-assert(() -&gt; Bpp; ,"message")
-
-e.g: assert(validation() !=nil,"the validation function returned nil")
-
-//Other Functions 
-
-let count = countElements(aCollection) //how many elements in the collection
-
-let sub = dropFirst(aSliceable) //drops the first thing in the sliceable
-
-let sub dropLast(aSliceable) // drops the last thing in the sliceable
-
-let first = first(aCollection) 
-
-let last = last(aCollection)
-
-let prefix = prefix(aSliceable, X:Int)
-
-let suffix = suffix(aSliceable, X: Int)
-
-let reversed: Array = reverse(aCollection)
-
-let backwardsSTRING = String(reverse(s))
-</code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[grunt入门]]></title>
-    <link href="http://mzkmzk.github.io/blog/2015/07/20/grunt_start/"/>
-    <updated>2015-07-20T11:37:40+08:00</updated>
-    <id>http://mzkmzk.github.io/blog/2015/07/20/grunt_start</id>
-    <content type="html"><![CDATA[<h3>安装步骤</h3>
-
-<ol>
-<li>先安装node.js</li>
-<li>输入命令行<code>sudo npm install -g grunt-cli</code></li>
-</ol>
-
 ]]></content>
   </entry>
   

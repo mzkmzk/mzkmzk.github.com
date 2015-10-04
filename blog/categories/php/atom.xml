@@ -4,7 +4,7 @@
   <title><![CDATA[Category: php | K]]></title>
   <link href="http://mzkmzk.github.io/blog/categories/php/atom.xml" rel="self"/>
   <link href="http://mzkmzk.github.io/"/>
-  <updated>2015-09-30T11:20:24+08:00</updated>
+  <updated>2015-10-04T23:45:18+08:00</updated>
   <id>http://mzkmzk.github.io/</id>
   <author>
     <name><![CDATA[K]]></name>
@@ -14,10 +14,47 @@
 
   
   <entry>
+    <title type="html"><![CDATA[PHP工具]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/09/30/php_utils/"/>
+    <updated>2015-09-30T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/09/30/php_utils</id>
+    <content type="html"><![CDATA[<!--more-->
+
+
+<h3>IDE</h3>
+
+<p>PHPStore</p>
+
+<p>官网下载</p>
+
+<p>破解码<code>EMBRACE</code></p>
+
+<p>参考<a href="http://orgcent.com/phpstorm-register-key-license/">http://orgcent.com/phpstorm-register-key-license/</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Laravel 错误积累]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/09/30/Laravel_error/"/>
+    <updated>2015-09-30T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/09/30/Laravel_error</id>
+    <content type="html"><![CDATA[<!--more-->
+
+
+<h4>[Laravel5] TokenMismatchException in VerifyCsrfToken</h4>
+
+<p>form表单内添加</p>
+
+<pre><code>&lt;input type="hidden" name="_token" value=""&gt;
+</code></pre>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[Laraval 入门]]></title>
-    <link href="http://mzkmzk.github.io/blog/2015/09/24/Lavaral-start/"/>
+    <link href="http://mzkmzk.github.io/blog/2015/09/24/Lavarel-start/"/>
     <updated>2015-09-24T11:37:40+08:00</updated>
-    <id>http://mzkmzk.github.io/blog/2015/09/24/Lavaral-start</id>
+    <id>http://mzkmzk.github.io/blog/2015/09/24/Lavarel-start</id>
     <content type="html"><![CDATA[<!--more-->
 
 
@@ -170,10 +207,17 @@ return view('User.Login');
 
 <p>详见<a href="http://www.golaravel.com/laravel/docs/5.1/helpers/#paths">http://www.golaravel.com/laravel/docs/5.1/helpers/#paths</a></p>
 
-<p>获取网络路径</p>
+<ol>
+<li><p>获取网络路径</p>
 
-<pre><code>    
-</code></pre>
+<pre><code>     
+</code></pre></li>
+<li><p>关闭CSRF,<code>App\Http;\Kernel</code>,注释</p>
+
+<pre><code>  // \App\Http\Middleware\VerifyCsrfToken::class,
+</code></pre></li>
+</ol>
+
 ]]></content>
   </entry>
   
@@ -238,77 +282,6 @@ Retrying with degraded mode, check https://getcomposer.org/doc/articles/troubles
 <h3>参考链接</h3>
 
 <p>安装参考<a href="http://www.phpcomposer.com/">http://www.phpcomposer.com/</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[php_常见小问题]]></title>
-    <link href="http://mzkmzk.github.io/blog/2015/09/09/php_question/"/>
-    <updated>2015-09-09T11:37:40+08:00</updated>
-    <id>http://mzkmzk.github.io/blog/2015/09/09/php_question</id>
-    <content type="html"><![CDATA[<h3>0x00 php echo 返回JSON但莫名多了&amp;#65279</h3>
-
-<p>原因:调用的文件中存储UTF-8 BOM 把格式改为UTF-8即可</p>
-
-<p>js正则也可以去除此字符</p>
-
-<pre><code>//去除返回数据前后空白符
-function trim(str){
-str = str.replace(/^\s\s*/, ''),
-ws = /\s/,
-i = str.length;
-while (ws.test(str.charAt(--i)));
-return str.slice(0, i + 1);
-}
-</code></pre>
-
-<p>但是想把该代码转为JAVA的,但对正则不太了解.日后再说.</p>
-
-<h3>0x01 foreach改变数组无效</h3>
-
-<p>用foreach改变数组无用,用普通for即可..</p>
-
-<pre><code>//for ($index = 0 ;$index&lt; count($rs);$index++){
-        //  $rs[$index] = array_merge($rs[$index], $patient_Model-&gt;query_name($rs[$index]['patient_id']));
-            //array_push($rs[$index], array('patient_name'=&gt;$patient_Model-&gt;query_name($rs[$index]['patient_id'])));
-        //}
-        foreach ($rs as $rs_one){
-            $rs_one = array_merge($rs_one, $patient_Model-&gt;query_name($rs_one['patient_id']));
-            //array_push($rs_one, array('patient_name'=&gt;$patient_Model-&gt;query_name($rs_one['patient_id'])));
-            //print_r($rs_one);
-        }
-</code></pre>
-
-<h3>php 升级到5.6</h3>
-
-<p><a href="http://php-osx.liip.ch/">http://php-osx.liip.ch/</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[php_配置记录错误文件]]></title>
-    <link href="http://mzkmzk.github.io/blog/2015/09/06/php_error_log/"/>
-    <updated>2015-09-06T11:37:40+08:00</updated>
-    <id>http://mzkmzk.github.io/blog/2015/09/06/php_error_log</id>
-    <content type="html"><![CDATA[<h3>0x00 配置php.ini</h3>
-
-<p>php.ini中设置</p>
-
-<pre><code>log_errors = On
-error_log = /var/log/php_errors.log
-</code></pre>
-
-<p>重启服务器 Mac:<code>sudo /usr/sbin/apachectl restart</code></p>
-
-<h3>添加错误文件</h3>
-
-<p>这个非常重要.由于当时我添加文件写错了名字&hellip;导致耽误了很多时间..吐槽一下..php不能自己自动添加文件吗?权限问题?不应该</p>
-
-<p>安装error_log添加文件然后给权限777就行.</p>
-
-<h3>其他参考</h3>
-
-<p>错误级别error_reporting设置<a href="http://www.vfeelit.com/232.html">http://www.vfeelit.com/232.html</a></p>
 ]]></content>
   </entry>
   

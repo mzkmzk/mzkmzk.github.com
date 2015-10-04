@@ -1,0 +1,718 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>系统分析师UML项目实战书籍阅读总结 - K</title>
+	<meta name="author" content="K">
+
+	
+	<meta name="description" content="1. UML项目现场 只有平庸的人,才会提出复杂的解决方案 UML建模顺序: 流程建模 -> 用例建模 ->领域建模 活动图,用例图,类图的图标名称介绍. 2. 业务流程建模 业务流程定义: 特定的客户
+特定的目标
+特定的服务 对于不重要的工作,不做活动图 表2-1 &hellip;&#8221;>
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="baidu-site-verification" content="HWyzFajtAX" />
+	<meta name="google-site-verification" content="xf8laC_mNTP9RdWTD-O8D4yYFsMXXnGjvcWVNqfNntk" />
+	<link href="false" rel="alternate" title="K" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script async="true" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	
+	<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?1e6c60ae572d5e740a34233f4accedbd";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+</head>
+
+
+<body>
+	<header id="header" class="inner"><h1><a href="/">K</a></h1>
+<nav id="K_select">
+	<div class="alignleft menu">
+		<a class="button">Category</a>
+		<div class="container"><ul class="main">
+		
+	
+<li><a href="/blog/categories/markdown">markdown</a></li>
+
+<li><a href="/blog/categories/data">data</a></li>
+
+<li><a href="/blog/categories/php">php</a></li>
+
+<li><a href="/blog/categories/svn">svn</a></li>
+
+<li><a href="/blog/categories/octopress">octopress</a></li>
+
+<li><a href="/blog/categories/sql">sql</a></li>
+
+<li><a href="/blog/categories/j2ee">j2ee</a></li>
+
+<li><a href="/blog/categories/mac">mac</a></li>
+
+<li><a href="/blog/categories/struts2">struts2</a></li>
+
+<li><a href="/blog/categories/android">android</a></li>
+
+<li><a href="/blog/categories/hack">hack</a></li>
+
+<li><a href="/blog/categories/design">design</a></li>
+
+<li><a href="/blog/categories/eclipse">eclipse</a></li>
+
+<li><a href="/blog/categories/readme">readme</a></li>
+
+<li><a href="/blog/categories/arduino">arduino</a></li>
+
+<li><a href="/blog/categories/jquery">jquery</a></li>
+
+<li><a href="/blog/categories/javascript">javascript</a></li>
+
+<li><a href="/blog/categories/bootstrap">bootstrap</a></li>
+
+<li><a href="/blog/categories/squild">squild</a></li>
+
+<li><a href="/blog/categories/iphone">iphone</a></li>
+
+<li><a href="/blog/categories/question">question</a></li>
+
+<li><a href="/blog/categories/java">java</a></li>
+
+<li><a href="/blog/categories/photoshop">photoshop</a></li>
+
+<li><a href="/blog/categories/sqlmap">sqlmap</a></li>
+
+<li><a href="/blog/categories/python">python</a></li>
+
+<li><a href="/blog/categories/git">git</a></li>
+
+<li><a href="/blog/categories/pr">pr</a></li>
+
+<li><a href="/blog/categories/linux">linux</a></li>
+
+<li><a href="/blog/categories/oracle">oracle</a></li>
+
+<li><a href="/blog/categories/windows">windows</a></li>
+
+<li><a href="/blog/categories/video">video</a></li>
+
+<li><a href="/blog/categories/travel">travel</a></li>
+
+<li><a href="/blog/categories/web">web</a></li>
+
+<li><a href="/blog/categories/httracl">httracl</a></li>
+
+<li><a href="/blog/categories/httpclient">httpclient</a></li>
+
+<li><a href="/blog/categories/tjrac">tjrac</a></li>
+
+<li><a href="/blog/categories/about_me">about_me</a></li>
+
+<li><a href="/blog/categories/seo">seo</a></li>
+
+<li><a href="/blog/categories/前端">前端</a></li>
+
+<li><a href="/blog/categories/ios">ios</a></li>
+
+<li><a href="/blog/categories/axure">axure</a></li>
+
+<li><a href="/blog/categories/html">html</a></li>
+
+<li><a href="/blog/categories/node">node</a></li>
+
+<li><a href="/blog/categories/my">my</a></li>
+
+<li><a href="/blog/categories/develop">develop</a></li>
+
+<li><a href="/blog/categories/project">project</a></li>
+
+<li><a href="/blog/categories/">About me</a></li>
+</ul>
+</div>
+	</div>
+	<div class="alignright search">
+		<a class="button"></a>
+		<div class="container">
+			<form action="https://www.google.com/search" method="get">
+				<input type="text" name="q" results="0">
+				<input type="hidden" name="q" value="site:mzkmzk.github.io">
+			</form>
+		</div>
+	</div>
+</nav>
+<nav id="main-nav">
+	<ul class="main">
+		<li><a href="/blog/2015/07/16/adoube_me.markdwon/">About me</a></li>
+	
+
+
+</ul>
+
+	</nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Category</a>
+		<div class="container"><ul class="main">
+		
+	
+<li><a href="/blog/categories/markdown">markdown</a></li>
+
+<li><a href="/blog/categories/data">data</a></li>
+
+<li><a href="/blog/categories/php">php</a></li>
+
+<li><a href="/blog/categories/svn">svn</a></li>
+
+<li><a href="/blog/categories/octopress">octopress</a></li>
+
+<li><a href="/blog/categories/sql">sql</a></li>
+
+<li><a href="/blog/categories/j2ee">j2ee</a></li>
+
+<li><a href="/blog/categories/mac">mac</a></li>
+
+<li><a href="/blog/categories/struts2">struts2</a></li>
+
+<li><a href="/blog/categories/android">android</a></li>
+
+<li><a href="/blog/categories/hack">hack</a></li>
+
+<li><a href="/blog/categories/design">design</a></li>
+
+<li><a href="/blog/categories/eclipse">eclipse</a></li>
+
+<li><a href="/blog/categories/readme">readme</a></li>
+
+<li><a href="/blog/categories/arduino">arduino</a></li>
+
+<li><a href="/blog/categories/jquery">jquery</a></li>
+
+<li><a href="/blog/categories/javascript">javascript</a></li>
+
+<li><a href="/blog/categories/bootstrap">bootstrap</a></li>
+
+<li><a href="/blog/categories/squild">squild</a></li>
+
+<li><a href="/blog/categories/iphone">iphone</a></li>
+
+<li><a href="/blog/categories/question">question</a></li>
+
+<li><a href="/blog/categories/java">java</a></li>
+
+<li><a href="/blog/categories/photoshop">photoshop</a></li>
+
+<li><a href="/blog/categories/sqlmap">sqlmap</a></li>
+
+<li><a href="/blog/categories/python">python</a></li>
+
+<li><a href="/blog/categories/git">git</a></li>
+
+<li><a href="/blog/categories/pr">pr</a></li>
+
+<li><a href="/blog/categories/linux">linux</a></li>
+
+<li><a href="/blog/categories/oracle">oracle</a></li>
+
+<li><a href="/blog/categories/windows">windows</a></li>
+
+<li><a href="/blog/categories/video">video</a></li>
+
+<li><a href="/blog/categories/travel">travel</a></li>
+
+<li><a href="/blog/categories/web">web</a></li>
+
+<li><a href="/blog/categories/httracl">httracl</a></li>
+
+<li><a href="/blog/categories/httpclient">httpclient</a></li>
+
+<li><a href="/blog/categories/tjrac">tjrac</a></li>
+
+<li><a href="/blog/categories/about_me">about_me</a></li>
+
+<li><a href="/blog/categories/seo">seo</a></li>
+
+<li><a href="/blog/categories/前端">前端</a></li>
+
+<li><a href="/blog/categories/ios">ios</a></li>
+
+<li><a href="/blog/categories/axure">axure</a></li>
+
+<li><a href="/blog/categories/html">html</a></li>
+
+<li><a href="/blog/categories/node">node</a></li>
+
+<li><a href="/blog/categories/my">my</a></li>
+
+<li><a href="/blog/categories/develop">develop</a></li>
+
+<li><a href="/blog/categories/project">project</a></li>
+
+<li><a href="/blog/categories/">About me</a></li>
+</ul>
+</div>
+	</div>
+	<div class="alignright search">
+		<a class="button"></a>
+		<div class="container">
+			<form action="https://www.google.com/search" method="get">
+				<input type="text" name="q" results="0">
+				<input type="hidden" name="q" value="site:mzkmzk.github.io">
+			</form>
+		</div>
+	</div>
+</nav>
+<nav id="sub-nav" class="alignright">
+	<div class="social">
+		
+		
+		
+		
+    
+		
+		
+		
+		
+		
+    
+	</div>
+	
+</nav>
+
+</header>
+	
+		
+	
+	<div id="content" class="inner"><article class="post">
+	<h2 class="title">系统分析师UML项目实战书籍阅读总结</h2>
+	<div class="entry-content"><!--more-->
+
+
+<h3>1. UML项目现场</h3>
+
+<p><code>只有平庸的人,才会提出复杂的解决方案</code></p>
+
+<p>UML建模顺序: 流程建模 -> 用例建模 ->领域建模</p>
+
+<p>活动图,用例图,类图的图标名称介绍.</p>
+
+<h3>2. 业务流程建模</h3>
+
+<p>业务流程定义:</p>
+
+<ol>
+<li>特定的客户</li>
+<li>特定的目标</li>
+<li>特定的服务</li>
+</ol>
+
+
+<p>对于不重要的工作,不做活动图</p>
+
+<p>表2-1 活动图用于表示业务流程或系统流程</p>
+
+<table>
+<thead>
+<tr>
+<th> 项目\活动图  </th>
+<th> 业务流程                                  </th>
+<th> 系统流程                                  </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td> 主要作用      </td>
+<td>                   表示企业组织的未来流程   </td>
+<td> 表示系统内部的系统流程                     </td>
+</tr>
+<tr>
+<td> 人工操作      </td>
+<td> 可能出现人工操作                          </td>
+<td> 不会出现人工操作                          </td>
+</tr>
+<tr>
+<td> 生成机时      </td>
+<td> 需求分析阶段                                </td>
+<td> 系统设计时间                                </td>
+</tr>
+<tr>
+<td> 相关文件      </td>
+<td> 收录在系统需求的规格书(SRS)                </td>
+<td> 收录在系统设计规格书(SDS)                   </td>
+</tr>
+<tr>
+<td> 绘制者         </td>
+<td> 系统分析师                                   </td>
+<td> 系统设计师                                   </td>
+</tr>
+<tr>
+<td> 观看者         </td>
+<td> 客户/用户(系统设计师也会参考使用)          </td>
+<td> 程序设计师                                   </td>
+</tr>
+<tr>
+<td> 粒度            </td>
+<td> 一张活动图对应多个用例(即将用例视为黑箱)   </td>
+<td> 一张活动图对应一个用例(即将用例视为白盒)   </td>
+</tr>
+</tbody>
+</table>
+
+
+<p>表2-2 于系统设计时间的活动图和顺序图</p>
+
+<table>
+<thead>
+<tr>
+<th> 项目/图类型  </th>
+<th> 活动图(系统流程)                           </th>
+<th> 顺序图(对象互动)                               </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td> 主要作用      </td>
+<td> 表示系统内部的系统流程                     </td>
+<td> 表示系统内部的对象互动                         </td>
+</tr>
+<tr>
+<td> 主要特色      </td>
+<td> 凸显流程与控制节点                           </td>
+<td> 凸显对象依序调用方法或函数                       </td>
+</tr>
+<tr>
+<td> 生成时机      </td>
+<td> 高级的系统设计时间                           </td>
+<td> 细部的系统设计时间                               </td>
+</tr>
+<tr>
+<td> 相关文件      </td>
+<td> 收录在系统设计规格书(SDS)                   </td>
+<td> 同左                                            </td>
+</tr>
+<tr>
+<td> 实作情况      </td>
+<td> 无法直接对应程序代码                        </td>
+<td> 可以直接对应程序代码(有些UML工具可以自动产码)     </td>
+</tr>
+<tr>
+<td> 绘制者         </td>
+<td> 系统设计师                                   </td>
+<td> 同左                                            </td>
+</tr>
+<tr>
+<td> 观看者         </td>
+<td> 程序设计师                                   </td>
+<td> 同左                                            </td>
+</tr>
+<tr>
+<td> 粒度            </td>
+<td> 一张活动图对应一个用例(即将用例视为白箱)   </td>
+<td> 同左                                            </td>
+</tr>
+</tbody>
+</table>
+
+
+<p>活动图图标:</p>
+
+<ol>
+<li>起始节点: 实心小圆 (建议一个活动图 一个起始节点)</li>
+<li>活动终点: 双圆,内实外空</li>
+<li>判断节点: 空心菱形</li>
+<li><p>动作: 圆角矩形 动作粒度要与用例粒度相近</p>
+
+<p> 4.1 第一行: (一个动作负责人)</p>
+
+<p> 4.2 第二行: 动作名称,动词开头</p></li>
+<li>合并节点: 空心菱形</li>
+<li>活动: 圆角矩形,右下角三叉图标 (活动可拆分外令一个活动图 )</li>
+<li>分叉与会合: 粗线段 (等所有条件具备进行下一阶段 建议分叉与会合成对出现)</li>
+<li>对象节点: 矩形 (代表流入/流出的数据项)</li>
+</ol>
+
+
+<h3>3. 用例建模</h3>
+
+<p>用例来源:</p>
+
+<ol>
+<li>业务流程</li>
+<li>功能流程</li>
+<li>其他用例</li>
+</ol>
+
+
+<p>建议同时生成用例图和功能架构图.</p>
+
+<p>用例图作用:</p>
+
+<ol>
+<li>规范一套动作</li>
+<li>明确结果</li>
+<li>表明参与者 (参与者包括主要参与者(启动者)和次要参与者)</li>
+</ol>
+
+
+<p>业务流程导出初版用例</p>
+
+<ol>
+<li>查看动作,动作负责人即为参与者,动作即为用例</li>
+<li>查看判断节点,判断判断节点是否需要其他用例支持</li>
+</ol>
+
+
+<p>功能划分->业务流程->初版用例->功能架构->用例图->用例描述</p>
+
+<p>用例描述:</p>
+
+<ol>
+<li>前置条件: 执行流程前必须要满足的条件</li>
+<li>主要流程: 一般正常的流程 (主要详细分为参与者输入,系统处理过程,及输出,要求非常详细!)</li>
+<li>替换流程: 特殊情况 (替换流程的编号,紧跟发生特殊情况的主要流程编号)</li>
+<li>后置条件: 必须要完成的结果</li>
+</ol>
+
+
+<p>包含关系与扩展关系</p>
+
+<ol>
+<li><p>包含关系: &lt;\<include>> 虚线箭头指向被包含 被包含可视为<code>前置条件</code></p>
+
+<p> 1.1 被包含的小用例无法脱离基础用例而单独存在</p>
+
+<p> 1.2 基础用例一定执行被包含的小用例</p>
+
+<p> 1.3 两者加起来是一条流程</p></li>
+<li><p>扩展关系: &lt;\<extends>> 虚线箭头直线被扩展 扩展可不执行 ,可视为<code>替换流程</code></p>
+
+<p> 2.1 拓展的小用例无法脱离基础用例而单独存在</p>
+
+<p> 2.2 基础用例不一定执行拓展的小用例</p>
+
+<p> 2.3 两者加起来是两条流程,其一是单独的基础用例,其二是基础用例外加拓展用例</p></li>
+</ol>
+
+
+<h3>4. 领域建模</h3>
+
+<p>领域模型:</p>
+
+<ol>
+<li>一种概念模型,呈现问题领域中的重要概念</li>
+<li>描述问题领域中的实体,实体属性,操作,角色,关系和限制.</li>
+<li>对于用例所描述的互动过程,领域模型可以为用例起支持结构作用.</li>
+<li>通常用类图描述领域模型.</li>
+<li>领域模式可用于出代码</li>
+</ol>
+
+
+<p>类图:</p>
+
+<ol>
+<li>类用矩形表示,第一行为名称,第二行为属性,第三行为操作</li>
+<li>属性 属性名称:数据类型=初始值</li>
+<li>操作 操作名称(参数,数据类型):返回值数据类型</li>
+<li><p>结合关系: 实线 表示两个领域存在重要且需要永久保存的静态关系</p>
+
+<p> 4.1 单向结合 无法从目标端找回来源端</p>
+
+<p> 4.2 双向结合</p>
+
+<p> 4.3 聚合关系 空心菱形 指向聚合类 整体-部分</p>
+
+<p> 4.4 组合关系 实心菱形 组合关系具有聚合关系的所有特性另加部分对象只会链接到一个整体对象,不允许数个整体对象共用一个部分对象,部分对象跟随整体对象的存活.</p>
+
+<p> 4.3 个体数目 下限..上限 表明关系:一对一,一对多,多对多.多对一.</p></li>
+</ol>
+
+
+<p>用例描述推导领域模型</p>
+
+<ol>
+<li>查看用例描述,把其中的数据项归到领域中.</li>
+<li>类代表领域,数据项代表属性</li>
+<li>查看概念之间的关系</li>
+<li>根据关系在两端添加数量</li>
+</ol>
+
+
+<p>领域模型呈现业务规则</p>
+
+<ol>
+<li>通过结合关系和个体数目来表达关系静态结构的业务规则</li>
+<li>通过操作来表达计算公司以及一些需要查验或检核的业务规则</li>
+</ol>
+
+
+<h3>5. 模型走读</h3>
+
+<p>作用:检测模型质量</p>
+
+<p>走读功能架构图与用例图</p>
+
+<ol>
+<li>是否可以从功能架构图追溯到用例图 (最好情况: 直接采用用例作为功能架构图中的功能)</li>
+<li>检测功能架构图中的系统,功能模块,用例名称是否和用例图一致</li>
+<li>若功能模块和底下的功能模块与客户的征求建议书(RFP)不一致,则需请求客户同意,看功能模块的切割、名称、地下的功能归属是否恰当.</li>
+</ol>
+
+
+<p>走读中遇到的问题及其解决方案:</p>
+
+<ol>
+<li>出现多个用例参与一个用例入口 解决:用例图中参与者第二行标明{or }</li>
+</ol>
+
+
+<p>走读用例图和用例描述</p>
+
+<ol>
+<li>检测参与者是否摆在系统方框之外,在系统方框和功能模块方框最上方要用标注&lt;\&lt;系统>>或&lt;\&lt;功能模块>></li>
+<li>用例描述每一个步骤都以参与者或系统开头</li>
+</ol>
+
+
+<p>界面雏形工具: Pencil</p>
+
+<p>走读用例描述与领域模型</p>
+
+<ol>
+<li>主要查看是否遗漏数据项(属性)、业务规则和重要操作</li>
+</ol>
+
+
+<h5>善用对象图</h5>
+
+<p>对象图是系统的快照,可表示某一时刻或某一场景系统内有哪些重要对象,属性的数值以及他们之间的关系.</p>
+
+<p>在绘制对象图,想好场景,一边套场景,一边通过对象图走读领域模型</p>
+
+<p>用对象图发现用例描述某一动作不能执行, 解决方案 增加用例辅助完成.</p>
+
+<h4>领域模式描述:</h4>
+
+<p>领域模式主要通过文字记录类别、属性、结合、限制的定义或解释、操作</p>
+
+<h3>6. 继续走读</h3>
+
+<p>走读中做了几个调整.</p>
+
+<p>1.整合应整合用例(自动汇整集锦交易与自动申购基金)</p>
+
+<p>非功能性需求可以添加到用例描述中或建立单独一个表格供整个系统参考.</p>
+
+<p>走读领域,可搭配情景对象图.这个很重要,其实在做系统测试时候,完全可以按照这个来.</p>
+
+<h3>7. 基金系统范例</h3>
+
+<p>以功能模块拆分用例图.</p>
+
+<p>主要把前面章节的图 汇总在一起.</p>
+
+<h3>总结</h3>
+
+<p>第四章的结合实例来说领域模型很精彩</p>
+
+<p>重复地方很多,有利有弊.</p>
+
+<p>对于整个系统流程来说,算是不错的体验.能够让读者大概明白UML的大概过程,每一步应该做什么.然后循环迭代.这和敏捷开发的思想很像.</p>
+</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-10-01T11:37:40+08:00" pubdate data-updated="true"></time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/project/'>project</a>
+
+
+</div>
+	
+</div>
+</article>
+
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+		
+		<a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+		
+		
+		<a class="addthis_button_tweet"></a>
+		
+		
+		
+	</div>
+	
+</div>
+
+
+
+
+
+
+  <section>
+    <h1>Comments</h1>
+    <div id="comments" aria-live="polite">
+
+<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="系统分析师UML项目实战书籍阅读总结" data-title="系统分析师UML项目实战书籍阅读总结" data-url="/blog/2015/10/01/uml_project_book/"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"mzkmzk"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- 多说公共JS代码 end --></div>
+  </section>
+</div>
+	<footer id="footer" class="inner">
+
+Copyright &copy; 2015
+
+    K
+
+
+</footer>
+	<script src="/javascripts/slash.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+	$('.fancybox').fancybox();
+})(jQuery);
+</script> <!-- Delete or comment this line to disable Fancybox -->
+
+
+
+
+
+
+</body>
+</html>

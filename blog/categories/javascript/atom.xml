@@ -4,7 +4,7 @@
   <title><![CDATA[Category: javascript | K]]></title>
   <link href="http://mzkmzk.github.io/blog/categories/javascript/atom.xml" rel="self"/>
   <link href="http://mzkmzk.github.io/"/>
-  <updated>2015-09-30T11:20:24+08:00</updated>
+  <updated>2015-10-04T23:45:18+08:00</updated>
   <id>http://mzkmzk.github.io/</id>
   <author>
     <name><![CDATA[K]]></name>
@@ -26,6 +26,13 @@
         '&lt;input  onclick="delete_library()" class="btn btn-info" id="delete_library_'+new_library_num+'" name="delete_library" value="删除"   style="width:100%"  /&gt;'+    
     '&lt;/div&gt;';
 </code></pre>
+
+<h1>已解决</h1>
+
+<ol>
+<li>jquery的ajax中不能再方法内return,返回的都是undefinte;</li>
+</ol>
+
 ]]></content>
   </entry>
   
@@ -273,6 +280,10 @@ page_form.appendChild(document.getElementById("search_info"));
 <p>Web端我们有实时的JS报错监控平台<a href="https://github.com/tmallfe/tmallfe.github.io/issues/6">https://github.com/tmallfe/tmallfe.github.io/issues/6</a></p>
 
 <p>js类继承<a href="http://javascript.crockford.com/zh/inheritance.html">http://javascript.crockford.com/zh/inheritance.html</a></p>
+
+<h3>url玩法</h3>
+
+<p><a href="http://www.cuplayer.com/player/PlayerCodeJS/2014/1218/1708.html">http://www.cuplayer.com/player/PlayerCodeJS/2014/1218/1708.html</a></p>
 
 <h3>未消化</h3>
 ]]></content>

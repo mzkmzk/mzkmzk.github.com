@@ -3,11 +3,11 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>Laraval 入门 - K</title>
+	<title>PHP工具 - K</title>
 	<meta name="author" content="K">
 
 	
-	<meta name="description" content="配置与安装 需要条件: - PHP &gt;= 5.5.9 - OpenSSL PHP 扩展 - PDO PHP 扩展 - Mbstring PHP 扩展 - Tokenizer PHP 扩展 查看方式:phpinfo(); 配置composer. 配置~/.composer/vendor/ &hellip;">
+	<meta name="description" content=" IDE PHPStore 官网下载 破解码EMBRACE 参考http://orgcent.com/phpstorm-register-key-license/ php ">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	<meta name="baidu-site-verification" content="HWyzFajtAX" />
@@ -130,6 +130,8 @@ var _hmt = _hmt || [];
 
 <li><a href="/blog/categories/develop">develop</a></li>
 
+<li><a href="/blog/categories/project">project</a></li>
+
 <li><a href="/blog/categories/">About me</a></li>
 </ul>
 </div>
@@ -249,6 +251,8 @@ var _hmt = _hmt || [];
 
 <li><a href="/blog/categories/develop">develop</a></li>
 
+<li><a href="/blog/categories/project">project</a></li>
+
 <li><a href="/blog/categories/">About me</a></li>
 </ul>
 </div>
@@ -285,157 +289,19 @@ var _hmt = _hmt || [];
 		
 	
 	<div id="content" class="inner"><article class="post">
-	<h2 class="title">Laraval 入门</h2>
+	<h2 class="title">PHP工具</h2>
 	<div class="entry-content"><!--more-->
 
 
-<h2>配置与安装</h2>
+<h3>IDE</h3>
 
-<p>需要条件:</p>
+<p>PHPStore</p>
 
-<pre><code>- PHP &gt;= 5.5.9 - OpenSSL PHP 扩展 - PDO PHP 扩展 - Mbstring PHP 扩展 - Tokenizer PHP 扩展
-</code></pre>
+<p>官网下载</p>
 
-<p>查看方式:<code>phpinfo();</code></p>
+<p>破解码<code>EMBRACE</code></p>
 
-<p>配置composer.</p>
-
-<p>配置<code>~/.composer/vendor/bin</code>到PATH</p>
-
-<p>安装Laravel</p>
-
-<pre><code>sudo composer global require "laravel/installer=~1.1"
-</code></pre>
-
-<p>之后就<code>laravel new blog</code> 爽一爽</p>
-
-<p>/config里都是配置文件 需要仔细看看.</p>
-
-<p>配置/storage和bootstrap/cache服务器写权限</p>
-
-<pre><code> chmod -R  777   storage/
- chmod -R  777   bootstrap/cache
-</code></pre>
-
-<p>ok,把项目放进apache路径 然后</p>
-
-<pre><code>http://localhost/laravel/public/
-</code></pre>
-
-<p>就会看到Laravel 5字样了</p>
-
-<p>我们自己试一试弄一个页面吧</p>
-
-<p>打开<code>/app/Http/routes.php</code>,设置Url跳转和传递title参数</p>
-
-<pre><code>Route::get('/hi',function(){
-return View::make('hi')-&gt;with("title","Hello Word");
-});
-</code></pre>
-
-<p>打开<code>/resources/views</code>创建hi.blade.php</p>
-
-<pre><code>@include('header')
-&lt;h1&gt;&lt;/h1&gt;
-&lt;p&gt;one Laravel&lt;/p&gt;
-</code></pre>
-
-<p>再在其目录下创建header.blade.php</p>
-
-<pre><code>&lt;p&gt;header&lt;/p&gt;
-</code></pre>
-
-<p>ok 访问url<code>http://localhost/laravel/public/index.php/hi</code></p>
-
-<p>如何去掉可恶的index.php</p>
-
-<ol>
-<li>设置apache支持.htaccess,打开apache http.conf,搜索<code>AllowOverride</code> 把None都改为All</li>
-<li>设置加载mod_rewrite模块,打开apache http.conf,搜索<code>mod_rewrite</code>,把前面的#去掉(校验方法-php_info()),重启下apache哦~.</li>
-<li><p>设置Laravel的.htaccess,把下面的内容代替之前的内容.</p>
-
-<pre><code> Options +FollowSymLinks
- RewriteEngine On
-
- RewriteCond %{REQUEST_FILENAME} !-d
- RewriteCond %{REQUEST_FILENAME} !-f
- RewriteRule ^ index.php [L]
-</code></pre></li>
-</ol>
-
-
-<p>ok<code>http://localhost/laravel/public/hi</code>爽一发吧.</p>
-
-<p>参考链接<a href="http://oublog.cn/u_58/">http://oublog.cn/u_58/</a></p>
-
-<p>环境配置</p>
-
-<pre><code>//获取系统配置
-config('app.timezone')
-//设置系统配置
-config(['app.timezone' =&gt; 'Asia/Shanghai'])
-</code></pre>
-
-<h3>路由</h3>
-
-<p>访问Controllers</p>
-
-<pre><code>Route::get('/Text_Laravel/Text_DB','Text_Laravel.Text_DB@index');
-</code></pre>
-
-<p>访问View</p>
-
-<pre><code>Route::get('/User/Login',function () {
-return view('User.Login');
-});
-</code></pre>
-
-<h3>数据库配制</h3>
-
-<p>配置文件<code>config/database.php</code></p>
-
-<p>Laravel还可以配置读写两个不同的ip地址.</p>
-
-<pre><code>'mysql' =&gt; [
-'read' =&gt; [
-    'host' =&gt; '192.168.1.1',
-],
-'write' =&gt; [
-    'host' =&gt; '196.168.1.2'
-],
-'driver'    =&gt; 'mysql',
-'database'  =&gt; 'database',
-'username'  =&gt; 'root',
-'password'  =&gt; '',
-'charset'   =&gt; 'utf8',
-'collation' =&gt; 'utf8_unicode_ci',
-'prefix'    =&gt; '',
-],
-</code></pre>
-
-<p>光配置这个还不行 还要去配置.env ? 难道.env是通过config实时生成的?</p>
-
-<h2>阅读API文档</h2>
-
-<p><a href="http://www.golaravel.com/laravel/docs/5.1/">http://www.golaravel.com/laravel/docs/5.1/</a></p>
-
-<h3>routing</h3>
-
-<p><a href="http://laravel.com/docs/5.1/routing">http://laravel.com/docs/5.1/routing</a></p>
-
-<p>路由配置在<code>app/Http/routes.php</code></p>
-
-<p>先来看下简单的配置,get,post请求,还有match,any匹配多种请求,还有通过url传递参数(参数不能包含<code>-</code>),</p>
-
-<h2>应用中碰到的应用</h2>
-
-<h3>获取路径</h3>
-
-<p>获取相对于目录的绝对路径</p>
-
-<p>详见<a href="http://www.golaravel.com/laravel/docs/5.1/helpers/#paths">http://www.golaravel.com/laravel/docs/5.1/helpers/#paths</a></p>
-
-<p>获取网络路径</p>
+<p>参考<a href="http://orgcent.com/phpstorm-register-key-license/">http://orgcent.com/phpstorm-register-key-license/</a></p>
 </div>
 
 
@@ -452,7 +318,7 @@ return view('User.Login');
   
 
 
-<time datetime="2015-09-24T11:37:40+08:00" pubdate data-updated="true"></time></div>
+<time datetime="2015-09-30T11:37:40+08:00" pubdate data-updated="true"></time></div>
 	<div class="tags">
 
 
@@ -488,7 +354,7 @@ return view('User.Login');
     <div id="comments" aria-live="polite">
 
 <!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="Laraval 入门" data-title="Laraval 入门" data-url="/blog/2015/09/24/Lavaral-start/"></div>
+	<div class="ds-thread" data-thread-key="PHP工具" data-title="PHP工具" data-url="/blog/2015/09/30/php_utils/"></div>
 <!-- 多说评论框 end -->
 <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 <script type="text/javascript">
