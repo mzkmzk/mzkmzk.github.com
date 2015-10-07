@@ -4,7 +4,7 @@
   <title><![CDATA[K]]></title>
   <link href="http://mzkmzk.github.io/atom.xml" rel="self"/>
   <link href="http://mzkmzk.github.io/"/>
-  <updated>2015-10-05T00:06:37+08:00</updated>
+  <updated>2015-10-07T19:49:18+08:00</updated>
   <id>http://mzkmzk.github.io/</id>
   <author>
     <name><![CDATA[K]]></name>
@@ -12,6 +12,458 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[疯狂Html+CSS+JS 中JS总结]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/10/05/amazeing-js/"/>
+    <updated>2015-10-05T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/10/05/amazeing-js</id>
+    <content type="html"><![CDATA[<!--more-->
+
+
+<h2>1. JavaScript语法</h2>
+
+<h3>执行js代码</h3>
+
+<ol>
+<li>javascript:alert(&lsquo;执行js&rsquo;);</li>
+<li><code>&lt;script&gt;alert("执行js")&lt;/script&gt;</code></li>
+</ol>
+
+
+<h3>变量赋值</h3>
+
+<pre><code>var a = 1;//显式
+a =1; //隐式
+</code></pre>
+
+<h3>全局变量与局部变量</h3>
+
+<pre><code>...
+var scope = "全局变量";
+function test(){
+    alert(scope);
+    var scope = "局部变量";
+    alert(scope);
+}
+</code></pre>
+
+<p>结果是先alert undefined 后 alert 局部变量</p>
+
+<p>因为全局变量被局部变量覆盖了.虽然局部变量的scope还没赋值,但是已经在方法里&#8221;占&#8221;上位置了.</p>
+
+<p>但如果把局部变量的var删了,就会先输出全局变量后输出局部变量,因为没有var在方法里给局部变量&#8221;占&#8221;位置;</p>
+
+<h3>浮点数</h3>
+
+<pre><code>var a =.333
+var b = a * 5;
+alert(b);
+</code></pre>
+
+<p>得出的结果是 1.66499999999999999</p>
+
+<p>所以在js中判断浮点数是否相等 建议判断两者的差值是否小于一个足够的数(例如0.0000000000001)</p>
+
+<h3>字符串</h3>
+
+<p>js中没有字符类型变量 &ldquo;&#8221;与&#8217;&lsquo;一致</p>
+
+<pre><code>var s ="abcdefg"
+
+//b = "def"
+b = s.slice(3, -1);
+</code></pre>
+
+<h3>字符串的正则表达式方法中</h3>
+
+<ol>
+<li>match()返回匹配的字符串(数组或null),可加/g进行全局匹配多个</li>
+<li>search()返回匹配的索引值 单个</li>
+</ol>
+
+
+<h3>undefined 和null</h3>
+
+<pre><code>null == undefined //true
+
+null === undefined //false
+</code></pre>
+
+<p>undefined 是没设值</p>
+
+<p>null则是设定了为null值</p>
+
+<h3>运算符</h3>
+
+<pre><code>//逗号运算符 取最右返回值
+a = (b =5 , c = 7 , d =56) //a =56
+
+a = void(b =5 , c = 7 , d =56) //a = undefined
+</code></pre>
+
+<h3>typeof 和 instanceof</h3>
+
+<p>typeof 用来获得 实例类型 :</p>
+
+<pre><code>typeof("123"); //string
+</code></pre>
+
+<p>instanceof 判断变量是否为某类的实例</p>
+
+<pre><code>var a = [4,5];
+alert(a instanceof Array); //true
+</code></pre>
+
+<h3>语句</h3>
+
+<p>抛出异常</p>
+
+<pre><code>throw new Error("用户自定义异常"); //一般用于终止程序和返回错误提示是个不错的选择;
+
+try{
+
+}catch(e){
+    alert(e.message); // "用户自定义异常"
+}
+</code></pre>
+
+<p>for in</p>
+
+<pre><code>//这回输出浏览器的所有属性,做浏览器兼容之前可以考虑看看.
+for( prop_name in navigator){
+    document.wrti(prop_name + " : " + navigator[propname]);
+}   
+</code></pre>
+
+<p>跳出命名for</p>
+
+<pre><code>outer: 
+for(...){
+    for(...){
+        ...
+        continue outer;
+    }
+}
+</code></pre>
+
+<h3>函数</h3>
+
+<p>js 允许先调用函数 再定义函数</p>
+
+<h5>定义匿名函数</h5>
+
+<pre><code>var show_name = function(name){
+    alert(name);
+}
+
+show_name("K"); //K
+</code></pre>
+
+<p>这样的好处是什么,如果直接定义function 它实际上也是创建了一个对象</p>
+
+<h5>函数既对象</h5>
+
+<pre><code>var hello = function(){...};
+
+hello instanceof Function //true;
+
+hello instanceof Object //true;
+
+alert(heelo) //输出函数源代码
+</code></pre>
+
+<h5>调用函数方式的不同</h5>
+
+<ol>
+<li>直接调用函数 返回return的值或void</li>
+<li>new 函数 得到的都是对象 - -&hellip;&hellip;.</li>
+</ol>
+
+
+<h5>this关键字.</h5>
+
+<p>在函数中使用this.变量 该变量就是函数的实例变量,而非局部变量,无论它在哪里.</p>
+
+<p>函数可依附在类中.如没指定 则依附在winodw对象中</p>
+
+<pre><code>var hello =function(){...}
+
+window.hello();
+
+var p = {
+    wark: function(){...}
+}
+p.wark();
+</code></pre>
+
+<h5>函数中的变量有三种</h5>
+
+<pre><code>function Person(){
+    //局部变量 只能在函数里访问
+    var id ;
+
+    //实例属性 通过对象.访问
+    this.age ;
+
+    //类属性 通过Patient.name访问 与static类似
+    Person.name ;
+}
+</code></pre>
+
+<h5>js是一种动态语言,能随时给对象增加属性和方法</h5>
+
+<pre><code>function Student(){ };
+
+var student =new Student();
+//动态增加name属性
+student.name = 'K';
+alert(sutdent.name) //K
+
+Student.age =22 ;
+alert(Student.age); //22 类属性也是可以动态添加的
+</code></pre>
+
+<h6>调用函数的三种方式</h6>
+
+<ol>
+<li><p>直接调用</p>
+
+<pre><code> windows.alert();
+ //or
+ alert();
+</code></pre></li>
+<li><p>call()调用</p>
+
+<p> 作用:动态地传入一个函数引用</p>
+
+<pre><code> var each = function(array,fn){
+     for(var index in arrary){
+         //null表示以window为调用者fn函数
+         fn.call(null,index,arrary[index]);
+     }
+ }
+
+ each([4,20,3] , function(index ,ele){
+     alert("第 " + index "个元素是 : " + ele);
+ });
+</code></pre>
+
+<p> call()调用函数语法为:<code>函数引用.call(调用者,参数1,参数2...)</code></p>
+
+<p> 直接调用函数语法为:<code>调用者.函数(参数1,参数2 ...)</code> = <code>函数.call(调用者,参数1,参数2 ...)</code></p></li>
+<li><p>apply()调用</p>
+
+<p> apply和()call()基本相似,区别如下:</p>
+
+<ol>
+<li>通过call()调用函数时,括号必须详细列出每个参数</li>
+<li><p>通过apply()动态地调用函数时,可以在括号中以<code>arguments</code>来代表所有参数</p>
+
+<pre><code> var myfun = function (a , b){
+     alert(a + "  " +b);
+ }
+
+ myfun.call(window ,12 ,23); //12 23;
+
+ myfun.apply(window ,[20 , 39]); //20 39
+
+ var example = function (num1 ,num2){
+     //直接调用arguments代表调用者(example,this代表example)时的传入的所有参数
+     myfun.apply(this,arguments); 
+ }
+ example(20,40) //20 40 
+</code></pre></li>
+</ol>
+</li>
+</ol>
+
+
+<h5>函数的独立性</h5>
+
+<p>在函数A中可以定义函数B,但是函数B还是独立于函数A</p>
+
+<pre><code>function Person(name){
+    this.name = name;
+
+    this.info = function(){
+        alert(this.name);
+    }
+}   
+
+var person =new Person('K');
+person.info(); //K
+var name = 'K_window';
+
+//由于window为调用者 ,this.name访问的是window.name
+p.info.call(window); //K_window
+</code></pre>
+
+<p>来爽一发猫学狗叫?.</p>
+
+<pre><code>function Dog(name,bark){
+    this.name = name;
+    this.bark = bark;
+    this.info =function(){
+        alert(this.name + "  " + this.bark);
+    }
+}
+
+function Cat(name){
+    this.name =name;
+}   
+
+var dog = new Dog("K","汪汪!");
+var cat = new Cat("K_2");
+dog.info.call(cat); //K_2 undefined
+</code></pre>
+
+<h5>参数传递方式</h5>
+
+<p>和JAVA一样 都是值传递拉~.</p>
+
+<p>基本类型</p>
+
+<pre><code>function change(arg){
+    arg =10 ;
+    alert(arg);
+}
+var x = 5;
+alert(x); //5
+change(x); //10
+alert(x); //5
+</code></pre>
+
+<p>复合类型</p>
+
+<pre><code>function change(person){
+    person.age = 10;
+    alert(person.age);
+    person = null;
+}
+
+var person = {age : 5};
+alert(person.age); //5
+change(person); //10
+alert(person.age); // 10
+alert(person); // []object Object]
+</code></pre>
+
+<p>复合类型的传递为值传递,原person和参数person指向同一javascript对象,所以当改变age的时候,是在改变javascript对象的age,但是参数person赋值为null,原person并无改变.</p>
+
+<h6>空参数</h6>
+
+<pre><code>function text(person){
+    alert( typeof parson);
+}
+
+text(); //undefined
+</code></pre>
+
+<p>所以对于弱类型,方法重载是无作用的,因为js会把空参数当做undefined传递进去;</p>
+
+<p>同名函数,后面出现的会覆盖前面的,无论参数个数是多少.</p>
+
+<h5>对象和关联数组</h5>
+
+<p>javascript和Map有点类似,当key为对象,value为函数,该该函数就是对象的方法,当key为对象,value为基本类型,则该基本类型为对象的属性.(以上为便于理解,切勿细琢)所以访问属性时,可以obj.propName也可以obj[propName].</p>
+
+<p>但有时候我们只能用obj[propName],因为.propName不能把propName当做变量处理,而是把他当成&#8217;propName&#8217;字符串</p>
+
+<pre><code>function Person(name){
+    this.name =name;
+    this.info = function(){
+        alert(K);
+    }
+}
+
+var person = new Person("K");
+//遍历person属性
+for (propName in person){
+    alert(p[propName]);//alet K info源代码 假如此处用p.propName则undefined,因为Person无'propName'变量.
+}
+</code></pre>
+
+<h6>继承和prototype</h6>
+
+<p>在一个类(函数)中定义一个函数会导致</p>
+
+<ol>
+<li>性能低下:每次new一个类 都会生成一个函数</li>
+<li><p>函数中若引用类的局部变量会产生闭包 导致局部变量一直存在</p>
+
+<pre><code> function Person(){
+     var local = "局部变量"
+     this.info = function(){
+         //产生闭包
+         alert(local);
+     }
+ }
+
+ var person = new Person();
+ person.ifno(); // 局部变量  
+</code></pre></li>
+</ol>
+
+
+<p>解决方案:prototype</p>
+
+<p>增加了prototype属性的类可视为继承了原先的类(伪继承)</p>
+
+<pre><code>function Person(){...}
+
+var person = new Person();
+
+//person.wark(); 程序报错wark不存在
+Person.prototype.wark = function(){...}
+
+person.wark(); //ok
+</code></pre>
+
+<p>在prototype之前实例化的类会具有wark方法吗? 有的,因为prototype这样并不会产生一个新的类,而是直接动态的往Person里加函数.</p>
+
+<h3>创建对象三种方式</h3>
+
+<pre><code>//(单身汪别说我不教你)
+</code></pre>
+
+<ol>
+<li><p>new关键字调用构造器创建对象</p>
+
+<pre><code> function Person(name){...}
+ var person_1 = new Person();
+ var person_2 = new Person('K'); //js不存在方法重载,空参数undefined顶替
+</code></pre></li>
+<li><p>使用Oject直接创建对象</p>
+
+<pre><code> var my_obj = new Object();
+ my_ojb.name = 'K';
+ my_obj.handsome = function(){...}
+
+ function text(){...}
+ my_obj.text = text;//不要添加(),不然会认为是调用方法
+</code></pre></li>
+<li><p>JSON创建对象</p>
+
+<pre><code> ver person = {
+     name : 'K',
+     school : ['ChangAn','TianJin'],
+     girl_friends :[
+         {
+             name : 'Haski',
+             age : 11
+         },
+         {
+             name : 'Samoyed',
+             age : '8'
+         }
+     ]
+ }
+</code></pre></li>
+</ol>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[系统分析师UML项目实战书籍阅读总结]]></title>
@@ -392,9 +844,9 @@
   
   <entry>
     <title type="html"><![CDATA[Laraval 入门]]></title>
-    <link href="http://mzkmzk.github.io/blog/2015/09/24/Lavarel-start/"/>
+    <link href="http://mzkmzk.github.io/blog/2015/09/24/Laravel-start/"/>
     <updated>2015-09-24T11:37:40+08:00</updated>
-    <id>http://mzkmzk.github.io/blog/2015/09/24/Lavarel-start</id>
+    <id>http://mzkmzk.github.io/blog/2015/09/24/Laravel-start</id>
     <content type="html"><![CDATA[<!--more-->
 
 
@@ -552,6 +1004,36 @@ return view('User.Login');
 </code></pre></li>
 </ol>
 
+
+<h3>快速查找SQL语句</h3>
+
+<pre><code>Route::get('/test-sql', function() {
+
+DB::enableQueryLog();
+$text = App\Models\Sample_Model::find(647)
+    -&gt;patient()
+    -&gt;Paginate(15)
+    -&gt;toJson();
+
+return response()-&gt;json(DB::getQueryLog());
+});
+</code></pre>
+
+<p>eg:   <br/>
+参考<a href="http://laravel.so/tricks/3c8bda45c15f494eaeba1690556aa40a">http://laravel.so/tricks/3c8bda45c15f494eaeba1690556aa40a</a></p>
+
+<h3>记录SQL到 日志</h3>
+
+<p><a href="http://laravel.so/tricks/6086494cbfde9950e9118b1dad6270d5">http://laravel.so/tricks/6086494cbfde9950e9118b1dad6270d5</a></p>
+
+<h3>Laravel级联查询</h3>
+
+<p>会调用patient()方法</p>
+
+<pre><code>Sample_Model::with('patient');
+</code></pre>
+
+<p>with属于懒加载..一般是最后需要用到的时候才执行</p>
 ]]></content>
   </entry>
   
@@ -1035,31 +1517,6 @@ aria-*, role
 </code></pre></li>
 </ol>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Axure入门]]></title>
-    <link href="http://mzkmzk.github.io/blog/2015/07/29/Axure_start/"/>
-    <updated>2015-07-29T11:37:40+08:00</updated>
-    <id>http://mzkmzk.github.io/blog/2015/07/29/Axure_start</id>
-    <content type="html"><![CDATA[<!--more-->
-
-
-<h3>0x00 安装 &amp;&amp; 破解 &amp;&amp; 汉化</h3>
-
-<p><a href="http://www.woshipm.com/xiazai/58714.html">http://www.woshipm.com/xiazai/58714.html</a></p>
-
-<h3>Demo</h3>
-
-<p><a href="http://www.douban.com/group/topic/39697467/">http://www.douban.com/group/topic/39697467/</a>
-<a href="http://blog.sina.com.cn/s/blog_7256fe8f0101b29t.html">http://blog.sina.com.cn/s/blog_7256fe8f0101b29t.html</a></p>
-
-<p>侧滑和弹窗效果实现记录</p>
-
-<h3>教程</h3>
-
-<p><a href="http://www.woshipm.com/rp/39208.html">http://www.woshipm.com/rp/39208.html</a></p>
 ]]></content>
   </entry>
   

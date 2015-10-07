@@ -447,6 +447,36 @@ return view('User.Login');
 </code></pre></li>
 </ol>
 
+
+<h3>快速查找SQL语句</h3>
+
+<pre><code>Route::get('/test-sql', function() {
+
+DB::enableQueryLog();
+$text = App\Models\Sample_Model::find(647)
+    -&gt;patient()
+    -&gt;Paginate(15)
+    -&gt;toJson();
+
+return response()-&gt;json(DB::getQueryLog());
+});
+</code></pre>
+
+<p>eg:   <br/>
+参考<a href="http://laravel.so/tricks/3c8bda45c15f494eaeba1690556aa40a">http://laravel.so/tricks/3c8bda45c15f494eaeba1690556aa40a</a></p>
+
+<h3>记录SQL到 日志</h3>
+
+<p><a href="http://laravel.so/tricks/6086494cbfde9950e9118b1dad6270d5">http://laravel.so/tricks/6086494cbfde9950e9118b1dad6270d5</a></p>
+
+<h3>Laravel级联查询</h3>
+
+<p>会调用patient()方法</p>
+
+<pre><code>Sample_Model::with('patient');
+</code></pre>
+
+<p>with属于懒加载..一般是最后需要用到的时候才执行</p>
 </div>
 
 
@@ -499,7 +529,7 @@ return view('User.Login');
     <div id="comments" aria-live="polite">
 
 <!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="Laraval 入门" data-title="Laraval 入门" data-url="/blog/2015/09/24/Lavarel-start/"></div>
+	<div class="ds-thread" data-thread-key="Laraval 入门" data-title="Laraval 入门" data-url="/blog/2015/09/24/Laravel-start/"></div>
 <!-- 多说评论框 end -->
 <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 <script type="text/javascript">

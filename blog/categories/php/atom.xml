@@ -4,7 +4,7 @@
   <title><![CDATA[Category: php | K]]></title>
   <link href="http://mzkmzk.github.io/blog/categories/php/atom.xml" rel="self"/>
   <link href="http://mzkmzk.github.io/"/>
-  <updated>2015-10-05T00:06:37+08:00</updated>
+  <updated>2015-10-07T19:49:18+08:00</updated>
   <id>http://mzkmzk.github.io/</id>
   <author>
     <name><![CDATA[K]]></name>
@@ -52,9 +52,9 @@
   
   <entry>
     <title type="html"><![CDATA[Laraval 入门]]></title>
-    <link href="http://mzkmzk.github.io/blog/2015/09/24/Lavarel-start/"/>
+    <link href="http://mzkmzk.github.io/blog/2015/09/24/Laravel-start/"/>
     <updated>2015-09-24T11:37:40+08:00</updated>
-    <id>http://mzkmzk.github.io/blog/2015/09/24/Lavarel-start</id>
+    <id>http://mzkmzk.github.io/blog/2015/09/24/Laravel-start</id>
     <content type="html"><![CDATA[<!--more-->
 
 
@@ -218,6 +218,36 @@ return view('User.Login');
 </code></pre></li>
 </ol>
 
+
+<h3>快速查找SQL语句</h3>
+
+<pre><code>Route::get('/test-sql', function() {
+
+DB::enableQueryLog();
+$text = App\Models\Sample_Model::find(647)
+    -&gt;patient()
+    -&gt;Paginate(15)
+    -&gt;toJson();
+
+return response()-&gt;json(DB::getQueryLog());
+});
+</code></pre>
+
+<p>eg:   <br/>
+参考<a href="http://laravel.so/tricks/3c8bda45c15f494eaeba1690556aa40a">http://laravel.so/tricks/3c8bda45c15f494eaeba1690556aa40a</a></p>
+
+<h3>记录SQL到 日志</h3>
+
+<p><a href="http://laravel.so/tricks/6086494cbfde9950e9118b1dad6270d5">http://laravel.so/tricks/6086494cbfde9950e9118b1dad6270d5</a></p>
+
+<h3>Laravel级联查询</h3>
+
+<p>会调用patient()方法</p>
+
+<pre><code>Sample_Model::with('patient');
+</code></pre>
+
+<p>with属于懒加载..一般是最后需要用到的时候才执行</p>
 ]]></content>
   </entry>
   
