@@ -7,9 +7,9 @@
 	<meta name="author" content="K">
 
 	
-	<meta name="description" content="1. JavaScript语法 1.1执行js代码 javascript:alert(&lsquo;执行js&rsquo;);
-&lt;script&gt;alert("执行js")&lt;/script&gt; 1.2变量赋值 var a = 1;//显式
-a =1; //隐式 1. &hellip;">
+	<meta name="description" content="1. JavaScript语法 1.1 执行js代码 javascript:alert(&lsquo;执行js&rsquo;);
+&lt;script&gt;alert("执行js")&lt;/script&gt; 1.2 变量赋值 var a = 1;//显式
+a =1; //隐式 1.3 &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	<meta name="baidu-site-verification" content="HWyzFajtAX" />
@@ -297,7 +297,7 @@ var _hmt = _hmt || [];
 
 <h2>1. JavaScript语法</h2>
 
-<h3>1.1执行js代码</h3>
+<h3>1.1 执行js代码</h3>
 
 <ol>
 <li>javascript:alert(&lsquo;执行js&rsquo;);</li>
@@ -305,13 +305,13 @@ var _hmt = _hmt || [];
 </ol>
 
 
-<h3>1.2变量赋值</h3>
+<h3>1.2 变量赋值</h3>
 
 <pre><code>var a = 1;//显式
 a =1; //隐式
 </code></pre>
 
-<h3>1.3全局变量与局部变量</h3>
+<h3>1.3 全局变量与局部变量</h3>
 
 <pre><code>...
 var scope = "全局变量";
@@ -328,7 +328,7 @@ function test(){
 
 <p>但如果把局部变量的var删了,就会先输出全局变量后输出局部变量,因为没有var在方法里给局部变量&#8221;占&#8221;位置;</p>
 
-<h3>1.4浮点数</h3>
+<h3>1.4 浮点数</h3>
 
 <pre><code>var a =.333
 var b = a * 5;
@@ -339,7 +339,7 @@ alert(b);
 
 <p>所以在js中判断浮点数是否相等 建议判断两者的差值是否小于一个足够的数(例如0.0000000000001)</p>
 
-<h3>1.5字符串</h3>
+<h3>1.5 字符串</h3>
 
 <p>js中没有字符类型变量 &ldquo;&#8221;与&#8217;&lsquo;一致</p>
 
@@ -349,7 +349,7 @@ alert(b);
 b = s.slice(3, -1);
 </code></pre>
 
-<h3>1.6字符串的正则表达式方法中</h3>
+<h3>1.6 字符串的正则表达式方法中</h3>
 
 <ol>
 <li>match()返回匹配的字符串(数组或null),可加/g进行全局匹配多个</li>
@@ -357,7 +357,7 @@ b = s.slice(3, -1);
 </ol>
 
 
-<h3>1.7undefined 和null</h3>
+<h3>1.7 undefined和null</h3>
 
 <pre><code>null == undefined //true
 
@@ -368,7 +368,7 @@ null === undefined //false
 
 <p>null则是设定了为null值</p>
 
-<h3>1.8运算符</h3>
+<h3>1.8 运算符</h3>
 
 <pre><code>//逗号运算符 取最右返回值
 a = (b =5 , c = 7 , d =56) //a =56
@@ -376,7 +376,7 @@ a = (b =5 , c = 7 , d =56) //a =56
 a = void(b =5 , c = 7 , d =56) //a = undefined
 </code></pre>
 
-<h3>1.9typeof 和 instanceof</h3>
+<h3>1.9 typeof和instanceof</h3>
 
 <p>typeof 用来获得 实例类型 :</p>
 
@@ -389,7 +389,7 @@ a = void(b =5 , c = 7 , d =56) //a = undefined
 alert(a instanceof Array); //true
 </code></pre>
 
-<h3>1.10语句</h3>
+<h3>1.10 语句</h3>
 
 <p>抛出异常</p>
 
@@ -421,11 +421,11 @@ for(...){
 }
 </code></pre>
 
-<h3>1.11函数</h3>
+<h3>1.11 函数</h3>
 
 <p>js 允许先调用函数 再定义函数</p>
 
-<h4>1.11.1定义匿名函数</h4>
+<h4>1.11.1 定义匿名函数</h4>
 
 <pre><code>var show_name = function(name){
     alert(name);
@@ -436,7 +436,7 @@ show_name("K"); //K
 
 <p>这样的好处是什么,如果直接定义function 它实际上也是创建了一个对象</p>
 
-<h4>1.11.2函数既对象</h4>
+<h4>1.11.2 函数既对象</h4>
 
 <pre><code>var hello = function(){...};
 
@@ -447,7 +447,7 @@ hello instanceof Object //true;
 alert(heelo) //输出函数源代码
 </code></pre>
 
-<h4>1.11.3调用函数方式的不同</h4>
+<h4>1.11.3 调用函数方式的不同</h4>
 
 <ol>
 <li>直接调用函数 返回return的值或void</li>
@@ -455,7 +455,7 @@ alert(heelo) //输出函数源代码
 </ol>
 
 
-<h4>1.11.4this关键字.</h4>
+<h4>1.11.4 this关键字.</h4>
 
 <p>在函数中使用this.变量 该变量就是函数的实例变量,而非局部变量,无论它在哪里.</p>
 
@@ -471,7 +471,7 @@ var p = {
 p.wark();
 </code></pre>
 
-<h4>1.11.5函数中的变量有三种</h4>
+<h4>1.11.5 函数中的变量有三种</h4>
 
 <pre><code>function Person(){
     //局部变量 只能在函数里访问
@@ -485,7 +485,7 @@ p.wark();
 }
 </code></pre>
 
-<h4>1.11.6js是一种动态语言,能随时给对象增加属性和方法</h4>
+<h4>1.11.6 js是一种动态语言,能随时给对象增加属性和方法</h4>
 
 <pre><code>function Student(){ };
 
@@ -498,7 +498,7 @@ Student.age =22 ;
 alert(Student.age); //22 类属性也是可以动态添加的
 </code></pre>
 
-<h4>1.11.7调用函数的三种方式</h4>
+<h4>1.11.7 调用函数的三种方式</h4>
 
 <ol>
 <li><p>直接调用</p>
@@ -553,7 +553,7 @@ alert(Student.age); //22 类属性也是可以动态添加的
 </ol>
 
 
-<h4>1.11.8函数的独立性</h4>
+<h4>1.11.8 函数的独立性</h4>
 
 <p>在函数A中可以定义函数B,但是函数B还是独立于函数A</p>
 
@@ -592,7 +592,7 @@ var cat = new Cat("K_2");
 dog.info.call(cat); //K_2 undefined
 </code></pre>
 
-<h4>1.11.9参数传递方式</h4>
+<h4>1.11.9 参数传递方式</h4>
 
 <p>和JAVA一样 都是值传递拉~.</p>
 
@@ -625,7 +625,7 @@ alert(person); // []object Object]
 
 <p>复合类型的传递为值传递,原person和参数person指向同一javascript对象,所以当改变age的时候,是在改变javascript对象的age,但是参数person赋值为null,原person并无改变.</p>
 
-<h4>1.11.10空参数</h4>
+<h4>1.11.10 空参数</h4>
 
 <pre><code>function text(person){
     alert( typeof parson);
@@ -638,7 +638,7 @@ text(); //undefined
 
 <p>同名函数,后面出现的会覆盖前面的,无论参数个数是多少.</p>
 
-<h4>1.11.11对象和关联数组</h4>
+<h4>1.11.11 对象和关联数组</h4>
 
 <p>javascript和Map有点类似,当key为对象,value为函数,该该函数就是对象的方法,当key为对象,value为基本类型,则该基本类型为对象的属性.(以上为便于理解,切勿细琢)所以访问属性时,可以obj.propName也可以obj[propName].</p>
 
@@ -658,7 +658,7 @@ for (propName in person){
 }
 </code></pre>
 
-<h4>1.11.12继承和prototype</h4>
+<h4>1.11.12 继承和prototype</h4>
 
 <p>在一个类(函数)中定义一个函数会导致</p>
 
@@ -696,7 +696,7 @@ person.wark(); //ok
 
 <p>在prototype之前实例化的类会具有wark方法吗? 有的,因为prototype这样并不会产生一个新的类,而是直接动态的往Person里加函数.</p>
 
-<h3>1.12创建对象三种方式</h3>
+<h3>1.12 创建对象三种方式</h3>
 
 <pre><code>//(单身汪别说我不教你)
 </code></pre>
@@ -737,7 +737,7 @@ person.wark(); //ok
 </ol>
 
 
-<h3>DOM编程</h3>
+<h3>2 DOM编程</h3>
 </div>
 
 
