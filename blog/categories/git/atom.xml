@@ -4,7 +4,7 @@
   <title><![CDATA[Category: git | K]]></title>
   <link href="http://mzkmzk.github.io/blog/categories/git/atom.xml" rel="self"/>
   <link href="http://mzkmzk.github.io/"/>
-  <updated>2015-10-07T20:00:18+08:00</updated>
+  <updated>2015-10-15T23:17:07+08:00</updated>
   <id>http://mzkmzk.github.io/</id>
   <author>
     <name><![CDATA[K]]></name>
@@ -102,7 +102,7 @@ git push origin 分支名称
 /build
 </code></pre>
 
-<h3>设置提交人喝邮箱</h3>
+<h3>设置提交人和邮箱</h3>
 
 <p>仅作内容提醒所用</p>
 

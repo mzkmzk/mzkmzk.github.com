@@ -132,6 +132,8 @@ var _hmt = _hmt || [];
 
 <li><a href="/blog/categories/project">project</a></li>
 
+<li><a href="/blog/categories/服务器">服务器</a></li>
+
 <li><a href="/blog/categories/">About me</a></li>
 </ul>
 </div>
@@ -252,6 +254,8 @@ var _hmt = _hmt || [];
 <li><a href="/blog/categories/develop">develop</a></li>
 
 <li><a href="/blog/categories/project">project</a></li>
+
+<li><a href="/blog/categories/服务器">服务器</a></li>
 
 <li><a href="/blog/categories/">About me</a></li>
 </ul>
@@ -477,6 +481,71 @@ return response()-&gt;json(DB::getQueryLog());
 </code></pre>
 
 <p>with属于懒加载..一般是最后需要用到的时候才执行</p>
+
+<h3>with记载上层数据时,不会显示被删除的数据</h3>
+
+<p>更改前</p>
+
+<pre><code>class Patient_Controller extends Controller{
+
+public function query(Request $request){
+
+$result = Patient_Model::withTrashed();
+    -&gt;orderBy("updated_at","desc")
+    -&gt;Paginate(15)
+    -&gt;toJson();
+
+   return $result;
+}
+//更改前执行的sql
+select count(*) as aggregate from `samples`
+select * from `samples` order by `updated_at` desc limit 1 offset 0
+select * from `patients` where  `patients`.`deleted_at` is null and `patients`.`code` in ('P-SZ150917134BrC')
+</code></pre>
+
+<p>更改后</p>
+
+<pre><code>public function query(Request $request){
+
+  $result = Sample_Model::with(['patient' =&gt; function($q) {
+    $q-&gt;withTrashed();
+}])
+-&gt;withTrashed()
+-&gt;orderBy("updated_at","desc")
+-&gt;Paginate(1)
+-&gt;toJson();
+
+return $result;
+}
+
+//更改后执行的sql是
+select count(*) as aggregate from `samples`
+select * from `samples` order by `updated_at` desc limit 1 offset 0
+select * from `patients` where `patients`.`code` in ('P-SZ150917134BrC')
+</code></pre>
+
+<p>ok with 函数究竟是神马鬼?来看下源代码</p>
+
+<pre><code>  /**
+ * Begin querying a model with eager loading.
+ *
+ * @param  array|string  $relations
+ * @return \Illuminate\Database\Eloquent\Builder|static
+ */
+public static function with($relations)
+{
+    if (is_string($relations)) {
+        $relations = func_get_args();
+    }
+
+    $instance = new static;
+
+    return $instance-&gt;newQuery()-&gt;with($relations);
+}   
+</code></pre>
+
+<p>首先他是懒加载,需要用的时候才加载,$relations可以是string也可以是数组,string的话就直接调用model的函数,数组的话,就是后面可以加判定条件.   <br/>
+参考链接<a href="http://stackoverflow.com/questions/33006470/laravel-query-delete-relationships">http://stackoverflow.com/questions/33006470/laravel-query-delete-relationships</a></p>
 </div>
 
 

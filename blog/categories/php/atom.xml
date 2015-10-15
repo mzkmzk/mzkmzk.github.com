@@ -4,7 +4,7 @@
   <title><![CDATA[Category: php | K]]></title>
   <link href="http://mzkmzk.github.io/blog/categories/php/atom.xml" rel="self"/>
   <link href="http://mzkmzk.github.io/"/>
-  <updated>2015-10-07T20:00:18+08:00</updated>
+  <updated>2015-10-15T23:17:07+08:00</updated>
   <id>http://mzkmzk.github.io/</id>
   <author>
     <name><![CDATA[K]]></name>
@@ -12,6 +12,109 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Wordpress入门]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/10/14/wordpress_study/"/>
+    <updated>2015-10-14T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/10/14/wordpress_study</id>
+    <content type="html"><![CDATA[<!--more-->
+
+
+<h1>1 需要实现的功能</h1>
+
+<ol>
+<li>升级wordpress</li>
+<li>如何写一套自己的主题</li>
+<li>wordpress如何使用React</li>
+<li>迁移wordpress</li>
+</ol>
+
+
+<h1>4 迁移wordpress</h1>
+
+<ol>
+<li>导入数据库</li>
+<li>在wp-login.php配置新的数据库信息</li>
+<li>在pdf-options填写siteurl为当前url</li>
+</ol>
+
+
+<h1>5 升级wordpress</h1>
+
+<p>自动升级失败->手动点击更新失败</p>
+
+<p>自己去下载覆盖</p>
+
+<ol>
+<li>删除wp-admin和wp-includes</li>
+<li>其余覆盖于合并</li>
+</ol>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Laravel 命令]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/10/12/laravel-order/"/>
+    <updated>2015-10-12T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/10/12/laravel-order</id>
+    <content type="html"><![CDATA[<!--more-->
+
+
+<ol>
+<li><p>命令行爽Eloquent</p>
+
+<pre><code> php artisan tinker
+</code></pre>
+
+<p> 这样爽的好处?可以看到返回的类型和执行sql</p>
+
+<pre><code> App\Models\Ready_Sample_Model::all();
+ select * from `ready_samples`
+ =&gt; Illuminate\Database\Eloquent\Collection {#895
+ all: [
+App\Models\Ready_Sample_Model {#896
+  id: 2646,
+  ....
+</code></pre></li>
+</ol>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Laravel Eloquent]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/10/05/laravel-eloquent/"/>
+    <updated>2015-10-05T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/10/05/laravel-eloquent</id>
+    <content type="html"><![CDATA[<!--more-->
+
+
+<p>命令行爽Eloquent</p>
+
+<pre><code>cd 项目跟目录
+php artisan tinker
+</code></pre>
+
+<p>这样爽的好处?可以看到返回的类型和执行sql</p>
+
+<pre><code>App\Models\Ready_Sample_Model::all();
+select * from `ready_samples`
+=&gt; Illuminate\Database\Eloquent\Collection {#895
+ all: [
+   App\Models\Ready_Sample_Model {#896
+     id: 2646,
+     ....
+</code></pre>
+
+<p>Model排序</p>
+
+<pre><code>Ready_Sample_Model::all()-&gt;sortByDesc('updated_at')
+Ready_Sample_Model::all()-&gt;sort('updated_at')
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[PHP工具]]></title>
@@ -47,271 +150,6 @@
 
 <pre><code>&lt;input type="hidden" name="_token" value=""&gt;
 </code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Laraval 入门]]></title>
-    <link href="http://mzkmzk.github.io/blog/2015/09/24/Laravel-start/"/>
-    <updated>2015-09-24T11:37:40+08:00</updated>
-    <id>http://mzkmzk.github.io/blog/2015/09/24/Laravel-start</id>
-    <content type="html"><![CDATA[<!--more-->
-
-
-<h2>配置与安装</h2>
-
-<p>需要条件:</p>
-
-<pre><code>- PHP &gt;= 5.5.9 - OpenSSL PHP 扩展 - PDO PHP 扩展 - Mbstring PHP 扩展 - Tokenizer PHP 扩展
-</code></pre>
-
-<p>查看方式:<code>phpinfo();</code></p>
-
-<p>配置composer.</p>
-
-<p>配置<code>~/.composer/vendor/bin</code>到PATH</p>
-
-<p>安装Laravel</p>
-
-<pre><code>sudo composer global require "laravel/installer=~1.1"
-</code></pre>
-
-<p>之后就<code>laravel new blog</code> 爽一爽</p>
-
-<p>/config里都是配置文件 需要仔细看看.</p>
-
-<p>配置/storage和bootstrap/cache服务器写权限</p>
-
-<pre><code> chmod -R  777   storage/
- chmod -R  777   bootstrap/cache
-</code></pre>
-
-<p>ok,把项目放进apache路径 然后</p>
-
-<pre><code>http://localhost/laravel/public/
-</code></pre>
-
-<p>就会看到Laravel 5字样了</p>
-
-<p>我们自己试一试弄一个页面吧</p>
-
-<p>打开<code>/app/Http/routes.php</code>,设置Url跳转和传递title参数</p>
-
-<pre><code>Route::get('/hi',function(){
-return View::make('hi')-&gt;with("title","Hello Word");
-});
-</code></pre>
-
-<p>打开<code>/resources/views</code>创建hi.blade.php</p>
-
-<pre><code>@include('header')
-&lt;h1&gt;&lt;/h1&gt;
-&lt;p&gt;one Laravel&lt;/p&gt;
-</code></pre>
-
-<p>再在其目录下创建header.blade.php</p>
-
-<pre><code>&lt;p&gt;header&lt;/p&gt;
-</code></pre>
-
-<p>ok 访问url<code>http://localhost/laravel/public/index.php/hi</code></p>
-
-<p>如何去掉可恶的index.php</p>
-
-<ol>
-<li>设置apache支持.htaccess,打开apache http.conf,搜索<code>AllowOverride</code> 把None都改为All</li>
-<li>设置加载mod_rewrite模块,打开apache http.conf,搜索<code>mod_rewrite</code>,把前面的#去掉(校验方法-php_info()),重启下apache哦~.</li>
-<li><p>设置Laravel的.htaccess,把下面的内容代替之前的内容.</p>
-
-<pre><code> Options +FollowSymLinks
- RewriteEngine On
-
- RewriteCond %{REQUEST_FILENAME} !-d
- RewriteCond %{REQUEST_FILENAME} !-f
- RewriteRule ^ index.php [L]
-</code></pre></li>
-</ol>
-
-
-<p>ok<code>http://localhost/laravel/public/hi</code>爽一发吧.</p>
-
-<p>参考链接<a href="http://oublog.cn/u_58/">http://oublog.cn/u_58/</a></p>
-
-<p>环境配置</p>
-
-<pre><code>//获取系统配置
-config('app.timezone')
-//设置系统配置
-config(['app.timezone' =&gt; 'Asia/Shanghai'])
-</code></pre>
-
-<h3>路由</h3>
-
-<p>访问Controllers</p>
-
-<pre><code>Route::get('/Text_Laravel/Text_DB','Text_Laravel.Text_DB@index');
-</code></pre>
-
-<p>访问View</p>
-
-<pre><code>Route::get('/User/Login',function () {
-return view('User.Login');
-});
-</code></pre>
-
-<h3>数据库配制</h3>
-
-<p>配置文件<code>config/database.php</code></p>
-
-<p>Laravel还可以配置读写两个不同的ip地址.</p>
-
-<pre><code>'mysql' =&gt; [
-'read' =&gt; [
-    'host' =&gt; '192.168.1.1',
-],
-'write' =&gt; [
-    'host' =&gt; '196.168.1.2'
-],
-'driver'    =&gt; 'mysql',
-'database'  =&gt; 'database',
-'username'  =&gt; 'root',
-'password'  =&gt; '',
-'charset'   =&gt; 'utf8',
-'collation' =&gt; 'utf8_unicode_ci',
-'prefix'    =&gt; '',
-],
-</code></pre>
-
-<p>光配置这个还不行 还要去配置.env ? 难道.env是通过config实时生成的?</p>
-
-<h2>阅读API文档</h2>
-
-<p><a href="http://www.golaravel.com/laravel/docs/5.1/">http://www.golaravel.com/laravel/docs/5.1/</a></p>
-
-<h3>routing</h3>
-
-<p><a href="http://laravel.com/docs/5.1/routing">http://laravel.com/docs/5.1/routing</a></p>
-
-<p>路由配置在<code>app/Http/routes.php</code></p>
-
-<p>先来看下简单的配置,get,post请求,还有match,any匹配多种请求,还有通过url传递参数(参数不能包含<code>-</code>),</p>
-
-<h2>应用中碰到的应用</h2>
-
-<h3>获取路径</h3>
-
-<p>获取相对于目录的绝对路径</p>
-
-<pre><code>
-</code></pre>
-
-<p>详见<a href="http://www.golaravel.com/laravel/docs/5.1/helpers/#paths">http://www.golaravel.com/laravel/docs/5.1/helpers/#paths</a></p>
-
-<ol>
-<li><p>获取网络路径</p>
-
-<pre><code>     
-</code></pre></li>
-<li><p>关闭CSRF,<code>App\Http;\Kernel</code>,注释</p>
-
-<pre><code>  // \App\Http\Middleware\VerifyCsrfToken::class,
-</code></pre></li>
-</ol>
-
-
-<h3>快速查找SQL语句</h3>
-
-<pre><code>Route::get('/test-sql', function() {
-
-DB::enableQueryLog();
-$text = App\Models\Sample_Model::find(647)
-    -&gt;patient()
-    -&gt;Paginate(15)
-    -&gt;toJson();
-
-return response()-&gt;json(DB::getQueryLog());
-});
-</code></pre>
-
-<p>eg:   <br/>
-参考<a href="http://laravel.so/tricks/3c8bda45c15f494eaeba1690556aa40a">http://laravel.so/tricks/3c8bda45c15f494eaeba1690556aa40a</a></p>
-
-<h3>记录SQL到 日志</h3>
-
-<p><a href="http://laravel.so/tricks/6086494cbfde9950e9118b1dad6270d5">http://laravel.so/tricks/6086494cbfde9950e9118b1dad6270d5</a></p>
-
-<h3>Laravel级联查询</h3>
-
-<p>会调用patient()方法</p>
-
-<pre><code>Sample_Model::with('patient');
-</code></pre>
-
-<p>with属于懒加载..一般是最后需要用到的时候才执行</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[phpUnit 入门]]></title>
-    <link href="http://mzkmzk.github.io/blog/2015/09/16/phpUnit_start/"/>
-    <updated>2015-09-16T11:37:40+08:00</updated>
-    <id>http://mzkmzk.github.io/blog/2015/09/16/phpUnit_start</id>
-    <content type="html"><![CDATA[<h3>参考链接</h3>
-
-<p>高大上的API<a href="https://phpunit.de/manual/current/zh_cn/">https://phpunit.de/manual/current/zh_cn/</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[php Composer 入门]]></title>
-    <link href="http://mzkmzk.github.io/blog/2015/09/16/php-composer/"/>
-    <updated>2015-09-16T11:37:40+08:00</updated>
-    <id>http://mzkmzk.github.io/blog/2015/09/16/php-composer</id>
-    <content type="html"><![CDATA[<h3>安装</h3>
-
-<pre><code>curl -sS https://getcomposer.org/installer | php
-sudo mv ~/Learning/php/Composer/composer.phar  /usr/local/bin/composer
-composer //即可
-</code></pre>
-
-<h3>安装phpUnit</h3>
-
-<p>在项目下新建<code>composer.json</code>,配置号需要的安装包</p>
-
-<pre><code>{
-    "require-dev": {
-        "phpunit/phpunit-selenium": "&gt;=1.2"
-    }
-}
-</code></pre>
-
-<p>安装</p>
-
-<pre><code>cd 项目目录
-composer.phar install
-
-//一开始是这样的
-Loading composer repositories with package information
-Installing dependencies (including require-dev)
-Failed to decode response: zlib_decode(): data error
-Retrying with degraded mode, check https://getcomposer.org/doc/articles/troubleshooting.md#degraded-mode for more info
-
-//后面再等等好了
-</code></pre>
-
-<h3>设置全局Composer</h3>
-
-<pre><code>composer global [全局组件]
-</code></pre>
-
-<h3>使用Composer中Vendor命令</h3>
-
-<pre><code>PATH="/Users/maizhikun/.composer/vendor/bin/:${PATH}"
-</code></pre>
-
-<h3>参考链接</h3>
-
-<p>安装参考<a href="http://www.phpcomposer.com/">http://www.phpcomposer.com/</a></p>
 ]]></content>
   </entry>
   

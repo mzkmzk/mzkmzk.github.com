@@ -4,7 +4,7 @@
   <title><![CDATA[Category: markdown | K]]></title>
   <link href="http://mzkmzk.github.io/blog/categories/markdown/atom.xml" rel="self"/>
   <link href="http://mzkmzk.github.io/"/>
-  <updated>2015-10-07T20:00:18+08:00</updated>
+  <updated>2015-10-15T23:17:07+08:00</updated>
   <id>http://mzkmzk.github.io/</id>
   <author>
     <name><![CDATA[K]]></name>
@@ -120,6 +120,17 @@
 </li>
 </ol>
 
+
+<h1>pdf显示问题</h1>
+
+<p>Mou用图片的方式插入pdf和很模糊,转为图片,然后用img表情设置为100%宽度(不然图片太大导为pdf可能显示图片补全)</p>
+
+<pre><code>&lt;img src="素材/全部来源_20150916-20151015.jpg" style="width:100%"&gt;
+</code></pre>
+
+<h1>markdown分页问题</h1>
+
+<p>导出pdf想实现类似word的分页符功能,未找到好的方案</p>
 ]]></content>
   </entry>
   

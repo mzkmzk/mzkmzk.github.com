@@ -132,6 +132,8 @@ var _hmt = _hmt || [];
 
 <li><a href="/blog/categories/project">project</a></li>
 
+<li><a href="/blog/categories/服务器">服务器</a></li>
+
 <li><a href="/blog/categories/">About me</a></li>
 </ul>
 </div>
@@ -252,6 +254,8 @@ var _hmt = _hmt || [];
 <li><a href="/blog/categories/develop">develop</a></li>
 
 <li><a href="/blog/categories/project">project</a></li>
+
+<li><a href="/blog/categories/服务器">服务器</a></li>
 
 <li><a href="/blog/categories/">About me</a></li>
 </ul>
@@ -448,6 +452,11 @@ sudo /etc/init.d/mysql restart
 <p>后续 原来REGEXP后面跟正则..那么应该就能无敌了.. 我上面的问题就可以解决了</p>
 
 <p>参考链接<a href="https://stackoverflow.com/questions/1127088/mysql-like-in/1127106#1127106">https://stackoverflow.com/questions/1127088/mysql-like-in/1127106#1127106</a></p>
+
+<h3>修改嵌套查询</h3>
+
+<pre><code>update samples as ss inner join (select patient_id,id from sample) as s on ss.id=s.id  set ss.patient_id = s.patient_id;
+</code></pre>
 </div>
 
 
