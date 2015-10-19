@@ -3,11 +3,12 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>Category: 前端 - K</title>
+	<title>疯狂Html+CSS+JS 中CSS总结 - K</title>
 	<meta name="author" content="K">
 
 	
-	<meta name="description" content="Category: 前端">
+	<meta name="description" content="0总结 1 级联样式与CSS选择器 1.1 CSS基本使用 1.1.1 引入CSS /* 不建议@import 性能问题 */
+&lt;link href="CSS文件路径" type="text/css" rel="stylesheet"&gt; 1.2 选择器 1.2.1 元素选择器 /* &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	<meta name="baidu-site-verification" content="HWyzFajtAX" />
@@ -292,127 +293,265 @@ var _hmt = _hmt || [];
 	
 		
 	
-	<div id="content" class="inner">
-	
+	<div id="content" class="inner"><article class="post">
+	<h2 class="title">疯狂Html+CSS+JS 中CSS总结</h2>
+	<div class="entry-content"><!--more-->
 
 
-	
-	
-	<section class="archives"><h1 class="year">2015</h1>
+<h1>0总结</h1>
 
-<article>
-	<h2 class="title"><a href="/blog/2015/10/18/amazeing-css.markdwon/">疯狂Html+CSS+JS 中CSS总结</a></h2>
-	<div class="meta">
-		<div class="date">Oct 18</div>
-		<div class="tags">
+<h1>1 级联样式与CSS选择器</h1>
+
+<h1>1.1 CSS基本使用</h1>
+
+<h3>1.1.1 引入CSS</h3>
+
+<pre><code>/* 不建议@import 性能问题 */
+&lt;link href="CSS文件路径" type="text/css" rel="stylesheet"&gt;
+</code></pre>
+
+<h2>1.2 选择器</h2>
+
+<h3>1.2.1 元素选择器</h3>
+
+<pre><code>/* 仅对P标签有作用 */
+p{...}
+</code></pre>
+
+<h3>1.2.2 属性选择器</h3>
+
+<pre><code>/* 仅对具有attr属性的E元素起作用 */
+E[attr]{...}
+
+/* 仅对attr=value的E元素起作用 */
+E[attr=value]{...}
+
+/* attr的值以空格为分隔符分开,其中一个值等于value即可的E元素 */
+E[attr~=value]{...}
+
+/* attr的值以连字符'_'为分隔符分开,其中一个值等于value即可的E元素 */
+E[attr |=value]{...}
+
+/* attr属性包含value值的E元素 */
+E[attr*="value"]{...}
+
+/* attr属性以value为开头的E元素 */
+E[attr^="value"]{...}
+
+/* attr属性以value为结尾的E元素 */
+E[attr$="value"]{...}
+</code></pre>
+
+<h3>1.2.3 ID选择器</h3>
+
+<pre><code>/* id为xx的元素起作用 */
+#xx{...}
+
+/* id为xx的E元素起作用 */
+E#xx{...}
+</code></pre>
+
+<h3>1.2.4 class选择器</h3>
+
+<pre><code>/* E为可选是否填写指定元素,my_class为指定lcass */
+[E].my_class{...}       
+
+/* class同时包含class1.class2*/
+.class1.class2{...}
+</code></pre>
+
+<h3>1.2.5 包含选择器</h3>
+
+<pre><code>/* div内所有class为a的元素起作用,无论元素是否为子元素 */
+div .a{...} 
+
+/*注意 包含关系有空格,同时满足关系无空格*/
+.class1 .class2
+</code></pre>
+
+<h3>1.2.6 子选择器</h3>
+
+<pre><code>/* 仅对div的子元素且class为a的元素起作用*/
+div&gt;.a{...} 
+</code></pre>
+
+<h3>1.2.7 兄弟选择器</h3>
+
+<pre><code>/* id为android的标签 之后出现的且class为long的同级元素*/
+#android ~ .long{...}   
+</code></pre>
+
+<h3>1.2.8 选择器组合</h3>
+
+<pre><code>/*逗号分隔或关系,仅符合一种选择器即起作用 */
+#a,.b,div&gt;.a{...}   
+</code></pre>
+
+<h3>1.2.9 伪元素选择器</h3>
+
+<ol>
+<li>:first-letter</li>
+<li>:first-line</li>
+<li>before</li>
+<li>after</li>
+</ol>
+
+
+<p>:first-letter和first-line可实现首字大写与首行大写之类的问题</p>
+
+<p>注意,这两个伪属性只对块元素<code>div,p,section</code>等元素起作用,对内嵌<code>span</code>等必须设定heihht与width、或postition:absolute、或display:block.</p>
+
+<pre><code>span{
+    disply:block;
+}
+
+//首字变蓝
+.span:first-letter{
+    color:#00f;
+}
+</code></pre>
+
+<p>:before与:after用于在指定元素前/后插入内容</p>
+
+<h3>1.2.10 内容相关属性</h3>
+
+<ol>
+<li>include-source: 属性值为url(url)</li>
+<li>content: 作用向指定元素之前或元素之后插入指定内容,该属性的值可以是字符串、url(url)、attr(alt)、counter(name)、counter(name,list-style-type)、open-quote和close-quote等格式.</li>
+<li>quotes: 该属性的值可以是两个以空格分隔的字符串,前面代表open-quotes,后面带便quote.</li>
+<li>counter-increment:该属性用于定义一个计数器,值为该计数器的名称.</li>
+<li><p>counter-rest: 重置计数器.</p>
+
+<pre><code> eg:
+ &lt;!-- 子div前添加文字和设置样式--&gt;
+ div&gt;div:before{
+     content: '文字';
+     colol: blue;
+ }
+
+ &lt;!-- 含有class为on的子div之后的添加图片 --&gt;
+ div&gt;div.no:after{
+     content:url("K.gif");
+ }
+
+ &lt;!-- 配合quetos 对的...其实这属性貌似并没神马卵用..--&gt;
+ &lt;!-- 是的,你没猜错..其实close-quote写在before里也是可以的..--&gt;
+ div&gt;div{
+     quotes: "&lt;&lt;" "&gt;&gt;";
+ }
+
+ div&gt;div:before{
+     content: open-quote;
+ }
+
+ div&gt;divafter{
+     content:close-quote;
+ }
+
+ &lt;!-- counter-increment添加编号1. 2. 3. --&gt;
+ div&gt;div{
+     counter-increment: fucking_K;
+ }
+
+ div&gt;div:before{
+     content: counter{fucking_K} '.';
+     font-size: 20pt;
+ }
+
+ &lt;!-- 拓展样式 更多参数&lt;https://developer.mozilla.org/zh-CN/docs/Web/CSS/list-style-type&gt; --&gt;
+ div&gt;after{
+     content: counter{fucking_K,lower-roman} '.';
+     font-size: 20pt;
+ }
+
+ &lt;!-- 多级编号 --&gt;
+ div&gt;h2{
+     counter-increment: fucking_K;
+ }
+
+ div&gt;div{
+     counter-increment: funcking_K2;
+ }
+
+ div&gt;h2:before{
+     counter-increment: funcking_K;
+     counter-reset: fucking_K2;
+ }
+
+ div&gt;div:before{
+     content: counter: funcking_K2;
+ }
+</code></pre></li>
+</ol>
+
+</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-10-18T11:37:40+08:00" pubdate data-updated="true"></time></div>
+	<div class="tags">
 
 
 	<a class='category' href='/blog/categories/qian-duan/'>前端</a>
 
 
 </div>
-	    
-	</div>
-</article>
 	
-
-	
-
-
-<article>
-	<h2 class="title"><a href="/blog/2015/10/16/sass_start/">Sass入门</a></h2>
-	<div class="meta">
-		<div class="date">Oct 16</div>
-		<div class="tags">
-
-
-	<a class='category' href='/blog/categories/qian-duan/'>前端</a>
-
-
 </div>
-	    
-	</div>
 </article>
+
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+		
+		<a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+		
+		
+		<a class="addthis_button_tweet"></a>
+		
+		
+		
+	</div>
 	
-
-	
-
-
-<article>
-	<h2 class="title"><a href="/blog/2015/10/16/grunt_bootstrap/">Grunt玩Bootstrap</a></h2>
-	<div class="meta">
-		<div class="date">Oct 16</div>
-		<div class="tags">
-
-
-	<a class='category' href='/blog/categories/qian-duan/'>前端</a>
-
-
 </div>
-	    
-	</div>
-</article>
-	
-
-	
 
 
-<article>
-	<h2 class="title"><a href="/blog/2015/10/14/qian_duan_summing_up/">前端组件积累</a></h2>
-	<div class="meta">
-		<div class="date">Oct 14</div>
-		<div class="tags">
 
 
-	<a class='category' href='/blog/categories/qian-duan/'>前端</a>
 
 
-</div>
-	    
-	</div>
-</article>
-	
+  <section>
+    <h1>Comments</h1>
+    <div id="comments" aria-live="polite">
 
-	
-
-
-<article>
-	<h2 class="title"><a href="/blog/2015/07/20/react_start/">react入门</a></h2>
-	<div class="meta">
-		<div class="date">Jul 20</div>
-		<div class="tags">
-
-
-	<a class='category' href='/blog/categories/qian-duan/'>前端</a>
-
-
-</div>
-	    
-	</div>
-</article>
-	
-
-	
-
-
-<article>
-	<h2 class="title"><a href="/blog/2015/07/20/grunt_start/">grunt入门</a></h2>
-	<div class="meta">
-		<div class="date">Jul 20</div>
-		<div class="tags">
-
-
-	<a class='category' href='/blog/categories/qian-duan/'>前端</a>
-
-
-</div>
-	    
-	</div>
-</article>
-	
-	</section>
-	
-
+<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="疯狂Html+CSS+JS 中CSS总结" data-title="疯狂Html+CSS+JS 中CSS总结" data-url="/blog/2015/10/18/amazeing-css.markdwon/"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"mzkmzk"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- 多说公共JS代码 end --></div>
+  </section>
 </div>
 	<footer id="footer" class="inner">
 

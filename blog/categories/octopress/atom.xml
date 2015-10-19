@@ -4,7 +4,7 @@
   <title><![CDATA[Category: octopress | K]]></title>
   <link href="http://mzkmzk.github.io/blog/categories/octopress/atom.xml" rel="self"/>
   <link href="http://mzkmzk.github.io/"/>
-  <updated>2015-10-15T23:17:07+08:00</updated>
+  <updated>2015-10-20T05:53:36+08:00</updated>
   <id>http://mzkmzk.github.io/</id>
   <author>
     <name><![CDATA[K]]></name>
@@ -476,6 +476,18 @@ $ gem install rails
 <p><img class="left" src="/images/blog/1.png" title="" ></p>
 
 <p>参考链接<a href="http://williamherry.com/blog/2012/07/20/octopress-setup/">http://williamherry.com/blog/2012/07/20/octopress-setup/</a></p>
+
+<h3>5升级了其他组件后提示错误</h3>
+
+<pre><code>Gem::LoadError: You have already activated rake 10.4.2, but your Gemfile requires rake 10.3.2. Prepending `bundle exec` to your command may solve this.
+</code></pre>
+
+<p>解决方案</p>
+
+<pre><code>bundle update rake
+</code></pre>
+
+<p>参考链接<a href="http://stackoverflow.com/questions/27296856/rake-or-any-other-rake-command-not-working-properly">http://stackoverflow.com/questions/27296856/rake-or-any-other-rake-command-not-working-properly</a></p>
 ]]></content>
   </entry>
   

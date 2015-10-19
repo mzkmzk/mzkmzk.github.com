@@ -4,7 +4,7 @@
   <title><![CDATA[Category: 前端 | K]]></title>
   <link href="http://mzkmzk.github.io/blog/categories/qian-duan/atom.xml" rel="self"/>
   <link href="http://mzkmzk.github.io/"/>
-  <updated>2015-10-15T23:17:07+08:00</updated>
+  <updated>2015-10-20T05:53:36+08:00</updated>
   <id>http://mzkmzk.github.io/</id>
   <author>
     <name><![CDATA[K]]></name>
@@ -12,6 +12,553 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[疯狂Html+CSS+JS 中CSS总结]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/10/18/amazeing-css.markdwon/"/>
+    <updated>2015-10-18T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/10/18/amazeing-css.markdwon</id>
+    <content type="html"><![CDATA[<!--more-->
+
+
+<h1>0总结</h1>
+
+<h1>1 级联样式与CSS选择器</h1>
+
+<h1>1.1 CSS基本使用</h1>
+
+<h3>1.1.1 引入CSS</h3>
+
+<pre><code>/* 不建议@import 性能问题 */
+&lt;link href="CSS文件路径" type="text/css" rel="stylesheet"&gt;
+</code></pre>
+
+<h2>1.2 选择器</h2>
+
+<h3>1.2.1 元素选择器</h3>
+
+<pre><code>/* 仅对P标签有作用 */
+p{...}
+</code></pre>
+
+<h3>1.2.2 属性选择器</h3>
+
+<pre><code>/* 仅对具有attr属性的E元素起作用 */
+E[attr]{...}
+
+/* 仅对attr=value的E元素起作用 */
+E[attr=value]{...}
+
+/* attr的值以空格为分隔符分开,其中一个值等于value即可的E元素 */
+E[attr~=value]{...}
+
+/* attr的值以连字符'_'为分隔符分开,其中一个值等于value即可的E元素 */
+E[attr |=value]{...}
+
+/* attr属性包含value值的E元素 */
+E[attr*="value"]{...}
+
+/* attr属性以value为开头的E元素 */
+E[attr^="value"]{...}
+
+/* attr属性以value为结尾的E元素 */
+E[attr$="value"]{...}
+</code></pre>
+
+<h3>1.2.3 ID选择器</h3>
+
+<pre><code>/* id为xx的元素起作用 */
+#xx{...}
+
+/* id为xx的E元素起作用 */
+E#xx{...}
+</code></pre>
+
+<h3>1.2.4 class选择器</h3>
+
+<pre><code>/* E为可选是否填写指定元素,my_class为指定lcass */
+[E].my_class{...}       
+
+/* class同时包含class1.class2*/
+.class1.class2{...}
+</code></pre>
+
+<h3>1.2.5 包含选择器</h3>
+
+<pre><code>/* div内所有class为a的元素起作用,无论元素是否为子元素 */
+div .a{...} 
+
+/*注意 包含关系有空格,同时满足关系无空格*/
+.class1 .class2
+</code></pre>
+
+<h3>1.2.6 子选择器</h3>
+
+<pre><code>/* 仅对div的子元素且class为a的元素起作用*/
+div&gt;.a{...} 
+</code></pre>
+
+<h3>1.2.7 兄弟选择器</h3>
+
+<pre><code>/* id为android的标签 之后出现的且class为long的同级元素*/
+#android ~ .long{...}   
+</code></pre>
+
+<h3>1.2.8 选择器组合</h3>
+
+<pre><code>/*逗号分隔或关系,仅符合一种选择器即起作用 */
+#a,.b,div&gt;.a{...}   
+</code></pre>
+
+<h3>1.2.9 伪元素选择器</h3>
+
+<ol>
+<li>:first-letter</li>
+<li>:first-line</li>
+<li>before</li>
+<li>after</li>
+</ol>
+
+
+<p>:first-letter和first-line可实现首字大写与首行大写之类的问题</p>
+
+<p>注意,这两个伪属性只对块元素<code>div,p,section</code>等元素起作用,对内嵌<code>span</code>等必须设定heihht与width、或postition:absolute、或display:block.</p>
+
+<pre><code>span{
+    disply:block;
+}
+
+//首字变蓝
+.span:first-letter{
+    color:#00f;
+}
+</code></pre>
+
+<p>:before与:after用于在指定元素前/后插入内容</p>
+
+<h3>1.2.10 内容相关属性</h3>
+
+<ol>
+<li>include-source: 属性值为url(url)</li>
+<li>content: 作用向指定元素之前或元素之后插入指定内容,该属性的值可以是字符串、url(url)、attr(alt)、counter(name)、counter(name,list-style-type)、open-quote和close-quote等格式.</li>
+<li>quotes: 该属性的值可以是两个以空格分隔的字符串,前面代表open-quotes,后面带便quote.</li>
+<li>counter-increment:该属性用于定义一个计数器,值为该计数器的名称.</li>
+<li><p>counter-rest: 重置计数器.</p>
+
+<pre><code> eg:
+ &lt;!-- 子div前添加文字和设置样式--&gt;
+ div&gt;div:before{
+     content: '文字';
+     colol: blue;
+ }
+
+ &lt;!-- 含有class为on的子div之后的添加图片 --&gt;
+ div&gt;div.no:after{
+     content:url("K.gif");
+ }
+
+ &lt;!-- 配合quetos 对的...其实这属性貌似并没神马卵用..--&gt;
+ &lt;!-- 是的,你没猜错..其实close-quote写在before里也是可以的..--&gt;
+ div&gt;div{
+     quotes: "&lt;&lt;" "&gt;&gt;";
+ }
+
+ div&gt;div:before{
+     content: open-quote;
+ }
+
+ div&gt;divafter{
+     content:close-quote;
+ }
+
+ &lt;!-- counter-increment添加编号1. 2. 3. --&gt;
+ div&gt;div{
+     counter-increment: fucking_K;
+ }
+
+ div&gt;div:before{
+     content: counter{fucking_K} '.';
+     font-size: 20pt;
+ }
+
+ &lt;!-- 拓展样式 更多参数&lt;https://developer.mozilla.org/zh-CN/docs/Web/CSS/list-style-type&gt; --&gt;
+ div&gt;after{
+     content: counter{fucking_K,lower-roman} '.';
+     font-size: 20pt;
+ }
+
+ &lt;!-- 多级编号 --&gt;
+ div&gt;h2{
+     counter-increment: fucking_K;
+ }
+
+ div&gt;div{
+     counter-increment: funcking_K2;
+ }
+
+ div&gt;h2:before{
+     counter-increment: funcking_K;
+     counter-reset: fucking_K2;
+ }
+
+ div&gt;div:before{
+     content: counter: funcking_K2;
+ }
+</code></pre></li>
+</ol>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Sass入门]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/10/16/sass_start/"/>
+    <updated>2015-10-16T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/10/16/sass_start</id>
+    <content type="html"><![CDATA[<!--more-->
+
+
+<h1>0 前面工作</h1>
+
+<ol>
+<li>本文主要使用bootstrap3的sass,下载链接<a href="http://v3.bootcss.com/getting-started/">http://v3.bootcss.com/getting-started/</a></li>
+<li>安装Ruby,sass基于Ruby开发的</li>
+<li><p>gem install sass 安装sass</p>
+
+<p> 3.1 安装失败,显示</p>
+
+<pre><code> ERROR:  Could not find a valid gem 'sass' (&gt;= 0), here is why:
+   Unable to download data from http://ruby.taobao.org/ - bad response Not Found 404 (http://ruby.taobao.org/latest_specs.4.8.gz)
+</code></pre>
+
+<p> 可能由于我之前安装octopress的时候换了Ruby使用淘宝镜像,现在淘宝镜像可能没有sass的了.</p>
+
+<p> 网上查了下解决方案,大多数还是说去淘宝的rubygems.org</p>
+
+<p> 参考<a href="https://github.com/nimojs/blog/issues/14">https://github.com/nimojs/blog/issues/14</a></p>
+
+<pre><code> //执行这句后的提示我是害怕的,什么鬼...和教程显示得不一样啊,但是勇敢的我还是去访问了下https://rubygems.org/,发现有这个网址的啊...于是尝试下去
+ K:bootstrap-sass-3.3.5 maizhikun$ gem sources --remove https://rubygems.org/
+ source https://rubygems.org/ not present in cache
+
+ //和教程一致了...
+ K:bootstrap-sass-3.3.5 maizhikun$ gem sources -a https://ruby.taobao.org/
+ https://ruby.taobao.org/ added to sources
+
+ //执行到这里大家可能明白了,可能ruby.taobao之前我使用的时候是http的,现在改为https,所以会导致一开始的错误.
+ K:bootstrap-sass-3.3.5 maizhikun$ gem source -l
+ *** CURRENT SOURCES ***
+
+ http://ruby.taobao.org/
+ https://ruby.taobao.org/
+
+ //额,,常见的权限问题..
+ K:bootstrap-sass-3.3.5 maizhikun$  gem install sass
+ Fetching: sass-3.4.19.gem (100%)
+ ERROR:  While executing gem ... (Gem::FilePermissionError)
+     You don't have write permissions for the /Library/Ruby/Gems/2.0.0 directory.
+
+ //找到提示的目录更改权限 原本权限是755,改为775还是不行,于是777~...然后就可以下载了..但是报了另外一个权限问题
+ K:bootstrap-sass-3.3.5 maizhikun$  gem install sass
+ Fetching: sass-3.4.19.gem (100%)
+ ERROR:  While executing gem ... (Gem::FilePermissionError)
+     You don't have write permissions for the /usr/bin directory.
+
+ //于是机智的我..发现这样chmod不是办法...sudo试试...
+ K:bootstrap-sass-3.3.5 maizhikun$ sudo  gem install sass
+ Successfully installed sass-3.4.19
+ Parsing documentation for sass-3.4.19
+ Installing ri documentation for sass-3.4.19
+ Done installing documentation for sass after 5 seconds
+ WARNING:  Unable to pull data from 'http://ruby.taobao.org/': bad response Not Found 404 (http://ruby.taobao.org/latest_specs.4.8.gz)
+ 1 gem installed
+ //管她呢.....WARNING而已..不理...不理....就好像上班迟到收警告一样~..
+</code></pre>
+
+<p> 让我们见证一下奇迹吧.</p>
+
+<pre><code> K:bootstrap-sass-3.3.5 maizhikun$ sass -v
+ Sass 3.4.19 (Selective Steve)
+</code></pre>
+
+<p> OK了,准备爽一发吧.</p></li>
+</ol>
+
+
+<h1>1 简单实践</h1>
+
+<ol>
+<li><p><code>sass _bootstrap.scss test2.css</code></p>
+
+<p> 会生成test2.css和test2.css.map</p></li>
+<li><p><code>sass _bootstrap.scss</code></p>
+
+<p> 会在控制台显示转化的代码</p></li>
+<li><p>SASS提供的四种编译风格选项<a href="http://sass-lang.com/documentation/file.SASS_REFERENCE.html#output_style">官网参考</a></p>
+
+<p> 3.1 nested: 默认值,嵌套缩进css代码.</p>
+
+<p> 3.2 expanded: 没有缩进、拓展的css代码.</p>
+
+<p> 3.3 compact: 简洁格式的css代码.</p>
+
+<p> 3.4 compressed: 压缩后的css代码.</p>
+
+<p> 例子:<code>sass --style compressed test.sass test.css</code></p></li>
+<li><p>sass监听某个文件/目录,一旦源文件变动,就自动编译</p>
+
+<pre><code> //watch afile 
+ sass --watch input.scss:output.css
+
+ // watch a directory 
+
+ sass --watch app/sass:public/stylesheets
+</code></pre>
+
+<p> SASS的官方网站，提供了一个在<a href="http://sassmeister.com/">线转换器</a>。你可以在那里，试运行下面的各种例子.</p></li>
+</ol>
+
+
+<h1>2 基本语法</h1>
+
+<ol>
+<li><p>变量</p>
+
+<pre><code> $blue: #1875e7;
+
+ div{
+     color : $blue;
+ }
+</code></pre>
+
+<p> 如果变量需要嵌套在字符串上必须加上#{}</p>
+
+<pre><code> $side : left;
+
+ .rounded{
+     border-#{$side}-radius: 5px;
+ }
+</code></pre></li>
+<li><p>计算功能</p>
+
+<pre><code> body {
+     magin: (14px/2);
+     top: 50px +100px;
+     right: $var * 10%;
+ } 
+</code></pre></li>
+<li><p>嵌套</p>
+
+<p> 标签嵌套</p>
+
+<pre><code> div {
+     hi{
+         color:red;
+     }
+ }
+</code></pre>
+
+<p> 属性嵌套</p>
+
+<pre><code> //border-color属性
+ p{
+     border: {
+         color:red ;
+     }
+ }
+ //注意border后的冒号
+</code></pre>
+
+<p> 嵌套中引用父级级元素</p>
+
+<pre><code> a{
+     &amp;:hover {
+         color : #ffb3ff;
+     }
+ }
+</code></pre></li>
+<li><p>注释</p>
+
+<pre><code> //: 保留在sass不会输出到css
+
+ /* 注释*/: 会保留在生成的css文件中,但不会保留在压缩模式
+
+ /*!
+     重要信息,任何时候都会保留,一般用作声明版权
+ */
+</code></pre></li>
+<li><p>继承</p>
+
+<pre><code> .class1 {}
+
+ .class2 {
+     @extend .class1;
+     ...
+ }
+</code></pre></li>
+<li><p>Mixin 可重用代码块</p>
+
+<pre><code> //定义代码块
+ @mixin left {
+     float: left ;
+ }
+
+ //调用代码块
+ div{
+     @include left;
+ }
+
+ mixin强大在于可以指定参数和缺省值
+
+ @mixin left($value: 10px){
+     margin-right: $value;
+ }
+
+ //使用
+ div{
+     @include left(20px);
+ }
+
+ //下面实例用来生成浏览器前缀
+ @mixin rounded($vert, $horz, $radius: 10px) {
+     border-#{$vert}-#{$horz}-radius: $radius;
+     -moz-border-radius-#{$vert}#{$horz}: $radius;
+     -webkit-border-#{$vert}-#{$horz}-radius: $radius;
+ }
+
+ //调用
+ #navbar li { @include rounded(top, left); }
+ #footer { @include rounded(top, left, 5px); }
+</code></pre></li>
+<li><p>颜色函数</p>
+
+<pre><code> lighten(#cc3, 10%) // #d6d65c
+ darken(#cc3, 10%) // #a3a329
+ grayscale(#cc3) // #808080
+ complement(#cc3) // #33c        
+</code></pre></li>
+<li><p>插入外部文件</p>
+
+<pre><code> 　@import "path/filename.scss";
+ 　@import "foo.css";
+ 　
+</code></pre></li>
+<li><p>高级用法</p>
+
+<p> 9.1 if , if else</p>
+
+<pre><code>     　p {
+     　   @if 1 + 1 == 2 { border: 1px solid; }
+     　   @if 5 &lt; 3 { border: 2px dotted; }
+     　}
+     　
+     　@if lightness($color) &gt; 30% {
+     　     background-color: #000;
+     　} @else {
+     　     background-color: #fff;
+     　}
+</code></pre>
+
+<p> 9,2 for,while,each</p>
+
+<pre><code>     @for $i from 1 to 10 {
+         .border-#{$i} {
+             border: #{$i}px solid blue;
+         }
+     }
+
+     $i: 6;
+     @while $i &gt; 0 {
+         .item-#{$i} { width: 2em * $i; }
+         $i: $i - 2;
+     }
+
+     @each $member in a, b, c, d {
+         .#{$member} {
+             background-image: url("/image/#{$member}.jpg");
+         }
+     }
+</code></pre>
+
+<p> 9,3 自定义函数</p>
+
+<pre><code> 　@function double($n) {
+ 　 @return $n * 2;
+ 　}
+ 　
+ 　#sidebar {
+ 　 width: double(5px);
+ 　}        
+</code></pre></li>
+</ol>
+
+
+<h1>参考链接</h1>
+
+<p>SASS用法指南<a href="http://www.ruanyifeng.com/blog/2012/06/sass.html">http://www.ruanyifeng.com/blog/2012/06/sass.html</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Grunt玩Bootstrap]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/10/16/grunt_bootstrap/"/>
+    <updated>2015-10-16T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/10/16/grunt_bootstrap</id>
+    <content type="html"><![CDATA[<!--more-->
+
+
+<h1>0 前面的工作</h1>
+
+<ol>
+<li>安装node</li>
+<li><p><code>sudo npm install -g grunt-cli</code>全局环境中安装grunt-cli;</p>
+
+<pre><code> K:bootstrap-sass-3.3.5 maizhikun$ sudo npm install -g grunt-cli
+ Password:
+ /usr/local/bin/grunt -&gt; /usr/local/lib/node_modules/grunt-cli/bin/grunt
+ grunt-cli@0.1.13 /usr/local/lib/node_modules/grunt-cli
+ ├── resolve@0.3.1
+ ├── nopt@1.0.10 (abbrev@1.0.7)
+ └── findup-sync@0.1.3 (lodash@2.4.2, glob@3.2.11)
+</code></pre></li>
+<li><p>cd 到bootstrap目录 安装依赖关系 根据package.json,<code>sudo npm install</code></p></li>
+<li><p>grunt dist(编译js和css到/dist/目录)</p>
+
+<p> 失败,显示:</p>
+
+<pre><code> K:bootstrap-sass-3.3.5 maizhikun$ grunt dist
+ grunt-cli: The grunt command line interface. (v0.1.13)
+
+ Fatal error: Unable to find local grunt.
+
+ If you're seeing this message, either a Gruntfile wasn't found or grunt
+ hasn't been installed locally to your project. For more information about
+ installing and configuring grunt, please see the Getting Started guide:
+
+ http://gruntjs.com/getting-started 
+</code></pre>
+
+<p> 我更新了下num<code>sudo npm update -g npm</code></p>
+
+<p> 重新安装全局grunt<code>sudo npm install -g grunt-cli</code></p>
+
+<p> 查找网上资料执行了<code>sudo npm install grunt --save-dev</code><a href="http://stackoverflow.com/questions/15483735/fatal-error-unable-to-find-local-grunt-when-running-grunt-command">参考</a></p>
+
+<p> 再执行grunt dist</p>
+
+<pre><code> K:bootstrap-sass-3.3.5 maizhikun$ sudo grunt dist
+ A valid Gruntfile could not be found. Please see the getting started guide for
+ more information on how to configure grunt: http://gruntjs.com/getting-started
+ Fatal error: Unable to find Gruntfile.
+</code></pre></li>
+</ol>
+
+
+<h1>参考资料</h1>
+
+<p>bootstrap中文<a href="http://v3.bootcss.com/getting-started/">http://v3.bootcss.com/getting-started/</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[前端组件积累]]></title>
@@ -74,21 +621,6 @@
 <p>API<a href="http://facebook.github.io/react-native/docs/troubleshooting.html#content">http://facebook.github.io/react-native/docs/troubleshooting.html#content</a></p>
 
 <p>在线开发环境<a href="https://jsfiddle.net/reactjs/69z2wepo/">https://jsfiddle.net/reactjs/69z2wepo/</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[grunt入门]]></title>
-    <link href="http://mzkmzk.github.io/blog/2015/07/20/grunt_start/"/>
-    <updated>2015-07-20T11:37:40+08:00</updated>
-    <id>http://mzkmzk.github.io/blog/2015/07/20/grunt_start</id>
-    <content type="html"><![CDATA[<h3>安装步骤</h3>
-
-<ol>
-<li>先安装node.js</li>
-<li>输入命令行<code>sudo npm install -g grunt-cli</code></li>
-</ol>
-
 ]]></content>
   </entry>
   
