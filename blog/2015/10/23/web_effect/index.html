@@ -3,12 +3,16 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>grunt入门 - K</title>
+	<title>CSS特效方法累积 - K</title>
 	<meta name="author" content="K">
 
 	
-	<meta name="description" content="安装步骤 先安装node.js
-输入命令行sudo npm install -g grunt-cli 前端 ">
+	<meta name="description" content="1 鼠标移上去灰色,移走变回原来色彩. .product_item {
+margin: 40px 0;
+-webkit-filter: grayscale(100%);
+-moz-filter: grayscale(100%);
+-ms-filter: grayscale(100%);
+-o- &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	<meta name="baidu-site-verification" content="HWyzFajtAX" />
@@ -117,9 +121,9 @@ var _hmt = _hmt || [];
 
 <li><a href="/blog/categories/seo">seo</a></li>
 
-<li><a href="/blog/categories/前端">前端</a></li>
-
 <li><a href="/blog/categories/ios">ios</a></li>
+
+<li><a href="/blog/categories/前端">前端</a></li>
 
 <li><a href="/blog/categories/axure">axure</a></li>
 
@@ -240,9 +244,9 @@ var _hmt = _hmt || [];
 
 <li><a href="/blog/categories/seo">seo</a></li>
 
-<li><a href="/blog/categories/前端">前端</a></li>
-
 <li><a href="/blog/categories/ios">ios</a></li>
+
+<li><a href="/blog/categories/前端">前端</a></li>
 
 <li><a href="/blog/categories/axure">axure</a></li>
 
@@ -294,14 +298,39 @@ var _hmt = _hmt || [];
 		
 	
 	<div id="content" class="inner"><article class="post">
-	<h2 class="title">Grunt入门</h2>
-	<div class="entry-content"><h3>安装步骤</h3>
+	<h2 class="title">CSS特效方法累积</h2>
+	<div class="entry-content"><!--more-->
 
-<ol>
-<li>先安装node.js</li>
-<li>输入命令行<code>sudo npm install -g grunt-cli</code></li>
-</ol>
 
+<h1>1 鼠标移上去灰色,移走变回原来色彩.</h1>
+
+<pre><code>.product_item {
+margin: 40px 0;
+-webkit-filter: grayscale(100%);
+-moz-filter: grayscale(100%);
+-ms-filter: grayscale(100%);
+-o-filter: grayscale(100%);
+
+filter: grayscale(100%);
+
+filter: gray;
+
+&amp;:hover {
+  -webkit-filter: grayscale(0);
+  -moz-filter: grayscale(0);
+  -ms-filter: grayscale(0);
+  -o-filter: grayscale(0);
+
+  filter: grayscale(0);
+
+  filter: none;
+}
+}
+</code></pre>
+
+<p>应该可以用jquery动画效果实现延迟变化的.</p>
+
+<p>参考链接<a href="http://www.w3cplus.com/css3/ten-effects-with-css3-filter">http://www.w3cplus.com/css3/ten-effects-with-css3-filter</a></p>
 </div>
 
 
@@ -318,7 +347,7 @@ var _hmt = _hmt || [];
   
 
 
-<time datetime="2015-07-20T11:37:40+08:00" pubdate data-updated="true"></time></div>
+<time datetime="2015-10-23T11:37:40+08:00" pubdate data-updated="true"></time></div>
 	<div class="tags">
 
 
@@ -354,7 +383,7 @@ var _hmt = _hmt || [];
     <div id="comments" aria-live="polite">
 
 <!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="Grunt入门" data-title="Grunt入门" data-url="/blog/2015/07/20/grunt_start/"></div>
+	<div class="ds-thread" data-thread-key="CSS特效方法累积" data-title="CSS特效方法累积" data-url="/blog/2015/10/23/web_effect/"></div>
 <!-- 多说评论框 end -->
 <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 <script type="text/javascript">

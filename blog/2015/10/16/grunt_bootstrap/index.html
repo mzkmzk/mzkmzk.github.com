@@ -117,9 +117,9 @@ var _hmt = _hmt || [];
 
 <li><a href="/blog/categories/seo">seo</a></li>
 
-<li><a href="/blog/categories/前端">前端</a></li>
-
 <li><a href="/blog/categories/ios">ios</a></li>
+
+<li><a href="/blog/categories/前端">前端</a></li>
 
 <li><a href="/blog/categories/axure">axure</a></li>
 
@@ -240,9 +240,9 @@ var _hmt = _hmt || [];
 
 <li><a href="/blog/categories/seo">seo</a></li>
 
-<li><a href="/blog/categories/前端">前端</a></li>
-
 <li><a href="/blog/categories/ios">ios</a></li>
+
+<li><a href="/blog/categories/前端">前端</a></li>
 
 <li><a href="/blog/categories/axure">axure</a></li>
 
@@ -341,13 +341,50 @@ var _hmt = _hmt || [];
  A valid Gruntfile could not be found. Please see the getting started guide for
  more information on how to configure grunt: http://gruntjs.com/getting-started
  Fatal error: Unable to find Gruntfile.
+</code></pre>
+
+<p> 傻傻的我最后 发现原来少了Gruntfile文件,因为我下载的Bootstrap是sass版本的.要下载源码版本才可以.但是下载原版后发现Gruntfile太庞大了.所以先放下.以后再去了解.现在先使用Grunt作为压缩JS工具所用.</p></li>
+</ol>
+
+
+<h1>1 在项目中使用</h1>
+
+<ol>
+<li>下载Bootstrap源码版本,拷贝<code>package.json</code>,<code>Gruntfile.js</code>.到所需目录下</li>
+<li><code>npm install</code> 加载node_modules;</li>
+<li><p>压缩JS 修改Gruntfile.js</p>
+
+<pre><code> module.exports = function (grunt) {
+ // 项目配置
+ grunt.initConfig({
+     pkg: grunt.file.readJSON('package.json'),
+     uglify: {
+         options: {
+             banner: '/*! &lt;%= pkg.file %&gt; &lt;%= grunt.template.today("yyyy-mm-dd") %&gt; */\n'
+         },
+          build: {
+             src: ['src/*.js','src/bootstrap/*.js'],
+             dest: 'Haplox.min.js'
+         }
+     }
+ });
+  // 加载提供"uglify"任务的插件
+  grunt.loadNpmTasks('grunt-contrib-uglify');
+  // 默认任务
+  grunt.registerTask('default', ['uglify']);
+  }
 </code></pre></li>
+<li><p>grunt即可.</p></li>
 </ol>
 
 
 <h1>参考资料</h1>
 
+<p>详细从0开始<a href="http://www.cnblogs.com/yexiaochai/p/3603389.html">http://www.cnblogs.com/yexiaochai/p/3603389.html</a></p>
+
 <p>bootstrap中文<a href="http://v3.bootcss.com/getting-started/">http://v3.bootcss.com/getting-started/</a></p>
+
+<p>中文Grunt文档<a href="http://www.gruntjs.net/getting-started">http://www.gruntjs.net/getting-started</a></p>
 </div>
 
 

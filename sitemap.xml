@@ -3,6 +3,22 @@
   
   
   <url>
+    <loc>http://mzkmzk.github.io/blog/2015/10/23/web_effect/</loc>
+    
+    <lastmod>2015-10-23T11:37:40+08:00</lastmod>
+    
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://mzkmzk.github.io/blog/2015/10/20/bottstrap_update.markdo/</loc>
+    
+    <lastmod>2015-10-20T11:37:40+08:00</lastmod>
+    
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
     <loc>http://mzkmzk.github.io/blog/2015/10/18/amazeing-css.markdwon/</loc>
     
     <lastmod>2015-10-18T11:37:40+08:00</lastmod>
@@ -252,14 +268,6 @@
   
   <url>
     <loc>http://mzkmzk.github.io/blog/2015/07/20/iOS_Start/</loc>
-    
-    <lastmod>2015-07-20T11:37:40+08:00</lastmod>
-    
-    <priority>0.8</priority>
-  </url>
-  
-  <url>
-    <loc>http://mzkmzk.github.io/blog/2015/07/20/grunt_start/</loc>
     
     <lastmod>2015-07-20T11:37:40+08:00</lastmod>
     
@@ -1101,28 +1109,28 @@
   
   <url>
     <loc>http://mzkmzk.github.io/404.html</loc>
-    <lastmod>2015-10-20T05:53:36+08:00</lastmod>
+    <lastmod>2015-10-24T19:04:29+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   
   <url>
     <loc>http://mzkmzk.github.io/blog/archives/</loc>
-    <lastmod>2015-10-20T05:53:36+08:00</lastmod>
+    <lastmod>2015-10-24T19:04:29+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   
   <url>
     <loc>http://mzkmzk.github.io/</loc>
-    <lastmod>2015-10-20T05:53:36+08:00</lastmod>
+    <lastmod>2015-10-24T19:04:29+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   
   <url>
     <loc>http://mzkmzk.github.io/index%E5%89%AF%E6%9C%AC.html</loc>
-    <lastmod>2015-10-20T05:53:36+08:00</lastmod>
+    <lastmod>2015-10-24T19:04:29+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
