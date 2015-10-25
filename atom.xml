@@ -4,7 +4,7 @@
   <title><![CDATA[K]]></title>
   <link href="http://mzkmzk.github.io/atom.xml" rel="self"/>
   <link href="http://mzkmzk.github.io/"/>
-  <updated>2015-10-25T11:20:02+08:00</updated>
+  <updated>2015-10-25T18:58:51+08:00</updated>
   <id>http://mzkmzk.github.io/</id>
   <author>
     <name><![CDATA[K]]></name>
@@ -272,6 +272,411 @@
 
 
 <h2>2.3 HTML5 头部和元数据</h2>
+
+<ol>
+<li><p><code>&lt;base&gt;:</code> 相对地址取的是此base的href,而非url.绝好放在head的头元素.</p>
+
+<p> 1.1 href: 指定相对地址</p>
+
+<p> 1.2 target: 默认打开链接方式</p></li>
+<li><p><code>&lt;meta&gt;:</code> 指定页面元信息.</p>
+
+<p> 2.1 name: 可为:</p>
+
+<pre><code> 2.1.1 author: 作者        
+ 2.1.2 description: 简述 
+ 2.1.3 keywords: 关键词 
+ 2.1.4 generator: 说明生成工具,如`Microsoft FrontPage 4.0`等
+     &lt;meta name=”generator” Content=”PCDATA|FrontPage|”&gt;
+
+ 2.1.5 revised: 定义网页版本
+     &lt;meta name=”revised” content=”David, 2008/8/8/” /&gt;
+
+ 2.1.6 robots: 给机器人(搜索引擎)做登陆参考,可同时设多个属性逗号分隔
+
+     2.1.6.1 all：默认,文件将被检索，且页面上的链接可以被查询(和 "index,follow"作用一样) 
+     2.1.6.2 none：文件将不被检索，且页面上的链接不可以被查询(和 “noindex, no follow” 起相同作用)
+     2.1.6.3 index：文件将被检索；（让robot/spider登录）
+     2.1.6.4 follow：页面上的链接可以被查询；
+     2.1.6.5 noindex：文件将不被检索
+     2.1.6.6 nofollow：页面上的链接不可以被查询
+
+ 2.1.7 others: - -....   
+ 2.1.8 viewport: 优化移动浏览器显示,。如果不是响应式网站，不要使用initial-scale或者禁用缩放。大部分4.7-5寸设备的viewport宽设为360px；5.5寸设备设为400px；iphone6设为375px；ipone6 plus设为414px。
+
+     &lt;meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no"/&gt;
+     &lt;!-- `width=device-width` 会导致 iPhone 5 添加到主屏后以 WebApp 全屏模式打开页面时出现黑边  --&gt;
+
+     width：宽度（数值 / device-width）（范围从200 到10,000，默认为980 像素）
+     height：高度（数值 / device-height）（范围从223 到10,000）
+     initial-scale：初始的缩放比例 （范围从&gt;0 到10）
+     minimum-scale：允许用户缩放到的最小比例
+     maximum-scale：允许用户缩放到的最大比例
+     user-scalable：用户是否可以手动缩 (no,yes)
+     minimal-ui：可以在页面加载时最小化上下状态栏。（已弃用）
+</code></pre>
+
+<p> 2.2 http-equiv 属性主要有</p>
+
+<pre><code> 2.2.1 expries: 指定网页过期时间,过期必须冲浏览器重新下载
+ 2.2.2 pragma: 值可为no-cache,不适用缓存
+ 2.2.3 refresh: 指定多长时间自动刷新页面
+ 2.2.3 set-cookie: 设定Cookie
+ 2.2.4 content-type: 指定网页内容类型和字符集.
+
+     &lt;meta http-equiv="Content-Type" content="text/html charset=utf-8"&gt;
+</code></pre>
+
+<p> 2.3 scheme 指定用来翻译属性值的方案</p></li>
+</ol>
+
+
+<p><code>&lt;meta&gt;</code>参考链接<a href="http://segmentfault.com/a/1190000002407912">http://segmentfault.com/a/1190000002407912</a>非常详细!、<a href="http://www.hujuntao.com/web/html/html-meta-tag.html">http://www.hujuntao.com/web/html/html-meta-tag.html</a></p>
+
+<h2>2.4 HTML5 新增拖放API</h2>
+
+<h3>2.4.1 拖放事件</h3>
+
+<p>不知道你有没有发现&hellip;网页的img和a(设置了href)的标签都是可以拖动的.对于其他标签,只要设定<code>draggable="true"</code>即可拖放.标签中含有相关的触发事件</p>
+
+<pre><code>1. ondragstart: 开始拖动触发
+2. ondrag: 拖动过程不断触发
+3. ondrageend: 拖动结束触发
+4. ondragenter: 当拖动的元素进入本元素后触发的时间
+5. ondragover: 当拖动的元素在本元素范围内将不断触发
+6. ondragleave: 拖动的元素离开本元素时触发
+7. ondrop: 其他元素放到本元素时触发该时间
+
+//实现拖动一个div随意放
+
+//取消默认事件 每个浏览器不一样.
+document.ondragover =function(evt){
+    //取消默认事件
+    evt.preventDefault();
+}
+
+document.ondrop = function(evt){
+    //取消默认事件
+    evt.preventDefault();
+    source.style.position = "absolute";
+    source.style.left = evt.pageX+"px";
+    source.style.top = evt.pageY +"px";
+
+
+}
+</code></pre>
+
+<h3>2.4.2 DataTransfer对象</h3>
+
+<p>拖放事件中的参数中有一个dataTransfer属性.该属性的方法有</p>
+
+<ol>
+<li>dropEffect: 设置或返回拖放目标上允许的拖放行为,属性值有<code>none(拖动元素不能放到本元素中)</code>,<code>copy</code>,<code>link</code>,<code>move</code>之一.且行为需要是effectAllowed中允许的行为</li>
+<li>effectAllowed: 设置或返回被拖动元素允许发生的拖动行为,属性有<code>none(不允许拖动本元素)</code>,<code>copy</code>,<code>link</code>,<code>move</code>,<code>copyLink</code>,<code>copyMove</code>,<code>linkMove</code>,<code>all</code>,<code>uninitalized</code></li>
+<li>items: 返回DataTransferItems对象,该对象代表了拖放数据.</li>
+<li><p>setDragImage(element,x,y): element代表指定的元素,x表示图标与鼠标的水平距离,y代表纵向距离.</p>
+
+<pre><code> //eg
+ var K_Icon =document.createElement("img");
+ K_Icon.src ="K.gif";
+
+ 被拖动元素.ondragestart =function(evt) {
+     evt.dataTransfer.setDragImage(K_Icon,0,0);
+ }
+</code></pre></li>
+<li><p>addElement(element): 添加自定义图标.</p></li>
+<li>types: 该属性返回一个DOMStringList对象,包含了dataTransfet中所有数据类型</li>
+<li>getData(format): 获取DataTransfer对象中的format格式的数据.</li>
+<li>setData(format,data): 设置DataTransfer对象中格式为format的data数据.</li>
+<li>clearData([format]): 清楚指定format格式数据,省略则全部删除.     <br/>
+一般监听ondragstart来把数据放入DataTransfer中,监听ondrop取数据.</li>
+</ol>
+
+
+<p>下面代码代表页面元素拖入收藏夹的部分功能实现.</p>
+
+<pre><code>&lt;div draggable="true" ondragstart="K(event)";&gt;...
+&lt;div id="Mark_Div" draggable="true" ondrop="mark(evt)" ;&gt;...
+
+var K = function(evt) {
+    evt.dataTransfer.setData("text/plain","&lt;item&gt;"+evt.target.innerHTML);
+}
+
+var mark = function(evt){
+    var text =evt.dataTransfer.getData("text/plain");
+    //如果以&lt;item&gt;开头
+    if (text.indexOf("&lt;item&gt;") == 0 ){
+        var New_Div = document.createElement("div");
+        New_Div.id =new Data().getUTCMilliseconds();
+        New_Div.innerHTML = text.substring(6);
+        document.getElementById("Mark_Div").appendChild(New_Div);
+    }
+}
+</code></pre>
+
+<h1>3 HTML5表单</h1>
+
+<p>这里列举部分form表单属性</p>
+
+<ol>
+<li><p>enctype: 指定表单内容进行编码时候的字符集.</p>
+
+<p> 1.1 application/x-www-form-urlencoded: 默认</p>
+
+<p> 1.2 multipart/form-data: 二进制流 一般上传文件时使用</p>
+
+<p> 1.3 text/plain 当表单的action未<a href="&#x6d;&#97;&#x69;&#108;&#116;&#111;&#x3a;&#85;&#x52;&#x4c;">&#x55;&#x52;&#x4c;</a> 发送邮件时,采用这种方式可能比较方便</p></li>
+<li><p>target: 表单也可以设置target.</p></li>
+</ol>
+
+
+<p>表单控件设置了disabled时,不提交此参数.</p>
+
+<p>表单控件有tabIndex属性,值为1,2,3&hellip;,按Tab按此顺序跳动.</p>
+
+<h2>3.1 form表单的一些标签</h2>
+
+<ol>
+<li><p><code>&lt;label...&gt;</code>: 和控件关联.</p>
+
+<p> 1.1 隐式调用: 使用for属性关联控件的ID</p>
+
+<p> 1.2 显式调用: 用<label>&lt;框住表单控件/label></p></li>
+<li><p><code>&lt;select&gt;</code>: 下拉列表/列表框</p>
+
+<p> 2.1 multiple: 指定可多选.</p>
+
+<p> 2.2 size: 列表框可以显示几条数据.</p>
+
+<p> 2.3 <code>&lt;optgroup&gt;:</code> 指定选项组, 必须定义lable属性.只能包含<code>&lt;option&gt;</code></p></li>
+</ol>
+
+
+<h2>3.2 HTML5新增的表单控件玩法</h2>
+
+<ol>
+<li>form: 该属性指定为form表单的id,及时该控件不在form表单内,也会随form提交.</li>
+<li>formaction: 一个表单若要两个提交按钮要提交到不同的地方,在提交控件中设置不同的formaction即可.</li>
+<li>formxxxx属性: 和formaction类似,为提交按钮设置不同的<code>formenctype</code>,<code>formmethod</code>,<code>formtarget</code>等.</li>
+<li>autofocus: 当打开一个页面时,这个控件自动获取焦点.</li>
+<li>placeholder: 提示功能,在文本框内显示提示信息,开始输入时消失.</li>
+<li>list: list指定<code>&lt;datalist&gt;</code>标签中的ID,<code>&lt;datalist&gt;</code>的使用方法和select完全一样,当文本控件获取焦点时,这个<code>&lt;datalist&gt;</code>定义的下拉列表显示在文本框下.</li>
+<li>autocomplete: 与list结合使用,当此属性为on,list属性起作用,为off,list属性失效.然而这并没有什么卵用.</li>
+</ol>
+
+
+<h3>3.2.1 input标签的type的新选项值</h3>
+
+<ol>
+<li>color: 生成一个颜色选择器.</li>
+<li>date: 生成日期选择器.</li>
+<li>time: 生成一个时间选择器.</li>
+<li>datetime: 让生成一个UTC日期、时间选择器.</li>
+<li>datetime-local: 生成一个当地的日期、时间选择器.</li>
+<li>week: 生成一个第几周选择器.</li>
+<li>month: 生成一个月份选择器.</li>
+<li>email: 生成一个校验邮件的控件,当type=&ldquo;email&#8221;时,可指定multiple属性,表示允许输入多个email.</li>
+<li>tel: 输入电话的文本框,并不怎么校验.</li>
+<li>url: 校验url的文本框.</li>
+<li>number: 只让输入数字的文本框.</li>
+<li>range: 进度条,当type=range时候,可值得属性有<code>min</code>,<code>max</code>,<code>step(指定拖动条步长)</code>.</li>
+<li>search: 输入搜索关键字,其实也并没什么卵用.</li>
+</ol>
+
+
+<h3>3.2.2 HTML5新增表单控件</h3>
+
+<ol>
+<li><code>&lt;output&gt;</code>: 输出变量,但不会随表单提交.</li>
+</ol>
+
+
+<h3>3.2.3 HTML5增强文件上传</h3>
+
+<p>当<code>type="file"</code>时,可指定一下属性</p>
+
+<ol>
+<li>accept: 指定一个/多个允许的文件上传MIME类型,多个类型用<code>,</code>分割.例如<code>accept="image/*"</code>指定智能上传图片.<a href="http://www.w3school.com.cn/media/media_mimeref.asp">更多格式参考</a></li>
+<li>multiple: 允许用户提交多个文件.</li>
+</ol>
+
+
+<p>JS也可以访问上传文件夹的具体属性.</p>
+
+<ol>
+<li>name: 返回File对象的文件名.</li>
+<li>type: 文本的类型.</li>
+<li>size: 文件的大小.</li>
+</ol>
+
+
+<h4>3.2.3.1 新增的FileReader对象读取文件内容</h4>
+
+<p>FileReader对象提供以下方法.</p>
+
+<ol>
+<li>readAsText(file,encoding): 以文本格式读取文件.根据ID选择到file,encoding字符编码默认utf-8.</li>
+<li>readAsBinaryString(file): 二进制读取文件,通过这种方式可以用Ajax把数据上传到服务器.</li>
+<li>readAsDataUrl(file): 以DataURL方式读取文件,这种方式也可以读取二进制,但是这种方式会采用base64方式把文件内容编码成DataURL格式字符串.</li>
+<li>abort(): 停止读取.</li>
+<li>loaded属性: 当前FileReader已读取文件的大小.</li>
+<li>result属性: 当FileReader读取完文件后,result包含读取文件的内容.</li>
+</ol>
+
+
+<p>但read*的所有方法都是异步的,进行时会不断触发函数.</p>
+
+<ol>
+<li>onloadstart: FileReader开始读取数据触发.</li>
+<li>onprogress: FileReader读取数据时不断触发.</li>
+<li>onload: FileReader成功读取后触发.</li>
+<li>onloadend: FileReader读取完成触发,无论成功还是失败都会触发.</li>
+<li>onerror: FileReader读取失败触发.</li>
+</ol>
+
+
+<p>例子:浏览器读取文件进度条,注意该方法只不过是浏览器读取文件的进度,而不是上传到服务器的进度.</p>
+
+<pre><code>&lt;input id="file_1" type="file" /&gt;
+&lt;progress id="pro" value="0"&gt;&lt;/progress&gt;
+...
+var Read_Binary =function(){
+    var reader = new FileReader();
+    var pro =document.getLementById("pro");
+    pro.max = document.getElementById("file_1").files[0].size;
+    reader.onprogress =function (evt){
+        pro.value =evt.loaded;
+    }
+}
+</code></pre>
+
+<h3>3.2.4 HTML5 新增客户端校验.</h3>
+
+<p>表单控件可增加以下属性完成校验</p>
+
+<ol>
+<li>required: 指定控件必须填写.</li>
+<li>pattern: 指定符合正则表达式.</li>
+<li>min、max、step: 只对数值类型,日期类型或者<code>&lt;input ../&gt;</code>起作用.,指定数值必须在min~max,并符合step步长.</li>
+</ol>
+
+
+<p>在JS中form对象多了checkValidity()方法,当form表单所有HTML5客户端验证通过返回true.</p>
+
+<p>除此之外,所有表单和表单控件都有validity(ValidityState对象)属性,用于判断表单内所以控件/单个表单验证的情况.返回true/false.</p>
+
+<p>所有表单/表单控件都有setCustomValidity(&ldquo;错误提示&rdquo;)方法,当校验没通过时,自定义的错误提示文字.</p>
+
+<p>关闭表单校验.</p>
+
+<ol>
+<li>当form表单属性包含novalidate属性,不进行校验.</li>
+<li>当提交按钮设置了 formnovalidate属性,不进行校验.</li>
+</ol>
+
+
+<h1>4 HTML5 绘图支持</h1>
+
+<p><code>&lt;canvas&gt;</code>提供了一个画布.JS进行绘图,绘图步骤</p>
+
+<ol>
+<li>获取<code>&lt;canvas&gt;</code>DOM对象.</li>
+<li><p>调用Canvas对象的getContext()方法,返回一个CanvasRenderingContext2D对象.</p>
+
+<pre><code> var ctx = Canvas对象.getContext('2d');
+</code></pre></li>
+<li><p>调用CanvasRenderingContext2D对象的方法进行绘图.</p></li>
+</ol>
+
+
+<p>这部分API非常多,用法这里不主要阐述,后面有时间会单独总结.总的来说,当你的网页功能有绘图的话,这会非常重要.</p>
+
+<h1>5 HTML5 多媒体支持</h1>
+
+<p>简单使用</p>
+
+<pre><code>&lt;!-- 音频 --&gt;
+&lt;audio src="demo.ogg" controls&gt;
+    你的浏览器不支持audio
+&lt;/audio&gt;
+
+&lt;!--视频--&gt;
+&lt;video src="movie.webm" controls&gt;
+    你的浏览器不支持video元素
+&lt;/video&gt;
+</code></pre>
+
+<p>audio推荐使用OGG Vovis格式</p>
+
+<p>video推荐使用VP8格式.</p>
+
+<h2>5.1 audio和video支持的属性</h2>
+
+<ol>
+<li>src: 地址.</li>
+<li>autoplay: 指定了属性装载完成后是否自动播放</li>
+<li>controls: 指定了属性就有控制条.</li>
+<li>loop: 指定了该属性循环播放.</li>
+<li><p>preload 是否预加载,指定了autoplay,此属性无作用.</p>
+
+<p> 5.1 auto: 预加载音频 视频</p>
+
+<p> 5.2 metadata: 只预加载音频 视频元数据.既媒体字节数,第一帧,播放列表,持续时间.</p>
+
+<p> 5.3 none 不预加载.</p></li>
+<li><p>poster: 只对video有效,指定一个图片url,开始播放前,显示这张图片.</p></li>
+</ol>
+
+
+<h2>5.2 audio和video可包含标签</h2>
+
+<ol>
+<li><p><code>&lt;source ../&gt;</code> 浏览器会根据自己情况选择格式.</p>
+
+<p> 1.1 src: 地址</p>
+
+<p> 1.2 type: 播放格式.</p></li>
+</ol>
+
+
+<h2>5.3 JS控制媒体播放</h2>
+
+<p>DOM获得对象分别是<code>HTMLAudioElement</code>或<code>HTMLVideoElement</code>,支持的方法有.</p>
+
+<ol>
+<li>play(): 播放.</li>
+<li>pause(): 暂停</li>
+<li>load(): 重新装载.</li>
+<li><p>canPlayType(type): 判断能否播放type格式的资源,type可指定MIME字符串/codecs属性,多个格式用<code>,</code>分割,返回值有</p>
+
+<p> 4.1 probably: 该浏览器支持type格式.</p>
+
+<p> 4.2 maybe: 可能支持- -..</p>
+
+<p> 4.3 空字符串: 不支持.</p></li>
+</ol>
+
+
+<p>在这里写一个播放多个音乐的JS函数</p>
+
+<pre><code>var musics =[
+    "K.ogg",
+    "404_K.ogg",
+];
+var index = 0;
+window.onload =function(){
+    var player = Audio的DOM对象.
+    palyer.src=musics[index];
+    //onended在资源播放完后后触发.
+    player.onended = function(){
+        player.src =musics[++indx % musics.length];
+        player.paly();
+    }
+
+}       
+</code></pre>
+
+<p><code>HTMLAudioElement</code>或<code>HTMLVideoElement</code>包含大量属性和时间监听.这里就不一一列举了.</p>
 ]]></content>
   </entry>
   
