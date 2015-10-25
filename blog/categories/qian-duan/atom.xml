@@ -4,7 +4,7 @@
   <title><![CDATA[Category: 前端 | K]]></title>
   <link href="http://mzkmzk.github.io/blog/categories/qian-duan/atom.xml" rel="self"/>
   <link href="http://mzkmzk.github.io/"/>
-  <updated>2015-10-25T19:22:16+08:00</updated>
+  <updated>2015-10-25T21:35:05+08:00</updated>
   <id>http://mzkmzk.github.io/</id>
   <author>
     <name><![CDATA[K]]></name>
@@ -372,7 +372,7 @@ document.ondrop = function(evt){
 
 <ol>
 <li>dropEffect: 设置或返回拖放目标上允许的拖放行为,属性值有<code>none(拖动元素不能放到本元素中)</code>,<code>copy</code>,<code>link</code>,<code>move</code>之一.且行为需要是effectAllowed中允许的行为</li>
-<li>effectAllowed: 设置或返回被拖动元素允许发生的拖动行为,属性有<code>none(不允许拖动本元素)</code>,<code>copy</code>,<code>link</code>,<code>move</code>,<code>copyLink</code>,<code>copyMove</code>,<code>linkMove</code>,<code>all</code>,<code>uninitalized</code></li>
+<li>effectAllowed: 设置或返回被拖动元素允许发生的拖动行为,属性有<code>none(不允许拖动本元素)</code>,<code>copy</code>,<code>link</code>,<code>move</code>,<code>copyLink</code>,还有<code>copyMove</code>,<code>linkMove</code>,<code>all</code>和<code>uninitalized</code></li>
 <li>items: 返回DataTransferItems对象,该对象代表了拖放数据.</li>
 <li><p>setDragImage(element,x,y): element代表指定的元素,x表示图标与鼠标的水平距离,y代表纵向距离.</p>
 
@@ -425,7 +425,7 @@ var mark = function(evt){
 
 <p> 1.2 multipart/form-data: 二进制流 一般上传文件时使用</p>
 
-<p> 1.3 text/plain 当表单的action未<a href="&#x6d;&#x61;&#x69;&#x6c;&#x74;&#x6f;&#x3a;&#85;&#82;&#x4c;">&#x55;&#82;&#x4c;</a> 发送邮件时,采用这种方式可能比较方便</p></li>
+<p> 1.3 text/plain 当表单的action未<a href="&#x6d;&#97;&#105;&#108;&#x74;&#111;&#58;&#x55;&#82;&#x4c;">&#85;&#82;&#76;</a> 发送邮件时,采用这种方式可能比较方便</p></li>
 <li><p>target: 表单也可以设置target.</p></li>
 </ol>
 
@@ -999,7 +999,7 @@ div&gt;.a{...}
 <ol>
 <li><p>结构性伪类选择器</p>
 
-<p> 1.1 Selector:rooot: HTML元素中,永远指向<code>&lt;html.../&gt;</code>元素.</p>
+<p> 1.1 Selector:root: HTML元素中,永远指向<code>&lt;html.../&gt;</code>元素.</p>
 
 <p> 1.2 Selector:first-child: 匹配其父元素的第一个节点.</p>
 
@@ -1250,7 +1250,7 @@ document.getElementById("id").className=class名称;
 <li><p>定义服务器字体</p>
 
 <pre><code> &lt;!-- src ...;后可跟字体样式属性 --&gt;
- @font-fave {
+ @font-face {
      font-family: 404_K;
      src: url(url) format("字体格式");
      font-weight: blod;
@@ -1261,7 +1261,7 @@ document.getElementById("id").className=class名称;
 
 <h3>2.4.1 优先使用客户端字体</h3>
 
-<pre><code>    @font-fave {
+<pre><code>    @font-face {
         font-family: 404_K;
         src: location("微软雅黑"),url(url) format("字体格式");
         font-weight: blod;
