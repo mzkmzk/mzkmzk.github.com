@@ -4,7 +4,7 @@
   <title><![CDATA[K]]></title>
   <link href="http://mzkmzk.github.io/atom.xml" rel="self"/>
   <link href="http://mzkmzk.github.io/"/>
-  <updated>2015-10-24T19:04:29+08:00</updated>
+  <updated>2015-10-25T10:08:33+08:00</updated>
   <id>http://mzkmzk.github.io/</id>
   <author>
     <name><![CDATA[K]]></name>
@@ -12,6 +12,266 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[疯狂Html+CSS+JS 中HTML5总结]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/10/24/amazeing-html5/"/>
+    <updated>2015-10-24T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/10/24/amazeing-html5</id>
+    <content type="html"><![CDATA[<!--more-->
+
+
+<h1>0总结</h1>
+
+<h1>1. HTML5简介</h1>
+
+<p>HTML,Hyper Text Markup Language.(How To Make Love - -.)</p>
+
+<p>标记H5.</p>
+
+<pre><code>&lt;!DOCTYPE html&gt;
+</code></pre>
+
+<p>作者的愤怒.</p>
+
+<pre><code>不要再&lt;html&gt;和&lt;head&gt;、&lt;/head&gt;和&lt;body&gt;还有&lt;/body&gt;和&lt;/html&gt;插任何内容.      
+</code></pre>
+
+<p>验证HTML是否符合规范<a href="http://validator.w3.org/">http://validator.w3.org/</a>.</p>
+
+<h1>2. HTML5常用标签和属性.</h1>
+
+<h2>2.1 HTML常用属性</h2>
+
+<h3>2.1.1文本格式化元素</h3>
+
+<ol>
+<li><code>&lt;i&gt;:</code> 斜体.</li>
+<li><code>&lt;em&gt;:</code> 强调文本.</li>
+<li><code>&lt;strong&gt;|&lt;b&gt;:</code> 粗体.</li>
+<li><code>&lt;small&gt;:</code> 小号字体.</li>
+<li><code>&lt;sup&gt;:</code> 上标</li>
+<li><code>&lt;sub&gt;:</code> 下标</li>
+<li><code>&lt;bdo&gt;:</code> 文本方向 设定属性dir为ltr/rtl(反着来)</li>
+</ol>
+
+
+<h3>2.1.2 语义相关元素</h3>
+
+<ol>
+<li><code>&lt;abbr&gt;:</code> 表示缩写,可定义title,表示全写,鼠标移上去会显示一次title.</li>
+<li><code>&lt;address&gt;:</code> 表示地址,会斜体显示.</li>
+<li><code>&lt;blockquote&gt;:</code> 表示定义引用很长的文本,会缩进显示,属性有cite指定该文应用的url.</li>
+<li><code>&lt;q&gt;:</code> 定义短的引用文本.</li>
+<li><code>&lt;cite&gt;:</code> 表示作品(书,电影,歌曲).</li>
+<li><code>&lt;code&gt;:</code> 表示代码.</li>
+<li><code>&lt;dfn&gt;:</code> 定义专业术语,一般会粗体/斜体显示.</li>
+<li><code>&lt;del&gt;</code>: 表示删除的文本,一般会中画线显示.</li>
+<li><p><code>&lt;ins&gt;:</code> 定义文档插入的文本,一般会下画线显示.</p>
+
+<p> del和ins结合使用有文档修订的效果,这两个属性都有cite定义一个url解释删除/插入的原因,datetime表示删除/插入的时间.</p></li>
+<li><p><code>&lt;pre&gt;:</code> 表示元素内已经预格式化了,该标签内的空格 回车 tab和其他格式的字符都会比保留下来.</p></li>
+<li><code>&lt;samp&gt;:</code> 用于定义示范文本内容.</li>
+<li><code>&lt;var&gt;:</code> 定义变量,一般斜体显示.</li>
+</ol>
+
+
+<h3>2.1.3 超链接和描点</h3>
+
+<p>a标签属性</p>
+
+<ol>
+<li><p>href: 关联资源.</p>
+
+<p> 语法规则<code>scheme://host.domain:port/path/filename</code></p>
+
+<p> scheme(因特网服务类型): 常见有https http file ftp.还有</p>
+
+<pre><code> 1. news: 访问新闻组上的文件.
+
+ 2. telnet: 访问Telnet连接.
+
+ 3. gopher: 访问远程Gopher服务器上的文件.
+
+ 4. mailto: 发送邮件
+</code></pre>
+
+<p> host: 指定此域中的主机,HTTP默认主机为www.</p></li>
+<li><p>target: 如何显示关联资源</p>
+
+<p> 2.1 _self: 自身.</p>
+
+<p> 2.2 _blank: 新窗口.</p>
+
+<p> 2.3 _top: 顶层框架 一般用于含有iframe等标签的时候使用.</p>
+
+<p> 2.4 _parent: 父层显示.</p></li>
+<li><p>media: 指定媒体类型(HTML5新增).</p></li>
+<li>name: 命名描点.<code>&lt;a name="K"&gt;</code>.</li>
+</ol>
+
+
+<h3>2.1.4 列表相关元素</h3>
+
+<ol>
+<li><code>&lt;ul&gt;:</code> 无序列表.</li>
+<li><p><code>&lt;ol&gt;:</code> 有序列表.</p>
+
+<p> 2.1 start: 起始数字 1/A等.</p>
+
+<p> 2.2 reversed: 反着排序.</p></li>
+<li><p><code>&lt;li&gt;:</code> 列表项.</p></li>
+<li><code>&lt;dl&gt;:</code> 定义列表.</li>
+<li><code>&lt;dt&gt;:</code> 标题列表项.</li>
+<li><code>&lt;dd&gt;:</code> 定义普通列表项.</li>
+</ol>
+
+
+<h3>2.1.5 图像相关属性</h3>
+
+<p>img新增usemap属性.</p>
+
+<ol>
+<li><code>&lt;map&gt;:</code> 定义图片映射,包含多个<code>&lt;area&gt;</code>.</li>
+<li><p><code>&lt;area&gt;:</code> 定义图片映射区域.特殊属性有</p>
+
+<p> 2.1 shape: 默认为rect 还有circle和ploy属性.</p>
+
+<p> 2.2 coords: 多个坐标,确定区域位置.</p>
+
+<p> 2.3 href: 链接资源.</p>
+
+<p> 2.4 alt: 提供图片信息.</p>
+
+<p> 2.5 target.</p>
+
+<p> 2.6 media.</p></li>
+</ol>
+
+
+<p>例子:</p>
+
+<pre><code>&lt;img usemap="#test" .../&gt;
+
+&lt;map name="test" id="test"&gt;
+    &lt;area shape="cicle" coords="57,55,25" href...&gt;
+    &lt;area shape="poloy" coords="188,28,185,50,200,74,244,72,246,51 ..."&gt;
+&lt;/map&gt;  
+</code></pre>
+
+<h3>2.1.6 表格相关属性</h3>
+
+<ol>
+<li><code>&lt;caption&gt;:</code> 定义表格标题,智能包含文本 图片 超链接 文本格式元素 和表单控件.</li>
+<li><code>&lt;colgroup&gt;:</code> 此标签智能包含在<code>&lt;table&gt;/&lt;colgroup&gt;</code>中,用来包含多个<code>&lt;col&gt;</code></li>
+<li><code>&lt;col&gt;</code>: 用于指定一列或多列的样式.span属性控制控制几列.</li>
+<li><code>&lt;thead&gt;:</code> 定义表格头.</li>
+<li><code>&lt;tbody&gt;:</code> 定义表格体智能直接包含<code>&lt;tr&gt;</code>.</li>
+<li><code>&lt;tfoot&gt;:</code> 定义表格腿.</li>
+<li><code>&lt;tr&gt;</code>: 一行</li>
+<li><code>&lt;th&gt;:</code> 定义页眉单元格.</li>
+<li><p><code>&lt;td&gt;:</code>单元格,属性有:</p>
+
+<p> 9.1 colspan: 单元格夸几列</p>
+
+<p> 9.2 rowspan: 单元格夸几行</p></li>
+</ol>
+
+
+<p>例子</p>
+
+<pre><code>&lt;!-- 书名列宽为160px 作者和价格列宽度为100px --&gt;
+&lt;table&gt;
+    &lt;caption&gt;标题&lt;/caption&gt;
+    &lt;colgroup&gt;
+        &lt;col style="width :160px"&gt;
+        &lt;col span="2" style="width:100px"&gt;
+    &lt;/colgroup&gt; 
+    &lt;thead&gt;
+        &lt;tr&gt;
+            &lt;th&gt;书名&lt;/th&gt;
+            &lt;th&gt;作者&lt;/th&gt;
+            &lt;th&gt;价格&lt;/th&gt;
+        &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tr&gt;
+        &lt;td&gt;程序员把妹&lt;td/&gt;
+        &lt;td&gt;K&lt;td/&gt;
+        &lt;td&gt;1024&lt;td/&gt;
+    &lt;/tr&gt;
+    ...
+    &lt;tfoot&gt;
+        &lt;tr&gt;
+            &lt;td&gt;现总计: 2本图书&lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/tfoot&gt;
+</code></pre>
+
+<h3>2.1.7 HTML5新增通用属性</h3>
+
+<ol>
+<li>contentEditable属性: 此值为true,组件可随意编辑.可继承.</li>
+<li>isContetnEditable属性: 若处于可编辑状态,返回true.</li>
+<li>designMode: 默认为off 设为on时,真个页面都可编辑(和在body设置contentEditable为true类似).</li>
+<li>spellcheck: 当true时,用户输入的内容会进行单词拼接检查.</li>
+<li>hidden: true/false,其实不建议用,样式还是给CSS控制吧.</li>
+</ol>
+
+
+<h2>2.2 HTML5 新增常用元素</h2>
+
+<h3>2.2.1 文档结构元素</h3>
+
+<p>此类元素其实只负责分块,其实无实际作用.只是友好提示程序员这是一块内容.</p>
+
+<ol>
+<li><code>&lt;article&gt;:</code> 用于展示一个整体内容,一篇文章 一条回复等.</li>
+<li><code>&lt;nav&gt;:</code> 导航栏(边导航,页面导,底部导)标签.</li>
+<li><code>&lt;header&gt;:</code> 页面顶部.</li>
+<li><code>&lt;hgroup&gt;:</code> 定义多个标题时</li>
+<li><code>&lt;section&gt;:</code> 内容分块.可设置cite属性.</li>
+<li><code>&lt;aside&gt;:</code> 专门用于定义当前页面的附属信息,一般用作侧边栏.一般放在<code>&lt;footer&gt;</code>之前.</li>
+<li><code>&lt;figure&gt;:</code> 用于一块图片区域,可包含一个<code>&lt;figcaption&gt;</code></li>
+<li><code>&lt;figcaption&gt;:</code> 作为图片区域的标题.</li>
+<li><code>&lt;footer&gt;</code>: 底部.</li>
+</ol>
+
+
+<h3>2.2.2 语义相关元素</h3>
+
+<ol>
+<li><code>&lt;mark&gt;:</code> 重点关注内容</li>
+<li><code>&lt;time&gt;:</code> 指定时间,里面应该包含一个<code>datetime</code>属性指定符合<code>yyyy-MM-ddTHH:mm</code>格式的时间</li>
+<li><code>&lt;details&gt;:</code>  用于展示某个主题的时间,可包含<code>&lt;summary&gt;</code>使用.</li>
+<li><code>&lt;summary&gt;:</code> 作为details的摘要元素.</li>
+</ol>
+
+
+<h3>2.2.3 特殊功能的元素</h3>
+
+<ol>
+<li><p><code>&lt;meter&gt;:</code>用于表示一个已知最大值和最小值的计数仪表,属性皆可浮点</p>
+
+<p> 1.1 value: 当前值.</p>
+
+<p> 1.2 min: 最小值.</p>
+
+<p> 1.3 max: 最大值.</p>
+
+<p> 1.4 low: 指定范围的最小值.</p>
+
+<p> 1.5 high: 指定范围的最小值.</p>
+
+<p> 1.6 optimum: 指定有效范围的最佳值,若大于high,表示当前值越大越好,若小于low,则表示当前值越少越好.</p></li>
+<li><p><code>&lt;progress&gt;:</code> 用于表示一个进度条.</p>
+
+<p> 2.1 max: 进度条完成时的值.</p>
+
+<p> 2.2 value: 当前值.</p></li>
+</ol>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[CSS特效方法累积]]></title>
@@ -55,9 +315,9 @@ filter: gray;
   
   <entry>
     <title type="html"><![CDATA[修改Bootstrap 记录]]></title>
-    <link href="http://mzkmzk.github.io/blog/2015/10/20/bottstrap_update.markdo/"/>
+    <link href="http://mzkmzk.github.io/blog/2015/10/20/bottstrap_update/"/>
     <updated>2015-10-20T11:37:40+08:00</updated>
-    <id>http://mzkmzk.github.io/blog/2015/10/20/bottstrap_update.markdo</id>
+    <id>http://mzkmzk.github.io/blog/2015/10/20/bottstrap_update</id>
     <content type="html"><![CDATA[<h1>1. 设置最大宽度</h1>
 
 <p>因为设计图主题显示区域为967 但是Bootstrap在1200+分辨率下 .container的宽度为1170,所以需要修改_variable.scss</p>
@@ -104,9 +364,9 @@ $container-large-desktop:      (937px + $grid-gutter-width) !default;
   
   <entry>
     <title type="html"><![CDATA[疯狂Html+CSS+JS 中CSS总结]]></title>
-    <link href="http://mzkmzk.github.io/blog/2015/10/18/amazeing-css.markdwon/"/>
+    <link href="http://mzkmzk.github.io/blog/2015/10/18/amazeing-css/"/>
     <updated>2015-10-18T11:37:40+08:00</updated>
-    <id>http://mzkmzk.github.io/blog/2015/10/18/amazeing-css.markdwon</id>
+    <id>http://mzkmzk.github.io/blog/2015/10/18/amazeing-css</id>
     <content type="html"><![CDATA[<!--more-->
 
 
@@ -182,7 +442,7 @@ E#xx{...}
 <pre><code>/* E为可选是否填写指定元素,my_class为指定lcass */
 [E].my_class{...}       
 
-/* class同时包含class1.class2*/
+/* class同时包含class1.class2 */
 .class1.class2{...}
 </code></pre>
 
@@ -191,19 +451,19 @@ E#xx{...}
 <pre><code>/* div内所有class为a的元素起作用,无论元素是否为子元素 */
 div .a{...} 
 
-/*注意 包含关系有空格,同时满足关系无空格*/
+/*注意 包含关系有空格,同时满足关系无空格 */
 .class1 .class2
 </code></pre>
 
 <h3>1.2.6 子选择器</h3>
 
-<pre><code>/* 仅对div的子元素且class为a的元素起作用*/
+<pre><code>/* 仅对div的子元素且class为a的元素起作用 */
 div&gt;.a{...} 
 </code></pre>
 
 <h3>1.2.7 兄弟选择器</h3>
 
-<pre><code>/* id为android的标签 之后出现的且class为long的同级元素*/
+<pre><code>/* id为android的标签 之后出现的且class为long的同级元素 */
 #android ~ .long{...}   
 </code></pre>
 
@@ -218,12 +478,12 @@ div&gt;.a{...}
 <ol>
 <li>:first-letter</li>
 <li>:first-line</li>
-<li>before</li>
-<li>after</li>
+<li>:before</li>
+<li>:after</li>
 </ol>
 
 
-<p>:first-letter和first-line可实现首字大写与首行大写之类的问题</p>
+<p><code>:first-letter</code>和<code>:first-line</code>可实现首字大写与首行大写之类的问题</p>
 
 <p>注意,这两个伪属性只对块元素<code>div,p,section</code>等元素起作用,对内嵌<code>span</code>等必须设定heihht与width、或postition:absolute、或display:block.</p>
 
@@ -237,7 +497,7 @@ div&gt;.a{...}
 }
 </code></pre>
 
-<p>:before与:after用于在指定元素前/后插入内容</p>
+<p><code>:before</code>与<code>:after</code>用于在指定元素前/后插入内容,参考下面的内容相关属性.</p>
 
 <h3>1.2.10 内容相关属性</h3>
 
@@ -249,7 +509,7 @@ div&gt;.a{...}
 <li><p>counter-rest: 重置计数器.</p>
 
 <pre><code> eg:
- &lt;!-- 子div前添加文字和设置样式--&gt;
+ &lt;!-- 子div前添加文字和设置样式 --&gt;
  div&gt;div:before{
      content: '文字';
      colol: blue;
@@ -260,8 +520,8 @@ div&gt;.a{...}
      content:url("K.gif");
  }
 
- &lt;!-- 配合quetos 对的...其实这属性貌似并没神马卵用..--&gt;
- &lt;!-- 是的,你没猜错..其实close-quote写在before里也是可以的..--&gt;
+ &lt;!-- 配合quetos 对的...其实这属性貌似并没神马卵用.. --&gt;
+ &lt;!-- 是的,你没猜错..其实close-quote写在before里也是可以的.. --&gt;
  div&gt;div{
      quotes: "&lt;&lt;" "&gt;&gt;";
  }
@@ -330,17 +590,17 @@ div&gt;.a{...}
 
 <p> 1.6 Selector:only-child: 匹配选择器,而且是其父元素唯一的节点.</p>
 
-<p> 1.7 Selector:first-of-type: 匹配选择器,而且是其同类型的兄弟元素中的第一个元素</p>
+<p> 1.7 Selector:first-of-type: 匹配选择器,而且是其同类型的兄弟元素中的第一个元素.</p>
 
-<p> 1.8 Selector:last-of-type: 匹配选择器,而且是其同类型的兄弟元素中的最后一个元素</p>
+<p> 1.8 Selector:last-of-type: 匹配选择器,而且是其同类型的兄弟元素中的最后一个元素.</p>
 
-<p> 1.9 Selecttor:nth-of-type(n): 匹配选择器,而且是其同类型的兄弟元素中的第n个元素</p>
+<p> 1.9 Selecttor:nth-of-type(n): 匹配选择器,而且是其同类型的兄弟元素中的第n个元素.</p>
 
-<p> 1.10 Selector:nth-last-of-type(n): 匹配选择器,而且是其同类型的兄弟元素中的倒数第n个元素</p>
+<p> 1.10 Selector:nth-last-of-type(n): 匹配选择器,而且是其同类型的兄弟元素中的倒数第n个元素.</p>
 
-<p> 1.11 Selector:only-of-type: 匹配选择器,而且是其同类型的兄弟元素的唯一一个元素</p>
+<p> 1.11 Selector:only-of-type: 匹配选择器,而且是其同类型的兄弟元素的唯一一个元素.</p>
 
-<p> 1.12 Selector:only:empty: 匹配选择器,而且其内部没有任何子元素(包括文本)的元素</p>
+<p> 1.12 Selector:only:empty: 匹配选择器,而且其内部没有任何子元素(包括文本)的元素.</p>
 
 <p> 拿first-child和first-of-type举例</p>
 
@@ -474,7 +734,7 @@ document.getElementById("id").className=class名称;
 
 <p>font-size-adjust用调节同样字号不同字体的效果.</p>
 
-<p>font-size-adjust通过设定aspect值从而控制不同字体的喜爱小.</p>
+<p>font-size-adjust通过设定aspect值从而控制不同字体的大小.</p>
 
 <p>aspect等于字体小写x的高度除以该字体的大小.</p>
 
@@ -555,11 +815,12 @@ document.getElementById("id").className=class名称;
 
 <p>word-break和word-wrap区别:</p>
 
-<p>word-break: break-all:会让每一行文本最后一个单词换行.(不浪费一点空间)</p>
+<ol>
+<li><p>word-break: break-all:会让每一行文本最后一个单词换行.(不浪费一点空间)</p></li>
+<li><p>word-wrap: break-word:会让太长单词之前自动换行.</p></li>
+<li><p>情况很多,不好理解.具体参考<a href="http://www.cnblogs.com/2050/archive/2012/08/10/2632256.html">http://www.cnblogs.com/2050/archive/2012/08/10/2632256.html</a></p></li>
+</ol>
 
-<p>word-wrap: break-word:会让太长单词之前自动换行.</p>
-
-<p>情况很多,不好理解.具体参考<a href="http://www.cnblogs.com/2050/archive/2012/08/10/2632256.html">http://www.cnblogs.com/2050/archive/2012/08/10/2632256.html</a></p>
 
 <h2>2.4 服务器字体</h2>
 
@@ -3757,59 +4018,6 @@ public static function with($relations)
     <content type="html"><![CDATA[<h3>参考链接</h3>
 
 <p>高大上的API<a href="https://phpunit.de/manual/current/zh_cn/">https://phpunit.de/manual/current/zh_cn/</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[php Composer 入门]]></title>
-    <link href="http://mzkmzk.github.io/blog/2015/09/16/php-composer/"/>
-    <updated>2015-09-16T11:37:40+08:00</updated>
-    <id>http://mzkmzk.github.io/blog/2015/09/16/php-composer</id>
-    <content type="html"><![CDATA[<h3>安装</h3>
-
-<pre><code>curl -sS https://getcomposer.org/installer | php
-sudo mv ~/Learning/php/Composer/composer.phar  /usr/local/bin/composer
-composer //即可
-</code></pre>
-
-<h3>安装phpUnit</h3>
-
-<p>在项目下新建<code>composer.json</code>,配置号需要的安装包</p>
-
-<pre><code>{
-    "require-dev": {
-        "phpunit/phpunit-selenium": "&gt;=1.2"
-    }
-}
-</code></pre>
-
-<p>安装</p>
-
-<pre><code>cd 项目目录
-composer.phar install
-
-//一开始是这样的
-Loading composer repositories with package information
-Installing dependencies (including require-dev)
-Failed to decode response: zlib_decode(): data error
-Retrying with degraded mode, check https://getcomposer.org/doc/articles/troubleshooting.md#degraded-mode for more info
-
-//后面再等等好了
-</code></pre>
-
-<h3>设置全局Composer</h3>
-
-<pre><code>composer global [全局组件]
-</code></pre>
-
-<h3>使用Composer中Vendor命令</h3>
-
-<pre><code>PATH="/Users/maizhikun/.composer/vendor/bin/:${PATH}"
-</code></pre>
-
-<h3>参考链接</h3>
-
-<p>安装参考<a href="http://www.phpcomposer.com/">http://www.phpcomposer.com/</a></p>
 ]]></content>
   </entry>
   

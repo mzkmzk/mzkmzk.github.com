@@ -376,7 +376,7 @@ E#xx{...}
 <pre><code>/* E为可选是否填写指定元素,my_class为指定lcass */
 [E].my_class{...}       
 
-/* class同时包含class1.class2*/
+/* class同时包含class1.class2 */
 .class1.class2{...}
 </code></pre>
 
@@ -385,19 +385,19 @@ E#xx{...}
 <pre><code>/* div内所有class为a的元素起作用,无论元素是否为子元素 */
 div .a{...} 
 
-/*注意 包含关系有空格,同时满足关系无空格*/
+/*注意 包含关系有空格,同时满足关系无空格 */
 .class1 .class2
 </code></pre>
 
 <h3>1.2.6 子选择器</h3>
 
-<pre><code>/* 仅对div的子元素且class为a的元素起作用*/
+<pre><code>/* 仅对div的子元素且class为a的元素起作用 */
 div&gt;.a{...} 
 </code></pre>
 
 <h3>1.2.7 兄弟选择器</h3>
 
-<pre><code>/* id为android的标签 之后出现的且class为long的同级元素*/
+<pre><code>/* id为android的标签 之后出现的且class为long的同级元素 */
 #android ~ .long{...}   
 </code></pre>
 
@@ -412,12 +412,12 @@ div&gt;.a{...}
 <ol>
 <li>:first-letter</li>
 <li>:first-line</li>
-<li>before</li>
-<li>after</li>
+<li>:before</li>
+<li>:after</li>
 </ol>
 
 
-<p>:first-letter和first-line可实现首字大写与首行大写之类的问题</p>
+<p><code>:first-letter</code>和<code>:first-line</code>可实现首字大写与首行大写之类的问题</p>
 
 <p>注意,这两个伪属性只对块元素<code>div,p,section</code>等元素起作用,对内嵌<code>span</code>等必须设定heihht与width、或postition:absolute、或display:block.</p>
 
@@ -431,7 +431,7 @@ div&gt;.a{...}
 }
 </code></pre>
 
-<p>:before与:after用于在指定元素前/后插入内容</p>
+<p><code>:before</code>与<code>:after</code>用于在指定元素前/后插入内容,参考下面的内容相关属性.</p>
 
 <h3>1.2.10 内容相关属性</h3>
 
@@ -443,7 +443,7 @@ div&gt;.a{...}
 <li><p>counter-rest: 重置计数器.</p>
 
 <pre><code> eg:
- &lt;!-- 子div前添加文字和设置样式--&gt;
+ &lt;!-- 子div前添加文字和设置样式 --&gt;
  div&gt;div:before{
      content: '文字';
      colol: blue;
@@ -454,8 +454,8 @@ div&gt;.a{...}
      content:url("K.gif");
  }
 
- &lt;!-- 配合quetos 对的...其实这属性貌似并没神马卵用..--&gt;
- &lt;!-- 是的,你没猜错..其实close-quote写在before里也是可以的..--&gt;
+ &lt;!-- 配合quetos 对的...其实这属性貌似并没神马卵用.. --&gt;
+ &lt;!-- 是的,你没猜错..其实close-quote写在before里也是可以的.. --&gt;
  div&gt;div{
      quotes: "&lt;&lt;" "&gt;&gt;";
  }
@@ -524,17 +524,17 @@ div&gt;.a{...}
 
 <p> 1.6 Selector:only-child: 匹配选择器,而且是其父元素唯一的节点.</p>
 
-<p> 1.7 Selector:first-of-type: 匹配选择器,而且是其同类型的兄弟元素中的第一个元素</p>
+<p> 1.7 Selector:first-of-type: 匹配选择器,而且是其同类型的兄弟元素中的第一个元素.</p>
 
-<p> 1.8 Selector:last-of-type: 匹配选择器,而且是其同类型的兄弟元素中的最后一个元素</p>
+<p> 1.8 Selector:last-of-type: 匹配选择器,而且是其同类型的兄弟元素中的最后一个元素.</p>
 
-<p> 1.9 Selecttor:nth-of-type(n): 匹配选择器,而且是其同类型的兄弟元素中的第n个元素</p>
+<p> 1.9 Selecttor:nth-of-type(n): 匹配选择器,而且是其同类型的兄弟元素中的第n个元素.</p>
 
-<p> 1.10 Selector:nth-last-of-type(n): 匹配选择器,而且是其同类型的兄弟元素中的倒数第n个元素</p>
+<p> 1.10 Selector:nth-last-of-type(n): 匹配选择器,而且是其同类型的兄弟元素中的倒数第n个元素.</p>
 
-<p> 1.11 Selector:only-of-type: 匹配选择器,而且是其同类型的兄弟元素的唯一一个元素</p>
+<p> 1.11 Selector:only-of-type: 匹配选择器,而且是其同类型的兄弟元素的唯一一个元素.</p>
 
-<p> 1.12 Selector:only:empty: 匹配选择器,而且其内部没有任何子元素(包括文本)的元素</p>
+<p> 1.12 Selector:only:empty: 匹配选择器,而且其内部没有任何子元素(包括文本)的元素.</p>
 
 <p> 拿first-child和first-of-type举例</p>
 
@@ -668,7 +668,7 @@ document.getElementById("id").className=class名称;
 
 <p>font-size-adjust用调节同样字号不同字体的效果.</p>
 
-<p>font-size-adjust通过设定aspect值从而控制不同字体的喜爱小.</p>
+<p>font-size-adjust通过设定aspect值从而控制不同字体的大小.</p>
 
 <p>aspect等于字体小写x的高度除以该字体的大小.</p>
 
@@ -749,11 +749,12 @@ document.getElementById("id").className=class名称;
 
 <p>word-break和word-wrap区别:</p>
 
-<p>word-break: break-all:会让每一行文本最后一个单词换行.(不浪费一点空间)</p>
+<ol>
+<li><p>word-break: break-all:会让每一行文本最后一个单词换行.(不浪费一点空间)</p></li>
+<li><p>word-wrap: break-word:会让太长单词之前自动换行.</p></li>
+<li><p>情况很多,不好理解.具体参考<a href="http://www.cnblogs.com/2050/archive/2012/08/10/2632256.html">http://www.cnblogs.com/2050/archive/2012/08/10/2632256.html</a></p></li>
+</ol>
 
-<p>word-wrap: break-word:会让太长单词之前自动换行.</p>
-
-<p>情况很多,不好理解.具体参考<a href="http://www.cnblogs.com/2050/archive/2012/08/10/2632256.html">http://www.cnblogs.com/2050/archive/2012/08/10/2632256.html</a></p>
 
 <h2>2.4 服务器字体</h2>
 
@@ -1383,7 +1384,7 @@ div&gt;a:hover {
     <div id="comments" aria-live="polite">
 
 <!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="疯狂Html+CSS+JS 中CSS总结" data-title="疯狂Html+CSS+JS 中CSS总结" data-url="/blog/2015/10/18/amazeing-css.markdwon/"></div>
+	<div class="ds-thread" data-thread-key="疯狂Html+CSS+JS 中CSS总结" data-title="疯狂Html+CSS+JS 中CSS总结" data-url="/blog/2015/10/18/amazeing-css/"></div>
 <!-- 多说评论框 end -->
 <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 <script type="text/javascript">
