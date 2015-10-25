@@ -4,7 +4,7 @@
   <title><![CDATA[Category: 前端 | K]]></title>
   <link href="http://mzkmzk.github.io/blog/categories/qian-duan/atom.xml" rel="self"/>
   <link href="http://mzkmzk.github.io/"/>
-  <updated>2015-10-25T22:15:40+08:00</updated>
+  <updated>2015-10-25T22:17:29+08:00</updated>
   <id>http://mzkmzk.github.io/</id>
   <author>
     <name><![CDATA[K]]></name>
@@ -441,7 +441,7 @@ var mark = function(evt){
 
 <p> 1.1 隐式调用: 使用for属性关联控件的ID</p>
 
-<p> 1.2 显式调用: 用<label>&lt;框住表单控件/label></p></li>
+<p> 1.2 显式调用: 用<code>&lt;label&gt;框住表单控件&lt;/label&gt;</code></p></li>
 <li><p><code>&lt;select&gt;</code>: 下拉列表/列表框</p>
 
 <p> 2.1 multiple: 指定可多选.</p>
