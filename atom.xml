@@ -4,7 +4,7 @@
   <title><![CDATA[K]]></title>
   <link href="http://mzkmzk.github.io/atom.xml" rel="self"/>
   <link href="http://mzkmzk.github.io/"/>
-  <updated>2015-10-25T10:08:33+08:00</updated>
+  <updated>2015-10-25T11:17:31+08:00</updated>
   <id>http://mzkmzk.github.io/</id>
   <author>
     <name><![CDATA[K]]></name>
@@ -270,6 +270,8 @@
 <p> 2.2 value: 当前值.</p></li>
 </ol>
 
+
+<h2>2.3 HTML5 头部和元数据</h2>
 ]]></content>
   </entry>
   
@@ -364,9 +366,9 @@ $container-large-desktop:      (937px + $grid-gutter-width) !default;
   
   <entry>
     <title type="html"><![CDATA[疯狂Html+CSS+JS 中CSS总结]]></title>
-    <link href="http://mzkmzk.github.io/blog/2015/10/18/amazeing-css/"/>
+    <link href="http://mzkmzk.github.io/blog/2015/10/18/amazeing-css.markdown/"/>
     <updated>2015-10-18T11:37:40+08:00</updated>
-    <id>http://mzkmzk.github.io/blog/2015/10/18/amazeing-css</id>
+    <id>http://mzkmzk.github.io/blog/2015/10/18/amazeing-css.markdown</id>
     <content type="html"><![CDATA[<!--more-->
 
 
