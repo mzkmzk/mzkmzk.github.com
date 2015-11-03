@@ -7,10 +7,7 @@
 	<meta name="author" content="K">
 
 	
-	<meta name="description" content="命令行爽Eloquent cd 项目跟目录
-php artisan tinker 这样爽的好处?可以看到返回的类型和执行sql App\Models\Ready_Sample_Model::all();
-select * from `ready_samples`
-=&gt; Illuminate &hellip;">
+	<meta name="description" content="1 疑问点. save方法返回的是true/false;但是delete返回的是1/0,下面是API查的..奇怪&hellip; bool|null delete() Delete the model from the database. Return Value bool|null &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	<meta name="baidu-site-verification" content="HWyzFajtAX" />
@@ -298,6 +295,25 @@ var _hmt = _hmt || [];
 	<div id="content" class="inner"><article class="post">
 	<h2 class="title">Laravel Eloquent</h2>
 	<div class="entry-content"><!--more-->
+
+
+<h1>1 疑问点.</h1>
+
+<ol>
+<li><p>save方法返回的是true/false;但是delete返回的是1/0,下面是API查的..奇怪&hellip;</p>
+
+<pre><code> bool|null delete()
+
+ Delete the model from the database.
+
+ Return Value
+
+ bool|null   
+ Exceptions
+
+ Exception
+</code></pre></li>
+</ol>
 
 
 <p>命令行爽Eloquent</p>

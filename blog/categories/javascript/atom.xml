@@ -4,7 +4,7 @@
   <title><![CDATA[Category: javascript | K]]></title>
   <link href="http://mzkmzk.github.io/blog/categories/javascript/atom.xml" rel="self"/>
   <link href="http://mzkmzk.github.io/"/>
-  <updated>2015-10-25T22:17:29+08:00</updated>
+  <updated>2015-11-03T14:32:22+08:00</updated>
   <id>http://mzkmzk.github.io/</id>
   <author>
     <name><![CDATA[K]]></name>
@@ -40,7 +40,7 @@
 <h2>1.1 执行js代码</h2>
 
 <ol>
-<li>javascript:alert(&lsquo;执行js&rsquo;);</li>
+<li>javascript:alert(&lsquo;执行js&rsquo;);//一般放在超链接中,用户点击即执行,</li>
 <li><code>&lt;script&gt;alert("执行js")&lt;/script&gt;</code></li>
 </ol>
 
@@ -1549,6 +1549,11 @@ page_form.appendChild(document.getElementById("search_info"));
 <h3>url玩法</h3>
 
 <p><a href="http://www.cuplayer.com/player/PlayerCodeJS/2014/1218/1708.html">http://www.cuplayer.com/player/PlayerCodeJS/2014/1218/1708.html</a></p>
+
+<h3>jQuery从this获取id</h3>
+
+<pre><code>alert($(this).context.id);
+</code></pre>
 
 <h3>未消化</h3>
 ]]></content>

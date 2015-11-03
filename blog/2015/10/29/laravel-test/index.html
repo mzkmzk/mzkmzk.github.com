@@ -3,11 +3,15 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>js 函数累积 - K</title>
+	<title>Laravel 测试 - K</title>
 	<meta name="author" content="K">
 
 	
-	<meta name="description" content="jquery apihttp://jquery.bootcss.com/ 小函数 基本类型转换: parstFlat,parstInt等 select 选中项 设置select中value="paraValue"的Item为选中 document.all.objSelect.value = &hellip;">
+	<meta name="description" content="规则: 测试的类名和文件名要以Test结尾.
+方法名要以test开头.
+文件名不能重复(即使在tests的不同子目录下).
+tests目录下的TestCase.php并不能删除.然而TestCase.php文件中的$baseurl并没什么卵用.
+cd到项目中phpunit就可以执行测试了..( &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	<meta name="baidu-site-verification" content="HWyzFajtAX" />
@@ -293,207 +297,123 @@ var _hmt = _hmt || [];
 		
 	
 	<div id="content" class="inner"><article class="post">
-	<h2 class="title">Js 函数累积</h2>
-	<div class="entry-content"><p>jquery api<a href="http://jquery.bootcss.com/">http://jquery.bootcss.com/</a></p>
+	<h2 class="title">Laravel 测试</h2>
+	<div class="entry-content"><!--more-->
 
-<h3>小函数</h3>
+
+<p>规则:</p>
 
 <ol>
-<li>基本类型转换: parstFlat,parstInt等</li>
-<li></li>
+<li>测试的类名和文件名要以Test结尾.</li>
+<li>方法名要以test开头.</li>
+<li>文件名不能重复(即使在tests的不同子目录下).</li>
+<li><code>tests</code>目录下的<code>TestCase.php</code>并不能删除.然而<code>TestCase.php</code>文件中的<code>$baseurl</code>并没什么卵用.</li>
+<li><code>cd</code>到项目中phpunit就可以执行测试了..(对了 官网doucment的<code>php artisan make:test UserTest</code>是无法执行了,作者也表示会修改Document或在未来添加这个命令).</li>
 </ol>
 
 
-<h3>select 选中项</h3>
+<p>来一发Demo.</p>
 
-<pre><code>设置select中value="paraValue"的Item为选中    
-document.all.objSelect.value = objItemValue;  
-</code></pre>
+<pre><code>&lt;?php
 
-<p>参考链接<a href="http://www.cnblogs.com/Herist/archive/2007/09/24/903890.html">http://www.cnblogs.com/Herist/archive/2007/09/24/903890.html</a></p>
+use Illuminate\Foundation\Testing\WithoutMiddleware;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 
-<h3>Dom元素加载完毕后调用方法 ready()</h3>
-
-<pre><code>$(document).ready(function(){
-    $(".btn1").click(function(){
-        $("p").slideToggle();
-    });
-});
-</code></pre>
-
-<p>参考链接<a href="http://www.w3school.com.cn/jquery/event_ready.asp">http://www.w3school.com.cn/jquery/event_ready.asp</a></p>
-
-<h3>jquery 控制css</h3>
-
-<p>通过控制class为button_left的鼠标移入动作把id为up_page设置为可见</p>
-
-<pre><code>$(".button_left").mouseover(function(){
-$("#up_page").css("visibility","visible");
-});
-</code></pre>
-
-<h3>js动态添加 from表单元素</h3>
-
-<pre><code>//from_this参数作用为Onsubmit事件传递过来的from表单 或者通过id获取也可以
-function  inser_Submit(from_this){
-     var NFC_ID=document.createElement("input");
-     NFC_ID.type="hidden";
-     NFC_ID.name="NFC_ID";
-     NFC_ID.value=document.getElementById("NFCID").value;
-     from_this.appendChild(NFC_ID);
-}   
-</code></pre>
-
-<h3>js设置cookie</h3>
-
-<pre><code>document.cookie="key=value; path=/"
-</code></pre>
-
-<h3>form表单动态添加子成员</h3>
-
-<pre><code>var page_form =document.createElement("form");
-page_form.appendChild(document.getElementById("search_type"));
-page_form.appendChild(document.getElementById("search_cancer_type"));
-page_form.appendChild(document.getElementById("search_info"));
-</code></pre>
-
-<h3>函数积累</h3>
-
-<ol>
-<li>.trim();</li>
-<li>window.location.href获取当前url</li>
-<li>parseInt(String) Stirng转int</li>
-<li>string.split(&lsquo;string_split&rsquo;) 方法用于把一个字符串分割成字符串数组。</li>
-</ol>
-
-
-<h3>jqeury函数积累</h3>
-
-<ol>
-<li>addClass(&ldquo;class&rdquo;); removeClass(&ldquo;class&rdquo;); 切换class:toggleClass(&ldquo;class&rdquo;);</li>
-<li>获取内容.html(); 设置内容.html(&ldquo;内容&rdquo;);</li>
-<li>$(document).ready(function(){});document加载完后执行的函数</li>
-</ol>
-
-
-<h3>注意点</h3>
-
-<ol>
-<li>用js提交form表单时,最好用get方法,因为用post方法的话,返回上一页需要重新提交表单.</li>
-<li>jQuery的show()和hide()函数时,注意如果该空间不需要提交到form内,要<code>$("#id").attr("disabled",true);</code></li>
-</ol>
-
-
-<h3>js验证身份证</h3>
-
-<pre><code>function IdentityCodeValid(code) {
-    var city = {
-        11: "北京",
-        12: "天津",
-        13: "河北",
-        14: "山西",
-        15: "内蒙古",
-        21: "辽宁",
-        22: "吉林",
-        23: "黑龙江 ",
-        31: "上海",
-        32: "江苏",
-        33: "浙江",
-        34: "安徽",
-        35: "福建",
-        36: "江西",
-        37: "山东",
-        41: "河南",
-        42: "湖北 ",
-        43: "湖南",
-        44: "广东",
-        45: "广西",
-        46: "海南",
-        50: "重庆",
-        51: "四川",
-        52: "贵州",
-        53: "云南",
-        54: "西藏 ",
-        61: "陕西",
-        62: "甘肃",
-        63: "青海",
-        64: "宁夏",
-        65: "新疆",
-        71: "台湾",
-        81: "香港",
-        82: "澳门",
-        91: "国外 "
-    };
-    var tip = "";
-    var pass = true;
-
-    if (!city[code.substr(0, 2)]) {
-        tip = "身份证地址编码错误";
-        pass = false;
-    } else {
-        //18位身份证需要验证最后一位校验位
-        if (code.length == 18) {
-            code = code.split('');
-            //∑(ai×Wi)(mod 11)
-            //加权因子
-            var factor = [7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2];
-            //校验位
-            var parity = [1, 0, 'X', 9, 8, 7, 6, 5, 4, 3, 2];
-            var sum = 0;
-            var ai = 0;
-            var wi = 0;
-            for (var i = 0; i &lt; 17; i++) {
-                ai = code[i];
-                wi = factor[i];
-                sum += ai * wi;
-            }
-            var last = parity[sum % 11];
-            if (parity[sum % 11] != code[17]) {
-                tip = "身份证校验位错误";
-                pass = false;
-            }
-        }
+class User_Test extends TestCase
+{
+    public function testQuery()
+    {
+        $this-&gt;post('/Controller/User_Controller/query', ['id' =&gt; '1'])
+            -&gt;seeJson([
+                'username' =&gt; "admin",
+            ]);
     }
-    if (!pass) alert(tip);
-    return pass;
 }
 </code></pre>
 
-<h3>操作json</h3>
+<p>一开始我是想在测试每个方法的时候输出一个语句表示测试到哪方法,但是没找到获取哪个类的哪个方法调用了测试方法的方法- -..所以只能输出在测试哪一个类..</p>
 
-<ol>
-<li>向一个元素添加属性<code>json[i].key=value</code>;</li>
-<li>json转为String<code>JSON.stringify()</code>参考链接<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify">https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify</a></li>
-<li><p>json新增元素</p>
+<p>修改TestCase.php,增加了<code>error_log("正在测试: " . get_class($this));</code>这么一句,结果是执行了多少个测试方法就输出多少次类名&hellip;求教如何输出方法..</p>
 
-<pre><code> var title_x = [];
- var key = { "key" : value };
- title_x.push(key);
-</code></pre></li>
-<li><p>json排序<a href="http://www.cnblogs.com/breakdown/archive/2012/08/03/2619480.html">http://www.cnblogs.com/breakdown/archive/2012/08/03/2619480.html</a></p></li>
-</ol>
+<pre><code>class TestCase extends Illuminate\Foundation\Testing\TestCase
+{
+    /**
+    * The base URL to use while testing the application.
+    *
+    * @var string
+    */
+    protected $baseUrl = 'http://localhost';
 
+    /**
+    * Creates the application.
+    *
+    * @return \Illuminate\Foundation\Application
+    */
+    public function createApplication()
+    {
+        $app = require __DIR__.'/../bootstrap/app.php';
+        error_log("正在测试: " . get_class($this));
+        $app-&gt;make(Illuminate\Contracts\Console\Kernel::class)-&gt;bootstrap();
 
-<p>参考链接<a href="http://blog.csdn.net/jcx5083761/article/details/9091701">http://blog.csdn.net/jcx5083761/article/details/9091701</a></p>
-
-<h3>参考链接</h3>
-
-<p>jquery api <a href="http://api.jquery.com/">http://api.jquery.com/</a></p>
-
-<p>Web端我们有实时的JS报错监控平台<a href="https://github.com/tmallfe/tmallfe.github.io/issues/6">https://github.com/tmallfe/tmallfe.github.io/issues/6</a></p>
-
-<p>js类继承<a href="http://javascript.crockford.com/zh/inheritance.html">http://javascript.crockford.com/zh/inheritance.html</a></p>
-
-<h3>url玩法</h3>
-
-<p><a href="http://www.cuplayer.com/player/PlayerCodeJS/2014/1218/1708.html">http://www.cuplayer.com/player/PlayerCodeJS/2014/1218/1708.html</a></p>
-
-<h3>jQuery从this获取id</h3>
-
-<pre><code>alert($(this).context.id);
+        return $app;
+    }
+}
 </code></pre>
 
-<h3>未消化</h3>
+<p>额&hellip;对了重写setUp()方法会在每个测试方法之前都调用..和我们之前实现的效果一样.</p>
+
+<p>注意<code>__construct方法</code>也是每测试一个方法执行一次的.因为每个测试方法是不同的实例,如果想共享变量,请用<code>static</code>.</p>
+
+<h1>遇到的错误</h1>
+
+<ol>
+<li><p>程序报错</p>
+
+<p> 1) User_Test::test_Insert
+ ErrorException: Invalid argument supplied for foreach()</p>
+
+<p> 原因是seeJson需要返回的是JSON,当返回无法JSON格式化的数据,大多数报这个错误.</p>
+
+<p> 但可恶的是这些错误不会报到报错文件!!所以建议实践操作一次.看错误内容是神马.</p>
+
+<p> 虽然在控制台会显示报错,但是偶尔会显示不全所有报错信息.</p>
+
+<p> <a href="http://stackoverflow.com/questions/31921451/laravel-5-1-phpunit-api-test-returns-always-invalid-argument-error-foreach">参考</a>    ,</p></li>
+<li><p>伪集合数组问题</p>
+
+<pre><code> //代码
+  $this-&gt;post('/Controller/User_Controller/insert', ['id' =&gt;  $this::$id , 'username' =&gt; $this::$id])
+     -&gt;seeJson([
+         'result' =&gt; "true",
+     ]);
+
+ //报错
+ 1) User_Test::test_Insert
+ Unable to find JSON fragment ["result":"true"] within [{"result":true}].
+ Failed asserting that false is true.
+</code></pre>
+
+<p> 第一眼看上去以为是前面是数组里的属性,而后面是数组里对象的属性的原因&hellip;.万万没想到..是因为true前后的双引号的原因..在测试类中去掉就好了</p></li>
+<li><p>数组需要包含所有属性问题</p>
+
+<p> 问题是我需要检验一个对象中的部分属性,好像实现不了.我的代码</p>
+
+<pre><code>  public function test_Query()
+ {
+     $this-&gt;post('/Controller/User_Controller/query', ['id' =&gt; $this::$id])
+     -&gt;seeJson([
+         'data'   =&gt; [ 0 =&gt;['username' =&gt;  $this::$id.'_update']],
+     ]);
+ }
+
+ //测试结果
+ 1) User_Test::test_Query
+ Unable to find JSON fragment ["data":[{"username":"1137598_update"}]] within [{"current_page":1,"data":[{"created_at":"2015-10-29 18:57:13","deleted_at":"0000-00-00 00:00:00","email":"","id":1137598,"last_login_at":"0000-00-00 00:00:00","login_times":0,"name":"","phone":"","privilege":1,"status":0,"updated_at":"2015-10-29 18:57:13","username":"1137598_update"}],"from":1,"last_page":1,"next_page_url":null,"per_page":20,"prev_page_url":null,"to":1,"total":1}].
+ Failed asserting that false is true.    
+</code></pre></li>
+</ol>
+
 </div>
 
 
@@ -510,11 +430,11 @@ page_form.appendChild(document.getElementById("search_info"));
   
 
 
-<time datetime="2015-01-07T11:37:40+08:00" pubdate data-updated="true"></time></div>
+<time datetime="2015-10-29T11:37:40+08:00" pubdate data-updated="true"></time></div>
 	<div class="tags">
 
 
-	<a class='category' href='/blog/categories/javascript/'>javascript</a>
+	<a class='category' href='/blog/categories/php/'>php</a>
 
 
 </div>
@@ -546,7 +466,7 @@ page_form.appendChild(document.getElementById("search_info"));
     <div id="comments" aria-live="polite">
 
 <!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="Js 函数累积" data-title="Js 函数累积" data-url="/blog/2015/01/07/js_function/"></div>
+	<div class="ds-thread" data-thread-key="Laravel 测试" data-title="Laravel 测试" data-url="/blog/2015/10/29/laravel-test/"></div>
 <!-- 多说评论框 end -->
 <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 <script type="text/javascript">

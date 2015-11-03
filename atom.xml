@@ -4,7 +4,7 @@
   <title><![CDATA[K]]></title>
   <link href="http://mzkmzk.github.io/atom.xml" rel="self"/>
   <link href="http://mzkmzk.github.io/"/>
-  <updated>2015-10-25T22:17:29+08:00</updated>
+  <updated>2015-11-03T14:32:22+08:00</updated>
   <id>http://mzkmzk.github.io/</id>
   <author>
     <name><![CDATA[K]]></name>
@@ -12,6 +12,234 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Laravel Migrations]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/11/02/laravel-migrations/"/>
+    <updated>2015-11-02T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/11/02/laravel-migrations</id>
+    <content type="html"><![CDATA[<!--more-->
+
+
+<h1>0 目的</h1>
+
+<p>创建Migrations主要的功能是为了让团队能保住使用的数据库结构一致</p>
+
+<h1>1 开玩</h1>
+
+<ol>
+<li><p>相关的命令(<code>php artisan list</code>)</p>
+
+<pre><code> migrate:install     Create the migration repository
+ migrate:refresh     Reset and re-run all migrations
+ migrate:reset       Rollback all database migrations
+ migrate:rollback    Rollback the last database migration
+ migrate:status      Show the status of each migration
+</code></pre>
+
+<p> 创建数据库表(手动创建表不会作用.),因为输入命令后,会在verdor/composer/autoload_classmap.php里映射类.如下</p>
+
+<pre><code>     'Create_Disease_Type' =&gt; $baseDir . '/database/migrations/2015_11_02_153746_Create_Disease_Type.php',
+     'CreateInstitutes' =&gt; $baseDir . '/database/migrations/2015_11_02_143144_Create_Institutes.php',
+
+ php artisan make:migration Create_Users --create=Users  
+</code></pre></li>
+<li><p>创建基础类,设置id、时间戳和软删除.</p>
+
+<p> 一开始自己创建了个<code>Base_Table</code>,不过那样也会创建一个表,所以直接把方法写在<code>Migration</code>里</p>
+
+<pre><code> /**
+ * 增加基本属性
+ * @param Blueprint $table
+ */
+ public function add_base_attribute(Blueprint $table)
+ {
+     $table-&gt;increments('id');
+     //创建created_at和updated_at
+     $table-&gt;timestamps();
+     //创建deleted_at
+     $table-&gt;softDeletes();
+     return $table;
+ }
+</code></pre></li>
+<li><p>创建外键,注意要先定义外键属性,再设定关系.</p>
+
+<pre><code> public function up()
+ {
+     Schema::create('Institutes', function (Blueprint $table) {
+         $table-&gt;unsignedInteger('institute_ID');
+         $table-&gt;foreign('institute_ID')
+         -&gt;references('id')-&gt;on('institutes')
+         -&gt;onDelete('cascade');
+         $table = parent::add_base_attribute($table);
+     });
+ }  
+</code></pre></li>
+</ol>
+
+
+<h1>错误处理</h1>
+
+<ol>
+<li>有依赖关系的表,要把外键的表先创建.</li>
+<li><p>外键的属性类型要一致,否则会报错<code>General error: 1215 Cannot add foreign key constraint</code></p>
+
+<pre><code> //主表
+ $table-&gt;increments('id');
+
+ //从表
+ $table-&gt;unsignedInteger('institute_ID');
+     $table-&gt;foreign('institute_ID')
+     -&gt;references('id')-&gt;on('institutes')
+     -&gt;onDelete('cascade');      
+</code></pre></li>
+<li><p><code>migrations</code>类名不过有下划线</p>
+
+<p> 报错</p>
+
+<pre><code> PHP Fatal error:  Class 'CreateInstitutes' not found in /Users/maizhikun/Learning/apache_sites/HapLab_Laravel/vendor/laravel/framework/src/Illuminate/Database/Migrations/Migrator.php on line 324
+
+ [Symfony\Component\Debug\Exception\FatalErrorException]
+ Class 'CreateInstitutes' not found
+
+ //看了下报错地方的源代码.估计是下划线导致.   
+ public function resolve($file)
+ {
+     $file = implode('_', array_slice(explode('_', $file), 4));
+     $class = Str::studly($file);
+     return new $class;
+ }
+</code></pre>
+
+<p> 后来又发现了错误.最后确定了是文件名(假如有下划线)会去掉下划线(从时间之后的下划线)然后找相对应的类名.</p></li>
+</ol>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Laravel 测试]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/10/29/laravel-test/"/>
+    <updated>2015-10-29T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/10/29/laravel-test</id>
+    <content type="html"><![CDATA[<!--more-->
+
+
+<p>规则:</p>
+
+<ol>
+<li>测试的类名和文件名要以Test结尾.</li>
+<li>方法名要以test开头.</li>
+<li>文件名不能重复(即使在tests的不同子目录下).</li>
+<li><code>tests</code>目录下的<code>TestCase.php</code>并不能删除.然而<code>TestCase.php</code>文件中的<code>$baseurl</code>并没什么卵用.</li>
+<li><code>cd</code>到项目中phpunit就可以执行测试了..(对了 官网doucment的<code>php artisan make:test UserTest</code>是无法执行了,作者也表示会修改Document或在未来添加这个命令).</li>
+</ol>
+
+
+<p>来一发Demo.</p>
+
+<pre><code>&lt;?php
+
+use Illuminate\Foundation\Testing\WithoutMiddleware;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
+
+class User_Test extends TestCase
+{
+    public function testQuery()
+    {
+        $this-&gt;post('/Controller/User_Controller/query', ['id' =&gt; '1'])
+            -&gt;seeJson([
+                'username' =&gt; "admin",
+            ]);
+    }
+}
+</code></pre>
+
+<p>一开始我是想在测试每个方法的时候输出一个语句表示测试到哪方法,但是没找到获取哪个类的哪个方法调用了测试方法的方法- -..所以只能输出在测试哪一个类..</p>
+
+<p>修改TestCase.php,增加了<code>error_log("正在测试: " . get_class($this));</code>这么一句,结果是执行了多少个测试方法就输出多少次类名&hellip;求教如何输出方法..</p>
+
+<pre><code>class TestCase extends Illuminate\Foundation\Testing\TestCase
+{
+    /**
+    * The base URL to use while testing the application.
+    *
+    * @var string
+    */
+    protected $baseUrl = 'http://localhost';
+
+    /**
+    * Creates the application.
+    *
+    * @return \Illuminate\Foundation\Application
+    */
+    public function createApplication()
+    {
+        $app = require __DIR__.'/../bootstrap/app.php';
+        error_log("正在测试: " . get_class($this));
+        $app-&gt;make(Illuminate\Contracts\Console\Kernel::class)-&gt;bootstrap();
+
+        return $app;
+    }
+}
+</code></pre>
+
+<p>额&hellip;对了重写setUp()方法会在每个测试方法之前都调用..和我们之前实现的效果一样.</p>
+
+<p>注意<code>__construct方法</code>也是每测试一个方法执行一次的.因为每个测试方法是不同的实例,如果想共享变量,请用<code>static</code>.</p>
+
+<h1>遇到的错误</h1>
+
+<ol>
+<li><p>程序报错</p>
+
+<p> 1) User_Test::test_Insert
+ ErrorException: Invalid argument supplied for foreach()</p>
+
+<p> 原因是seeJson需要返回的是JSON,当返回无法JSON格式化的数据,大多数报这个错误.</p>
+
+<p> 但可恶的是这些错误不会报到报错文件!!所以建议实践操作一次.看错误内容是神马.</p>
+
+<p> 虽然在控制台会显示报错,但是偶尔会显示不全所有报错信息.</p>
+
+<p> <a href="http://stackoverflow.com/questions/31921451/laravel-5-1-phpunit-api-test-returns-always-invalid-argument-error-foreach">参考</a>    ,</p></li>
+<li><p>伪集合数组问题</p>
+
+<pre><code> //代码
+  $this-&gt;post('/Controller/User_Controller/insert', ['id' =&gt;  $this::$id , 'username' =&gt; $this::$id])
+     -&gt;seeJson([
+         'result' =&gt; "true",
+     ]);
+
+ //报错
+ 1) User_Test::test_Insert
+ Unable to find JSON fragment ["result":"true"] within [{"result":true}].
+ Failed asserting that false is true.
+</code></pre>
+
+<p> 第一眼看上去以为是前面是数组里的属性,而后面是数组里对象的属性的原因&hellip;.万万没想到..是因为true前后的双引号的原因..在测试类中去掉就好了</p></li>
+<li><p>数组需要包含所有属性问题</p>
+
+<p> 问题是我需要检验一个对象中的部分属性,好像实现不了.我的代码</p>
+
+<pre><code>  public function test_Query()
+ {
+     $this-&gt;post('/Controller/User_Controller/query', ['id' =&gt; $this::$id])
+     -&gt;seeJson([
+         'data'   =&gt; [ 0 =&gt;['username' =&gt;  $this::$id.'_update']],
+     ]);
+ }
+
+ //测试结果
+ 1) User_Test::test_Query
+ Unable to find JSON fragment ["data":[{"username":"1137598_update"}]] within [{"current_page":1,"data":[{"created_at":"2015-10-29 18:57:13","deleted_at":"0000-00-00 00:00:00","email":"","id":1137598,"last_login_at":"0000-00-00 00:00:00","login_times":0,"name":"","phone":"","privilege":1,"status":0,"updated_at":"2015-10-29 18:57:13","username":"1137598_update"}],"from":1,"last_page":1,"next_page_url":null,"per_page":20,"prev_page_url":null,"to":1,"total":1}].
+ Failed asserting that false is true.    
+</code></pre></li>
+</ol>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[疯狂Html+CSS+JS 中HTML5总结]]></title>
@@ -736,10 +964,24 @@ filter: gray;
   
   <entry>
     <title type="html"><![CDATA[修改Bootstrap 记录]]></title>
-    <link href="http://mzkmzk.github.io/blog/2015/10/20/bottstrap_update/"/>
+    <link href="http://mzkmzk.github.io/blog/2015/10/20/bootstrap_update/"/>
     <updated>2015-10-20T11:37:40+08:00</updated>
-    <id>http://mzkmzk.github.io/blog/2015/10/20/bottstrap_update</id>
-    <content type="html"><![CDATA[<h1>1. 设置最大宽度</h1>
+    <id>http://mzkmzk.github.io/blog/2015/10/20/bootstrap_update</id>
+    <content type="html"><![CDATA[<p>本文实在读&lt;&lt;Bootstrap实战>>后写的,里面实践的东西挺多,如果能照着书的代码敲一敲的话.可以满足你基本的布局需求,可是Bootstrap的JS方面提及得不多,需要好好看下源码.</p>
+
+<p>本文会写几个在实际项目中改了的地方.</p>
+
+<h1>0. 前面的工作</h1>
+
+<p>下载Bootstrap的时候不建议下载编译后的代码,下载完整项目源代码,那按模块修改模块,效果棒棒哒.主要用到下面两个工具.</p>
+
+<ol>
+<li>sass <a href="http://mzkmzk.github.io/blog/2015/10/16/sass_start/">可以参考</a></li>
+<li>grunt <a href="http://mzkmzk.github.io/blog/2015/10/16/grunt_bootstrap/">可以参考</a></li>
+</ol>
+
+
+<h1>1. 设置最大宽度</h1>
 
 <p>因为设计图主题显示区域为967 但是Bootstrap在1200+分辨率下 .container的宽度为1170,所以需要修改_variable.scss</p>
 
@@ -778,6 +1020,38 @@ $container-large-desktop:      (937px + $grid-gutter-width) !default;
 <pre><code> &lt;!-- _variables --&gt;
  $navbar-height:                    50px !default;   
 </code></pre></li>
+</ol>
+
+
+<h1>3修改轮播图</h1>
+
+<p>要做的事情</p>
+
+<ol>
+<li><p>将轮播变成三块显示,而非隐藏</p>
+
+<p> 调试过程中,最好将轮播效果取消掉.这里偷懒下,把轮播时间间隔改得大点.修改<code>carousel.js</code></p>
+
+<pre><code>   Carousel.DEFAULTS = {
+     interval: 50000000000000000000,
+     pause: 'hover',
+     wrap: true,
+     keyboard: true
+   }
+</code></pre></li>
+</ol>
+
+
+<h3>记录一些坑点</h3>
+
+<ol>
+<li><p>JS混乱</p>
+
+<p> 我导入了bootstrap.js,然后我又压缩了其代码.</p>
+
+<p> 我用的是grunt然后<code>Gruntfile.js</code>写的是<code>*.js</code>导致JS按文件名字顺序压缩,导致JS报错.</p>
+
+<p> 应该按Bootstrap官方源代码的Gruntfile.js顺序.</p></li>
 </ol>
 
 ]]></content>
@@ -906,7 +1180,7 @@ div&gt;.a{...}
 
 <p><code>:first-letter</code>和<code>:first-line</code>可实现首字大写与首行大写之类的问题</p>
 
-<p>注意,这两个伪属性只对块元素<code>div,p,section</code>等元素起作用,对内嵌<code>span</code>等必须设定heihht与width、或postition:absolute、或display:block.</p>
+<p>注意,这两个伪属性只对块元素<code>div,p,section</code>等元素起作用,对内嵌<code>span</code>等必须设定height与width、或postition:absolute、或display:block.</p>
 
 <pre><code>span{
     disply:block;
@@ -1073,6 +1347,10 @@ div&gt;.a{...}
 <li><p>特殊的伪类选择</p>
 
 <p> 3.1 Selector1:not(Selector2): 匹配符合Selector1选择器,但不符合Selector2选择器的元素</p>
+
+<pre><code> //尝试了Selector2 写了两个条件,无法筛选.然后这样就可以- -.
+ :not(.container):not(.row):not(h3) {...}
+</code></pre>
 
 <p> 3.2 Selector:target: 匹配符合Selector选择器且必须是命名描点的且正在被访问的目标选择器.</p>
 
@@ -1485,7 +1763,7 @@ top: 0; left: 0; bottom: 0; right: 0;
 <h2>4.1 布局相关属性</h2>
 
 <ol>
-<li>float: 可left/right.当设置了该属性强制display为block,它会紧靠组件的左/右,直到遇到边框/padding/margin或另外一块组件(displ为block)为止.)</li>
+<li>float: 可left/right.当设置了该属性强制display为block,它会紧靠组件的左/右,直到遇到边框/padding/margin或另外一块组件(display为block)为止.)</li>
 <li><p>clear: 设置该组件能否出现浮动组件.</p>
 
 <p> 2.1 none: 默认,你随便飘~</p>
@@ -1536,8 +1814,9 @@ top: 0; left: 0; bottom: 0; right: 0;
 
 <p> 8.6 list-item盒模型: 可以将组件转为ul等列表元素.</p>
 
-<p> 8.7 run-in盒模型: 和inline类似,但假如后面紧跟block,那么run-in会包含在后面的block中.
- 8.8 box模型: CSS3新增.当disp为box时,组件可以使用以下的属性控制box</p>
+<p> 8.7 run-in盒模型: 和inline类似,但假如后面紧跟block,那么run-in会包含在后面的block中.</p>
+
+<p> 8.8 box模型: CSS3新增.当display为box时,组件可以使用以下的属性控制box</p>
 
 <pre><code> 1. box-orient:horizontal/vertical. 
 
@@ -1819,6 +2098,14 @@ div&gt;a:hover {
     -webkit-animation-iteration-count: infinite;
 } 
 </code></pre>
+
+<h3>参考资源</h3>
+
+<ol>
+<li>特殊字符编码表<a href="http://www.jb51.net/onlineread/htmlchar.htm">http://www.jb51.net/onlineread/htmlchar.htm</a></li>
+<li>CSS学习资料网站<a href="http://zh.learnlayout.com/inline-block.html">http://zh.learnlayout.com/inline-block.html</a></li>
+</ol>
+
 ]]></content>
   </entry>
   
@@ -2438,6 +2725,11 @@ App\Models\Ready_Sample_Model {#896
   id: 2646,
   ....
 </code></pre></li>
+<li><p>新建Model</p>
+
+<pre><code> K:HapLab_Laravel maizhikun$ php artisan make:model Disease_Type_Item_Model
+ Models created successfully.
+</code></pre></li>
 </ol>
 
 ]]></content>
@@ -2449,6 +2741,25 @@ App\Models\Ready_Sample_Model {#896
     <updated>2015-10-05T11:37:40+08:00</updated>
     <id>http://mzkmzk.github.io/blog/2015/10/05/laravel-eloquent</id>
     <content type="html"><![CDATA[<!--more-->
+
+
+<h1>1 疑问点.</h1>
+
+<ol>
+<li><p>save方法返回的是true/false;但是delete返回的是1/0,下面是API查的..奇怪&hellip;</p>
+
+<pre><code> bool|null delete()
+
+ Delete the model from the database.
+
+ Return Value
+
+ bool|null   
+ Exceptions
+
+ Exception
+</code></pre></li>
+</ol>
 
 
 <p>命令行爽Eloquent</p>
@@ -2503,7 +2814,7 @@ Ready_Sample_Model::all()-&gt;sort('updated_at')
 <h2>1.1 执行js代码</h2>
 
 <ol>
-<li>javascript:alert(&lsquo;执行js&rsquo;);</li>
+<li>javascript:alert(&lsquo;执行js&rsquo;);//一般放在超链接中,用户点击即执行,</li>
 <li><code>&lt;script&gt;alert("执行js")&lt;/script&gt;</code></li>
 </ol>
 
@@ -4390,55 +4701,6 @@ public static function with($relations)
 <li>js加减乘除中运用在浮点数会不准确,需要另写方法,参考<a href="http://segmentfault.com/a/1190000000324193">http://segmentfault.com/a/1190000000324193</a></li>
 </ol>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[开发规范]]></title>
-    <link href="http://mzkmzk.github.io/blog/2015/09/21/develop_norm/"/>
-    <updated>2015-09-21T11:37:40+08:00</updated>
-    <id>http://mzkmzk.github.io/blog/2015/09/21/develop_norm</id>
-    <content type="html"><![CDATA[<h3>ALL</h3>
-
-<p>文件和文件夹用<em>,方法和变量用驼峰
-在函数名和变量名种一个</em>分割功能,描述一个功能的两个单词用驼峰</p>
-
-<p>包名 首字母大写</p>
-
-<h3>JS</h3>
-
-<h3>CSS</h3>
-
-<h3>HTML</h3>
-
-<ol>
-<li>在控件中,id绝对不能重复,要重复.宁可不设</li>
-</ol>
-
-
-<h3>Adnroid</h3>
-
-<h3>php</h3>
-
-<h3>iOS</h3>
-
-<h3>ERROR</h3>
-
-<ol>
-<li>类 方法 错误 参数;</li>
-</ol>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[phpUnit 入门]]></title>
-    <link href="http://mzkmzk.github.io/blog/2015/09/16/phpUnit_start/"/>
-    <updated>2015-09-16T11:37:40+08:00</updated>
-    <id>http://mzkmzk.github.io/blog/2015/09/16/phpUnit_start</id>
-    <content type="html"><![CDATA[<h3>参考链接</h3>
-
-<p>高大上的API<a href="https://phpunit.de/manual/current/zh_cn/">https://phpunit.de/manual/current/zh_cn/</a></p>
 ]]></content>
   </entry>
   

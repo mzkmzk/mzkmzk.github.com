@@ -3,12 +3,11 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>修改Bootstrap 记录 - K</title>
+	<title>Laravel Migrations - K</title>
 	<meta name="author" content="K">
 
 	
-	<meta name="description" content="1. 设置最大宽度 因为设计图主题显示区域为967 但是Bootstrap在1200+分辨率下 .container的宽度为1170,所以需要修改_variable.scss // Large screen / wide desktop
-// MaiZhiKun $container-large- &hellip;">
+	<meta name="description" content="0 目的 创建Migrations主要的功能是为了让团队能保住使用的数据库结构一致 1 开玩 相关的命令(php artisan list) migrate:install Create the migration repository migrate:refresh Reset and re- &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	<meta name="baidu-site-verification" content="HWyzFajtAX" />
@@ -294,46 +293,101 @@ var _hmt = _hmt || [];
 		
 	
 	<div id="content" class="inner"><article class="post">
-	<h2 class="title">修改Bootstrap 记录</h2>
-	<div class="entry-content"><h1>1. 设置最大宽度</h1>
+	<h2 class="title">Laravel Migrations</h2>
+	<div class="entry-content"><!--more-->
 
-<p>因为设计图主题显示区域为967 但是Bootstrap在1200+分辨率下 .container的宽度为1170,所以需要修改_variable.scss</p>
 
-<pre><code>// Large screen / wide desktop
-// MaiZhiKun $container-large-desktop:      (1140px + $grid-gutter-width) !default;
-$container-large-desktop:      (937px + $grid-gutter-width) !default;
-</code></pre>
+<h1>0 目的</h1>
 
-<h1>2. 修改导航条</h1>
+<p>创建Migrations主要的功能是为了让团队能保住使用的数据库结构一致</p>
 
-<p>导航栏相关样式<code>_navbar.sass</code>,相关变量<code>_variables.scss</code></p>
+<h1>1 开玩</h1>
 
 <ol>
-<li><p>默认灰改成透明</p>
+<li><p>相关的命令(<code>php artisan list</code>)</p>
 
-<pre><code> !-- _variables.scss --&gt;
- $navbar-default-bg:                transparent;
-</code></pre></li>
-<li><p>消除导航栏圆角</p>
-
-<pre><code> &lt;!-- _variables.scss --&gt;
- $border-radius-base:        0 ;
- $border-radius-large:       0 ;
- $border-radius-small:       0 ;
-</code></pre></li>
-<li><p>改变导航栏中 居中和悬浮的效果</p>
-
-<pre><code> position: absolute !important;
- top: 0; left: 0; bottom: 0; right: 0;
+<pre><code> migrate:install     Create the migration repository
+ migrate:refresh     Reset and re-run all migrations
+ migrate:reset       Rollback all database migrations
+ migrate:rollback    Rollback the last database migration
+ migrate:status      Show the status of each migration
 </code></pre>
 
-<p> 参考链接:<a href="http://blog.csdn.net/freshlover/article/details/11579669">http://blog.csdn.net/freshlover/article/details/11579669</a>
- <a href="http://www.smashingmagazine.com/2013/08/absolute-horizontal-vertical-centering-css/">http://www.smashingmagazine.com/2013/08/absolute-horizontal-vertical-centering-css/</a></p></li>
-<li><p>导航栏增加上下间距</p>
+<p> 创建数据库表(手动创建表不会作用.),因为输入命令后,会在verdor/composer/autoload_classmap.php里映射类.如下</p>
 
-<pre><code> &lt;!-- _variables --&gt;
- $navbar-height:                    50px !default;   
+<pre><code>     'Create_Disease_Type' =&gt; $baseDir . '/database/migrations/2015_11_02_153746_Create_Disease_Type.php',
+     'CreateInstitutes' =&gt; $baseDir . '/database/migrations/2015_11_02_143144_Create_Institutes.php',
+
+ php artisan make:migration Create_Users --create=Users  
 </code></pre></li>
+<li><p>创建基础类,设置id、时间戳和软删除.</p>
+
+<p> 一开始自己创建了个<code>Base_Table</code>,不过那样也会创建一个表,所以直接把方法写在<code>Migration</code>里</p>
+
+<pre><code> /**
+ * 增加基本属性
+ * @param Blueprint $table
+ */
+ public function add_base_attribute(Blueprint $table)
+ {
+     $table-&gt;increments('id');
+     //创建created_at和updated_at
+     $table-&gt;timestamps();
+     //创建deleted_at
+     $table-&gt;softDeletes();
+     return $table;
+ }
+</code></pre></li>
+<li><p>创建外键,注意要先定义外键属性,再设定关系.</p>
+
+<pre><code> public function up()
+ {
+     Schema::create('Institutes', function (Blueprint $table) {
+         $table-&gt;unsignedInteger('institute_ID');
+         $table-&gt;foreign('institute_ID')
+         -&gt;references('id')-&gt;on('institutes')
+         -&gt;onDelete('cascade');
+         $table = parent::add_base_attribute($table);
+     });
+ }  
+</code></pre></li>
+</ol>
+
+
+<h1>错误处理</h1>
+
+<ol>
+<li>有依赖关系的表,要把外键的表先创建.</li>
+<li><p>外键的属性类型要一致,否则会报错<code>General error: 1215 Cannot add foreign key constraint</code></p>
+
+<pre><code> //主表
+ $table-&gt;increments('id');
+
+ //从表
+ $table-&gt;unsignedInteger('institute_ID');
+     $table-&gt;foreign('institute_ID')
+     -&gt;references('id')-&gt;on('institutes')
+     -&gt;onDelete('cascade');      
+</code></pre></li>
+<li><p><code>migrations</code>类名不过有下划线</p>
+
+<p> 报错</p>
+
+<pre><code> PHP Fatal error:  Class 'CreateInstitutes' not found in /Users/maizhikun/Learning/apache_sites/HapLab_Laravel/vendor/laravel/framework/src/Illuminate/Database/Migrations/Migrator.php on line 324
+
+ [Symfony\Component\Debug\Exception\FatalErrorException]
+ Class 'CreateInstitutes' not found
+
+ //看了下报错地方的源代码.估计是下划线导致.   
+ public function resolve($file)
+ {
+     $file = implode('_', array_slice(explode('_', $file), 4));
+     $class = Str::studly($file);
+     return new $class;
+ }
+</code></pre>
+
+<p> 后来又发现了错误.最后确定了是文件名(假如有下划线)会去掉下划线(从时间之后的下划线)然后找相对应的类名.</p></li>
 </ol>
 
 </div>
@@ -352,11 +406,11 @@ $container-large-desktop:      (937px + $grid-gutter-width) !default;
   
 
 
-<time datetime="2015-10-20T11:37:40+08:00" pubdate data-updated="true"></time></div>
+<time datetime="2015-11-02T11:37:40+08:00" pubdate data-updated="true"></time></div>
 	<div class="tags">
 
 
-	<a class='category' href='/blog/categories/qian-duan/'>前端</a>
+	<a class='category' href='/blog/categories/php/'>php</a>
 
 
 </div>
@@ -388,7 +442,7 @@ $container-large-desktop:      (937px + $grid-gutter-width) !default;
     <div id="comments" aria-live="polite">
 
 <!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="修改Bootstrap 记录" data-title="修改Bootstrap 记录" data-url="/blog/2015/10/20/bottstrap_update/"></div>
+	<div class="ds-thread" data-thread-key="Laravel Migrations" data-title="Laravel Migrations" data-url="/blog/2015/11/02/laravel-migrations/"></div>
 <!-- 多说评论框 end -->
 <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 <script type="text/javascript">
