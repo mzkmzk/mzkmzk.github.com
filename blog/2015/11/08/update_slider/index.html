@@ -1,0 +1,499 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>jssor轮播图的使用和修改 - K</title>
+	<meta name="author" content="K">
+
+	
+	<meta name="description" content="这里使用下jssor的轮播,github地址.优势是支持手动滑动,响应式和键盘左右监听.很人性. 任务 改变光标,一开始为可移动的手势,改为默认的鼠标 $("#case_big_slider div").css("cursor","default"); 宽度100%,调整左右两图显示的大小 // &hellip;">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="baidu-site-verification" content="HWyzFajtAX" />
+	<meta name="google-site-verification" content="xf8laC_mNTP9RdWTD-O8D4yYFsMXXnGjvcWVNqfNntk" />
+	<link href="false" rel="alternate" title="K" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script async="true" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	
+	<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?1e6c60ae572d5e740a34233f4accedbd";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+</head>
+
+
+<body>
+	<header id="header" class="inner"><h1><a href="/">K</a></h1>
+<nav id="K_select">
+	<div class="alignleft menu">
+		<a class="button">Category</a>
+		<div class="container"><ul class="main">
+		
+	
+<li><a href="/blog/categories/markdown">markdown</a></li>
+
+<li><a href="/blog/categories/data">data</a></li>
+
+<li><a href="/blog/categories/php">php</a></li>
+
+<li><a href="/blog/categories/svn">svn</a></li>
+
+<li><a href="/blog/categories/octopress">octopress</a></li>
+
+<li><a href="/blog/categories/sql">sql</a></li>
+
+<li><a href="/blog/categories/j2ee">j2ee</a></li>
+
+<li><a href="/blog/categories/mac">mac</a></li>
+
+<li><a href="/blog/categories/struts2">struts2</a></li>
+
+<li><a href="/blog/categories/android">android</a></li>
+
+<li><a href="/blog/categories/hack">hack</a></li>
+
+<li><a href="/blog/categories/design">design</a></li>
+
+<li><a href="/blog/categories/eclipse">eclipse</a></li>
+
+<li><a href="/blog/categories/readme">readme</a></li>
+
+<li><a href="/blog/categories/arduino">arduino</a></li>
+
+<li><a href="/blog/categories/jquery">jquery</a></li>
+
+<li><a href="/blog/categories/javascript">javascript</a></li>
+
+<li><a href="/blog/categories/bootstrap">bootstrap</a></li>
+
+<li><a href="/blog/categories/squild">squild</a></li>
+
+<li><a href="/blog/categories/iphone">iphone</a></li>
+
+<li><a href="/blog/categories/question">question</a></li>
+
+<li><a href="/blog/categories/java">java</a></li>
+
+<li><a href="/blog/categories/photoshop">photoshop</a></li>
+
+<li><a href="/blog/categories/sqlmap">sqlmap</a></li>
+
+<li><a href="/blog/categories/python">python</a></li>
+
+<li><a href="/blog/categories/git">git</a></li>
+
+<li><a href="/blog/categories/pr">pr</a></li>
+
+<li><a href="/blog/categories/linux">linux</a></li>
+
+<li><a href="/blog/categories/oracle">oracle</a></li>
+
+<li><a href="/blog/categories/windows">windows</a></li>
+
+<li><a href="/blog/categories/video">video</a></li>
+
+<li><a href="/blog/categories/travel">travel</a></li>
+
+<li><a href="/blog/categories/web">web</a></li>
+
+<li><a href="/blog/categories/httracl">httracl</a></li>
+
+<li><a href="/blog/categories/httpclient">httpclient</a></li>
+
+<li><a href="/blog/categories/tjrac">tjrac</a></li>
+
+<li><a href="/blog/categories/about_me">about_me</a></li>
+
+<li><a href="/blog/categories/seo">seo</a></li>
+
+<li><a href="/blog/categories/ios">ios</a></li>
+
+<li><a href="/blog/categories/前端">前端</a></li>
+
+<li><a href="/blog/categories/axure">axure</a></li>
+
+<li><a href="/blog/categories/html">html</a></li>
+
+<li><a href="/blog/categories/node">node</a></li>
+
+<li><a href="/blog/categories/my">my</a></li>
+
+<li><a href="/blog/categories/develop">develop</a></li>
+
+<li><a href="/blog/categories/project">project</a></li>
+
+<li><a href="/blog/categories/服务器">服务器</a></li>
+
+<li><a href="/blog/categories/js">js</a></li>
+
+<li><a href="/blog/categories/">About me</a></li>
+</ul>
+</div>
+	</div>
+	<div class="alignright search">
+		<a class="button"></a>
+		<div class="container">
+			<form action="https://www.google.com/search" method="get">
+				<input type="text" name="q" results="0">
+				<input type="hidden" name="q" value="site:mzkmzk.github.io">
+			</form>
+		</div>
+	</div>
+</nav>
+<nav id="main-nav">
+	<ul class="main">
+		<li><a href="/blog/2015/07/16/adoube_me.markdwon/">About me</a></li>
+	
+
+
+</ul>
+
+	</nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Category</a>
+		<div class="container"><ul class="main">
+		
+	
+<li><a href="/blog/categories/markdown">markdown</a></li>
+
+<li><a href="/blog/categories/data">data</a></li>
+
+<li><a href="/blog/categories/php">php</a></li>
+
+<li><a href="/blog/categories/svn">svn</a></li>
+
+<li><a href="/blog/categories/octopress">octopress</a></li>
+
+<li><a href="/blog/categories/sql">sql</a></li>
+
+<li><a href="/blog/categories/j2ee">j2ee</a></li>
+
+<li><a href="/blog/categories/mac">mac</a></li>
+
+<li><a href="/blog/categories/struts2">struts2</a></li>
+
+<li><a href="/blog/categories/android">android</a></li>
+
+<li><a href="/blog/categories/hack">hack</a></li>
+
+<li><a href="/blog/categories/design">design</a></li>
+
+<li><a href="/blog/categories/eclipse">eclipse</a></li>
+
+<li><a href="/blog/categories/readme">readme</a></li>
+
+<li><a href="/blog/categories/arduino">arduino</a></li>
+
+<li><a href="/blog/categories/jquery">jquery</a></li>
+
+<li><a href="/blog/categories/javascript">javascript</a></li>
+
+<li><a href="/blog/categories/bootstrap">bootstrap</a></li>
+
+<li><a href="/blog/categories/squild">squild</a></li>
+
+<li><a href="/blog/categories/iphone">iphone</a></li>
+
+<li><a href="/blog/categories/question">question</a></li>
+
+<li><a href="/blog/categories/java">java</a></li>
+
+<li><a href="/blog/categories/photoshop">photoshop</a></li>
+
+<li><a href="/blog/categories/sqlmap">sqlmap</a></li>
+
+<li><a href="/blog/categories/python">python</a></li>
+
+<li><a href="/blog/categories/git">git</a></li>
+
+<li><a href="/blog/categories/pr">pr</a></li>
+
+<li><a href="/blog/categories/linux">linux</a></li>
+
+<li><a href="/blog/categories/oracle">oracle</a></li>
+
+<li><a href="/blog/categories/windows">windows</a></li>
+
+<li><a href="/blog/categories/video">video</a></li>
+
+<li><a href="/blog/categories/travel">travel</a></li>
+
+<li><a href="/blog/categories/web">web</a></li>
+
+<li><a href="/blog/categories/httracl">httracl</a></li>
+
+<li><a href="/blog/categories/httpclient">httpclient</a></li>
+
+<li><a href="/blog/categories/tjrac">tjrac</a></li>
+
+<li><a href="/blog/categories/about_me">about_me</a></li>
+
+<li><a href="/blog/categories/seo">seo</a></li>
+
+<li><a href="/blog/categories/ios">ios</a></li>
+
+<li><a href="/blog/categories/前端">前端</a></li>
+
+<li><a href="/blog/categories/axure">axure</a></li>
+
+<li><a href="/blog/categories/html">html</a></li>
+
+<li><a href="/blog/categories/node">node</a></li>
+
+<li><a href="/blog/categories/my">my</a></li>
+
+<li><a href="/blog/categories/develop">develop</a></li>
+
+<li><a href="/blog/categories/project">project</a></li>
+
+<li><a href="/blog/categories/服务器">服务器</a></li>
+
+<li><a href="/blog/categories/js">js</a></li>
+
+<li><a href="/blog/categories/">About me</a></li>
+</ul>
+</div>
+	</div>
+	<div class="alignright search">
+		<a class="button"></a>
+		<div class="container">
+			<form action="https://www.google.com/search" method="get">
+				<input type="text" name="q" results="0">
+				<input type="hidden" name="q" value="site:mzkmzk.github.io">
+			</form>
+		</div>
+	</div>
+</nav>
+<nav id="sub-nav" class="alignright">
+	<div class="social">
+		
+		
+		
+		
+    
+		
+		
+		
+		
+		
+    
+	</div>
+	
+</nav>
+
+</header>
+	
+		
+	
+	<div id="content" class="inner"><article class="post">
+	<h2 class="title">Jssor轮播图的使用和修改</h2>
+	<div class="entry-content"><!--more-->
+
+
+<p>这里使用下<code>jssor</code>的轮播,<a href="https://github.com/jssor/slider">github地址</a>.优势是支持手动滑动,响应式和键盘左右监听.很人性.</p>
+
+<p><img src="../images/QQ20151108-2.png" alt="一开始是这样的" /></p>
+
+<p>任务</p>
+
+<ol>
+<li><p>改变光标,一开始为可移动的手势,改为默认的鼠标</p>
+
+<pre><code> $("#case_big_slider div").css("cursor","default");
+</code></pre></li>
+<li><p>宽度100%,调整左右两图显示的大小</p>
+
+<pre><code> //设置屏幕宽度为document宽度
+ jssor_slider1.$ScaleWidth(Math.min(parentWidth, $(document).width()));
+</code></pre>
+
+<p> 接下来设置整个轮播图的宽高比,一开始的div设置</p>
+
+<pre><code> &lt;div id="slider1_container" style="position: relative; top: 0px; left: 0px; width: 800px;
+ height: 300px; overflow: hidden;"&gt;
+     &lt;!-- Slides Container --&gt;
+     &lt;div u="slides" style="position: absolute; left: 0px; top: 0px; width: 800px; height: 300px;
+     overflow: hidden;"&gt;
+         &lt;div&gt;&lt;img u="image" src="../Assets/Images/Case_Slider_01.png" /&gt;&lt;/div&gt;
+         &lt;div&gt;&lt;img u="image" src="../Assets/Images/Case_Slider_01.png" /&gt;&lt;/div&gt;
+         &lt;div&gt;&lt;img u="image" src="../Assets/Images/Case_Slider_01.png" /&gt;&lt;/div&gt;
+         &lt;div&gt;&lt;img u="image" src="../Assets/Images/Case_Slider_01.png" /&gt;&lt;/div&gt;
+         &lt;div&gt;&lt;img u="image" src="../Assets/Images/Case_Slider_01.png" /&gt;&lt;/div&gt;
+         &lt;div&gt;&lt;img u="image" src="../Assets/Images/Case_Slider_01.png" /&gt;&lt;/div&gt;
+
+     &lt;/div&gt;
+</code></pre>
+
+<p>应该很少在div设置固定宽高的,研究发现,其实起的是设置宽高比作用.多少px是无所谓的.</p>
+
+<p>这里由于我要的效果是在1440时,高度为381,所以width设置为1440,height设置为381.就完成了设置宽高比.</p>
+
+<p>该框架默认,左右两边的图只显示100px,但我需要显示为屏幕的百分27%</p>
+
+<pre><code> $ParkingPosition: $(document).width() * 0.27,          
+</code></pre></li>
+<li><p>更改左右两个图片位置和显示</p>
+
+<p> 原来</p>
+
+<pre><code> &lt;span u="arrowleft" class="jssora13l glyphicon glyphicon-menu-left" style="top: 123px; left: 30px;"&gt;
+</code></pre>
+
+<p> 我要改为屏幕边向左右20%,和改变显示图标</p>
+
+<pre><code> &lt;span u="arrowright" class="jssora13r glyphicon-right" style="top: 123px; right: 20%;"&gt;
+         &lt;img  src="../Assets/Images/Slider_Line.png"/&gt;
+ &lt;/span&gt;
+</code></pre></li>
+</ol>
+
+
+<p>最终效果</p>
+
+<p><img src="../images/QQ20151108-0.png" alt="最终效果" /></p>
+
+<h1>附录原代码</h1>
+
+<p>原来的配置文件.</p>
+
+<pre><code> jQuery(document).ready(function ($) {
+    var options = {
+        $AutoPlay: true,
+
+        $PauseOnHover: 1,                               //[Optional] Whether to pause when mouse over if a slideshow is auto playing, default value is false
+
+        $ArrowKeyNavigation: true,                          //Allows arrow key to navigate or not, default value is true
+        $SlideWidth: 600,                                   //[Optional] Width of every slide in pixels, the default is width of 'slides' container
+        //$SlideHeight: 300,                                  //[Optional] Height of every slide in pixels, the default is width of 'slides' container
+        $SlideSpacing: 0,                                   //Space between each slide in pixels
+        $DisplayPieces: 2,                                  //Number of pieces to display (the slideshow would be disabled if the value is set to greater than 1), the default value is 1
+        $ParkingPosition: 100,                                //The offset position to park slide (this options applys only when slideshow disabled).
+
+        $ArrowNavigatorOptions: {                       //[Optional] Options to specify and enable arrow navigator or not
+            $Class: $JssorArrowNavigator$,              //[Requried] Class to create arrow navigator instance
+            $ChanceToShow: 2,                               //[Required] 0 Never, 1 Mouse Over, 2 Always
+            $AutoCenter: 2,                                 //[Optional] Auto center arrows in parent container, 0 No, 1 Horizontal, 2 Vertical, 3 Both, default value is 0
+            $Steps: 1                                       //[Optional] Steps to go for each navigation request, default value is 1
+        }
+    };
+
+    var jssor_slider1 = new $JssorSlider$("slider1_container", options);
+
+    //responsive code begin
+    //you can remove responsive code if you don't want the slider scales while window resizes
+    function ScaleSlider() {
+        var parentWidth = jssor_slider1.$Elmt.parentNode.clientWidth;
+        if (parentWidth)
+            jssor_slider1.$ScaleWidth(Math.min(parentWidth, 800));
+        else
+            window.setTimeout(ScaleSlider, 30);
+    }
+    ScaleSlider();
+
+    $(window).bind("load", ScaleSlider);
+    $(window).bind("resize", ScaleSlider);
+    $(window).bind("orientationchange", ScaleSlider);
+</code></pre>
+</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-11-08T11:37:40+08:00" pubdate data-updated="true"></time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/qian-duan/'>前端</a>
+
+
+</div>
+	
+</div>
+</article>
+
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+		
+		<a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+		
+		
+		<a class="addthis_button_tweet"></a>
+		
+		
+		
+	</div>
+	
+</div>
+
+
+
+
+
+
+  <section>
+    <h1>Comments</h1>
+    <div id="comments" aria-live="polite">
+
+<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="Jssor轮播图的使用和修改" data-title="Jssor轮播图的使用和修改" data-url="/blog/2015/11/08/update_slider/"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"mzkmzk"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- 多说公共JS代码 end --></div>
+  </section>
+</div>
+	<footer id="footer" class="inner">
+
+Copyright &copy; 2015
+
+    K
+
+
+</footer>
+	<script src="/javascripts/slash.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+	$('.fancybox').fancybox();
+})(jQuery);
+</script> <!-- Delete or comment this line to disable Fancybox -->
+
+
+
+
+
+
+</body>
+</html>

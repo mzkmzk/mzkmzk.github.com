@@ -1,0 +1,470 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Laravel 使用deployer 简单项目搭建 - K</title>
+	<meta name="author" content="K">
+
+	
+	<meta name="description" content="deployer是后台管理模板 安装指南 安装中遇到的问题 在sudo composer install -o --no-dev在出现警告 Notice: Use of undefined constant MCRYPT_RIJNDAEL_128 - assumed ' &hellip;">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="baidu-site-verification" content="HWyzFajtAX" />
+	<meta name="google-site-verification" content="xf8laC_mNTP9RdWTD-O8D4yYFsMXXnGjvcWVNqfNntk" />
+	<link href="false" rel="alternate" title="K" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script async="true" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	
+	<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?1e6c60ae572d5e740a34233f4accedbd";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+</head>
+
+
+<body>
+	<header id="header" class="inner"><h1><a href="/">K</a></h1>
+<nav id="K_select">
+	<div class="alignleft menu">
+		<a class="button">Category</a>
+		<div class="container"><ul class="main">
+		
+	
+<li><a href="/blog/categories/markdown">markdown</a></li>
+
+<li><a href="/blog/categories/data">data</a></li>
+
+<li><a href="/blog/categories/php">php</a></li>
+
+<li><a href="/blog/categories/svn">svn</a></li>
+
+<li><a href="/blog/categories/octopress">octopress</a></li>
+
+<li><a href="/blog/categories/sql">sql</a></li>
+
+<li><a href="/blog/categories/j2ee">j2ee</a></li>
+
+<li><a href="/blog/categories/mac">mac</a></li>
+
+<li><a href="/blog/categories/struts2">struts2</a></li>
+
+<li><a href="/blog/categories/android">android</a></li>
+
+<li><a href="/blog/categories/hack">hack</a></li>
+
+<li><a href="/blog/categories/design">design</a></li>
+
+<li><a href="/blog/categories/eclipse">eclipse</a></li>
+
+<li><a href="/blog/categories/readme">readme</a></li>
+
+<li><a href="/blog/categories/arduino">arduino</a></li>
+
+<li><a href="/blog/categories/jquery">jquery</a></li>
+
+<li><a href="/blog/categories/javascript">javascript</a></li>
+
+<li><a href="/blog/categories/bootstrap">bootstrap</a></li>
+
+<li><a href="/blog/categories/squild">squild</a></li>
+
+<li><a href="/blog/categories/iphone">iphone</a></li>
+
+<li><a href="/blog/categories/question">question</a></li>
+
+<li><a href="/blog/categories/java">java</a></li>
+
+<li><a href="/blog/categories/photoshop">photoshop</a></li>
+
+<li><a href="/blog/categories/sqlmap">sqlmap</a></li>
+
+<li><a href="/blog/categories/python">python</a></li>
+
+<li><a href="/blog/categories/git">git</a></li>
+
+<li><a href="/blog/categories/pr">pr</a></li>
+
+<li><a href="/blog/categories/linux">linux</a></li>
+
+<li><a href="/blog/categories/oracle">oracle</a></li>
+
+<li><a href="/blog/categories/windows">windows</a></li>
+
+<li><a href="/blog/categories/video">video</a></li>
+
+<li><a href="/blog/categories/travel">travel</a></li>
+
+<li><a href="/blog/categories/web">web</a></li>
+
+<li><a href="/blog/categories/httracl">httracl</a></li>
+
+<li><a href="/blog/categories/httpclient">httpclient</a></li>
+
+<li><a href="/blog/categories/tjrac">tjrac</a></li>
+
+<li><a href="/blog/categories/about_me">about_me</a></li>
+
+<li><a href="/blog/categories/seo">seo</a></li>
+
+<li><a href="/blog/categories/ios">ios</a></li>
+
+<li><a href="/blog/categories/前端">前端</a></li>
+
+<li><a href="/blog/categories/axure">axure</a></li>
+
+<li><a href="/blog/categories/html">html</a></li>
+
+<li><a href="/blog/categories/node">node</a></li>
+
+<li><a href="/blog/categories/my">my</a></li>
+
+<li><a href="/blog/categories/develop">develop</a></li>
+
+<li><a href="/blog/categories/project">project</a></li>
+
+<li><a href="/blog/categories/服务器">服务器</a></li>
+
+<li><a href="/blog/categories/js">js</a></li>
+
+<li><a href="/blog/categories/">About me</a></li>
+</ul>
+</div>
+	</div>
+	<div class="alignright search">
+		<a class="button"></a>
+		<div class="container">
+			<form action="https://www.google.com/search" method="get">
+				<input type="text" name="q" results="0">
+				<input type="hidden" name="q" value="site:mzkmzk.github.io">
+			</form>
+		</div>
+	</div>
+</nav>
+<nav id="main-nav">
+	<ul class="main">
+		<li><a href="/blog/2015/07/16/adoube_me.markdwon/">About me</a></li>
+	
+
+
+</ul>
+
+	</nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Category</a>
+		<div class="container"><ul class="main">
+		
+	
+<li><a href="/blog/categories/markdown">markdown</a></li>
+
+<li><a href="/blog/categories/data">data</a></li>
+
+<li><a href="/blog/categories/php">php</a></li>
+
+<li><a href="/blog/categories/svn">svn</a></li>
+
+<li><a href="/blog/categories/octopress">octopress</a></li>
+
+<li><a href="/blog/categories/sql">sql</a></li>
+
+<li><a href="/blog/categories/j2ee">j2ee</a></li>
+
+<li><a href="/blog/categories/mac">mac</a></li>
+
+<li><a href="/blog/categories/struts2">struts2</a></li>
+
+<li><a href="/blog/categories/android">android</a></li>
+
+<li><a href="/blog/categories/hack">hack</a></li>
+
+<li><a href="/blog/categories/design">design</a></li>
+
+<li><a href="/blog/categories/eclipse">eclipse</a></li>
+
+<li><a href="/blog/categories/readme">readme</a></li>
+
+<li><a href="/blog/categories/arduino">arduino</a></li>
+
+<li><a href="/blog/categories/jquery">jquery</a></li>
+
+<li><a href="/blog/categories/javascript">javascript</a></li>
+
+<li><a href="/blog/categories/bootstrap">bootstrap</a></li>
+
+<li><a href="/blog/categories/squild">squild</a></li>
+
+<li><a href="/blog/categories/iphone">iphone</a></li>
+
+<li><a href="/blog/categories/question">question</a></li>
+
+<li><a href="/blog/categories/java">java</a></li>
+
+<li><a href="/blog/categories/photoshop">photoshop</a></li>
+
+<li><a href="/blog/categories/sqlmap">sqlmap</a></li>
+
+<li><a href="/blog/categories/python">python</a></li>
+
+<li><a href="/blog/categories/git">git</a></li>
+
+<li><a href="/blog/categories/pr">pr</a></li>
+
+<li><a href="/blog/categories/linux">linux</a></li>
+
+<li><a href="/blog/categories/oracle">oracle</a></li>
+
+<li><a href="/blog/categories/windows">windows</a></li>
+
+<li><a href="/blog/categories/video">video</a></li>
+
+<li><a href="/blog/categories/travel">travel</a></li>
+
+<li><a href="/blog/categories/web">web</a></li>
+
+<li><a href="/blog/categories/httracl">httracl</a></li>
+
+<li><a href="/blog/categories/httpclient">httpclient</a></li>
+
+<li><a href="/blog/categories/tjrac">tjrac</a></li>
+
+<li><a href="/blog/categories/about_me">about_me</a></li>
+
+<li><a href="/blog/categories/seo">seo</a></li>
+
+<li><a href="/blog/categories/ios">ios</a></li>
+
+<li><a href="/blog/categories/前端">前端</a></li>
+
+<li><a href="/blog/categories/axure">axure</a></li>
+
+<li><a href="/blog/categories/html">html</a></li>
+
+<li><a href="/blog/categories/node">node</a></li>
+
+<li><a href="/blog/categories/my">my</a></li>
+
+<li><a href="/blog/categories/develop">develop</a></li>
+
+<li><a href="/blog/categories/project">project</a></li>
+
+<li><a href="/blog/categories/服务器">服务器</a></li>
+
+<li><a href="/blog/categories/js">js</a></li>
+
+<li><a href="/blog/categories/">About me</a></li>
+</ul>
+</div>
+	</div>
+	<div class="alignright search">
+		<a class="button"></a>
+		<div class="container">
+			<form action="https://www.google.com/search" method="get">
+				<input type="text" name="q" results="0">
+				<input type="hidden" name="q" value="site:mzkmzk.github.io">
+			</form>
+		</div>
+	</div>
+</nav>
+<nav id="sub-nav" class="alignright">
+	<div class="social">
+		
+		
+		
+		
+    
+		
+		
+		
+		
+		
+    
+	</div>
+	
+</nav>
+
+</header>
+	
+		
+	
+	<div id="content" class="inner"><article class="post">
+	<h2 class="title">Laravel 使用deployer 简单项目搭建</h2>
+	<div class="entry-content"><!--more-->
+
+
+<p><code>deployer</code>是后台管理模板</p>
+
+<p><a href="https://github.com/REBELinBLUE/deployer">安装指南</a></p>
+
+<p>安装中遇到的问题</p>
+
+<ol>
+<li><p>在<code>sudo composer install -o --no-dev</code>在出现警告</p>
+
+<pre><code> Notice: Use of undefined constant MCRYPT_RIJNDAEL_128 - assumed 'MCRYPT_RIJNDAEL_128' in /Users/maizhikun/Learning/apache_sites/deployer/config/app.php on line 84
+ PHP Notice:  Use of undefined constant MCRYPT_RIJNDAEL_128 - assumed 'MCRYPT_RIJNDAEL_128' in /Users/maizhikun/Learning/apache_sites/deployer/config/app.php on line 84
+ &gt; php artisan optimize
+
+ Notice: Use of undefined constant MCRYPT_RIJNDAEL_128 - assumed 'MCRYPT_RIJNDAEL_128' in /Users/maizhikun/Learning/apache_sites/deployer/config/app.php on line 84
+ PHP Notice:  Use of undefined constant MCRYPT_RIJNDAEL_128 - assumed 'MCRYPT_RIJNDAEL_128' in /Users/maizhikun/Learning/apache_sites/deployer/config/app.php on line 84
+ Generating optimized class loader
+ Compiling common classes
+</code></pre>
+
+<p> 修改config/app的</p>
+
+<pre><code> 'cipher'          =&gt; 'AES-256-CBC',
+</code></pre></li>
+<li><p><code>php artisan app:install</code>中出现</p>
+
+<pre><code> ***********************
+ Welcome to Deployer
+ ***********************
+
+ Extension required: mcrypt
+
+ Deployer cannot be installed, as not all requirements are met. Please review the errors above before continuing.
+</code></pre>
+
+<p> 解决方案是: 在配置文件中加</p>
+
+<pre><code> export PATH=/usr/local/php5/bin:$PATH
+</code></pre></li>
+<li><p>到了最后的设置数据库,不允许属性为空</p>
+
+<pre><code>[ERROR] A value is required.
+
+Username [deployer]:    
+</code></pre>
+
+<p>然而我的账号就是空啊..啊哈哈- -.</p>
+
+<p>修改源文件<code>deployer/vendor/symfony/console/Helper/SymfonyQuestionHelper.php</code>40行附近</p>
+
+<pre><code>//if (!is_array($value) &amp;&amp; !is_bool($value) &amp;&amp; 0 === strlen($value)) {
+if (!is_array($value) &amp;&amp; !is_bool($value) &amp;&amp; 0 === strlen($value)) {
+    throw new \Exception('A value is required.');
+}
+</code></pre>
+
+<p>//phpstorm默认不让改的.用subline改就OK哈哈- -.</p></li>
+<li><p>在创建时候缺少<code>Beanstalkd</code></p>
+
+<pre><code>[Pheanstalk\Exception\ConnectionException]
+Socket error 61: Connection refused (connecting to localhost:11300)
+</code></pre>
+
+<p>安装<code>Beanstalkd</code></p>
+
+<pre><code>brew install beanstalkd
+</code></pre>
+
+<p>启动<code>Beanstalkd</code></p>
+
+<pre><code>beanstalkd
+</code></pre>
+
+<p><a href="http://wppurking.github.io/rails/ruby/queue/2012/10/01/chu-shi-beanstalk.html">使用Beanstalkd参考</a></p></li>
+</ol>
+
+</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-11-08T11:37:40+08:00" pubdate data-updated="true"></time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/php/'>php</a>
+
+
+</div>
+	
+</div>
+</article>
+
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+		
+		<a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+		
+		
+		<a class="addthis_button_tweet"></a>
+		
+		
+		
+	</div>
+	
+</div>
+
+
+
+
+
+
+  <section>
+    <h1>Comments</h1>
+    <div id="comments" aria-live="polite">
+
+<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="Laravel 使用deployer 简单项目搭建" data-title="Laravel 使用deployer 简单项目搭建" data-url="/blog/2015/11/08/laravel_demo_start/"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"mzkmzk"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- 多说公共JS代码 end --></div>
+  </section>
+</div>
+	<footer id="footer" class="inner">
+
+Copyright &copy; 2015
+
+    K
+
+
+</footer>
+	<script src="/javascripts/slash.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+	$('.fancybox').fancybox();
+})(jQuery);
+</script> <!-- Delete or comment this line to disable Fancybox -->
+
+
+
+
+
+
+</body>
+</html>

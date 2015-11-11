@@ -4,7 +4,7 @@
   <title><![CDATA[K]]></title>
   <link href="http://mzkmzk.github.io/atom.xml" rel="self"/>
   <link href="http://mzkmzk.github.io/"/>
-  <updated>2015-11-03T14:32:22+08:00</updated>
+  <updated>2015-11-11T15:51:07+08:00</updated>
   <id>http://mzkmzk.github.io/</id>
   <author>
     <name><![CDATA[K]]></name>
@@ -14,10 +14,554 @@
 
   
   <entry>
+    <title type="html"><![CDATA[Ubuntu技巧与知识]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/11/11/ubuntu_kill/"/>
+    <updated>2015-11-11T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/11/11/ubuntu_kill</id>
+    <content type="html"><![CDATA[<!--more-->
+
+
+<h1>Ubuntu apache配置文件说明</h1>
+
+<p><a href="http://www.darrenfang.com/2014/01/ubuntu-apache-configuration-and-enable-mod-rewrite/">http://www.darrenfang.com/2014/01/ubuntu-apache-configuration-and-enable-mod-rewrite/</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[jssor轮播图的使用和修改]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/11/08/update_slider/"/>
+    <updated>2015-11-08T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/11/08/update_slider</id>
+    <content type="html"><![CDATA[<!--more-->
+
+
+<p>这里使用下<code>jssor</code>的轮播,<a href="https://github.com/jssor/slider">github地址</a>.优势是支持手动滑动,响应式和键盘左右监听.很人性.</p>
+
+<p><img src="../images/QQ20151108-2.png" alt="一开始是这样的" /></p>
+
+<p>任务</p>
+
+<ol>
+<li><p>改变光标,一开始为可移动的手势,改为默认的鼠标</p>
+
+<pre><code> $("#case_big_slider div").css("cursor","default");
+</code></pre></li>
+<li><p>宽度100%,调整左右两图显示的大小</p>
+
+<pre><code> //设置屏幕宽度为document宽度
+ jssor_slider1.$ScaleWidth(Math.min(parentWidth, $(document).width()));
+</code></pre>
+
+<p> 接下来设置整个轮播图的宽高比,一开始的div设置</p>
+
+<pre><code> &lt;div id="slider1_container" style="position: relative; top: 0px; left: 0px; width: 800px;
+ height: 300px; overflow: hidden;"&gt;
+     &lt;!-- Slides Container --&gt;
+     &lt;div u="slides" style="position: absolute; left: 0px; top: 0px; width: 800px; height: 300px;
+     overflow: hidden;"&gt;
+         &lt;div&gt;&lt;img u="image" src="../Assets/Images/Case_Slider_01.png" /&gt;&lt;/div&gt;
+         &lt;div&gt;&lt;img u="image" src="../Assets/Images/Case_Slider_01.png" /&gt;&lt;/div&gt;
+         &lt;div&gt;&lt;img u="image" src="../Assets/Images/Case_Slider_01.png" /&gt;&lt;/div&gt;
+         &lt;div&gt;&lt;img u="image" src="../Assets/Images/Case_Slider_01.png" /&gt;&lt;/div&gt;
+         &lt;div&gt;&lt;img u="image" src="../Assets/Images/Case_Slider_01.png" /&gt;&lt;/div&gt;
+         &lt;div&gt;&lt;img u="image" src="../Assets/Images/Case_Slider_01.png" /&gt;&lt;/div&gt;
+
+     &lt;/div&gt;
+</code></pre>
+
+<p>应该很少在div设置固定宽高的,研究发现,其实起的是设置宽高比作用.多少px是无所谓的.</p>
+
+<p>这里由于我要的效果是在1440时,高度为381,所以width设置为1440,height设置为381.就完成了设置宽高比.</p>
+
+<p>该框架默认,左右两边的图只显示100px,但我需要显示为屏幕的百分27%</p>
+
+<pre><code> $ParkingPosition: $(document).width() * 0.27,          
+</code></pre></li>
+<li><p>更改左右两个图片位置和显示</p>
+
+<p> 原来</p>
+
+<pre><code> &lt;span u="arrowleft" class="jssora13l glyphicon glyphicon-menu-left" style="top: 123px; left: 30px;"&gt;
+</code></pre>
+
+<p> 我要改为屏幕边向左右20%,和改变显示图标</p>
+
+<pre><code> &lt;span u="arrowright" class="jssora13r glyphicon-right" style="top: 123px; right: 20%;"&gt;
+         &lt;img  src="../Assets/Images/Slider_Line.png"/&gt;
+ &lt;/span&gt;
+</code></pre></li>
+</ol>
+
+
+<p>最终效果</p>
+
+<p><img src="../images/QQ20151108-0.png" alt="最终效果" /></p>
+
+<h1>附录原代码</h1>
+
+<p>原来的配置文件.</p>
+
+<pre><code> jQuery(document).ready(function ($) {
+    var options = {
+        $AutoPlay: true,
+
+        $PauseOnHover: 1,                               //[Optional] Whether to pause when mouse over if a slideshow is auto playing, default value is false
+
+        $ArrowKeyNavigation: true,                          //Allows arrow key to navigate or not, default value is true
+        $SlideWidth: 600,                                   //[Optional] Width of every slide in pixels, the default is width of 'slides' container
+        //$SlideHeight: 300,                                  //[Optional] Height of every slide in pixels, the default is width of 'slides' container
+        $SlideSpacing: 0,                                   //Space between each slide in pixels
+        $DisplayPieces: 2,                                  //Number of pieces to display (the slideshow would be disabled if the value is set to greater than 1), the default value is 1
+        $ParkingPosition: 100,                                //The offset position to park slide (this options applys only when slideshow disabled).
+
+        $ArrowNavigatorOptions: {                       //[Optional] Options to specify and enable arrow navigator or not
+            $Class: $JssorArrowNavigator$,              //[Requried] Class to create arrow navigator instance
+            $ChanceToShow: 2,                               //[Required] 0 Never, 1 Mouse Over, 2 Always
+            $AutoCenter: 2,                                 //[Optional] Auto center arrows in parent container, 0 No, 1 Horizontal, 2 Vertical, 3 Both, default value is 0
+            $Steps: 1                                       //[Optional] Steps to go for each navigation request, default value is 1
+        }
+    };
+
+    var jssor_slider1 = new $JssorSlider$("slider1_container", options);
+
+    //responsive code begin
+    //you can remove responsive code if you don't want the slider scales while window resizes
+    function ScaleSlider() {
+        var parentWidth = jssor_slider1.$Elmt.parentNode.clientWidth;
+        if (parentWidth)
+            jssor_slider1.$ScaleWidth(Math.min(parentWidth, 800));
+        else
+            window.setTimeout(ScaleSlider, 30);
+    }
+    ScaleSlider();
+
+    $(window).bind("load", ScaleSlider);
+    $(window).bind("resize", ScaleSlider);
+    $(window).bind("orientationchange", ScaleSlider);
+</code></pre>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Laravel 使用deployer 简单项目搭建]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/11/08/laravel_demo_start/"/>
+    <updated>2015-11-08T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/11/08/laravel_demo_start</id>
+    <content type="html"><![CDATA[<!--more-->
+
+
+<p><code>deployer</code>是后台管理模板</p>
+
+<p><a href="https://github.com/REBELinBLUE/deployer">安装指南</a></p>
+
+<p>安装中遇到的问题</p>
+
+<ol>
+<li><p>在<code>sudo composer install -o --no-dev</code>在出现警告</p>
+
+<pre><code> Notice: Use of undefined constant MCRYPT_RIJNDAEL_128 - assumed 'MCRYPT_RIJNDAEL_128' in /Users/maizhikun/Learning/apache_sites/deployer/config/app.php on line 84
+ PHP Notice:  Use of undefined constant MCRYPT_RIJNDAEL_128 - assumed 'MCRYPT_RIJNDAEL_128' in /Users/maizhikun/Learning/apache_sites/deployer/config/app.php on line 84
+ &gt; php artisan optimize
+
+ Notice: Use of undefined constant MCRYPT_RIJNDAEL_128 - assumed 'MCRYPT_RIJNDAEL_128' in /Users/maizhikun/Learning/apache_sites/deployer/config/app.php on line 84
+ PHP Notice:  Use of undefined constant MCRYPT_RIJNDAEL_128 - assumed 'MCRYPT_RIJNDAEL_128' in /Users/maizhikun/Learning/apache_sites/deployer/config/app.php on line 84
+ Generating optimized class loader
+ Compiling common classes
+</code></pre>
+
+<p> 修改config/app的</p>
+
+<pre><code> 'cipher'          =&gt; 'AES-256-CBC',
+</code></pre></li>
+<li><p><code>php artisan app:install</code>中出现</p>
+
+<pre><code> ***********************
+ Welcome to Deployer
+ ***********************
+
+ Extension required: mcrypt
+
+ Deployer cannot be installed, as not all requirements are met. Please review the errors above before continuing.
+</code></pre>
+
+<p> 解决方案是: 在配置文件中加</p>
+
+<pre><code> export PATH=/usr/local/php5/bin:$PATH
+</code></pre></li>
+<li><p>到了最后的设置数据库,不允许属性为空</p>
+
+<pre><code>[ERROR] A value is required.
+
+Username [deployer]:    
+</code></pre>
+
+<p>然而我的账号就是空啊..啊哈哈- -.</p>
+
+<p>修改源文件<code>deployer/vendor/symfony/console/Helper/SymfonyQuestionHelper.php</code>40行附近</p>
+
+<pre><code>//if (!is_array($value) &amp;&amp; !is_bool($value) &amp;&amp; 0 === strlen($value)) {
+if (!is_array($value) &amp;&amp; !is_bool($value) &amp;&amp; 0 === strlen($value)) {
+    throw new \Exception('A value is required.');
+}
+</code></pre>
+
+<p>//phpstorm默认不让改的.用subline改就OK哈哈- -.</p></li>
+<li><p>在创建时候缺少<code>Beanstalkd</code></p>
+
+<pre><code>[Pheanstalk\Exception\ConnectionException]
+Socket error 61: Connection refused (connecting to localhost:11300)
+</code></pre>
+
+<p>安装<code>Beanstalkd</code></p>
+
+<pre><code>brew install beanstalkd
+</code></pre>
+
+<p>启动<code>Beanstalkd</code></p>
+
+<pre><code>beanstalkd
+</code></pre>
+
+<p><a href="http://wppurking.github.io/rails/ruby/queue/2012/10/01/chu-shi-beanstalk.html">使用Beanstalkd参考</a></p></li>
+</ol>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Laravel 使用deployer 简单项目搭建]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/11/08/laravel_demo_amazeui/"/>
+    <updated>2015-11-08T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/11/08/laravel_demo_amazeui</id>
+    <content type="html"><![CDATA[<!--more-->
+
+
+<p><code>amazeui</code>是后台管理模板</p>
+
+<p><a href="https://github.com/iroben/laravel5-amazeui-admin">安装指南</a></p>
+
+<p>安装中遇到的问题</p>
+
+<ol>
+<li><p>缺少<code>bower</code></p>
+
+<pre><code> //安装
+ npm install -g bower
+
+ //安装后出现权限问题
+ sudo chmod -R  777 ../configstore/
+</code></pre></li>
+</ol>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[jQuery 函数累积]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/11/08/jquery_function/"/>
+    <updated>2015-11-08T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/11/08/jquery_function</id>
+    <content type="html"><![CDATA[<!--more-->
+
+
+<h1>基础函数</h1>
+
+<ol>
+<li><p>查找合适的<code>a</code>标签替换href</p>
+
+<pre><code> $(".pagination  a").attr('href',function(i,val){
+     return val.replace('query/','query');
+ });
+</code></pre></li>
+</ol>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Ubantu 安装Laravel]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/11/04/ubuntu_laravel/"/>
+    <updated>2015-11-04T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/11/04/ubuntu_laravel</id>
+    <content type="html"><![CDATA[<!--more-->
+
+
+<p>Ubuntu版本 :14.04</p>
+
+<h1>1 安装apche mysql php</h1>
+
+<ol>
+<li><p>安装apache<code>sudo apt-get install apache2</code></p>
+
+<p> <code>localhost</code>有apache页面显示即可</p></li>
+<li><p>安装php<code>sudo apt-get install php5 libapache2-mod-php5</code></p>
+
+<pre><code> //重启apache 加载php模块
+ sudo service apache2 restart
+</code></pre>
+
+<p> 新增<code>sudo vim /var/www/html/php_info.php</code>,输入内容</p>
+
+<pre><code> &lt;?php  
+     phpinfo();  
+ ?&gt;  
+</code></pre>
+
+<p> 浏览器输入<code>localhost/php_info.php</code>,浏览到php配置信息即为正确.</p></li>
+<li><p>安装MySQL<code>sudo apt-get install mysql-server mysql-client</code></p>
+
+<p> 过程中设置MySQL密码请谨记</p></li>
+<li><p>安装phpmyadmin<code>sudo apt-get install phpmyadmin</code></p>
+
+<p> 过程中设置服务器类型和phpmyadmin密码</p>
+
+<p> phpmyadmin安装完后，并不在apache默认路径下，需要建立一个链接，</p>
+
+<pre><code> sudo ln -s /usr/share/phpmyadmin /var/www/html
+</code></pre>
+
+<p> 访问<code>localhost/phpmyadmin/</code>即可.</p></li>
+</ol>
+
+
+<p><a href="http://blog.csdn.net/tecn14/article/details/27515241">参考链接</a></p>
+
+<h1>2 安装Laravel</h1>
+
+<p>参考之前写的文章<a href="http://mzkmzk.github.io/blog/2015/09/24/Laravel-start/">http://mzkmzk.github.io/blog/2015/09/24/Laravel-start/</a></p>
+
+<h1>3 更改apache</h1>
+
+<ol>
+<li><code>sudo a2enmod rewrite</code>加载重定向模块</li>
+<li><code>/etc/apche2/apache.conf</code>里的所有<code>AllowOverride None</code>修改为<code>AllowOverride All</code></li>
+<li>重启服务器</li>
+</ol>
+
+
+<h1>附录小问题</h1>
+
+<ol>
+<li>修改用户密码<code>passwd username</code></li>
+</ol>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Laravel 小技巧]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/11/04/laravel_kill/"/>
+    <updated>2015-11-04T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/11/04/laravel_kill</id>
+    <content type="html"><![CDATA[<!--more-->
+
+
+<h1>1 基本函数</h1>
+
+<ol>
+<li><code>return redirect(地址)</code>在route中设置重定向.</li>
+</ol>
+
+
+<h1>2 定义全局自定义函数</h1>
+
+<ol>
+<li>创建app/Utils/Utils.php,里面直接放方法</li>
+<li><p>修改项目 composer.json</p>
+
+<pre><code>     "autoload": {
+     ...
+         "files": [
+             "app/Utils/Utils.php"
+         ]
+     ... 
+     },
+</code></pre></li>
+<li><p>命令行运行<code>composer dump-autoload</code>,ok</p></li>
+</ol>
+
+
+<p><a href="http://laravel.so/tricks/e81a15277236d35feb19ad5b86427bdc">参考</a></p>
+
+<h1>3 Blade显示数据为字符串</h1>
+
+<pre><code> var cases = {!!$cases!!};
+ alert();
+
+ //页面显示
+  var cases = [{"id":62,"created_at":"2015-11-10 04:38:46","updated_at":"2015-11-10 04:38:46","title":"4353","subhead":"534543","address":"534534","description":"","type":1,"logo":"","post_at":"0000-00-00 00:00:00","deleted_at":null}];
+  //alert([{&amp;quot;id&amp;quot;:62,&amp;quot;created_at&amp;quot;:&amp;quot;2015-11-10 04:38:46&amp;quot;,&amp;quot;updated_at&amp;quot;:&amp;quot;2015-11-10 04:38:46&amp;quot;,&amp;quot;title&amp;quot;:&amp;quot;4353&amp;quot;,&amp;quot;subhead&amp;quot;:&amp;quot;534543&amp;quot;,&amp;quot;address&amp;quot;:&amp;quot;534534&amp;quot;,&amp;quot;description&amp;quot;:&amp;quot;&amp;quot;,&amp;quot;type&amp;quot;:1,&amp;quot;logo&amp;quot;:&amp;quot;&amp;quot;,&amp;quot;post_at&amp;quot;:&amp;quot;0000-00-00 00:00:00&amp;quot;,&amp;quot;deleted_at&amp;quot;:null}]);  
+</code></pre>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[MySQL 排错指南 总结]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/11/03/mysql_error_book/"/>
+    <updated>2015-11-03T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/11/03/mysql_error_book</id>
+    <content type="html"><![CDATA[<!--more-->
+
+
+<p>有很多时候,MySQL会有很多百思不得其姐的错误.快读下去爽一爽吧~</p>
+
+<h1>1 基础</h1>
+
+<p>SELECT查询异常解决步骤</p>
+
+<ol>
+<li>将查询分解成小段,然后依次执行它们,知道捏发现问题的原因.</li>
+<li>使用<code>EXPLAIN EXTENDED</code>,然后使用<code>SHOW WARNINGS</code>命令去获得查询执行计划机实际运行方式的相关信息.</li>
+</ol>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Laravel Seeders]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/11/03/laravel_seeders/"/>
+    <updated>2015-11-03T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/11/03/laravel_seeders</id>
+    <content type="html"><![CDATA[<!--more-->
+
+
+<h1>0 目的</h1>
+
+<p>建立好数据库以后,就是要建立测试数据看效果如何.</p>
+
+<h1>1 初体验</h1>
+
+<ol>
+<li><p>开始入门吧</p>
+
+<p> 首先我是基于<code>Eloquent</code>开发的.</p>
+
+<p> 1.1 添加ModelFactory</p>
+
+<p> <code>./database/factyories/ModelFactory.php</code>里定义模拟数据</p>
+
+<pre><code> $factory-&gt;define(App\Models\Institute_Model::class, function (Faker\Generator $faker) {
+     return [
+     'name' =&gt; $faker-&gt;name,
+     ];
+ });     
+</code></pre>
+
+<p> <code>$faker</code>是一个模拟数据的框架,<a href="https://github.com/fzaninotto/Faker">更多玩法</a></p>
+
+<pre><code> //主要方法
+ 'code' =&gt; $faker-&gt;swiftBicNumber, //FCDNOFCFHST
+ 'name' =&gt; $faker-&gt;firstName, //Lynn
+ 'type' =&gt; $faker-&gt;numberBetween(0,3),
+</code></pre>
+
+<p> 1.2 添加Seeder,配置Model</p>
+
+<pre><code> K:HapLab_Laravel maizhikun$ php artisan make:seeder User_Seeder
+ Seeder created successfully.
+</code></pre>
+
+<p> 后会在<code>./database/seeds</code>创建一个User_Seeder文件</p>
+
+<pre><code> class User_Seeder extends Seeder
+ {
+     public function run()
+     {
+         //
+     }
+ }
+</code></pre>
+
+<p> 然后在<code>run()</code>方法里配置上填充的Model数据</p>
+
+<pre><code> public function run()
+ {
+     factory(App\Models\User_Model::class, 50)-&gt;create();
+ }
+</code></pre>
+
+<p> 1.3 执行Seeder</p>
+
+<pre><code> K:HapLab_Laravel maizhikun$ php artisan db:seed --class=User_Seeder
+</code></pre>
+
+<p> note :或在<code>./database/seeds/DatabaseSeeder</code>里配置多个Seeder,然后执行&#8217;php artisan db:seed&#8217;</p>
+
+<pre><code> class DatabaseSeeder extends Seeder
+ {
+     public function run()
+     {
+         Model::unguard();
+
+         $this-&gt;call(User_Seeder::class);
+
+         Model::reguard();
+     }
+ }   
+</code></pre></li>
+<li><p>玩一玩有外键的玩法</p>
+
+<p> 基本和入门玩法一样,不过需要遍历循环主表</p>
+
+<pre><code>   public function run()
+ {
+     factory(App\Models\Institute_Model::class,21)-&gt;create()-&gt;each(function($institute){
+         $institute-&gt;patients()-&gt;save(factory(App\Models\User_Model::class)-&gt;make());
+     });
+ }  
+</code></pre></li>
+<li><p>蜀黍,要是表中有多个外键怎么破.</p>
+
+<p> 这时候就要到ModelFactory里修改了</p>
+
+<pre><code> $factory-&gt;define(App\Models\Disease_Item_Type_Model::class, function (Faker\Generator $faker) {
+     //获取外键可能的值,这里代码可以诱惑,用单例模式,不然每条数据都会获取一遍外键可的值.
+     $id = get_all_id(new \App\Models\Disease_Type_Model());
+     return [
+         'disease_type_ID' =&gt; $faker-&gt;randomElement($id),
+         'code' =&gt; $faker-&gt;swiftBicNumber,
+         'name' =&gt; $faker-&gt;firstName,
+     ];
+ });
+</code></pre>
+
+<p> 上述代码中,<code>get_all_id</code>是获取外键的所有可能的值的方法.代码如下</p>
+
+<pre><code> function get_all_id(\App\Models\Base_Model $base_Model){
+     $model_datas = $base_Model-&gt;all();
+     $model_id = array();
+     foreach($model_datas as $model_data){
+         array_push($model_id,$model_data['id']);
+     }
+     return $model_id;
+ }   
+</code></pre></li>
+</ol>
+
+
+<h3>其他问题</h3>
+
+<ol>
+<li><p>创建图片数据时,无法写目录,原因可能是路径问题,直接设定绝对路径即可</p>
+
+<pre><code> //提示错误(Cannot write to directory "./Images"
+ 'url' =&gt; $faker-&gt;image(  '/Images','635','420')
+
+ //改为
+ 'url' =&gt; $faker-&gt;image( base_path("public") . '/Images','635','420')
+</code></pre>
+
+<p> 虽然没报错,但是可能由于网络原因,增加极慢,弃之.</p></li>
+</ol>
+
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[Laravel Migrations]]></title>
-    <link href="http://mzkmzk.github.io/blog/2015/11/02/laravel-migrations/"/>
+    <link href="http://mzkmzk.github.io/blog/2015/11/02/laravel_migrations/"/>
     <updated>2015-11-02T11:37:40+08:00</updated>
-    <id>http://mzkmzk.github.io/blog/2015/11/02/laravel-migrations</id>
+    <id>http://mzkmzk.github.io/blog/2015/11/02/laravel_migrations</id>
     <content type="html"><![CDATA[<!--more-->
 
 
@@ -75,6 +619,30 @@
      });
  }  
 </code></pre></li>
+<li><p>修改表</p>
+
+<pre><code> php artisan make:migration Add_Name_To_Samples_Table --table=Samples
+
+ 注意,要是新增列,直接和创建表一样语法
+
+ 但要修改已由列需要调用change()方法,例如:
+
+      $table-&gt;string('name', 50)-&gt;change();
+</code></pre>
+
+<p> 可能报不是dba的错误</p>
+
+<pre><code> [RuntimeException]
+ Changing columns for table "Samples" requires Doctrine DBAL; install "doctrine/dbal".
+</code></pre>
+
+<p> 在composer.json中配置</p>
+
+<pre><code> "require": {
+     ...
+     "doctrine/dbal": "v2.4.2"
+ },  
+</code></pre></li>
 </ol>
 
 
@@ -91,7 +659,7 @@
  $table-&gt;unsignedInteger('institute_ID');
      $table-&gt;foreign('institute_ID')
      -&gt;references('id')-&gt;on('institutes')
-     -&gt;onDelete('cascade');      
+     -&gt;onDelete('cascade');      the
 </code></pre></li>
 <li><p><code>migrations</code>类名不过有下划线</p>
 
@@ -112,6 +680,28 @@
 </code></pre>
 
 <p> 后来又发现了错误.最后确定了是文件名(假如有下划线)会去掉下划线(从时间之后的下划线)然后找相对应的类名.</p></li>
+<li><p><code>php artisan migrate:refresh,reset,rollback</code>都无法执行</p>
+
+<p> 提示报错</p>
+
+<pre><code> [Symfony\Component\Debug\Exception\FatalErrorException]
+  Class 'Illuminate\Database\Migrations\Schema' not found 
+</code></pre>
+
+<p> 解决办法:</p>
+
+<p> 将<code>Illuminate\Support\Facades\Schema</code>复制到<code>Illuminate\Database\Schema</code></p>
+
+<p> 并且</p>
+
+<p> 修改命名空间和<code>use</code></p>
+
+<pre><code> namespace Illuminate\Database\Migrations;
+
+ use Illuminate\Support\Facades\Facade;
+</code></pre>
+
+<p> <a href="http://stackoverflow.com/questions/28743546/laravel-5-migration-create-table-got-error-class-illuminate-database-schema-n">参考</a></p></li>
 </ol>
 
 ]]></content>
@@ -2582,2123 +3172,6 @@ div&gt;a:hover {
 
 <ol>
 <li>新版htmlDocker部署到服务器上</li>
-</ol>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[RESTful设计]]></title>
-    <link href="http://mzkmzk.github.io/blog/2015/10/12/study_restful/"/>
-    <updated>2015-10-12T11:37:40+08:00</updated>
-    <id>http://mzkmzk.github.io/blog/2015/10/12/study_restful</id>
-    <content type="html"><![CDATA[<!--more-->
-
-
-<ol>
-<li>协议: 必须使用https.</li>
-<li>域名: <a href="https://api.example.com">https://api.example.com</a> or <a href="https://example.org/api.">https://example.org/api.</a></li>
-<li>版本: <a href="https://api/example.com/v1.">https://api/example.com/v1.</a></li>
-<li>路径:不能有动词,只有名次,而且名词往往和数据库表对应.</li>
-<li><p>HTTP动词: 括号里对应的SQL命令</p>
-
-<p> 5.1. GET (SELECT): 从服务器取出资源(一项或多项).</p>
-
-<p> 5.2. POST (CREATE): 在服务器新建一个资源.</p>
-
-<p> 5.3. PUT (UPDATE): 在服务器更新资源(客户端提供改变的属性).</p>
-
-<p> 5.4. PATCH (UPDATE): 在服务器更新资源(客户端提供改变的属性).</p>
-
-<p> 5.5 DELETE (DELETE): 从服务器删除资源.</p>
-
-<p> 5.6 HEAD: 获取资源的元数据(不常用).</p>
-
-<p> 5.7 OPTIONS: 获取信息,关于资源的哪些属性是客户端可以改变的.</p>
-
-<p> 例子</p>
-
-<pre><code> GET /zoos：列出所有动物园
- POST /zoos：新建一个动物园
- GET /zoos/ID：获取某个指定动物园的信息
- PUT /zoos/ID：更新某个指定动物园的信息（提供该动物园的全部信息）
- PATCH /zoos/ID：更新某个指定动物园的信息（提供该动物园的部分信息）
- DELETE /zoos/ID：删除某个动物园
- GET /zoos/ID/animals：列出某个指定动物园的所有动物
- DELETE /zoos/ID/animals/ID：删除某个指定动物园的指定动物
-</code></pre></li>
-</ol>
-
-
-<p>6.0 过滤信息</p>
-
-<pre><code>?limit=10：指定返回记录的数量
-?offset=10：指定返回记录的开始位置。
-?page=2&amp;per_page=100：指定第几页，以及每页的记录数。
-?sortby=name&amp;order=asc：指定返回结果按照哪个属性排序，以及排序顺序。
-?animal_type_id=1：指定筛选条件
-</code></pre>
-
-<p>7.0 状态吗</p>
-
-<pre><code>200 OK - [GET]：服务器成功返回用户请求的数据，该操作是幂等的（Idempotent）。
-201 CREATED - [POST/PUT/PATCH]：用户新建或修改数据成功。
-202 Accepted - [*]：表示一个请求已经进入后台排队（异步任务）
-204 NO CONTENT - [DELETE]：用户删除数据成功。
-400 INVALID REQUEST - [POST/PUT/PATCH]：用户发出的请求有错误，服务器没有进行新建或修改数据的操作，该操作是幂等的。
-401 Unauthorized - [*]：表示用户没有权限（令牌、用户名、密码错误）。
-403 Forbidden - [*] 表示用户得到授权（与401错误相对），但是访问是被禁止的。
-404 NOT FOUND - [*]：用户发出的请求针对的是不存在的记录，服务器没有进行操作，该操作是幂等的。
-406 Not Acceptable - [GET]：用户请求的格式不可得（比如用户请求JSON格式，但是只有XML格式）。
-410 Gone -[GET]：用户请求的资源被永久删除，且不会再得到的。
-422 Unprocesable entity - [POST/PUT/PATCH] 当创建一个对象时，发生一个验证错误。
-500 INTERNAL SERVER ERROR - [*]：服务器发生错误，用户将无法判断发出的请求是否成功。
-</code></pre>
-
-<p>更全<a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html">http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html</a></p>
-
-<p>8.0 错误处理</p>
-
-<pre><code>{
-error: "Invalid API key"
-}
-</code></pre>
-
-<p>9.0 返回结果</p>
-
-<pre><code>GET /collection：返回资源对象的列表（数组）
-GET /collection/resource：返回单个资源对象
-POST /collection：返回新生成的资源对象
-PUT /collection/resource：返回完整的资源对象
-PATCH /collection/resource：返回完整的资源对象
-DELETE /collection/resource：返回一个空文档
-</code></pre>
-
-<p>10.0 Hypermedia API</p>
-
-<p>RESTful的API最好做到Hypermedia API,既返回结果中提供链接,连向其他API方法,使得用户不查文档,也知道下一步该作什么.</p>
-
-<p>比如，当用户向api.example.com的根目录发出请求，会得到这样一个文档。</p>
-
-<pre><code>{"link": {
-    "rel":   "collection https://www.example.com/zoos",//路径与本API的关系
-    "href":  "https://api.example.com/zoos", //API路径
-    "title": "List of zoos", //标题
-    "type":  "application/vnd.yourformat+json" //返回类型
-}}
-</code></pre>
-
-<p>例子<a href="https://api.github.com/">https://api.github.com/</a></p>
-
-<p>11.0 其他</p>
-
-<p>API身份证认真使用Oauth 2.0<a href="http://www.ruanyifeng.com/blog/2014/05/oauth_2_0.html">http://www.ruanyifeng.com/blog/2014/05/oauth_2_0.html</a>
-尽量使用JSON</p>
-
-<h3>参考链接</h3>
-
-<p>阮一峰: <a href="http://www.ruanyifeng.com/blog/2014/05/restful_api.html">http://www.ruanyifeng.com/blog/2014/05/restful_api.html</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Laravel 命令]]></title>
-    <link href="http://mzkmzk.github.io/blog/2015/10/12/laravel-order/"/>
-    <updated>2015-10-12T11:37:40+08:00</updated>
-    <id>http://mzkmzk.github.io/blog/2015/10/12/laravel-order</id>
-    <content type="html"><![CDATA[<!--more-->
-
-
-<ol>
-<li><p>命令行爽Eloquent</p>
-
-<pre><code> php artisan tinker
-</code></pre>
-
-<p> 这样爽的好处?可以看到返回的类型和执行sql</p>
-
-<pre><code> App\Models\Ready_Sample_Model::all();
- select * from `ready_samples`
- =&gt; Illuminate\Database\Eloquent\Collection {#895
- all: [
-App\Models\Ready_Sample_Model {#896
-  id: 2646,
-  ....
-</code></pre></li>
-<li><p>新建Model</p>
-
-<pre><code> K:HapLab_Laravel maizhikun$ php artisan make:model Disease_Type_Item_Model
- Models created successfully.
-</code></pre></li>
-</ol>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Laravel Eloquent]]></title>
-    <link href="http://mzkmzk.github.io/blog/2015/10/05/laravel-eloquent/"/>
-    <updated>2015-10-05T11:37:40+08:00</updated>
-    <id>http://mzkmzk.github.io/blog/2015/10/05/laravel-eloquent</id>
-    <content type="html"><![CDATA[<!--more-->
-
-
-<h1>1 疑问点.</h1>
-
-<ol>
-<li><p>save方法返回的是true/false;但是delete返回的是1/0,下面是API查的..奇怪&hellip;</p>
-
-<pre><code> bool|null delete()
-
- Delete the model from the database.
-
- Return Value
-
- bool|null   
- Exceptions
-
- Exception
-</code></pre></li>
-</ol>
-
-
-<p>命令行爽Eloquent</p>
-
-<pre><code>cd 项目跟目录
-php artisan tinker
-</code></pre>
-
-<p>这样爽的好处?可以看到返回的类型和执行sql</p>
-
-<pre><code>App\Models\Ready_Sample_Model::all();
-select * from `ready_samples`
-=&gt; Illuminate\Database\Eloquent\Collection {#895
- all: [
-   App\Models\Ready_Sample_Model {#896
-     id: 2646,
-     ....
-</code></pre>
-
-<p>Model排序</p>
-
-<pre><code>Ready_Sample_Model::all()-&gt;sortByDesc('updated_at')
-Ready_Sample_Model::all()-&gt;sort('updated_at')
-</code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[疯狂Html+CSS+JS 中JS总结]]></title>
-    <link href="http://mzkmzk.github.io/blog/2015/10/05/amazeing-js/"/>
-    <updated>2015-10-05T11:37:40+08:00</updated>
-    <id>http://mzkmzk.github.io/blog/2015/10/05/amazeing-js</id>
-    <content type="html"><![CDATA[<!--more-->
-
-
-<h1>0 总结</h1>
-
-<p>本书的JS</p>
-
-<ol>
-<li>第一章有讲语法有挺多常见的坑点和原理解释很不错</li>
-<li>第二章DOM编程讲述了挺多API</li>
-<li>第三章事件处理机制其实对事件中的this关键字和事件传播顺序讲解还不错</li>
-<li>第四章WebStorage本地存储例子鲜明</li>
-<li>第五章Worker应付复杂的js操作</li>
-<li>第六章客户端通信WebSocket挺有用,可以实现用户与用户在浏览器中互动</li>
-</ol>
-
-
-<h1>1. JavaScript语法</h1>
-
-<h2>1.1 执行js代码</h2>
-
-<ol>
-<li>javascript:alert(&lsquo;执行js&rsquo;);//一般放在超链接中,用户点击即执行,</li>
-<li><code>&lt;script&gt;alert("执行js")&lt;/script&gt;</code></li>
-</ol>
-
-
-<h2>1.2 变量赋值</h2>
-
-<pre><code>var a = 1;//显式
-a =1; //隐式
-</code></pre>
-
-<h2>1.3 全局变量与局部变量</h2>
-
-<pre><code>...
-var scope = "全局变量";
-function test(){
-    alert(scope); // undefiend
-    var scope = "局部变量";
-    alert(scope); // 局部变量
-}
-</code></pre>
-
-<p>因为全局变量被局部变量覆盖了.虽然局部变量的scope还没赋值,但是已经在方法里&#8221;占&#8221;上位置了.</p>
-
-<p>但如果把局部变量的var删了,就会先输出全局变量后输出局部变量,因为没有var在方法里给局部变量&#8221;占&#8221;位置;</p>
-
-<h2>1.4 浮点数</h2>
-
-<pre><code>var a =.333
-var b = a * 5;
-alert(b);
-</code></pre>
-
-<p>得出的结果是 1.66499999999999999</p>
-
-<p>所以在js中判断浮点数是否相等 建议判断两者的差值是否小于一个足够的数(例如0.0000000000001)</p>
-
-<h2>1.5 字符串</h2>
-
-<p>js中没有字符类型变量 &ldquo;&#8221;与&#8217;&lsquo;一致</p>
-
-<pre><code>var s ="abcdefg"
-
-//b = "def"
-b = s.slice(3, -1);
-</code></pre>
-
-<h2>1.6 字符串的正则表达式方法中</h2>
-
-<ol>
-<li>match()返回匹配的字符串(数组或null),可加/g进行全局匹配多个</li>
-<li>search()返回匹配的索引值 单个</li>
-</ol>
-
-
-<h2>1.7 undefined和null</h2>
-
-<pre><code>null == undefined //true
-
-null === undefined //false
-</code></pre>
-
-<p>undefined 是没设值</p>
-
-<p>null则是设定了为null值</p>
-
-<h2>1.8 运算符</h2>
-
-<pre><code>//逗号运算符 取最右返回值
-a = (b =5 , c = 7 , d =56) //a =56
-
-a = void(b =5 , c = 7 , d =56) //a = undefined
-</code></pre>
-
-<h2>1.9 typeof和instanceof</h2>
-
-<p>typeof 用来获得 实例类型 :</p>
-
-<pre><code>typeof("123"); //string
-</code></pre>
-
-<p>instanceof 判断变量是否为某类的实例</p>
-
-<pre><code>var a = [4,5];
-alert(a instanceof Array); //true
-</code></pre>
-
-<h2>1.10 语句</h2>
-
-<p>抛出异常</p>
-
-<pre><code>throw new Error("用户自定义异常"); //一般用于终止程序和返回错误提示是个不错的选择;
-
-try{
-
-}catch(e){
-    alert(e.message); // "用户自定义异常"
-}
-</code></pre>
-
-<p>for in</p>
-
-<pre><code>//这回输出浏览器的所有属性,做浏览器兼容之前可以考虑看看.
-for( prop_name in navigator){
-    document.wrti(prop_name + " : " + navigator[propname]);
-}   
-</code></pre>
-
-<p>跳出命名for</p>
-
-<pre><code>outer: 
-for(...){
-    for(...){
-        ...
-        continue outer;
-    }
-}
-</code></pre>
-
-<h2>1.11 函数</h2>
-
-<p>js 允许先调用函数 再定义函数</p>
-
-<h3>1.11.1 定义匿名函数</h3>
-
-<pre><code>var show_name = function(name){
-    alert(name);
-}
-
-show_name("K"); //K
-</code></pre>
-
-<p>这样的好处是什么,如果直接定义function 它实际上也是创建了一个对象</p>
-
-<h3>1.11.2 函数既对象</h3>
-
-<pre><code>var hello = function(){...};
-
-hello instanceof Function //true;
-
-hello instanceof Object //true;
-
-alert(heelo) //输出函数源代码
-</code></pre>
-
-<h3>1.11.3 调用函数方式的不同</h3>
-
-<ol>
-<li>直接调用函数 返回return的值或void</li>
-<li>new 函数 得到的都是对象 - -&hellip;&hellip;.</li>
-</ol>
-
-
-<h3>1.11.4 this关键字.</h3>
-
-<p>在函数中使用this.变量 该变量就是函数的实例变量,而非局部变量,无论它在哪里.</p>
-
-<p>函数可依附在类中.如没指定 则依附在winodw对象中</p>
-
-<pre><code>var hello =function(){...}
-
-window.hello();
-
-var p = {
-    wark: function(){...}
-}
-p.wark();
-</code></pre>
-
-<h3>1.11.5 函数中的变量有三种</h3>
-
-<pre><code>function Person(){
-    //局部变量 只能在函数里访问
-    var id ;
-
-    //实例属性 通过对象.访问
-    this.age ;
-
-    //类属性 通过Patient.name访问 与static类似
-    Person.name ;
-}
-</code></pre>
-
-<h3>1.11.6 js是一种动态语言,能随时给对象增加属性和方法</h3>
-
-<pre><code>function Student(){ };
-
-var student =new Student();
-//动态增加name属性
-student.name = 'K';
-alert(sutdent.name) //K
-
-Student.age =22 ;
-alert(Student.age); //22 类属性也是可以动态添加的
-</code></pre>
-
-<h3>1.11.7 调用函数的三种方式</h3>
-
-<ol>
-<li><p>直接调用</p>
-
-<pre><code> windows.alert();
- //or
- alert();
-</code></pre></li>
-<li><p>call()调用</p>
-
-<p> 作用:动态地传入一个函数引用</p>
-
-<pre><code> var each = function(array,fn){
-     for(var index in arrary){
-         //null表示以window为调用者fn函数
-         fn.call(null,index,arrary[index]);
-     }
- }
-
- each([4,20,3] , function(index ,ele){
-     alert("第 " + index "个元素是 : " + ele);
- });
-</code></pre>
-
-<p> call()调用函数语法为:<code>函数引用.call(调用者,参数1,参数2...)</code></p>
-
-<p> 直接调用函数语法为:<code>调用者.函数(参数1,参数2 ...)</code> = <code>函数.call(调用者,参数1,参数2 ...)</code></p></li>
-<li><p>apply()调用</p>
-
-<p> apply和()call()基本相似,区别如下:</p>
-
-<ol>
-<li>通过call()调用函数时,括号必须详细列出每个参数</li>
-<li><p>通过apply()动态地调用函数时,可以在括号中以<code>arguments</code>来代表所有参数</p>
-
-<pre><code> var myfun = function (a , b){
-     alert(a + "  " +b);
- }
-
- myfun.call(window ,12 ,23); //12 23;
-
- myfun.apply(window ,[20 , 39]); //20 39
-
- var example = function (num1 ,num2){
-     //直接调用arguments代表调用者(example,this代表example)时的传入的所有参数
-     myfun.apply(this,arguments); 
- }
- example(20,40) //20 40 
-</code></pre></li>
-</ol>
-</li>
-</ol>
-
-
-<h3>1.11.8 函数的独立性</h3>
-
-<p>在函数A中可以定义函数B,但是函数B还是独立于函数A</p>
-
-<pre><code>function Person(name){
-    this.name = name;
-
-    this.info = function(){
-        alert(this.name);
-    }
-}   
-
-var person =new Person('K');
-person.info(); //K
-var name = 'K_window';
-
-//由于window为调用者 ,this.name访问的是window.name
-p.info.call(window); //K_window
-</code></pre>
-
-<p>来爽一发猫学狗叫?.</p>
-
-<pre><code>function Dog(name,bark){
-    this.name = name;
-    this.bark = bark;
-    this.info =function(){
-        alert(this.name + "  " + this.bark);
-    }
-}
-
-function Cat(name){
-    this.name =name;
-}   
-
-var dog = new Dog("K","汪汪!");
-var cat = new Cat("K_2");
-dog.info.call(cat); //K_2 undefined
-</code></pre>
-
-<h3>1.11.9 参数传递方式</h3>
-
-<p>和JAVA一样 都是值传递拉~.</p>
-
-<p>基本类型</p>
-
-<pre><code>function change(arg){
-    arg =10 ;
-    alert(arg);
-}
-var x = 5;
-alert(x); //5
-change(x); //10
-alert(x); //5
-</code></pre>
-
-<p>复合类型</p>
-
-<pre><code>function change(person){
-    person.age = 10;
-    alert(person.age);
-    person = null;
-}
-
-var person = {age : 5};
-alert(person.age); //5
-change(person); //10
-alert(person.age); // 10
-alert(person); // []object Object]
-</code></pre>
-
-<p>复合类型的传递为值传递,原person和参数person指向同一javascript对象,所以当改变age的时候,是在改变javascript对象的age,但是参数person赋值为null,原person并无改变.</p>
-
-<h3>1.11.10 空参数</h3>
-
-<pre><code>function text(person){
-    alert( typeof parson);
-}
-
-text(); //undefined
-</code></pre>
-
-<p>所以对于弱类型,方法重载是无作用的,因为js会把空参数当做undefined传递进去;</p>
-
-<p>同名函数,后面出现的会覆盖前面的,无论参数个数是多少.</p>
-
-<h3>1.11.11 对象和关联数组</h3>
-
-<p>javascript和Map有点类似,当key为对象,value为函数,该该函数就是对象的方法,当key为对象,value为基本类型,则该基本类型为对象的属性.(以上为便于理解,切勿细琢)所以访问属性时,可以obj.propName也可以obj[propName].</p>
-
-<p>但有时候我们只能用obj[propName],因为.propName不能把propName当做变量处理,而是把他当成&#8217;propName&#8217;字符串</p>
-
-<pre><code>function Person(name){
-    this.name =name;
-    this.info = function(){
-        alert(K);
-    }
-}
-
-var person = new Person("K");
-//遍历person属性
-for (propName in person){
-    alert(p[propName]);//alet K info源代码 假如此处用p.propName则undefined,因为Person无'propName'变量.
-}
-</code></pre>
-
-<h3>1.11.12 继承和prototype</h3>
-
-<p>在一个类(函数)中定义一个函数会导致</p>
-
-<ol>
-<li>性能低下:每次new一个类 都会生成一个函数</li>
-<li><p>函数中若引用类的局部变量会产生闭包 导致局部变量一直存在</p>
-
-<pre><code> function Person(){
-     var local = "局部变量"
-     this.info = function(){
-         //产生闭包
-         alert(local);
-     }
- }
-
- var person = new Person();
- person.ifno(); // 局部变量  
-</code></pre></li>
-</ol>
-
-
-<p>解决方案:prototype</p>
-
-<p>增加了prototype属性的类可视为继承了原先的类(伪继承)</p>
-
-<pre><code>function Person(){...}
-
-var person = new Person();
-
-//person.wark(); 程序报错wark不存在
-Person.prototype.wark = function(){...}
-
-person.wark(); //ok
-</code></pre>
-
-<p>在prototype之前实例化的类会具有wark方法吗? 有的,因为prototype这样并不会产生一个新的类,而是直接动态的往Person里加函数.</p>
-
-<h2>1.12 创建对象三种方式</h2>
-
-<pre><code>//(单身汪别说我不教你)
-</code></pre>
-
-<ol>
-<li><p>new关键字调用构造器创建对象</p>
-
-<pre><code> function Person(name){...}
- var person_1 = new Person();
- var person_2 = new Person('K'); //js不存在方法重载,空参数undefined顶替
-</code></pre></li>
-<li><p>使用Object直接创建对象</p>
-
-<pre><code> var my_obj = new Object();
- my_ojb.name = 'K';
- my_obj.handsome = function(){...}
-
- function text(){...}
- my_obj.text = text;//不要添加(),不然会认为是调用方法
-</code></pre></li>
-<li><p>JSON创建对象</p>
-
-<pre><code> ver person = {
-     name : 'K',
-     school : ['ChangAn','TianJin'],
-     girl_friends :[
-         {
-             name : 'Haski',
-             age : 11
-         },
-         {
-             name : 'Samoyed',
-             age : '8'
-         }
-     ]
- }
-
- alert(person.girl_friends[0].name); //Haski
-</code></pre></li>
-</ol>
-
-
-<h1>2 DOM编程</h1>
-
-<p>DOM操作其实JQuery已经做得很好了,这里简单补充一下原生JS的知识</p>
-
-<p>HTML文档中只有一个根节点</p>
-
-<h2>2.1 访问HTML元素</h2>
-
-<ol>
-<li>id getElementById(&lsquo;id&rsquo;); or getElementsByName(&lsquo;name&rsquo;);</li>
-<li><p>根据节点关系</p>
-
-<pre><code> Node parentNode: 返回父节点
- Node previousSibling: 返回前一个兄弟节点
- Node nextSibling: 饭后后一个兄弟节点
- Node[] childNodes 返回当前节点的所有节点
- Node[] getElementsByTagName('标签名称'): 返回当前节点具有制定标签的子节点
- //注意ol标签的子标签IE8和其他浏览器不一样(其他浏览器会把ol下的li和其后面的空白分别当成2个节点,IE8则不会)
-</code></pre></li>
-</ol>
-
-
-<h2>2.2 增加HTML函数</h2>
-
-<ol>
-<li>document.createElement(&ldquo;标签名&rdquo;);</li>
-<li>复制节点 var node = ul.firstChild.nextSibling.cloneNode(boolean),boolean为true时,复制所有所有后代节点.false则仅复制当前节点.clone了节点以后还要找一个节点添加进去.</li>
-</ol>
-
-
-<h2>2.3 添加节点</h2>
-
-<ol>
-<li>appendChild(Node);添加为当前节点的最后一个子节点</li>
-<li>inserBefore(newNode,refNode);在refNode前添加newNode</li>
-<li>replaceChild(newChild,oldChild);替换节点</li>
-<li>增加select选项 new Option(text,value,defaultSelected,selected);</li>
-</ol>
-
-
-<h2>2.4 删除节点</h2>
-
-<ol>
-<li>removeChild(oldNode);</li>
-</ol>
-
-
-<h2>2.5 window对象</h2>
-
-<ol>
-<li>返回上一个页面: back()</li>
-<li>window.href: 当前url</li>
-<li>window.width: 屏幕横向分辨率</li>
-<li>window.height: 屏幕纵向分辨率</li>
-<li><p>遍历window.screen,包含所以屏幕属性</p>
-
-<pre><code> for(var propName in window.screen){
-     alert(propName+":" +screent[propname]);
- }
-</code></pre></li>
-<li><p>cofrim(&lsquo;标题&rsquo;); 能弹出是否确认的提示框</p></li>
-<li>prompt(&lsquo;标题&rsquo;); 能弹出一个文本输入框输入.</li>
-<li><p>定时器:setInterVal,clearInterval()</p>
-
-<pre><code> var timer;
- var cur = new Date().getTime();
- var setTime = function(){
-     document.getElementById("tm").innerHTML = new Date().toLocationString();
-     if(new Date().getTime- cur &gt; 60 *1000){
-         clearInterval(timer);
-     }
- }
- //每1S执行一次,执行了60次就暂停
- timer = window.setInterval("setTime()",1000);
-</code></pre></li>
-</ol>
-
-
-<h2>2.6 navigator和地理位置</h2>
-
-<p>navigator汉堡浏览器所有信息,遍历循环获取信息</p>
-
-<pre><code>for(var propName in window.navigator){
-    alert(propName + ":" + window.navigator[propName]);
-}   
-</code></pre>
-
-<p>HTML5新增geolocation属性</p>
-
-<p>Geolocation提供的方法</p>
-
-<ol>
-<li>getCurrentPosition(onSuccess,onError,options)</li>
-<li>int watchCurrentPostion(OnSuccess,onError,options),周期性调用getCurrentPosition,返回的int代表这个&#8221;监听器&#8221;的ID,用来clearWatch(watchID)取消监听</li>
-<li>clearWatch(watchID),用于取消watchCurrentPosition</li>
-</ol>
-
-
-<p>上面的前两个方法的options参数是一个对象,可包含3个变量</p>
-
-<ol>
-<li>enabelHighAccuracy(是否制定高精度地理位置)</li>
-<li>tiemout 设置超时时长</li>
-<li>maximumAge,设置缓存时间</li>
-</ol>
-
-
-<p>例子:</p>
-
-<pre><code>var geoHandler = function(position){
-    var geoMsg = "用户地址位置是 : &lt;br/&gt;"
-    geoMsg += "timestamp属性为 :" + position.timestamp + "&lt;br/&gt;"//获取位置的时间
-    var cords =position.coords;
-    for(var prop in coords ){
-        geoMsg += prop + ": " + coords[prop] +"&lt;br/&gt;"//经纬度,移动速度等
-    }
-    document.writeln(geoMsg);
-}
-
-var errorHandler = function(error){
-    var errMsg = {
-        1: '用户拒绝了位置服务'
-        2: '无法获取地址位置信息'
-        3: '获取地理位置信息超时'
-    };
-    alert(error[error.code]);
-}
-
-navigator.geolocation.getCurrentPosition(geoHandler
-, errorHandler
-, {
-    enableHighAccuracy:true,
-    maximuAge:1000
-});
-</code></pre>
-
-<h2>2.7 HTML5新增浏览器分析</h2>
-
-<p>实现该功能主要通过performance对象</p>
-
-<p>其中的(PerformanceTiming)timing属性包含加载时间相关的属性</p>
-
-<p>另外(PerformanceNavigation)navigation,主要属性有</p>
-
-<p>type :</p>
-
-<pre><code>TYPE_NAVIGATE(数值为0): 超链接/输入url
-TYPE_RELOAD(1): 重新加载方式,diaoyonglocation.reload()等
-TYPE_BACK_FORWARD(2): 通过浏览器的前进方式
-TYPE_RESERVED(255): 未知方式
-</code></pre>
-
-<p>redirectCount: 重定向次数</p>
-
-<h1>3 事件处理机制</h1>
-
-<h2>3.1 常见事件</h2>
-
-<ol>
-<li>onabort: 图片加载终端</li>
-<li>onblur: 失去焦点</li>
-<li>onchange: 表单域更改</li>
-<li>onclick: 点击</li>
-<li>onerror: 图片加载出错</li>
-<li>onfocus: 获得焦点</li>
-<li>onkeydown: 按下鼠标</li>
-<li>onkeypress: 当焦点在当前元素上,单击键盘某个键触发</li>
-<li>onkeyup: 当焦点在当前元素上,松开某个键触发</li>
-<li>onload: 某个对象加载完毕,适用于<code>img</code>,<code>oframe</code>,<code>body</code></li>
-<li>onunload: 当某个对象从窗口下卸载触发,适用于<code>img</code>,<code>oframe</code>,<code>body</code></li>
-<li>onmousedown: 焦点停留在当前元素上,按下鼠标触发</li>
-<li>onmousemore: 当焦点在当前元素上,鼠标移动到该元素</li>
-<li>onmouseout: 鼠标移出当前元素触发</li>
-<li>onmouseover: 鼠标移动到该元素触发</li>
-<li>onmouseup: 焦点在当前元素,松开鼠标时触发</li>
-<li>onreset: 重置表单时触发</li>
-<li>onsubmit: 表单提交触发</li>
-</ol>
-
-
-<h2>3.2 事件处理和this</h2>
-
-<pre><code>p.info = function(){
-    alert(this.name);
-}
-document.getElementById("bt").onclick = p.info//this指向'bt'控件
-document.getElementById("bt").onclick = new function (){ p.info();} //this总是指向p
-</code></pre>
-
-<p>注意表单设置id为x和name为y时候,相当于表单创建了x属性和y属性,所以id和name不能是关键字submit等</p>
-
-<h2>3.3 DOM</h2>
-
-<p>创建监听事件</p>
-
-<p>objectTarget.addEventListener(&ldquo;eventType&rdquo;,handler,capture),第一个参数表示绑定的事件,如click、keypress之类的,第二个制定绑定的函数,第3个位boolean,true表示监听捕获阶段,false表示监听冒泡阶段</p>
-
-<p>objectTarget.removeEventListener(&ldquo;eventType&rdquo;,handler,captureFlag): 删除绑定事件</p>
-
-<p>捕获状态阶段的绑定事件先执行,事件冒泡状态阶段的绑定事件后执行.
-捕获状态阶段从外往内触发,事件冒泡状态阶段从内往外触发.</p>
-
-<p>绑定例子</p>
-
-<pre><code>var got_click = function (event){
-    for ( event_one in event){
-        alert(event_one + "  : " + event[event_one]);
-    }
-}   
-
-document.getElementByID("test").addEventListener("cilck",got_click,true);
-</code></pre>
-
-<p>阻止事件传播</p>
-
-<pre><code>event.stopPropagation();
-</code></pre>
-
-<p>取消事件的默认行为,如跳转页面等,但不会阻止事件传播.</p>
-
-<pre><code>event.preventDefault();
-</code></pre>
-
-<h3>3.3.1转发事件</h3>
-
-<p>DOM提供了dispathEvent方法用于事件转发,该方法属于Node</p>
-
-<p>target.dispathEvent(Event event),将event转发到target上</p>
-
-<p>DOM的dispath()必须转发人工合成的Event事件</p>
-
-<p>document.createEvent(String type),tpy参数用于指定事件类型,eg:普通事件Events,UI事件UIEvents,鼠标事件:MouseEvents</p>
-
-<p>初始化事件</p>
-
-<pre><code>initEvent(具体参数...)
-
-initUIEvent(具体参数...)
-
-intMouseEvent(具体参数...)
-
-//例子
-
-&lt;input id="bt1"&gt;
-&lt;input id="bt2"&gt;
-...
-
-var rd =function(evt){
-    alert("事件冒泡阶段: " + evt.currentTarget.value +"被点击了");
-    var e =document.createEvent("Evnets");
-    e.initEvent("click",true,false);//true表示是否支持冒泡,false表示是否有默认行为
-    document.getElementById("bn2").dispathEvent(e);
-}
-var go_click = function (evt){
-    alert("事件冒泡阶段: " + evt.currentTarget.value);
-}
-
-document.getElementById("bn1").addEventListener("click",rd,false);
-
-document.getElementById("bn2").addEventListener("click",go_click,false);;
-
-//点解按钮一结果
-alert(事件冒泡阶段: 按钮一被点击了);
-alert(事件冒泡阶段:按钮2);
-</code></pre>
-
-<p>点击按钮1,按钮执行了前面按钮一被点击了提示语句后,将点击事件转给了按钮2,按钮2执行自身的点击事件.</p>
-
-<h1>4 本地存储与离线应用</h1>
-
-<h2>4.1 Web Storage</h2>
-
-<p>使用理由之一Cookie的局限性:</p>
-
-<ol>
-<li>Cookie大小被限制为4KB</li>
-<li>Cookie会包含在每次HTTP请求中</li>
-<li>Cookie网络传输未加密(除非整个应用都使用SSL)</li>
-</ol>
-
-
-<p>Web Storage分两种</p>
-
-<p>Session Storage: 生命周期与用户Session一致(用户Session是指:用户从访问网址到离开网址/关闭浏览器)</p>
-
-<p>Local Storage: 保存在用户的磁盘中,失效的方式为用户/程序显示删除.</p>
-
-<p>Web Storage的方法有</p>
-
-<ol>
-<li>length: 返回key-value对数</li>
-<li>key(index): 返回第index个key</li>
-<li>getItem(key): 获取key对应的value</li>
-<li>set(key,value): 设置key-value</li>
-<li>removeItem(key): 删除key-value</li>
-<li>clear(): 清除所有key-value</li>
-</ol>
-
-
-<p>Web Storage包含在window对象中</p>
-
-<p>当value为对象时,建议用JSON存储</p>
-
-<h2>4.2 构建离线应用</h2>
-
-<ol>
-<li><p>在html标签中修改</p>
-
-<pre><code> //表明该页使用index.manifest文件
- &lt;html manifest="index.manifest"&gt;
-</code></pre></li>
-<li><p>index.mainfest文件</p>
-
-<pre><code> CACHE MANIFEST
- //第一行必须为上述字符
- //指定版本号
- #version 1
- //本地缓存资源
- CACHE
- inedx.html
- logo.jpg
- //不缓存的资源
- NETWORK
- *
- //前者表示在线状态使用的资源,后者代表离线状态使用的资源
- FALLBACK
- test.js offline.js
-</code></pre></li>
-<li><p>Tomcat为例,天津映射文件</p>
-
-<pre><code> &lt;!--conf的web.xml根元素中增加MIME映射--&gt;
- &lt;mine-mapping&gt;
-     &lt;extension&gt;manifest&lt;/extension&gt;
-     &lt;mine-type&gt;text/cache-mainfest&lt;/mime-type&gt;
- &lt;/mime-mapping&gt;
-</code></pre></li>
-</ol>
-
-
-<p>启动应用后,页面可刷新(即使离线状态),并使用离线时候的资源</p>
-
-<h3>4.2.1 判断在线状态</h3>
-
-<p>navigator.onLine属性: true表示在线</p>
-
-<p>online/offline事件: 当在线/离线状态切换时,body上的online/offine事件会被触发,沿着document.body、document和window冒泡</p>
-
-<pre><code>window.addEventListener("offline",function(){
-    alert("离线状态")
-},true);
-if(navigator.onLine){
-    alert("在线");
-}
-</code></pre>
-
-<h3>4.2.2 applicationCache对象</h3>
-
-<p>js可通过applicationCache控制离线缓存.</p>
-
-<p>status属性:</p>
-
-<ol>
-<li>UNCACHE: 主机没开启离线功能.</li>
-<li>IDLE: 空闲状态.</li>
-<li>CHECKING: 正在检查本地manifest和服务器中manifest的差异</li>
-<li>DOWNLOADING: 正在下载需要的缓存数据</li>
-<li>OBSOLETE: 缓存已经过期</li>
-</ol>
-
-
-<p>常用方法</p>
-
-<ol>
-<li>void update(): 强制检查服务器的mainfest文件是否有更新</li>
-<li><p>void swapCache(): 更新缓存,只能在applicationCache的updateReady事件被触发时调用.</p>
-
-<pre><code> setInterval(function(){
-     applicationCache.update()
- },2000);
-
- applicationCache.onupdateready = function(){
-     if(confirm("已从远程服务器下载了需要的缓存,是否更新?")){
-         applicationCache.swapCache();
-         location.reload();
-     }
- }
-</code></pre>
-
-<h3>4.2.3 离线应用的事件与监听</h3></li>
-</ol>
-
-
-<p>访问html页面过程</p>
-
-<ol>
-<li>浏览器请求index.html</li>
-<li>服务器返回index.html</li>
-<li>浏览器页面是否制定manifest属性,若制定,触发checking事件,检查服务器中的manifest文件是否存在,不存在则触发error事件,不会制定第六部及其后续步骤</li>
-<li>浏览器解析index.html,请求该页其他资源.</li>
-<li>服务器返回所以请求</li>
-<li>浏览器处理mainfest文件,重新请求manifest文件中的所以页面,包括index.html页面,前面下载过的资源,扔会再下一遍.</li>
-<li>服务器返回所以要求被要求缓存的资源</li>
-<li>浏览器开始下载需要在本地缓存的资源,开始下载时触发ondownloading事件,在下载过程中不断触发onprogress事件.以便开发人员了解下载进度.</li>
-<li>下载完成后触发oncache事件.缓存完成</li>
-</ol>
-
-
-<p>当用户再访问index.html时,前面1~5完全相同,接下来检测mainfest文件是否有改变.</p>
-
-<ol>
-<li>没有改变触发onnoupdate事件,结束.</li>
-<li>mainfest改变,执行第7,8部,当所以文件本地缓存下载完毕后,浏览器触发onupdateready事件,而不会触发oncached事件.</li>
-</ol>
-
-
-<h1>5 使用worker创建多线程</h1>
-
-<p>worker中无法使用DOM、alert等与界面有关的操作.</p>
-
-<p>使用理由:防止js阻塞主线程的js运行</p>
-
-<p>WorkerAPI</p>
-
-<ol>
-<li>onmessage: 获取前台js提交过来的数据</li>
-<li>postMessage(data): 前台js通过postMessage触发Worker对象的onmessage事件.</li>
-<li>importScripts(urls),导入多个js,importScripts(&ldquo;a.js&rdquo;,&ldquo;b.js&rdquo;);</li>
-<li>sessionStorge/localStorage: 使用Worker操作Storage本地存储</li>
-<li>Worker: 创建新的Worker对象启动嵌套线程</li>
-<li>XMLHttpRequest: Worker使用XMLHttpRequest发送异步请求.</li>
-<li>navigator: 与window的location属性类似</li>
-<li>location: 与window的location属性相似</li>
-<li>self: WorkerGlobalScope对象,代表当前Worker线程自身作用域.调用self的close()结束线程</li>
-<li>setTimeout()/seInterval()/eval()/inNaN()/parseInt,等与界面无关的js核心函数,包括Array/Data/Math/Number/Object/String等.</li>
-</ol>
-
-
-<p>写一段找出输入start和end之间素数的线程.</p>
-
-<p>worker.js代码</p>
-
-<pre><code>onmessage =function(event){
-    var data =JSON.parse(event.data);
-    var start =data.start;
-    var end =data.end;
-    var result ="";
-    search:
-    for (var n =start; n &lt;= end :n++){
-        if(n%i==0){
-            continue search;
-        }
-        result +=(n+",");
-    }
-}
-postMessage(result);
-</code></pre>
-
-<p>网页代码</p>
-
-<pre><code>&lt;input name="start" ...&gt;
-&lt;input name="end" ...&gt;
-&lt;input type=button inclick="cal();" ...&gt;
-...
-var car =function(){
-    var start = parseInt(document.getElementById("start").value);
-    var end = parseInt(document.getElementById("end").value);
-    //创建线程
-    var cal = new Worker("worker.js");
-    var data ={
-        "start" : srart,
-        "end" : end
-    };
-    //发送数据
-    cal.postMessage(JSON.stringify(data));
-    cal.onmessage = function (evnet){
-        alert(event);
-    }
-}
-</code></pre>
-
-<p>并行的两条Worker不能互相通信,但Wroker可嵌套.</p>
-
-<h1>6 客户端通信</h1>
-
-<p>WebSocket: 服务器主动推送信息/客户端实时推送数据到服务器</p>
-
-<h2>6.1 跨文档通信</h2>
-
-<p>window对象新增方法</p>
-
-<ol>
-<li>targetWindow.postMessage(message,targetOrigin): 该方法用户向targetWindow中状态的HTML发送信息,targetOrigin表示接收html的域名.</li>
-<li><p>onmessage: 调用方法:windows.onmessage =function(event){&hellip;}</p>
-
-<p> event中的属性:</p>
-
-<ol>
-<li>data: 数据</li>
-<li>orgin: 发送消息window的源域名</li>
-<li>lastEventID: 返回发送消失时间的ID</li>
-<li>source: 返回发送消息的窗口</li>
-</ol>
-</li>
-</ol>
-
-
-<p>html想发送要做</p>
-
-<ol>
-<li>获取接收消息的window对象</li>
-<li>调用接收消息的window对象的postMessage(any message)方法</li>
-</ol>
-
-
-<p>html想接收要做</p>
-
-<ol>
-<li>本html绑定事件window.message = function(event){&hellip;};</li>
-</ol>
-
-
-<p>跨文档消息传递</p>
-
-<pre><code>//source.html
-var targetWin = window.open("接收方url",'_blank','windth=400,height=300');
-
-targetWin.onload =function(){
-    targetWin.postMessage("传输消息","接收方域名");
-}
-
-window.onmessage =function(event){
-    //忽略其他域名发送的消息
-    if(event.orgin !="指定域名"){
-        return ;
-    }
-    alert(event.data);
-}
-
-//接收页面.html
-window.onmessage = function(event){
-    //忽略其他域名发送的消息
-    if(event.orgin !="指定域名"){
-        return ;
-    }
-    alert("接收到消息拉!"+event.data);
-    event.source.postMessage("回传消息",event.origin);
-}
-</code></pre>
-
-<p>结果:</p>
-
-<p>alert(接收到消息拉!传输消息);</p>
-
-<p>alert(回传消息);</p>
-
-<p>注意!一定要判断发送方的域名!!!!!一定要判断发送方的域名!!!!!一定要判断发送方的域名!!!!!</p>
-
-<h3>6.2 WebSocket与服务器通信</h3>
-
-<p>以前方案:</p>
-
-<ol>
-<li>周期发送请求</li>
-<li>页面使用隐藏窗口与服务器长连接</li>
-</ol>
-
-
-<p>WebSocket方法</p>
-
-<ol>
-<li>send(&ldquo;数据&rdquo;);向服务器发送数据.</li>
-<li>close();关闭该WebSocket.</li>
-</ol>
-
-
-<p>WebSocket监听事件</p>
-
-<ol>
-<li>onopen: 当WebSocket建立网络连接触发该.</li>
-<li>onerror: 网络连接错误</li>
-<li>onclose: WebScokt被关闭触发</li>
-<li>onmessage: WebSocket接收到服务器数据时</li>
-</ol>
-
-
-<p>WebSocket属性</p>
-
-<ol>
-<li><p>readyState</p>
-
-<p> 1.1 CONNECTING(0): WebSocket正在尝试连接</p>
-
-<p> 1.2 OPEN(1): 已经连接</p>
-
-<p> 1.3 CLOSING(2): 正在关闭连接</p>
-
-<p> 1.4 CLOSED(3): 已经关闭连接</p></li>
-</ol>
-
-
-<p>WebSocket与服务器通信步骤</p>
-
-<ol>
-<li>WebSocket.Constructor(url,[DOMString protocols]);创建WebSocket对象</li>
-<li>发送信息: WebSocket对象的send()</li>
-<li>接收信息: WebSocket对象的onmessage属性绑定函数;</li>
-</ol>
-
-
-<p>实现客户端多人聊天,JAVA为例</p>
-
-<p>客户端代码:</p>
-
-<pre><code>var web_socket =new WebSocket("ws://域名:端口");
-
-web_socket.onopen =function(){
-    web_socket.onmessage =function(event){
-        document.getElementById('show').innerHTML += event.data +"&lt;/br&gt;"
-    }
-};
-
-var sendMsg =function(val){
-    var inputElement = document.getElementByID('msg');
-    webSocket.send(inputElement.value);
-    inputElement.value="";
-}
-
-...
-</code></pre>
-
-<p>服务端代码</p>
-
-<pre><code>import java.io.*;
-import java.net.*;
-import java.nio.charset.Charset;
-import java.security.MessageDigest;
-import java.util.regex.*;
-import java.util.*;
-import sun.misc.BASE64Encoder;
-
-public class ChatServer
-{
-    // 记录所有的客户端Soccket
-    public static List&lt;Socket&gt; clientSockets
-        = new ArrayList&lt;Socket&gt;();
-public ChatServer()throws IOException
-{
-    // 创建ServerSocket，准备接受客户端连接
-    ServerSocket ss = new ServerSocket(30000);
-    while(true)
-    {
-        // 接收到客户端连接
-        Socket socket = ss.accept();
-        // 将客户端Socket添加到clientSockets集合中
-        clientSockets.add(socket);
-        // 启动线程
-        new ServerThread(socket).start();
-    }
-}
-public static void main(String[] args)
-    throws Exception{
-    new ChatServer();
-}
-}
-class ServerThread extends Thread
-{
-    private Socket socket;
-    public ServerThread(Socket socket)
-    {
-        this.socket = socket;
-    }
-    public void run()
-    {
-    try
-    {
-        // 得到Socket对应的输入流
-        InputStream in = socket.getInputStream();
-        // 得到Socket对应的输出流
-        OutputStream out = socket.getOutputStream();
-        byte[] buff = new byte[1024];
-        String req = "";
-        // 读取数据，此时建立与WebSocket的"握手"。
-        int count = in.read(buff);
-        // 如果读取的数据长度大于0
-        if(count &gt; 0)
-        {
-            // 将读取的数据转化为字符串
-            req = new String(buff , 0 , count);
-            System.out.println("握手请求：" + req);
-            // 获取WebSocket的key
-            String secKey = getSecWebSocketKey(req);
-            System.out.println("secKey = " + secKey);
-            String response = "HTTP/1.1 101 Switching Protocols\r\nUpgrade: "
-                + "websocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: "
-                    + getSecWebSocketAccept(secKey) + "\r\n\r\n";
-            System.out.println("secAccept = " + getSecWebSocketAccept(secKey));
-            out.write(response.getBytes());
-        }
-        int hasRead = 0;
-        // 不断读取WebSocket发送过来的数据
-        while((hasRead = in.read(buff)) &gt; 0){
-            System.out.println("接收的字节数：" + hasRead);
-            /*
-                因为WebSocket发送过来的数据遵循了一定的协议格式，
-                其中第3个〜第6个字节是数据掩码。
-                从第7个字节开始才是真正的有效数据。
-                因此程序使用第3个〜第6个字节对后面的数据进行了处理
-            */
-            for (int i = 0 ; i &lt; hasRead - 6 ; i++ ){
-                buff[i + 6] = (byte) (buff[i % 4 + 2] ^ buff[i + 6]);
-            }
-            // 获得从浏览器发送过来的数据
-            String pushMsg = new String(buff
-                , 6 , hasRead - 6 , "UTF-8");
-            // 遍历Socket集合，依次向每个Socket发送数据
-            for (Iterator&lt;Socket&gt; it = ChatServer.clientSockets.iterator()
-                ; it.hasNext() ;)
-            {
-                try
-                {
-                    Socket s = it.next();
-                    // 发送数据时，第一个字节必须与读到的第一个字节相同
-                    byte[] pushHead = new byte[2];
-                    pushHead[0] = buff[0];
-                    // 发送数据时，第二个字节记录发送数据的长度
-                    pushHead[1] = (byte) pushMsg.getBytes("UTF-8").length;
-                    // 发送前两个字节
-                    s.getOutputStream().write(pushHead);
-                    // 发送有效数据
-                    s.getOutputStream().write(pushMsg.getBytes("UTF-8"));
-                }
-                catch (SocketException ex)
-                {
-                    // 如果捕捉到异常，表明该Socket已经关闭
-                    // 将该Socket从Socket集合中删除
-                    it.remove();
-                }
-            }
-        }
-    }
-    catch (Exception e)
-    {
-        e.printStackTrace();
-    }
-    finally
-    {
-        try
-        {
-            // 关闭Socket
-            socket.close();
-        }
-        catch (IOException ex)
-        {
-            ex.printStackTrace();
-        }
-    }
-}
-// 获取WebSocket请求的SecKey
-private String getSecWebSocketKey(String req)
-{
-    //构建正则表达式，获取Sec-WebSocket-Key: 后面的内容
-    Pattern p = Pattern.compile("^(Sec-WebSocket-Key:).+",
-            Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
-    Matcher m = p.matcher(req);
-    if (m.find())
-    {
-        // 提取Sec-WebSocket-Key
-        String foundstring = m.group();
-        return foundstring.split(":")[1].trim();
-    }
-    else
-    {
-        return null;
-    }
-}
-// 根据WebSocket请求的SecKey计算SecAccept
-private String getSecWebSocketAccept(String key)
-    throws Exception
-{
-    String guid = "258EAFA5-E914-47DA-95CA-C5AB0DC85B11";
-    key += guid;
-    MessageDigest md = MessageDigest.getInstance("SHA-1");
-    md.update(key.getBytes("ISO-8859-1") , 0 , key.length());
-    byte[] sha1Hash = md.digest();
-    BASE64Encoder encoder = new BASE64Encoder();
-    return encoder.encode(sha1Hash);
-}
-}
-</code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[系统分析师UML项目实战书籍阅读总结]]></title>
-    <link href="http://mzkmzk.github.io/blog/2015/10/01/uml_project_book/"/>
-    <updated>2015-10-01T11:37:40+08:00</updated>
-    <id>http://mzkmzk.github.io/blog/2015/10/01/uml_project_book</id>
-    <content type="html"><![CDATA[<!--more-->
-
-
-<h3>1. UML项目现场</h3>
-
-<p><code>只有平庸的人,才会提出复杂的解决方案</code></p>
-
-<p>UML建模顺序: 流程建模 -> 用例建模 ->领域建模</p>
-
-<p>活动图,用例图,类图的图标名称介绍.</p>
-
-<h3>2. 业务流程建模</h3>
-
-<p>业务流程定义:</p>
-
-<ol>
-<li>特定的客户</li>
-<li>特定的目标</li>
-<li>特定的服务</li>
-</ol>
-
-
-<p>对于不重要的工作,不做活动图</p>
-
-<p>表2-1 活动图用于表示业务流程或系统流程</p>
-
-<table>
-<thead>
-<tr>
-<th> 项目\活动图  </th>
-<th> 业务流程                                  </th>
-<th> 系统流程                                  </th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td> 主要作用      </td>
-<td>                   表示企业组织的未来流程   </td>
-<td> 表示系统内部的系统流程                     </td>
-</tr>
-<tr>
-<td> 人工操作      </td>
-<td> 可能出现人工操作                          </td>
-<td> 不会出现人工操作                          </td>
-</tr>
-<tr>
-<td> 生成机时      </td>
-<td> 需求分析阶段                                </td>
-<td> 系统设计时间                                </td>
-</tr>
-<tr>
-<td> 相关文件      </td>
-<td> 收录在系统需求的规格书(SRS)                </td>
-<td> 收录在系统设计规格书(SDS)                   </td>
-</tr>
-<tr>
-<td> 绘制者         </td>
-<td> 系统分析师                                   </td>
-<td> 系统设计师                                   </td>
-</tr>
-<tr>
-<td> 观看者         </td>
-<td> 客户/用户(系统设计师也会参考使用)          </td>
-<td> 程序设计师                                   </td>
-</tr>
-<tr>
-<td> 粒度            </td>
-<td> 一张活动图对应多个用例(即将用例视为黑箱)   </td>
-<td> 一张活动图对应一个用例(即将用例视为白盒)   </td>
-</tr>
-</tbody>
-</table>
-
-
-<p>表2-2 于系统设计时间的活动图和顺序图</p>
-
-<table>
-<thead>
-<tr>
-<th> 项目/图类型  </th>
-<th> 活动图(系统流程)                           </th>
-<th> 顺序图(对象互动)                               </th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td> 主要作用      </td>
-<td> 表示系统内部的系统流程                     </td>
-<td> 表示系统内部的对象互动                         </td>
-</tr>
-<tr>
-<td> 主要特色      </td>
-<td> 凸显流程与控制节点                           </td>
-<td> 凸显对象依序调用方法或函数                       </td>
-</tr>
-<tr>
-<td> 生成时机      </td>
-<td> 高级的系统设计时间                           </td>
-<td> 细部的系统设计时间                               </td>
-</tr>
-<tr>
-<td> 相关文件      </td>
-<td> 收录在系统设计规格书(SDS)                   </td>
-<td> 同左                                            </td>
-</tr>
-<tr>
-<td> 实作情况      </td>
-<td> 无法直接对应程序代码                        </td>
-<td> 可以直接对应程序代码(有些UML工具可以自动产码)     </td>
-</tr>
-<tr>
-<td> 绘制者         </td>
-<td> 系统设计师                                   </td>
-<td> 同左                                            </td>
-</tr>
-<tr>
-<td> 观看者         </td>
-<td> 程序设计师                                   </td>
-<td> 同左                                            </td>
-</tr>
-<tr>
-<td> 粒度            </td>
-<td> 一张活动图对应一个用例(即将用例视为白箱)   </td>
-<td> 同左                                            </td>
-</tr>
-</tbody>
-</table>
-
-
-<p>活动图图标:</p>
-
-<ol>
-<li>起始节点: 实心小圆 (建议一个活动图 一个起始节点)</li>
-<li>活动终点: 双圆,内实外空</li>
-<li>判断节点: 空心菱形</li>
-<li><p>动作: 圆角矩形 动作粒度要与用例粒度相近</p>
-
-<p> 4.1 第一行: (一个动作负责人)</p>
-
-<p> 4.2 第二行: 动作名称,动词开头</p></li>
-<li>合并节点: 空心菱形</li>
-<li>活动: 圆角矩形,右下角三叉图标 (活动可拆分外令一个活动图 )</li>
-<li>分叉与会合: 粗线段 (等所有条件具备进行下一阶段 建议分叉与会合成对出现)</li>
-<li>对象节点: 矩形 (代表流入/流出的数据项)</li>
-</ol>
-
-
-<h3>3. 用例建模</h3>
-
-<p>用例来源:</p>
-
-<ol>
-<li>业务流程</li>
-<li>功能流程</li>
-<li>其他用例</li>
-</ol>
-
-
-<p>建议同时生成用例图和功能架构图.</p>
-
-<p>用例图作用:</p>
-
-<ol>
-<li>规范一套动作</li>
-<li>明确结果</li>
-<li>表明参与者 (参与者包括主要参与者(启动者)和次要参与者)</li>
-</ol>
-
-
-<p>业务流程导出初版用例</p>
-
-<ol>
-<li>查看动作,动作负责人即为参与者,动作即为用例</li>
-<li>查看判断节点,判断判断节点是否需要其他用例支持</li>
-</ol>
-
-
-<p>功能划分->业务流程->初版用例->功能架构->用例图->用例描述</p>
-
-<p>用例描述:</p>
-
-<ol>
-<li>前置条件: 执行流程前必须要满足的条件</li>
-<li>主要流程: 一般正常的流程 (主要详细分为参与者输入,系统处理过程,及输出,要求非常详细!)</li>
-<li>替换流程: 特殊情况 (替换流程的编号,紧跟发生特殊情况的主要流程编号)</li>
-<li>后置条件: 必须要完成的结果</li>
-</ol>
-
-
-<p>包含关系与扩展关系</p>
-
-<ol>
-<li><p>包含关系: <code>&lt;&lt;include&gt;&gt;</code> 虚线箭头指向被包含 被包含可视为<code>前置条件</code></p>
-
-<p> 1.1 被包含的小用例无法脱离基础用例而单独存在</p>
-
-<p> 1.2 基础用例一定执行被包含的小用例</p>
-
-<p> 1.3 两者加起来是一条流程</p></li>
-<li><p>扩展关系: <code>&lt;&lt;extends&gt;&gt;</code> 虚线箭头直线被扩展 扩展可不执行 ,可视为<code>替换流程</code></p>
-
-<p> 2.1 拓展的小用例无法脱离基础用例而单独存在</p>
-
-<p> 2.2 基础用例不一定执行拓展的小用例</p>
-
-<p> 2.3 两者加起来是两条流程,其一是单独的基础用例,其二是基础用例外加拓展用例</p></li>
-</ol>
-
-
-<h3>4. 领域建模</h3>
-
-<p>领域模型:</p>
-
-<ol>
-<li>一种概念模型,呈现问题领域中的重要概念</li>
-<li>描述问题领域中的实体,实体属性,操作,角色,关系和限制.</li>
-<li>对于用例所描述的互动过程,领域模型可以为用例起支持结构作用.</li>
-<li>通常用类图描述领域模型.</li>
-<li>领域模式可用于出代码</li>
-</ol>
-
-
-<p>类图:</p>
-
-<ol>
-<li>类用矩形表示,第一行为名称,第二行为属性,第三行为操作</li>
-<li>属性 属性名称:数据类型=初始值</li>
-<li>操作 操作名称(参数,数据类型):返回值数据类型</li>
-<li><p>结合关系: 实线 表示两个领域存在重要且需要永久保存的静态关系</p>
-
-<p> 4.1 单向结合 无法从目标端找回来源端</p>
-
-<p> 4.2 双向结合</p>
-
-<p> 4.3 聚合关系 空心菱形 指向聚合类 整体-部分</p>
-
-<p> 4.4 组合关系 实心菱形 组合关系具有聚合关系的所有特性另加部分对象只会链接到一个整体对象,不允许数个整体对象共用一个部分对象,部分对象跟随整体对象的存活.</p>
-
-<p> 4.3 个体数目 下限..上限 表明关系:一对一,一对多,多对多.多对一.</p></li>
-</ol>
-
-
-<p>用例描述推导领域模型</p>
-
-<ol>
-<li>查看用例描述,把其中的数据项归到领域中.</li>
-<li>类代表领域,数据项代表属性</li>
-<li>查看概念之间的关系</li>
-<li>根据关系在两端添加数量</li>
-</ol>
-
-
-<p>领域模型呈现业务规则</p>
-
-<ol>
-<li>通过结合关系和个体数目来表达关系静态结构的业务规则</li>
-<li>通过操作来表达计算公司以及一些需要查验或检核的业务规则</li>
-</ol>
-
-
-<h3>5. 模型走读</h3>
-
-<p>作用:检测模型质量</p>
-
-<p>走读功能架构图与用例图</p>
-
-<ol>
-<li>是否可以从功能架构图追溯到用例图 (最好情况: 直接采用用例作为功能架构图中的功能)</li>
-<li>检测功能架构图中的系统,功能模块,用例名称是否和用例图一致</li>
-<li>若功能模块和底下的功能模块与客户的征求建议书(RFP)不一致,则需请求客户同意,看功能模块的切割、名称、地下的功能归属是否恰当.</li>
-</ol>
-
-
-<p>走读中遇到的问题及其解决方案:</p>
-
-<ol>
-<li>出现多个用例参与一个用例入口 解决:用例图中参与者第二行标明{or }</li>
-</ol>
-
-
-<p>走读用例图和用例描述</p>
-
-<ol>
-<li>检测参与者是否摆在系统方框之外,在系统方框和功能模块方框最上方要用标注&lt;\&lt;系统>>或&lt;\&lt;功能模块>></li>
-<li>用例描述每一个步骤都以参与者或系统开头</li>
-</ol>
-
-
-<p>界面雏形工具: Pencil</p>
-
-<p>走读用例描述与领域模型</p>
-
-<ol>
-<li>主要查看是否遗漏数据项(属性)、业务规则和重要操作</li>
-</ol>
-
-
-<h5>善用对象图</h5>
-
-<p>对象图是系统的快照,可表示某一时刻或某一场景系统内有哪些重要对象,属性的数值以及他们之间的关系.</p>
-
-<p>在绘制对象图,想好场景,一边套场景,一边通过对象图走读领域模型</p>
-
-<p>用对象图发现用例描述某一动作不能执行, 解决方案 增加用例辅助完成.</p>
-
-<h4>领域模式描述:</h4>
-
-<p>领域模式主要通过文字记录类别、属性、结合、限制的定义或解释、操作</p>
-
-<h3>6. 继续走读</h3>
-
-<p>走读中做了几个调整.</p>
-
-<p>1.整合应整合用例(自动汇整集锦交易与自动申购基金)</p>
-
-<p>非功能性需求可以添加到用例描述中或建立单独一个表格供整个系统参考.</p>
-
-<p>走读领域,可搭配情景对象图.这个很重要,其实在做系统测试时候,完全可以按照这个来.</p>
-
-<h3>7. 基金系统范例</h3>
-
-<p>以功能模块拆分用例图.</p>
-
-<p>主要把前面章节的图 汇总在一起.</p>
-
-<h3>总结</h3>
-
-<p>第四章的结合实例来说领域模型很精彩</p>
-
-<p>重复地方很多,有利有弊.</p>
-
-<p>对于整个系统流程来说,算是不错的体验.能够让读者大概明白UML的大概过程,每一步应该做什么.然后循环迭代.这和敏捷开发的思想很像.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[PHP工具]]></title>
-    <link href="http://mzkmzk.github.io/blog/2015/09/30/php_utils/"/>
-    <updated>2015-09-30T11:37:40+08:00</updated>
-    <id>http://mzkmzk.github.io/blog/2015/09/30/php_utils</id>
-    <content type="html"><![CDATA[<!--more-->
-
-
-<h3>IDE</h3>
-
-<p>PHPStore</p>
-
-<p>官网下载</p>
-
-<p>破解码<code>EMBRACE</code></p>
-
-<p>参考<a href="http://orgcent.com/phpstorm-register-key-license/">http://orgcent.com/phpstorm-register-key-license/</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Laravel 错误积累]]></title>
-    <link href="http://mzkmzk.github.io/blog/2015/09/30/Laravel_error/"/>
-    <updated>2015-09-30T11:37:40+08:00</updated>
-    <id>http://mzkmzk.github.io/blog/2015/09/30/Laravel_error</id>
-    <content type="html"><![CDATA[<!--more-->
-
-
-<h4>[Laravel5] TokenMismatchException in VerifyCsrfToken</h4>
-
-<p>form表单内添加</p>
-
-<pre><code>&lt;input type="hidden" name="_token" value=""&gt;
-</code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Laraval 入门]]></title>
-    <link href="http://mzkmzk.github.io/blog/2015/09/24/Laravel-start/"/>
-    <updated>2015-09-24T11:37:40+08:00</updated>
-    <id>http://mzkmzk.github.io/blog/2015/09/24/Laravel-start</id>
-    <content type="html"><![CDATA[<!--more-->
-
-
-<h2>配置与安装</h2>
-
-<p>需要条件:</p>
-
-<pre><code>- PHP &gt;= 5.5.9 - OpenSSL PHP 扩展 - PDO PHP 扩展 - Mbstring PHP 扩展 - Tokenizer PHP 扩展
-</code></pre>
-
-<p>查看方式:<code>phpinfo();</code></p>
-
-<p>配置composer.</p>
-
-<p>配置<code>~/.composer/vendor/bin</code>到PATH</p>
-
-<p>安装Laravel</p>
-
-<pre><code>sudo composer global require "laravel/installer=~1.1"
-</code></pre>
-
-<p>之后就<code>laravel new blog</code> 爽一爽</p>
-
-<p>/config里都是配置文件 需要仔细看看.</p>
-
-<p>配置/storage和bootstrap/cache服务器写权限</p>
-
-<pre><code> chmod -R  777   storage/
- chmod -R  777   bootstrap/cache
-</code></pre>
-
-<p>ok,把项目放进apache路径 然后</p>
-
-<pre><code>http://localhost/laravel/public/
-</code></pre>
-
-<p>就会看到Laravel 5字样了</p>
-
-<p>我们自己试一试弄一个页面吧</p>
-
-<p>打开<code>/app/Http/routes.php</code>,设置Url跳转和传递title参数</p>
-
-<pre><code>Route::get('/hi',function(){
-return View::make('hi')-&gt;with("title","Hello Word");
-});
-</code></pre>
-
-<p>打开<code>/resources/views</code>创建hi.blade.php</p>
-
-<pre><code>@include('header')
-&lt;h1&gt;&lt;/h1&gt;
-&lt;p&gt;one Laravel&lt;/p&gt;
-</code></pre>
-
-<p>再在其目录下创建header.blade.php</p>
-
-<pre><code>&lt;p&gt;header&lt;/p&gt;
-</code></pre>
-
-<p>ok 访问url<code>http://localhost/laravel/public/index.php/hi</code></p>
-
-<p>如何去掉可恶的index.php</p>
-
-<ol>
-<li>设置apache支持.htaccess,打开apache http.conf,搜索<code>AllowOverride</code> 把None都改为All</li>
-<li>设置加载mod_rewrite模块,打开apache http.conf,搜索<code>mod_rewrite</code>,把前面的#去掉(校验方法-php_info()),重启下apache哦~.</li>
-<li><p>设置Laravel的.htaccess,把下面的内容代替之前的内容.</p>
-
-<pre><code> Options +FollowSymLinks
- RewriteEngine On
-
- RewriteCond %{REQUEST_FILENAME} !-d
- RewriteCond %{REQUEST_FILENAME} !-f
- RewriteRule ^ index.php [L]
-</code></pre></li>
-</ol>
-
-
-<p>ok<code>http://localhost/laravel/public/hi</code>爽一发吧.</p>
-
-<p>参考链接<a href="http://oublog.cn/u_58/">http://oublog.cn/u_58/</a></p>
-
-<p>环境配置</p>
-
-<pre><code>//获取系统配置
-config('app.timezone')
-//设置系统配置
-config(['app.timezone' =&gt; 'Asia/Shanghai'])
-</code></pre>
-
-<h3>路由</h3>
-
-<p>访问Controllers</p>
-
-<pre><code>Route::get('/Text_Laravel/Text_DB','Text_Laravel.Text_DB@index');
-</code></pre>
-
-<p>访问View</p>
-
-<pre><code>Route::get('/User/Login',function () {
-return view('User.Login');
-});
-</code></pre>
-
-<h3>数据库配制</h3>
-
-<p>配置文件<code>config/database.php</code></p>
-
-<p>Laravel还可以配置读写两个不同的ip地址.</p>
-
-<pre><code>'mysql' =&gt; [
-'read' =&gt; [
-    'host' =&gt; '192.168.1.1',
-],
-'write' =&gt; [
-    'host' =&gt; '196.168.1.2'
-],
-'driver'    =&gt; 'mysql',
-'database'  =&gt; 'database',
-'username'  =&gt; 'root',
-'password'  =&gt; '',
-'charset'   =&gt; 'utf8',
-'collation' =&gt; 'utf8_unicode_ci',
-'prefix'    =&gt; '',
-],
-</code></pre>
-
-<p>光配置这个还不行 还要去配置.env ? 难道.env是通过config实时生成的?</p>
-
-<h2>阅读API文档</h2>
-
-<p><a href="http://www.golaravel.com/laravel/docs/5.1/">http://www.golaravel.com/laravel/docs/5.1/</a></p>
-
-<h3>routing</h3>
-
-<p><a href="http://laravel.com/docs/5.1/routing">http://laravel.com/docs/5.1/routing</a></p>
-
-<p>路由配置在<code>app/Http/routes.php</code></p>
-
-<p>先来看下简单的配置,get,post请求,还有match,any匹配多种请求,还有通过url传递参数(参数不能包含<code>-</code>),</p>
-
-<h2>应用中碰到的应用</h2>
-
-<h3>获取路径</h3>
-
-<p>获取相对于目录的绝对路径</p>
-
-<p>详见<a href="http://www.golaravel.com/laravel/docs/5.1/helpers/#paths">http://www.golaravel.com/laravel/docs/5.1/helpers/#paths</a></p>
-
-<ol>
-<li><p>获取网络路径</p></li>
-<li><p>关闭CSRF,<code>App\Http;\Kernel</code>,注释</p>
-
-<pre><code>  // \App\Http\Middleware\VerifyCsrfToken::class,
-</code></pre></li>
-</ol>
-
-
-<h3>快速查找SQL语句</h3>
-
-<pre><code>Route::get('/test-sql', function() {
-
-DB::enableQueryLog();
-$text = App\Models\Sample_Model::find(647)
-    -&gt;patient()
-    -&gt;Paginate(15)
-    -&gt;toJson();
-
-return response()-&gt;json(DB::getQueryLog());
-});
-</code></pre>
-
-<p>eg:   <br/>
-参考<a href="http://laravel.so/tricks/3c8bda45c15f494eaeba1690556aa40a">http://laravel.so/tricks/3c8bda45c15f494eaeba1690556aa40a</a></p>
-
-<h3>记录SQL到 日志</h3>
-
-<p><a href="http://laravel.so/tricks/6086494cbfde9950e9118b1dad6270d5">http://laravel.so/tricks/6086494cbfde9950e9118b1dad6270d5</a></p>
-
-<h3>Laravel级联查询</h3>
-
-<p>会调用patient()方法</p>
-
-<pre><code>Sample_Model::with('patient');
-</code></pre>
-
-<p>with属于懒加载..一般是最后需要用到的时候才执行</p>
-
-<h3>with记载上层数据时,不会显示被删除的数据</h3>
-
-<p>更改前</p>
-
-<pre><code>class Patient_Controller extends Controller{
-
-public function query(Request $request){
-
-$result = Patient_Model::withTrashed();
-    -&gt;orderBy("updated_at","desc")
-    -&gt;Paginate(15)
-    -&gt;toJson();
-
-   return $result;
-}
-//更改前执行的sql
-select count(*) as aggregate from `samples`
-select * from `samples` order by `updated_at` desc limit 1 offset 0
-select * from `patients` where  `patients`.`deleted_at` is null and `patients`.`code` in ('P-SZ150917134BrC')
-</code></pre>
-
-<p>更改后</p>
-
-<pre><code>public function query(Request $request){
-
-  $result = Sample_Model::with(['patient' =&gt; function($q) {
-    $q-&gt;withTrashed();
-}])
--&gt;withTrashed()
--&gt;orderBy("updated_at","desc")
--&gt;Paginate(1)
--&gt;toJson();
-
-return $result;
-}
-
-//更改后执行的sql是
-select count(*) as aggregate from `samples`
-select * from `samples` order by `updated_at` desc limit 1 offset 0
-select * from `patients` where `patients`.`code` in ('P-SZ150917134BrC')
-</code></pre>
-
-<p>ok with 函数究竟是神马鬼?来看下源代码</p>
-
-<pre><code>  /**
- * Begin querying a model with eager loading.
- *
- * @param  array|string  $relations
- * @return \Illuminate\Database\Eloquent\Builder|static
- */
-public static function with($relations)
-{
-    if (is_string($relations)) {
-        $relations = func_get_args();
-    }
-
-    $instance = new static;
-
-    return $instance-&gt;newQuery()-&gt;with($relations);
-}   
-</code></pre>
-
-<p>首先他是懒加载,需要用的时候才加载,$relations可以是string也可以是数组,string的话就直接调用model的函数,数组的话,就是后面可以加判定条件.   <br/>
-参考链接<a href="http://stackoverflow.com/questions/33006470/laravel-query-delete-relationships">http://stackoverflow.com/questions/33006470/laravel-query-delete-relationships</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[js 坑点]]></title>
-    <link href="http://mzkmzk.github.io/blog/2015/09/21/js_error/"/>
-    <updated>2015-09-21T11:37:40+08:00</updated>
-    <id>http://mzkmzk.github.io/blog/2015/09/21/js_error</id>
-    <content type="html"><![CDATA[<h1>未解决</h1>
-
-<p>莫名其妙.在div中设置onclick方法就能找该方法,在包含下的input下就找不到.</p>
-
-<pre><code>'&lt;div class="col-sm-1" onclick="delete_library()"&gt;'+
-        '&lt;input  onclick="delete_library()" class="btn btn-info" id="delete_library_'+new_library_num+'" name="delete_library" value="删除"   style="width:100%"  /&gt;'+    
-    '&lt;/div&gt;';
-</code></pre>
-
-<h1>已解决</h1>
-
-<ol>
-<li>jquery的ajax中不能再方法内return,返回的都是undefinte;</li>
-<li>js加减乘除中运用在浮点数会不准确,需要另写方法,参考<a href="http://segmentfault.com/a/1190000000324193">http://segmentfault.com/a/1190000000324193</a></li>
 </ol>
 
 ]]></content>

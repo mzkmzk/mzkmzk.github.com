@@ -4,7 +4,7 @@
   <title><![CDATA[Category: javascript | K]]></title>
   <link href="http://mzkmzk.github.io/blog/categories/javascript/atom.xml" rel="self"/>
   <link href="http://mzkmzk.github.io/"/>
-  <updated>2015-11-03T14:32:22+08:00</updated>
+  <updated>2015-11-11T15:51:07+08:00</updated>
   <id>http://mzkmzk.github.io/</id>
   <author>
     <name><![CDATA[K]]></name>
@@ -433,6 +433,14 @@ person.wark(); //ok
 </code></pre>
 
 <p>在prototype之前实例化的类会具有wark方法吗? 有的,因为prototype这样并不会产生一个新的类,而是直接动态的往Person里加函数.</p>
+
+<p>判断某方法是否继承了该对象</p>
+
+<pre><code>该对象.prototype['某方法'] != undefined;
+
+var test = new 该对象();
+test.某方法 !=undefined ;
+</code></pre>
 
 <h2>1.12 创建对象三种方式</h2>
 
@@ -1553,6 +1561,41 @@ page_form.appendChild(document.getElementById("search_info"));
 <h3>jQuery从this获取id</h3>
 
 <pre><code>alert($(this).context.id);
+</code></pre>
+
+<h3>JS中 Array转Map</h3>
+
+<p>得到的数据是这样的</p>
+
+<pre><code>[
+    {
+        "id": 1,
+        "name": "Lennie"
+    },
+    {
+        "id": 2,
+        "name": "Afton"
+    },
+    ...
+]   
+</code></pre>
+
+<p>我需要的结果是</p>
+
+<pre><code>Map {1 =&gt; "Lennie", 2 =&gt; "Afton"…}
+</code></pre>
+
+<p>实现代码</p>
+
+<pre><code> var data_map = new Map();
+ $.getJSON(remote_url,function(data){
+    for(var index =0  ; index&lt; data.length ;index++ ){
+        data_map.set(data[index].id,data[index].name);
+    }
+}); 
+
+//根据key获取value
+data_map.get(具体ID);
 </code></pre>
 
 <h3>未消化</h3>

@@ -134,6 +134,8 @@ var _hmt = _hmt || [];
 
 <li><a href="/blog/categories/服务器">服务器</a></li>
 
+<li><a href="/blog/categories/js">js</a></li>
+
 <li><a href="/blog/categories/">About me</a></li>
 </ul>
 </div>
@@ -257,6 +259,8 @@ var _hmt = _hmt || [];
 
 <li><a href="/blog/categories/服务器">服务器</a></li>
 
+<li><a href="/blog/categories/js">js</a></li>
+
 <li><a href="/blog/categories/">About me</a></li>
 </ul>
 </div>
@@ -356,6 +360,21 @@ git push origin 分支名称
 <h3>Error:Untracked files:**</h3>
 
 <p>此文件从未commit过</p>
+
+<h3>Could not open a connection to your authentication agent</h3>
+
+<pre><code>ubuntu@VM-66-109-ubuntu:~$ eval `ssh-agent -s`
+Agent pid 1470
+ubuntu@VM-66-109-ubuntu:~$ alias ssh-agent-cyg='eval `ssh-agent -s`'
+ubuntu@VM-66-109-ubuntu:~$ ssh-agent-cyg
+Agent pid 1472
+ubuntu@VM-66-109-ubuntu:~$ ssh-add ~/.ssh/test
+Identity added: /home/ubuntu/.ssh/test (/home/ubuntu/.ssh/test)
+ubuntu@VM-66-109-ubuntu:~$ ssh-add -l
+2048 43:6d:47:58:6f:15:57:6a:99:de:f2:58:be:e3:ce:b0 /home/ubuntu/.ssh/test (RSA)
+</code></pre>
+
+<p><a href="http://stackoverflow.com/questions/17846529/could-not-open-a-connection-to-your-authentication-agent">http://stackoverflow.com/questions/17846529/could-not-open-a-connection-to-your-authentication-agent</a></p>
 </div>
 
 

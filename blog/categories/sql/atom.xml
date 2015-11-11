@@ -4,7 +4,7 @@
   <title><![CDATA[Category: sql | K]]></title>
   <link href="http://mzkmzk.github.io/blog/categories/sql/atom.xml" rel="self"/>
   <link href="http://mzkmzk.github.io/"/>
-  <updated>2015-11-03T14:32:22+08:00</updated>
+  <updated>2015-11-11T15:51:07+08:00</updated>
   <id>http://mzkmzk.github.io/</id>
   <author>
     <name><![CDATA[K]]></name>
@@ -12,6 +12,28 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[MySQL 排错指南 总结]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/11/03/mysql_error_book/"/>
+    <updated>2015-11-03T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/11/03/mysql_error_book</id>
+    <content type="html"><![CDATA[<!--more-->
+
+
+<p>有很多时候,MySQL会有很多百思不得其姐的错误.快读下去爽一爽吧~</p>
+
+<h1>1 基础</h1>
+
+<p>SELECT查询异常解决步骤</p>
+
+<ol>
+<li>将查询分解成小段,然后依次执行它们,知道捏发现问题的原因.</li>
+<li>使用<code>EXPLAIN EXTENDED</code>,然后使用<code>SHOW WARNINGS</code>命令去获得查询执行计划机实际运行方式的相关信息.</li>
+</ol>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Mac 配置mysql配置文件]]></title>
@@ -344,118 +366,6 @@ sudo /etc/init.d/mysql restart
 
 <pre><code>update samples as ss inner join (select patient_id,id from sample) as s on ss.id=s.id  set ss.patient_id = s.patient_id;
 </code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Mysql 问题集锦]]></title>
-    <link href="http://mzkmzk.github.io/blog/2014/10/01/mysql_question/"/>
-    <updated>2014-10-01T11:37:40+08:00</updated>
-    <id>http://mzkmzk.github.io/blog/2014/10/01/mysql_question</id>
-    <content type="html"><![CDATA[<h3>1. mysql字符乱码</h3>
-
-<p>如要进行数据库定制，可到&#8217;/usr/local/mysql/support-files/&lsquo;文件夹底下，把里面的任一个.cnf配置文件复制到/etc/目录底下并修改文件名称为my.cnf。</p>
-
-<pre><code>sudo cp /usr/local/mysql/support-files/my-medium.cnf /etc/my.cnf
-
-sudo vi /etc/my.cnf
-</code></pre>
-
-<p>[mysqld]部分加入：</p>
-
-<pre><code>character-set-server=utf8
-</code></pre>
-
-<h3>2. mysql无法删除数据库</h3>
-
-<p>错误代码</p>
-
-<pre><code>DROP DATABASE db_name;
-ERROR 1010 (HY000): Error dropping database (can't rmdir './db_name', errno: 66)
-</code></pre>
-
-<p>解决办法</p>
-
-<pre><code>1) Find the database directory: mysql -e "select @@datadir" -&gt; /usr/local/mysql/data/
-
-2) Go to DB folder: cd /usr/local/mysql/data/
-
-3) Delete DB folder of DB with issue (in this case: sudo rm -rf DB_NAME)
-</code></pre>
-
-<p>参考链接<a href="http://stackoverflow.com/questions/16527054/drop-database-return-error-dropping-database-errno-66-in-mysql">http://stackoverflow.com/questions/16527054/drop-database-return-error-dropping-database-errno-66-in-mysql</a></p>
-
-<h3>3. Can&rsquo;t connect to MySQL server on &lsquo;127.0.0.1&rsquo; (61)</h3>
-
-<p>原因 数据库未启动</p>
-
-<h2>4. java.sql.SQLException: Access denied for user &lsquo;root&rsquo;@&lsquo;localhost&rsquo; (using password: YES)</h2>
-
-<p>解决办法 把数据库连接的localhost改为127.0.0.1</p>
-
-<h3>4. 开启远程访问数据库</h3>
-
-<p>首先访问下3306的状态</p>
-
-<pre><code>maizk@x02:~$ netstat -an | grep 3306
-tcp        0      0 127.0.0.1:3306          0.0.0.0:*               LISTEN 
-</code></pre>
-
-<p>3306只对本机开放</p>
-
-<p>修改/etc/mysql/my.cnf</p>
-
-<pre><code>//注销下面这句话
-bind-address = 127.0.0.1
-</code></pre>
-
-<p>重启mysql</p>
-
-<pre><code>//linux
-sudo /etc/init.d/mysql restart
-</code></pre>
-
-<p>再查看下3306的状态</p>
-
-<pre><code>maizk@x02:/etc/mysql$ netstat -an | grep 3306
-tcp        0      0 0.0.0.0:3306            0.0.0.0:*               LISTEN     
-tcp        0      0 127.0.0.1:53766         127.0.0.1:3306          TIME_WAIT  
-tcp        0      0 127.0.0.1:53765         127.0.0.1:3306          TIME_WAIT  
-tcp        0      0 127.0.0.1:53767         127.0.0.1:3306          TIME_WAIT  
-</code></pre>
-
-<p>ok 3306对外开放了</p>
-
-<p>远程访问下试试</p>
-
-<pre><code>K:~ maizhikun$ /usr/local/mysql/bin/mysql -u root -h 192.168.0.11 -p 
-Enter password: 
-ERROR 1130 (HY000): Host '192.168.0.129' is not allowed to connect to this MySQL server
-</code></pre>
-
-<p>给予IP用户权限</p>
-
-<pre><code>mysql&gt; grant all on *.* to user_name@"%" identified by "user_password"; 　
-</code></pre>
-
-<p>*.*代表任意数据库的任意表,%代表任何IP,</p>
-
-<p>但是发现phpmyadmin无法登陆了提示2002错误,phpmyadmin应该默认用localhost登陆的,但是我们要改成127.0.0.1</p>
-
-<pre><code>vim /usr/share/phpmyadmin/libraries/config.default.php
-
-$cfg['Servers'][$i]['host'] = 'localhost';
-
-//修改为
-
-$cfg['Servers'][$i]['host'] = '127.0.0.1';
-</code></pre>
-
-<p>参考链接<a href="http://www.cnblogs.com/sunzhenchao/archive/2013/01/16/2863160.html">http://www.cnblogs.com/sunzhenchao/archive/2013/01/16/2863160.html</a></p>
-
-<p>ok,完事</p>
-
-<p>主要参考这个,还有数据库拒绝外界访问设置参考链接<a href="http://amon.org/how-to-manage-port-3306-for-mysql-connection.html">http://amon.org/how-to-manage-port-3306-for-mysql-connection.html</a></p>
 ]]></content>
   </entry>
   

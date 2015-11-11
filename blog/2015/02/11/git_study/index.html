@@ -139,6 +139,8 @@ var _hmt = _hmt || [];
 
 <li><a href="/blog/categories/服务器">服务器</a></li>
 
+<li><a href="/blog/categories/js">js</a></li>
+
 <li><a href="/blog/categories/">About me</a></li>
 </ul>
 </div>
@@ -262,6 +264,8 @@ var _hmt = _hmt || [];
 
 <li><a href="/blog/categories/服务器">服务器</a></li>
 
+<li><a href="/blog/categories/js">js</a></li>
+
 <li><a href="/blog/categories/">About me</a></li>
 </ul>
 </div>
@@ -322,6 +326,45 @@ git config --global user.name "Service"
 </code></pre>
 
 <h3>设置密钥</h3>
+
+<pre><code>[huqiu@101 ~]$ cd .ssh/
+[huqiu@101 .ssh]$ ssh-keygen -t rsa -f test -C "test-key"
+Generating public/private rsa key pair.
+Enter passphrase (empty for no passphrase):
+Enter same passphrase again:
+</code></pre>
+
+<p>密码可为空不输入</p>
+
+<p>然后到相应的git提交密钥</p>
+
+<pre><code>cat test.pub
+</code></pre>
+
+<p>但是之后出现</p>
+
+<pre><code>git Permission denied (publickey).
+
+ ssh -v git@github.com
+
+ ...
+ Permission denied (publickey).
+ //还是不行
+
+ 查看密钥文件
+ /Users/maizhikun/.ssh/:
+ known_hosts    test        test.pub
+
+ 查看密钥列表
+ ssh-add -l
+ 原来是因为我没添加密钥上去本机
+ ssh-add ~/.ssh/test
+
+ 然后再git ok 
+</code></pre>
+
+<p><a href="http://www.liaohuqiu.net/cn/posts/ssh-public-key-auto-login/">密钥生成</a>   <br/>
+<a href="http://my.oschina.net/grnick/blog/201155">参考权限修复</a></p>
 
 <h3>常用命令</h3>
 

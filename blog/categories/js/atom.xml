@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: js | K]]></title>
+  <link href="http://mzkmzk.github.io/blog/categories/js/atom.xml" rel="self"/>
+  <link href="http://mzkmzk.github.io/"/>
+  <updated>2015-11-11T15:51:07+08:00</updated>
+  <id>http://mzkmzk.github.io/</id>
+  <author>
+    <name><![CDATA[K]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[jQuery 函数累积]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/11/08/jquery_function/"/>
+    <updated>2015-11-08T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/11/08/jquery_function</id>
+    <content type="html"><![CDATA[<!--more-->
+
+
+<h1>基础函数</h1>
+
+<ol>
+<li><p>查找合适的<code>a</code>标签替换href</p>
+
+<pre><code> $(".pagination  a").attr('href',function(i,val){
+     return val.replace('query/','query');
+ });
+</code></pre></li>
+</ol>
+
+]]></content>
+  </entry>
+  
+</feed>

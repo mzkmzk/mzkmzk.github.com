@@ -134,6 +134,8 @@ var _hmt = _hmt || [];
 
 <li><a href="/blog/categories/服务器">服务器</a></li>
 
+<li><a href="/blog/categories/js">js</a></li>
+
 <li><a href="/blog/categories/">About me</a></li>
 </ul>
 </div>
@@ -256,6 +258,8 @@ var _hmt = _hmt || [];
 <li><a href="/blog/categories/project">project</a></li>
 
 <li><a href="/blog/categories/服务器">服务器</a></li>
+
+<li><a href="/blog/categories/js">js</a></li>
 
 <li><a href="/blog/categories/">About me</a></li>
 </ul>
@@ -491,6 +495,41 @@ page_form.appendChild(document.getElementById("search_info"));
 <h3>jQuery从this获取id</h3>
 
 <pre><code>alert($(this).context.id);
+</code></pre>
+
+<h3>JS中 Array转Map</h3>
+
+<p>得到的数据是这样的</p>
+
+<pre><code>[
+    {
+        "id": 1,
+        "name": "Lennie"
+    },
+    {
+        "id": 2,
+        "name": "Afton"
+    },
+    ...
+]   
+</code></pre>
+
+<p>我需要的结果是</p>
+
+<pre><code>Map {1 =&gt; "Lennie", 2 =&gt; "Afton"…}
+</code></pre>
+
+<p>实现代码</p>
+
+<pre><code> var data_map = new Map();
+ $.getJSON(remote_url,function(data){
+    for(var index =0  ; index&lt; data.length ;index++ ){
+        data_map.set(data[index].id,data[index].name);
+    }
+}); 
+
+//根据key获取value
+data_map.get(具体ID);
 </code></pre>
 
 <h3>未消化</h3>

@@ -138,6 +138,8 @@ var _hmt = _hmt || [];
 
 <li><a href="/blog/categories/服务器">服务器</a></li>
 
+<li><a href="/blog/categories/js">js</a></li>
+
 <li><a href="/blog/categories/">About me</a></li>
 </ul>
 </div>
@@ -260,6 +262,8 @@ var _hmt = _hmt || [];
 <li><a href="/blog/categories/project">project</a></li>
 
 <li><a href="/blog/categories/服务器">服务器</a></li>
+
+<li><a href="/blog/categories/js">js</a></li>
 
 <li><a href="/blog/categories/">About me</a></li>
 </ul>
@@ -713,6 +717,14 @@ person.wark(); //ok
 </code></pre>
 
 <p>在prototype之前实例化的类会具有wark方法吗? 有的,因为prototype这样并不会产生一个新的类,而是直接动态的往Person里加函数.</p>
+
+<p>判断某方法是否继承了该对象</p>
+
+<pre><code>该对象.prototype['某方法'] != undefined;
+
+var test = new 该对象();
+test.某方法 !=undefined ;
+</code></pre>
 
 <h2>1.12 创建对象三种方式</h2>
 

@@ -1,0 +1,534 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Laravel Migrations - K</title>
+	<meta name="author" content="K">
+
+	
+	<meta name="description" content="0 目的 创建Migrations主要的功能是为了让团队能保住使用的数据库结构一致 1 开玩 相关的命令(php artisan list) migrate:install Create the migration repository migrate:refresh Reset and re- &hellip;">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="baidu-site-verification" content="HWyzFajtAX" />
+	<meta name="google-site-verification" content="xf8laC_mNTP9RdWTD-O8D4yYFsMXXnGjvcWVNqfNntk" />
+	<link href="false" rel="alternate" title="K" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script async="true" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	
+	<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?1e6c60ae572d5e740a34233f4accedbd";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+</head>
+
+
+<body>
+	<header id="header" class="inner"><h1><a href="/">K</a></h1>
+<nav id="K_select">
+	<div class="alignleft menu">
+		<a class="button">Category</a>
+		<div class="container"><ul class="main">
+		
+	
+<li><a href="/blog/categories/markdown">markdown</a></li>
+
+<li><a href="/blog/categories/data">data</a></li>
+
+<li><a href="/blog/categories/php">php</a></li>
+
+<li><a href="/blog/categories/svn">svn</a></li>
+
+<li><a href="/blog/categories/octopress">octopress</a></li>
+
+<li><a href="/blog/categories/sql">sql</a></li>
+
+<li><a href="/blog/categories/j2ee">j2ee</a></li>
+
+<li><a href="/blog/categories/mac">mac</a></li>
+
+<li><a href="/blog/categories/struts2">struts2</a></li>
+
+<li><a href="/blog/categories/android">android</a></li>
+
+<li><a href="/blog/categories/hack">hack</a></li>
+
+<li><a href="/blog/categories/design">design</a></li>
+
+<li><a href="/blog/categories/eclipse">eclipse</a></li>
+
+<li><a href="/blog/categories/readme">readme</a></li>
+
+<li><a href="/blog/categories/arduino">arduino</a></li>
+
+<li><a href="/blog/categories/jquery">jquery</a></li>
+
+<li><a href="/blog/categories/javascript">javascript</a></li>
+
+<li><a href="/blog/categories/bootstrap">bootstrap</a></li>
+
+<li><a href="/blog/categories/squild">squild</a></li>
+
+<li><a href="/blog/categories/iphone">iphone</a></li>
+
+<li><a href="/blog/categories/question">question</a></li>
+
+<li><a href="/blog/categories/java">java</a></li>
+
+<li><a href="/blog/categories/photoshop">photoshop</a></li>
+
+<li><a href="/blog/categories/sqlmap">sqlmap</a></li>
+
+<li><a href="/blog/categories/python">python</a></li>
+
+<li><a href="/blog/categories/git">git</a></li>
+
+<li><a href="/blog/categories/pr">pr</a></li>
+
+<li><a href="/blog/categories/linux">linux</a></li>
+
+<li><a href="/blog/categories/oracle">oracle</a></li>
+
+<li><a href="/blog/categories/windows">windows</a></li>
+
+<li><a href="/blog/categories/video">video</a></li>
+
+<li><a href="/blog/categories/travel">travel</a></li>
+
+<li><a href="/blog/categories/web">web</a></li>
+
+<li><a href="/blog/categories/httracl">httracl</a></li>
+
+<li><a href="/blog/categories/httpclient">httpclient</a></li>
+
+<li><a href="/blog/categories/tjrac">tjrac</a></li>
+
+<li><a href="/blog/categories/about_me">about_me</a></li>
+
+<li><a href="/blog/categories/seo">seo</a></li>
+
+<li><a href="/blog/categories/ios">ios</a></li>
+
+<li><a href="/blog/categories/前端">前端</a></li>
+
+<li><a href="/blog/categories/axure">axure</a></li>
+
+<li><a href="/blog/categories/html">html</a></li>
+
+<li><a href="/blog/categories/node">node</a></li>
+
+<li><a href="/blog/categories/my">my</a></li>
+
+<li><a href="/blog/categories/develop">develop</a></li>
+
+<li><a href="/blog/categories/project">project</a></li>
+
+<li><a href="/blog/categories/服务器">服务器</a></li>
+
+<li><a href="/blog/categories/js">js</a></li>
+
+<li><a href="/blog/categories/">About me</a></li>
+</ul>
+</div>
+	</div>
+	<div class="alignright search">
+		<a class="button"></a>
+		<div class="container">
+			<form action="https://www.google.com/search" method="get">
+				<input type="text" name="q" results="0">
+				<input type="hidden" name="q" value="site:mzkmzk.github.io">
+			</form>
+		</div>
+	</div>
+</nav>
+<nav id="main-nav">
+	<ul class="main">
+		<li><a href="/blog/2015/07/16/adoube_me.markdwon/">About me</a></li>
+	
+
+
+</ul>
+
+	</nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Category</a>
+		<div class="container"><ul class="main">
+		
+	
+<li><a href="/blog/categories/markdown">markdown</a></li>
+
+<li><a href="/blog/categories/data">data</a></li>
+
+<li><a href="/blog/categories/php">php</a></li>
+
+<li><a href="/blog/categories/svn">svn</a></li>
+
+<li><a href="/blog/categories/octopress">octopress</a></li>
+
+<li><a href="/blog/categories/sql">sql</a></li>
+
+<li><a href="/blog/categories/j2ee">j2ee</a></li>
+
+<li><a href="/blog/categories/mac">mac</a></li>
+
+<li><a href="/blog/categories/struts2">struts2</a></li>
+
+<li><a href="/blog/categories/android">android</a></li>
+
+<li><a href="/blog/categories/hack">hack</a></li>
+
+<li><a href="/blog/categories/design">design</a></li>
+
+<li><a href="/blog/categories/eclipse">eclipse</a></li>
+
+<li><a href="/blog/categories/readme">readme</a></li>
+
+<li><a href="/blog/categories/arduino">arduino</a></li>
+
+<li><a href="/blog/categories/jquery">jquery</a></li>
+
+<li><a href="/blog/categories/javascript">javascript</a></li>
+
+<li><a href="/blog/categories/bootstrap">bootstrap</a></li>
+
+<li><a href="/blog/categories/squild">squild</a></li>
+
+<li><a href="/blog/categories/iphone">iphone</a></li>
+
+<li><a href="/blog/categories/question">question</a></li>
+
+<li><a href="/blog/categories/java">java</a></li>
+
+<li><a href="/blog/categories/photoshop">photoshop</a></li>
+
+<li><a href="/blog/categories/sqlmap">sqlmap</a></li>
+
+<li><a href="/blog/categories/python">python</a></li>
+
+<li><a href="/blog/categories/git">git</a></li>
+
+<li><a href="/blog/categories/pr">pr</a></li>
+
+<li><a href="/blog/categories/linux">linux</a></li>
+
+<li><a href="/blog/categories/oracle">oracle</a></li>
+
+<li><a href="/blog/categories/windows">windows</a></li>
+
+<li><a href="/blog/categories/video">video</a></li>
+
+<li><a href="/blog/categories/travel">travel</a></li>
+
+<li><a href="/blog/categories/web">web</a></li>
+
+<li><a href="/blog/categories/httracl">httracl</a></li>
+
+<li><a href="/blog/categories/httpclient">httpclient</a></li>
+
+<li><a href="/blog/categories/tjrac">tjrac</a></li>
+
+<li><a href="/blog/categories/about_me">about_me</a></li>
+
+<li><a href="/blog/categories/seo">seo</a></li>
+
+<li><a href="/blog/categories/ios">ios</a></li>
+
+<li><a href="/blog/categories/前端">前端</a></li>
+
+<li><a href="/blog/categories/axure">axure</a></li>
+
+<li><a href="/blog/categories/html">html</a></li>
+
+<li><a href="/blog/categories/node">node</a></li>
+
+<li><a href="/blog/categories/my">my</a></li>
+
+<li><a href="/blog/categories/develop">develop</a></li>
+
+<li><a href="/blog/categories/project">project</a></li>
+
+<li><a href="/blog/categories/服务器">服务器</a></li>
+
+<li><a href="/blog/categories/js">js</a></li>
+
+<li><a href="/blog/categories/">About me</a></li>
+</ul>
+</div>
+	</div>
+	<div class="alignright search">
+		<a class="button"></a>
+		<div class="container">
+			<form action="https://www.google.com/search" method="get">
+				<input type="text" name="q" results="0">
+				<input type="hidden" name="q" value="site:mzkmzk.github.io">
+			</form>
+		</div>
+	</div>
+</nav>
+<nav id="sub-nav" class="alignright">
+	<div class="social">
+		
+		
+		
+		
+    
+		
+		
+		
+		
+		
+    
+	</div>
+	
+</nav>
+
+</header>
+	
+		
+	
+	<div id="content" class="inner"><article class="post">
+	<h2 class="title">Laravel Migrations</h2>
+	<div class="entry-content"><!--more-->
+
+
+<h1>0 目的</h1>
+
+<p>创建Migrations主要的功能是为了让团队能保住使用的数据库结构一致</p>
+
+<h1>1 开玩</h1>
+
+<ol>
+<li><p>相关的命令(<code>php artisan list</code>)</p>
+
+<pre><code> migrate:install     Create the migration repository
+ migrate:refresh     Reset and re-run all migrations
+ migrate:reset       Rollback all database migrations
+ migrate:rollback    Rollback the last database migration
+ migrate:status      Show the status of each migration
+</code></pre>
+
+<p> 创建数据库表(手动创建表不会作用.),因为输入命令后,会在verdor/composer/autoload_classmap.php里映射类.如下</p>
+
+<pre><code>     'Create_Disease_Type' =&gt; $baseDir . '/database/migrations/2015_11_02_153746_Create_Disease_Type.php',
+     'CreateInstitutes' =&gt; $baseDir . '/database/migrations/2015_11_02_143144_Create_Institutes.php',
+
+ php artisan make:migration Create_Users --create=Users  
+</code></pre></li>
+<li><p>创建基础类,设置id、时间戳和软删除.</p>
+
+<p> 一开始自己创建了个<code>Base_Table</code>,不过那样也会创建一个表,所以直接把方法写在<code>Migration</code>里</p>
+
+<pre><code> /**
+ * 增加基本属性
+ * @param Blueprint $table
+ */
+ public function add_base_attribute(Blueprint $table)
+ {
+     $table-&gt;increments('id');
+     //创建created_at和updated_at
+     $table-&gt;timestamps();
+     //创建deleted_at
+     $table-&gt;softDeletes();
+     return $table;
+ }
+</code></pre></li>
+<li><p>创建外键,注意要先定义外键属性,再设定关系.</p>
+
+<pre><code> public function up()
+ {
+     Schema::create('Institutes', function (Blueprint $table) {
+         $table-&gt;unsignedInteger('institute_ID');
+         $table-&gt;foreign('institute_ID')
+         -&gt;references('id')-&gt;on('institutes')
+         -&gt;onDelete('cascade');
+         $table = parent::add_base_attribute($table);
+     });
+ }  
+</code></pre></li>
+<li><p>修改表</p>
+
+<pre><code> php artisan make:migration Add_Name_To_Samples_Table --table=Samples
+
+ 注意,要是新增列,直接和创建表一样语法
+
+ 但要修改已由列需要调用change()方法,例如:
+
+      $table-&gt;string('name', 50)-&gt;change();
+</code></pre>
+
+<p> 可能报不是dba的错误</p>
+
+<pre><code> [RuntimeException]
+ Changing columns for table "Samples" requires Doctrine DBAL; install "doctrine/dbal".
+</code></pre>
+
+<p> 在composer.json中配置</p>
+
+<pre><code> "require": {
+     ...
+     "doctrine/dbal": "v2.4.2"
+ },  
+</code></pre></li>
+</ol>
+
+
+<h1>错误处理</h1>
+
+<ol>
+<li>有依赖关系的表,要把外键的表先创建.</li>
+<li><p>外键的属性类型要一致,否则会报错<code>General error: 1215 Cannot add foreign key constraint</code></p>
+
+<pre><code> //主表
+ $table-&gt;increments('id');
+
+ //从表
+ $table-&gt;unsignedInteger('institute_ID');
+     $table-&gt;foreign('institute_ID')
+     -&gt;references('id')-&gt;on('institutes')
+     -&gt;onDelete('cascade');      the
+</code></pre></li>
+<li><p><code>migrations</code>类名不过有下划线</p>
+
+<p> 报错</p>
+
+<pre><code> PHP Fatal error:  Class 'CreateInstitutes' not found in /Users/maizhikun/Learning/apache_sites/HapLab_Laravel/vendor/laravel/framework/src/Illuminate/Database/Migrations/Migrator.php on line 324
+
+ [Symfony\Component\Debug\Exception\FatalErrorException]
+ Class 'CreateInstitutes' not found
+
+ //看了下报错地方的源代码.估计是下划线导致.   
+ public function resolve($file)
+ {
+     $file = implode('_', array_slice(explode('_', $file), 4));
+     $class = Str::studly($file);
+     return new $class;
+ }
+</code></pre>
+
+<p> 后来又发现了错误.最后确定了是文件名(假如有下划线)会去掉下划线(从时间之后的下划线)然后找相对应的类名.</p></li>
+<li><p><code>php artisan migrate:refresh,reset,rollback</code>都无法执行</p>
+
+<p> 提示报错</p>
+
+<pre><code> [Symfony\Component\Debug\Exception\FatalErrorException]
+  Class 'Illuminate\Database\Migrations\Schema' not found 
+</code></pre>
+
+<p> 解决办法:</p>
+
+<p> 将<code>Illuminate\Support\Facades\Schema</code>复制到<code>Illuminate\Database\Schema</code></p>
+
+<p> 并且</p>
+
+<p> 修改命名空间和<code>use</code></p>
+
+<pre><code> namespace Illuminate\Database\Migrations;
+
+ use Illuminate\Support\Facades\Facade;
+</code></pre>
+
+<p> <a href="http://stackoverflow.com/questions/28743546/laravel-5-migration-create-table-got-error-class-illuminate-database-schema-n">参考</a></p></li>
+</ol>
+
+</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-11-02T11:37:40+08:00" pubdate data-updated="true"></time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/php/'>php</a>
+
+
+</div>
+	
+</div>
+</article>
+
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+		
+		<a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+		
+		
+		<a class="addthis_button_tweet"></a>
+		
+		
+		
+	</div>
+	
+</div>
+
+
+
+
+
+
+  <section>
+    <h1>Comments</h1>
+    <div id="comments" aria-live="polite">
+
+<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="Laravel Migrations" data-title="Laravel Migrations" data-url="/blog/2015/11/02/laravel_migrations/"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"mzkmzk"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- 多说公共JS代码 end --></div>
+  </section>
+</div>
+	<footer id="footer" class="inner">
+
+Copyright &copy; 2015
+
+    K
+
+
+</footer>
+	<script src="/javascripts/slash.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+	$('.fancybox').fancybox();
+})(jQuery);
+</script> <!-- Delete or comment this line to disable Fancybox -->
+
+
+
+
+
+
+</body>
+</html>

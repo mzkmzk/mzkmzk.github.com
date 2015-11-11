@@ -4,7 +4,7 @@
   <title><![CDATA[Category: linux | K]]></title>
   <link href="http://mzkmzk.github.io/blog/categories/linux/atom.xml" rel="self"/>
   <link href="http://mzkmzk.github.io/"/>
-  <updated>2015-11-03T14:32:22+08:00</updated>
+  <updated>2015-11-11T15:51:07+08:00</updated>
   <id>http://mzkmzk.github.io/</id>
   <author>
     <name><![CDATA[K]]></name>
@@ -12,6 +12,20 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Ubuntu技巧与知识]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/11/11/ubuntu_kill/"/>
+    <updated>2015-11-11T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/11/11/ubuntu_kill</id>
+    <content type="html"><![CDATA[<!--more-->
+
+
+<h1>Ubuntu apache配置文件说明</h1>
+
+<p><a href="http://www.darrenfang.com/2014/01/ubuntu-apache-configuration-and-enable-mod-rewrite/">http://www.darrenfang.com/2014/01/ubuntu-apache-configuration-and-enable-mod-rewrite/</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Linux 常用命令]]></title>
@@ -399,33 +413,6 @@ cd   导入文件夹路径
 
 imp system/oracle FULL=y file=one.dmp log=one.log 
 </code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Linux 用户无法使用sudo]]></title>
-    <link href="http://mzkmzk.github.io/blog/2015/03/27/linux_sudo/"/>
-    <updated>2015-03-27T11:37:40+08:00</updated>
-    <id>http://mzkmzk.github.io/blog/2015/03/27/linux_sudo</id>
-    <content type="html"><![CDATA[<!--more-->
-
-
-<h3>0x00问题</h3>
-
-<pre><code>[oracle@localhost bin]$ sudo mkdir -p /opt/app/oracle
-[sudo] password for oracle: 
-oracle is not in the sudoers file.  This incident will be reported.
-</code></pre>
-
-<h3>0x01解决办法</h3>
-
-<pre><code>su root
-echo '用户名  ALL=(ALL) ALL' &gt;&gt; /etc/sudoers
-</code></pre>
-
-<h3>参考链接</h3>
-
-<p><a href="http://superuser.com/questions/120340/user-not-in-the-sudoers-file-this-incident-will-be-reported">http://superuser.com/questions/120340/user-not-in-the-sudoers-file-this-incident-will-be-reported</a>中user21655的回复</p>
 ]]></content>
   </entry>
   
