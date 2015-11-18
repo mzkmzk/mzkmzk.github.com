@@ -4,7 +4,7 @@
   <title><![CDATA[K]]></title>
   <link href="http://mzkmzk.github.io/atom.xml" rel="self"/>
   <link href="http://mzkmzk.github.io/"/>
-  <updated>2015-11-12T14:09:14+08:00</updated>
+  <updated>2015-11-18T22:12:33+08:00</updated>
   <id>http://mzkmzk.github.io/</id>
   <author>
     <name><![CDATA[K]]></name>
@@ -37,7 +37,7 @@
 
 <p>这里使用下<code>jssor</code>的轮播,<a href="https://github.com/jssor/slider">github地址</a>.优势是支持手动滑动,响应式和键盘左右监听.很人性.</p>
 
-<p><img src="../images/QQ20151108-2.png" alt="一开始是这样的" /></p>
+<p><img src="http://mzkmzk.github.io/images/QQ20151108-2.png" alt="一开始是这样的" /></p>
 
 <p>任务</p>
 
@@ -95,7 +95,7 @@
 
 <p>最终效果</p>
 
-<p><img src="../images/QQ20151108-0.png" alt="最终效果" /></p>
+<p><img src="http://mzkmzk.github.io/images/QQ20151108-0.png" alt="最终效果" /></p>
 
 <h1>附录原代码</h1>
 
@@ -345,6 +345,253 @@ Socket error 61: Connection refused (connecting to localhost:11300)
 <li>修改用户密码<code>passwd username</code></li>
 </ol>
 
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[深入php面向对象、模式与实践阅读总结]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/11/04/php_design_book/"/>
+    <updated>2015-11-04T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/11/04/php_design_book</id>
+    <content type="html"><![CDATA[<!--more-->
+
+
+<h1>1 语法</h1>
+
+<h2>1.1 基础语法</h2>
+
+<ol>
+<li><p><code>clone</code></p>
+
+<p> 需要操作原对象,但又不想影响原对象.</p>
+
+<pre><code> $K_back = clone $K;
+</code></pre>
+
+<p> 基本数据类型和数组都为真复制,即为真副本,当属性为对象时,为假复制,改变副本仍会影响原对象.解决方案:</p>
+
+<pre><code> //在原对象中添加
+ function __clone(){
+     $this-&gt;对象 = clone $this-&gt;对象
+ }   
+</code></pre>
+
+<p> <code>__clone</code>在clone前自动触发,可以执行一些在备份前的属性操作.</p></li>
+<li><p><code>&amp;</code>传递引用</p>
+
+<p> 方法引用传递,改变源对象</p>
+
+<pre><code> function set_K(&amp; $K){...}
+
+ function &amp; get_K(){...}
+</code></pre></li>
+<li><p><code>static</code>延迟静态绑定</p>
+
+<p> 应用场景:Dog类和Person类都需要一个返回实例化的方法,Dog类和Person类都继承于Animal抽象类.</p>
+
+<pre><code> abstract class Animal{
+     public static function create(){
+         //实例化调用类
+         return new static();
+     }
+ }
+
+ class Person extends Animal{...}
+
+ //返回Person实例化类
+ Person::create();
+</code></pre></li>
+<li><p><code>拦截器</code></p>
+
+<ol>
+<li><p><code>__get($property)</code>,访问未定义的属性时调用.</p></li>
+<li><p><code>__set($property,$value)</code>,给未定义的属性赋值时被调用.</p></li>
+<li><p><code>__isset($property)</code>,对未定义属性调用isset()方法时调用.</p></li>
+<li><p><code>__unset($property)</code>,对未定义属性调用unset()方法时调用.</p></li>
+<li><p><code>__call($method,$arg_array)</code>,调用未定义方法时调用.</p>
+
+<p> __call很有用,但要慎用,因为太灵活.</p>
+
+<p> 应用场景:有一个专门打印Person类信息的Person_Writer类,如果通过Person类调用Person_Writer类.</p>
+
+<pre><code> //Person委托Person_Writer类处理打印事务.
+ class Person {
+     private $writer;
+     ...
+
+     function __call($method_name,$args){
+         if(methood_exists($this-&gt;wirter,$method_name)){
+             return $this-&gt;writer-&gt;$method_name($this);
+         }
+     }
+
+     //高级__call写法,当委托方法参数不确定时使用.
+     function __call($method_name,$args){
+         //当然这里这样写法意义不大,但是call一般都是用call_user_func_array调用
+         $args = $this ;
+         if(methood_exists($this-&gt;wirter,$method_name)){
+             return call_user_func_array(
+                 array($this-&gt;writer,$method_name),$args);
+             )
+         }
+     }
+
+ }       
+</code></pre></li>
+</ol>
+</li>
+<li><p><code>回调函数</code></p>
+
+<p> 应用场景:   3个类,<code>Product类</code>,<code>Product_Sale类</code>,<code>Product_Totalizer类</code>,要实现:当卖出Product总共价格超过指定金额时,输出警告.</p>
+
+<pre><code> //Product
+ class Product {
+     public $name;
+     public $price;
+ }
+
+ //Product_Sale
+ class Product_Sale {
+     private $callbacks;
+
+     //记录回调函数
+     function register_callback ($callback) {
+         if(! is_callback($callback)){
+             thow new Exception('callback not callable');
+         }
+         $this-&gt;callbacks[] = $callback;
+     }
+
+     //执行回调函数
+     function sale ($product){
+         print "{$product-&gt;name} : 处理中 \n";
+         foreach($this-&gt;callbacks as $callback){
+             call_user_func($callback , $product);
+         }
+     }
+ }
+
+ //Produce_Totalizer
+ class Produce_Totalizer {
+     static function warn_amount ($amt) {
+         $count = 0;
+         return function ($produce) use ($amt , &amp;count) {
+             $count += $produce-&gt;price;
+             print " count : {count}\n"
+             if($count&gt;$amt){
+                 print "超过指定金额{$amt}啦~";
+             }
+         };
+     }
+ }
+
+ //模拟场景
+ $product_sale = new Produce_Sale();
+ //指定报警金额为8块
+ $product_sale = register_callback(Product_Titakuzer::warn_amount(8)); 
+
+ //卖商品
+ $product_sale-&gt;sale(new Product("Durex",6));
+ $product_sale-&gt;sale(new Produce("Jissbon",5));
+
+ //输出结果
+ Durex : 处理中
+     count :6 
+
+ Jissbon : 处理中 
+     count: 11
+
+ 超过指定金额8块啦~
+</code></pre></li>
+<li><p><code>get_class()</code>和<code>instanceof</code></p>
+
+<p> <code>get_class(类)</code>用于判断是否精准等于类名;</p>
+
+<p> <code>instanceof</code> 可以判断是否其本身或继承于某父类.</p></li>
+<li><p>类中的方法和类中的属性</p>
+
+<p> <code>get_class_methods('类名')</code>:获取类中所有方法.</p>
+
+<p> <code>get_class_vars('类名')</code>:获取类中所有public参数;</p></li>
+<li>反射API</li>
+</ol>
+
+
+<h1>2 模式</h1>
+
+<h2>2.1 组合</h2>
+
+<p>问题:课堂类被演讲类和研讨会类继承着.但是演讲类和研讨类都要实现一次性计费和上N次课计费的方法.和输出计算的方式.</p>
+
+<p>解决方案1: 在课堂类中添加计算一次性付费的方法,上N次课的计费方法和输出计算方式的方法.</p>
+
+<p>解决方案2: 运用组合,将处理计费和输出计算方式单独封装为一个计费策略类.</p>
+
+<pre><code>abstract class Cost_Strategy {
+    protected $duration;
+    abstract function cost ();
+    abstract function charge_type();
+
+    public __construct($duration){
+        $this-&gt;duration = $duration;
+    }
+}
+
+class Timed_Const_Strategy extends Cost_Stratedy {
+    function cost () {
+        //上一次课给5块钱- -.
+        return $this-&gt;duration * 5;
+    }
+
+    function charge_type(){
+        return "多次课结算";
+    }
+}
+
+class Fixed_Const_Strategy extends Cost_Stratedy {
+    function cost (){
+        return 30 ;
+    }
+
+    function charge_type(){
+        return "一次性课结算";
+    }
+}
+
+abstract class Leason {
+
+    private $cost_strategy;
+
+    public __construct(Const_Strategy $cost_strategy){
+        $this-&gt;cost_strategy = $cost_strategy;
+    }
+
+    function __call($method_name,$args){
+        $args = $cost_strategy ;
+        if(methood_exists($this-&gt;cost_strategy,$method_name)){
+            return call_user_func_array(
+                array($this-&gt;writer,$method_name),$args);
+            )
+        }
+    }
+}
+
+//运用
+$leasons[] = new Seminar(new Timed_Const_Strategy(4));
+$leasons[] = new Lecture(new Fixed_Const_Strategy(null));
+
+foreach ($leasons as $leason){
+    print "leason charge : {$leason-&gt;const()}";
+    print "charge_type : {$leason-&gt;charge_type()}"
+}
+
+leason charge 20. charge_type : 多次课结算;
+leason charge 30. charge_type : 一次课结算;
+</code></pre>
+
+<p>组合既委托.同级委托.</p>
+
+<p>继承既父子关系.</p>
 ]]></content>
   </entry>
   
@@ -3155,23 +3402,6 @@ div&gt;a:hover {
 
 <ol>
 <li>WEB实现类似文件夹效果<a href="http://photonkit.com/">http://photonkit.com/</a></li>
-</ol>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Docker入门]]></title>
-    <link href="http://mzkmzk.github.io/blog/2015/10/14/Docker_start/"/>
-    <updated>2015-10-14T11:37:40+08:00</updated>
-    <id>http://mzkmzk.github.io/blog/2015/10/14/Docker_start</id>
-    <content type="html"><![CDATA[<!--more-->
-
-
-<h1>1 需要实现的功能</h1>
-
-<ol>
-<li>新版htmlDocker部署到服务器上</li>
 </ol>
 
 ]]></content>

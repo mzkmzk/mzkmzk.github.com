@@ -3,12 +3,11 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>php 函数累积 - K</title>
+	<title>深入php面向对象、模式与实践阅读总结 - K</title>
 	<meta name="author" content="K">
 
 	
-	<meta name="description" content="查看php环境信息 phpinfo() ; 截取字符串函数 $str1 = substr($str,5);
-echo "从第5个字符开始取至最后：".$str1." string substr(string string, int start, int [length]) 参考链接http:// &hellip;">
+	<meta name="description" content="1 语法 1.1 基础语法 clone 需要操作原对象,但又不想影响原对象. $K_back = clone $K; 基本数据类型和数组都为真复制,即为真副本,当属性为对象时,为假复制,改变副本仍会影响原对象.解决方案: //在原对象中添加 function __clone(){ $this-& &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	<meta name="baidu-site-verification" content="HWyzFajtAX" />
@@ -298,193 +297,246 @@ var _hmt = _hmt || [];
 		
 	
 	<div id="content" class="inner"><article class="post">
-	<h2 class="title">Php 函数累积</h2>
-	<div class="entry-content"><h3>查看php环境信息</h3>
+	<h2 class="title">深入php面向对象、模式与实践阅读总结</h2>
+	<div class="entry-content"><!--more-->
 
-<pre><code>phpinfo() ;
-</code></pre>
 
-<h3>截取字符串函数</h3>
+<h1>1 语法</h1>
 
-<pre><code>$str1 = substr($str,5);
-echo "从第5个字符开始取至最后：".$str1."
-
-string substr(string string, int start, int [length])
-</code></pre>
-
-<p> 参考链接<a href="http://www.php100.com/html/php/hanshu/2013/0905/4650.html">http://www.php100.com/html/php/hanshu/2013/0905/4650.html</a></p>
-
-<h3>随机函数</h3>
-
-<pre><code>//mt_rand生成一个介于33和126之间的数字 
-//chr()将数字转为字符串
-char(mt_rand(33, 126));
-</code></pre>
-
-<h3>php 获取 form表单传递过来的file文件</h3>
-
-<pre><code>$_FILES($_REQUEST("fiel控件的name"));
-</code></pre>
-
-<h3>header()跳转页面</h3>
-
-<h3>php request上传多个同name</h3>
-
-<p>当name一样,php只会选取最后一个.如何上传多个同类型的input</p>
-
-<p>eg:</p>
-
-<pre><code>&lt;input name="type[]" ..&gt;
-&lt;input name="type[]" ..&gt;
-</code></pre>
-
-<h3>other</h3>
+<h2>1.1 基础语法</h2>
 
 <ol>
-<li><code>isset(变量)</code>,测试参数是否为NULL</li>
-<li><code>require_once()</code>检查该文件是否已经被包含过，如果是则不会再次包含.</li>
-<li><code>$_SERVER['PHP_SELF']</code>获取本文件的网络路径</li>
-<li><code>dirname(__FILE__)</code>获取本文件的系统路径</li>
-<li>在通用文件中,设置变量等于文件路径会随着调用文件的路径改变而改变,要通过define设置网站根路径.</li>
-<li><code>empty()</code>判断字符串是否为空 是则返回1</li>
-<li><code>count(数组)</code>;返回数组长度</li>
-<li><code>intval()</code>向下取整;</li>
-<li><code>ceil</code>向上取整</li>
-<li><code>array_unshift(array,var)</code>在数组头结点添加一个或多个元素</li>
-<li><code>strlen($var)</code>返回字符串长度</li>
-<li>&lsquo;&#8217;和&#8221;&ldquo; 前者不会解析$ 后者会;</li>
-<li><code>var_dump(对象)</code>会输出类的详情</li>
-<li><code>explode(",",$buffer);</code>分割字符串</li>
-<li><code>strpos("str","baohan")</code> 判断是否包含字符串 返回boolean</li>
-<li><code>in_array("Glenn",$people,[bool $strict = FALSE ])</code>判断元素是否在数组内,strict决定是否判断类型</li>
-<li><code>array_push($array,$val1,$val2)</code>推送到栈末,返回长度</li>
-<li><code>error_log</code>错误输出到指定文件.更多:PHP Error 和 Logging 函数</li>
-<li><code>trim(string,[charlist])</code>清除字符串</li>
-<li><code>array_filter(array)</code>:清楚数组中的空元素</li>
-<li><code>array_merge(array1,array2)</code>;合并数组</li>
-<li><code>substr(string,start,[length])</code>截取字符串</li>
-<li><code>str_replace(find,replace,string,[count])</code>替换字符</li>
-<li><code>__CLASS__</code>php 获取本类类名 这些常量前后均是两个下划线。</li>
-<li><code>__METHOD__</code>获取方法名</li>
-<li><code>func_get_args</code>参数变成数组返回</li>
-<li><code>get_class($this)</code>获取调用该方法的类</li>
-<li><code>var_dump(debug_backtrace());</code>获取调用该方法的方法</li>
-<li><code>unset(key)</code>删除某key,value</li>
-<li><code>array_key_exists($key,$array)</code>判断数组内是否含有key.</li>
-<li><code>md5(string)</code> 采取的是32位小的加密方式</li>
-<li><p><code>date("Y-m-d")</code>  2015-11-14</p>
+<li><p><code>clone</code></p>
 
-<h3>note</h3></li>
-<li><p>在表格中echo东西,如果没有td 会默认在表格前.</p></li>
+<p> 需要操作原对象,但又不想影响原对象.</p>
+
+<pre><code> $K_back = clone $K;
+</code></pre>
+
+<p> 基本数据类型和数组都为真复制,即为真副本,当属性为对象时,为假复制,改变副本仍会影响原对象.解决方案:</p>
+
+<pre><code> //在原对象中添加
+ function __clone(){
+     $this-&gt;对象 = clone $this-&gt;对象
+ }   
+</code></pre>
+
+<p> <code>__clone</code>在clone前自动触发,可以执行一些在备份前的属性操作.</p></li>
+<li><p><code>&amp;</code>传递引用</p>
+
+<p> 方法引用传递,改变源对象</p>
+
+<pre><code> function set_K(&amp; $K){...}
+
+ function &amp; get_K(){...}
+</code></pre></li>
+<li><p><code>static</code>延迟静态绑定</p>
+
+<p> 应用场景:Dog类和Person类都需要一个返回实例化的方法,Dog类和Person类都继承于Animal抽象类.</p>
+
+<pre><code> abstract class Animal{
+     public static function create(){
+         //实例化调用类
+         return new static();
+     }
+ }
+
+ class Person extends Animal{...}
+
+ //返回Person实例化类
+ Person::create();
+</code></pre></li>
+<li><p><code>拦截器</code></p>
+
+<ol>
+<li><p><code>__get($property)</code>,访问未定义的属性时调用.</p></li>
+<li><p><code>__set($property,$value)</code>,给未定义的属性赋值时被调用.</p></li>
+<li><p><code>__isset($property)</code>,对未定义属性调用isset()方法时调用.</p></li>
+<li><p><code>__unset($property)</code>,对未定义属性调用unset()方法时调用.</p></li>
+<li><p><code>__call($method,$arg_array)</code>,调用未定义方法时调用.</p>
+
+<p> __call很有用,但要慎用,因为太灵活.</p>
+
+<p> 应用场景:有一个专门打印Person类信息的Person_Writer类,如果通过Person类调用Person_Writer类.</p>
+
+<pre><code> //Person委托Person_Writer类处理打印事务.
+ class Person {
+     private $writer;
+     ...
+
+     function __call($method_name,$args){
+         if(methood_exists($this-&gt;wirter,$method_name)){
+             return $this-&gt;writer-&gt;$method_name($this);
+         }
+     }
+
+     //高级__call写法,当委托方法参数不确定时使用.
+     function __call($method_name,$args){
+         //当然这里这样写法意义不大,但是call一般都是用call_user_func_array调用
+         $args = $this ;
+         if(methood_exists($this-&gt;wirter,$method_name)){
+             return call_user_func_array(
+                 array($this-&gt;writer,$method_name),$args);
+             )
+         }
+     }
+
+ }       
+</code></pre></li>
+</ol>
+</li>
+<li><p><code>回调函数</code></p>
+
+<p> 应用场景:   3个类,<code>Product类</code>,<code>Product_Sale类</code>,<code>Product_Totalizer类</code>,要实现:当卖出Product总共价格超过指定金额时,输出警告.</p>
+
+<pre><code> //Product
+ class Product {
+     public $name;
+     public $price;
+ }
+
+ //Product_Sale
+ class Product_Sale {
+     private $callbacks;
+
+     //记录回调函数
+     function register_callback ($callback) {
+         if(! is_callback($callback)){
+             thow new Exception('callback not callable');
+         }
+         $this-&gt;callbacks[] = $callback;
+     }
+
+     //执行回调函数
+     function sale ($product){
+         print "{$product-&gt;name} : 处理中 \n";
+         foreach($this-&gt;callbacks as $callback){
+             call_user_func($callback , $product);
+         }
+     }
+ }
+
+ //Produce_Totalizer
+ class Produce_Totalizer {
+     static function warn_amount ($amt) {
+         $count = 0;
+         return function ($produce) use ($amt , &amp;count) {
+             $count += $produce-&gt;price;
+             print " count : {count}\n"
+             if($count&gt;$amt){
+                 print "超过指定金额{$amt}啦~";
+             }
+         };
+     }
+ }
+
+ //模拟场景
+ $product_sale = new Produce_Sale();
+ //指定报警金额为8块
+ $product_sale = register_callback(Product_Titakuzer::warn_amount(8)); 
+
+ //卖商品
+ $product_sale-&gt;sale(new Product("Durex",6));
+ $product_sale-&gt;sale(new Produce("Jissbon",5));
+
+ //输出结果
+ Durex : 处理中
+     count :6 
+
+ Jissbon : 处理中 
+     count: 11
+
+ 超过指定金额8块啦~
+</code></pre></li>
+<li><p><code>get_class()</code>和<code>instanceof</code></p>
+
+<p> <code>get_class(类)</code>用于判断是否精准等于类名;</p>
+
+<p> <code>instanceof</code> 可以判断是否其本身或继承于某父类.</p></li>
+<li><p>类中的方法和类中的属性</p>
+
+<p> <code>get_class_methods('类名')</code>:获取类中所有方法.</p>
+
+<p> <code>get_class_vars('类名')</code>:获取类中所有public参数;</p></li>
+<li>反射API</li>
 </ol>
 
 
-<h3>框架引用</h3>
+<h1>2 模式</h1>
 
-<p>laravel<a href="https://phphub.org/">https://phphub.org/</a>,官网<a href="http://laravel-china.org/">http://laravel-china.org/</a></p>
+<h2>2.1 组合</h2>
 
-<h3>php修改时区问题</h3>
+<p>问题:课堂类被演讲类和研讨会类继承着.但是演讲类和研讨类都要实现一次性计费和上N次课计费的方法.和输出计算的方式.</p>
 
-<ol>
-<li><p>在php.ini设置date.tiemzome 参考资料<a href="http://www.ezloo.com/2009/08/php_timezone.html">http://www.ezloo.com/2009/08/php_timezone.html</a></p></li>
-<li><p>重启服务器<code>sudo service apache2 restart</code></p></li>
-</ol>
+<p>解决方案1: 在课堂类中添加计算一次性付费的方法,上N次课的计费方法和输出计算方式的方法.</p>
 
+<p>解决方案2: 运用组合,将处理计费和输出计算方式单独封装为一个计费策略类.</p>
 
-<h3>Mac重启服务器</h3>
+<pre><code>abstract class Cost_Strategy {
+    protected $duration;
+    abstract function cost ();
+    abstract function charge_type();
 
-<pre><code>sudo /usr/sbin/apachectl  restart
-</code></pre>
-
-<h3>Mac设置php.ini</h3>
-
-<p>Mac的php要在/etc下新建一个php.ini才起作用.当然他有个php.ini.default给您cp</p>
-
-<p>参考链接<a href="http://blog.saymoon.com/2011/03/mac-os-phpini/">http://blog.saymoon.com/2011/03/mac-os-phpini/</a></p>
-
-<h3>php.ini各系统存在位置</h3>
-
-<ol>
-<li><p>Linux</p>
-
-<p>  1.1 /etc/php.ini</p>
-
-<p>  1,2 /usr/bin/php5/bin/php.ini</p>
-
-<p>  1.3 /etc/php/php.ini</p>
-
-<p>  1.4 /etc/php5/apache2/php.ini</p></li>
-<li><p>Mac OSX   /private/etc/php.ini</p></li>
-<li>Windows (with XAMPP installed)    C:/xampp/php/php.ini</li>
-</ol>
-
-
-<p>当然phpinfo();也可以查看php.ini的存在路径</p>
-
-<h3>Cannot modify header information – headers already sent by cookie 的解决办法</h3>
-
-<p>php.ini中设置</p>
-
-<pre><code> output_buffering
-     Default Value: On
-     Development Value: 4096
-     Production Value: 4096
-</code></pre>
-
-<h2>php显示错误设置</h2>
-
-<pre><code>//php.ini中
-display_errors = On
-</code></pre>
-
-<p>参考链接<a href="http://www.jb51.net/article/50025.htm">http://www.jb51.net/article/50025.htm</a></p>
-
-<h3>待消化</h3>
-
-<ol>
-<li>apache日志文件设置<a href="http://yansu.org/2014/01/24/apache-log-format.html">http://yansu.org/2014/01/24/apache-log-format.html</a></li>
-</ol>
-
-
-<h3>php自动化测试</h3>
-
-<p>IBM<a href="http://www.ibm.com/developerworks/cn/opensource/os-cn-php-autotest/">http://www.ibm.com/developerworks/cn/opensource/os-cn-php-autotest/</a></p>
-
-<h3>php json数据返回多了一个空行</h3>
-
-<p>很大的一种概率是php中有空的字符返回了.懒得找的方式就是这样得到json后去掉一下前后空行</p>
-
-<pre><code>String.prototype.trim = function() {
-var str = this,
-str = str.replace(/^\s\s*/, ''),
-ws = /\s/,
-i = str.length;
-while (ws.test(str.charAt(--i)));
-return str.slice(0, i + 1);
+    public __construct($duration){
+        $this-&gt;duration = $duration;
+    }
 }
+
+class Timed_Const_Strategy extends Cost_Stratedy {
+    function cost () {
+        //上一次课给5块钱- -.
+        return $this-&gt;duration * 5;
+    }
+
+    function charge_type(){
+        return "多次课结算";
+    }
+}
+
+class Fixed_Const_Strategy extends Cost_Stratedy {
+    function cost (){
+        return 30 ;
+    }
+
+    function charge_type(){
+        return "一次性课结算";
+    }
+}
+
+abstract class Leason {
+
+    private $cost_strategy;
+
+    public __construct(Const_Strategy $cost_strategy){
+        $this-&gt;cost_strategy = $cost_strategy;
+    }
+
+    function __call($method_name,$args){
+        $args = $cost_strategy ;
+        if(methood_exists($this-&gt;cost_strategy,$method_name)){
+            return call_user_func_array(
+                array($this-&gt;writer,$method_name),$args);
+            )
+        }
+    }
+}
+
+//运用
+$leasons[] = new Seminar(new Timed_Const_Strategy(4));
+$leasons[] = new Lecture(new Fixed_Const_Strategy(null));
+
+foreach ($leasons as $leason){
+    print "leason charge : {$leason-&gt;const()}";
+    print "charge_type : {$leason-&gt;charge_type()}"
+}
+
+leason charge 20. charge_type : 多次课结算;
+leason charge 30. charge_type : 一次课结算;
 </code></pre>
 
-<p>参考链接<a href="http://www.cnblogs.com/rubylouvre/archive/2009/09/18/1568794.html">http://www.cnblogs.com/rubylouvre/archive/2009/09/18/1568794.html</a></p>
+<p>组合既委托.同级委托.</p>
 
-<h3>Fatal error: Cannot redeclare class</h3>
-
-<p>重复定义类/类路径错误</p>
-
-<h3>php应该注意的地方</h3>
-
-<ol>
-<li>php数组中例如 params[&lsquo;id&rsquo;] id是会认为是变量,要用&#8221;&ldquo; 错误</li>
-</ol>
-
-
-<h3>php order</h3>
-
-<ol>
-<li><code>php -i</code> 相当于 php_info();</li>
-</ol>
-
-
-<p>参考<a href="http://php.net/manual/zh/features.commandline.php">http://php.net/manual/zh/features.commandline.php</a></p>
+<p>继承既父子关系.</p>
 </div>
 
 
@@ -501,7 +553,7 @@ return str.slice(0, i + 1);
   
 
 
-<time datetime="2015-01-07T11:37:40+08:00" pubdate data-updated="true"></time></div>
+<time datetime="2015-11-04T11:37:40+08:00" pubdate data-updated="true"></time></div>
 	<div class="tags">
 
 
@@ -537,7 +589,7 @@ return str.slice(0, i + 1);
     <div id="comments" aria-live="polite">
 
 <!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="Php 函数累积" data-title="Php 函数累积" data-url="/blog/2015/01/07/php_function/"></div>
+	<div class="ds-thread" data-thread-key="深入php面向对象、模式与实践阅读总结" data-title="深入php面向对象、模式与实践阅读总结" data-url="/blog/2015/11/04/php_design_book/"></div>
 <!-- 多说评论框 end -->
 <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 <script type="text/javascript">
