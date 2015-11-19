@@ -4,7 +4,7 @@
   <title><![CDATA[Category: php | K]]></title>
   <link href="http://mzkmzk.github.io/blog/categories/php/atom.xml" rel="self"/>
   <link href="http://mzkmzk.github.io/"/>
-  <updated>2015-11-18T22:12:33+08:00</updated>
+  <updated>2015-11-19T08:50:09+08:00</updated>
   <id>http://mzkmzk.github.io/</id>
   <author>
     <name><![CDATA[K]]></name>
@@ -376,6 +376,8 @@ Socket error 61: Connection refused (connecting to localhost:11300)
 
 <p>解决方案2: 运用组合,将处理计费和输出计算方式单独封装为一个计费策略类.</p>
 
+<p><img src="/images/QQ20151118-0.png" alt="组合模式" /></p>
+
 <pre><code>abstract class Cost_Strategy {
     protected $duration;
     abstract function cost ();
@@ -441,6 +443,51 @@ leason charge 30. charge_type : 一次课结算;
 <p>组合既委托.同级委托.</p>
 
 <p>继承既父子关系.</p>
+
+<h1>3 生成对象</h1>
+
+<h2>3.1 单例模式</h2>
+
+<p>确保系统中只有唯一一个用例.例如系统配置文件.</p>
+
+<p>重点</p>
+
+<p>1: 构造方法私有.</p>
+
+<p>2: 类本身包含自己的实例化属性.</p>
+
+<p><img src="/iamges/QQ20151118-1.png" alt="单例模式" /></p>
+
+<pre><code>class Preferences {
+    private static $instance;
+    private function __construct(){ ... }
+
+    public static function get_instance(){
+        if(empty(self::$instance)){
+            self::$instance = new Preferences();
+        }
+        return self::$instance;
+    }
+    ...
+}
+
+//使用
+$preferences = Preferences::get_instance();
+</code></pre>
+
+<h2>3.2 工厂模式</h2>
+
+<p>通过一个父类,生产处多个不同功能的子类.</p>
+
+<p>特点:产品方(新浪微博)和需求方(显示新浪微博)一一对应.</p>
+
+<p>问题:印象笔记中,来源可能为新浪微博,或者开发者头条,在印象笔记显示的时候,两者的页眉和页尾是不一样的.</p>
+
+<p><img src="/images/QQ20151118-2.png" alt="工厂模式" /></p>
+
+<h2>3.3 抽象模式</h2>
+
+<p>RLGL!!!.印象笔记不只要显示新浪微博内容!!!还要显示</p>
 ]]></content>
   </entry>
   
