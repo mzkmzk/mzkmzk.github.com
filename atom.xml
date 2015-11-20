@@ -4,7 +4,7 @@
   <title><![CDATA[K]]></title>
   <link href="http://mzkmzk.github.io/atom.xml" rel="self"/>
   <link href="http://mzkmzk.github.io/"/>
-  <updated>2015-11-20T09:10:46+08:00</updated>
+  <updated>2015-11-20T09:13:04+08:00</updated>
   <id>http://mzkmzk.github.io/</id>
   <author>
     <name><![CDATA[K]]></name>
@@ -14,19 +14,345 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Php_design_book]]></title>
-    <link href="http://mzkmzk.github.io/blog/2015/11/14/php_design_book/"/>
-    <updated>2015-11-14T00:00:00+08:00</updated>
-    <id>http://mzkmzk.github.io/blog/2015/11/14/php_design_book</id>
-    <content type="html"><![CDATA[<p>=&mdash;
-layout: post
-title: &ldquo;深入php面向对象、模式与实践阅读总结&rdquo;
-date: 2015-11-04 11:37:40 +0800
-comments: true</p>
+    <title type="html"><![CDATA[Ubuntu技巧与知识]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/11/11/ubuntu_kill/"/>
+    <updated>2015-11-11T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/11/11/ubuntu_kill</id>
+    <content type="html"><![CDATA[<!--more-->
 
-<h2>categories: php</h2>
 
-<!--more-->
+<h1>Ubuntu apache配置文件说明</h1>
+
+<p><a href="http://www.darrenfang.com/2014/01/ubuntu-apache-configuration-and-enable-mod-rewrite/">http://www.darrenfang.com/2014/01/ubuntu-apache-configuration-and-enable-mod-rewrite/</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[jssor轮播图的使用和修改]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/11/08/update_slider/"/>
+    <updated>2015-11-08T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/11/08/update_slider</id>
+    <content type="html"><![CDATA[<!--more-->
+
+
+<p>这里使用下<code>jssor</code>的轮播,<a href="https://github.com/jssor/slider">github地址</a>.优势是支持手动滑动,响应式和键盘左右监听.很人性.</p>
+
+<p><img src="http://mzkmzk.github.io/images/QQ20151108-2.png" alt="一开始是这样的" />
+任务</p>
+
+<ol>
+<li><p>改变光标,一开始为可移动的手势,改为默认的鼠标</p>
+
+<pre><code> $("#case_big_slider div").css("cursor","default");
+</code></pre></li>
+<li><p>宽度100%,调整左右两图显示的大小</p>
+
+<pre><code> //设置屏幕宽度为document宽度
+ jssor_slider1.$ScaleWidth(Math.min(parentWidth, $(document).width()));
+</code></pre>
+
+<p> 接下来设置整个轮播图的宽高比,一开始的div设置</p>
+
+<pre><code> &lt;div id="slider1_container" style="position: relative; top: 0px; left: 0px; width: 800px;
+ height: 300px; overflow: hidden;"&gt;
+     &lt;!-- Slides Container --&gt;
+     &lt;div u="slides" style="position: absolute; left: 0px; top: 0px; width: 800px; height: 300px;
+     overflow: hidden;"&gt;
+         &lt;div&gt;&lt;img u="image" src="../Assets/Images/Case_Slider_01.png" /&gt;&lt;/div&gt;
+         &lt;div&gt;&lt;img u="image" src="../Assets/Images/Case_Slider_01.png" /&gt;&lt;/div&gt;
+         &lt;div&gt;&lt;img u="image" src="../Assets/Images/Case_Slider_01.png" /&gt;&lt;/div&gt;
+         &lt;div&gt;&lt;img u="image" src="../Assets/Images/Case_Slider_01.png" /&gt;&lt;/div&gt;
+         &lt;div&gt;&lt;img u="image" src="../Assets/Images/Case_Slider_01.png" /&gt;&lt;/div&gt;
+         &lt;div&gt;&lt;img u="image" src="../Assets/Images/Case_Slider_01.png" /&gt;&lt;/div&gt;
+
+     &lt;/div&gt;
+</code></pre>
+
+<p>应该很少在div设置固定宽高的,研究发现,其实起的是设置宽高比作用.多少px是无所谓的.</p>
+
+<p>这里由于我要的效果是在1440时,高度为381,所以width设置为1440,height设置为381.就完成了设置宽高比.</p>
+
+<p>该框架默认,左右两边的图只显示100px,但我需要显示为屏幕的百分27%</p>
+
+<pre><code> $ParkingPosition: $(document).width() * 0.27,          
+</code></pre></li>
+<li><p>更改左右两个图片位置和显示</p>
+
+<p> 原来</p>
+
+<pre><code> &lt;span u="arrowleft" class="jssora13l glyphicon glyphicon-menu-left" style="top: 123px; left: 30px;"&gt;
+</code></pre>
+
+<p> 我要改为屏幕边向左右20%,和改变显示图标</p>
+
+<pre><code> &lt;span u="arrowright" class="jssora13r glyphicon-right" style="top: 123px; right: 20%;"&gt;
+         &lt;img  src="../Assets/Images/Slider_Line.png"/&gt;
+ &lt;/span&gt;
+</code></pre></li>
+</ol>
+
+
+<p>最终效果</p>
+
+<p><img src="http://mzkmzk.github.io/images/QQ20151108-0.png" alt="最终效果" /></p>
+
+<h1>附录原代码</h1>
+
+<p>原来的配置文件.</p>
+
+<pre><code> jQuery(document).ready(function ($) {
+    var options = {
+        $AutoPlay: true,
+
+        $PauseOnHover: 1,                               //[Optional] Whether to pause when mouse over if a slideshow is auto playing, default value is false
+
+        $ArrowKeyNavigation: true,                          //Allows arrow key to navigate or not, default value is true
+        $SlideWidth: 600,                                   //[Optional] Width of every slide in pixels, the default is width of 'slides' container
+        //$SlideHeight: 300,                                  //[Optional] Height of every slide in pixels, the default is width of 'slides' container
+        $SlideSpacing: 0,                                   //Space between each slide in pixels
+        $DisplayPieces: 2,                                  //Number of pieces to display (the slideshow would be disabled if the value is set to greater than 1), the default value is 1
+        $ParkingPosition: 100,                                //The offset position to park slide (this options applys only when slideshow disabled).
+
+        $ArrowNavigatorOptions: {                       //[Optional] Options to specify and enable arrow navigator or not
+            $Class: $JssorArrowNavigator$,              //[Requried] Class to create arrow navigator instance
+            $ChanceToShow: 2,                               //[Required] 0 Never, 1 Mouse Over, 2 Always
+            $AutoCenter: 2,                                 //[Optional] Auto center arrows in parent container, 0 No, 1 Horizontal, 2 Vertical, 3 Both, default value is 0
+            $Steps: 1                                       //[Optional] Steps to go for each navigation request, default value is 1
+        }
+    };
+
+    var jssor_slider1 = new $JssorSlider$("slider1_container", options);
+
+    //responsive code begin
+    //you can remove responsive code if you don't want the slider scales while window resizes
+    function ScaleSlider() {
+        var parentWidth = jssor_slider1.$Elmt.parentNode.clientWidth;
+        if (parentWidth)
+            jssor_slider1.$ScaleWidth(Math.min(parentWidth, 800));
+        else
+            window.setTimeout(ScaleSlider, 30);
+    }
+    ScaleSlider();
+
+    $(window).bind("load", ScaleSlider);
+    $(window).bind("resize", ScaleSlider);
+    $(window).bind("orientationchange", ScaleSlider);
+</code></pre>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Laravel 使用deployer 简单项目搭建]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/11/08/laravel_demo_start/"/>
+    <updated>2015-11-08T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/11/08/laravel_demo_start</id>
+    <content type="html"><![CDATA[<!--more-->
+
+
+<p><code>deployer</code>是后台管理模板</p>
+
+<p><a href="https://github.com/REBELinBLUE/deployer">安装指南</a></p>
+
+<p>安装中遇到的问题</p>
+
+<ol>
+<li><p>在<code>sudo composer install -o --no-dev</code>在出现警告</p>
+
+<pre><code> Notice: Use of undefined constant MCRYPT_RIJNDAEL_128 - assumed 'MCRYPT_RIJNDAEL_128' in /Users/maizhikun/Learning/apache_sites/deployer/config/app.php on line 84
+ PHP Notice:  Use of undefined constant MCRYPT_RIJNDAEL_128 - assumed 'MCRYPT_RIJNDAEL_128' in /Users/maizhikun/Learning/apache_sites/deployer/config/app.php on line 84
+ &gt; php artisan optimize
+
+ Notice: Use of undefined constant MCRYPT_RIJNDAEL_128 - assumed 'MCRYPT_RIJNDAEL_128' in /Users/maizhikun/Learning/apache_sites/deployer/config/app.php on line 84
+ PHP Notice:  Use of undefined constant MCRYPT_RIJNDAEL_128 - assumed 'MCRYPT_RIJNDAEL_128' in /Users/maizhikun/Learning/apache_sites/deployer/config/app.php on line 84
+ Generating optimized class loader
+ Compiling common classes
+</code></pre>
+
+<p> 修改config/app的</p>
+
+<pre><code> 'cipher'          =&gt; 'AES-256-CBC',
+</code></pre></li>
+<li><p><code>php artisan app:install</code>中出现</p>
+
+<pre><code> ***********************
+ Welcome to Deployer
+ ***********************
+
+ Extension required: mcrypt
+
+ Deployer cannot be installed, as not all requirements are met. Please review the errors above before continuing.
+</code></pre>
+
+<p> 解决方案是: 在配置文件中加</p>
+
+<pre><code> export PATH=/usr/local/php5/bin:$PATH
+</code></pre></li>
+<li><p>到了最后的设置数据库,不允许属性为空</p>
+
+<pre><code>[ERROR] A value is required.
+
+Username [deployer]:    
+</code></pre>
+
+<p>然而我的账号就是空啊..啊哈哈- -.</p>
+
+<p>修改源文件<code>deployer/vendor/symfony/console/Helper/SymfonyQuestionHelper.php</code>40行附近</p>
+
+<pre><code>//if (!is_array($value) &amp;&amp; !is_bool($value) &amp;&amp; 0 === strlen($value)) {
+if (!is_array($value) &amp;&amp; !is_bool($value) &amp;&amp; 0 === strlen($value)) {
+    throw new \Exception('A value is required.');
+}
+</code></pre>
+
+<p>//phpstorm默认不让改的.用subline改就OK哈哈- -.</p></li>
+<li><p>在创建时候缺少<code>Beanstalkd</code></p>
+
+<pre><code>[Pheanstalk\Exception\ConnectionException]
+Socket error 61: Connection refused (connecting to localhost:11300)
+</code></pre>
+
+<p>安装<code>Beanstalkd</code></p>
+
+<pre><code>brew install beanstalkd
+</code></pre>
+
+<p>启动<code>Beanstalkd</code></p>
+
+<pre><code>beanstalkd
+</code></pre>
+
+<p><a href="http://wppurking.github.io/rails/ruby/queue/2012/10/01/chu-shi-beanstalk.html">使用Beanstalkd参考</a></p></li>
+</ol>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Laravel 使用deployer 简单项目搭建]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/11/08/laravel_demo_amazeui/"/>
+    <updated>2015-11-08T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/11/08/laravel_demo_amazeui</id>
+    <content type="html"><![CDATA[<!--more-->
+
+
+<p><code>amazeui</code>是后台管理模板</p>
+
+<p><a href="https://github.com/iroben/laravel5-amazeui-admin">安装指南</a></p>
+
+<p>安装中遇到的问题</p>
+
+<ol>
+<li><p>缺少<code>bower</code></p>
+
+<pre><code> //安装
+ npm install -g bower
+
+ //安装后出现权限问题
+ sudo chmod -R  777 ../configstore/
+</code></pre></li>
+</ol>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[jQuery 函数累积]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/11/08/jquery_function/"/>
+    <updated>2015-11-08T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/11/08/jquery_function</id>
+    <content type="html"><![CDATA[<!--more-->
+
+
+<h1>基础函数</h1>
+
+<ol>
+<li><p>查找合适的<code>a</code>标签替换href</p>
+
+<pre><code> $(".pagination  a").attr('href',function(i,val){
+     return val.replace('query/','query');
+ });
+</code></pre></li>
+</ol>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Ubantu 安装Laravel]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/11/04/ubuntu_laravel/"/>
+    <updated>2015-11-04T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/11/04/ubuntu_laravel</id>
+    <content type="html"><![CDATA[<!--more-->
+
+
+<p>Ubuntu版本 :14.04</p>
+
+<h1>1 安装apche mysql php</h1>
+
+<ol>
+<li><p>安装apache<code>sudo apt-get install apache2</code></p>
+
+<p> <code>localhost</code>有apache页面显示即可</p></li>
+<li><p>安装php<code>sudo apt-get install php5 libapache2-mod-php5</code></p>
+
+<pre><code> //重启apache 加载php模块
+ sudo service apache2 restart
+</code></pre>
+
+<p> 新增<code>sudo vim /var/www/html/php_info.php</code>,输入内容</p>
+
+<pre><code> &lt;?php  
+     phpinfo();  
+ ?&gt;  
+</code></pre>
+
+<p> 浏览器输入<code>localhost/php_info.php</code>,浏览到php配置信息即为正确.</p></li>
+<li><p>安装MySQL<code>sudo apt-get install mysql-server mysql-client</code></p>
+
+<p> 过程中设置MySQL密码请谨记</p></li>
+<li><p>安装phpmyadmin<code>sudo apt-get install phpmyadmin</code></p>
+
+<p> 过程中设置服务器类型和phpmyadmin密码</p>
+
+<p> phpmyadmin安装完后，并不在apache默认路径下，需要建立一个链接，</p>
+
+<pre><code> sudo ln -s /usr/share/phpmyadmin /var/www/html
+</code></pre>
+
+<p> 访问<code>localhost/phpmyadmin/</code>即可.</p></li>
+</ol>
+
+
+<p><a href="http://blog.csdn.net/tecn14/article/details/27515241">参考链接</a></p>
+
+<h1>2 安装Laravel</h1>
+
+<p>参考之前写的文章<a href="http://mzkmzk.github.io/blog/2015/09/24/Laravel-start/">http://mzkmzk.github.io/blog/2015/09/24/Laravel-start/</a></p>
+
+<h1>3 更改apache</h1>
+
+<ol>
+<li><code>sudo a2enmod rewrite</code>加载重定向模块</li>
+<li><code>/etc/apche2/apache.conf</code>里的所有<code>AllowOverride None</code>修改为<code>AllowOverride All</code></li>
+<li>重启服务器</li>
+</ol>
+
+
+<h1>附录小问题</h1>
+
+<ol>
+<li>修改用户密码<code>passwd username</code></li>
+</ol>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[深入php面向对象、模式与实践阅读总结]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/11/04/php_design_book/"/>
+    <updated>2015-11-04T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/11/04/php_design_book</id>
+    <content type="html"><![CDATA[<!--more-->
 
 
 <h1>1 语法</h1>
@@ -411,340 +737,6 @@ $妹子-&gt;计算舒服程度();
 </code></pre>
 
 <p>这是一个很理想的组合模式,在现实情况,我们使用组合模式,可能不得不创建多种类型的洗脚男,需要添加许多判断条件.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Ubuntu技巧与知识]]></title>
-    <link href="http://mzkmzk.github.io/blog/2015/11/11/ubuntu_kill/"/>
-    <updated>2015-11-11T11:37:40+08:00</updated>
-    <id>http://mzkmzk.github.io/blog/2015/11/11/ubuntu_kill</id>
-    <content type="html"><![CDATA[<!--more-->
-
-
-<h1>Ubuntu apache配置文件说明</h1>
-
-<p><a href="http://www.darrenfang.com/2014/01/ubuntu-apache-configuration-and-enable-mod-rewrite/">http://www.darrenfang.com/2014/01/ubuntu-apache-configuration-and-enable-mod-rewrite/</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[jssor轮播图的使用和修改]]></title>
-    <link href="http://mzkmzk.github.io/blog/2015/11/08/update_slider/"/>
-    <updated>2015-11-08T11:37:40+08:00</updated>
-    <id>http://mzkmzk.github.io/blog/2015/11/08/update_slider</id>
-    <content type="html"><![CDATA[<!--more-->
-
-
-<p>这里使用下<code>jssor</code>的轮播,<a href="https://github.com/jssor/slider">github地址</a>.优势是支持手动滑动,响应式和键盘左右监听.很人性.</p>
-
-<p><img src="http://mzkmzk.github.io/images/QQ20151108-2.png" alt="一开始是这样的" />
-任务</p>
-
-<ol>
-<li><p>改变光标,一开始为可移动的手势,改为默认的鼠标</p>
-
-<pre><code> $("#case_big_slider div").css("cursor","default");
-</code></pre></li>
-<li><p>宽度100%,调整左右两图显示的大小</p>
-
-<pre><code> //设置屏幕宽度为document宽度
- jssor_slider1.$ScaleWidth(Math.min(parentWidth, $(document).width()));
-</code></pre>
-
-<p> 接下来设置整个轮播图的宽高比,一开始的div设置</p>
-
-<pre><code> &lt;div id="slider1_container" style="position: relative; top: 0px; left: 0px; width: 800px;
- height: 300px; overflow: hidden;"&gt;
-     &lt;!-- Slides Container --&gt;
-     &lt;div u="slides" style="position: absolute; left: 0px; top: 0px; width: 800px; height: 300px;
-     overflow: hidden;"&gt;
-         &lt;div&gt;&lt;img u="image" src="../Assets/Images/Case_Slider_01.png" /&gt;&lt;/div&gt;
-         &lt;div&gt;&lt;img u="image" src="../Assets/Images/Case_Slider_01.png" /&gt;&lt;/div&gt;
-         &lt;div&gt;&lt;img u="image" src="../Assets/Images/Case_Slider_01.png" /&gt;&lt;/div&gt;
-         &lt;div&gt;&lt;img u="image" src="../Assets/Images/Case_Slider_01.png" /&gt;&lt;/div&gt;
-         &lt;div&gt;&lt;img u="image" src="../Assets/Images/Case_Slider_01.png" /&gt;&lt;/div&gt;
-         &lt;div&gt;&lt;img u="image" src="../Assets/Images/Case_Slider_01.png" /&gt;&lt;/div&gt;
-
-     &lt;/div&gt;
-</code></pre>
-
-<p>应该很少在div设置固定宽高的,研究发现,其实起的是设置宽高比作用.多少px是无所谓的.</p>
-
-<p>这里由于我要的效果是在1440时,高度为381,所以width设置为1440,height设置为381.就完成了设置宽高比.</p>
-
-<p>该框架默认,左右两边的图只显示100px,但我需要显示为屏幕的百分27%</p>
-
-<pre><code> $ParkingPosition: $(document).width() * 0.27,          
-</code></pre></li>
-<li><p>更改左右两个图片位置和显示</p>
-
-<p> 原来</p>
-
-<pre><code> &lt;span u="arrowleft" class="jssora13l glyphicon glyphicon-menu-left" style="top: 123px; left: 30px;"&gt;
-</code></pre>
-
-<p> 我要改为屏幕边向左右20%,和改变显示图标</p>
-
-<pre><code> &lt;span u="arrowright" class="jssora13r glyphicon-right" style="top: 123px; right: 20%;"&gt;
-         &lt;img  src="../Assets/Images/Slider_Line.png"/&gt;
- &lt;/span&gt;
-</code></pre></li>
-</ol>
-
-
-<p>最终效果</p>
-
-<p><img src="http://mzkmzk.github.io/images/QQ20151108-0.png" alt="最终效果" /></p>
-
-<h1>附录原代码</h1>
-
-<p>原来的配置文件.</p>
-
-<pre><code> jQuery(document).ready(function ($) {
-    var options = {
-        $AutoPlay: true,
-
-        $PauseOnHover: 1,                               //[Optional] Whether to pause when mouse over if a slideshow is auto playing, default value is false
-
-        $ArrowKeyNavigation: true,                          //Allows arrow key to navigate or not, default value is true
-        $SlideWidth: 600,                                   //[Optional] Width of every slide in pixels, the default is width of 'slides' container
-        //$SlideHeight: 300,                                  //[Optional] Height of every slide in pixels, the default is width of 'slides' container
-        $SlideSpacing: 0,                                   //Space between each slide in pixels
-        $DisplayPieces: 2,                                  //Number of pieces to display (the slideshow would be disabled if the value is set to greater than 1), the default value is 1
-        $ParkingPosition: 100,                                //The offset position to park slide (this options applys only when slideshow disabled).
-
-        $ArrowNavigatorOptions: {                       //[Optional] Options to specify and enable arrow navigator or not
-            $Class: $JssorArrowNavigator$,              //[Requried] Class to create arrow navigator instance
-            $ChanceToShow: 2,                               //[Required] 0 Never, 1 Mouse Over, 2 Always
-            $AutoCenter: 2,                                 //[Optional] Auto center arrows in parent container, 0 No, 1 Horizontal, 2 Vertical, 3 Both, default value is 0
-            $Steps: 1                                       //[Optional] Steps to go for each navigation request, default value is 1
-        }
-    };
-
-    var jssor_slider1 = new $JssorSlider$("slider1_container", options);
-
-    //responsive code begin
-    //you can remove responsive code if you don't want the slider scales while window resizes
-    function ScaleSlider() {
-        var parentWidth = jssor_slider1.$Elmt.parentNode.clientWidth;
-        if (parentWidth)
-            jssor_slider1.$ScaleWidth(Math.min(parentWidth, 800));
-        else
-            window.setTimeout(ScaleSlider, 30);
-    }
-    ScaleSlider();
-
-    $(window).bind("load", ScaleSlider);
-    $(window).bind("resize", ScaleSlider);
-    $(window).bind("orientationchange", ScaleSlider);
-</code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Laravel 使用deployer 简单项目搭建]]></title>
-    <link href="http://mzkmzk.github.io/blog/2015/11/08/laravel_demo_start/"/>
-    <updated>2015-11-08T11:37:40+08:00</updated>
-    <id>http://mzkmzk.github.io/blog/2015/11/08/laravel_demo_start</id>
-    <content type="html"><![CDATA[<!--more-->
-
-
-<p><code>deployer</code>是后台管理模板</p>
-
-<p><a href="https://github.com/REBELinBLUE/deployer">安装指南</a></p>
-
-<p>安装中遇到的问题</p>
-
-<ol>
-<li><p>在<code>sudo composer install -o --no-dev</code>在出现警告</p>
-
-<pre><code> Notice: Use of undefined constant MCRYPT_RIJNDAEL_128 - assumed 'MCRYPT_RIJNDAEL_128' in /Users/maizhikun/Learning/apache_sites/deployer/config/app.php on line 84
- PHP Notice:  Use of undefined constant MCRYPT_RIJNDAEL_128 - assumed 'MCRYPT_RIJNDAEL_128' in /Users/maizhikun/Learning/apache_sites/deployer/config/app.php on line 84
- &gt; php artisan optimize
-
- Notice: Use of undefined constant MCRYPT_RIJNDAEL_128 - assumed 'MCRYPT_RIJNDAEL_128' in /Users/maizhikun/Learning/apache_sites/deployer/config/app.php on line 84
- PHP Notice:  Use of undefined constant MCRYPT_RIJNDAEL_128 - assumed 'MCRYPT_RIJNDAEL_128' in /Users/maizhikun/Learning/apache_sites/deployer/config/app.php on line 84
- Generating optimized class loader
- Compiling common classes
-</code></pre>
-
-<p> 修改config/app的</p>
-
-<pre><code> 'cipher'          =&gt; 'AES-256-CBC',
-</code></pre></li>
-<li><p><code>php artisan app:install</code>中出现</p>
-
-<pre><code> ***********************
- Welcome to Deployer
- ***********************
-
- Extension required: mcrypt
-
- Deployer cannot be installed, as not all requirements are met. Please review the errors above before continuing.
-</code></pre>
-
-<p> 解决方案是: 在配置文件中加</p>
-
-<pre><code> export PATH=/usr/local/php5/bin:$PATH
-</code></pre></li>
-<li><p>到了最后的设置数据库,不允许属性为空</p>
-
-<pre><code>[ERROR] A value is required.
-
-Username [deployer]:    
-</code></pre>
-
-<p>然而我的账号就是空啊..啊哈哈- -.</p>
-
-<p>修改源文件<code>deployer/vendor/symfony/console/Helper/SymfonyQuestionHelper.php</code>40行附近</p>
-
-<pre><code>//if (!is_array($value) &amp;&amp; !is_bool($value) &amp;&amp; 0 === strlen($value)) {
-if (!is_array($value) &amp;&amp; !is_bool($value) &amp;&amp; 0 === strlen($value)) {
-    throw new \Exception('A value is required.');
-}
-</code></pre>
-
-<p>//phpstorm默认不让改的.用subline改就OK哈哈- -.</p></li>
-<li><p>在创建时候缺少<code>Beanstalkd</code></p>
-
-<pre><code>[Pheanstalk\Exception\ConnectionException]
-Socket error 61: Connection refused (connecting to localhost:11300)
-</code></pre>
-
-<p>安装<code>Beanstalkd</code></p>
-
-<pre><code>brew install beanstalkd
-</code></pre>
-
-<p>启动<code>Beanstalkd</code></p>
-
-<pre><code>beanstalkd
-</code></pre>
-
-<p><a href="http://wppurking.github.io/rails/ruby/queue/2012/10/01/chu-shi-beanstalk.html">使用Beanstalkd参考</a></p></li>
-</ol>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Laravel 使用deployer 简单项目搭建]]></title>
-    <link href="http://mzkmzk.github.io/blog/2015/11/08/laravel_demo_amazeui/"/>
-    <updated>2015-11-08T11:37:40+08:00</updated>
-    <id>http://mzkmzk.github.io/blog/2015/11/08/laravel_demo_amazeui</id>
-    <content type="html"><![CDATA[<!--more-->
-
-
-<p><code>amazeui</code>是后台管理模板</p>
-
-<p><a href="https://github.com/iroben/laravel5-amazeui-admin">安装指南</a></p>
-
-<p>安装中遇到的问题</p>
-
-<ol>
-<li><p>缺少<code>bower</code></p>
-
-<pre><code> //安装
- npm install -g bower
-
- //安装后出现权限问题
- sudo chmod -R  777 ../configstore/
-</code></pre></li>
-</ol>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[jQuery 函数累积]]></title>
-    <link href="http://mzkmzk.github.io/blog/2015/11/08/jquery_function/"/>
-    <updated>2015-11-08T11:37:40+08:00</updated>
-    <id>http://mzkmzk.github.io/blog/2015/11/08/jquery_function</id>
-    <content type="html"><![CDATA[<!--more-->
-
-
-<h1>基础函数</h1>
-
-<ol>
-<li><p>查找合适的<code>a</code>标签替换href</p>
-
-<pre><code> $(".pagination  a").attr('href',function(i,val){
-     return val.replace('query/','query');
- });
-</code></pre></li>
-</ol>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Ubantu 安装Laravel]]></title>
-    <link href="http://mzkmzk.github.io/blog/2015/11/04/ubuntu_laravel/"/>
-    <updated>2015-11-04T11:37:40+08:00</updated>
-    <id>http://mzkmzk.github.io/blog/2015/11/04/ubuntu_laravel</id>
-    <content type="html"><![CDATA[<!--more-->
-
-
-<p>Ubuntu版本 :14.04</p>
-
-<h1>1 安装apche mysql php</h1>
-
-<ol>
-<li><p>安装apache<code>sudo apt-get install apache2</code></p>
-
-<p> <code>localhost</code>有apache页面显示即可</p></li>
-<li><p>安装php<code>sudo apt-get install php5 libapache2-mod-php5</code></p>
-
-<pre><code> //重启apache 加载php模块
- sudo service apache2 restart
-</code></pre>
-
-<p> 新增<code>sudo vim /var/www/html/php_info.php</code>,输入内容</p>
-
-<pre><code> &lt;?php  
-     phpinfo();  
- ?&gt;  
-</code></pre>
-
-<p> 浏览器输入<code>localhost/php_info.php</code>,浏览到php配置信息即为正确.</p></li>
-<li><p>安装MySQL<code>sudo apt-get install mysql-server mysql-client</code></p>
-
-<p> 过程中设置MySQL密码请谨记</p></li>
-<li><p>安装phpmyadmin<code>sudo apt-get install phpmyadmin</code></p>
-
-<p> 过程中设置服务器类型和phpmyadmin密码</p>
-
-<p> phpmyadmin安装完后，并不在apache默认路径下，需要建立一个链接，</p>
-
-<pre><code> sudo ln -s /usr/share/phpmyadmin /var/www/html
-</code></pre>
-
-<p> 访问<code>localhost/phpmyadmin/</code>即可.</p></li>
-</ol>
-
-
-<p><a href="http://blog.csdn.net/tecn14/article/details/27515241">参考链接</a></p>
-
-<h1>2 安装Laravel</h1>
-
-<p>参考之前写的文章<a href="http://mzkmzk.github.io/blog/2015/09/24/Laravel-start/">http://mzkmzk.github.io/blog/2015/09/24/Laravel-start/</a></p>
-
-<h1>3 更改apache</h1>
-
-<ol>
-<li><code>sudo a2enmod rewrite</code>加载重定向模块</li>
-<li><code>/etc/apche2/apache.conf</code>里的所有<code>AllowOverride None</code>修改为<code>AllowOverride All</code></li>
-<li>重启服务器</li>
-</ol>
-
-
-<h1>附录小问题</h1>
-
-<ol>
-<li>修改用户密码<code>passwd username</code></li>
-</ol>
-
 ]]></content>
   </entry>
   
