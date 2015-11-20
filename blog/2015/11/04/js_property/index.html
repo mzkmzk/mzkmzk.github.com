@@ -3,11 +3,14 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>深入php面向对象、模式与实践阅读总结 - K</title>
+	<title>高性能JS总结 - K</title>
 	<meta name="author" content="K">
 
 	
-	<meta name="description" content="1 语法 1.1 基础语法 clone 需要操作原对象,但又不想影响原对象. $K_back = clone $K; 基本数据类型和数组都为真复制,即为真副本,当属性为对象时,为假复制,改变副本仍会影响原对象.解决方案: //在原对象中添加 function __clone(){ $this-& &hellip;">
+	<meta name="description" content="1 加载与执行 &lt;script&gt;每次出现,都会阻塞页面其他部分执行.
+页面在执行到&lt;body&gt;之前,不会有任何渲染页面的行为.
+建议所有&lt;script&gt;紧跟在&lt;/body&gt;前面.
+尽可能减少&lt;script&gt;个数, &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	<meta name="baidu-site-verification" content="HWyzFajtAX" />
@@ -297,293 +300,20 @@ var _hmt = _hmt || [];
 		
 	
 	<div id="content" class="inner"><article class="post">
-	<h2 class="title">深入php面向对象、模式与实践阅读总结</h2>
+	<h2 class="title">高性能JS总结</h2>
 	<div class="entry-content"><!--more-->
 
 
-<h1>1 语法</h1>
-
-<h2>1.1 基础语法</h2>
+<h1>1 加载与执行</h1>
 
 <ol>
-<li><p><code>clone</code></p>
-
-<p> 需要操作原对象,但又不想影响原对象.</p>
-
-<pre><code> $K_back = clone $K;
-</code></pre>
-
-<p> 基本数据类型和数组都为真复制,即为真副本,当属性为对象时,为假复制,改变副本仍会影响原对象.解决方案:</p>
-
-<pre><code> //在原对象中添加
- function __clone(){
-     $this-&gt;对象 = clone $this-&gt;对象
- }   
-</code></pre>
-
-<p> <code>__clone</code>在clone前自动触发,可以执行一些在备份前的属性操作.</p></li>
-<li><p><code>&amp;</code>传递引用</p>
-
-<p> 方法引用传递,改变源对象</p>
-
-<pre><code> function set_K(&amp; $K){...}
-
- function &amp; get_K(){...}
-</code></pre></li>
-<li><p><code>static</code>延迟静态绑定</p>
-
-<p> 应用场景:Dog类和Person类都需要一个返回实例化的方法,Dog类和Person类都继承于Animal抽象类.</p>
-
-<pre><code> abstract class Animal{
-     public static function create(){
-         //实例化调用类
-         return new static();
-     }
- }
-
- class Person extends Animal{...}
-
- //返回Person实例化类
- Person::create();
-</code></pre></li>
-<li><p><code>拦截器</code></p>
-
-<ol>
-<li><p><code>__get($property)</code>,访问未定义的属性时调用.</p></li>
-<li><p><code>__set($property,$value)</code>,给未定义的属性赋值时被调用.</p></li>
-<li><p><code>__isset($property)</code>,对未定义属性调用isset()方法时调用.</p></li>
-<li><p><code>__unset($property)</code>,对未定义属性调用unset()方法时调用.</p></li>
-<li><p><code>__call($method,$arg_array)</code>,调用未定义方法时调用.</p>
-
-<p> __call很有用,但要慎用,因为太灵活.</p>
-
-<p> 应用场景:有一个专门打印Person类信息的Person_Writer类,如果通过Person类调用Person_Writer类.</p>
-
-<pre><code> //Person委托Person_Writer类处理打印事务.
- class Person {
-     private $writer;
-     ...
-
-     function __call($method_name,$args){
-         if(methood_exists($this-&gt;wirter,$method_name)){
-             return $this-&gt;writer-&gt;$method_name($this);
-         }
-     }
-
-     //高级__call写法,当委托方法参数不确定时使用.
-     function __call($method_name,$args){
-         //当然这里这样写法意义不大,但是call一般都是用call_user_func_array调用
-         $args = $this ;
-         if(methood_exists($this-&gt;wirter,$method_name)){
-             return call_user_func_array(
-                 array($this-&gt;writer,$method_name),$args);
-             )
-         }
-     }
-
- }       
-</code></pre></li>
-</ol>
-</li>
-<li><p><code>回调函数</code></p>
-
-<p> 应用场景:   3个类,<code>Product类</code>,<code>Product_Sale类</code>,<code>Product_Totalizer类</code>,要实现:当卖出Product总共价格超过指定金额时,输出警告.</p>
-
-<pre><code> //Product
- class Product {
-     public $name;
-     public $price;
- }
-
- //Product_Sale
- class Product_Sale {
-     private $callbacks;
-
-     //记录回调函数
-     function register_callback ($callback) {
-         if(! is_callback($callback)){
-             thow new Exception('callback not callable');
-         }
-         $this-&gt;callbacks[] = $callback;
-     }
-
-     //执行回调函数
-     function sale ($product){
-         print "{$product-&gt;name} : 处理中 \n";
-         foreach($this-&gt;callbacks as $callback){
-             call_user_func($callback , $product);
-         }
-     }
- }
-
- //Produce_Totalizer
- class Produce_Totalizer {
-     static function warn_amount ($amt) {
-         $count = 0;
-         return function ($produce) use ($amt , &amp;count) {
-             $count += $produce-&gt;price;
-             print " count : {count}\n"
-             if($count&gt;$amt){
-                 print "超过指定金额{$amt}啦~";
-             }
-         };
-     }
- }
-
- //模拟场景
- $product_sale = new Produce_Sale();
- //指定报警金额为8块
- $product_sale = register_callback(Product_Titakuzer::warn_amount(8)); 
-
- //卖商品
- $product_sale-&gt;sale(new Product("Durex",6));
- $product_sale-&gt;sale(new Produce("Jissbon",5));
-
- //输出结果
- Durex : 处理中
-     count :6 
-
- Jissbon : 处理中 
-     count: 11
-
- 超过指定金额8块啦~
-</code></pre></li>
-<li><p><code>get_class()</code>和<code>instanceof</code></p>
-
-<p> <code>get_class(类)</code>用于判断是否精准等于类名;</p>
-
-<p> <code>instanceof</code> 可以判断是否其本身或继承于某父类.</p></li>
-<li><p>类中的方法和类中的属性</p>
-
-<p> <code>get_class_methods('类名')</code>:获取类中所有方法.</p>
-
-<p> <code>get_class_vars('类名')</code>:获取类中所有public参数;</p></li>
-<li>反射API</li>
+<li><code>&lt;script&gt;</code>每次出现,都会阻塞页面其他部分执行.</li>
+<li>页面在执行到<code>&lt;body&gt;</code>之前,不会有任何渲染页面的行为.</li>
+<li>建议所有<code>&lt;script&gt;</code>紧跟在<code>&lt;/body&gt;</code>前面.</li>
+<li>尽可能减少<code>&lt;script&gt;</code>个数,用<code>Grunt</code>或<code>Gulp</code>来管理和压缩你的JS.</li>
+<li><code>&lt;link&gt;</code>后不要跟任何内嵌脚本.因为<code>&lt;link&gt;</code>会等待后面的内嵌脚本先执行.即使内嵌脚本在<code>&lt;link&gt;</code>之后</li>
 </ol>
 
-
-<h1>2 模式</h1>
-
-<h2>2.1 组合</h2>
-
-<p>问题:课堂类被演讲类和研讨会类继承着.但是演讲类和研讨类都要实现一次性计费和上N次课计费的方法.和输出计算的方式.</p>
-
-<p>解决方案1: 在课堂类中添加计算一次性付费的方法,上N次课的计费方法和输出计算方式的方法.</p>
-
-<p>解决方案2: 运用组合,将处理计费和输出计算方式单独封装为一个计费策略类.</p>
-
-<p><img src="/images/QQ20151118-0.png" alt="组合模式" /></p>
-
-<pre><code>abstract class Cost_Strategy {
-    protected $duration;
-    abstract function cost ();
-    abstract function charge_type();
-
-    public __construct($duration){
-        $this-&gt;duration = $duration;
-    }
-}
-
-class Timed_Const_Strategy extends Cost_Stratedy {
-    function cost () {
-        //上一次课给5块钱- -.
-        return $this-&gt;duration * 5;
-    }
-
-    function charge_type(){
-        return "多次课结算";
-    }
-}
-
-class Fixed_Const_Strategy extends Cost_Stratedy {
-    function cost (){
-        return 30 ;
-    }
-
-    function charge_type(){
-        return "一次性课结算";
-    }
-}
-
-abstract class Leason {
-
-    private $cost_strategy;
-
-    public __construct(Const_Strategy $cost_strategy){
-        $this-&gt;cost_strategy = $cost_strategy;
-    }
-
-    function __call($method_name,$args){
-        $args = $cost_strategy ;
-        if(methood_exists($this-&gt;cost_strategy,$method_name)){
-            return call_user_func_array(
-                array($this-&gt;writer,$method_name),$args);
-            )
-        }
-    }
-}
-
-//运用
-$leasons[] = new Seminar(new Timed_Const_Strategy(4));
-$leasons[] = new Lecture(new Fixed_Const_Strategy(null));
-
-foreach ($leasons as $leason){
-    print "leason charge : {$leason-&gt;const()}";
-    print "charge_type : {$leason-&gt;charge_type()}"
-}
-
-leason charge 20. charge_type : 多次课结算;
-leason charge 30. charge_type : 一次课结算;
-</code></pre>
-
-<p>组合既委托.同级委托.</p>
-
-<p>继承既父子关系.</p>
-
-<h1>3 生成对象</h1>
-
-<h2>3.1 单例模式</h2>
-
-<p>确保系统中只有唯一一个用例.例如系统配置文件.</p>
-
-<p>重点</p>
-
-<p>1: 构造方法私有.</p>
-
-<p>2: 类本身包含自己的实例化属性.</p>
-
-<p><img src="/iamges/QQ20151118-1.png" alt="单例模式" /></p>
-
-<pre><code>class Preferences {
-    private static $instance;
-    private function __construct(){ ... }
-
-    public static function get_instance(){
-        if(empty(self::$instance)){
-            self::$instance = new Preferences();
-        }
-        return self::$instance;
-    }
-    ...
-}
-
-//使用
-$preferences = Preferences::get_instance();
-</code></pre>
-
-<h2>3.2 工厂模式</h2>
-
-<p>通过一个父类,生产处多个不同功能的子类.</p>
-
-<p>特点:产品方(新浪微博)和需求方(显示新浪微博)一一对应.</p>
-
-<p>问题:印象笔记中,来源可能为新浪微博,或者开发者头条,在印象笔记显示的时候,两者的页眉和页尾是不一样的.</p>
-
-<p><img src="/images/QQ20151118-2.png" alt="工厂模式" /></p>
-
-<h2>3.3 抽象模式</h2>
-
-<p>RLGL!!!.印象笔记不只要显示新浪微博内容!!!还要显示</p>
 </div>
 
 
@@ -604,7 +334,7 @@ $preferences = Preferences::get_instance();
 	<div class="tags">
 
 
-	<a class='category' href='/blog/categories/php/'>php</a>
+	<a class='category' href='/blog/categories/javascript/'>javascript</a>
 
 
 </div>
@@ -636,7 +366,7 @@ $preferences = Preferences::get_instance();
     <div id="comments" aria-live="polite">
 
 <!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="深入php面向对象、模式与实践阅读总结" data-title="深入php面向对象、模式与实践阅读总结" data-url="/blog/2015/11/04/php_design_book/"></div>
+	<div class="ds-thread" data-thread-key="高性能JS总结" data-title="高性能JS总结" data-url="/blog/2015/11/04/js_property/"></div>
 <!-- 多说评论框 end -->
 <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 <script type="text/javascript">

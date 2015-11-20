@@ -4,7 +4,7 @@
   <title><![CDATA[Category: 前端 | K]]></title>
   <link href="http://mzkmzk.github.io/blog/categories/qian-duan/atom.xml" rel="self"/>
   <link href="http://mzkmzk.github.io/"/>
-  <updated>2015-11-19T08:50:09+08:00</updated>
+  <updated>2015-11-20T09:10:46+08:00</updated>
   <id>http://mzkmzk.github.io/</id>
   <author>
     <name><![CDATA[K]]></name>
@@ -23,9 +23,8 @@
 
 <p>这里使用下<code>jssor</code>的轮播,<a href="https://github.com/jssor/slider">github地址</a>.优势是支持手动滑动,响应式和键盘左右监听.很人性.</p>
 
-<p><img src="/images/QQ20151108-2.png" alt="一开始是这样的" /></p>
-
-<p>任务</p>
+<p><img src="/images/QQ20151108-2.png" alt="一开始是这样的" />
+任务</p>
 
 <ol>
 <li><p>改变光标,一开始为可移动的手势,改为默认的鼠标</p>

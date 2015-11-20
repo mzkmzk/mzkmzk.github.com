@@ -4,7 +4,7 @@
   <title><![CDATA[Category: javascript | K]]></title>
   <link href="http://mzkmzk.github.io/blog/categories/javascript/atom.xml" rel="self"/>
   <link href="http://mzkmzk.github.io/"/>
-  <updated>2015-11-19T08:50:09+08:00</updated>
+  <updated>2015-11-20T09:10:46+08:00</updated>
   <id>http://mzkmzk.github.io/</id>
   <author>
     <name><![CDATA[K]]></name>
@@ -12,6 +12,27 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[高性能JS总结]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/11/04/js_property/"/>
+    <updated>2015-11-04T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/11/04/js_property</id>
+    <content type="html"><![CDATA[<!--more-->
+
+
+<h1>1 加载与执行</h1>
+
+<ol>
+<li><code>&lt;script&gt;</code>每次出现,都会阻塞页面其他部分执行.</li>
+<li>页面在执行到<code>&lt;body&gt;</code>之前,不会有任何渲染页面的行为.</li>
+<li>建议所有<code>&lt;script&gt;</code>紧跟在<code>&lt;/body&gt;</code>前面.</li>
+<li>尽可能减少<code>&lt;script&gt;</code>个数,用<code>Grunt</code>或<code>Gulp</code>来管理和压缩你的JS.</li>
+<li><code>&lt;link&gt;</code>后不要跟任何内嵌脚本.因为<code>&lt;link&gt;</code>会等待后面的内嵌脚本先执行.即使内嵌脚本在<code>&lt;link&gt;</code>之后</li>
+</ol>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[疯狂Html+CSS+JS 中JS总结]]></title>
@@ -1602,15 +1623,6 @@ data_map.get(具体ID);
 </code></pre>
 
 <h3>未消化</h3>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[js动态添加 from表单元素]]></title>
-    <link href="http://mzkmzk.github.io/blog/2015/01/03/js_add_from/"/>
-    <updated>2015-01-03T11:37:40+08:00</updated>
-    <id>http://mzkmzk.github.io/blog/2015/01/03/js_add_from</id>
-    <content type="html"><![CDATA[
 ]]></content>
   </entry>
   
