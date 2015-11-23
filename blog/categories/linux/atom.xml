@@ -4,7 +4,7 @@
   <title><![CDATA[Category: linux | K]]></title>
   <link href="http://mzkmzk.github.io/blog/categories/linux/atom.xml" rel="self"/>
   <link href="http://mzkmzk.github.io/"/>
-  <updated>2015-11-20T09:13:04+08:00</updated>
+  <updated>2015-11-23T23:24:32+08:00</updated>
   <id>http://mzkmzk.github.io/</id>
   <author>
     <name><![CDATA[K]]></name>
@@ -136,6 +136,8 @@
 <li><code>more /var/log.auth.log</code>记录登陆情况</li>
 </ol>
 
+
+<h3>tree 显示目录结构</h3>
 ]]></content>
   </entry>
   

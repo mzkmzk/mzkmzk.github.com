@@ -4,7 +4,7 @@
   <title><![CDATA[K]]></title>
   <link href="http://mzkmzk.github.io/atom.xml" rel="self"/>
   <link href="http://mzkmzk.github.io/"/>
-  <updated>2015-11-20T09:13:04+08:00</updated>
+  <updated>2015-11-23T23:24:32+08:00</updated>
   <id>http://mzkmzk.github.io/</id>
   <author>
     <name><![CDATA[K]]></name>
@@ -12,6 +12,26 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Laravel 小错误]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/11/23/laravel_error/"/>
+    <updated>2015-11-23T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/11/23/laravel_error</id>
+    <content type="html"><![CDATA[<!--more-->
+
+
+<h1>1 upload_max_filesize ini directive (limit is 2048 KiB)</h1>
+
+<ol>
+<li><code>phpimnfo()</code>查看配置文件未知.</li>
+<li>修改<code>php.ini</code>upload_max_filesize设置文件大小</li>
+<li>重启<code>apache</code></li>
+<li><code>phpinfo()</code>查看<code>upload_max_filesize</code>是否设置成功</li>
+</ol>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Ubuntu技巧与知识]]></title>
@@ -274,6 +294,10 @@ Socket error 61: Connection refused (connecting to localhost:11300)
 </code></pre></li>
 </ol>
 
+
+<h1>小知识点</h1>
+
+<p>1.如何跳出.each()?:<code>return false</code>(<code>return true</code>不起作用);</p>
 ]]></content>
   </entry>
   
@@ -718,13 +742,13 @@ $factory = new Show_Evernote(
 
 <h2>4.1 组合模式</h2>
 
-<p>组合模式,最终组合体下的各个组合部件最好类型一致.不然特殊性越多,需要判断就越多.</p>
+<p>组合模式,可以理解为单一对象管理组合对象(聚合组件),最终组合体下的各个组合部件最好类型一致.不然特殊性越多,需要判断就越多.</p>
 
 <p>假设捶背男,洗脚男,洗发男,用来服务一个人(妹子).</p>
 
 <p>假设妹子的几个部位可用的服务男均为无限个.</p>
 
-<p><img src="http://mzkmzk.github.io/images/2015-11-19-03.png" alt="组合模式" /></p>
+<p><img src="http://mzkmzk.github.io/images/%E7%BB%84%E5%90%88%E6%A8%A1%E5%BC%8F.png" alt="组合模式" /></p>
 
 <pre><code>//创建一个妹子
 $妹子 = new 人();
@@ -733,10 +757,88 @@ $妹子 = new 人();
 $妹子-&gt;add_man(new 洗脚男);
 $妹子-&gt;add_man(new 捶背男);
 
+//循环所有男的给予舒服的方法.
 $妹子-&gt;计算舒服程度();
 </code></pre>
 
 <p>这是一个很理想的组合模式,在现实情况,我们使用组合模式,可能不得不创建多种类型的洗脚男,需要添加许多判断条件.</p>
+
+<h2>4.2 装饰模式</h2>
+
+<p>装饰模式,首先洗脚男,洗发男,捶背男都是人,但是如果,一个男的又捶背,又洗发,这怎么玩?.<code>add_man</code>两次?这不科学吧,来给这些男的装饰一下吧~</p>
+
+<p><img src="http://mzkmzk.github.io/images/%E8%A3%85%E9%A5%B0%E6%A8%A1%E5%BC%8F.png" alt="装饰模式" /></p>
+
+<pre><code>abstract class 人{
+    ...
+    abstract function get_well();
+}   
+
+class 男 extends 人 {
+    //无论你是神马男,服务你,你就能获得10点舒服度.
+    private $well = 10;
+    function get_well(){
+        return $this-&gt;well();
+    }
+}
+
+abstract class 装饰男类型 extends 人 {
+    protected $人;
+    function __construct(人 $人){
+        $this-&gt;人 = $人;
+    } 
+}
+
+class 捶背装饰 extends 类型男装饰{
+    function get_well(){
+        return $this-&gt;人-&gt;get_well()+30;
+    }
+}
+
+class 洗发装饰 extends 类型男装饰{
+    function get_well(){
+        return $this-&gt;人-&gt;get_well()+20;
+    }
+}
+
+class 洗褪装饰 extends 类型男装饰{
+    //老子不喜欢别人碰我的毛裤.
+    function get_well(){
+        return $this-&gt;人-&gt;get_well()-20;
+    }
+}
+
+//创建捶背,获取舒服指数 - -嘻嘻.
+$人 = new 捶背装饰(new 男);
+$人-&gt;get_well(); // 10+30 = 40
+
+//来来来,全能选手,捶背、洗发、洗腿一起来
+$人 = new 洗脚装饰(new 洗发装饰(new 捶背装饰(new 男()))); //10+30+20-20 = 40,注意顺序,由里到外执行.
+</code></pre>
+
+<p>装饰模式,既(组合+继承),基类方法一定要尽量少,不然子类可能有它不该有的方法.直接类继承,她只可能是一种形态,而她的多种形态可能一并拥有的时候,应该运用组合.</p>
+
+<p>继承即单一多态,组合既多种多态.</p>
+
+<p>这个例子中,你可以添加女,然后把装饰男类型改为装饰通用类型,但每个get_well()都要多一个判断是男还是女(如果给予的舒服程度不一样).</p>
+
+<p>这只是确保不可能出现在<code>男</code>,<code>女</code>之外的第三种人,如果基类为动物,给予服务的可能是鸡,鹅,鸭,那么装饰类型应该运用工厂模式,动物形态和装饰形态一一对应.方便拓展.</p>
+
+<p>除了服务类型,服务男的样子也很重要,这就多了一种装饰,现在有<code>装饰男类型</code>和<code>相貌男类型</code>,这种情况怎么破,其实类似.</p>
+
+<p><img src="http://mzkmzk.github.io/images/%E4%B8%A4%E4%B8%AA%E8%A3%85%E9%A5%B0%E6%A8%A1%E5%BC%8F.png" alt="两个装饰" /></p>
+
+<pre><code>//如何获取捶背的帅哥麦?,
+$人 =new 男类型(new 捶背(new 帅哥麦(new 男())));
+</code></pre>
+
+<h2>4.3 外观模式</h2>
+
+<p>即给外部系统提供清晰接口</p>
+
+<p>例如当Model层写得很混乱,但是里面的方法还能用,那我们的Controller层应该列举一些清晰的访问方法来供View层访问.外观模式,强调的是清晰的访问接口.</p>
+
+<h2>5</h2>
 ]]></content>
   </entry>
   
@@ -3512,47 +3614,6 @@ div&gt;a:hover {
 <p>bootstrap中文<a href="http://v3.bootcss.com/getting-started/">http://v3.bootcss.com/getting-started/</a></p>
 
 <p>中文Grunt文档<a href="http://www.gruntjs.net/getting-started">http://www.gruntjs.net/getting-started</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Wordpress入门]]></title>
-    <link href="http://mzkmzk.github.io/blog/2015/10/14/wordpress_study/"/>
-    <updated>2015-10-14T11:37:40+08:00</updated>
-    <id>http://mzkmzk.github.io/blog/2015/10/14/wordpress_study</id>
-    <content type="html"><![CDATA[<!--more-->
-
-
-<h1>1 需要实现的功能</h1>
-
-<ol>
-<li>升级wordpress</li>
-<li>如何写一套自己的主题</li>
-<li>wordpress如何使用React</li>
-<li>迁移wordpress</li>
-</ol>
-
-
-<h1>4 迁移wordpress</h1>
-
-<ol>
-<li>导入数据库</li>
-<li>在wp-login.php配置新的数据库信息</li>
-<li>在pdf-options填写siteurl为当前url</li>
-</ol>
-
-
-<h1>5 升级wordpress</h1>
-
-<p>自动升级失败->手动点击更新失败</p>
-
-<p>自己去下载覆盖</p>
-
-<ol>
-<li>删除wp-admin和wp-includes</li>
-<li>其余覆盖于合并</li>
-</ol>
-
 ]]></content>
   </entry>
   
