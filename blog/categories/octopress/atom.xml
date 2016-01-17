@@ -4,7 +4,7 @@
   <title><![CDATA[Category: octopress | K]]></title>
   <link href="http://mzkmzk.github.io/blog/categories/octopress/atom.xml" rel="self"/>
   <link href="http://mzkmzk.github.io/"/>
-  <updated>2016-01-17T19:13:45+08:00</updated>
+  <updated>2016-01-17T19:20:19+08:00</updated>
   <id>http://mzkmzk.github.io/</id>
   <author>
     <name><![CDATA[K]]></name>
@@ -56,7 +56,7 @@ duoshuo_short_name: yourname
 &lt;!-- 多说评论框 end --&gt;
 &lt;!-- 多说公共JS代码 start (一个网页只需插入一次) --&gt;
 &lt;script type="text/javascript"&gt;
-var duoshuoQuery = {short_name:"mzkmzk"};
+var duoshuoQuery = {short_name:"{{ site.duoshuo_short_name }}"};
 (function() {
     var ds = document.createElement('script');
     ds.type = 'text/javascript';ds.async = true;
@@ -473,7 +473,7 @@ $ gem install rails
 <p><em>Create backup file when sabing</em> 去掉对勾 修改时就不会产生.bak
 如下图</p>
 
-<p><img class="left" src="/images/blog/1.png" title="" ></p>
+<p>{% img left /images/blog/1.png  %}</p>
 
 <p>参考链接<a href="http://williamherry.com/blog/2012/07/20/octopress-setup/">http://williamherry.com/blog/2012/07/20/octopress-setup/</a></p>
 
