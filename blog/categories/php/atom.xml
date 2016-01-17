@@ -4,7 +4,7 @@
   <title><![CDATA[Category: php | K]]></title>
   <link href="http://mzkmzk.github.io/blog/categories/php/atom.xml" rel="self"/>
   <link href="http://mzkmzk.github.io/"/>
-  <updated>2015-11-23T23:33:32+08:00</updated>
+  <updated>2016-01-17T19:13:45+08:00</updated>
   <id>http://mzkmzk.github.io/</id>
   <author>
     <name><![CDATA[K]]></name>
@@ -12,6 +12,61 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[WordPress常见错误]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/11/30/wordpress_error/"/>
+    <updated>2015-11-30T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/11/30/wordpress_error</id>
+    <content type="html"><![CDATA[<!--more-->
+
+
+<h1>1. 升级到WP4.3后无法添加媒体</h1>
+
+<p>在<code>wp-config</code>添加<code>define('CONCATENATE_SCRIPTS', false);</code></p>
+
+<p>参考链接<a href="http://weibo.com/p/230418142326bf60102w5l6">http://weibo.com/p/230418142326bf60102w5l6</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Satellite7 学习修改]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/11/30/satellite7_use/"/>
+    <updated>2015-11-30T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/11/30/satellite7_use</id>
+    <content type="html"><![CDATA[<!--more-->
+
+
+<h1>1. 搭建方式</h1>
+
+<p><a href="https://github.com/mzkmzk/Utils">https://github.com/mzkmzk/Utils</a>里主题分类有Satellite7主题文档和安装需要的部件.</p>
+
+<h1>2. 修改内容</h1>
+
+<ol>
+<li><p>Logo</p>
+
+<p> 进入wp管理员页面,左菜单中的<code>Qode</code>-><code>Header and Footer</code>,Qode中主要是系统一些文本,样式的简单控制.</p></li>
+<li><p>底部栏目要修改为4栏,在<code>footer.php</code>修改</p></li>
+</ol>
+
+
+<h1>3. 其中组件</h1>
+
+<ul>
+<li>parallax : 和 <code>section</code>作用相同.声明具体具体<code>parallax_section</code>前要用<code>parallax</code>包括</li>
+<li>SEPARATOR : 主要用于分割组件,占空间所用.</li>
+<li>EngLishNum_col_colNum,平摊分栏设置.</li>
+<li>tab : 分类<code>[tabs]</code> 下属<code>[tab id='1']</code>结束标签前后要带空格.</li>
+<li>element_fade_in : 动画效果时间</li>
+</ul>
+
+
+<h1>4. 修改轮播图</h1>
+
+<p>左边侧栏的<code>LayerSlider WP</code></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Laravel 小错误]]></title>
@@ -144,547 +199,6 @@ Socket error 61: Connection refused (connecting to localhost:11300)
 </code></pre></li>
 </ol>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Ubantu 安装Laravel]]></title>
-    <link href="http://mzkmzk.github.io/blog/2015/11/04/ubuntu_laravel/"/>
-    <updated>2015-11-04T11:37:40+08:00</updated>
-    <id>http://mzkmzk.github.io/blog/2015/11/04/ubuntu_laravel</id>
-    <content type="html"><![CDATA[<!--more-->
-
-
-<p>Ubuntu版本 :14.04</p>
-
-<h1>1 安装apche mysql php</h1>
-
-<ol>
-<li><p>安装apache<code>sudo apt-get install apache2</code></p>
-
-<p> <code>localhost</code>有apache页面显示即可</p></li>
-<li><p>安装php<code>sudo apt-get install php5 libapache2-mod-php5</code></p>
-
-<pre><code> //重启apache 加载php模块
- sudo service apache2 restart
-</code></pre>
-
-<p> 新增<code>sudo vim /var/www/html/php_info.php</code>,输入内容</p>
-
-<pre><code> &lt;?php  
-     phpinfo();  
- ?&gt;  
-</code></pre>
-
-<p> 浏览器输入<code>localhost/php_info.php</code>,浏览到php配置信息即为正确.</p></li>
-<li><p>安装MySQL<code>sudo apt-get install mysql-server mysql-client</code></p>
-
-<p> 过程中设置MySQL密码请谨记</p></li>
-<li><p>安装phpmyadmin<code>sudo apt-get install phpmyadmin</code></p>
-
-<p> 过程中设置服务器类型和phpmyadmin密码</p>
-
-<p> phpmyadmin安装完后，并不在apache默认路径下，需要建立一个链接，</p>
-
-<pre><code> sudo ln -s /usr/share/phpmyadmin /var/www/html
-</code></pre>
-
-<p> 访问<code>localhost/phpmyadmin/</code>即可.</p></li>
-</ol>
-
-
-<p><a href="http://blog.csdn.net/tecn14/article/details/27515241">参考链接</a></p>
-
-<h1>2 安装Laravel</h1>
-
-<p>参考之前写的文章<a href="http://mzkmzk.github.io/blog/2015/09/24/Laravel-start/">http://mzkmzk.github.io/blog/2015/09/24/Laravel-start/</a></p>
-
-<h1>3 更改apache</h1>
-
-<ol>
-<li><code>sudo a2enmod rewrite</code>加载重定向模块</li>
-<li><code>/etc/apche2/apache.conf</code>里的所有<code>AllowOverride None</code>修改为<code>AllowOverride All</code></li>
-<li>重启服务器</li>
-</ol>
-
-
-<h1>附录小问题</h1>
-
-<ol>
-<li>修改用户密码<code>passwd username</code></li>
-</ol>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[深入php面向对象、模式与实践阅读总结]]></title>
-    <link href="http://mzkmzk.github.io/blog/2015/11/04/php_design_book/"/>
-    <updated>2015-11-04T11:37:40+08:00</updated>
-    <id>http://mzkmzk.github.io/blog/2015/11/04/php_design_book</id>
-    <content type="html"><![CDATA[<!--more-->
-
-
-<h1>1 语法</h1>
-
-<h2>1.1 基础语法</h2>
-
-<ol>
-<li><p><code>clone</code></p>
-
-<p> 需要操作原对象,但又不想影响原对象.</p>
-
-<pre><code> $K_back = clone $K;
-</code></pre>
-
-<p> 基本数据类型和数组都为真复制,即为真副本,当属性为对象时,为假复制,改变副本仍会影响原对象.解决方案:</p>
-
-<pre><code> //在原对象中添加
- function __clone(){
-     $this-&gt;对象 = clone $this-&gt;对象
- }   
-</code></pre>
-
-<p> <code>__clone</code>在clone前自动触发,可以执行一些在备份前的属性操作.</p></li>
-<li><p><code>&amp;</code>传递引用</p>
-
-<p> 方法引用传递,改变源对象</p>
-
-<pre><code> function set_K(&amp; $K){...}
-
- function &amp; get_K(){...}
-</code></pre></li>
-<li><p><code>static</code>延迟静态绑定</p>
-
-<p> 应用场景:Dog类和Person类都需要一个返回实例化的方法,Dog类和Person类都继承于Animal抽象类.</p>
-
-<pre><code> abstract class Animal{
-     public static function create(){
-         //实例化调用类
-         return new static();
-     }
- }
-
- class Person extends Animal{...}
-
- //返回Person实例化类
- Person::create();
-</code></pre></li>
-<li><p><code>拦截器</code></p>
-
-<ol>
-<li><p><code>__get($property)</code>,访问未定义的属性时调用.</p></li>
-<li><p><code>__set($property,$value)</code>,给未定义的属性赋值时被调用.</p></li>
-<li><p><code>__isset($property)</code>,对未定义属性调用isset()方法时调用.</p></li>
-<li><p><code>__unset($property)</code>,对未定义属性调用unset()方法时调用.</p></li>
-<li><p><code>__call($method,$arg_array)</code>,调用未定义方法时调用.</p>
-
-<p> __call很有用,但要慎用,因为太灵活.</p>
-
-<p> 应用场景:有一个专门打印Person类信息的Person_Writer类,如果通过Person类调用Person_Writer类.</p>
-
-<pre><code> //Person委托Person_Writer类处理打印事务.
- class Person {
-     private $writer;
-     ...
-
-     function __call($method_name,$args){
-         if(methood_exists($this-&gt;wirter,$method_name)){
-             return $this-&gt;writer-&gt;$method_name($this);
-         }
-     }
-
-     //高级__call写法,当委托方法参数不确定时使用.
-     function __call($method_name,$args){
-         //当然这里这样写法意义不大,但是call一般都是用call_user_func_array调用
-         $args = $this ;
-         if(methood_exists($this-&gt;wirter,$method_name)){
-             return call_user_func_array(
-                 array($this-&gt;writer,$method_name),$args);
-             )
-         }
-     }
-
- }       
-</code></pre></li>
-</ol>
-</li>
-<li><p><code>回调函数</code></p>
-
-<p> 应用场景:   3个类,<code>Product类</code>,<code>Product_Sale类</code>,<code>Product_Totalizer类</code>,要实现:当卖出Product总共价格超过指定金额时,输出警告.</p>
-
-<pre><code> //Product
- class Product {
-     public $name;
-     public $price;
- }
-
- //Product_Sale
- class Product_Sale {
-     private $callbacks;
-
-     //记录回调函数
-     function register_callback ($callback) {
-         if(! is_callback($callback)){
-             thow new Exception('callback not callable');
-         }
-         $this-&gt;callbacks[] = $callback;
-     }
-
-     //执行回调函数
-     function sale ($product){
-         print "{$product-&gt;name} : 处理中 \n";
-         foreach($this-&gt;callbacks as $callback){
-             call_user_func($callback , $product);
-         }
-     }
- }
-
- //Produce_Totalizer
- class Produce_Totalizer {
-     static function warn_amount ($amt) {
-         $count = 0;
-         return function ($produce) use ($amt , &amp;count) {
-             $count += $produce-&gt;price;
-             print " count : {count}\n"
-             if($count&gt;$amt){
-                 print "超过指定金额{$amt}啦~";
-             }
-         };
-     }
- }
-
- //模拟场景
- $product_sale = new Produce_Sale();
- //指定报警金额为8块
- $product_sale = register_callback(Product_Titakuzer::warn_amount(8)); 
-
- //卖商品
- $product_sale-&gt;sale(new Product("Durex",6));
- $product_sale-&gt;sale(new Produce("Jissbon",5));
-
- //输出结果
- Durex : 处理中
-     count :6 
-
- Jissbon : 处理中 
-     count: 11
-
- 超过指定金额8块啦~
-</code></pre></li>
-<li><p><code>get_class()</code>和<code>instanceof</code></p>
-
-<p> <code>get_class(类)</code>用于判断是否精准等于类名;</p>
-
-<p> <code>instanceof</code> 可以判断是否其本身或继承于某父类.</p></li>
-<li><p>类中的方法和类中的属性</p>
-
-<p> <code>get_class_methods('类名')</code>:获取类中所有方法.</p>
-
-<p> <code>get_class_vars('类名')</code>:获取类中所有public参数;</p></li>
-<li>反射API</li>
-</ol>
-
-
-<h1>2 模式</h1>
-
-<h2>2.1 组合</h2>
-
-<p>问题:课堂类被演讲类和研讨会类继承着.但是演讲类和研讨类都要实现一次性计费和上N次课计费的方法.和输出计算的方式.</p>
-
-<p>解决方案1: 在课堂类中添加计算一次性付费的方法,上N次课的计费方法和输出计算方式的方法.</p>
-
-<p>解决方案2: 运用组合,将处理计费和输出计算方式单独封装为一个计费策略类.</p>
-
-<p><img src="/images/QQ20151118-0.png" alt="组合模式" /></p>
-
-<pre><code>abstract class Cost_Strategy {
-    protected $duration;
-    abstract function cost ();
-    abstract function charge_type();
-
-    public __construct($duration){
-        $this-&gt;duration = $duration;
-    }
-}
-
-class Timed_Const_Strategy extends Cost_Stratedy {
-    function cost () {
-        //上一次课给5块钱- -.
-        return $this-&gt;duration * 5;
-    }
-
-    function charge_type(){
-        return "多次课结算";
-    }
-}
-
-class Fixed_Const_Strategy extends Cost_Stratedy {
-    function cost (){
-        return 30 ;
-    }
-
-    function charge_type(){
-        return "一次性课结算";
-    }
-}
-
-abstract class Leason {
-
-    private $cost_strategy;
-
-    public __construct(Const_Strategy $cost_strategy){
-        $this-&gt;cost_strategy = $cost_strategy;
-    }
-
-    function __call($method_name,$args){
-        $args = $cost_strategy ;
-        if(methood_exists($this-&gt;cost_strategy,$method_name)){
-            return call_user_func_array(
-                array($this-&gt;writer,$method_name),$args);
-            )
-        }
-    }
-}
-
-//运用
-$leasons[] = new Seminar(new Timed_Const_Strategy(4));
-$leasons[] = new Lecture(new Fixed_Const_Strategy(null));
-
-foreach ($leasons as $leason){
-    print "leason charge : {$leason-&gt;const()}";
-    print "charge_type : {$leason-&gt;charge_type()}"
-}
-
-leason charge 20. charge_type : 多次课结算;
-leason charge 30. charge_type : 一次课结算;
-</code></pre>
-
-<p>组合既委托.同级委托.</p>
-
-<p>继承既父子关系.</p>
-
-<h1>3 生成对象</h1>
-
-<h2>3.1 单例模式</h2>
-
-<p>确保系统中只有唯一一个用例.例如系统配置文件.</p>
-
-<p>重点</p>
-
-<p>1: 构造方法私有.</p>
-
-<p>2: 类本身包含自己的实例化属性.</p>
-
-<p><img src="/images/QQ20151118-1.png" alt="单例模式" /></p>
-
-<pre><code>class Preferences {
-    private static $instance;
-    private function __construct(){ ... }
-
-    public static function get_instance(){
-        if(empty(self::$instance)){
-            self::$instance = new Preferences();
-        }
-        return self::$instance;
-    }
-    ...
-}
-
-//使用
-$preferences = Preferences::get_instance();
-</code></pre>
-
-<h2>3.2 工厂模式</h2>
-
-<p>通过一个父类,生产处多个不同功能的子类.</p>
-
-<p>特点:产品方(新浪微博)和需求方(显示新浪微博)一一对应.</p>
-
-<p>问题:印象笔记中,来源可能为新浪微博,或者开发者头条,在印象笔记显示的时候,两者的页眉和页尾是不一样的.</p>
-
-<p><img src="/images/2015-11-19-02.png" alt="工厂模式" /></p>
-
-<h2>3.3 抽象模式</h2>
-
-<p>RLGL!!!.印象笔记不只要显示新浪微博内容!!!还要显示我的新浪账号,还要该微博啊~~!!卧槽~~~憋着急,吻我.</p>
-
-<p>工厂模式主要用于生产一一对应的产品方和需求方,而抽象模式要做的是一个需求方(印象笔记_显示新浪微博),要多个工厂(把需求方抽象为多个需求方),例如提供新浪内容的工厂,提供新浪账号的工厂.提供微博内容的评论的工厂等.</p>
-
-<p><img src="/images/2015-11-19-01.png" alt="抽象模式" /></p>
-
-<p>代码:</p>
-
-<pre><code>abstract class Show_Evernote {
-    abstract function get_header_text();
-    abstract function get_context();
-    abstract function get_footer_text();
-    abstract function get_user();
-    abstract function get_comment();
-
-}
-
-class 显示新浪微博 extends Show_Evernote{
-    function get_header_text(){...};
-    function get_context(){new 新浪微博_内容;}
-    function get_footer_text(){...};
-    function get_user(){new 新浪微博_账号 ;}
-    function get_comment(){new 新浪微博_评论;}
-}
-
-//使用
-印象笔记控件类-&gt;内容 = 显示新浪微博-&gt;get_context;
-印象笔记控件类-&gt;账号 = 显示新浪微博-&gt;get_context;
-...
-</code></pre>
-
-<h2>3.4 平行模式</h2>
-
-<p>当使用工厂/抽象模式必须要制定具体的创建者(需求方).</p>
-
-<p>平行模式和抽象模式的模型图一致,但代码实现不一样.</p>
-
-<p>抽象模式中父类均为抽象类,而平行模式中,所以类都为普通类,方便父类的实例化.</p>
-
-<p>在这里列出显示印象笔记类的实现代码</p>
-
-<pre><code>class Show_Evernote{
-    private $内容;
-    private $账号;
-    private $评论;
-
-    function __construct(内容,账号,评论){
-        $this-&gt;内容 = 内容;
-        $this-&gt;账号 = 账号;
-        $this-&gt;评论 = 评论;
-    }
-
-    function get_内容(){
-        return clone $this-&gt;内容);
-    }
-
-    function get_账号(){
-        return clone $this-&gt;账号);
-    }
-
-    function get_评论(){
-        return clone $this-&gt;评论;
-    }
-}
-
-//使用
-$factory = new Show_Evernote( 
-    new 新浪微博内容(),
-    new 新浪微博账号(),
-    new 新浪微博评论()
-);
-
-印象笔记控件类-&gt;显示印象笔记 = $factory;
-</code></pre>
-
-<p>其实大家可以发现,原型模式只不过只在最顶层类中包装了一下各组件子类而已,然而这样可以轻松的组合他们,例如实现一个显示新浪微博内容,但要显示开发者头条账号的需求?</p>
-
-<h1>4 使用对象</h1>
-
-<h2>4.1 组合模式</h2>
-
-<p>组合模式,可以理解为单一对象管理组合对象(聚合组件),最终组合体下的各个组合部件最好类型一致.不然特殊性越多,需要判断就越多.</p>
-
-<p>假设捶背男,洗脚男,洗发男,用来服务一个人(妹子).</p>
-
-<p>假设妹子的几个部位可用的服务男均为无限个.</p>
-
-<p><img src="/images/%E7%BB%84%E5%90%88%E6%A8%A1%E5%BC%8F.png" alt="组合模式" /></p>
-
-<pre><code>//创建一个妹子
-$妹子 = new 人();
-
-//添加洗脚男、捶背男
-$妹子-&gt;add_man(new 洗脚男);
-$妹子-&gt;add_man(new 捶背男);
-
-//循环所有男的给予舒服的方法.
-$妹子-&gt;计算舒服程度();
-</code></pre>
-
-<p>这是一个很理想的组合模式,在现实情况,我们使用组合模式,可能不得不创建多种类型的洗脚男,需要添加许多判断条件.</p>
-
-<h2>4.2 装饰模式</h2>
-
-<p>装饰模式,首先洗脚男,洗发男,捶背男都是人,但是如果,一个男的又捶背,又洗发,这怎么玩?.<code>add_man</code>两次?这不科学吧,来给这些男的装饰一下吧~</p>
-
-<p><img src="/images/%E8%A3%85%E9%A5%B0%E6%A8%A1%E5%BC%8F.png" alt="装饰模式" /></p>
-
-<pre><code>abstract class 人{
-    ...
-    abstract function get_well();
-}   
-
-class 男 extends 人 {
-    //无论你是神马男,服务你,你就能获得10点舒服度.
-    private $well = 10;
-    function get_well(){
-        return $this-&gt;well();
-    }
-}
-
-abstract class 装饰男类型 extends 人 {
-    protected $人;
-    function __construct(人 $人){
-        $this-&gt;人 = $人;
-    } 
-}
-
-class 捶背装饰 extends 类型男装饰{
-    function get_well(){
-        return $this-&gt;人-&gt;get_well()+30;
-    }
-}
-
-class 洗发装饰 extends 类型男装饰{
-    function get_well(){
-        return $this-&gt;人-&gt;get_well()+20;
-    }
-}
-
-class 洗褪装饰 extends 类型男装饰{
-    //老子不喜欢别人碰我的毛裤.
-    function get_well(){
-        return $this-&gt;人-&gt;get_well()-20;
-    }
-}
-
-//创建捶背,获取舒服指数 - -嘻嘻.
-$人 = new 捶背装饰(new 男);
-$人-&gt;get_well(); // 10+30 = 40
-
-//来来来,全能选手,捶背、洗发、洗腿一起来
-$人 = new 洗脚装饰(new 洗发装饰(new 捶背装饰(new 男()))); //10+30+20-20 = 40,注意顺序,由里到外执行.
-</code></pre>
-
-<p>装饰模式,既(组合+继承),基类方法一定要尽量少,不然子类可能有它不该有的方法.直接类继承,她只可能是一种形态,而她的多种形态可能一并拥有的时候,应该运用组合.</p>
-
-<p>继承即单一多态,组合既多种多态.</p>
-
-<p>这个例子中,你可以添加女,然后把装饰男类型改为装饰通用类型,但每个get_well()都要多一个判断是男还是女(如果给予的舒服程度不一样).</p>
-
-<p>这只是确保不可能出现在<code>男</code>,<code>女</code>之外的第三种人,如果基类为动物,给予服务的可能是鸡,鹅,鸭,那么装饰类型应该运用工厂模式,动物形态和装饰形态一一对应.方便拓展.</p>
-
-<p>除了服务类型,服务男的样子也很重要,这就多了一种装饰,现在有<code>装饰男类型</code>和<code>相貌男类型</code>,这种情况怎么破,其实类似.</p>
-
-<p><img src="/images/%E4%B8%A4%E4%B8%AA%E8%A3%85%E9%A5%B0%E6%A8%A1%E5%BC%8F.png" alt="两个装饰" /></p>
-
-<pre><code>//如何获取捶背的帅哥麦?,
-$人 =new 男类型(new 捶背(new 帅哥麦(new 男())));
-</code></pre>
-
-<h2>4.3 外观模式</h2>
-
-<p>即给外部系统提供清晰接口</p>
-
-<p>例如当Model层写得很混乱,但是里面的方法还能用,那我们的Controller层应该列举一些清晰的访问方法来供View层访问.外观模式,强调的是清晰的访问接口.</p>
-
-<h2>5</h2>
 ]]></content>
   </entry>
   

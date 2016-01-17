@@ -673,7 +673,7 @@ $factory = new Show_Evernote(
 <p><img src="/images/%E7%BB%84%E5%90%88%E6%A8%A1%E5%BC%8F.png" alt="组合模式" /></p>
 
 <pre><code>//创建一个妹子
-$妹子 = new 人();
+$妹子 = new 男();
 
 //添加洗脚男、捶背男
 $妹子-&gt;add_man(new 洗脚男);
@@ -730,7 +730,7 @@ class 洗褪装饰 extends 类型男装饰{
     }
 }
 
-//创建捶背,获取舒服指数 - -嘻嘻.
+//创建捶背,能给予的舒服指数 - -嘻嘻.
 $人 = new 捶背装饰(new 男);
 $人-&gt;get_well(); // 10+30 = 40
 
@@ -760,7 +760,135 @@ $人 =new 男类型(new 捶背(new 帅哥麦(new 男())));
 
 <p>例如当Model层写得很混乱,但是里面的方法还能用,那我们的Controller层应该列举一些清晰的访问方法来供View层访问.外观模式,强调的是清晰的访问接口.</p>
 
-<h2>5</h2>
+<h1>5 执行任务</h1>
+
+<h2>5.1 策略模式</h2>
+
+<p>给类添加功能.对象要显式的调用它.</p>
+
+<p>继续刚才的洗脚男和人的故事吧&hellip;你丫的爽完了要给钱吧?支付宝?微信?现金?</p>
+
+<p>这个付款方式有多种,实现方法不应该放在<code>人</code>类中,而是应该委托给别的类</p>
+
+<pre><code>abstract class 人 {
+
+    protectd $支付方式;
+
+    function set_支付方式(){...}
+
+    function 付款(金额){
+        return $支付方式-&gt;付款($金额);
+    }
+}
+
+abstract class 付款{
+    abstract function 付款($金额);
+}
+
+class 支付宝付款 extends 付款{
+
+    function 付款($金额){
+        return 外接支付宝付款流程($金额);
+    }
+}
+...
+
+//使用
+$男 =new 男();
+
+///爽爽爽
+...
+
+//结账
+$支付宝支付账单 = new 支付宝付款($金额);
+$人 = new 男();
+$人-&gt;set_支付方式(new 支付宝付款());
+$人-&gt;付款();
+</code></pre>
+
+<h2>5.2 观察者模式</h2>
+
+<p>当被观察者发生变化,观察者需要被通知.</p>
+
+<p>当数据发生变化,页面需要被通知.</p>
+
+<p>使用步骤:</p>
+
+<ol>
+<li>观察者加载到被观察者中.</li>
+<li>被观察者通知观察者.</li>
+</ol>
+
+
+<p>例如登陆类(被观察)状态改变,要出发邮件系统和日志系统(观察者)</p>
+
+<pre><code>interface 被观察者{
+    function attach(观察者);
+    function detatch(观察者);
+    function notify();
+}
+
+class Login implements 被观察者{
+    private $观察者;
+
+    function __construct(){
+        $this-&gt;观察者 = array();
+    }
+
+    function attach($观察者){
+        $this-&gt;观察者 = $观察者; 
+    }
+
+    function detach($观察者){
+        //删除某个观察者的操作;
+    }
+
+    function notify(){
+        foreach ($this-&gt;观察者 as $单个观察者){
+            $单个观察者-&gt;update($this);
+        }
+    }       
+}
+
+interface 观察者{
+    function update(被观察者);
+}
+
+abstract class Login_观察者 implements 观察者{
+    private $login;
+    function __construct (Login $login){
+        $this-&gt;login = $login;
+        $login-&gt;attach($this);
+    }
+
+    function update(观察者 $观察者){
+        if ($观察者 ===$this-&gt;login){
+            $this-&gt;do_update($观察者);
+        }
+    }
+    abstract function do_update(Login $login);
+}
+
+class 邮件观察者 extends 登陆观察者 {
+    function do_update(Login $login){
+        //判断条件 发送邮件
+    }
+}
+
+
+class 日志观察者 extends 登陆观察者 {
+    function do_update(Login $login){
+        //判断条件 记录到日志;
+    }
+}
+
+//使用
+$login = new Login();
+new 邮件观察者 ($login);
+new 日志  观察者 ($login);
+</code></pre>
+
+<p>PHP有内置的SPL实现上述的观察者模式.</p>
 </div>
 
 
@@ -832,7 +960,7 @@ var duoshuoQuery = {short_name:"mzkmzk"};
 </div>
 	<footer id="footer" class="inner">
 
-Copyright &copy; 2015
+Copyright &copy; 2016
 
     K
 

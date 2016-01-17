@@ -312,6 +312,7 @@ var _hmt = _hmt || [];
 <li>建议所有<code>&lt;script&gt;</code>紧跟在<code>&lt;/body&gt;</code>前面.</li>
 <li>尽可能减少<code>&lt;script&gt;</code>个数,用<code>Grunt</code>或<code>Gulp</code>来管理和压缩你的JS.</li>
 <li><code>&lt;link&gt;</code>后不要跟任何内嵌脚本.因为<code>&lt;link&gt;</code>会等待后面的内嵌脚本先执行.即使内嵌脚本在<code>&lt;link&gt;</code>之后</li>
+<li>无阻塞模式加载JS(延迟加载):推荐工具<code>YUI3</code>,<code>LazyLoad</code>,<code>LABjs</code>(比较喜欢这个,体积小,而且可以管理依赖关系,可以设置加载JS的有序/无序)</li>
 </ol>
 
 </div>
@@ -385,7 +386,7 @@ var duoshuoQuery = {short_name:"mzkmzk"};
 </div>
 	<footer id="footer" class="inner">
 
-Copyright &copy; 2015
+Copyright &copy; 2016
 
     K
 

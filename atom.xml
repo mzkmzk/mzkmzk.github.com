@@ -4,7 +4,7 @@
   <title><![CDATA[K]]></title>
   <link href="http://mzkmzk.github.io/atom.xml" rel="self"/>
   <link href="http://mzkmzk.github.io/"/>
-  <updated>2015-11-23T23:33:32+08:00</updated>
+  <updated>2016-01-17T19:13:45+08:00</updated>
   <id>http://mzkmzk.github.io/</id>
   <author>
     <name><![CDATA[K]]></name>
@@ -12,6 +12,209 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Haplox_website]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/12/18/haplox_website/"/>
+    <updated>2015-12-18T00:00:00+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/12/18/haplox_website</id>
+    <content type="html"><![CDATA[<ol>
+<li><p>注销掉超时</p>
+
+<pre><code> /Users/maizhikun/Learning/apache_sites/html/wp-content/plugins/jetpack/class.json-api-endpoints.php
+
+ 3360 &amp; 3466
+</code></pre></li>
+</ol>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[DataTables 初探]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/12/11/dataTables_start/"/>
+    <updated>2015-12-11T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/12/11/dataTables_start</id>
+    <content type="html"><![CDATA[<!--more-->
+
+
+<p>官网<a href="https://www.datatables.net/examples/index">https://www.datatables.net/examples/index</a></p>
+
+<h1>方法累计</h1>
+
+<ol>
+<li><p>获取Table</p>
+
+<pre><code> var t = $('#example').DataTable();
+</code></pre></li>
+<li><p>增加行</p>
+
+<pre><code> t.row.add( [
+     第一列数据,
+     第二列数据,
+     ...
+ ] ).draw( false );      
+</code></pre></li>
+</ol>
+
+
+<p>3.增加编号栏</p>
+
+<pre><code>    var t = $('#example').DataTable( {
+        ...
+        "order": [[ 1, 'asc' ]]
+    } );
+</code></pre>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Linux 错误累计]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/12/07/linux_error/"/>
+    <updated>2015-12-07T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/12/07/linux_error</id>
+    <content type="html"><![CDATA[<!--more-->
+
+
+<h1>1. ssh一段时间不操作,会中断</h1>
+
+<p>错误提示</p>
+
+<pre><code>Write failed: Broken pipe
+</code></pre>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[前端未解决疑问]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/12/03/web_unknow/"/>
+    <updated>2015-12-03T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/12/03/web_unknow</id>
+    <content type="html"><![CDATA[<!--more-->
+
+
+<h1>1. CSS</h1>
+
+<ol>
+<li><p><code>user agent stylesheet</code>如何生成的?</p>
+
+<pre><code> ul, menu, dir {
+     display: block;
+     list-style-type: disc;
+     -webkit-margin-before: 1em;
+     -webkit-margin-after: 1em;
+     -webkit-margin-start: 0px;
+     -webkit-margin-end: 0px;
+     -webkit-padding-start: 40px;
+ } 
+</code></pre></li>
+</ol>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Lory轮播使用]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/12/03/server_lory_start/"/>
+    <updated>2015-12-03T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/12/03/server_lory_start</id>
+    <content type="html"><![CDATA[<!--more-->
+
+
+<h1>1 使用步骤</h1>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[WordPress常见错误]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/11/30/wordpress_error/"/>
+    <updated>2015-11-30T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/11/30/wordpress_error</id>
+    <content type="html"><![CDATA[<!--more-->
+
+
+<h1>1. 升级到WP4.3后无法添加媒体</h1>
+
+<p>在<code>wp-config</code>添加<code>define('CONCATENATE_SCRIPTS', false);</code></p>
+
+<p>参考链接<a href="http://weibo.com/p/230418142326bf60102w5l6">http://weibo.com/p/230418142326bf60102w5l6</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[服务器响应慢]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/11/30/server_intenet_low/"/>
+    <updated>2015-11-30T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/11/30/server_intenet_low</id>
+    <content type="html"><![CDATA[<!--more-->
+
+
+<p>问题:</p>
+
+<p>服务器上(公司内服务器).我Mac离路由器比较近,访问php网站速度很快.但其他同事用win访问很慢</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Satellite7 学习修改]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/11/30/satellite7_use/"/>
+    <updated>2015-11-30T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/11/30/satellite7_use</id>
+    <content type="html"><![CDATA[<!--more-->
+
+
+<h1>1. 搭建方式</h1>
+
+<p><a href="https://github.com/mzkmzk/Utils">https://github.com/mzkmzk/Utils</a>里主题分类有Satellite7主题文档和安装需要的部件.</p>
+
+<h1>2. 修改内容</h1>
+
+<ol>
+<li><p>Logo</p>
+
+<p> 进入wp管理员页面,左菜单中的<code>Qode</code>-><code>Header and Footer</code>,Qode中主要是系统一些文本,样式的简单控制.</p></li>
+<li><p>底部栏目要修改为4栏,在<code>footer.php</code>修改</p></li>
+</ol>
+
+
+<h1>3. 其中组件</h1>
+
+<ul>
+<li>parallax : 和 <code>section</code>作用相同.声明具体具体<code>parallax_section</code>前要用<code>parallax</code>包括</li>
+<li>SEPARATOR : 主要用于分割组件,占空间所用.</li>
+<li>EngLishNum_col_colNum,平摊分栏设置.</li>
+<li>tab : 分类<code>[tabs]</code> 下属<code>[tab id='1']</code>结束标签前后要带空格.</li>
+<li>element_fade_in : 动画效果时间</li>
+</ul>
+
+
+<h1>4. 修改轮播图</h1>
+
+<p>左边侧栏的<code>LayerSlider WP</code></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[CSS技术累积]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/11/26/css_experience/"/>
+    <updated>2015-11-26T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/11/26/css_experience</id>
+    <content type="html"><![CDATA[<!--more-->
+
+
+<h2>1 绝对定位情况下,如何超越父元素</h2>
+
+<p>例如</p>
+
+<p><img src="http://mzkmzk.github.io/images/QQ20151126-0.png" alt="被限制了右边距离范围" /></p>
+
+<p>要实现</p>
+
+<p><img src="http://mzkmzk.github.io/images/QQ20151126-1.png" alt="实现和效果" /></p>
+
+<p>只需要把对应的元素<code>right</code>-3000px即可.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Laravel 小错误]]></title>
@@ -316,7 +519,13 @@ Socket error 61: Connection refused (connecting to localhost:11300)
 <ol>
 <li><p>安装apache<code>sudo apt-get install apache2</code></p>
 
-<p> <code>localhost</code>有apache页面显示即可</p></li>
+<p> <code>localhost</code>有apache页面显示即可</p>
+
+<pre><code> //阿里云显示错误
+ Err http://mirrors.aliyun.com/ubuntu/ trusty-updates/main apache2-bin amd64 2.4.7-1ubuntu4.4
+ //即可
+ sudo apt-get update     
+</code></pre></li>
 <li><p>安装php<code>sudo apt-get install php5 libapache2-mod-php5</code></p>
 
 <pre><code> //重启apache 加载php模块
@@ -751,7 +960,7 @@ $factory = new Show_Evernote(
 <p><img src="http://mzkmzk.github.io/images/%E7%BB%84%E5%90%88%E6%A8%A1%E5%BC%8F.png" alt="组合模式" /></p>
 
 <pre><code>//创建一个妹子
-$妹子 = new 人();
+$妹子 = new 男();
 
 //添加洗脚男、捶背男
 $妹子-&gt;add_man(new 洗脚男);
@@ -808,7 +1017,7 @@ class 洗褪装饰 extends 类型男装饰{
     }
 }
 
-//创建捶背,获取舒服指数 - -嘻嘻.
+//创建捶背,能给予的舒服指数 - -嘻嘻.
 $人 = new 捶背装饰(new 男);
 $人-&gt;get_well(); // 10+30 = 40
 
@@ -838,7 +1047,135 @@ $人 =new 男类型(new 捶背(new 帅哥麦(new 男())));
 
 <p>例如当Model层写得很混乱,但是里面的方法还能用,那我们的Controller层应该列举一些清晰的访问方法来供View层访问.外观模式,强调的是清晰的访问接口.</p>
 
-<h2>5</h2>
+<h1>5 执行任务</h1>
+
+<h2>5.1 策略模式</h2>
+
+<p>给类添加功能.对象要显式的调用它.</p>
+
+<p>继续刚才的洗脚男和人的故事吧&hellip;你丫的爽完了要给钱吧?支付宝?微信?现金?</p>
+
+<p>这个付款方式有多种,实现方法不应该放在<code>人</code>类中,而是应该委托给别的类</p>
+
+<pre><code>abstract class 人 {
+
+    protectd $支付方式;
+
+    function set_支付方式(){...}
+
+    function 付款(金额){
+        return $支付方式-&gt;付款($金额);
+    }
+}
+
+abstract class 付款{
+    abstract function 付款($金额);
+}
+
+class 支付宝付款 extends 付款{
+
+    function 付款($金额){
+        return 外接支付宝付款流程($金额);
+    }
+}
+...
+
+//使用
+$男 =new 男();
+
+///爽爽爽
+...
+
+//结账
+$支付宝支付账单 = new 支付宝付款($金额);
+$人 = new 男();
+$人-&gt;set_支付方式(new 支付宝付款());
+$人-&gt;付款();
+</code></pre>
+
+<h2>5.2 观察者模式</h2>
+
+<p>当被观察者发生变化,观察者需要被通知.</p>
+
+<p>当数据发生变化,页面需要被通知.</p>
+
+<p>使用步骤:</p>
+
+<ol>
+<li>观察者加载到被观察者中.</li>
+<li>被观察者通知观察者.</li>
+</ol>
+
+
+<p>例如登陆类(被观察)状态改变,要出发邮件系统和日志系统(观察者)</p>
+
+<pre><code>interface 被观察者{
+    function attach(观察者);
+    function detatch(观察者);
+    function notify();
+}
+
+class Login implements 被观察者{
+    private $观察者;
+
+    function __construct(){
+        $this-&gt;观察者 = array();
+    }
+
+    function attach($观察者){
+        $this-&gt;观察者 = $观察者; 
+    }
+
+    function detach($观察者){
+        //删除某个观察者的操作;
+    }
+
+    function notify(){
+        foreach ($this-&gt;观察者 as $单个观察者){
+            $单个观察者-&gt;update($this);
+        }
+    }       
+}
+
+interface 观察者{
+    function update(被观察者);
+}
+
+abstract class Login_观察者 implements 观察者{
+    private $login;
+    function __construct (Login $login){
+        $this-&gt;login = $login;
+        $login-&gt;attach($this);
+    }
+
+    function update(观察者 $观察者){
+        if ($观察者 ===$this-&gt;login){
+            $this-&gt;do_update($观察者);
+        }
+    }
+    abstract function do_update(Login $login);
+}
+
+class 邮件观察者 extends 登陆观察者 {
+    function do_update(Login $login){
+        //判断条件 发送邮件
+    }
+}
+
+
+class 日志观察者 extends 登陆观察者 {
+    function do_update(Login $login){
+        //判断条件 记录到日志;
+    }
+}
+
+//使用
+$login = new Login();
+new 邮件观察者 ($login);
+new 日志  观察者 ($login);
+</code></pre>
+
+<p>PHP有内置的SPL实现上述的观察者模式.</p>
 ]]></content>
   </entry>
   
@@ -886,6 +1223,18 @@ $人 =new 男类型(new 捶背(new 帅哥麦(new 男())));
   var cases = [{"id":62,"created_at":"2015-11-10 04:38:46","updated_at":"2015-11-10 04:38:46","title":"4353","subhead":"534543","address":"534534","description":"","type":1,"logo":"","post_at":"0000-00-00 00:00:00","deleted_at":null}];
   //alert([{&amp;quot;id&amp;quot;:62,&amp;quot;created_at&amp;quot;:&amp;quot;2015-11-10 04:38:46&amp;quot;,&amp;quot;updated_at&amp;quot;:&amp;quot;2015-11-10 04:38:46&amp;quot;,&amp;quot;title&amp;quot;:&amp;quot;4353&amp;quot;,&amp;quot;subhead&amp;quot;:&amp;quot;534543&amp;quot;,&amp;quot;address&amp;quot;:&amp;quot;534534&amp;quot;,&amp;quot;description&amp;quot;:&amp;quot;&amp;quot;,&amp;quot;type&amp;quot;:1,&amp;quot;logo&amp;quot;:&amp;quot;&amp;quot;,&amp;quot;post_at&amp;quot;:&amp;quot;0000-00-00 00:00:00&amp;quot;,&amp;quot;deleted_at&amp;quot;:null}]);  
 </code></pre>
+
+<h1>4 Request替换/新增input</h1>
+
+<p>新增</p>
+
+<pre><code>$request-&gt;merge([key=&gt;value]);  
+</code></pre>
+
+<p>替换</p>
+
+<pre><code>$request-&gt;replace([key=&gt;value]);  
+</code></pre>
 ]]></content>
   </entry>
   
@@ -905,6 +1254,7 @@ $人 =new 男类型(new 捶背(new 帅哥麦(new 男())));
 <li>建议所有<code>&lt;script&gt;</code>紧跟在<code>&lt;/body&gt;</code>前面.</li>
 <li>尽可能减少<code>&lt;script&gt;</code>个数,用<code>Grunt</code>或<code>Gulp</code>来管理和压缩你的JS.</li>
 <li><code>&lt;link&gt;</code>后不要跟任何内嵌脚本.因为<code>&lt;link&gt;</code>会等待后面的内嵌脚本先执行.即使内嵌脚本在<code>&lt;link&gt;</code>之后</li>
+<li>无阻塞模式加载JS(延迟加载):推荐工具<code>YUI3</code>,<code>LazyLoad</code>,<code>LABjs</code>(比较喜欢这个,体积小,而且可以管理依赖关系,可以设置加载JS的有序/无序)</li>
 </ol>
 
 ]]></content>
@@ -929,2691 +1279,6 @@ $人 =new 男类型(new 捶背(new 帅哥麦(new 男())));
 <li>使用<code>EXPLAIN EXTENDED</code>,然后使用<code>SHOW WARNINGS</code>命令去获得查询执行计划机实际运行方式的相关信息.</li>
 </ol>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Laravel Seeders]]></title>
-    <link href="http://mzkmzk.github.io/blog/2015/11/03/laravel_seeders/"/>
-    <updated>2015-11-03T11:37:40+08:00</updated>
-    <id>http://mzkmzk.github.io/blog/2015/11/03/laravel_seeders</id>
-    <content type="html"><![CDATA[<!--more-->
-
-
-<h1>0 目的</h1>
-
-<p>建立好数据库以后,就是要建立测试数据看效果如何.</p>
-
-<h1>1 初体验</h1>
-
-<ol>
-<li><p>开始入门吧</p>
-
-<p> 首先我是基于<code>Eloquent</code>开发的.</p>
-
-<p> 1.1 添加ModelFactory</p>
-
-<p> <code>./database/factyories/ModelFactory.php</code>里定义模拟数据</p>
-
-<pre><code> $factory-&gt;define(App\Models\Institute_Model::class, function (Faker\Generator $faker) {
-     return [
-     'name' =&gt; $faker-&gt;name,
-     ];
- });     
-</code></pre>
-
-<p> <code>$faker</code>是一个模拟数据的框架,<a href="https://github.com/fzaninotto/Faker">更多玩法</a></p>
-
-<pre><code> //主要方法
- 'code' =&gt; $faker-&gt;swiftBicNumber, //FCDNOFCFHST
- 'name' =&gt; $faker-&gt;firstName, //Lynn
- 'type' =&gt; $faker-&gt;numberBetween(0,3),
-</code></pre>
-
-<p> 1.2 添加Seeder,配置Model</p>
-
-<pre><code> K:HapLab_Laravel maizhikun$ php artisan make:seeder User_Seeder
- Seeder created successfully.
-</code></pre>
-
-<p> 后会在<code>./database/seeds</code>创建一个User_Seeder文件</p>
-
-<pre><code> class User_Seeder extends Seeder
- {
-     public function run()
-     {
-         //
-     }
- }
-</code></pre>
-
-<p> 然后在<code>run()</code>方法里配置上填充的Model数据</p>
-
-<pre><code> public function run()
- {
-     factory(App\Models\User_Model::class, 50)-&gt;create();
- }
-</code></pre>
-
-<p> 1.3 执行Seeder</p>
-
-<pre><code> K:HapLab_Laravel maizhikun$ php artisan db:seed --class=User_Seeder
-</code></pre>
-
-<p> note :或在<code>./database/seeds/DatabaseSeeder</code>里配置多个Seeder,然后执行&#8217;php artisan db:seed&#8217;</p>
-
-<pre><code> class DatabaseSeeder extends Seeder
- {
-     public function run()
-     {
-         Model::unguard();
-
-         $this-&gt;call(User_Seeder::class);
-
-         Model::reguard();
-     }
- }   
-</code></pre></li>
-<li><p>玩一玩有外键的玩法</p>
-
-<p> 基本和入门玩法一样,不过需要遍历循环主表</p>
-
-<pre><code>   public function run()
- {
-     factory(App\Models\Institute_Model::class,21)-&gt;create()-&gt;each(function($institute){
-         $institute-&gt;patients()-&gt;save(factory(App\Models\User_Model::class)-&gt;make());
-     });
- }  
-</code></pre></li>
-<li><p>蜀黍,要是表中有多个外键怎么破.</p>
-
-<p> 这时候就要到ModelFactory里修改了</p>
-
-<pre><code> $factory-&gt;define(App\Models\Disease_Item_Type_Model::class, function (Faker\Generator $faker) {
-     //获取外键可能的值,这里代码可以诱惑,用单例模式,不然每条数据都会获取一遍外键可的值.
-     $id = get_all_id(new \App\Models\Disease_Type_Model());
-     return [
-         'disease_type_ID' =&gt; $faker-&gt;randomElement($id),
-         'code' =&gt; $faker-&gt;swiftBicNumber,
-         'name' =&gt; $faker-&gt;firstName,
-     ];
- });
-</code></pre>
-
-<p> 上述代码中,<code>get_all_id</code>是获取外键的所有可能的值的方法.代码如下</p>
-
-<pre><code> function get_all_id(\App\Models\Base_Model $base_Model){
-     $model_datas = $base_Model-&gt;all();
-     $model_id = array();
-     foreach($model_datas as $model_data){
-         array_push($model_id,$model_data['id']);
-     }
-     return $model_id;
- }   
-</code></pre></li>
-</ol>
-
-
-<h3>其他问题</h3>
-
-<ol>
-<li><p>创建图片数据时,无法写目录,原因可能是路径问题,直接设定绝对路径即可</p>
-
-<pre><code> //提示错误(Cannot write to directory "./Images"
- 'url' =&gt; $faker-&gt;image(  '/Images','635','420')
-
- //改为
- 'url' =&gt; $faker-&gt;image( base_path("public") . '/Images','635','420')
-</code></pre>
-
-<p> 虽然没报错,但是可能由于网络原因,增加极慢,弃之.</p></li>
-</ol>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Laravel Migrations]]></title>
-    <link href="http://mzkmzk.github.io/blog/2015/11/02/laravel_migrations/"/>
-    <updated>2015-11-02T11:37:40+08:00</updated>
-    <id>http://mzkmzk.github.io/blog/2015/11/02/laravel_migrations</id>
-    <content type="html"><![CDATA[<!--more-->
-
-
-<h1>0 目的</h1>
-
-<p>创建Migrations主要的功能是为了让团队能保住使用的数据库结构一致</p>
-
-<h1>1 开玩</h1>
-
-<ol>
-<li><p>相关的命令(<code>php artisan list</code>)</p>
-
-<pre><code> migrate:install     Create the migration repository
- migrate:refresh     Reset and re-run all migrations
- migrate:reset       Rollback all database migrations
- migrate:rollback    Rollback the last database migration
- migrate:status      Show the status of each migration
-</code></pre>
-
-<p> 创建数据库表(手动创建表不会作用.),因为输入命令后,会在verdor/composer/autoload_classmap.php里映射类.如下</p>
-
-<pre><code>     'Create_Disease_Type' =&gt; $baseDir . '/database/migrations/2015_11_02_153746_Create_Disease_Type.php',
-     'CreateInstitutes' =&gt; $baseDir . '/database/migrations/2015_11_02_143144_Create_Institutes.php',
-
- php artisan make:migration Create_Users --create=Users  
-</code></pre></li>
-<li><p>创建基础类,设置id、时间戳和软删除.</p>
-
-<p> 一开始自己创建了个<code>Base_Table</code>,不过那样也会创建一个表,所以直接把方法写在<code>Migration</code>里</p>
-
-<pre><code> /**
- * 增加基本属性
- * @param Blueprint $table
- */
- public function add_base_attribute(Blueprint $table)
- {
-     $table-&gt;increments('id');
-     //创建created_at和updated_at
-     $table-&gt;timestamps();
-     //创建deleted_at
-     $table-&gt;softDeletes();
-     return $table;
- }
-</code></pre></li>
-<li><p>创建外键,注意要先定义外键属性,再设定关系.</p>
-
-<pre><code> public function up()
- {
-     Schema::create('Institutes', function (Blueprint $table) {
-         $table-&gt;unsignedInteger('institute_ID');
-         $table-&gt;foreign('institute_ID')
-         -&gt;references('id')-&gt;on('institutes')
-         -&gt;onDelete('cascade');
-         $table = parent::add_base_attribute($table);
-     });
- }  
-</code></pre></li>
-<li><p>修改表</p>
-
-<pre><code> php artisan make:migration Add_Name_To_Samples_Table --table=Samples
-
- 注意,要是新增列,直接和创建表一样语法
-
- 但要修改已由列需要调用change()方法,例如:
-
-      $table-&gt;string('name', 50)-&gt;change();
-</code></pre>
-
-<p> 可能报不是dba的错误</p>
-
-<pre><code> [RuntimeException]
- Changing columns for table "Samples" requires Doctrine DBAL; install "doctrine/dbal".
-</code></pre>
-
-<p> 在composer.json中配置</p>
-
-<pre><code> "require": {
-     ...
-     "doctrine/dbal": "v2.4.2"
- },  
-</code></pre></li>
-</ol>
-
-
-<h1>错误处理</h1>
-
-<ol>
-<li>有依赖关系的表,要把外键的表先创建.</li>
-<li><p>外键的属性类型要一致,否则会报错<code>General error: 1215 Cannot add foreign key constraint</code></p>
-
-<pre><code> //主表
- $table-&gt;increments('id');
-
- //从表
- $table-&gt;unsignedInteger('institute_ID');
-     $table-&gt;foreign('institute_ID')
-     -&gt;references('id')-&gt;on('institutes')
-     -&gt;onDelete('cascade');      the
-</code></pre></li>
-<li><p><code>migrations</code>类名不过有下划线</p>
-
-<p> 报错</p>
-
-<pre><code> PHP Fatal error:  Class 'CreateInstitutes' not found in /Users/maizhikun/Learning/apache_sites/HapLab_Laravel/vendor/laravel/framework/src/Illuminate/Database/Migrations/Migrator.php on line 324
-
- [Symfony\Component\Debug\Exception\FatalErrorException]
- Class 'CreateInstitutes' not found
-
- //看了下报错地方的源代码.估计是下划线导致.   
- public function resolve($file)
- {
-     $file = implode('_', array_slice(explode('_', $file), 4));
-     $class = Str::studly($file);
-     return new $class;
- }
-</code></pre>
-
-<p> 后来又发现了错误.最后确定了是文件名(假如有下划线)会去掉下划线(从时间之后的下划线)然后找相对应的类名.</p></li>
-<li><p><code>php artisan migrate:refresh,reset,rollback</code>都无法执行</p>
-
-<p> 提示报错</p>
-
-<pre><code> [Symfony\Component\Debug\Exception\FatalErrorException]
-  Class 'Illuminate\Database\Migrations\Schema' not found 
-</code></pre>
-
-<p> 解决办法:</p>
-
-<p> 将<code>Illuminate\Support\Facades\Schema</code>复制到<code>Illuminate\Database\Schema</code></p>
-
-<p> 并且</p>
-
-<p> 修改命名空间和<code>use</code></p>
-
-<pre><code> namespace Illuminate\Database\Migrations;
-
- use Illuminate\Support\Facades\Facade;
-</code></pre>
-
-<p> <a href="http://stackoverflow.com/questions/28743546/laravel-5-migration-create-table-got-error-class-illuminate-database-schema-n">参考</a></p></li>
-</ol>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Laravel 测试]]></title>
-    <link href="http://mzkmzk.github.io/blog/2015/10/29/laravel-test/"/>
-    <updated>2015-10-29T11:37:40+08:00</updated>
-    <id>http://mzkmzk.github.io/blog/2015/10/29/laravel-test</id>
-    <content type="html"><![CDATA[<!--more-->
-
-
-<p>规则:</p>
-
-<ol>
-<li>测试的类名和文件名要以Test结尾.</li>
-<li>方法名要以test开头.</li>
-<li>文件名不能重复(即使在tests的不同子目录下).</li>
-<li><code>tests</code>目录下的<code>TestCase.php</code>并不能删除.然而<code>TestCase.php</code>文件中的<code>$baseurl</code>并没什么卵用.</li>
-<li><code>cd</code>到项目中phpunit就可以执行测试了..(对了 官网doucment的<code>php artisan make:test UserTest</code>是无法执行了,作者也表示会修改Document或在未来添加这个命令).</li>
-</ol>
-
-
-<p>来一发Demo.</p>
-
-<pre><code>&lt;?php
-
-use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
-
-class User_Test extends TestCase
-{
-    public function testQuery()
-    {
-        $this-&gt;post('/Controller/User_Controller/query', ['id' =&gt; '1'])
-            -&gt;seeJson([
-                'username' =&gt; "admin",
-            ]);
-    }
-}
-</code></pre>
-
-<p>一开始我是想在测试每个方法的时候输出一个语句表示测试到哪方法,但是没找到获取哪个类的哪个方法调用了测试方法的方法- -..所以只能输出在测试哪一个类..</p>
-
-<p>修改TestCase.php,增加了<code>error_log("正在测试: " . get_class($this));</code>这么一句,结果是执行了多少个测试方法就输出多少次类名&hellip;求教如何输出方法..</p>
-
-<pre><code>class TestCase extends Illuminate\Foundation\Testing\TestCase
-{
-    /**
-    * The base URL to use while testing the application.
-    *
-    * @var string
-    */
-    protected $baseUrl = 'http://localhost';
-
-    /**
-    * Creates the application.
-    *
-    * @return \Illuminate\Foundation\Application
-    */
-    public function createApplication()
-    {
-        $app = require __DIR__.'/../bootstrap/app.php';
-        error_log("正在测试: " . get_class($this));
-        $app-&gt;make(Illuminate\Contracts\Console\Kernel::class)-&gt;bootstrap();
-
-        return $app;
-    }
-}
-</code></pre>
-
-<p>额&hellip;对了重写setUp()方法会在每个测试方法之前都调用..和我们之前实现的效果一样.</p>
-
-<p>注意<code>__construct方法</code>也是每测试一个方法执行一次的.因为每个测试方法是不同的实例,如果想共享变量,请用<code>static</code>.</p>
-
-<h1>遇到的错误</h1>
-
-<ol>
-<li><p>程序报错</p>
-
-<p> 1) User_Test::test_Insert
- ErrorException: Invalid argument supplied for foreach()</p>
-
-<p> 原因是seeJson需要返回的是JSON,当返回无法JSON格式化的数据,大多数报这个错误.</p>
-
-<p> 但可恶的是这些错误不会报到报错文件!!所以建议实践操作一次.看错误内容是神马.</p>
-
-<p> 虽然在控制台会显示报错,但是偶尔会显示不全所有报错信息.</p>
-
-<p> <a href="http://stackoverflow.com/questions/31921451/laravel-5-1-phpunit-api-test-returns-always-invalid-argument-error-foreach">参考</a>    ,</p></li>
-<li><p>伪集合数组问题</p>
-
-<pre><code> //代码
-  $this-&gt;post('/Controller/User_Controller/insert', ['id' =&gt;  $this::$id , 'username' =&gt; $this::$id])
-     -&gt;seeJson([
-         'result' =&gt; "true",
-     ]);
-
- //报错
- 1) User_Test::test_Insert
- Unable to find JSON fragment ["result":"true"] within [{"result":true}].
- Failed asserting that false is true.
-</code></pre>
-
-<p> 第一眼看上去以为是前面是数组里的属性,而后面是数组里对象的属性的原因&hellip;.万万没想到..是因为true前后的双引号的原因..在测试类中去掉就好了</p></li>
-<li><p>数组需要包含所有属性问题</p>
-
-<p> 问题是我需要检验一个对象中的部分属性,好像实现不了.我的代码</p>
-
-<pre><code>  public function test_Query()
- {
-     $this-&gt;post('/Controller/User_Controller/query', ['id' =&gt; $this::$id])
-     -&gt;seeJson([
-         'data'   =&gt; [ 0 =&gt;['username' =&gt;  $this::$id.'_update']],
-     ]);
- }
-
- //测试结果
- 1) User_Test::test_Query
- Unable to find JSON fragment ["data":[{"username":"1137598_update"}]] within [{"current_page":1,"data":[{"created_at":"2015-10-29 18:57:13","deleted_at":"0000-00-00 00:00:00","email":"","id":1137598,"last_login_at":"0000-00-00 00:00:00","login_times":0,"name":"","phone":"","privilege":1,"status":0,"updated_at":"2015-10-29 18:57:13","username":"1137598_update"}],"from":1,"last_page":1,"next_page_url":null,"per_page":20,"prev_page_url":null,"to":1,"total":1}].
- Failed asserting that false is true.    
-</code></pre></li>
-</ol>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[疯狂Html+CSS+JS 中HTML5总结]]></title>
-    <link href="http://mzkmzk.github.io/blog/2015/10/24/amazeing-html5/"/>
-    <updated>2015-10-24T11:37:40+08:00</updated>
-    <id>http://mzkmzk.github.io/blog/2015/10/24/amazeing-html5</id>
-    <content type="html"><![CDATA[<!--more-->
-
-
-<h1>0总结</h1>
-
-<h1>1. HTML5简介</h1>
-
-<p>HTML:Hyper Text Markup Language.(How To Make Love - -.)</p>
-
-<p>标记H5.</p>
-
-<pre><code>&lt;!DOCTYPE html&gt;
-</code></pre>
-
-<p>作者的愤怒.</p>
-
-<pre><code>不要再&lt;html&gt;和&lt;head&gt;、&lt;/head&gt;和&lt;body&gt;还有&lt;/body&gt;和&lt;/html&gt;插任何内容.      
-</code></pre>
-
-<p>验证HTML是否符合规范<a href="http://validator.w3.org/">http://validator.w3.org/</a>.</p>
-
-<h1>2. HTML5常用标签和属性.</h1>
-
-<h2>2.1 HTML常用属性</h2>
-
-<h3>2.1.1文本格式化元素</h3>
-
-<ol>
-<li><code>&lt;i&gt;:</code> 斜体.</li>
-<li><code>&lt;em&gt;:</code> 强调文本.</li>
-<li><code>&lt;strong&gt;|&lt;b&gt;:</code> 粗体.</li>
-<li><code>&lt;small&gt;:</code> 小号字体.</li>
-<li><code>&lt;sup&gt;:</code> 上标</li>
-<li><code>&lt;sub&gt;:</code> 下标</li>
-<li><code>&lt;bdo&gt;:</code> 文本方向 设定属性dir为ltr/rtl(反着来)</li>
-</ol>
-
-
-<h3>2.1.2 语义相关元素</h3>
-
-<ol>
-<li><code>&lt;abbr&gt;:</code> 表示缩写,可定义title,表示全写,鼠标移上去会显示一次title.</li>
-<li><code>&lt;address&gt;:</code> 表示地址,会斜体显示.</li>
-<li><code>&lt;blockquote&gt;:</code> 表示定义引用很长的文本,会缩进显示,属性有cite指定该文应用的url.</li>
-<li><code>&lt;q&gt;:</code> 定义短的引用文本.</li>
-<li><code>&lt;cite&gt;:</code> 表示作品(书,电影,歌曲).</li>
-<li><code>&lt;code&gt;:</code> 表示代码.</li>
-<li><code>&lt;dfn&gt;:</code> 定义专业术语,一般会粗体/斜体显示.</li>
-<li><code>&lt;del&gt;</code>: 表示删除的文本,一般会中画线显示.</li>
-<li><p><code>&lt;ins&gt;:</code> 定义文档插入的文本,一般会下画线显示.</p>
-
-<p> del和ins结合使用有文档修订的效果,这两个属性都有cite定义一个url解释删除/插入的原因,datetime表示删除/插入的时间.</p></li>
-<li><p><code>&lt;pre&gt;:</code> 表示元素内已经预格式化了,该标签内的空格 回车 tab和其他格式的字符都会比保留下来.</p></li>
-<li><code>&lt;samp&gt;:</code> 用于定义示范文本内容.</li>
-<li><code>&lt;var&gt;:</code> 定义变量,一般斜体显示.</li>
-</ol>
-
-
-<h3>2.1.3 超链接和描点</h3>
-
-<p>a标签属性</p>
-
-<ol>
-<li><p>href: 关联资源.</p>
-
-<p> 语法规则<code>scheme://host.domain:port/path/filename</code></p>
-
-<p> scheme(因特网服务类型): 常见有https http file ftp.还有</p>
-
-<pre><code> 1. news: 访问新闻组上的文件.
-
- 2. telnet: 访问Telnet连接.
-
- 3. gopher: 访问远程Gopher服务器上的文件.
-
- 4. mailto: 发送邮件
-</code></pre>
-
-<p> host: 指定此域中的主机,HTTP默认主机为www.</p></li>
-<li><p>target: 如何显示关联资源</p>
-
-<p> 2.1 _self: 自身.</p>
-
-<p> 2.2 _blank: 新窗口.</p>
-
-<p> 2.3 _top: 顶层框架 一般用于含有iframe等标签的时候使用.</p>
-
-<p> 2.4 _parent: 父层显示.</p></li>
-<li><p>media: 指定媒体类型(HTML5新增).</p></li>
-<li>name: 命名描点.<code>&lt;a name="K"&gt;</code>.</li>
-</ol>
-
-
-<h3>2.1.4 列表相关元素</h3>
-
-<ol>
-<li><code>&lt;ul&gt;:</code> 无序列表.</li>
-<li><p><code>&lt;ol&gt;:</code> 有序列表.</p>
-
-<p> 2.1 start: 起始数字 1/A等.</p>
-
-<p> 2.2 reversed: 反着排序.</p></li>
-<li><p><code>&lt;li&gt;:</code> 列表项.</p></li>
-<li><code>&lt;dl&gt;:</code> 定义列表.</li>
-<li><code>&lt;dt&gt;:</code> 标题列表项.</li>
-<li><code>&lt;dd&gt;:</code> 定义普通列表项.</li>
-</ol>
-
-
-<h3>2.1.5 图像相关属性</h3>
-
-<p>img新增usemap属性.</p>
-
-<ol>
-<li><code>&lt;map&gt;:</code> 定义图片映射,包含多个<code>&lt;area&gt;</code>.</li>
-<li><p><code>&lt;area&gt;:</code> 定义图片映射区域.特殊属性有</p>
-
-<p> 2.1 shape: 默认为rect 还有circle和ploy属性.</p>
-
-<p> 2.2 coords: 多个坐标,确定区域位置.</p>
-
-<p> 2.3 href: 链接资源.</p>
-
-<p> 2.4 alt: 提供图片信息.</p>
-
-<p> 2.5 target.</p>
-
-<p> 2.6 media.</p></li>
-</ol>
-
-
-<p>例子:</p>
-
-<pre><code>&lt;img usemap="#test" .../&gt;
-
-&lt;map name="test" id="test"&gt;
-    &lt;area shape="cicle" coords="57,55,25" href...&gt;
-    &lt;area shape="poloy" coords="188,28,185,50,200,74,244,72,246,51 ..."&gt;
-&lt;/map&gt;  
-</code></pre>
-
-<h3>2.1.6 表格相关属性</h3>
-
-<ol>
-<li><code>&lt;caption&gt;:</code> 定义表格标题,智能包含文本 图片 超链接 文本格式元素 和表单控件.</li>
-<li><code>&lt;colgroup&gt;:</code> 此标签智能包含在<code>&lt;table&gt;/&lt;colgroup&gt;</code>中,用来包含多个<code>&lt;col&gt;</code></li>
-<li><code>&lt;col&gt;</code>: 用于指定一列或多列的样式.span属性控制控制几列.</li>
-<li><code>&lt;thead&gt;:</code> 定义表格头.</li>
-<li><code>&lt;tbody&gt;:</code> 定义表格体智能直接包含<code>&lt;tr&gt;</code>.</li>
-<li><code>&lt;tfoot&gt;:</code> 定义表格腿.</li>
-<li><code>&lt;tr&gt;</code>: 一行</li>
-<li><code>&lt;th&gt;:</code> 定义页眉单元格.</li>
-<li><p><code>&lt;td&gt;:</code>单元格,属性有:</p>
-
-<p> 9.1 colspan: 单元格夸几列</p>
-
-<p> 9.2 rowspan: 单元格夸几行</p></li>
-</ol>
-
-
-<p>例子</p>
-
-<pre><code>&lt;!-- 书名列宽为160px 作者和价格列宽度为100px --&gt;
-&lt;table&gt;
-    &lt;caption&gt;标题&lt;/caption&gt;
-    &lt;colgroup&gt;
-        &lt;col style="width :160px"&gt;
-        &lt;col span="2" style="width:100px"&gt;
-    &lt;/colgroup&gt; 
-    &lt;thead&gt;
-        &lt;tr&gt;
-            &lt;th&gt;书名&lt;/th&gt;
-            &lt;th&gt;作者&lt;/th&gt;
-            &lt;th&gt;价格&lt;/th&gt;
-        &lt;/tr&gt;
-    &lt;/thead&gt;
-    &lt;tr&gt;
-        &lt;td&gt;程序员把妹&lt;td/&gt;
-        &lt;td&gt;K&lt;td/&gt;
-        &lt;td&gt;1024&lt;td/&gt;
-    &lt;/tr&gt;
-    ...
-    &lt;tfoot&gt;
-        &lt;tr&gt;
-            &lt;td&gt;现总计: 2本图书&lt;/td&gt;
-        &lt;/tr&gt;
-    &lt;/tfoot&gt;
-</code></pre>
-
-<h3>2.1.7 HTML5新增通用属性</h3>
-
-<ol>
-<li>contentEditable属性: 此值为true,组件可随意编辑.可继承.</li>
-<li>isContetnEditable属性: 若处于可编辑状态,返回true.</li>
-<li>designMode: 默认为off 设为on时,真个页面都可编辑(和在body设置contentEditable为true类似).</li>
-<li>spellcheck: 当true时,用户输入的内容会进行单词拼接检查.</li>
-<li>hidden: true/false,其实不建议用,样式还是给CSS控制吧.</li>
-</ol>
-
-
-<h2>2.2 HTML5 新增常用元素</h2>
-
-<h3>2.2.1 文档结构元素</h3>
-
-<p>此类元素其实只负责分块,其实无实际作用.只是友好提示程序员这是一块内容.</p>
-
-<ol>
-<li><code>&lt;article&gt;:</code> 用于展示一个整体内容,一篇文章 一条回复等.</li>
-<li><code>&lt;nav&gt;:</code> 导航栏(边导航,页面导,底部导)标签.</li>
-<li><code>&lt;header&gt;:</code> 页面顶部.</li>
-<li><code>&lt;hgroup&gt;:</code> 定义多个标题时</li>
-<li><code>&lt;section&gt;:</code> 内容分块.可设置cite属性.</li>
-<li><code>&lt;aside&gt;:</code> 专门用于定义当前页面的附属信息,一般用作侧边栏.一般放在<code>&lt;footer&gt;</code>之前.</li>
-<li><code>&lt;figure&gt;:</code> 用于一块图片区域,可包含一个<code>&lt;figcaption&gt;</code></li>
-<li><code>&lt;figcaption&gt;:</code> 作为图片区域的标题.</li>
-<li><code>&lt;footer&gt;</code>: 底部.</li>
-</ol>
-
-
-<h3>2.2.2 语义相关元素</h3>
-
-<ol>
-<li><code>&lt;mark&gt;:</code> 重点关注内容</li>
-<li><code>&lt;time&gt;:</code> 指定时间,里面应该包含一个<code>datetime</code>属性指定符合<code>yyyy-MM-ddTHH:mm</code>格式的时间</li>
-<li><code>&lt;details&gt;:</code>  用于展示某个主题的时间,可包含<code>&lt;summary&gt;</code>使用.</li>
-<li><code>&lt;summary&gt;:</code> 作为details的摘要元素.</li>
-</ol>
-
-
-<h3>2.2.3 特殊功能的元素</h3>
-
-<ol>
-<li><p><code>&lt;meter&gt;:</code>用于表示一个已知最大值和最小值的计数仪表,属性皆可浮点</p>
-
-<p> 1.1 value: 当前值.</p>
-
-<p> 1.2 min: 最小值.</p>
-
-<p> 1.3 max: 最大值.</p>
-
-<p> 1.4 low: 指定范围的最小值.</p>
-
-<p> 1.5 high: 指定范围的最小值.</p>
-
-<p> 1.6 optimum: 指定有效范围的最佳值,若大于high,表示当前值越大越好,若小于low,则表示当前值越少越好.</p></li>
-<li><p><code>&lt;progress&gt;:</code> 用于表示一个进度条.</p>
-
-<p> 2.1 max: 进度条完成时的值.</p>
-
-<p> 2.2 value: 当前值.</p></li>
-</ol>
-
-
-<h2>2.3 HTML5 头部和元数据</h2>
-
-<ol>
-<li><p><code>&lt;base&gt;:</code> 相对地址取的是此base的href,而非url.绝好放在head的头元素.</p>
-
-<p> 1.1 href: 指定相对地址</p>
-
-<p> 1.2 target: 默认打开链接方式</p></li>
-<li><p><code>&lt;meta&gt;:</code> 指定页面元信息.</p>
-
-<p> 2.1 name: 可为:</p>
-
-<pre><code> 2.1.1 author: 作者        
- 2.1.2 description: 简述 
- 2.1.3 keywords: 关键词 
- 2.1.4 generator: 说明生成工具,如`Microsoft FrontPage 4.0`等
-     &lt;meta name=”generator” Content=”PCDATA|FrontPage|”&gt;
-
- 2.1.5 revised: 定义网页版本
-     &lt;meta name=”revised” content=”David, 2008/8/8/” /&gt;
-
- 2.1.6 robots: 给机器人(搜索引擎)做登陆参考,可同时设多个属性逗号分隔
-
-     2.1.6.1 all：默认,文件将被检索，且页面上的链接可以被查询(和 "index,follow"作用一样) 
-     2.1.6.2 none：文件将不被检索，且页面上的链接不可以被查询(和 “noindex, no follow” 起相同作用)
-     2.1.6.3 index：文件将被检索；（让robot/spider登录）
-     2.1.6.4 follow：页面上的链接可以被查询；
-     2.1.6.5 noindex：文件将不被检索
-     2.1.6.6 nofollow：页面上的链接不可以被查询
-
- 2.1.7 others: - -....   
- 2.1.8 viewport: 优化移动浏览器显示,。如果不是响应式网站，不要使用initial-scale或者禁用缩放。大部分4.7-5寸设备的viewport宽设为360px；5.5寸设备设为400px；iphone6设为375px；ipone6 plus设为414px。
-
-     &lt;meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no"/&gt;
-     &lt;!-- `width=device-width` 会导致 iPhone 5 添加到主屏后以 WebApp 全屏模式打开页面时出现黑边  --&gt;
-
-     width：宽度（数值 / device-width）（范围从200 到10,000，默认为980 像素）
-     height：高度（数值 / device-height）（范围从223 到10,000）
-     initial-scale：初始的缩放比例 （范围从&gt;0 到10）
-     minimum-scale：允许用户缩放到的最小比例
-     maximum-scale：允许用户缩放到的最大比例
-     user-scalable：用户是否可以手动缩 (no,yes)
-     minimal-ui：可以在页面加载时最小化上下状态栏。（已弃用）
-</code></pre>
-
-<p> 2.2 http-equiv 属性主要有</p>
-
-<pre><code> 2.2.1 expries: 指定网页过期时间,过期必须冲浏览器重新下载
- 2.2.2 pragma: 值可为no-cache,不适用缓存
- 2.2.3 refresh: 指定多长时间自动刷新页面
- 2.2.3 set-cookie: 设定Cookie
- 2.2.4 content-type: 指定网页内容类型和字符集.
-
-     &lt;meta http-equiv="Content-Type" content="text/html charset=utf-8"&gt;
-</code></pre>
-
-<p> 2.3 scheme 指定用来翻译属性值的方案</p></li>
-</ol>
-
-
-<p><code>&lt;meta&gt;</code>参考链接<a href="http://segmentfault.com/a/1190000002407912">http://segmentfault.com/a/1190000002407912</a>非常详细!、<a href="http://www.hujuntao.com/web/html/html-meta-tag.html">http://www.hujuntao.com/web/html/html-meta-tag.html</a></p>
-
-<h2>2.4 HTML5 新增拖放API</h2>
-
-<h3>2.4.1 拖放事件</h3>
-
-<p>不知道你有没有发现&hellip;网页的img和a(设置了href)的标签都是可以拖动的.对于其他标签,只要设定<code>draggable="true"</code>即可拖放.标签中含有相关的触发事件</p>
-
-<pre><code>1. ondragstart: 开始拖动触发
-2. ondrag: 拖动过程不断触发
-3. ondrageend: 拖动结束触发
-4. ondragenter: 当拖动的元素进入本元素后触发的时间
-5. ondragover: 当拖动的元素在本元素范围内将不断触发
-6. ondragleave: 拖动的元素离开本元素时触发
-7. ondrop: 其他元素放到本元素时触发该时间
-
-//实现拖动一个div随意放
-
-//取消默认事件 每个浏览器不一样.
-document.ondragover =function(evt){
-    //取消默认事件
-    evt.preventDefault();
-}
-
-document.ondrop = function(evt){
-    //取消默认事件
-    evt.preventDefault();
-    source.style.position = "absolute";
-    source.style.left = evt.pageX+"px";
-    source.style.top = evt.pageY +"px";
-
-
-}
-</code></pre>
-
-<h3>2.4.2 DataTransfer对象</h3>
-
-<p>拖放事件中的参数中有一个dataTransfer属性.该属性的方法有</p>
-
-<ol>
-<li>dropEffect: 设置或返回拖放目标上允许的拖放行为,属性值有<code>none(拖动元素不能放到本元素中)</code>,<code>copy</code>,<code>link</code>,<code>move</code>之一.且行为需要是effectAllowed中允许的行为</li>
-<li>effectAllowed: 设置或返回被拖动元素允许发生的拖动行为,属性有<code>none(不允许拖动本元素)</code>,<code>copy</code>,<code>link</code>,<code>move</code>,<code>copyLink</code>,还有<code>copyMove</code>,<code>linkMove</code>,<code>all</code>和<code>uninitalized</code></li>
-<li>items: 返回DataTransferItems对象,该对象代表了拖放数据.</li>
-<li><p>setDragImage(element,x,y): element代表指定的元素,x表示图标与鼠标的水平距离,y代表纵向距离.</p>
-
-<pre><code> //eg
- var K_Icon =document.createElement("img");
- K_Icon.src ="K.gif";
-
- 被拖动元素.ondragestart =function(evt) {
-     evt.dataTransfer.setDragImage(K_Icon,0,0);
- }
-</code></pre></li>
-<li><p>addElement(element): 添加自定义图标.</p></li>
-<li>types: 该属性返回一个DOMStringList对象,包含了dataTransfet中所有数据类型</li>
-<li>getData(format): 获取DataTransfer对象中的format格式的数据.</li>
-<li>setData(format,data): 设置DataTransfer对象中格式为format的data数据.</li>
-<li>clearData([format]): 清楚指定format格式数据,省略则全部删除.     <br/>
-一般监听ondragstart来把数据放入DataTransfer中,监听ondrop取数据.</li>
-</ol>
-
-
-<p>下面代码代表页面元素拖入收藏夹的部分功能实现.</p>
-
-<pre><code>&lt;div draggable="true" ondragstart="K(event)";&gt;...
-&lt;div id="Mark_Div" draggable="true" ondrop="mark(evt)" ;&gt;...
-
-var K = function(evt) {
-    evt.dataTransfer.setData("text/plain","&lt;item&gt;"+evt.target.innerHTML);
-}
-
-var mark = function(evt){
-    var text =evt.dataTransfer.getData("text/plain");
-    //如果以&lt;item&gt;开头
-    if (text.indexOf("&lt;item&gt;") == 0 ){
-        var New_Div = document.createElement("div");
-        New_Div.id =new Data().getUTCMilliseconds();
-        New_Div.innerHTML = text.substring(6);
-        document.getElementById("Mark_Div").appendChild(New_Div);
-    }
-}
-</code></pre>
-
-<h1>3 HTML5表单</h1>
-
-<p>这里列举部分form表单属性</p>
-
-<ol>
-<li><p>enctype: 指定表单内容进行编码时候的字符集.</p>
-
-<p> 1.1 application/x-www-form-urlencoded: 默认</p>
-
-<p> 1.2 multipart/form-data: 二进制流 一般上传文件时使用</p>
-
-<p> 1.3 text/plain 当表单的action为<code>mailto:URL</code> 发送邮件时,采用这种方式可能比较方便</p></li>
-<li><p>target: 表单也可以设置target.</p></li>
-</ol>
-
-
-<p>表单控件设置了disabled时,不提交此参数.</p>
-
-<p>表单控件有tabIndex属性,值为1,2,3&hellip;,按Tab按此顺序跳动.</p>
-
-<h2>3.1 form表单的一些标签</h2>
-
-<ol>
-<li><p><code>&lt;label...&gt;</code>: 和控件关联.</p>
-
-<p> 1.1 隐式调用: 使用for属性关联控件的ID</p>
-
-<p> 1.2 显式调用: 用<code>&lt;label&gt;框住表单控件&lt;/label&gt;</code></p></li>
-<li><p><code>&lt;select&gt;</code>: 下拉列表/列表框</p>
-
-<p> 2.1 multiple: 指定可多选.</p>
-
-<p> 2.2 size: 列表框可以显示几条数据.</p>
-
-<p> 2.3 <code>&lt;optgroup&gt;:</code> 指定选项组, 必须定义lable属性.只能包含<code>&lt;option&gt;</code></p></li>
-</ol>
-
-
-<h2>3.2 HTML5新增的表单控件玩法</h2>
-
-<ol>
-<li>form: 该属性指定为form表单的id,及时该控件不在form表单内,也会随form提交.</li>
-<li>formaction: 一个表单若要两个提交按钮要提交到不同的地方,在提交控件中设置不同的formaction即可.</li>
-<li>formxxxx属性: 和formaction类似,为提交按钮设置不同的<code>formenctype</code>,<code>formmethod</code>,<code>formtarget</code>等.</li>
-<li>autofocus: 当打开一个页面时,这个控件自动获取焦点.</li>
-<li>placeholder: 提示功能,在文本框内显示提示信息,开始输入时消失.</li>
-<li>list: list指定<code>&lt;datalist&gt;</code>标签中的ID,<code>&lt;datalist&gt;</code>的使用方法和select完全一样,当文本控件获取焦点时,这个<code>&lt;datalist&gt;</code>定义的下拉列表显示在文本框下.</li>
-<li>autocomplete: 与list结合使用,当此属性为on,list属性起作用,为off,list属性失效.然而这并没有什么卵用.</li>
-</ol>
-
-
-<h3>3.2.1 input标签的type的新选项值</h3>
-
-<ol>
-<li>color: 生成一个颜色选择器.</li>
-<li>date: 生成日期选择器.</li>
-<li>time: 生成一个时间选择器.</li>
-<li>datetime: 让生成一个UTC日期、时间选择器.</li>
-<li>datetime-local: 生成一个当地的日期、时间选择器.</li>
-<li>week: 生成一个第几周选择器.</li>
-<li>month: 生成一个月份选择器.</li>
-<li>email: 生成一个校验邮件的控件,当type=&ldquo;email&#8221;时,可指定multiple属性,表示允许输入多个email.</li>
-<li>tel: 输入电话的文本框,并不怎么校验.</li>
-<li>url: 校验url的文本框.</li>
-<li>number: 只让输入数字的文本框.</li>
-<li>range: 进度条,当type=range时候,可值得属性有<code>min</code>,<code>max</code>,<code>step(指定拖动条步长)</code>.</li>
-<li>search: 输入搜索关键字,其实也并没什么卵用.</li>
-</ol>
-
-
-<h3>3.2.2 HTML5新增表单控件</h3>
-
-<ol>
-<li><code>&lt;output&gt;</code>: 输出变量,但不会随表单提交.</li>
-</ol>
-
-
-<h3>3.2.3 HTML5增强文件上传</h3>
-
-<p>当<code>type="file"</code>时,可指定一下属性</p>
-
-<ol>
-<li>accept: 指定一个/多个允许的文件上传MIME类型,多个类型用<code>,</code>分割.例如<code>accept="image/*"</code>指定智能上传图片.<a href="http://www.w3school.com.cn/media/media_mimeref.asp">更多格式参考</a></li>
-<li>multiple: 允许用户提交多个文件.</li>
-</ol>
-
-
-<p>JS也可以访问上传文件夹的具体属性.</p>
-
-<ol>
-<li>name: 返回File对象的文件名.</li>
-<li>type: 文本的类型.</li>
-<li>size: 文件的大小.</li>
-</ol>
-
-
-<h4>3.2.3.1 新增的FileReader对象读取文件内容</h4>
-
-<p>FileReader对象提供以下方法.</p>
-
-<ol>
-<li>readAsText(file,encoding): 以文本格式读取文件.根据ID选择到file,encoding字符编码默认utf-8.</li>
-<li>readAsBinaryString(file): 二进制读取文件,通过这种方式可以用Ajax把数据上传到服务器.</li>
-<li>readAsDataUrl(file): 以DataURL方式读取文件,这种方式也可以读取二进制,但是这种方式会采用base64方式把文件内容编码成DataURL格式字符串.</li>
-<li>abort(): 停止读取.</li>
-<li>loaded属性: 当前FileReader已读取文件的大小.</li>
-<li>result属性: 当FileReader读取完文件后,result包含读取文件的内容.</li>
-</ol>
-
-
-<p>但read*的所有方法都是异步的,进行时会不断触发函数.</p>
-
-<ol>
-<li>onloadstart: FileReader开始读取数据触发.</li>
-<li>onprogress: FileReader读取数据时不断触发.</li>
-<li>onload: FileReader成功读取后触发.</li>
-<li>onloadend: FileReader读取完成触发,无论成功还是失败都会触发.</li>
-<li>onerror: FileReader读取失败触发.</li>
-</ol>
-
-
-<p>例子:浏览器读取文件进度条,注意该方法只不过是浏览器读取文件的进度,而不是上传到服务器的进度.</p>
-
-<pre><code>&lt;input id="file_1" type="file" /&gt;
-&lt;progress id="pro" value="0"&gt;&lt;/progress&gt;
-...
-var Read_Binary =function(){
-    var reader = new FileReader();
-    var pro =document.getLementById("pro");
-    pro.max = document.getElementById("file_1").files[0].size;
-    reader.onprogress =function (evt){
-        pro.value =evt.loaded;
-    }
-}
-</code></pre>
-
-<h3>3.2.4 HTML5 新增客户端校验.</h3>
-
-<p>表单控件可增加以下属性完成校验</p>
-
-<ol>
-<li>required: 指定控件必须填写.</li>
-<li>pattern: 指定符合正则表达式.</li>
-<li>min、max、step: 只对数值类型,日期类型或者<code>&lt;input ../&gt;</code>起作用.,指定数值必须在min~max,并符合step步长.</li>
-</ol>
-
-
-<p>在JS中form对象多了checkValidity()方法,当form表单所有HTML5客户端验证通过返回true.</p>
-
-<p>除此之外,所有表单和表单控件都有validity(ValidityState对象)属性,用于判断表单内所以控件/单个表单验证的情况.返回true/false.</p>
-
-<p>所有表单/表单控件都有setCustomValidity(&ldquo;错误提示&rdquo;)方法,当校验没通过时,自定义的错误提示文字.</p>
-
-<p>关闭表单校验.</p>
-
-<ol>
-<li>当form表单属性包含novalidate属性,不进行校验.</li>
-<li>当提交按钮设置了 formnovalidate属性,不进行校验.</li>
-</ol>
-
-
-<h1>4 HTML5 绘图支持</h1>
-
-<p><code>&lt;canvas&gt;</code>提供了一个画布.JS进行绘图,绘图步骤</p>
-
-<ol>
-<li>获取<code>&lt;canvas&gt;</code>DOM对象.</li>
-<li><p>调用Canvas对象的getContext()方法,返回一个CanvasRenderingContext2D对象.</p>
-
-<pre><code> var ctx = Canvas对象.getContext('2d');
-</code></pre></li>
-<li><p>调用CanvasRenderingContext2D对象的方法进行绘图.</p></li>
-</ol>
-
-
-<p>这部分API非常多,用法这里不主要阐述,后面有时间会单独总结.总的来说,当你的网页功能有绘图的话,这会非常重要.</p>
-
-<p>这里只抛砖引玉一下..会在网页内出现颜色为#f00的长方形.</p>
-
-<pre><code>&lt;canvas id="K" style="width:300px ; height:180px"&gt;
-
-...
-
-var K_Canvas = document.getElementById("K");
-var K_CTX = K_Canvas.getContext("2d");
-//设置填充颜色
-K_CTX.fillStyle= "#f00";
-//绘制图形
-K_CTX.fillRect(30,40,80,100);
-</code></pre>
-
-<h1>5 HTML5 多媒体支持</h1>
-
-<p>简单使用</p>
-
-<pre><code>&lt;!-- 音频 --&gt;
-&lt;audio src="demo.ogg" controls&gt;
-    你的浏览器不支持audio
-&lt;/audio&gt;
-
-&lt;!--视频--&gt;
-&lt;video src="movie.webm" controls&gt;
-    你的浏览器不支持video元素
-&lt;/video&gt;
-</code></pre>
-
-<p>audio推荐使用OGG Vovis格式</p>
-
-<p>video推荐使用VP8格式.</p>
-
-<h2>5.1 audio和video支持的属性</h2>
-
-<ol>
-<li>src: 地址.</li>
-<li>autoplay: 指定了属性装载完成后是否自动播放</li>
-<li>controls: 指定了属性就有控制条.</li>
-<li>loop: 指定了该属性循环播放.</li>
-<li><p>preload 是否预加载,指定了autoplay,此属性无作用.</p>
-
-<p> 5.1 auto: 预加载音频 视频</p>
-
-<p> 5.2 metadata: 只预加载音频 视频元数据.既媒体字节数,第一帧,播放列表,持续时间.</p>
-
-<p> 5.3 none 不预加载.</p></li>
-<li><p>poster: 只对video有效,指定一个图片url,开始播放前,显示这张图片.</p></li>
-</ol>
-
-
-<h2>5.2 audio和video可包含标签</h2>
-
-<ol>
-<li><p><code>&lt;source ../&gt;</code> 浏览器会根据自己情况选择格式.</p>
-
-<p> 1.1 src: 地址</p>
-
-<p> 1.2 type: 播放格式.</p></li>
-</ol>
-
-
-<h2>5.3 JS控制媒体播放</h2>
-
-<p>DOM获得对象分别是<code>HTMLAudioElement</code>或<code>HTMLVideoElement</code>,支持的方法有.</p>
-
-<ol>
-<li>play(): 播放.</li>
-<li>pause(): 暂停</li>
-<li>load(): 重新装载.</li>
-<li><p>canPlayType(type): 判断能否播放type格式的资源,type可指定MIME字符串/codecs属性,多个格式用<code>,</code>分割,返回值有</p>
-
-<p> 4.1 probably: 该浏览器支持type格式.</p>
-
-<p> 4.2 maybe: 可能支持- -..</p>
-
-<p> 4.3 空字符串: 不支持.</p></li>
-</ol>
-
-
-<p>在这里写一个播放多个音乐的JS函数</p>
-
-<pre><code>var musics =[
-    "K.ogg",
-    "404_K.ogg",
-];
-var index = 0;
-window.onload =function(){
-    var player = Audio的DOM对象.
-    palyer.src=musics[index];
-    //onended在资源播放完后后触发.
-    player.onended = function(){
-        player.src =musics[++indx % musics.length];
-        player.paly();
-    }
-
-}       
-</code></pre>
-
-<p><code>HTMLAudioElement</code>或<code>HTMLVideoElement</code>包含大量属性和时间监听.这里就不一一列举了.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[CSS特效方法累积]]></title>
-    <link href="http://mzkmzk.github.io/blog/2015/10/23/web_effect/"/>
-    <updated>2015-10-23T11:37:40+08:00</updated>
-    <id>http://mzkmzk.github.io/blog/2015/10/23/web_effect</id>
-    <content type="html"><![CDATA[<!--more-->
-
-
-<h1>1 鼠标移上去灰色,移走变回原来色彩.</h1>
-
-<pre><code>.product_item {
-margin: 40px 0;
--webkit-filter: grayscale(100%);
--moz-filter: grayscale(100%);
--ms-filter: grayscale(100%);
--o-filter: grayscale(100%);
-
-filter: grayscale(100%);
-
-filter: gray;
-
-&amp;:hover {
-  -webkit-filter: grayscale(0);
-  -moz-filter: grayscale(0);
-  -ms-filter: grayscale(0);
-  -o-filter: grayscale(0);
-
-  filter: grayscale(0);
-
-  filter: none;
-}
-}
-</code></pre>
-
-<p>应该可以用jquery动画效果实现延迟变化的.</p>
-
-<p>参考链接<a href="http://www.w3cplus.com/css3/ten-effects-with-css3-filter">http://www.w3cplus.com/css3/ten-effects-with-css3-filter</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[修改Bootstrap 记录]]></title>
-    <link href="http://mzkmzk.github.io/blog/2015/10/20/bootstrap_update/"/>
-    <updated>2015-10-20T11:37:40+08:00</updated>
-    <id>http://mzkmzk.github.io/blog/2015/10/20/bootstrap_update</id>
-    <content type="html"><![CDATA[<p>本文实在读&lt;&lt;Bootstrap实战>>后写的,里面实践的东西挺多,如果能照着书的代码敲一敲的话.可以满足你基本的布局需求,可是Bootstrap的JS方面提及得不多,需要好好看下源码.</p>
-
-<p>本文会写几个在实际项目中改了的地方.</p>
-
-<h1>0. 前面的工作</h1>
-
-<p>下载Bootstrap的时候不建议下载编译后的代码,下载完整项目源代码,那按模块修改模块,效果棒棒哒.主要用到下面两个工具.</p>
-
-<ol>
-<li>sass <a href="http://mzkmzk.github.io/blog/2015/10/16/sass_start/">可以参考</a></li>
-<li>grunt <a href="http://mzkmzk.github.io/blog/2015/10/16/grunt_bootstrap/">可以参考</a></li>
-</ol>
-
-
-<h1>1. 设置最大宽度</h1>
-
-<p>因为设计图主题显示区域为967 但是Bootstrap在1200+分辨率下 .container的宽度为1170,所以需要修改_variable.scss</p>
-
-<pre><code>// Large screen / wide desktop
-// MaiZhiKun $container-large-desktop:      (1140px + $grid-gutter-width) !default;
-$container-large-desktop:      (937px + $grid-gutter-width) !default;
-</code></pre>
-
-<h1>2. 修改导航条</h1>
-
-<p>导航栏相关样式<code>_navbar.sass</code>,相关变量<code>_variables.scss</code></p>
-
-<ol>
-<li><p>默认灰改成透明</p>
-
-<pre><code> !-- _variables.scss --&gt;
- $navbar-default-bg:                transparent;
-</code></pre></li>
-<li><p>消除导航栏圆角</p>
-
-<pre><code> &lt;!-- _variables.scss --&gt;
- $border-radius-base:        0 ;
- $border-radius-large:       0 ;
- $border-radius-small:       0 ;
-</code></pre></li>
-<li><p>改变导航栏中 居中和悬浮的效果</p>
-
-<pre><code> position: absolute !important;
- top: 0; left: 0; bottom: 0; right: 0;
-</code></pre>
-
-<p> 参考链接:<a href="http://blog.csdn.net/freshlover/article/details/11579669">http://blog.csdn.net/freshlover/article/details/11579669</a>
- <a href="http://www.smashingmagazine.com/2013/08/absolute-horizontal-vertical-centering-css/">http://www.smashingmagazine.com/2013/08/absolute-horizontal-vertical-centering-css/</a></p></li>
-<li><p>导航栏增加上下间距</p>
-
-<pre><code> &lt;!-- _variables --&gt;
- $navbar-height:                    50px !default;   
-</code></pre></li>
-</ol>
-
-
-<h1>3修改轮播图</h1>
-
-<p>要做的事情</p>
-
-<ol>
-<li><p>将轮播变成三块显示,而非隐藏</p>
-
-<p> 调试过程中,最好将轮播效果取消掉.这里偷懒下,把轮播时间间隔改得大点.修改<code>carousel.js</code></p>
-
-<pre><code>   Carousel.DEFAULTS = {
-     interval: 50000000000000000000,
-     pause: 'hover',
-     wrap: true,
-     keyboard: true
-   }
-</code></pre></li>
-</ol>
-
-
-<h3>记录一些坑点</h3>
-
-<ol>
-<li><p>JS混乱</p>
-
-<p> 我导入了bootstrap.js,然后我又压缩了其代码.</p>
-
-<p> 我用的是grunt然后<code>Gruntfile.js</code>写的是<code>*.js</code>导致JS按文件名字顺序压缩,导致JS报错.</p>
-
-<p> 应该按Bootstrap官方源代码的Gruntfile.js顺序.</p></li>
-</ol>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[疯狂Html+CSS+JS 中CSS总结]]></title>
-    <link href="http://mzkmzk.github.io/blog/2015/10/18/amazeing-css.markdwon/"/>
-    <updated>2015-10-18T11:37:40+08:00</updated>
-    <id>http://mzkmzk.github.io/blog/2015/10/18/amazeing-css.markdwon</id>
-    <content type="html"><![CDATA[<!--more-->
-
-
-<h1>0总结</h1>
-
-<ol>
-<li>第一章详细讲了各种选择器.</li>
-<li>第二章讲述了字体和文本的相关属性.</li>
-<li>第三章降序了背景边框的属性.</li>
-<li>第四章简单讲述了大小、定位等属性.</li>
-<li>第五章盒模型,重要的模型讲述得还可以.</li>
-<li>第六章表格和列表还有几本的响应式属性.</li>
-<li>第七章为变形和动画,通俗易懂的列举了属性</li>
-<li>总体来说,这个CSS部分较为枯燥,很多属性需要知道和了解,特别是动画和变形,别太依赖JS.CSS部分具备了入门到初级前端应该知道的知识.</li>
-</ol>
-
-
-<hr />
-
-<h1>1 级联样式与CSS选择器</h1>
-
-<h1>1.1 CSS基本使用</h1>
-
-<h3>1.1.1 引入CSS</h3>
-
-<pre><code>/* 不建议@import 性能问题 */
-&lt;link href="CSS文件路径" type="text/css" rel="stylesheet"&gt;
-</code></pre>
-
-<h2>1.2 选择器</h2>
-
-<h3>1.2.1 元素选择器</h3>
-
-<pre><code>/* 仅对P标签有作用 */
-p{...}
-</code></pre>
-
-<h3>1.2.2 属性选择器</h3>
-
-<pre><code>/* 仅对具有attr属性的E元素起作用 */
-E[attr]{...}
-
-/* 仅对attr=value的E元素起作用 */
-E[attr=value]{...}
-
-/* attr的值以空格为分隔符分开,其中一个值等于value即可的E元素 */
-E[attr~=value]{...}
-
-/* attr的值以连字符'_'为分隔符分开,其中一个值等于value即可的E元素 */
-E[attr |=value]{...}
-
-/* attr属性包含value值的E元素 */
-E[attr*="value"]{...}
-
-/* attr属性以value为开头的E元素 */
-E[attr^="value"]{...}
-
-/* attr属性以value为结尾的E元素 */
-E[attr$="value"]{...}
-</code></pre>
-
-<h3>1.2.3 ID选择器</h3>
-
-<pre><code>/* id为xx的元素起作用 */
-#xx{...}
-
-/* id为xx的E元素起作用 */
-E#xx{...}
-</code></pre>
-
-<h3>1.2.4 class选择器</h3>
-
-<pre><code>/* E为可选是否填写指定元素,my_class为指定lcass */
-[E].my_class{...}       
-
-/* class同时包含class1.class2 */
-.class1.class2{...}
-</code></pre>
-
-<h3>1.2.5 包含选择器</h3>
-
-<pre><code>/* div内所有class为a的元素起作用,无论元素是否为子元素 */
-div .a{...} 
-
-/*注意 包含关系有空格,同时满足关系无空格 */
-.class1 .class2
-</code></pre>
-
-<h3>1.2.6 子选择器</h3>
-
-<pre><code>/* 仅对div的子元素且class为a的元素起作用 */
-div&gt;.a{...} 
-</code></pre>
-
-<h3>1.2.7 兄弟选择器</h3>
-
-<pre><code>/* id为android的标签 之后出现的且class为long的同级元素 */
-#android ~ .long{...}   
-</code></pre>
-
-<h3>1.2.8 选择器组合</h3>
-
-<pre><code>/*逗号分隔或关系,仅符合一种选择器即起作用 */
-#a,.b,div&gt;.a{...}   
-</code></pre>
-
-<h3>1.2.9 伪元素选择器</h3>
-
-<ol>
-<li>:first-letter</li>
-<li>:first-line</li>
-<li>:before</li>
-<li>:after</li>
-</ol>
-
-
-<p><code>:first-letter</code>和<code>:first-line</code>可实现首字大写与首行大写之类的问题</p>
-
-<p>注意,这两个伪属性只对块元素<code>div,p,section</code>等元素起作用,对内嵌<code>span</code>等必须设定height与width、或postition:absolute、或display:block.</p>
-
-<pre><code>span{
-    disply:block;
-}
-
-//首字变蓝
-.span:first-letter{
-    color:#00f;
-}
-</code></pre>
-
-<p><code>:before</code>与<code>:after</code>用于在指定元素前/后插入内容,参考下面的内容相关属性.</p>
-
-<h3>1.2.10 内容相关属性</h3>
-
-<ol>
-<li>include-source: 属性值为url(url)</li>
-<li>content: 作用向指定元素之前或元素之后插入指定内容,该属性的值可以是字符串、url(url)、attr(alt)、counter(name)、counter(name,list-style-type)、open-quote和close-quote等格式.</li>
-<li>quotes: 该属性的值可以是两个以空格分隔的字符串,前面代表open-quotes,后面带便quote.</li>
-<li>counter-increment:该属性用于定义一个计数器,值为该计数器的名称.</li>
-<li><p>counter-rest: 重置计数器.</p>
-
-<pre><code> eg:
- &lt;!-- 子div前添加文字和设置样式 --&gt;
- div&gt;div:before{
-     content: '文字';
-     colol: blue;
- }
-
- &lt;!-- 含有class为on的子div之后的添加图片 --&gt;
- div&gt;div.no:after{
-     content:url("K.gif");
- }
-
- &lt;!-- 配合quetos 对的...其实这属性貌似并没神马卵用.. --&gt;
- &lt;!-- 是的,你没猜错..其实close-quote写在before里也是可以的.. --&gt;
- div&gt;div{
-     quotes: "&lt;&lt;" "&gt;&gt;";
- }
-
- div&gt;div:before{
-     content: open-quote;
- }
-
- div&gt;divafter{
-     content:close-quote;
- }
-
- &lt;!-- counter-increment添加编号1. 2. 3. --&gt;
- div&gt;div{
-     counter-increment: fucking_K;
- }
-
- div&gt;div:before{
-     content: counter{fucking_K} '.';
-     font-size: 20pt;
- }
-
- &lt;!-- 拓展样式 更多参数&lt;https://developer.mozilla.org/zh-CN/docs/Web/CSS/list-style-type&gt; --&gt;
- div&gt;after{
-     content: counter{fucking_K,lower-roman} '.';
-     font-size: 20pt;
- }
-
- &lt;!-- 多级编号 --&gt;
- div&gt;h2{
-     counter-increment: fucking_K;
- }
-
- div&gt;div{
-     counter-increment: funcking_K2;
- }
-
- div&gt;h2:before{
-     counter-increment: funcking_K;
-     counter-reset: fucking_K2;
- }
-
- div&gt;div:before{
-     content: counter: funcking_K2;
- }
-</code></pre></li>
-</ol>
-
-
-<h3>1.2.11 伪类选择器</h3>
-
-<p>Selecttor可省略.不作为匹配条件</p>
-
-<ol>
-<li><p>结构性伪类选择器</p>
-
-<p> 1.1 Selector:root: HTML元素中,永远指向<code>&lt;html.../&gt;</code>元素.</p>
-
-<p> 1.2 Selector:first-child: 匹配其父元素的第一个节点.</p>
-
-<p> 1.3 Selector:last-child: 匹配选择器,而且是其父元素的最后一个节点.</p>
-
-<p> 1.4 Selector:nth-child(n): 匹配选择器,而且是其父元素的第n个节点.</p>
-
-<p> 1.5 Selector:nth-last-child(n): 匹配选择器,而且是其父元素倒数第n个节点.</p>
-
-<p> 1.6 Selector:only-child: 匹配选择器,而且是其父元素唯一的节点.</p>
-
-<p> 1.7 Selector:first-of-type: 匹配选择器,而且是其同类型的兄弟元素中的第一个元素.</p>
-
-<p> 1.8 Selector:last-of-type: 匹配选择器,而且是其同类型的兄弟元素中的最后一个元素.</p>
-
-<p> 1.9 Selecttor:nth-of-type(n): 匹配选择器,而且是其同类型的兄弟元素中的第n个元素.</p>
-
-<p> 1.10 Selector:nth-last-of-type(n): 匹配选择器,而且是其同类型的兄弟元素中的倒数第n个元素.</p>
-
-<p> 1.11 Selector:only-of-type: 匹配选择器,而且是其同类型的兄弟元素的唯一一个元素.</p>
-
-<p> 1.12 Selector:only:empty: 匹配选择器,而且其内部没有任何子元素(包括文本)的元素.</p>
-
-<p> 拿first-child和first-of-type举例</p>
-
-<pre><code> &lt;ul&gt;
- &lt;img .../&gt;
-     &lt;li&gt;...&lt;/li&gt;
- &lt;/ul&gt;
-
- //匹配不到任何元素,li必须是父元素的第一个元素.
- li:first-child{...}
-
- //匹配到li,是在父元素中匹配到的类型中的第一个即可.
- li:first-of-type{...}   
-</code></pre>
-
-<p> <code>-child匹配是会把其他不同类型的兄弟节点算进去,而-of-type只计算同类型的兄弟元素</code></p>
-
-<p> 其中nth-child(n)、nth-last-child(n)、nth-of-type(n)、nth-last-of-type(n)支持参数</p>
-
-<ol>
-<li>odd:匹配奇数的元素</li>
-<li>even:匹配偶数的元素</li>
-<li>xn+y: 匹配第(x乘以n)加y的元素</li>
-</ol>
-</li>
-<li><p>UI元素状态伪类选择器</p>
-
-<p> 2.1 Selector:link: 匹配未访问的元素</p>
-
-<p> 2.2 Selector:visited: 匹配访问过的元素</p>
-
-<p> 2.3 Selector:active: 匹配处于用户被激活(鼠标点击与释放的过程中)的元素</p>
-
-<p> 2.4 Selector:hover: 匹配鼠标悬停状态的元素</p>
-
-<p> 2.5 Selector:focus: 匹配已得到焦点的元素</p>
-
-<p> 2.6 Selector:enabled: 匹配当前处于可用状态的元素</p>
-
-<p> 2.7 Selector:disabled: 匹配当前不可用状态的元素</p>
-
-<p> 2.8 Selector:checked: 匹配当前选中状态的元素</p>
-
-<p> 2.9 Selector:ready-only: 匹配当前只读状态的元素</p>
-
-<p> 2.10 Selector:read-write: 匹配当前处于读写状态的元素</p>
-
-<p> 2.11 Selector::selection: 匹配当前被选中的内容.</p></li>
-<li><p>特殊的伪类选择</p>
-
-<p> 3.1 Selector1:not(Selector2): 匹配符合Selector1选择器,但不符合Selector2选择器的元素</p>
-
-<pre><code> //尝试了Selector2 写了两个条件,无法筛选.然后这样就可以- -.
- :not(.container):not(.row):not(h3) {...}
-</code></pre>
-
-<p> 3.2 Selector:target: 匹配符合Selector选择器且必须是命名描点的且正在被访问的目标选择器.</p>
-
-<pre><code> :target{
-     background-color: #fff;
- }
-
- &lt;a href="#K" /&gt;
-
- //当正在浏览此div,:target生效
- &lt;div id="K"&gt;
-     ...
- &lt;/div&gt;
-</code></pre></li>
-</ol>
-
-
-<h3>1.3 浏览器专属属性</h3>
-
-<ol>
-<li>-ms- IE内核</li>
-<li>-moz- Gecko内核(Firefox)</li>
-<li>-o- Opera浏览器</li>
-<li>-webkit- Webkit内核(Chrome、Safari)</li>
-</ol>
-
-
-<h3>1.4 JS修改CSS</h3>
-
-<pre><code>//修改属性
-//注意属性名中采用驼峰命名,例如改变background-color,属性名要写backgroundColor
-document.getElementById("id").style.属性名=属性值;
-
-//修改class
-document.getElementById("id").className=class名称;
-</code></pre>
-
-<hr />
-
-<h1>2 字体与文本相关属性</h1>
-
-<h2>2.1 字体相关属性</h2>
-
-<ol>
-<li>font: 可添加font-style,font-variant,font-weight,font-size,line-height,font-family等属性.</li>
-<li>color: 字体颜色,可颜色名,十六进制颜色值,RGB,HSL</li>
-<li>font-family: 设置字体,可用<code>,</code>分割按顺序使用字体</li>
-<li>font-size: 字体大小</li>
-<li>font-size-adjust: 对字体进行微调.</li>
-<li>font-streth: 改变字体横向拉伸,narrower既横向压缩,wider横向拉伸.</li>
-<li>font-style: 文字风格,常用属性有italic斜体,oblique倾斜体.</li>
-<li>font-weight: 是否加粗,属性可数值,也可lighter、normal、bold、bolder,越来越粗.</li>
-<li>text-decoration: 文字修饰线,常用属性有:none、blink闪烁、underline、line-through中划线、overline上划线.</li>
-<li>font-variant: 设置文字大写字母格式,属性有normal、small-caps(小型大写字母).</li>
-<li>text-shadow: 文字阴影效果,后面会详细提.</li>
-<li>text-transform: 字母大小写none,capitalize首字母大写、unpercase全部大写、lowercase全部小写;.</li>
-<li>line-height: 行高,负值时候可用来实现阴影效果.</li>
-<li>letter-spacing: 字符之后的间隔.最后一个字不受影响</li>
-<li>word-soacing: 单词之间的间隔.</li>
-</ol>
-
-
-<h3>2.1.1 字体添加阴影</h3>
-
-<p>text-shadow,多组阴影用,分割</p>
-
-<ol>
-<li>color: 指定阴影颜色.</li>
-<li>xoffset: 指定阴影在横向上的偏移量.(可负值)</li>
-<li>yoffset: 指定阴影在纵向上的偏移量.(可负值)</li>
-<li><p>redius: 指定阴影的模糊半径,半径越大越模糊    .</p>
-
-<pre><code> &lt;!-- 向右下角和左上角加阴影加阴影--&gt;
- &lt;span style="text-shadow:5px 5px 2px gray,-5px 5px 2px gray"&gt;帅哥麦&lt;/span&gt;
-</code></pre></li>
-</ol>
-
-
-<h3>2.1.2 微调字体大小</h3>
-
-<p>font-size-adjust用调节同样字号不同字体的效果.</p>
-
-<p>font-size-adjust通过设定aspect值从而控制不同字体的大小.</p>
-
-<p>aspect等于字体小写x的高度除以该字体的大小.</p>
-
-<pre><code>    #div {
-        font-size: 16pt;
-        font-family: "狂草";
-        font-size-adjust:0.52;
-    }   
-
-    #div2 {
-        font-size: 16pt;
-        font-family: "楷书";
-        font-size-adjust: 1.22;
-    }
-</code></pre>
-
-<h2>2.2 CSS3支持的颜色表示方法</h2>
-
-<ol>
-<li>颜色名:white,red,greenyellow</li>
-<li>十六进制</li>
-<li>rgb(r,g,b)</li>
-<li>rgba(r,g,b,a): a在0~1之间,0表示完全透明</li>
-<li>hsl(hue,saturation,lightness):色调,饱和度,亮度控制.</li>
-<li>hsla(h,s,l,a).</li>
-</ol>
-
-
-<h2>2.3 文本相关属性</h2>
-
-<p>此类属性用于控制整段或整个div的</p>
-
-<ol>
-<li>text-indent: 文本的缩进</li>
-<li><p>text-overflow:</p>
-
-<p> 2.1 clip: 要指定overflow:hidden,隐藏溢出的文字</p>
-
-<p> 2.2 ellipsi: 要指定了overflow:hidden,溢出时候用&hellip;标记</p></li>
-<li><p>vertical-align:指定内容垂直方式</p>
-
-<p> 3.1 auto: 自动对齐</p>
-
-<p> 3.2 baseline: 默认值,将支持valign属性的元素的文本内容与基线对齐</p>
-
-<p> 3.3 sub: 文本下标对齐</p>
-
-<p> 3.4 super: 文本上标对齐</p>
-
-<p> 3.5 top: 默认值,将支持valign属性的元素的文本内容与元素的顶端对齐</p>
-
-<p> 3.6 middle: 默认值,将支持valign属性的元素的文本内容对齐到元素的中间.</p>
-
-<p> 3.7 bottom: 默认值,将支持valign属性的元素的文本内容与元素的底端对齐.</p></li>
-<li><p>text-align: left,right,center,justify(两端对齐)</p></li>
-<li><p>direction: 用于设置文本流入的方式,ltr(左到右),rtl(右到左),不会影响数字和拉丁文字母(除拉丁文标点符号).</p></li>
-<li><p>word-break: 用于设置目标组件中文本的换行方式</p>
-
-<p> 6.1 normal: 按浏览器默认,西方文字:只会在半角空格、连字符地方换行.中文,任意文字后换行.</p>
-
-<p> 6.2 keep-all: 只能在半角空格或连字符换行</p>
-
-<p> 6.3 break-all: 允许在连续单词中间换行</p></li>
-<li><p>white-space:处理目标组件中文本对空格的处理</p>
-
-<p> 7.1 normal: 自动换行</p>
-
-<p> 7.2 nowrap: 强制文本一行显示,除非遇到<code>&lt;br /&gt;</code></p></li>
-<li><p>word-wrap: 用于设定目标组中文本内容的换行方式</p>
-
-<p> 8.2 normal: 浏览器默认</p>
-
-<p> 8.3 break-word: 允许单词中间换行.</p></li>
-</ol>
-
-
-<p>word-break兼容性不好,单词中换行最好使用<code>word-wrap:breakword;</code></p>
-
-<p>word-break和word-wrap区别:</p>
-
-<ol>
-<li><p>word-break: break-all:会让每一行文本最后一个单词换行.(不浪费一点空间)</p></li>
-<li><p>word-wrap: break-word:会让太长单词之前自动换行.</p></li>
-<li><p>情况很多,不好理解.具体参考<a href="http://www.cnblogs.com/2050/archive/2012/08/10/2632256.html">http://www.cnblogs.com/2050/archive/2012/08/10/2632256.html</a></p></li>
-</ol>
-
-
-<h2>2.4 服务器字体</h2>
-
-<ol>
-<li>下载.ttf/.otf字体</li>
-<li><p>定义服务器字体</p>
-
-<pre><code> &lt;!-- src ...;后可跟字体样式属性 --&gt;
- @font-face {
-     font-family: 404_K;
-     src: url(url) format("字体格式");
-     font-weight: blod;
- }
-</code></pre></li>
-</ol>
-
-
-<h3>2.4.1 优先使用客户端字体</h3>
-
-<pre><code>    @font-face {
-        font-family: 404_K;
-        src: location("微软雅黑"),url(url) format("字体格式");
-        font-weight: blod;
-    }
-</code></pre>
-
-<hr />
-
-<h1>3 背景、边框和补丁相关属性</h1>
-
-<h2>3.1 背景相关属性</h2>
-
-<ol>
-<li>background: 可控制背景颜色、背景图片、背景重复方式.</li>
-<li><p>background-attachment: 背景图片是否随对象内容滚动还是固定.</p>
-
-<p> 2.1: scorll:背景随内容滚动</p>
-
-<p> 2.2 fixed:背景图片固定.</p></li>
-<li><p>background-color: 背景色</p></li>
-<li>background-image: 背景图片,背景图片会覆盖背景色(假如同时设置了).</li>
-<li>background-position: 可百分百可数值,只设横百分比,纵百分比为50%.</li>
-<li><p>background-repeat:是否平铺</p>
-
-<p> 6.1 repeat:平铺</p>
-
-<p> 6.2 repeat-x:横向平铺</p>
-
-<p> 6.3 repeat-y:纵向平铺</p>
-
-<p> 6.4 no-repeat:不平铺</p></li>
-</ol>
-
-
-<hr />
-
-<p>以下为CSS3新增</p>
-
-<ol>
-<li><p>background-clip: 指定背景覆盖范围.</p>
-
-<p> 7.1 border-box: border-box(覆盖border,padding,content)</p>
-
-<p> 7.2 padding-box: 覆盖padding,content(默认)</p>
-
-<p> 7.2 content-box,只覆盖content.</p></li>
-<li><p>background-origin: 设置背景覆盖的起点,有点和background-position类似.或指定从哪个区域的开始放置背景图片(content,padding,border).Chrome和Safari使用要开-webkit开头.</p></li>
-<li><p>background-size: 设置图片大小.</p>
-
-<p> 9.1 数值: 12px,13px 占宽12px,高13px;</p>
-
-<p> 9.2 百分比: eg 80% 10%,宽占百分之80,高占百分之10%</p>
-
-<p> 9.3 auto:只有一个值能为auto,根据另外一个值自动缩放(这个对响应式非常有用,保证图片不走形 100% auto,完全显示图片).</p></li>
-</ol>
-
-
-<p>CSS3提供了多背景控制,属性还是上面的,多个背景属性用,隔开.</p>
-
-<h2>3.2 边框相关属性</h2>
-
-<ol>
-<li>border: 设置边框样式,粗细,线型,颜色.</li>
-<li>border-color: 边框颜色..任何颜色值</li>
-<li><p>border-style: 边框样式</p>
-
-<p> 3.1 none:无边框</p>
-
-<p> 3.2 hidden: 隐藏边框,于none类似,当在表中可解决边框冲突</p>
-
-<p> 3.3 dotted: 电线边框</p>
-
-<p> 3.4 dashed: 虚线边框</p>
-
-<p> 3.5 solid: 实现边框</p>
-
-<p> 3.6 double: 双线边框</p>
-
-<p> 3.7 grove: 3D凹槽边框</p>
-
-<p> 3.8 ridge: 3D凸槽边框</p>
-
-<p> 3.9 inset: 3D凹入边框</p>
-
-<p> 3.10 outset: 3D凸出边框(个人感觉3.7,3.8和3.9,3.10类似,不过立体感弱一点)</p></li>
-<li><p>border-width: 边框线框.任何有效长度值.若只设width,是没法占位置的.</p></li>
-</ol>
-
-
-<hr />
-
-<p>以下top bottom right left皆有.</p>
-
-<ol>
-<li>border-top: 设置上线的复合属性,可设置边框样式,粗细,线型,颜色.</li>
-<li>border-top-color: 上边框颜色.</li>
-<li>border-top-style: 边框样式</li>
-<li>border-top-width: 上边线框.</li>
-<li>border-top-colors: 渐变属性,CSS3新增,假设border-top-width为Npx,则可以设置N种颜色,从外框往里渐变,若设置的颜色个数小于width,最后一个颜色会作为之后的颜色.</li>
-</ol>
-
-
-<hr />
-
-<p>圆角边框,CSS3新增</p>
-
-<ol>
-<li>border-radius: 圆角边框,数值代表圆角半径,半径越大,越圆,</li>
-<li>还有border-top-left-radius、border-top-right-radius、border-bottom-left-radius、border-bottom-right-radius属性.</li>
-</ol>
-
-
-<hr />
-
-<p>图片边框</p>
-
-<ol>
-<li>border-image: 语法:<code>&lt;border-image-source&gt;  &lt;border-image-slice&gt;[/boder-image-width]?  &lt;border-image-repeat&gt;</code></li>
-<li>border-image-source: none/url(&ldquo;图片路径&rdquo;)</li>
-<li>border-image-slice: 可输1~4个百分比或数值用于切割图片,按上下左右切割,得出9张小图片,默认情况中间会丢弃.但例如 10 20&amp;&amp;fill中间就会保留放在内容中间.</li>
-<li>border-image-width: 为上面切割的图片设置宽度.可设置1~4个长度,百分比,或auto,指定image-slice的宽度.</li>
-<li><p>border-iamge-repeat: 指定图片覆盖方式.可设0~2个值,分别代表横竖.</p>
-
-<p> 5.1 stretch: 拉伸覆盖</p>
-
-<p> 5.2 repeat: 平铺覆盖</p>
-
-<p> 5.3 round: 取整平铺,和repeat类似,</p>
-
-<pre><code> 当最后一张图片不能显示超过一半,则不显示最后一张图片,通过拉伸前面的图片实现填充.
-
- 当最后一张图片可以显示超过一半,则显示最后一张图片,压缩前面的图片.
-</code></pre></li>
-</ol>
-
-
-<p>border存在则border-image相关属性不起作用.</p>
-
-<h1>3 大小、定位、轮毂相关属性</h1>
-
-<h2>3.1 大小相关属性</h2>
-
-<ol>
-<li>height: 设定高度</li>
-<li>max-height: 设定最大高度.当此属性小于min-height,则自动转化为min-height,下面属性同理</li>
-<li>min-height: 设定最小高度.</li>
-<li>width: 设定宽度</li>
-<li>max-width: 最大宽度</li>
-<li>min-widht: 最小宽度</li>
-</ol>
-
-
-<p>CSS3新增属性</p>
-
-<ol>
-<li><p>box-sizing: 用于设定width和height控制content padding border等哪些区域.</p>
-
-<p> 1.1 content-box: 只控制content</p>
-
-<p> 1.2 padding-box: 控制content+padding</p>
-
-<p> 1.3 border-box: 控制contetn+padding+border</p></li>
-<li><p>resize: 设置用户能否拖动组件来改变组件的大小</p>
-
-<p> 2.1 none: 不能改变大小</p>
-
-<p> 2.2 both: 能改变大小,但只能按比例缩放</p>
-
-<p> 2.3 horizontal: 不允许改变高度,能改变宽度</p>
-
-<p> 2.4 vertical: 不允许改变宽度,能改变高度</p></li>
-</ol>
-
-
-<h2>3.2 定位相关属性</h2>
-
-<p>定位作用为在于布局,漂浮~.除了position以外的其他属性不对static起作用.</p>
-
-<ol>
-<li><p>position 定位方式</p>
-
-<p> 1.1 absolute: 组件会漂浮在页面上,不考虑周围内容</p>
-
-<p> 1.2 relative: 参考前一个组件的位置来定位</p>
-
-<p> 1.3 static: 默认值,没有定位,元素出现在正常的页面流中.</p>
-
-<p> 1.4 fixed: 绝对定位,以浏览器为定位参考</p></li>
-<li><p>z-index: 数值觉得漂浮重叠优先级.数值越高优先级越高.</p></li>
-<li>top: 设定最近一个具有定位设置的父元素向顶部偏移.</li>
-<li>right: 设定最近一个具有定位设置的父元素向右侧偏移.</li>
-<li>bottom: 设定最近一个具有定位设置的父元素向底部偏移.</li>
-<li>left: 设定最近一个具有定位设置的父元素向顶部偏移.</li>
-</ol>
-
-
-<p>漂浮居中定位设置很常用的一招.</p>
-
-<pre><code>margin: auto;  
-position: absolute;  
-top: 0; left: 0; bottom: 0; right: 0; 
-</code></pre>
-
-<p>原理及其它居中方式<a href="http://blog.csdn.net/freshlover/article/details/11579669">http://blog.csdn.net/freshlover/article/details/11579669</a>.</p>
-
-<h3>3.3 轮廓相关属性</h3>
-
-<p>轮廓不占页面实际物理布局面积,可实现&#8221;光晕效果&#8221;.</p>
-
-<ol>
-<li>outline: 可设置轮廓颜色 线宽 线型.</li>
-<li>outline-color: 轮廓颜色.</li>
-<li>outline-style: 和之前的border-style一致.</li>
-<li>outline-width: 轮廓宽度.</li>
-<li>outline-offset: 设置轮廓和边框的距离</li>
-</ol>
-
-
-<h1>4 盒模型与布局相关属性</h1>
-
-<h2>4.1 布局相关属性</h2>
-
-<ol>
-<li>float: 可left/right.当设置了该属性强制display为block,它会紧靠组件的左/右,直到遇到边框/padding/margin或另外一块组件(display为block)为止.)</li>
-<li><p>clear: 设置该组件能否出现浮动组件.</p>
-
-<p> 2.1 none: 默认,你随便飘~</p>
-
-<p> 2.2 left: 不允许出现左飘~</p>
-
-<p> 2.3 right: 不允许出现右飘~</p>
-
-<p> 2.4 both: 你丫的别给我飘~.</p></li>
-<li><p>clip: 对组件裁剪设置,(只有在position为absolute且overflow:hidden,效果才会较好.)</p>
-
-<p> 3.1 rect(Num_A,Num_B,Num_C,Num_D),定义一个矩形,只有在矩形内才显示出来.这4个数有点奇葩,和别的不一样,定义的矩形为,横向显示(Num_D~Num_B)的内容,纵向显示(Num_A~Num_C)的内容.  当Num为auto,表示该边不做裁剪.</p></li>
-<li><p>overflow: 设置等组件不能容纳内容显示时,采取的措施</p>
-
-<p> 4.1 visble: 默认,不剪切也不加滚动条.</p>
-
-<p> 4.2 auto: 添加滚动条显示全部内容.</p>
-
-<p> 4.3 hidden: 裁剪不能显示的部分.</p>
-
-<p> 4.4 scroll: 不够内容有没有超,总显示滚动条.</p></li>
-<li><p>overflow-x: 仅对横向方向起作用,属性同overflow.</p></li>
-<li>overflow-y: 仅对纵向起作用.属性同overflow.</li>
-<li>visibility: visibl/hidden.隐藏时仍占据网页空间</li>
-<li><p>display: 设置盒模型.</p>
-
-<p> 8.1 block类型: 默认占据一行,可CSS设置宽高度,默认此属性的元素有<code>&lt;div&gt;、&lt;p&gt;、&lt;h1&gt;...&lt;h6&gt;、&lt;ol&gt;、&lt;ul&gt;、&lt;dl&gt;、&lt;table&gt;、&lt;address&gt;、&lt;blockquote&gt; 、&lt;form&gt;</code>等.</p>
-
-<p> 8.2 inline类型: 默认允许一行放多个组件,CSS设置宽高度无作用.默认此属性的元素有<code>&lt;a&gt;、&lt;span&gt;、&lt;br&gt;、&lt;i&gt;、&lt;em&gt;、&lt;strong&gt;、&lt;label&gt;、&lt;q&gt;、&lt;var&gt;、&lt;cite&gt;、&lt;code&gt;</code>等.当两个block中间有inline他们是不可以在同一行的,</p>
-
-<p> 8.3 none: 隐藏组件,不占网页空间.</p>
-
-<p> 8.4 inline-block盒模型: 不占据一行,但可以设置宽高度.这个也可以实现多栏布局.默认情况下,多个inline-block盒模型会对齐底部.改变对齐顶部使用<code>vertical-align:top</code>,默认此属性的元素有<code>&lt;img&gt;、&lt;input&gt;</code>等.当两个block中间有inline-block他们是可以在同一行的,</p>
-
-<p> 8.5 inline-table盒模型: 与inline-block类似,分别在表格设置inline-table或inline-block,但是inline-table设置width会拉伸单元格,inline-block会把内容多余的空间在右边留白,而不是给单元格.</p>
-
-<pre><code> //关于表格的盒模型,其实作用不大,作用大概就是可以把div当做表格来显示.
- 1. table: 将组件变为表格.
- 2. table-caption: 将组件变为表格标题.
- 3. table-cell: 将组件变为单元格.
- 4. table-column: 将组件变为表格列.
- 5. table-column-group: 将组件变为表格列组.
- 6. table-row: 将组件变为表格行.
- 7. table-row-group: 将组件变为表格列组.
- 8. table-header-group: 将组件变为表格头部分.
- 9. table-footer-group: 将组件变为表格尾部分.
-</code></pre>
-
-<p> 8.6 list-item盒模型: 可以将组件转为ul等列表元素.</p>
-
-<p> 8.7 run-in盒模型: 和inline类似,但假如后面紧跟block,那么run-in会包含在后面的block中.</p>
-
-<p> 8.8 box模型: CSS3新增.当display为box时,组件可以使用以下的属性控制box</p>
-
-<pre><code> 1. box-orient:horizontal/vertical. 
-
-     1.1 当属性为horizontal时候,没有为子元素定义高度,则高度等于父元素的高度.
-
-     1.2 当属性为vertical时候,没有为子元素定义宽度,则高度等于父元素的宽度.
-
- 2. box-oridinal-group: 设置box盒模型中子元素的显示顺序.
-
- 3. box-flex: 设置模型自动适应宽度比例,
-
-     3.1 例如box盒模型多余150px,第一个元素的box-flue为1,第二个元素的box-flue为2,则把多余的宽度分50px给第一个元素,分100px给第二个元素.  
-</code></pre></li>
-</ol>
-
-
-<h2>4.2 给盒子加阴影</h2>
-
-<p>CSS3新增的,主要使用box-shadow属性.是一个复合属性,包括以下5个属性.</p>
-
-<ol>
-<li>hOffset: 控制阴影在水平方向的偏移.</li>
-<li>vOffset: 控制阴影在纵向的偏移.</li>
-<li>blurLength: 控制阴影的模糊程度.</li>
-<li>scaleLength: 控制阴影的缩放程度.</li>
-<li>color: 控制阴影颜色</li>
-</ol>
-
-
-<p>eg:</p>
-
-<pre><code>&lt;!-- 右下阴影,模糊程度10px,缩小阴影区域-10px --&gt;
-&lt;div style="box-shadow: 10px 8px 10px -10px red"&gt;..&lt;/div&gt;
-</code></pre>
-
-<h2>4.3 column-count分栏</h2>
-
-<p>column-count分栏为CSS3新增,属性主要有:</p>
-
-<ol>
-<li>columns: 复合属性,可指定栏目宽度,栏目数.但内容大于容器时,Firefox和Chrome会增加每栏的宽度,Opera会保持栏目宽度,但增加栏目数.</li>
-<li>column-width: 指定每个栏目的宽度.</li>
-<li>column-count: 指定栏目个数.</li>
-<li>column-rule: 符合属性,指定栏目之间分隔条的宽度 样式 颜色.</li>
-<li>column-rule-width: 指定分隔条的宽度.</li>
-<li>column-rule-style: 指定分隔条的样式,属性和border-style的样式一样.</li>
-<li>column-rule-color: 指定分隔条的颜色.</li>
-<li>column-gap: 设定栏目的间距.</li>
-<li><p>column-fill: 设定栏目的高度</p>
-
-<p> 9.1 auto: 根据内容多少变化高度.</p>
-
-<p> 9.2 balance: 高度统一为最长的那栏的高度.</p></li>
-</ol>
-
-
-<h1>5 表格、列表及media query</h1>
-
-<h2>5.1 表格相关属性</h2>
-
-<ol>
-<li><p>border-collapse: 控制两个单元格的边框分开还是合并.</p>
-
-<p> 1.1 seperate: 边框分开.(双线)</p>
-
-<p> 1.2 collapse: 边框合并.(单线)</p></li>
-<li><p>border-spacing: 前提为border-collapse为seperate时,设置分割间距.</p></li>
-<li>caption-side: 设置表格标题在表格的哪边,必须与<code>&lt;caption.../&gt;</code>一块使用,属性有top bottom/left/right.</li>
-<li>empty-cells: 前提为border-collapse为seperate,设置单元格为空时,是否显示单元格边框,属性有show/hide.</li>
-<li><p>table-layout: 设置表格宽度布局方法.</p>
-
-<p> 5.1 auto: 默认值.</p>
-
-<p> 5.2 fixed 固定布局.</p>
-
-<pre><code> //fixed表格宽度计算方式.
- 1. 如果设置了&lt;col../&gt;或&lt;colgroup../&gt;每列的宽度,则表格宽度等于所有列宽的总和.
- 2. 如果表格内第一个单元格设置了宽度,则表格宽度所有所以列宽的总和.
- 3. 直接平均分配每列的宽度,忽略单元内容的实际宽度.
-</code></pre></li>
-</ol>
-
-
-<h2>5.2 列表相关属性</h2>
-
-<ol>
-<li>list-style: 复合属性,可以指定list-style-image list-style-position list-style-type.</li>
-<li>list-style-image: 指定列表标记的图片.</li>
-<li><p>list-style-position: 设定列表标记出现的位置</p>
-
-<p> 3.1 outside: 列表项标记防盗列表元素之外.</p>
-
-<p> 3.2 inside: 列表想标记放在列表元素之内.</p></li>
-<li><p>list-style-type : 设置项标记符号,list-style-image会覆盖list-style-type属性,全部属性<a href="http://www.w3school.com.cn/cssref/pr_list-style-type.asp">参考</a>.常用的有</p>
-
-<p> 4.1 decimal: 默认,阿拉伯数字.</p>
-
-<p> 4.2 disc: 实心圆</p>
-
-<p> 4.3 upper-roman: 大写罗马数字.</p>
-
-<p> 4.4 none: 不使用符号.</p>
-
-<p> 4.5 lower-alpha: 小写英文字母</p>
-
-<p> 4.6 upper-alpha: 大写英文字母</p></li>
-</ol>
-
-
-<h2>5.3 控制光标的属性</h2>
-
-<p>cursor属性控制光标属性</p>
-
-<ol>
-<li>auto: 默认</li>
-<li>default: 默认光标(一般是箭头).</li>
-<li>all-scroll: 代表十字箭头光标.</li>
-<li>col-resize: 代表水平拖动线光标.</li>
-<li>crosshair: 代表十字线光标.</li>
-<li>more: 移动十字箭头光标.</li>
-<li>help: 带问号光标.</li>
-<li>no-drop: 禁止光标.</li>
-<li>not-allowed: 和no-drop一样.</li>
-<li>pointer: 代表手型光标.</li>
-<li>progress: 代表漏沙光标.</li>
-<li>wait: 和progress一样.</li>
-<li>row-resize: 代表垂直拖动光标.</li>
-<li>text: 文本编辑光标.</li>
-<li>vertical-text: 代表垂直文本编辑光标.</li>
-<li>*-resize: 该属性*可为n(上) s(下) e(右) w(左) 方向的光标.*可为1位或2位,例如nw-resize代表指向上右的光标.</li>
-</ol>
-
-
-<h2>5.4 media query功能</h2>
-
-<p>语法</p>
-
-<pre><code>@media [not|only] 设备类型 [and 设备特性]*
-</code></pre>
-
-<ol>
-<li>all: 所有设备.</li>
-<li>aural: 适用于语音和音频合成器.</li>
-<li>braille: 适用于触觉反馈设备.</li>
-<li>embossed: 使用凸点字符(盲文)印刷设备.</li>
-<li>handheld: 适用于小型或手提设备.</li>
-<li>print: 适用于打印机.</li>
-<li>projection: 适用于投影图像,如幻灯片.</li>
-<li>screen: 适用于计算机显示器.</li>
-<li>tty: 适用于固定间距字符格的设备,如电传打字机和终端.</li>
-<li>tv: 适用于电视类设备.</li>
-</ol>
-
-
-<p>设备特性中的值<a href="http://blog.csdn.net/lee_magnum/article/details/12144187">参考</a></p>
-
-<p>最常用的设备特新为 min-width和max-width.</p>
-
-<p>一般使用的代码</p>
-
-<pre><code>@media screen and (min-width: ***px){...}
-</code></pre>
-
-<h1>6 变形与动画相关属性.</h1>
-
-<h2>6.1 CSS3提供的变形支持</h2>
-
-<ol>
-<li><p>transform: 设置1个或多个变形函数,设置变形函数顺序和重要,按顺序变形,变形函数有</p>
-
-<p> 1.1 translate[tx[,ty]]: 横向移动tx,纵向移动ty.,ty不写则不移动.</p>
-
-<p> 1.2 translateX(tx): 横向移动tx.</p>
-
-<p> 1.3 translateY(ty): 纵向移动ty.</p>
-
-<p> 1.4 scanle(sx[,sy]): 横向缩放比为sx,纵向缩放比为sy,但sy不填,则缩放比为sx.</p>
-
-<p> 1.5 scanleX(sx): scanle(sx,1).</p>
-
-<p> 1.6 scanleY(sy): scanle(1,sy).</p>
-
-<p> 1.7 rotate(angle): 顺时针转angle角度.</p>
-
-<p> 1.8 skew(sx [,sy]): 沿X轴倾斜sx角度,沿Y轴倾斜sy角度.省略sy,sy为0.</p>
-
-<p> 1.9 skewX(sx): skew(sx);</p>
-
-<p> 1.10 skewY(sy): skew(0,sy);</p>
-
-<p> 1.11 matrix(m11,m12,m21,m22,dx,dy): 基于矩阵变换,前4个参数组成变形矩形,dx、表示对坐标系统进行平移.</p>
-
-<pre><code> //按照矩形变换公司最后变形坐标计算公式,其实变形函数都是通过这个函数实现的.
- (x*m11+y*m21+dx,x*m12+y*m22+dy);
-</code></pre></li>
-<li><p>transform-origin: xCenter yCenter ,设置变形中心点,可选值有左上角 左下角 右下角 右上角</p>
-
-<p> 2.1 xCenter可为left/right</p>
-
-<p> 2.2 yCenter可为top/bottom</p></li>
-</ol>
-
-
-<h2>6.2 CSS3提供的Transition</h2>
-
-<p>transition属性指定下面4部分,可设置多组动画,用<code>,</code>分割.</p>
-
-<ol>
-<li>transition-property:指定组件的哪个CSS属性进行平滑渐变,可指定background-color,width,height等标准CSS属性.</li>
-<li>transition-duration: 渐变时间.</li>
-<li><p>transition-timing-function: 渐变速度</p>
-
-<p> 3.1 ease: 先慢后快再慢.</p>
-
-<p> 3.2 linear: 速度不变.</p>
-
-<p> 3.3 ease-in: 先慢后快</p>
-
-<p> 3.4 ease-out: 先快后慢.</p>
-
-<p> 3.5 ease-in-out: 和ease类似.</p>
-
-<p> 3.6 cubic-bezier(x1,y1,x2,y2): 通过贝济埃曲线控制动画.</p></li>
-<li><p>transition-delay: 指定延迟时间.延迟多久后开始渐变</p></li>
-</ol>
-
-
-<p>eg:</p>
-
-<pre><code>div{
-    浏览器前缀-transition: background-color 4s linear 4s.
-}   
-</code></pre>
-
-<h2>6.3 CSS 3提供的Animation动画</h2>
-
-<p>Animation动画提供一下几个属性.</p>
-
-<ol>
-<li>animation 复合属性,可同时按顺序设置下面的属性.</li>
-<li>animation-name: 动画名称,指向一个已有的关键帧.</li>
-<li>animation-duration: 制动动画的持续时间.</li>
-<li>animation-timing-function: 指定动画的变化速度.</li>
-<li>animation-delay: 延迟多久开始执行动画.</li>
-<li>animation-iteration-count: 指定动画循环次数.数值/infinite为无数次,</li>
-</ol>
-
-
-<p>关键帧定义格式:</p>
-
-<pre><code>keyframes 关键帧名称 {
-    form | to | 百分比 {
-        css属性1 : 属性值1;
-        ...
-    }
-    ...
-}
-</code></pre>
-
-<p>eg 实现鼠标hover时放大div:</p>
-
-<pre><code>@-webkit-keyframes '404_K' {
-    0% {
-        -webkit-transform: scale(1);
-    }
-
-    50% {
-        -webkit-transform: scale(2);
-    }
-
-    100% {
-        -webkit-transform: scale(1);
-    }
-}
-...
-div&gt;a:hover {
-    -webkit-animation-name: '404_K' ;
-    -webkit-animation-duration: 3s;
-    -webkit-animation-iteration-count: infinite;
-} 
-</code></pre>
-
-<h3>参考资源</h3>
-
-<ol>
-<li>特殊字符编码表<a href="http://www.jb51.net/onlineread/htmlchar.htm">http://www.jb51.net/onlineread/htmlchar.htm</a></li>
-<li>CSS学习资料网站<a href="http://zh.learnlayout.com/inline-block.html">http://zh.learnlayout.com/inline-block.html</a></li>
-</ol>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Sass入门]]></title>
-    <link href="http://mzkmzk.github.io/blog/2015/10/16/sass_start/"/>
-    <updated>2015-10-16T11:37:40+08:00</updated>
-    <id>http://mzkmzk.github.io/blog/2015/10/16/sass_start</id>
-    <content type="html"><![CDATA[<!--more-->
-
-
-<h1>0 前面工作</h1>
-
-<ol>
-<li>本文主要使用bootstrap3的sass,下载链接<a href="http://v3.bootcss.com/getting-started/">http://v3.bootcss.com/getting-started/</a></li>
-<li>安装Ruby,sass基于Ruby开发的</li>
-<li><p>gem install sass 安装sass</p>
-
-<p> 3.1 安装失败,显示</p>
-
-<pre><code> ERROR:  Could not find a valid gem 'sass' (&gt;= 0), here is why:
-   Unable to download data from http://ruby.taobao.org/ - bad response Not Found 404 (http://ruby.taobao.org/latest_specs.4.8.gz)
-</code></pre>
-
-<p> 可能由于我之前安装octopress的时候换了Ruby使用淘宝镜像,现在淘宝镜像可能没有sass的了.</p>
-
-<p> 网上查了下解决方案,大多数还是说去淘宝的rubygems.org</p>
-
-<p> 参考<a href="https://github.com/nimojs/blog/issues/14">https://github.com/nimojs/blog/issues/14</a></p>
-
-<pre><code> //执行这句后的提示我是害怕的,什么鬼...和教程显示得不一样啊,但是勇敢的我还是去访问了下https://rubygems.org/,发现有这个网址的啊...于是尝试下去
- K:bootstrap-sass-3.3.5 maizhikun$ gem sources --remove https://rubygems.org/
- source https://rubygems.org/ not present in cache
-
- //和教程一致了...
- K:bootstrap-sass-3.3.5 maizhikun$ gem sources -a https://ruby.taobao.org/
- https://ruby.taobao.org/ added to sources
-
- //执行到这里大家可能明白了,可能ruby.taobao之前我使用的时候是http的,现在改为https,所以会导致一开始的错误.
- K:bootstrap-sass-3.3.5 maizhikun$ gem source -l
- *** CURRENT SOURCES ***
-
- http://ruby.taobao.org/
- https://ruby.taobao.org/
-
- //额,,常见的权限问题..
- K:bootstrap-sass-3.3.5 maizhikun$  gem install sass
- Fetching: sass-3.4.19.gem (100%)
- ERROR:  While executing gem ... (Gem::FilePermissionError)
-     You don't have write permissions for the /Library/Ruby/Gems/2.0.0 directory.
-
- //找到提示的目录更改权限 原本权限是755,改为775还是不行,于是777~...然后就可以下载了..但是报了另外一个权限问题
- K:bootstrap-sass-3.3.5 maizhikun$  gem install sass
- Fetching: sass-3.4.19.gem (100%)
- ERROR:  While executing gem ... (Gem::FilePermissionError)
-     You don't have write permissions for the /usr/bin directory.
-
- //于是机智的我..发现这样chmod不是办法...sudo试试...
- K:bootstrap-sass-3.3.5 maizhikun$ sudo  gem install sass
- Successfully installed sass-3.4.19
- Parsing documentation for sass-3.4.19
- Installing ri documentation for sass-3.4.19
- Done installing documentation for sass after 5 seconds
- WARNING:  Unable to pull data from 'http://ruby.taobao.org/': bad response Not Found 404 (http://ruby.taobao.org/latest_specs.4.8.gz)
- 1 gem installed
- //管她呢.....WARNING而已..不理...不理....就好像上班迟到收警告一样~..
-</code></pre>
-
-<p> 让我们见证一下奇迹吧.</p>
-
-<pre><code> K:bootstrap-sass-3.3.5 maizhikun$ sass -v
- Sass 3.4.19 (Selective Steve)
-</code></pre>
-
-<p> OK了,准备爽一发吧.</p></li>
-</ol>
-
-
-<h1>1 简单实践</h1>
-
-<ol>
-<li><p><code>sass _bootstrap.scss test2.css</code></p>
-
-<p> 会生成test2.css和test2.css.map</p></li>
-<li><p><code>sass _bootstrap.scss</code></p>
-
-<p> 会在控制台显示转化的代码</p></li>
-<li><p>SASS提供的四种编译风格选项<a href="http://sass-lang.com/documentation/file.SASS_REFERENCE.html#output_style">官网参考</a></p>
-
-<p> 3.1 nested: 默认值,嵌套缩进css代码.</p>
-
-<p> 3.2 expanded: 没有缩进、拓展的css代码.</p>
-
-<p> 3.3 compact: 简洁格式的css代码.</p>
-
-<p> 3.4 compressed: 压缩后的css代码.</p>
-
-<p> 例子:<code>sass --style compressed test.sass test.css</code></p></li>
-<li><p>sass监听某个文件/目录,一旦源文件变动,就自动编译</p>
-
-<pre><code> //watch afile 
- sass --watch input.scss:output.css
-
- // watch a directory 
-
- sass --watch app/sass:public/stylesheets
-</code></pre>
-
-<p> SASS的官方网站，提供了一个在<a href="http://sassmeister.com/">线转换器</a>。你可以在那里，试运行下面的各种例子.</p></li>
-</ol>
-
-
-<h1>2 基本语法</h1>
-
-<ol>
-<li><p>变量</p>
-
-<pre><code> $blue: #1875e7;
-
- div{
-     color : $blue;
- }
-</code></pre>
-
-<p> 如果变量需要嵌套在字符串上必须加上#{}</p>
-
-<pre><code> $side : left;
-
- .rounded{
-     border-#{$side}-radius: 5px;
- }
-</code></pre></li>
-<li><p>计算功能</p>
-
-<pre><code> body {
-     magin: (14px/2);
-     top: 50px +100px;
-     right: $var * 10%;
- } 
-</code></pre></li>
-<li><p>嵌套</p>
-
-<p> 标签嵌套</p>
-
-<pre><code> div {
-     hi{
-         color:red;
-     }
- }
-</code></pre>
-
-<p> 属性嵌套</p>
-
-<pre><code> //border-color属性
- p{
-     border: {
-         color:red ;
-     }
- }
- //注意border后的冒号
-</code></pre>
-
-<p> 嵌套中引用父级级元素</p>
-
-<pre><code> a{
-     &amp;:hover {
-         color : #ffb3ff;
-     }
- }
-</code></pre></li>
-<li><p>注释</p>
-
-<pre><code> //: 保留在sass不会输出到css
-
- /* 注释*/: 会保留在生成的css文件中,但不会保留在压缩模式
-
- /*!
-     重要信息,任何时候都会保留,一般用作声明版权
- */
-</code></pre></li>
-<li><p>继承</p>
-
-<pre><code> .class1 {}
-
- .class2 {
-     @extend .class1;
-     ...
- }
-</code></pre></li>
-<li><p>Mixin 可重用代码块</p>
-
-<pre><code> //定义代码块
- @mixin left {
-     float: left ;
- }
-
- //调用代码块
- div{
-     @include left;
- }
-
- mixin强大在于可以指定参数和缺省值
-
- @mixin left($value: 10px){
-     margin-right: $value;
- }
-
- //使用
- div{
-     @include left(20px);
- }
-
- //下面实例用来生成浏览器前缀
- @mixin rounded($vert, $horz, $radius: 10px) {
-     border-#{$vert}-#{$horz}-radius: $radius;
-     -moz-border-radius-#{$vert}#{$horz}: $radius;
-     -webkit-border-#{$vert}-#{$horz}-radius: $radius;
- }
-
- //调用
- #navbar li { @include rounded(top, left); }
- #footer { @include rounded(top, left, 5px); }
-</code></pre></li>
-<li><p>颜色函数</p>
-
-<pre><code> lighten(#cc3, 10%) // #d6d65c
- darken(#cc3, 10%) // #a3a329
- grayscale(#cc3) // #808080
- complement(#cc3) // #33c        
-</code></pre></li>
-<li><p>插入外部文件</p>
-
-<pre><code> 　@import "path/filename.scss";
- 　@import "foo.css";
- 　
-</code></pre></li>
-<li><p>高级用法</p>
-
-<p> 9.1 if , if else</p>
-
-<pre><code>     　p {
-     　   @if 1 + 1 == 2 { border: 1px solid; }
-     　   @if 5 &lt; 3 { border: 2px dotted; }
-     　}
-     　
-     　@if lightness($color) &gt; 30% {
-     　     background-color: #000;
-     　} @else {
-     　     background-color: #fff;
-     　}
-</code></pre>
-
-<p> 9,2 for,while,each</p>
-
-<pre><code>     @for $i from 1 to 10 {
-         .border-#{$i} {
-             border: #{$i}px solid blue;
-         }
-     }
-
-     $i: 6;
-     @while $i &gt; 0 {
-         .item-#{$i} { width: 2em * $i; }
-         $i: $i - 2;
-     }
-
-     @each $member in a, b, c, d {
-         .#{$member} {
-             background-image: url("/image/#{$member}.jpg");
-         }
-     }
-</code></pre>
-
-<p> 9,3 自定义函数</p>
-
-<pre><code> 　@function double($n) {
- 　 @return $n * 2;
- 　}
- 　
- 　#sidebar {
- 　 width: double(5px);
- 　}        
-</code></pre></li>
-</ol>
-
-
-<h1>参考链接</h1>
-
-<p>SASS用法指南<a href="http://www.ruanyifeng.com/blog/2012/06/sass.html">http://www.ruanyifeng.com/blog/2012/06/sass.html</a></p>
-
-<h1>后续遇到的问题</h1>
-
-<ol>
-<li><p>sass 普通命令能使用 但是监听文件就报错</p>
-
-<pre><code> K:sass maizhikun$ sass --watch _bootstrap.scss:../CSS/Haplox.css
- &gt;&gt;&gt; Sass is watching for changes. Press Ctrl-C to stop.
- I, [2015-10-21T09:34:38.749464 #4396]  INFO -- : Celluloid 0.17.2 is running in BACKPORTED mode. [ http://git.io/vJf3J ]
- ArgumentError: wrong number of arguments (2 for 1)
- Use --trace for backtrace.
-</code></pre>
-
-<p> 然后Mac搜索Gemfile,居然在握的octopress文件夹里&hellip;.</p></li>
-</ol>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Grunt玩Bootstrap]]></title>
-    <link href="http://mzkmzk.github.io/blog/2015/10/16/grunt_bootstrap/"/>
-    <updated>2015-10-16T11:37:40+08:00</updated>
-    <id>http://mzkmzk.github.io/blog/2015/10/16/grunt_bootstrap</id>
-    <content type="html"><![CDATA[<!--more-->
-
-
-<h1>0 前面的工作</h1>
-
-<ol>
-<li>安装node</li>
-<li><p><code>sudo npm install -g grunt-cli</code>全局环境中安装grunt-cli;</p>
-
-<pre><code> K:bootstrap-sass-3.3.5 maizhikun$ sudo npm install -g grunt-cli
- Password:
- /usr/local/bin/grunt -&gt; /usr/local/lib/node_modules/grunt-cli/bin/grunt
- grunt-cli@0.1.13 /usr/local/lib/node_modules/grunt-cli
- ├── resolve@0.3.1
- ├── nopt@1.0.10 (abbrev@1.0.7)
- └── findup-sync@0.1.3 (lodash@2.4.2, glob@3.2.11)
-</code></pre></li>
-<li><p>cd 到bootstrap目录 安装依赖关系 根据package.json,<code>sudo npm install</code></p></li>
-<li><p>grunt dist(编译js和css到/dist/目录)</p>
-
-<p> 失败,显示:</p>
-
-<pre><code> K:bootstrap-sass-3.3.5 maizhikun$ grunt dist
- grunt-cli: The grunt command line interface. (v0.1.13)
-
- Fatal error: Unable to find local grunt.
-
- If you're seeing this message, either a Gruntfile wasn't found or grunt
- hasn't been installed locally to your project. For more information about
- installing and configuring grunt, please see the Getting Started guide:
-
- http://gruntjs.com/getting-started 
-</code></pre>
-
-<p> 我更新了下num<code>sudo npm update -g npm</code></p>
-
-<p> 重新安装全局grunt<code>sudo npm install -g grunt-cli</code></p>
-
-<p> 查找网上资料执行了<code>sudo npm install grunt --save-dev</code><a href="http://stackoverflow.com/questions/15483735/fatal-error-unable-to-find-local-grunt-when-running-grunt-command">参考</a></p>
-
-<p> 再执行grunt dist</p>
-
-<pre><code> K:bootstrap-sass-3.3.5 maizhikun$ sudo grunt dist
- A valid Gruntfile could not be found. Please see the getting started guide for
- more information on how to configure grunt: http://gruntjs.com/getting-started
- Fatal error: Unable to find Gruntfile.
-</code></pre>
-
-<p> 傻傻的我最后 发现原来少了Gruntfile文件,因为我下载的Bootstrap是sass版本的.要下载源码版本才可以.但是下载原版后发现Gruntfile太庞大了.所以先放下.以后再去了解.现在先使用Grunt作为压缩JS工具所用.</p></li>
-</ol>
-
-
-<h1>1 在项目中使用</h1>
-
-<ol>
-<li>下载Bootstrap源码版本,拷贝<code>package.json</code>,<code>Gruntfile.js</code>.到所需目录下</li>
-<li><code>npm install</code> 加载node_modules;</li>
-<li><p>压缩JS 修改Gruntfile.js</p>
-
-<pre><code> module.exports = function (grunt) {
- // 项目配置
- grunt.initConfig({
-     pkg: grunt.file.readJSON('package.json'),
-     uglify: {
-         options: {
-             banner: '/*! &lt;%= pkg.file %&gt; &lt;%= grunt.template.today("yyyy-mm-dd") %&gt; */\n'
-         },
-          build: {
-             src: ['src/*.js','src/bootstrap/*.js'],
-             dest: 'Haplox.min.js'
-         }
-     }
- });
-  // 加载提供"uglify"任务的插件
-  grunt.loadNpmTasks('grunt-contrib-uglify');
-  // 默认任务
-  grunt.registerTask('default', ['uglify']);
-  }
-</code></pre></li>
-<li><p>grunt即可.</p></li>
-</ol>
-
-
-<h1>参考资料</h1>
-
-<p>详细从0开始<a href="http://www.cnblogs.com/yexiaochai/p/3603389.html">http://www.cnblogs.com/yexiaochai/p/3603389.html</a></p>
-
-<p>bootstrap中文<a href="http://v3.bootcss.com/getting-started/">http://v3.bootcss.com/getting-started/</a></p>
-
-<p>中文Grunt文档<a href="http://www.gruntjs.net/getting-started">http://www.gruntjs.net/getting-started</a></p>
 ]]></content>
   </entry>
   

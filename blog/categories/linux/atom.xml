@@ -4,7 +4,7 @@
   <title><![CDATA[Category: linux | K]]></title>
   <link href="http://mzkmzk.github.io/blog/categories/linux/atom.xml" rel="self"/>
   <link href="http://mzkmzk.github.io/"/>
-  <updated>2015-11-23T23:33:32+08:00</updated>
+  <updated>2016-01-17T19:13:45+08:00</updated>
   <id>http://mzkmzk.github.io/</id>
   <author>
     <name><![CDATA[K]]></name>
@@ -12,6 +12,23 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Linux 错误累计]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/12/07/linux_error/"/>
+    <updated>2015-12-07T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/12/07/linux_error</id>
+    <content type="html"><![CDATA[<!--more-->
+
+
+<h1>1. ssh一段时间不操作,会中断</h1>
+
+<p>错误提示</p>
+
+<pre><code>Write failed: Broken pipe
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Ubuntu技巧与知识]]></title>
@@ -379,42 +396,6 @@ tmpfs                 1.9G     0  1.9G   0% /dev/shm
 <p>其实这个方法要更简便 差不多 用tar来代码我的mv</p>
 
 <p><a href="http://blog.csdn.net/cymm_liu/article/details/11932297">http://blog.csdn.net/cymm_liu/article/details/11932297</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[oracle 导入.dmp和.log文件]]></title>
-    <link href="http://mzkmzk.github.io/blog/2015/04/04/oracle_dmp_log/"/>
-    <updated>2015-04-04T11:37:40+08:00</updated>
-    <id>http://mzkmzk.github.io/blog/2015/04/04/oracle_dmp_log</id>
-    <content type="html"><![CDATA[<!--more-->
-
-
-<h3>0x00 创建导入文件夹并授予权限</h3>
-
-<pre><code>SQL&gt;show user
-USER IS "SYS"
-
-crate directory data_hehe as '导入文件夹路径'
-grant read,write on directory data_hehe to scott;
-</code></pre>
-
-<h3>0x01 导入数据库</h3>
-
-<pre><code>SQL&gt;show user
-USER IS "SYS"
-
-#注意 用户名一定要与导出的.dmp里写的用户名一直
-SQL&gt;create user LIBSYS(用户名) identity by LIBSYS(密码)
-2 DEFAULT TABLESPACE users;
-3 quota 20g on users
-
-grant connect to LIBSYS;
-
-cd   导入文件夹路径
-
-imp system/oracle FULL=y file=one.dmp log=one.log 
-</code></pre>
 ]]></content>
   </entry>
   

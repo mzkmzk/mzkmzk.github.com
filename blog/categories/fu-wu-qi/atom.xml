@@ -4,7 +4,7 @@
   <title><![CDATA[Category: 服务器 | K]]></title>
   <link href="http://mzkmzk.github.io/blog/categories/fu-wu-qi/atom.xml" rel="self"/>
   <link href="http://mzkmzk.github.io/"/>
-  <updated>2015-11-23T23:33:32+08:00</updated>
+  <updated>2016-01-17T19:13:45+08:00</updated>
   <id>http://mzkmzk.github.io/</id>
   <author>
     <name><![CDATA[K]]></name>
@@ -12,6 +12,20 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[服务器响应慢]]></title>
+    <link href="http://mzkmzk.github.io/blog/2015/11/30/server_intenet_low/"/>
+    <updated>2015-11-30T11:37:40+08:00</updated>
+    <id>http://mzkmzk.github.io/blog/2015/11/30/server_intenet_low</id>
+    <content type="html"><![CDATA[<!--more-->
+
+
+<p>问题:</p>
+
+<p>服务器上(公司内服务器).我Mac离路由器比较近,访问php网站速度很快.但其他同事用win访问很慢</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Docker入门]]></title>

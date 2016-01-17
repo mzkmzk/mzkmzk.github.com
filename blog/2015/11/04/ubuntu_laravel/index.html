@@ -7,8 +7,7 @@
 	<meta name="author" content="K">
 
 	
-	<meta name="description" content="Ubuntu版本 :14.04 1 安装apche mysql php 安装apachesudo apt-get install apache2 localhost有apache页面显示即可
-安装phpsudo apt-get install php5 libapache2-mod-php5 &hellip;">
+	<meta name="description" content="Ubuntu版本 :14.04 1 安装apche mysql php 安装apachesudo apt-get install apache2 localhost有apache页面显示即可 //阿里云显示错误 Err http://mirrors.aliyun.com/ubuntu/ &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	<meta name="baidu-site-verification" content="HWyzFajtAX" />
@@ -309,7 +308,13 @@ var _hmt = _hmt || [];
 <ol>
 <li><p>安装apache<code>sudo apt-get install apache2</code></p>
 
-<p> <code>localhost</code>有apache页面显示即可</p></li>
+<p> <code>localhost</code>有apache页面显示即可</p>
+
+<pre><code> //阿里云显示错误
+ Err http://mirrors.aliyun.com/ubuntu/ trusty-updates/main apache2-bin amd64 2.4.7-1ubuntu4.4
+ //即可
+ sudo apt-get update     
+</code></pre></li>
 <li><p>安装php<code>sudo apt-get install php5 libapache2-mod-php5</code></p>
 
 <pre><code> //重启apache 加载php模块
@@ -432,7 +437,7 @@ var duoshuoQuery = {short_name:"mzkmzk"};
 </div>
 	<footer id="footer" class="inner">
 
-Copyright &copy; 2015
+Copyright &copy; 2016
 
     K
 
